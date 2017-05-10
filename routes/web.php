@@ -22,20 +22,28 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'VodController@index');
     Route::get('/video/{video?}', 'VodController@video');
 });
+
+
 Route::group([
     'middleware' => ['web', 'role:admin'],
-    'namespace'=>'Admin',
-    'prefix'=>'admin'
+    'namespace' => 'Admin',
+    'prefix' => 'admin'
 ], function () {
     Route::get('/', 'AdminController@index')->name('admin::index');
     Route::get('/phpinfo', 'AdminController@info');
 });
+
+
 Route::group([
-    'middleware' => ['web', 'role:admin'],
-    'namespace'=>'Admin'
+    'middleware' => ['web'],
 ], function () {
-    Route::resource('videos','VideoController');
+    Route::resource('courses', 'CourseController');
+    Route::resource('lessons', 'LessonController');
+    Route::resource('comments', 'CommentController');
+    Route::resource('orders', 'OrderController');
+    Route::resource('videos', 'VideoController');
     Route::get('/videos/{video?}/cloud/info', 'VideoController@cloudInfo')->name('video.cloud.info');
     Route::get('/videos/{video?}/cloud/transcode', 'VideoController@cloudTranscode')->name('video.cloud.transcode');
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');
 });
+

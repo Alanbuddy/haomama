@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Common;
+use App\Http\Controllers\Util\IO;
 use App\Models\File;
 use App\Models\Video;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Lib\Vod\VodApi;
 use App\Http\Controllers\Util\Parse;
-use function PHPSTORM_META\type;
 
 class VideoController extends Controller
 {
     use Parse;
+    use IO;
 
     /**
      * Display a listing of the resource.
@@ -149,22 +149,14 @@ class VideoController extends Controller
             $video->save();
         }
         if ($request->file('picture')) {
-            $file = $request->file('picture');
-            $moved = $file->move(public_path('app/' . $video->id), $file->getClientOriginalName());
-            $item = new File();
-            $item->path = substr($moved->getPathname(), strlen(public_path()));
-            $item->fill($this->getFileBaseInfo($file));
-            auth()->user()->videos()->save($item);
+            $folderPath = public_path('storage/video/' . $video->id);
+            $item = $this->moveAndStore($request, 'picture', $folderPath);
             $video->attachments()->attach($item->id);
         }
         if ($request->file('audio')) {
-            $file = $request->file('audio');
-            $moved = $file->move(public_path('app/' . $video->id), $file->getClientOriginalName());
-            $item = new File();
-            $item->path = substr($moved->getPathname(), strlen(public_path()));
-            $item->fill($this->getFileBaseInfo($file));
-            auth()->user()->videos()->save($item);
-            $video->attachments()->attach($item->id, ['type' => 'audio']);
+            $folderPath = public_path('storage/video/' . $video->id);
+            $item = $this->moveAndStore($request, 'audio', $folderPath);
+            $video->attachments()->attach($item->id);
         }
         if ($request->file('timeline')) {
             $file = $request->file('timeline');
@@ -174,19 +166,6 @@ class VideoController extends Controller
         }
 
         return redirect()->route('videos.edit', $video);
-    }
-
-    /**
-     * @param $file UploadedFile
-     * @return mixed
-     */
-    public function getFileBaseInfo($file)
-    {
-        $item['file_name'] = $file->getClientOriginalName();
-        $item['mime'] = $file->getClientMimeType();
-        $item['extension'] = $file->getClientOriginalExtension();
-        $item['size'] = $file->getClientSize();
-        return $item;
     }
 
     /**
@@ -269,7 +248,7 @@ class VideoController extends Controller
     public function updateAttachmentOrder(Request $request, $videoId)
     {
         $data = $request->get('data');
-        dd($data);
+//        dd($data);//array:8 [ 0 => array:2 [ "id" => "33" "no" => "0" ] 1 => array:2 [ "id" => "34" "no" => "1" ] 2 => array:2 [ "id" => "18" "no" => "2" ] 3 => array:2 [ "id" => "22" "no" => "3" ] 4 => array:2 [ "id" => "19" "no" => "4" ] 5 => array:2 [ "id" => "23" "no" => "5" ] 6 => array:2 [ "id" => "17" "no" => "6" ] 7 => array:2 [ "id" => "16" "no" => "7" ] ]
         $sql = '';
         foreach ($data as $item) {
 //            var_dump($item['id']);
