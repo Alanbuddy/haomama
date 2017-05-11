@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Util\IO;
 use App\Models\Course;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    use IO;
+
     /**
      * Display a listing of the resource.
      *
@@ -45,15 +48,15 @@ class CourseController extends Controller
             'description',
             'price',
         ]));
-        $item->teacher_id = auth()->user()->id;
+//        $item->teacher_id = auth()->user()->id;
         $item->save();
 
         if ($request->file('cover')) {
             $folderPath = public_path('storage/course/' . $item->id);
-            $cover = $this->moveAndStore($request, 'picture', $folderPath);
+            $cover = $this->moveAndStore($request, 'cover', $folderPath);
             $item->cover = $cover->path;
-            $item->save();
         }
+        $item->save();
 
         return redirect()->route('courses.index');
     }
@@ -89,12 +92,29 @@ class CourseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param Course $item
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        $course->fill($request->only([
+            'name',
+            'description',
+            'price',
+            'begin',
+            'end',
+        ]));
+//        $course->teacher_id = auth()->user()->id;
+
+        if ($request->file('cover')) {
+            $folderPath = public_path('storage/course/' . $course->id);
+            $cover = $this->moveAndStore($request, 'cover', $folderPath);
+            $course->cover = $cover->path;
+        }
+        $course->update();
+
+        return redirect()->route('courses.edit', $course->id);
     }
 
     /**
@@ -107,5 +127,6 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         $course->delete();
+        return redirect()->route('courses.index');
     }
 }

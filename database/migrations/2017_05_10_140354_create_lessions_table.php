@@ -13,9 +13,10 @@ class CreateLessionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lessions', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('video_id')->unsigned()->nullable()->comment('视频ID');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateLessionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lessions');
+        Schema::dropIfExists('lessons');
     }
 }

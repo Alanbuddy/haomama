@@ -17,6 +17,7 @@
 //});
 
 Route::get('/', 'VodController@index');
+Route::get('/haml', 'TestController@index');
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
     Route::get('/', 'VodController@index');

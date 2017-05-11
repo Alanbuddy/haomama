@@ -9,4 +9,10 @@ class Course extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
+
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class);
+    }
 }
+

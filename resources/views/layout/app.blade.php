@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>VOD</title>
+    <title>
+        @yield('title') VOD
+    </title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     @yield('css')
 </head>
