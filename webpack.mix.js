@@ -11,5 +11,14 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
+mix.js('resources/assets/js/app.coffee', 'public/js')
+.webpackConfig({
+        module: {
+            rules: [
+                { test: /\.coffee$/, loader: 'coffee-loader' }
+            ]
+        }
+   })
+.sass('resources/assets/sass/register.scss', 'public/css')
+.js('resources/assets/js/register.coffee', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

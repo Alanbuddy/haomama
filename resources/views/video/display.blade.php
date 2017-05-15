@@ -1,4 +1,7 @@
 @extends('layout.app')
+@section('css')
+<link rel="stylesheet" href="{{ mix('/css/register.css') }}">
+@endsection
 @section('content')
     <div class="row">
         <div id="id_video_container_9031868222917328248" style="width:100%;height:0px;"></div>
@@ -29,4 +32,7 @@
             })()
         </script>
     </div>
+@endsection
+@section('script')
+<script src="{{ mix('/js/register.js') }}"></script>
 @endsection
