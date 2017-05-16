@@ -1,6 +1,10 @@
 {
   "/js/app.js": "/js/app.js",
+  "/css/layout.css": "/css/layout.css",
   "/css/register.css": "/css/register.css",
   "/css/app.css": "/css/app.css",
-  "/js/register.js": "/js/register.js"
+  "/js/register.js": "/js/register.js",
+  "/js/layout.js": "/js/layout.js",
+  "/js/course-index.js": "/js/course-index.js",
+  "/css/course-index.css": "/css/course-index.css"
 }

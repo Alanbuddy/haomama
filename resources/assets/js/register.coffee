@@ -1,3 +1,2 @@
 $ ->
-	# alert("aaa")
-  alert("this is a test")
+	alert("test test ")

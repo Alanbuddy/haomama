@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('content')
+@section('ccc')
     <div class="row">
         <div id="id_video_container_9031868222917328248" style="width:100%;height:0px;"></div>
         <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>

@@ -19,6 +19,12 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
             ]
         }
    })
+.sass('resources/assets/sass/layout.scss', 'public/css')
 .sass('resources/assets/sass/register.scss', 'public/css')
+.sass('resources/assets/sass/course-index.scss', 'public/css')
+
+
+.js('resources/assets/js/layout.coffee', 'public/js')
 .js('resources/assets/js/register.coffee', 'public/js')
+.js('resources/assets/js/course-index.coffee', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

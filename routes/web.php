@@ -42,6 +42,7 @@ Route::group([
     Route::resource('comments', 'CommentController');
     Route::resource('orders', 'OrderController');
     Route::resource('videos', 'VideoController');
+    Route::resource('courses', 'Course1Controller');
     Route::get('/videos/{video?}/cloud/info', 'VideoController@cloudInfo')->name('video.cloud.info');
     Route::get('/videos/{video?}/cloud/transcode', 'VideoController@cloudTranscode')->name('video.cloud.transcode');
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');
