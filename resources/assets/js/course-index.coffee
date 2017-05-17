@@ -51,3 +51,4 @@ $(document).ready ->
       return
     ), 5000)
     return
+  return

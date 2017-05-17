@@ -2,9 +2,11 @@
   "/js/app.js": "/js/app.js",
   "/css/layout.css": "/css/layout.css",
   "/css/register.css": "/css/register.css",
+  "/css/course-index.css": "/css/course-index.css",
   "/css/app.css": "/css/app.css",
   "/js/register.js": "/js/register.js",
   "/js/layout.js": "/js/layout.js",
   "/js/course-index.js": "/js/course-index.js",
-  "/css/course-index.css": "/css/course-index.css"
+  "/js/setting-index.js": "/js/setting-index.js",
+  "/css/setting-index.css": "/css/setting-index.css"
 }

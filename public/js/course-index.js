@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,7 +10329,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 10:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);
@@ -10380,7 +10380,7 @@ module.exports = __webpack_require__(2);
       $('#btn_next').click();
     }), 5000);
   });
-  return $('.main_img').bind('touchstart', function() {
+  $('.main_img').bind('touchstart', function() {
     clearInterval(timer);
   }).bind('touchend', function() {
     timer = setInterval((function() {

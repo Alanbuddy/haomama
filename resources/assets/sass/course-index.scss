@@ -12,9 +12,15 @@
 }
 .nav {
   display: -webkit-flex;
-  -webkit-justify-content: space-between;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
   display: flex;
-  justify-content: space-between;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
   li {
     width: 1.44rem;
     padding-bottom: 0.12rem;
@@ -40,10 +46,170 @@
   }
 }
 // banner
-.img_gallery{width:94.0625%;margin:0 auto;position:relative;margin-top:2.6%;}
-.main_img{position:relative;overflow:hidden;padding-bottom:51.5%;}
-.main_img ul{list-style:none;overflow:hidden;position:absolute;top:0;left:0}
-.main_img li{float:left;width:100%;background:image-url("/icon/banner.png") no-repeat;padding:25.8% 0;background-size: 100%;}
-div.point{position:absolute;bottom:10px;left:50%;z-index:999;width:70px;height:21px;margin:0 0 0 -35px;}
+.img_gallery{width:100%;position:relative;height: 3.2rem;}
+.main_img{position:relative;overflow:hidden;height: 3.2rem;}
+.main_img ul{list-style:none;overflow:hidden;position:absolute;top:0;left:0;height:3.2rem;}
+.main_img li{float:left;width:100%;background-size: 50%;}
+div.point{position:absolute;bottom:4px;left:50%;z-index:999;width:70px;height:21px;margin:0 0 0 -35px;}
 div.point a{float:left;width:30%;max-width:21px;height:100%;margin:0;padding:0;background:url("/icon/btn_main_img.png") 0 0 no-repeat;display:block;text-indent:-1000px}
 div.point a.on{background-position:0 -21px}
+.img-size {
+  width: 100%;
+  max-width: 750px;
+}
+
+.course-title-div {
+  margin: 0.32rem 0.24rem 0.12rem 0.24rem;
+}
+.course-nav {
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  li {
+    a {
+      color: #999;
+      padding: 0 0.16rem;
+      text-align: center;
+      border-right: 1px solid #ccc;
+      &:hover {
+        background: #fff;
+        color: #fc90a5;
+      }
+    }
+    .course-active {
+      color: #fc90a5;
+      font-weight: bold;
+    }
+  }
+  .no-border {
+    border-right: none;
+  }
+}
+
+.item-div {
+  width: 100%;
+}
+.item {
+  padding: 0.2rem 0.4rem;
+  height: 1.92rem;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
+}
+.icon-div {
+  position: relative;
+  margin-right: 0.16rem;
+}
+.recommend {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.32rem;
+}
+.icon {
+  width: 1.52rem;
+  height: 1.52rem;
+  border-radius: 4px;
+}
+.row-div {
+  width: 5.02rem;
+  margin-bottom: 0.24rem; 
+}
+.row-div:not(:last-child) {
+  margin-bottom: 0.2rem;
+}
+.course-name {
+  display: inline-block;
+  width: 4.46rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.health-title {
+  color: #77dca6;
+  width: 1.28rem;
+  display: inline-block;
+  font-weight: bold;
+  border-bottom: 2px solid #77dca6;
+}
+.psychology-title {
+  color: #8dbdf2;
+  width: 1.28rem;
+  display: inline-block;
+  font-weight: bold;
+  border-bottom: 2px solid #8dbdf2;
+}
+.grow-title {
+  color: #fc90a5;
+  width: 1.28rem;
+  display: inline-block;
+  font-weight: bold;
+  border-bottom: 2px solid #fc90a5;
+}
+.item-value {
+  float: right;
+}
+.course-status {
+  display: inline-block;
+  width: 0.48rem;
+  height: 0.24rem;
+  text-align: center;
+  color: #fc90a5;
+  border: 1px solid #fc90a5;
+  border-radius: 2px;
+  margin-left: 0.08rem;
+}
+.unstart {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
+.home, .mine {
+  width: 0.64rem;
+}
+.foot {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 0.98rem;
+  background: #f6f6f6;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-around; 
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+}
+.foot-item-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  flex-direction: column;
+  -webkit-justify-content: space-around; 
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+  align-items: center;
+}

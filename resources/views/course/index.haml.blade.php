@@ -27,24 +27,148 @@
     %ul
       %li
         %a{:href => "#"}
-          %img.img_1{src: '/icon/banner.png'}
+          %img.img-size.img_1{src: '/icon/banner.png'}
       %li
         %a{:href => "#"}
-          %img.img_2{src: '/icon/banner.png'}
+          %img.img-size.img_2{src: '/icon/banner.png'}
       %li
         %a{:href => "#"}
-          %img.img_3{src: '/icon/banner.png'}
+          %img.img-size.img_3{src: '/icon/banner.png'}
     %a#btn_prev{:href => "#"}
     %a#btn_next{:href => "#"}
+.course-title-div.clearfix
+  %p.fl.color7.fb.f14 新课速递
+  %ul.fr.course-nav.f12
+    %li
+      %a#feed-course.course-active{:href => "#"} 最新
+    %li
+      %a#hot-course{:href => "#"} 最热
+    %li
+      %a#good-review.no-border{:href => "#"} 好评
+.item-div
+  .item
+    .icon-div
+      %img.recommend{src: "/icon/recommend.png"}
+      %img.icon{src: "/icon/example.png"}
+    .word-div
+      .row-div.clearfix
+        %span.health-title.f12 健康养育
+        %span.item-value.f14.color5 200
+      .row-div.color7
+        %span.coures-name.f16 名字很长很长很长
+        // %span.course-status.f8 线下
+      .row-div.f12.color6
+        %span.participate 2315人已学
+        %span .
+        %span 810条评论
+  .item
+    .icon-div
+      %img.recommend{src: "/icon/recommend.png"}
+      %img.icon{src: "/icon/example.png"}
+    .word-div
+      .row-div.clearfix
+        %span.psychology-title.f12 心理教育
+        %span.item-value.f14.color5 200
+      .row-div.color7.unstart
+        %span.coures-name.f16 名字很长很长很长
+        %span.course-status.f8 线下
+      .row-div.f12.color6
+        %span.participate 2315人已报名
+        %span .
+        %span 5月9日开课
+  .item
+    .icon-div
+      %img.recommend{src: "/icon/recommend.png"}
+      %img.icon{src: "/icon/example.png"}
+    .word-div
+      .row-div.clearfix
+        %span.grow-title.f12 自我成长
+        %span.item-value.f14.color5 200
+      .row-div.color7
+        %span.coures-name.f16 名字很长很长很长
+        // %span.course-status.f8 线下
+      .row-div.f12.color6
+        %span.participate 2315人已学
+        %span .
+        %span 810条评论
+  .item
+    .icon-div
+      %img.recommend{src: "/icon/recommend.png"}
+      %img.icon{src: "/icon/example.png"}
+    .word-div
+      .row-div.clearfix
+        %span.grow-title.f12 自我成长
+        %span.item-value.f14.color5 200
+      .row-div.color7
+        %span.coures-name.f16 名字很长很长很长
+        // %span.course-status.f8 线下
+      .row-div.f12.color6
+        %span.participate 2315人已学
+        %span .
+        %span 810条评论
+  .item
+    .icon-div
+      %img.recommend{src: "/icon/recommend.png"}
+      %img.icon{src: "/icon/example.png"}
+    .word-div
+      .row-div.clearfix
+        %span.grow-title.f12 自我成长
+        %span.item-value.f14.color5 200
+      .row-div.color7
+        %span.coures-name.f16 名字很长很长很长
+        // %span.course-status.f8 线下
+      .row-div.f12.color6
+        %span.participate 2315人已学
+        %span .
+        %span 810条评论
+  .item
+    .icon-div
+      %img.recommend{src: "/icon/recommend.png"}
+      %img.icon{src: "/icon/example.png"}
+    .word-div
+      .row-div.clearfix
+        %span.grow-title.f12 自我成长
+        %span.item-value.f14.color5 200
+      .row-div.color7
+        %span.coures-name.f16 名字很长很长很长
+        // %span.course-status.f8 线下
+      .row-div.f12.color6
+        %span.participate 2315人已学
+        %span .
+        %span 810条评论
+
+  .item
+    .icon-div
+      %img.recommend{src: "/icon/recommend.png"}
+      %img.icon{src: "/icon/example.png"}
+    .word-div
+      .row-div.clearfix
+        %span.grow-title.f12 自我成长
+        %span.item-value.f14.color5 200
+      .row-div.color7
+        %span.coures-name.f16 名字很长很长很长
+        // %span.course-status.f8 线下
+      .row-div.f12.color6
+        %span.participate 2315人已学
+        %span .
+        %span 810条评论
+.foot
+  .foot-item-div#home
+    %img.home{src: "/icon/home_selected.png"}
+    %p.f10.color8 首页
+  .foot-item-div#mine
+    %img.mine{src: "/icon/mine_normal.png"}
+    %p.f10.color5 我的
 
 @endsection
 
 @section('script')
-<scrip src= "/js/jquery.min.js"></scrip>
 
-<script src= "/js/jquery.touchSlider.js"></script>
 <script src= "/js/jquery.event.drag.js"></script>
-<script src="{{ mix('/js/course-index.js') }}"></script>
+<script src= "/js/jquery.touchSlider.js"></script>
+<script src= "/js/banner.js"></script>
+  
+
 @endsection
 
 
