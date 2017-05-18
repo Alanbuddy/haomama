@@ -49,6 +49,7 @@
     
 </div>
 <script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <script src = "/js/ajax.js"></script>
 <script src = "/js/regex.js"></script>
 <script src = "/js/layout.js"></script>

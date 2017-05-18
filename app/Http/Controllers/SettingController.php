@@ -23,7 +23,7 @@ class SettingController extends Controller
      */
     public function create()
     {
-        //
+        return view('setting.create');
     }
 
     /**
