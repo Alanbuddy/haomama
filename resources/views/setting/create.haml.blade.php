@@ -22,11 +22,11 @@
         %label.f14.color7.fn 手机号码
         .mobile-div
           %input.f12.color6#mobile
-          %span.f12.color10#code 验证码
+          %button.f12.color10#code 获取验证码
       .row-div
         %label.f14.color7.fn 验证码
         %input.input-div.f12.color6
-  .item.baby-div
+  .item-baby-div
     .left-div
       %img.avatar{src: "/icon/baby_female.png"}
     .right-div
@@ -37,8 +37,8 @@
         %label.f14.color7.fn 宝宝性别
         %select.input-div#baby-gender
           %option{value: "请选择"} 请选择
-          %option{value: "男"} 男
-          %option{value: "女"} 女
+          %option{value: "男子汉"} 男子汉
+          %option{value: "小姑娘"} 小姑娘
       .row-div
         %label.f14.color7.fn 宝宝生日
         %input.input-div#baby-birthday{type: "date"}

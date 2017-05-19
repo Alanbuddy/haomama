@@ -5,19 +5,20 @@
 @endsection
 
 @section('content')
-.search-div.f12
-  %img.search{src: '/icon/search.png'}
-  %input.search-input.color5{type: "text", placeholder: "搜索课程名/老师名"}
-.nav-div
-  %ul.nav.f14
-    %li.active
-      %a#feed{:href => "#"} 新课速递
-    %li
-      %a#health{:href => "#"} 健康教育
-    %li
-      %a#psychology{:href => "#"} 心理教育
-    %li
-      %a#grow{:href => "#"} 自我成长
+.head-div
+  .search-div.f12
+    %img.search{src: '/icon/search.png'}
+    %input.search-input.color5{type: "text", placeholder: "搜索课程名/老师名"}
+  .nav-div
+    %ul.nav.f14
+      %li.active
+        %a#feed{:href => "#"} 新课速递
+      %li
+        %a#health{:href => "#"} 健康教育
+      %li
+        %a#psychology{:href => "#"} 心理教育
+      %li
+        %a#grow{:href => "#"} 自我成长
 .img_gallery
   .point
     %a{:href => "#"} 1

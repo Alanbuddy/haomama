@@ -1,12 +1,17 @@
 .wrapper {
   min-height: 100%;
   background: #f6f6f6;
+  padding-bottom: 1.1rem;
+  padding-top: 0.88rem;
 }
 .head-div {
-  position: relative;
+  position: fixed;
+  top: 0;
+  z-index: 10;
 	width: 100%;
 	line-height: 0.88rem;
   background: #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
 }
 .back {
   position: absolute;
@@ -23,6 +28,7 @@
   padding-right: 0.24rem;
 }
 .item {
+  position: relative;
   height: 3.2rem;
   background: #fff;
   border-radius: 4px;
@@ -93,6 +99,10 @@
   flex: 1;
   // display: none;
 }
+#wechat-name {
+  flex: 1;
+}
+
 .input-div {
   display: none;
   font-size: 1.2em;
@@ -103,7 +113,7 @@
   display: none;
   margin-left: 0.16rem;
 }
-#parent, #baby-gender {
+#parent, #baby-gender, .add-gender {
   outline: none;
   border: 0;
   border-bottom: 1px solid #ccc;
@@ -177,11 +187,15 @@
     margin-bottom: 0.54rem; 
   }
   #mobile {
-    width: 2.4rem;
+    width: 2rem;
   }
   #code {
-    display: inline-block;
-    width: 1rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    background: #fff;
+    width: 1.4rem;
     text-align: center;
   }
 }
@@ -201,4 +215,18 @@
   border-bottom-left-radius: 4px;
   font-size: 1.6em;
   color: #fff;
+}
+.add-baby-div {
+  display: none;
+}
+.add-input-div {
+  font-size: 1.2em;
+  color: #666;
+  border-bottom: 1px solid #ccc;
+}
+.close-add-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.88rem;
 }
