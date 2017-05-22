@@ -101,98 +101,7 @@ div.point a.on{background-position:0 -21px}
   }
 }
 
-.item-div {
-  width: 100%;
-}
-.item {
-  padding: 0.2rem 0.4rem;
-  height: 1.92rem;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-felx;
-  display: flex;
-  -webkit-justify-content: sapce-between; 
-  -moz-justify-content: sapce-between;
-  -ms-justify-content: sapce-between;
-  -o-justify-content: sapce-between;
-  justify-content: sapce-between;
-}
-.icon-div {
-  position: relative;
-  margin-right: 0.16rem;
-}
-.recommend {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0.32rem;
-}
-.icon {
-  width: 1.52rem;
-  height: 1.52rem;
-  border-radius: 4px;
-}
-.row-div {
-  width: 5.02rem;
-  margin-bottom: 0.24rem; 
-}
-.row-div:not(:last-child) {
-  margin-bottom: 0.2rem;
-}
-.course-name {
-  display: inline-block;
-  width: 4.46rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.health-title {
-  color: #77dca6;
-  width: 1.28rem;
-  display: inline-block;
-  font-weight: bold;
-  border-bottom: 2px solid #77dca6;
-}
-.psychology-title {
-  color: #8dbdf2;
-  width: 1.28rem;
-  display: inline-block;
-  font-weight: bold;
-  border-bottom: 2px solid #8dbdf2;
-}
-.grow-title {
-  color: #fc90a5;
-  width: 1.28rem;
-  display: inline-block;
-  font-weight: bold;
-  border-bottom: 2px solid #fc90a5;
-}
-.item-value {
-  float: right;
-}
-.course-status {
-  display: inline-block;
-  width: 0.48rem;
-  height: 0.24rem;
-  text-align: center;
-  color: #fc90a5;
-  border: 1px solid #fc90a5;
-  border-radius: 2px;
-  margin-left: 0.08rem;
-}
-.unstart {
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-felx;
-  display: flex;
-  -webkit-align-items: center; 
-  -moz-align-items: center;
-  -ms-align-items: center;
-  -o-align-items: center;
-  align-items: center;
-}
+
 .home, .mine {
   width: 0.64rem;
 }
@@ -219,11 +128,19 @@ div.point a.on{background-position:0 -21px}
   display: -ms-flex;
   display: -o-felx;
   display: flex;
-  flex-direction: column;
   -webkit-justify-content: space-around; 
   -moz-justify-content: space-around;
   -ms-justify-content: space-around;
   -o-justify-content: space-around;
   justify-content: space-around;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
   align-items: center;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -o-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }

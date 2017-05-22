@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Course1Controller extends Controller
+class MineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class Course1Controller extends Controller
      */
     public function index()
     {
-        return view('course.index');
+        return view('mine.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class Course1Controller extends Controller
      */
     public function create()
     {
-        return view('course.create');
+        return view('mine.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class Course1Controller extends Controller
      */
     public function show($id)
     {
-        //
+        return view('mine.show');
     }
 
     /**
@@ -56,7 +56,7 @@ class Course1Controller extends Controller
      */
     public function edit($id)
     {
-        return view('course.edit');
+        //
     }
 
     /**

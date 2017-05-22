@@ -241,31 +241,108 @@ input {
   background: #f6f6f6;
   margin: 0.16rem 0.4rem 0.36rem 0.4rem;
 }
+.health-title {
+  color: #77dca6;
+  width: 1.28rem;
+  display: inline-block;
+  font-weight: bold;
+  border-bottom: 2px solid #77dca6;
+}
+.psychology-title {
+  color: #8dbdf2;
+  width: 1.28rem;
+  display: inline-block;
+  font-weight: bold;
+  border-bottom: 2px solid #8dbdf2;
+}
+.grow-title {
+  color: #fc90a5;
+  width: 1.28rem;
+  display: inline-block;
+  font-weight: bold;
+  border-bottom: 2px solid #fc90a5;
+}
 
 
+.course-item-div {
+  width: 100%;
+}
+.course-item {
+  padding: 0.2rem 0.4rem;
+  height: 1.92rem;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
+}
+.course-icon-div {
+  position: relative;
+  margin-right: 0.16rem;
+}
+.course-recommend {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.32rem;
+}
+.course-icon {
+  width: 1.52rem;
+  height: 1.52rem;
+  border-radius: 4px;
+}
+.course-row-div {
+  width: 5.02rem;
+  // margin-bottom: 0.24rem; 
+}
+.course-row-div:not(:last-child) {
+  margin-bottom: 0.2rem;
+}
+.course-name {
+  display: inline-block;
+  width: 4.46rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
+.course-item-value {
+  float: right;
+}
+.course-status {
+  display: inline-block;
+  width: 0.48rem;
+  height: 0.24rem;
+  text-align: center;
+  color: #fc90a5;
+  border: 1px solid #fc90a5;
+  border-radius: 2px;
+  margin-left: 0.08rem;
+}
+.course-unstart {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
 
-.f12-op54 {
-  font-size: 1em;
-  color: rgba(0, 0, 0, 0.54);
-}
-.undiscover-icon {
-  display: block;
-  width: 3.04rem;
-  height: 2.7rem;
-  margin: 0 auto;
-  margin-top: 1rem;
+.div-line {
+  height: 4px;
+  margin: 0;
+  background: #f6f6f6;
 }
 
-.end-register {
-  color: #e9657e;
-}
-.red-class {
-  color: #e9885d;
-}
-.green-class {
-  color: #40ca85;
-}
 
 // render-more
 .render-more {

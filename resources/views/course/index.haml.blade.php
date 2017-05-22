@@ -46,113 +46,53 @@
       %a#hot-course{:href => "#"} 最热
     %li
       %a#good-review.no-border{:href => "#"} 好评
-.item-div
-  .item
-    .icon-div
-      %img.recommend{src: "/icon/recommend.png"}
-      %img.icon{src: "/icon/example.png"}
+.course-item-div
+  .course-item
+    .course-icon-div
+      %img.course-recommend{src: "/icon/recommend.png"}
+      %img.course-icon{src: "/icon/example.png"}
     .word-div
-      .row-div.clearfix
+      .course-row-div.clearfix
         %span.health-title.f12 健康养育
-        %span.item-value.f14.color5 200
-      .row-div.color7
+        %span.course-item-value.f14.color5 200
+      .course-row-div.color7
         %span.coures-name.f16 名字很长很长很长
         // %span.course-status.f8 线下
-      .row-div.f12.color6
+      .course-row-div.f12.color6
         %span.participate 2315人已学
         %span .
         %span 810条评论
-  .item
-    .icon-div
-      %img.recommend{src: "/icon/recommend.png"}
-      %img.icon{src: "/icon/example.png"}
+  .course-item
+    .course-icon-div
+      %img.course-recommend{src: "/icon/recommend.png"}
+      %img.course-icon{src: "/icon/example.png"}
     .word-div
-      .row-div.clearfix
+      .course-row-div.clearfix
         %span.psychology-title.f12 心理教育
-        %span.item-value.f14.color5 200
-      .row-div.color7.unstart
+        %span.course-item-value.f14.color5 200
+      .course-row-div.color7.unstart
         %span.coures-name.f16 名字很长很长很长
         %span.course-status.f8 线下
-      .row-div.f12.color6
+      .course-row-div.f12.color6
         %span.participate 2315人已报名
         %span .
         %span 5月9日开课
-  .item
-    .icon-div
-      %img.recommend{src: "/icon/recommend.png"}
-      %img.icon{src: "/icon/example.png"}
+  .course-item
+    .course-icon-div
+      %img.course-recommend{src: "/icon/recommend.png"}
+      %img.course-icon{src: "/icon/example.png"}
     .word-div
-      .row-div.clearfix
+      .course-row-div.clearfix
         %span.grow-title.f12 自我成长
-        %span.item-value.f14.color5 200
-      .row-div.color7
+        %span.course-item-value.f14.color5 200
+      .course-row-div.color7
         %span.coures-name.f16 名字很长很长很长
         // %span.course-status.f8 线下
-      .row-div.f12.color6
+      .course-row-div.f12.color6
         %span.participate 2315人已学
         %span .
         %span 810条评论
-  .item
-    .icon-div
-      %img.recommend{src: "/icon/recommend.png"}
-      %img.icon{src: "/icon/example.png"}
-    .word-div
-      .row-div.clearfix
-        %span.grow-title.f12 自我成长
-        %span.item-value.f14.color5 200
-      .row-div.color7
-        %span.coures-name.f16 名字很长很长很长
-        // %span.course-status.f8 线下
-      .row-div.f12.color6
-        %span.participate 2315人已学
-        %span .
-        %span 810条评论
-  .item
-    .icon-div
-      %img.recommend{src: "/icon/recommend.png"}
-      %img.icon{src: "/icon/example.png"}
-    .word-div
-      .row-div.clearfix
-        %span.grow-title.f12 自我成长
-        %span.item-value.f14.color5 200
-      .row-div.color7
-        %span.coures-name.f16 名字很长很长很长
-        // %span.course-status.f8 线下
-      .row-div.f12.color6
-        %span.participate 2315人已学
-        %span .
-        %span 810条评论
-  .item
-    .icon-div
-      %img.recommend{src: "/icon/recommend.png"}
-      %img.icon{src: "/icon/example.png"}
-    .word-div
-      .row-div.clearfix
-        %span.grow-title.f12 自我成长
-        %span.item-value.f14.color5 200
-      .row-div.color7
-        %span.coures-name.f16 名字很长很长很长
-        // %span.course-status.f8 线下
-      .row-div.f12.color6
-        %span.participate 2315人已学
-        %span .
-        %span 810条评论
-
-  .item
-    .icon-div
-      %img.recommend{src: "/icon/recommend.png"}
-      %img.icon{src: "/icon/example.png"}
-    .word-div
-      .row-div.clearfix
-        %span.grow-title.f12 自我成长
-        %span.item-value.f14.color5 200
-      .row-div.color7
-        %span.coures-name.f16 名字很长很长很长
-        // %span.course-status.f8 线下
-      .row-div.f12.color6
-        %span.participate 2315人已学
-        %span .
-        %span 810条评论
+  
 .foot
   .foot-item-div#home
     %img.home{src: "/icon/home_selected.png"}

@@ -5,10 +5,19 @@
   "/css/course-index.css": "/css/course-index.css",
   "/css/setting-index.css": "/css/setting-index.css",
   "/css/setting-create.css": "/css/setting-create.css",
+  "/css/mine-index.css": "/css/mine-index.css",
+  "/css/mine-show.css": "/css/mine-show.css",
+  "/css/course-create.css": "/css/course-create.css",
   "/css/app.css": "/css/app.css",
   "/js/setting-index.js": "/js/setting-index.js",
   "/js/setting-create.js": "/js/setting-create.js",
   "/js/register.js": "/js/register.js",
+  "/js/mine-index.js": "/js/mine-index.js",
   "/js/layout.js": "/js/layout.js",
-  "/js/course-index.js": "/js/course-index.js"
+  "/js/course-index.js": "/js/course-index.js",
+  "/js/course-create.js": "/js/course-create.js",
+  "/js/sign.js": "/js/sign.js",
+  "/js/search-result.js": "/js/search-result.js",
+  "/js/mine-show.js": "/js/mine-show.js",
+  "/css/sign.css": "/css/sign.css"
 }
