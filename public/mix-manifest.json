@@ -8,6 +8,11 @@
   "/css/mine-index.css": "/css/mine-index.css",
   "/css/mine-show.css": "/css/mine-show.css",
   "/css/course-create.css": "/css/course-create.css",
+  "/css/sign.css": "/css/sign.css",
+  "/css/pay-success.css": "/css/pay-success.css",
+  "/css/search-result.css": "/css/search-result.css",
+  "/css/message.css": "/css/message.css",
+  "/css/course-show.css": "/css/course-show.css",
   "/css/app.css": "/css/app.css",
   "/js/setting-index.js": "/js/setting-index.js",
   "/js/setting-create.js": "/js/setting-create.js",
@@ -18,6 +23,8 @@
   "/js/course-create.js": "/js/course-create.js",
   "/js/sign.js": "/js/sign.js",
   "/js/search-result.js": "/js/search-result.js",
+  "/js/pay-success.js": "/js/pay-success.js",
   "/js/mine-show.js": "/js/mine-show.js",
-  "/css/sign.css": "/css/sign.css"
+  "/js/message.js": "/js/message.js",
+  "/js/course-show.js": "/js/course-show.js"
 }

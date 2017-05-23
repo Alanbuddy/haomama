@@ -336,13 +336,42 @@ input {
   -o-align-items: center;
   align-items: center;
 }
-
+// divide line
 .div-line {
   height: 4px;
   margin: 0;
   background: #f6f6f6;
 }
-
+//empty component
+.empty-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-around; 
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -o-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.empty-icon {
+  width: 1.12rem;
+}
+.empty-message {
+  margin-top: 0.4rem;
+}
 
 // render-more
 .render-more {

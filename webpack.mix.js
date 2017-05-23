@@ -28,6 +28,10 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .sass('resources/assets/sass/mine-show.scss', 'public/css')
 .sass('resources/assets/sass/course-create.scss', 'public/css')
 .sass('resources/assets/sass/sign.scss', 'public/css')
+.sass('resources/assets/sass/pay-success.scss', 'public/css')
+.sass('resources/assets/sass/search-result.scss', 'public/css')
+.sass('resources/assets/sass/message.scss', 'public/css')
+.sass('resources/assets/sass/course-show.scss', 'public/css')
 
 
 .js('resources/assets/js/layout.coffee', 'public/js')
@@ -40,4 +44,7 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/course-create.coffee', 'public/js')
 .js('resources/assets/js/search-result.coffee', 'public/js')
 .js('resources/assets/js/sign.coffee', 'public/js')
+.js('resources/assets/js/pay-success.coffee', 'public/js')
+.js('resources/assets/js/message.coffee', 'public/js')
+.js('resources/assets/js/course-show.coffee', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

@@ -45,7 +45,7 @@ class Course1Controller extends Controller
      */
     public function show($id)
     {
-        //
+        return view('course.show');
     }
 
     /**

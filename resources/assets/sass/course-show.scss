@@ -1,0 +1,220 @@
+.wrapper {
+  padding-bottom: 0.92rem;
+}
+.head-div {
+  position: relative;
+}
+.course-photo {
+  width: 100%;
+}
+.back {
+  position: absolute;
+  top: 0.16rem;
+  left: 0.16rem;
+  width: 0.88rem;
+}
+.favorite {
+  position: absolute;
+  top: 0.16rem;
+  right: 0.16rem;
+  width: 0.88rem;
+}
+.course-title-div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: url("/icon/white.png");
+  padding: 1.1rem 0.24rem 0.12rem 0.24rem;
+}
+#test-btn {
+  position: absolute;
+  right: 0.24rem;
+  bottom: 0.24rem;
+  width: 1.76rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  margin: 0;
+  padding: 0;
+  background: #fc90a5;
+  border-radius: 0.25rem;
+  border: 0;
+  outline: none;
+  color: #fff;
+  font-size: 1.2em
+}
+.play {
+  width: 0.32rem;
+}
+.desc-div {
+  padding-left: 0.24rem;
+  height: 0.58rem;
+}
+.price {
+  margin-left: 0.16rem;
+  margin-right: 0.4rem;
+  text-decoration: line-through;
+}
+.course-content {
+  padding: 0.32rem 0.4rem 0 0.4rem;
+}
+.items-div {
+  padding-top: 0.32rem;
+}
+.go {
+  width: 0.14rem;
+}
+.title {
+  margin-left: -0.16rem;
+}
+.item {
+  position: relative;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-between; 
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  background: #f6f6f6;
+  height: 1.2rem;
+  padding-right: 0.4rem;
+}
+.num-div {
+  width: 0.96rem;
+  text-align: center;
+}
+.item-desc {
+  flex: 1;
+}
+.item-row {
+  margin-top: 0.1rem;
+}
+.min {
+  margin-right: 0.24rem;
+}
+.free {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.32rem;
+}
+.opt55 {
+  opacity: 0.55;
+}
+.view-more {
+  text-align: center;
+  height: 0.88rem;
+  line-height: 0.88rem;
+}
+.more-icon {
+  width: 0.16rem;
+}
+.avatar {
+  width: 1.08rem;
+  margin-right: 0.2rem;
+}
+.teacher-item {
+  @extend .item;
+  background: #fff;
+  padding-right: 0;
+  height: 1.36rem;
+}
+.teacher-name {
+  margin-bottom: 0.12rem;
+}
+.course-desc {
+  padding: 0.24rem;
+}
+.desc-box {
+  margin-top: 0.2rem;
+}
+.recommend-div {
+  padding: 0.32rem 0;
+  .recommend-title {
+    padding-left: 0.24rem;
+  }
+}
+
+.review-item {
+  position: relative;
+  padding-bottom: 0.32rem;
+  padding-top: 0.32rem;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  .review-avatar {
+    width: 0.8rem;
+    float: left;
+  }
+  .item-desc {
+    width: 5.66rem;
+    margin-left: 1.04rem;
+  }
+  .review-name {
+    margin-top: 0.12rem;
+    margin-bottom: 0.08rem;
+  }
+  .review-content {
+    margin-top: 0.16rem;
+    margin-bottom: 0.1rem;
+  }
+  .admire-div {
+    position: absolute;
+    right: 0;
+    top: 0.48rem;
+  }
+  .admire-num {
+    vertical-align: bottom;
+  }
+  .admire-icon {
+    width: 0.48rem;
+  }
+}
+.review-title {
+  position: relative;
+}
+.review-score {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.btn {
+  position: fixed;
+  bottom: 0;
+  height: 0.92rem;
+  line-height: 0.92rem;
+  color: #fff;
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+  outline: none;
+  background: #fc90a5;
+  margin: 0;
+  padding: 0;
+}
+.btn:link {
+  color: #fff;
+}
+.btn:visited {
+  color: #fff;
+}
+.btn:hover {
+  color: #fff;
+}
+.btn:active {
+  color: #fff;
+}
+.upper {
+  position: fixed;
+  width: 1.08rem;
+  bottom: 1.28rem;
+  right: 0.36rem;
+}
