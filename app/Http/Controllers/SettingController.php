@@ -85,4 +85,8 @@ class SettingController extends Controller
     {
         return view('setting.message');
     }
+    public function teacher()
+    {
+        return view('setting.teacher');
+    }
 }

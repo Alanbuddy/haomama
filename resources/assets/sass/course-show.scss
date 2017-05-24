@@ -41,14 +41,17 @@
   border: 0;
   outline: none;
   color: #fff;
-  font-size: 1.2em
+  font-size: 1.2em;
+  font-weight: normal;
 }
 .play {
   width: 0.32rem;
+  margin-top: -0.04rem;
 }
 .desc-div {
   padding-left: 0.24rem;
-  height: 0.58rem;
+  padding-right: 0.24rem;
+  padding-bottom: 0.24rem;
 }
 .price {
   margin-left: 0.16rem;
@@ -87,6 +90,7 @@
   background: #f6f6f6;
   height: 1.2rem;
   padding-right: 0.4rem;
+  margin-bottom: 0.02rem;
 }
 .num-div {
   width: 0.96rem;
@@ -117,6 +121,7 @@
 }
 .more-icon {
   width: 0.16rem;
+  margin-top: -0.06rem;
 }
 .avatar {
   width: 1.08rem;
@@ -144,6 +149,9 @@
   }
 }
 
+.review-item:nth-last-child(1) {
+  border-bottom: 0;
+}
 .review-item {
   position: relative;
   padding-bottom: 0.32rem;
@@ -199,6 +207,8 @@
   background: #fc90a5;
   margin: 0;
   padding: 0;
+  font-weight: bold;
+  font-size: 1.6em;
 }
 .btn:link {
   color: #fff;
@@ -218,3 +228,108 @@
   bottom: 1.28rem;
   right: 0.36rem;
 }
+.unonline-div {
+  padding-top: 0.24rem;
+  .unonline-row {
+    margin-bottom: 0.08rem;
+  }
+}
+.mr40 {
+  margin-right: 0.4rem;
+}
+.feed-review {
+  position: relative;
+  text-align: center;
+}
+.feed-review:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  background: #ccc;
+  height: 0.02rem;
+  width: 3.2rem;
+  left: 0;
+}
+.feed-review:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  background: #ccc;
+  height: 0.02rem;
+  width: 3.2rem;
+  right: 0;
+}
+.feed-review-items-div {
+  padding: 0 0.4rem;
+}
+.feed-review-item {
+  @extend .review-item;
+}
+.sign-icon {
+  width: 0.32rem;
+}
+.refund {
+  float: right;
+}
+.address {
+  display: inline-block;
+  width: 5.9rem;
+}
+.address-span {
+  vertical-align: top;
+}
+
+
+#reviewModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 45%;
+    margin-left: -2.8rem;
+    margin-top: -1.7rem;
+    width: 5.6rem;
+    height: 3.4rem;
+    z-index: 10;
+  }
+  .modal-backdrop {
+    background-color: #999;
+  }
+  .modal-content {
+    border-radius: 12px;
+  }
+  .modal-body, input, label {
+    margin: 0;
+    padding: 0;
+  }
+  .name {
+    text-align: center;
+    margin-top: 0.6rem;
+    padding: 0 0.24rem;
+  }
+  .star-div {
+    height: 1.36rem;
+    text-align: center;
+  }
+  .star-div>input{position:relative;margin-right:2em;border:0;background:transparent;color:gold;-webkit-transition:color .8s;
+    transition:color .8s;}
+  .star-div>input:nth-of-type(1){display:none;}
+  .star-div>input:before{position:absolute;content:"★";left:0;top:0;bottom: 0;font-size:4em;height:100%;width:100%;background:#FFF;cursor:pointer;}
+  .star-div>input:checked~input{color:#666;}
+  #review-submit {
+    width: 100%;
+    background: #fc90a5;
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    border: 0;
+    outline: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+

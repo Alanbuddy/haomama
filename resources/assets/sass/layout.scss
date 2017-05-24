@@ -301,7 +301,7 @@ input {
   // margin-bottom: 0.24rem; 
 }
 .course-row-div:not(:last-child) {
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.16rem;
 }
 .course-name {
   display: inline-block;
@@ -372,7 +372,25 @@ input {
 .empty-message {
   margin-top: 0.4rem;
 }
-
+// course status-flex
+.status-flex {
+  position: relative;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  -o-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
 // render-more
 .render-more {
   width: 2.4rem;

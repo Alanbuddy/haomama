@@ -70,6 +70,7 @@
     .row-div
       %label.f14.color7.fn 宝宝生日
       %input.add-input-div#add-baby-birthday{type: "date"}
+@endsection
 #mobileModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
@@ -84,8 +85,6 @@
             %label.f14.color7.fn 验证码
             %input.verify-code.f12.color6
         .btn#confirm-replace 确认更换
-@endsection
-
 
 @section('script')
 <script src= "{{ mix('/js/setting-index.js') }}"></script>

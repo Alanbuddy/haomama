@@ -13,18 +13,20 @@
   "/css/search-result.css": "/css/search-result.css",
   "/css/message.css": "/css/message.css",
   "/css/course-show.css": "/css/course-show.css",
+  "/css/teacher.css": "/css/teacher.css",
   "/css/app.css": "/css/app.css",
   "/js/setting-index.js": "/js/setting-index.js",
   "/js/setting-create.js": "/js/setting-create.js",
   "/js/register.js": "/js/register.js",
   "/js/mine-index.js": "/js/mine-index.js",
   "/js/layout.js": "/js/layout.js",
+  "/js/course-show.js": "/js/course-show.js",
   "/js/course-index.js": "/js/course-index.js",
   "/js/course-create.js": "/js/course-create.js",
+  "/js/teacher.js": "/js/teacher.js",
   "/js/sign.js": "/js/sign.js",
   "/js/search-result.js": "/js/search-result.js",
   "/js/pay-success.js": "/js/pay-success.js",
   "/js/mine-show.js": "/js/mine-show.js",
-  "/js/message.js": "/js/message.js",
-  "/js/course-show.js": "/js/course-show.js"
+  "/js/message.js": "/js/message.js"
 }
