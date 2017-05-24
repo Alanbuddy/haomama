@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Util\IO;
+use App\Http\Util\IO;
 use App\Models\Course;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use \Exception;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
     use IO;
+
+    function __construct()
+    {
+        $this->middleware('role:admin')->except(['index', 'show']);
+    }
 
     /**
      * Display a listing of the resource.
@@ -70,9 +78,26 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('admin.course.show', [
-            'item' => $course,
-        ]);
+        $count = $this->hasEnrolled($course);
+        $hasEnrolled = $count == 1 ? true : false;
+
+        $count = $this->hasFavorited($course);
+
+        $hasFavorited = $count == 1 ? true : false;
+        $comments = $course->comments()->paginate(10);
+        $lessons = $course->lessons()->paginate(10);
+        $enrolledCount = $this->enrolledCount($course);
+        $favoritedCount = $this->favoritedCount($course);
+
+        return view('admin.course.show',
+            compact('course',
+                'hasEnrolled',
+                'hasFavorited',
+                'enrolledCount',
+                'lessons',
+                'comments'
+            )
+        );
     }
 
     /**
@@ -104,6 +129,7 @@ class CourseController extends Controller
             'price',
             'begin',
             'end',
+            'category_id',
         ]));
 //        $course->teacher_id = auth()->user()->id;
 
@@ -129,4 +155,161 @@ class CourseController extends Controller
         $course->delete();
         return redirect()->route('courses.index');
     }
+
+    public function editLessons(Request $request, Course $course)
+    {
+        $lessons = $course->lessons->all();
+        $result = array_reduce($lessons, function ($result, $v) {
+            Return $result . ',' . $v['id'];
+        });
+//        $lessons = (explode(',', substr($result, 1)));//example:  array:2 [ 0 => "1" 1 => "2" ]
+        return view('admin.course.editLesson', [
+            'item' => $course,
+            'lessons' => $lessons
+        ]);
+    }
+
+    public function updateLessons(Request $request, Course $course)
+    {
+        $lessons = $request->lessons;
+        $arr = explode(',', $lessons);
+        $arr = array_map('intval', $arr);
+//        dd($arr);
+        try {
+            $course->lessons()->sync($arr);
+        } catch (Exception $e) {
+            return back()->withErrors('数据错误');
+        }
+        return redirect()->route('courses.lessons.edit', $course);
+    }
+
+    public function editTags(Request $request, Course $course)
+    {
+        $tags = $course->tags->all();
+        return view('admin.course.editTags', [
+            'item' => $course,
+            'tags' => $tags
+        ]);
+    }
+
+    public function updateTags(Request $request, Course $course)
+    {
+        $lessons = $request->lessons;
+        $arr = explode(',', $lessons);
+        $arr = array_map('intval', $arr);
+        $array = [];
+        foreach ($arr as $id) {
+            $array['' . $id] = ['type' => 'tag'];
+        }
+        try {
+            $course->tags()->sync($array);
+        } catch (Exception $e) {
+            return back()->withErrors('数据错误');
+        }
+        return redirect()->route('courses.tags.edit', $course);
+    }
+
+    public function commentsIndex(Request $request, Course $course)
+    {
+        return $course->comments()->get();
+    }
+
+    //加入课程
+    public function enroll(Course $course)
+    {
+        $user = auth()->user();
+        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
+//        $course->users()->attach(auth()->user(), ['type' => $type]);
+        $changed = $course->users()->syncWithoutDetaching($user, ['user_type' => $user_type]);
+        return ['success' => 'true', 'changed' => $changed];
+    }
+
+    //收藏课程与取消收藏
+    public function favorite(Course $course)
+    {
+        $user = auth()->user();
+        $count = $course->users()
+            ->withPivot('type')
+            ->where('type', 'favorite')
+            ->where('user_id', $user->id)
+            ->count();
+        if ($count == 0) {
+            //收藏课程
+            $course->users()->attach($user, ['type' => 'favorite']);
+        } else {
+            //取消收藏
+            DB::table('course_user')
+                ->where('user_id', $user->id)
+                ->where('course_id', $course->id)
+                ->where('type', 'favorite')
+                ->delete();
+        }
+        return ['success' => 'true'];
+    }
+
+    /**
+     * @param Course $course
+     * @return mixed
+     */
+    public function hasEnrolled(Course $course)
+    {
+        $count = auth()->user()
+            ->enrolledCourses()
+            ->where('id', $course->id)
+            ->count();
+        return $count;
+    }
+
+    /**
+     * @param Course $course
+     * @return mixed
+     */
+    public function hasFavorited(Course $course)
+    {
+        $count = auth()->user()
+            ->favoritedCourses()
+            ->where('id', $course->id)
+            ->count();
+        return $count;
+    }
+
+    public function enrolledCount(Course $course)
+    {
+        $count = $course
+            ->users()
+            ->wherePivot('type', 'enroll')
+            ->count();
+        return $count;
+    }
+
+    public function favoritedCount(Course $course)
+    {
+        $count = $course
+            ->users()
+            ->wherePivot('type', 'enroll')
+            ->count();
+        return $count;
+    }
+
+    //我收藏的课程
+    public function favoriteCourses()
+    {
+        $items = auth()->user()->favoritedCourses()->paginate(10);
+        return $items;
+    }
+
+    //我加入的课程
+    public function enrolledCourses()
+    {
+        $items = auth()->user()->enrolledCourses()->paginate(10);
+        return $items;
+    }
+    //置顶与取消置顶
+    public function toggleHot(Request $request, Course $course)
+    {
+        $course->hot = !$course->hot;
+        $course->save();
+        return ['success' => true];
+    }
+
 }

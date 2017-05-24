@@ -16,9 +16,15 @@ class EntrustSeeder extends Seeder
 
         $admin = new Role();
         $admin->name         = 'admin';
-        $admin->display_name = 'User Administrator'; // optional
+        $admin->display_name = '管理员'; // optional
         $admin->description  = 'User is allowed to manage and edit other users'; // optional
         $admin->save();
+
+        $teacher = new Role();
+        $teacher->name         = 'teacher';
+        $teacher->display_name = '老师'; // optional
+        $teacher->description  = ''; // optional
+        $teacher->save();
 
         $user=User::find(1);
         $user->attachRole($admin);

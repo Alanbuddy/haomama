@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Search;
 use App\Models\Lession;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('role:admin')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -18,8 +18,10 @@
             <!-- Authentication Links -->
 
             @if (Auth::guest())
-                <li><a href="{{ url('/login') }}">Login</a></li>
-                <li><a href="{{ url('/register') }}">Register</a></li>
+                {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
+                <li><a href="{{ route('login',[],false) }}">Login</a></li>
+{{--                <li><a href="{{ route('register') }}">Register</a></li>--}}
+                <li><a href="{{ route('register',[],false) }}">Register</a></li>
 
             @else
                 @role('admin')
@@ -36,7 +38,7 @@
                 </li>
 
                 <li>
-                    <form class="navbar-form navbar-left" action="{{route('logout')}}" method="post">
+                    <form class="navbar-form navbar-left" action="{{route('logout',[],false)}}" method="post">
                         {{csrf_field()}}
                         <button type="submit" class="btn btn-sm btn-danger">Logout</button>
                     </form>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Common;
-use App\Http\Controllers\Util\IO;
+use App\Http\Util\IO;
 use App\Models\File;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Lib\Vod\VodApi;
-use App\Http\Controllers\Util\Parse;
+use App\Http\Util\Parse;
 
 class VideoController extends Controller
 {

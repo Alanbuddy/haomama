@@ -22,4 +22,6 @@ class Video extends Model
             ->where('mime', 'like', 'image%')
             ->withPivot('no');
     }
+
+
 }

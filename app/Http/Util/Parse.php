@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Util;
+namespace App\Http\Util;
 /**
  * Created by PhpStorm.
  * User: gao

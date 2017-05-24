@@ -38,4 +38,26 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\File');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
+
+    public function enrolledCourses()
+    {
+        return $this->belongsToMany('App\Models\Course')
+            ->wherePivot('type', 'enroll');
+    }
+
+    public function favoritedCourses()
+    {
+        return $this->belongsToMany('App\Models\Course')
+            ->wherePivot('type', 'favorite');
+    }
 }

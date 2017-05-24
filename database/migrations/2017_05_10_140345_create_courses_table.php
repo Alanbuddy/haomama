@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('teacher_id')->unsigned()->nullable()->comment('老师ID');
+            $table->integer('category_id')->unsigned()->nullable()->comment('分类ID');
             $table->string('cover')->nullable()->comment('课程封面图片URL');
             $table->float('price', 10, 2)->default(0.00)->nullable()->comment('价格，金额单位为【元】');
             $table->string('address')->nullable()->comment('线下课程授课地址');
