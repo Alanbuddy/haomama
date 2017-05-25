@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 38);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,25 +10329,18 @@ return jQuery;
 
 /***/ }),
 
-/***/ 35:
+/***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(5);
+module.exports = __webpack_require__(6);
 
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var viewHeight;
-  viewHeight = window.innerHeight;
-  $("input").focus(function() {
-    return $(".wrapper").css("height", viewHeight);
-  }).blur(function() {
-    return $(".wrapper").css("height", "100%");
-  });
   return document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
 });
 

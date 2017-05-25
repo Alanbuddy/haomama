@@ -89,4 +89,8 @@ class SettingController extends Controller
     {
         return view('setting.teacher');
     }
+    public function creview()
+    {
+        return view('setting.creview');
+    }
 }

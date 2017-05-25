@@ -33,6 +33,7 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .sass('resources/assets/sass/message.scss', 'public/css')
 .sass('resources/assets/sass/course-show.scss', 'public/css')
 .sass('resources/assets/sass/teacher.scss', 'public/css')
+.sass('resources/assets/sass/creview.scss', 'public/css')
 
 
 .js('resources/assets/js/layout.coffee', 'public/js')
@@ -49,4 +50,5 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/message.coffee', 'public/js')
 .js('resources/assets/js/course-show.coffee', 'public/js')
 .js('resources/assets/js/teacher.coffee', 'public/js')
+.js('resources/assets/js/creview.coffee', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

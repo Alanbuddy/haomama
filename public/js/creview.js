@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 45);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,45 +10329,36 @@ return jQuery;
 
 /***/ }),
 
-/***/ 13:
+/***/ 37:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(5);
+
+
+/***/ }),
+
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var time, timer, uid, wait;
-  uid = "";
-  timer = null;
-  wait = 60;
-  time = function(o) {
-    $(o).attr("disabled", true);
-    if (wait === 0) {
-      $(o).attr("disabled", false);
-      $(o).text('获取验证码');
-      wait = 60;
+  var check_review_input;
+  $("li").click(function() {
+    $(this).siblings().removeClass("active");
+    return $(this).addClass("active");
+  });
+  check_review_input = function() {
+    if ($(".review-input").val() === "") {
+      return $("#delivery").attr("disabled", true).css("opacity", "0.5");
     } else {
-      $(o).text('重发(' + wait + ')');
-      wait--;
-      timer = setTimeout((function() {
-        time(o);
-      }), 1000);
+      return $("#delivery").attr("disabled", false).css("opacity", "1");
     }
   };
-  return $("#another-baby").click(function() {
-    var baby_dom;
-    baby_dom = document.createElement("div");
-    $(baby_dom).addClass("item-baby-div").html($(".item-baby-div").html());
-    return $(baby_dom).insertBefore("#another-baby");
+  return $(".review-input").keyup(function() {
+    return check_review_input();
   });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-
-/***/ 45:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(13);
-
 
 /***/ })
 

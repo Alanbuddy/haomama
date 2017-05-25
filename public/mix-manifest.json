@@ -14,6 +14,7 @@
   "/css/message.css": "/css/message.css",
   "/css/course-show.css": "/css/course-show.css",
   "/css/teacher.css": "/css/teacher.css",
+  "/css/creview.css": "/css/creview.css",
   "/css/app.css": "/css/app.css",
   "/js/setting-index.js": "/js/setting-index.js",
   "/js/setting-create.js": "/js/setting-create.js",
@@ -28,5 +29,6 @@
   "/js/search-result.js": "/js/search-result.js",
   "/js/pay-success.js": "/js/pay-success.js",
   "/js/mine-show.js": "/js/mine-show.js",
-  "/js/message.js": "/js/message.js"
+  "/js/message.js": "/js/message.js",
+  "/js/creview.js": "/js/creview.js"
 }

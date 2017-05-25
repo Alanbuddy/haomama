@@ -10,7 +10,7 @@
   %img.favorite{src: "/icon/like_normal.png"}
   .course-title-div
     .course-row-div.clearfix
-      %span.health-title.f12 健康养育
+      %span.health-title-small.f12 健康养育
     .course-row-div.color7.status-flex
       %span.name-span.f16.fb.color7 名字很长很长
       // 线下课程出现
@@ -27,7 +27,7 @@
     %span.f12.color5 18人已报名
     //pay
     %span.f12.color6.mr40 已报名
-    %span.f12.color5 18人已报名 
+    %span.f12.color5 18人已报名(限30人)
   // underline course
   .unonline-div
     .unonline-row.f14.color7

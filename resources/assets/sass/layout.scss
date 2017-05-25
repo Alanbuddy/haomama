@@ -173,7 +173,7 @@ a:hover {
 
 /*web project layout*/
 .color1 {
-  background: #fff;
+  color: #fff;
 }
 .color2 {
   background: #f6f6f6;
@@ -262,7 +262,24 @@ input {
   font-weight: bold;
   border-bottom: 2px solid #fc90a5;
 }
-
+.health-title-small {
+  color: #77dca6;
+  width: 1.28rem;
+  display: inline-block;
+  border-bottom: 1px solid #77dca6;
+}
+.psychology-title-small {
+  color: #8dbdf2;
+  width: 1.28rem;
+  display: inline-block;
+  border-bottom: 1px solid #8dbdf2;
+}
+.grow-title-small {
+  color: #fc90a5;
+  width: 1.28rem;
+  display: inline-block;
+  border-bottom: 1px solid #fc90a5;
+}
 
 .course-item-div {
   width: 100%;

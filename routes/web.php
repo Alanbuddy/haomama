@@ -45,6 +45,7 @@ Route::group([
     Route::resource('courses', 'Course1Controller');
     Route::get('/settings/message', 'SettingController@message');
     Route::get('/settings/teacher', 'SettingController@teacher');
+    Route::get('/settings/creview', 'SettingController@creview');
     Route::resource('settings', 'SettingController');
     Route::resource('mines', 'MineController');
     Route::get('/videos/{video?}/cloud/info', 'VideoController@cloudInfo')->name('video.cloud.info');
