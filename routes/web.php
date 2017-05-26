@@ -43,6 +43,7 @@ Route::group([
     Route::resource('orders', 'OrderController');
     Route::resource('videos', 'VideoController');
     Route::resource('courses', 'Course1Controller');
+    Route::get('/settings/mycourse', 'SettingController@mycourse');
     Route::get('/settings/message', 'SettingController@message');
     Route::get('/settings/teacher', 'SettingController@teacher');
     Route::get('/settings/creview', 'SettingController@creview');

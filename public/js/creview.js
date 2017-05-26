@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,7 +10329,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 37:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(5);
@@ -10342,10 +10342,6 @@ module.exports = __webpack_require__(5);
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var check_review_input;
-  $("li").click(function() {
-    $(this).siblings().removeClass("active");
-    return $(this).addClass("active");
-  });
   check_review_input = function() {
     if ($(".review-input").val() === "") {
       return $("#delivery").attr("disabled", true).css("opacity", "0.5");
@@ -10353,8 +10349,14 @@ module.exports = __webpack_require__(5);
       return $("#delivery").attr("disabled", false).css("opacity", "1");
     }
   };
-  return $(".review-input").keyup(function() {
+  $(".review-input").keyup(function() {
     return check_review_input();
+  });
+  return $(".nav li").click(function() {
+    $(".nav li").removeClass("active");
+    $(this).addClass("active");
+    $(".main-div").css("display", "none");
+    return $(".main-div").eq($(this).index()).css("display", "block");
   });
 });
 

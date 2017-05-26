@@ -1,54 +1,30 @@
 
-$(document).ready ->
-  $('.img_gallery').hover (->
-    $('#btn_prev,#btn_next').fadeIn()
-    return
-  ), ->
-    $('#btn_prev,#btn_next').fadeOut()
-    return
-  $dragBln = false
-  $('.main_img').touchSlider
-    flexible: true
-    speed: 200
-    btn_prev: $('#btn_prev')
-    btn_next: $('#btn_next')
-    paging: $('.point a')
-    counter: (e) ->
-      $('.point a').removeClass('on').eq(e.current - 1).addClass 'on'
-      #图片顺序点切换
-      $('.img_font span').hide().eq(e.current - 1).show()
-      #图片文字切换
-      return
-  $('.main_img').bind 'mousedown', ->
-    $dragBln = false
-    return
-  $('.main_img').bind 'dragstart', ->
-    $dragBln = true
-    return
-  $('.main_img a').click ->
-    if $dragBln
-      return false
-    return
-  timer = setInterval((->
-    $('#btn_next').click()
-    return
-  ), 5000)
-  $('.img_gallery').hover (->
-    clearInterval timer
-    return
-  ), ->
-    timer = setInterval((->
-      $('#btn_next').click()
-      return
-    ), 5000)
-    return
-  $('.main_img').bind('touchstart', ->
-    clearInterval timer
-    return
-  ).bind 'touchend', ->
-    timer = setInterval((->
-      $('#btn_next').click()
-      return
-    ), 5000)
-    return
-  return
+$ ->
+
+  $(".course-nav li").click ->
+    $(".course-nav li").removeClass('course-active')
+    $(this).addClass('course-active')
+    $(".course-item-div").css('display', 'none');
+    $(".course-item-div").eq($(this).index()).css('display', 'block')
+
+  $("#home").click ->
+    # jump to home_page
+    location.href = ""
+
+  $("#mine").click ->
+    # jump to mine_page
+    location.href = ""
+
+  search = ->
+    val = $(".search-input").val()
+    # jump to search_page
+    location.href = ""
+
+  $(".search").click ->
+    search()
+
+  $(".search-input").keydown (event) ->
+    code = event.which
+    if code == 13
+      search()
+

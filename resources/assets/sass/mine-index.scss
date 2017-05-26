@@ -49,6 +49,13 @@
   width: 0.48rem;
   z-index: 10;
 }
+.small-circle {
+  position: absolute;
+  top: 0.24rem;
+  right: 0.4rem;
+  width: 0.08rem;
+  height: 0.08rem;
+}
 
 
 .empty-div {
@@ -83,8 +90,8 @@
 .course-div {
   padding: 0.32rem 0.4rem;
 }
-.mb32 {
-  margin-bottom: 0.32rem;
+.mb28 {
+  margin-bottom: 0.28rem;
 }
 .item {
   display: -webkit-flex;
@@ -255,4 +262,11 @@
 }
 .wrapper {
   padding-bottom: 0.98rem;
+}
+
+.title, .title-div {
+  margin-left: -0.16rem;
+}
+.title-div {
+  margin-bottom: 0.08rem;
 }

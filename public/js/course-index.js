@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10332,52 +10332,34 @@ return jQuery;
 /***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(document).ready(function() {
-  var $dragBln, timer;
-  $('.img_gallery').hover((function() {
-    $('#btn_prev,#btn_next').fadeIn();
-  }), function() {
-    $('#btn_prev,#btn_next').fadeOut();
+/* WEBPACK VAR INJECTION */(function($) {$(function() {
+  var search;
+  $(".course-nav li").click(function() {
+    $(".course-nav li").removeClass('course-active');
+    $(this).addClass('course-active');
+    $(".course-item-div").css('display', 'none');
+    return $(".course-item-div").eq($(this).index()).css('display', 'block');
   });
-  $dragBln = false;
-  $('.main_img').touchSlider({
-    flexible: true,
-    speed: 200,
-    btn_prev: $('#btn_prev'),
-    btn_next: $('#btn_next'),
-    paging: $('.point a'),
-    counter: function(e) {
-      $('.point a').removeClass('on').eq(e.current - 1).addClass('on');
-      $('.img_font span').hide().eq(e.current - 1).show();
+  $("#home").click(function() {
+    return location.href = "";
+  });
+  $("#mine").click(function() {
+    return location.href = "";
+  });
+  search = function() {
+    var val;
+    val = $(".search-input").val();
+    return location.href = "";
+  };
+  $(".search").click(function() {
+    return search();
+  });
+  return $(".search-input").keydown(function(event) {
+    var code;
+    code = event.which;
+    if (code === 13) {
+      return search();
     }
-  });
-  $('.main_img').bind('mousedown', function() {
-    $dragBln = false;
-  });
-  $('.main_img').bind('dragstart', function() {
-    $dragBln = true;
-  });
-  $('.main_img a').click(function() {
-    if ($dragBln) {
-      return false;
-    }
-  });
-  timer = setInterval((function() {
-    $('#btn_next').click();
-  }), 5000);
-  $('.img_gallery').hover((function() {
-    clearInterval(timer);
-  }), function() {
-    timer = setInterval((function() {
-      $('#btn_next').click();
-    }), 5000);
-  });
-  $('.main_img').bind('touchstart', function() {
-    clearInterval(timer);
-  }).bind('touchend', function() {
-    timer = setInterval((function() {
-      $('#btn_next').click();
-    }), 5000);
   });
 });
 
@@ -10385,7 +10367,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 35:
+/***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(3);

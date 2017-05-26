@@ -20,6 +20,9 @@
   .dir-div
     %span.title.f14.color7.fb 课程目录
     .nums-div
+      %a.common
+        %img.free-icon{src: "/icon/free.png"}
+        1
       %a.common 1
       %a.common 1
       %a.common 1
@@ -29,8 +32,8 @@
       %a.common 1
       %a.common 1
       %a.common 1
-      %a.common 1
-      %a.new
+      //未购买的免费课和购买后的新增课程均为red-border
+      %a.red-border
         %img.new-icon{src: "/icon/new.png"}
         2
       %a.unopen 3
@@ -105,11 +108,24 @@
           %img.admire-icon{src: "/icon/like1_normal.png"}
 @endsection
 @section('foot-div')
+//未购买时不显示底部评论input
 .foot-div
   %input.review-input{placeholder: "写评论......"}
   .btn#delivery 发送
 @endsection
+#confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %p.prompt 未报名课程
+        %p.question　确认立即报名当前课程？
+        .confirm-div
+          %a#register 报名
+          %a{"data-dismiss" => "modal"} 取消
+      
+
 
 @section('script')
 <script src= "{{ mix('/js/creview.js') }}"></script>
+<script src= "/js/prompt.js"></script>
 @endsection

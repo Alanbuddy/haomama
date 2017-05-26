@@ -72,35 +72,32 @@ div.point a.on{background-position:0 -21px}
   max-width: 750px;
 }
 
-.course-title-div {
+.title-row-div {
   margin: 0.32rem 0.24rem 0.12rem 0.24rem;
 }
 .course-nav {
   display: -webkit-flex;
-  -webkit-justify-content: space-between;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
   display: flex;
+  -webkit-justify-content: space-between; 
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
   justify-content: space-between;
   li {
-    a {
-      color: #999;
-      padding: 0 0.16rem;
-      text-align: center;
-      border-right: 1px solid #ccc;
-      &:hover {
-        background: #fff;
-        color: #fc90a5;
-      }
-    }
-    .course-active {
-      color: #fc90a5;
-      font-weight: bold;
-    }
+    padding: 0 0.16rem;
+    text-align: center;
   }
-  .no-border {
-    border-right: none;
+  li:not(:last-child) {
+    border-right: 1px solid #ccc;
   }
 }
-
+.course-active {
+  color: #fc90a5;
+  font-weight: bold;
+}
 
 .home, .mine {
   width: 0.64rem;
@@ -143,4 +140,10 @@ div.point a.on{background-position:0 -21px}
   -o-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+.course-item-div {
+  display: none;
+}
+.upper {
+  display: none;
 }

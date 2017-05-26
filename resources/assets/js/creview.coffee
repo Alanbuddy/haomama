@@ -1,8 +1,5 @@
 
 $ ->
-  $("li").click ->
-    $(this).siblings().removeClass("active")
-    $(this).addClass("active")
 
   check_review_input = ->
     if $(".review-input").val() == ""
@@ -12,6 +9,14 @@ $ ->
 
   $(".review-input").keyup ->
     check_review_input()
+
+  $(".nav li").click ->
+    $(".nav li").removeClass("active")
+    $(this).addClass("active")
+    $(".main-div").css("display", "none")
+    $(".main-div").eq($(this).index()).css("display", "block")
+    
+
 
 
 
