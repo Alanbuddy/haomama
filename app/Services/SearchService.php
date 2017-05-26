@@ -27,6 +27,7 @@ class SearchService
         return $items;
     }
 
+    //统计课程评论数和学员数
     public function latestCourse()
     {
         $items = Course::withCount('comments')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Search;
+use App\Http\Wechat\JSSDK;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,11 @@ class HomeController extends Controller
         $categories = Term::where('type', 'category')
             ->select('id', 'name')
             ->get();
-        $data = compact('categories', 'items');
+
+        $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
+        $signPackage = $jsSdk->getSignPackage();
+
+        $data = compact('categories', 'items', 'signPackage');
 //        dd($data);
 
         return view('video.display', $data);

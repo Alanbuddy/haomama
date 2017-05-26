@@ -37,6 +37,11 @@ return [
     'vod'=>[
         'secretId'=>"AKIDd2B4h6g8nGSO3eC7yax4vXkkZ9asllMi",
         'secretKey'=>"HIdjeQxFH4cv0qTr44qNhlZ8SZQ3ax4v"
+    ],
+    'sms'=>[
+        'url'=>'http://pi.noc.cn/SendSMS.aspx',
+        'account'=>'101077004',
+        'password'=>'haomama',
     ]
 
 ];

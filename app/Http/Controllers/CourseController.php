@@ -209,6 +209,7 @@ class CourseController extends Controller
         return redirect()->route('courses.tags.edit', $course);
     }
 
+    //课程的评论
     public function commentsIndex(Request $request, Course $course)
     {
         return $course->comments()->get();

@@ -74,5 +74,8 @@ Route::group([
 
     Route::get('/wechat/access-token', 'WechatController@accessToken');
     Route::get('/wechat/payment/notify', 'WechatController@paymentNotify');
+
+    Route::get('/sms/send', 'SmsController@send');
+    Route::get('/sms/residual', 'SmsController@residual');
 });
 

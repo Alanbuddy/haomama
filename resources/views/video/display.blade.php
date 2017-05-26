@@ -29,4 +29,34 @@
             })()
         </script>
     </div>
+    {{--JS-SDK--}}
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        wx.config({
+            debug: true,
+            appId: '{{ $signPackage["appId"]}}',
+            timestamp: '{{ $signPackage["timestamp"]}}',
+            nonceStr: '{{ $signPackage["nonceStr"]}}',
+            signature: '{{ $signPackage["signature"]}}',
+            jsApiList: [
+                // 所有要调用的 API 都要加到这个列表中
+                'onMenuShareTimeline'
+            ]
+        });
+        wx.ready(function () {
+            // 在这里调用 API
+            wx.onMenuShareTimeline({
+                title: '', // 分享标题
+                link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '', // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                    alert('shared');
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+    </script>
 @endsection

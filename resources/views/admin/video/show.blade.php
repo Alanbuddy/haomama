@@ -11,7 +11,7 @@
             font-weight: bold;
             display: inline-block;
             font-size: 2rem;
-            white-space:nowrap;
+            white-space: nowrap;
         }
     </style>
 @endsection
@@ -58,8 +58,23 @@
                     "height": 480,
                     "https": 1
                 };
+                var listener = {
+                    // 全屏 / 退出全屏操作 isFullScreen: true  全屏 ; false  退出全屏
+                    'fullScreen': function (isFullScreen) {
+                        console.log(isFullScreen);
+                    },
+                    // 播放状态
+                    'playStatus': function (status) { // status可为{ready:播放器已准备就绪,seeking:搜索,suspended:暂停,playing:播放中,playEnd:播放结束,stop:试看结束触发}’
+                        console.debug('out listener status == ', status);
+                    },
+                    // 拖动播放位置变化 ； second  拖动播放的位置（单位秒）
+                    'dragPlay': function (second) {
+                        console.debug('out listener dragPlay ==  ', second);
+                    }
+                }
                 /*调用播放器进行播放*/
-                player = new qcVideo.Player(/*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/ "id_video_container_9031868222917328248", option);
+                /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
+                player = new qcVideo.Player("id_video_container_9031868222917328248", option);
 
                 var barrage = [
                     {"type": "content", "content": "hello world", "time": "1"},
@@ -95,9 +110,9 @@
             {"type": "content", "content": "hello world", "time": "1"},
             {"type": "content", "content": "居中显示", "time": "1", "style": "C64B03;30", "position": "center"}
         ];
-//        window.setTimeout(function () {
-//            addBarrage(barrage);
-//        }, 1000);
+        //        window.setTimeout(function () {
+        //            addBarrage(barrage);
+        //        }, 1000);
         $.each(barrage, function (k, v) {
             window.setTimeout(function () {
                 addBarrage(v);
