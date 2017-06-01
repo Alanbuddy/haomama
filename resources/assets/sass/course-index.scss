@@ -38,24 +38,12 @@
     flex: 1;
     width: 1.44rem;
     padding-bottom: 0.12rem;
-    a {
-      color: #999;
-      padding: 0;
-      text-align: center;
-      &:hover {
-        background: #fff;
-        color: #fc90a5;
-      }
-    }
-    &:hover {
-      border-bottom: 2px solid #fc90a5;
-    }
+    text-align: center;
+    color: #999;
   }
   .active {
-    a {
-      color: #fc90a5;
-      font-weight: bold;
-    }
+    color: #fc90a5;
+    font-weight: bold;
     border-bottom: 2px solid #fc90a5;
   }
 }
@@ -146,4 +134,19 @@ div.point a.on{background-position:0 -21px}
 }
 .upper {
   display: none;
+}
+
+// slide div
+.inner {
+  clear: both;
+  overflow: hidden;
+  -webkit-animation: load 1s 1 linear;
+  animation: load 1s 1 linear;
+  .list {
+    width: 31rem;
+    .item {
+      float: left;
+      width: 7.5rem;
+    }
+  }
 }

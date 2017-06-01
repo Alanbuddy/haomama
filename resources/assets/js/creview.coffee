@@ -15,6 +15,8 @@ $ ->
     $(this).addClass("active")
     $(".main-div").css("display", "none")
     $(".main-div").eq($(this).index()).css("display", "block")
+
+
     
 
 

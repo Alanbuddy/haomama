@@ -10335,10 +10335,10 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var search;
   $(".course-nav li").click(function() {
-    $(".course-nav li").removeClass('course-active');
+    $(this).closest(".item").find(".course-nav li").removeClass('course-active');
     $(this).addClass('course-active');
-    $(".course-item-div").css('display', 'none');
-    return $(".course-item-div").eq($(this).index()).css('display', 'block');
+    $(this).closest(".item").find(".course-item-div").css('display', 'none');
+    return $(this).closest(".item").find(".course-item-div").eq($(this).index()).css('display', 'block');
   });
   $("#home").click(function() {
     return location.href = "";

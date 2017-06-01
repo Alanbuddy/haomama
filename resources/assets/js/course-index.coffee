@@ -2,10 +2,10 @@
 $ ->
 
   $(".course-nav li").click ->
-    $(".course-nav li").removeClass('course-active')
+    $(this).closest(".item").find(".course-nav li").removeClass('course-active')
     $(this).addClass('course-active')
-    $(".course-item-div").css('display', 'none');
-    $(".course-item-div").eq($(this).index()).css('display', 'block')
+    $(this).closest(".item").find(".course-item-div").css('display', 'none');
+    $(this).closest(".item").find(".course-item-div").eq($(this).index()).css('display', 'block')
 
   $("#home").click ->
     # jump to home_page
