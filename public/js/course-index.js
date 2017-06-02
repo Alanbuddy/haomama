@@ -10333,12 +10333,12 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var search;
-  $(".course-nav li").click(function() {
-    $(this).closest(".item").find(".course-nav li").removeClass('course-active');
+  var bannerSwiper, mySwiper, search;
+  $(".course-nav span").click(function() {
+    $(this).closest(".swiper-slide").find(".course-nav span").removeClass('course-active');
     $(this).addClass('course-active');
-    $(this).closest(".item").find(".course-item-div").css('display', 'none');
-    return $(this).closest(".item").find(".course-item-div").eq($(this).index()).css('display', 'block');
+    $(this).closest(".swiper-slide").find(".course-item-div").css('display', 'none');
+    return $(this).closest(".swiper-slide").find(".course-item-div").eq($(this).index()).css('display', 'block');
   });
   $("#home").click(function() {
     return location.href = "";
@@ -10354,12 +10354,33 @@ return jQuery;
   $(".search").click(function() {
     return search();
   });
-  return $(".search-input").keydown(function(event) {
+  $(".search-input").keydown(function(event) {
     var code;
     code = event.which;
     if (code === 13) {
       return search();
     }
+  });
+  mySwiper = new Swiper('.swiper-container', {
+    speed: 300,
+    onSlideChangeStart: function() {
+      $(".nav li").removeClass('active');
+      return $(".nav li").eq(mySwiper.activeIndex).addClass('active');
+    }
+  });
+  $(".nav li").on('touchstart mousedown', function(e) {
+    e.preventDefault();
+    $(".nav li").removeClass('active');
+    $(this).addClass('active');
+    return mySwiper.slideTo($(this).index());
+  });
+  $(".nav li").click(function(e) {
+    return e.preventDefault();
+  });
+  return bannerSwiper = new Swiper('.swiper-container-banner', {
+    pagination: '.swiper-pagination',
+    autoplay: 3000,
+    loop: true
   });
 });
 

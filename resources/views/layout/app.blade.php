@@ -13,6 +13,9 @@
     @yield('css')
 </head>
 <body>
+<div>
+    @yield('header')
+</div>
 <div class="wrapper">
     @yield('content')
    <!--  <div class="row">
@@ -49,7 +52,7 @@
     
 </div>
 <div>
-@yield('foot-div')
+    @yield('foot-div')
 </div>
 <script src="/js/jquery-3.2.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
