@@ -25,6 +25,8 @@
         <dd>{{count($lessons)}} </dd>
         <dt>评论</dt>
         <dd>{{count($comments)}} </dd>
+        <dt>推荐</dt>
+        <dd>{{json_encode($recommendedCourses)}} </dd>
     </dl>
 
 @endsection

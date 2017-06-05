@@ -30,18 +30,17 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
     'vod'=>[
-        'secretId'=>"AKIDd2B4h6g8nGSO3eC7yax4vXkkZ9asllMi",
-        'secretKey'=>"HIdjeQxFH4cv0qTr44qNhlZ8SZQ3ax4v"
+        'secretId'=>"AKIDVu8CNOgqIaxOlwgtfHrKKE1c1EIDOYv5",
+        'secretKey'=>"511yoV5TiqwsfFezFJAqJD0bzA92iCTX"
     ],
     'sms'=>[
         'url'=>'http://pi.noc.cn/SendSMS.aspx',
         'account'=>'101077004',
         'password'=>'haomama',
     ]
-
 ];

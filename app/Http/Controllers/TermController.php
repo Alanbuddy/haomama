@@ -62,11 +62,11 @@ class TermController extends Controller
      */
     public function show(Term $term)
     {
-        if ($term->type == 'tag')
-            dd(Search::coursesByTag($term));
-        if ($term->type == 'category')
-            dd(Search::coursesByCategory($term));
-        return view('admin.course.show', [
+//        if ($term->type == 'tag')
+//            dd(Search::coursesByTag($term));
+//        if ($term->type == 'category')
+//            dd(Search::coursesByCategory($term));
+        return view('admin.term.show', [
             'item' => $term,
         ]);
     }
@@ -79,7 +79,9 @@ class TermController extends Controller
      */
     public function edit(Term $term)
     {
-        //
+        return view('admin.term.edit', [
+            'item' => $term,
+        ]);
     }
 
     /**
@@ -91,7 +93,11 @@ class TermController extends Controller
      */
     public function update(Request $request, Term $term)
     {
-        //
+        $term->name = $request->name;
+        $term->save();
+        return view('admin.term.edit', [
+            'item' => $term,
+        ]);
     }
 
     /**

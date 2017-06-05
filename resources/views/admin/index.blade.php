@@ -32,5 +32,8 @@
         <li>
             <a href="{{route('roles.index')}}">Role</a>
         </li>
+        <li>
+            <a href="{{route('behaviors.index')}}">User Behavior</a>
+        </li>
     </ul>
 @endsection

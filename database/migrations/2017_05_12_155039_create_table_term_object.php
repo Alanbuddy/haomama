@@ -16,7 +16,7 @@ class CreateTableTermObject extends Migration
         Schema::create('term_object', function (Blueprint $table) {
             $table->integer('term_id')->unsigned();
             $table->integer('object_id')->unsigned();
-            //$table->enum('type', ['tag', 'category']);
+            $table->enum('type', ['tag']);
 
             $table->foreign('term_id')->references('id')->on('terms')
                 ->onUpdate('cascade')->onDelete('cascade');

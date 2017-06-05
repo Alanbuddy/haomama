@@ -7,8 +7,8 @@
             (function () {
                 var option = {
                     "auto_play": "1",
-                    "file_id": "9031868222922882965",
-                    "app_id": "1252044713",
+                    "file_id": "9031868222953457775",
+                    "app_id": "1253793695",
                     "width": 640,
                     "height": 480,
                     "https": 1

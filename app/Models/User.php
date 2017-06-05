@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Order');
     }
 
+    public function behaviors()
+    {
+        return $this->hasMany('App\Models\Behavior');
+    }
+
     public function enrolledCourses()
     {
         return $this->belongsToMany('App\Models\Course')

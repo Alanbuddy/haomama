@@ -12,7 +12,6 @@ class LessonSeeder extends Seeder
     public function run()
     {
         for ($i = 0; $i < 20; $i++) {
-
             DB::table('lessons')->insert([
                 'name' => str_random('7'),
                 'video_id' => '3'

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Search;
 use App\Http\Util\IO;
 use App\Models\Course;
 use Illuminate\Database\QueryException;
@@ -15,7 +16,7 @@ class CourseController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin')->except(['index', 'show']);
+        $this->middleware('role:admin')->except(['index', 'show','statistics']);
     }
 
     /**
@@ -88,14 +89,15 @@ class CourseController extends Controller
         $lessons = $course->lessons()->paginate(10);
         $enrolledCount = $this->enrolledCount($course);
         $favoritedCount = $this->favoritedCount($course);
-
+        $recommendedCourses = Search::recommend($course)->keys()->all();
         return view('admin.course.show',
             compact('course',
                 'hasEnrolled',
                 'hasFavorited',
                 'enrolledCount',
                 'lessons',
-                'comments'
+                'comments',
+                'recommendedCourses'
             )
         );
     }
@@ -305,6 +307,7 @@ class CourseController extends Controller
         $items = auth()->user()->enrolledCourses()->paginate(10);
         return $items;
     }
+
     //置顶与取消置顶
     public function toggleHot(Request $request, Course $course)
     {
@@ -313,4 +316,26 @@ class CourseController extends Controller
         return ['success' => true];
     }
 
+    public function statistics(Request $request)
+    {
+        $begin = $request->get('begin', '1');
+        $items = Search::coursesStatistics()
+//            ->where('courses.created_at', '>'
+//                , DB::raw('date_sub(`courses`.`created_at`, INTERVAL ' . $begin . ' DAY)'))
+            ->where('courses.created_at', '>', date('Y-m-d H:i:s', strtotime("today -" . $begin . " days")))
+            ->join('orders', 'courses.id', '=', 'orders.product_id')
+            ->select('courses.id', 'courses.name', 'courses.created_at','comment_count', 'users_count', 'favorite_count')
+            ->addSelect(DB::raw('sum(amount) as amount'))
+            ->addSelect(DB::raw('count(*) as amount'))
+            ->groupBy('courses.id')
+            ->paginate();
+        dd($items);
+    }
+
+    public function recommend(Request $request, Course $course)
+    {
+        $sorted = Search::recommend($course);
+        dd($sorted->all());
+        dd($sorted->keys()->all());
+    }
 }

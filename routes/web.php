@@ -41,6 +41,7 @@ Route::group([
 
     Route::get('/video/{video?}', 'VodController@video');
 
+    Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');
     Route::get('/courses/enrolled', 'CourseController@enrolledCourses')->name('courses.enrolled');//我加入的课程
     Route::get('/courses/favorited', 'CourseController@favoriteCourses')->name('courses.favorited');//我收藏的课程
     Route::resource('courses', 'CourseController');
@@ -52,6 +53,7 @@ Route::group([
     Route::get('/courses/{course}/hot', 'CourseController@toggleHot')->name('courses.hot');//置顶与取消置顶
     Route::get('/courses/{course}/enroll', 'CourseController@enroll')->name('courses.enroll');
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');
+    Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');
 
     Route::resource('lessons', 'LessonController');
 
@@ -66,6 +68,9 @@ Route::group([
     Route::resource('roles', 'RoleController');
 
     Route::resource('terms', 'TermController');
+
+    Route::get('/behaviors/latest', 'BehaviorController@latest');
+    Route::resource('behaviors', 'BehaviorController');
 
     Route::resource('videos', 'VideoController');
     Route::get('/videos/{video?}/cloud/info', 'VideoController@cloudInfo')->name('video.cloud.info');

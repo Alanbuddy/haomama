@@ -11,7 +11,7 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 7; $i++) {
             DB::table('courses')->insert([
                 'name' => str_random('7'),
                 'teacher_id' => 1,
@@ -23,6 +23,7 @@ class CourseSeeder extends Seeder
                 'cover' => '/storage/a.png',
                 'begin' => date('Y-m-d H:i:s', time()),
                 'end' => date('Y-m-d H:i:s', strtotime("+1 week")),
+                'created_at' => date('Y-m-d H:i:s', strtotime("+" . $i . " week")),
             ]);
         }
 

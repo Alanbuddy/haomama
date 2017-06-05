@@ -29,11 +29,11 @@ class HomeController extends Controller
         }
 
         if (!$hasFilter) {
-            $items = Search::latestCourse(); //dd(auth()->user()->courses);
+            $items = Search::latestCourse()
+                ->paginate();
         }
 
         //retrieve data needed by index page
-
         foreach ($items as $i) {
             echo($i->id);
             echo($i->category->name);
