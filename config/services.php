@@ -35,9 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'vod' => [
-        'secretId' => env('TECENT_VOD_SECRET_ID'),
-        'secretKey' => env('TECENT_VOD_SECRET_KEY'),
-        'appId' => env('TECENT_VOD_APP_ID'),
+        'secretId' => env('TENCENT_VOD_SECRET_ID'),
+        'secretKey' => env('TENCENT_VOD_SECRET_KEY'),
+        'appId' => env('TENCENT_VOD_APP_ID'),
     ],
     'sms' => [
         'url' => 'http://pi.noc.cn/SendSMS.aspx',
