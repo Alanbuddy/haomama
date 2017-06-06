@@ -53,7 +53,7 @@
                 var option = {
                     "auto_play": "1",
                     "file_id": "{{$item->cloud_file_id}}",
-                    "app_id": "1252044713",
+                    "app_id": "1253793695",
                     "width": 640,
                     "height": 480,
                     "https": 1
@@ -87,6 +87,20 @@
                 }, 1000);
 
             })();
+
+            // 分享接口 https://mp.weixin.qq.com/wiki?id=mp1421141115&highline=js%7C%26sdk%7C%26jssdk
+            wx.onMenuShareTimeline({
+                title: '', // 分享标题
+                link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '', // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
         </script>
     @endif
 

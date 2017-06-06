@@ -34,13 +34,14 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-    'vod'=>[
-        'secretId'=>"AKIDVu8CNOgqIaxOlwgtfHrKKE1c1EIDOYv5",
-        'secretKey'=>"511yoV5TiqwsfFezFJAqJD0bzA92iCTX"
+    'vod' => [
+        'secretId' => env('TECENT_VOD_SECRET_ID'),
+        'secretKey' => env('TECENT_VOD_SECRET_KEY'),
+        'appId' => env('TECENT_VOD_APP_ID'),
     ],
-    'sms'=>[
-        'url'=>'http://pi.noc.cn/SendSMS.aspx',
-        'account'=>'101077004',
-        'password'=>'haomama',
+    'sms' => [
+        'url' => 'http://pi.noc.cn/SendSMS.aspx',
+        'account' => '101077004',
+        'password' => 'haomama',
     ]
 ];

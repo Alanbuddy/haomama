@@ -39,7 +39,6 @@ Route::group([
     Route::get('/tag/{tag}', 'HomeController@index')->name('tag');
     Route::get('/category/{category}', 'HomeController@index')->name('category');
 
-    Route::get('/video/{video?}', 'VodController@video');
 
     Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');
     Route::get('/courses/enrolled', 'CourseController@enrolledCourses')->name('courses.enrolled');//我加入的课程
@@ -72,10 +71,12 @@ Route::group([
     Route::get('/behaviors/latest', 'BehaviorController@latest');
     Route::resource('behaviors', 'BehaviorController');
 
+//    Route::get('/video/{video?}', 'VodController@video');
     Route::resource('videos', 'VideoController');
     Route::get('/videos/{video?}/cloud/info', 'VideoController@cloudInfo')->name('video.cloud.info');
     Route::get('/videos/{video?}/cloud/transcode', 'VideoController@cloudTranscode')->name('video.cloud.transcode');
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');
+    Route::get('/videos/{video?}/statistics', 'VideoController@statistics')->name('video.statistics');
 
     Route::get('/wechat/access-token', 'WechatController@accessToken');
     Route::get('/wechat/payment/notify', 'WechatController@paymentNotify');

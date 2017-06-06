@@ -72,17 +72,6 @@ class BehaviorController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Behavior $userBehavior
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Behavior $userBehavior)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
