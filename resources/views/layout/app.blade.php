@@ -9,7 +9,9 @@
 
     <title>好妈妈微课</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mobile-notification.css">
     <link rel="stylesheet" href="/css/layout.css">
+   
     @yield('css')
 </head>
 <body>
@@ -58,6 +60,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src = "/js/ajax.js"></script>
 <script src = "/js/regex.js"></script>
+<script src = "/js/mobile-notification.js"></script>
 <script src = "/js/layout.js"></script>
 
 @yield('script')

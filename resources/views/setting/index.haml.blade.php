@@ -21,7 +21,7 @@
         %select.input-div#parent
           %option{value: "请选择"} 请选择
           %option{value: "爸爸"} 爸爸
-          %option{value: "妈妈"} 妈妈
+          %option{value: "妈妈", selected: "selected"} 妈妈
       .row-div
         %label.f14.color7.fn 手机号码
         %p.f12.color6#mobile-span 13011111111

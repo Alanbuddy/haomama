@@ -10333,7 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var time, timer, uid, wait;
+  var change_avatar, time, timer, uid, wait;
   uid = "";
   timer = null;
   wait = 60;
@@ -10341,7 +10341,7 @@ return jQuery;
     $(o).attr("disabled", true);
     if (wait === 0) {
       $(o).attr("disabled", false);
-      $(o).text('获取验证码');
+      $(o).text('发送验证码');
       wait = 60;
     } else {
       $(o).text('重发(' + wait + ')');
@@ -10351,11 +10351,44 @@ return jQuery;
       }), 1000);
     }
   };
-  return $("#another-baby").click(function() {
+  $("#another-baby").click(function() {
     var baby_dom;
     baby_dom = document.createElement("div");
-    $(baby_dom).addClass("item-baby-div").html($(".item-baby-div").html());
+    $(baby_dom).addClass("add-baby-div").html($(".add-baby-div").html()).css('display', 'flex');
     return $(baby_dom).insertBefore("#another-baby");
+  });
+  $(document).on('click', '.close-add-item', function() {
+    return $(this).closest('.add-baby-div').hide();
+  });
+  change_avatar = function(gender, birthday, object) {
+    var today;
+    today = new Date();
+    if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3) {
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png');
+    }
+    if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png');
+    }
+    if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3) {
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png');
+    }
+    if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
+      return $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png');
+    }
+  };
+  $(document).on('change', '.birthday', function() {
+    var birthday, gender;
+    birthday = $(this).val();
+    birthday = new Date(birthday);
+    gender = $(this).closest('.row-div').siblings('.row-div').find('.gender').val();
+    return change_avatar(gender, birthday, this);
+  });
+  return $(document).on('change', '.gender', function() {
+    var birthday, gender;
+    gender = $(this).val();
+    birthday = $(this).closest('.row-div').siblings('.row-div').find('.birthday').val();
+    birthday = new Date(birthday);
+    return change_avatar(gender, birthday, this);
   });
 });
 

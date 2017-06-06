@@ -17,12 +17,12 @@
         %select.input-div#parent
           %option{value: "请选择"} 请选择
           %option{value: "爸爸"} 爸爸
-          %option{value: "妈妈"} 妈妈
+          %option{value: "妈妈", selected: "selected"} 妈妈
       .row-div
         %label.f14.color7.fn 手机号码
         .mobile-div
           %input.f12.color6#mobile
-          %button.f12.color10#code 获取验证码
+          %button.f12.color10#code 发送验证码
       .row-div
         %label.f14.color7.fn 验证码
         %input.input-div.f12.color6
@@ -35,17 +35,36 @@
         %input.input-div#baby-name
       .row-div
         %label.f14.color7.fn 宝宝性别
-        %select.input-div#baby-gender
+        %select.input-div.gender#baby-gender
           %option{value: "请选择"} 请选择
           %option{value: "男子汉"} 男子汉
           %option{value: "小姑娘"} 小姑娘
       .row-div
         %label.f14.color7.fn 宝宝生日
-        %input.input-div#baby-birthday{type: "date"}
+        %input.input-div#baby-birthday.birthday{type: "date"}
+
+  .add-baby-div
+    %img.close-add-item{src: "/icon/close.png"}
+    .left-div
+      %img.avatar{src: "/icon/baby_female.png"}
+    .right-div
+      .row-div
+        %label.f14.color7.fn 宝宝姓名
+        %input.add-input-div#add-baby-name
+      .row-div
+        %label.f14.color7.fn 宝宝性别
+        %select.add-input-div.add-gender.gender#add-baby-gender
+          %option{value: "请选择"} 请选择
+          %option{value: "男子汉"} 男子汉
+          %option{value: "小姑娘"} 小姑娘
+      .row-div
+        %label.f14.color7.fn 宝宝生日
+        %input.add-input-div.birthday#add-baby-birthday{type: "date"}
   %p.f12.color10.pt16#another-baby 还有一个宝宝?
 .btn#edit-end 编辑完成
 @endsection
 
 @section('script')
 <script src= "{{ mix('/js/setting-create.js') }}"></script>
+<script src= "/js/timer.js"></script>
 @endsection

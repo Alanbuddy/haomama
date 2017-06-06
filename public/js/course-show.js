@@ -10340,7 +10340,69 @@ module.exports = __webpack_require__(4);
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(function() {});
+/* WEBPACK VAR INJECTION */(function($) {$(function() {
+  var change_avatar;
+  $("#another-baby").click(function() {
+    var baby_dom;
+    baby_dom = document.createElement("div");
+    $(baby_dom).addClass("add-baby-div baby-div").html($(".add-baby-div").html()).css('display', 'flex');
+    return $(baby_dom).insertBefore("#another-baby");
+  });
+  $(document).on('click', '.close-add-item', function() {
+    return $(this).closest('.add-baby-div').hide();
+  });
+  change_avatar = function(gender, birthday, object) {
+    var today;
+    today = new Date();
+    if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3) {
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png');
+    }
+    if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png');
+    }
+    if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3) {
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png');
+    }
+    if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
+      return $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png');
+    }
+  };
+  $(document).on('change', '.birthday', function() {
+    var birthday, gender;
+    birthday = $(this).val();
+    birthday = new Date(birthday);
+    gender = $(this).closest('.row-div').siblings('.row-div').find('.gender').val();
+    return change_avatar(gender, birthday, this);
+  });
+  $(document).on('change', '.gender', function() {
+    var birthday, gender;
+    gender = $(this).val();
+    birthday = $(this).closest('.row-div').siblings('.row-div').find('.birthday').val();
+    birthday = new Date(birthday);
+    return change_avatar(gender, birthday, this);
+  });
+  return $('#edit-end').click(function() {
+    var baby_name, birthday, code, gender, mobile, parent;
+    parent = $('#parent').val();
+    mobile = $('#mobile').val();
+    code = $('#mobile-code').val();
+    baby_name = [];
+    gender = [];
+    birthday = [];
+    $('.baby-div:visible .baby-name').each(function(i) {
+      return baby_name[i] = $(this).val();
+    });
+    $('.baby-div:visible .gender').each(function(i) {
+      return gender[i] = $(this).val();
+    });
+    $('.baby-div:visible .birthday').each(function(i) {
+      return birthday[i] = $(this).val();
+    });
+    console.log(baby_name);
+    console.log(gender);
+    return console.log(birthday);
+  });
+});
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
