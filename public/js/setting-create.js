@@ -10333,24 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var change_avatar, time, timer, uid, wait;
-  uid = "";
-  timer = null;
-  wait = 60;
-  time = function(o) {
-    $(o).attr("disabled", true);
-    if (wait === 0) {
-      $(o).attr("disabled", false);
-      $(o).text('发送验证码');
-      wait = 60;
-    } else {
-      $(o).text('重发(' + wait + ')');
-      wait--;
-      timer = setTimeout((function() {
-        time(o);
-      }), 1000);
-    }
-  };
+  var change_avatar;
   $("#another-baby").click(function() {
     var baby_dom;
     baby_dom = document.createElement("div");

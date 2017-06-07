@@ -17,7 +17,7 @@
         %p.f12.color6.fn#wechat-name 限制十四个字
       .row-div
         %label.f14.color7.fn 家长身份
-        %span.f12.color6.span-desc 妈妈
+        %span.f12.color6.span-desc#parent-span 妈妈(默认)
         %select.input-div#parent
           %option{value: "请选择"} 请选择
           %option{value: "爸爸"} 爸爸
@@ -28,7 +28,7 @@
         // %p.replace.f12.color10{"data-toggle" => "modal", "data-target" => "#mobileModal"} 更换
         %p.replace.f12.color10 更换
       .row-div
-        %a.edit.f12.color10#parent-edit 编辑
+        %a.f12.color10#parent-edit 编辑
   .item.baby-div
     .left-div
       %img.avatar{src: "/icon/baby_female.png"}
@@ -36,18 +36,17 @@
       .row-div
         %label.f14.color7.fn 宝宝姓名
         %span.f12.color6.span-desc 小凉粉
-        %input.input-div#baby-name
+        %input.input-div#baby-name.baby-name
       .row-div
         %label.f14.color7.fn 宝宝性别
         %span.f12.color6.span-desc 小姑娘
-        %select.input-div#baby-gender
-          %option{value: "请选择"} 请选择
-          %option{value: "男"} 男
-          %option{value: "女"} 女
+        %select.input-div#baby-gender.gender
+          %option{value: "男子汉"} 男子汉
+          %option{value: "小姑娘"} 小姑娘
       .row-div
         %label.f14.color7.fn 宝宝生日
         %span.f12.color6.span-desc 2016/04/05
-        %input.input-div#baby-birthday{type: "date"}
+        %input.input-div#baby-birthday.birthday{type: "date"}
       .row-div
         %a.edit.f12.color10#baby-edit 编辑
   %p.f12.color10.pt16#another-baby 还有一个宝宝?
@@ -60,16 +59,15 @@
   .right-div
     .row-div
       %label.f14.color7.fn 宝宝姓名
-      %input.add-input-div#add-baby-name
+      %input.add-input-div#add-baby-name.baby-name
     .row-div
       %label.f14.color7.fn 宝宝性别
-      %select.add-input-div.add-gender#add-baby-gender
-        %option{value: "请选择"} 请选择
-        %option{value: "男"} 男
-        %option{value: "女"} 女
+      %select.add-input-div.add-gender#add-baby-gender.gender
+        %option{value: "男子汉"} 男子汉
+        %option{value: "小姑娘"} 小姑娘
     .row-div
       %label.f14.color7.fn 宝宝生日
-      %input.add-input-div#add-baby-birthday{type: "date"}
+      %input.add-input-div#add-baby-birthday.birthday{type: "date"}
 @endsection
 #mobileModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

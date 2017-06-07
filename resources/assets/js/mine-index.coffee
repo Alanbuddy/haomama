@@ -18,3 +18,9 @@ $ ->
   $(".course-more").click ->
   	# jump to favorite course page 
   	location.href = ""
+
+  if $('.course-div.mine-course').find('.favorite-item').length >= 3
+    $('.course-more').show()
+
+  if $('.favorite-div').find('.favorite-item').length >= 3
+    $('.favorite-more').show()

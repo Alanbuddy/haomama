@@ -10353,9 +10353,15 @@ module.exports = __webpack_require__(8);
   $(".favorite-more").click(function() {
     return location.href = "";
   });
-  return $(".course-more").click(function() {
+  $(".course-more").click(function() {
     return location.href = "";
   });
+  if ($('.course-div.mine-course').find('.favorite-item').length >= 3) {
+    $('.course-more').show();
+  }
+  if ($('.favorite-div').find('.favorite-item').length >= 3) {
+    return $('.favorite-more').show();
+  }
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

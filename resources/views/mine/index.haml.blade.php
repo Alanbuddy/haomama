@@ -58,7 +58,7 @@
     .item-right
       %img.signin{src: "/icon/signin.png"}
 %hr.div-line
-.course-div
+.course-div.mine-course
   .title-div.clearfix
     %span.f14.color7.fb.mb12 我的课程
     %span.course-more.f10.color5.fr 更多
@@ -90,8 +90,22 @@
         %span.participate 2315人已学
         %span .
         %span 810条评论
+  .favorite-item
+    .icon-div
+      %img.icon{src: "/icon/example.png"}
+    .word-div
+      .favorite-row-div.clearfix
+        %span.grow-title.f12 自我成长
+        %span.item-value.f14.color5 200
+      .favorite-row-div.color7
+        %span.coures-name.f16 名字很长很长很长
+        // %span.course-status.f8 线下
+      .favorite-row-div.f12.color6
+        %span.participate 2315人已学
+        %span .
+        %span 810条评论
 .hr.div-line
-.course-div
+.course-div.favorite-div
   .title-div.clearfix
     %span.f14.color7.fb.mb12 我的收藏
     %span.favorite-more.f10.color5.fr 更多
@@ -129,7 +143,7 @@
     %p.f10.color5 首页
   .foot-item-div#mine
     %img.mine{src: "/icon/mine_selected.png"}
-    %p.f10.color8 我的
+    %p.f10.color8.fb 我的
 
 @endsection
 

@@ -10345,7 +10345,7 @@ module.exports = __webpack_require__(4);
   $("#another-baby").click(function() {
     var baby_dom;
     baby_dom = document.createElement("div");
-    $(baby_dom).addClass("add-baby-div baby-div").html($(".add-baby-div").html()).css('display', 'flex');
+    $(baby_dom).addClass("add-baby-div").html($(".add-baby-div").html()).css('display', 'flex');
     return $(baby_dom).insertBefore("#another-baby");
   });
   $(document).on('click', '.close-add-item', function() {
@@ -10374,33 +10374,12 @@ module.exports = __webpack_require__(4);
     gender = $(this).closest('.row-div').siblings('.row-div').find('.gender').val();
     return change_avatar(gender, birthday, this);
   });
-  $(document).on('change', '.gender', function() {
+  return $(document).on('change', '.gender', function() {
     var birthday, gender;
     gender = $(this).val();
     birthday = $(this).closest('.row-div').siblings('.row-div').find('.birthday').val();
     birthday = new Date(birthday);
     return change_avatar(gender, birthday, this);
-  });
-  return $('#edit-end').click(function() {
-    var baby_name, birthday, code, gender, mobile, parent;
-    parent = $('#parent').val();
-    mobile = $('#mobile').val();
-    code = $('#mobile-code').val();
-    baby_name = [];
-    gender = [];
-    birthday = [];
-    $('.baby-div:visible .baby-name').each(function(i) {
-      return baby_name[i] = $(this).val();
-    });
-    $('.baby-div:visible .gender').each(function(i) {
-      return gender[i] = $(this).val();
-    });
-    $('.baby-div:visible .birthday').each(function(i) {
-      return birthday[i] = $(this).val();
-    });
-    console.log(baby_name);
-    console.log(gender);
-    return console.log(birthday);
   });
 });
 

@@ -287,7 +287,7 @@
               .row-div
                 %label.f14.color7.fn 验证码
                 %input.input-div.f12.color6#mobile-code
-          .item-baby-div.baby-div
+          .item-baby-div
             .left-div
               %img.avatar{src: "/icon/baby_female.png"}
             .right-div
@@ -304,7 +304,7 @@
                 %label.f14.color7.fn 宝宝生日
                 %input.input-div#baby-birthday.birthday{type: "date"}
 
-          .add-baby-div.baby-div
+          .add-baby-div
             %img.close-add-item{src: "/icon/close.png"}
             .left-div
               %img.avatar{src: "/icon/baby_female.png"}

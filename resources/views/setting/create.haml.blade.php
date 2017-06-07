@@ -36,7 +36,6 @@
       .row-div
         %label.f14.color7.fn 宝宝性别
         %select.input-div.gender#baby-gender
-          %option{value: "请选择"} 请选择
           %option{value: "男子汉"} 男子汉
           %option{value: "小姑娘"} 小姑娘
       .row-div
@@ -54,7 +53,6 @@
       .row-div
         %label.f14.color7.fn 宝宝性别
         %select.add-input-div.add-gender.gender#add-baby-gender
-          %option{value: "请选择"} 请选择
           %option{value: "男子汉"} 男子汉
           %option{value: "小姑娘"} 小姑娘
       .row-div

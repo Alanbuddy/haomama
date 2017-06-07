@@ -1,7 +1,7 @@
 $ ->
 	$("#another-baby").click ->
     baby_dom = document.createElement("div")
-    $(baby_dom).addClass("add-baby-div baby-div").html($(".add-baby-div").html()).css('display', 'flex')
+    $(baby_dom).addClass("add-baby-div").html($(".add-baby-div").html()).css('display', 'flex')
     $(baby_dom).insertBefore("#another-baby")
 
   $(document).on 'click', '.close-add-item', ->
@@ -29,20 +29,3 @@ $ ->
     birthday = $(this).closest('.row-div').siblings('.row-div').find('.birthday').val()
     birthday = new Date(birthday)
     change_avatar(gender, birthday, this)
-
-  $('#edit-end').click ->
-    parent = $('#parent').val()
-    mobile = $('#mobile').val()
-    code = $('#mobile-code').val()
-    baby_name = []
-    gender = []
-    birthday = []
-    $('.baby-div:visible .baby-name').each (i) ->
-      baby_name[i] = $(this).val()
-    $('.baby-div:visible .gender').each (i) ->
-      gender[i] = $(this).val()
-    $('.baby-div:visible .birthday').each (i) ->
-      birthday[i] = $(this).val()
-    console.log(baby_name)
-    console.log(gender)
-    console.log(birthday)

@@ -1,4 +1,15 @@
 $(document).ready(function($) {
+  $(".replace").click(function(){
+      $("#mobileModal").modal("show");
+    });
+
+  // $('#mobileModal').on('hidden.bs.modal', function(){
+  //   if (timer != null) {
+  //     clearTimeout(timer);
+  //     $('#code').text('发送验证码');
+  //     wait = 60;
+  //   }
+  // });
 	var timer = null;
 	var wait = 60;
 	var time = function(o) {
@@ -6,7 +17,7 @@ $(document).ready(function($) {
 		if (wait == 0) {
 			$(o).attr("disabled", false);
 			$(o).text('发送验证码');
-			return wait = 60;
+		  wait = 60;
 		} else {
 			$(o).text('重发(' + wait + ')');
 			wait--;
@@ -14,9 +25,236 @@ $(document).ready(function($) {
 				time(o);
 			}, 1000);
 		}
+		return false;
 	};
-	$(".replace").click(function(){
-	    $("#mobileModal").modal("show");
-	  });
+
+	$("#code").click(function(){
+	  var mobile = $("#mobile").val();
+	  var mobile_retval = $.regex.isMobile(mobile);
+	  if (mobile_retval === false) {
+	    showMsg("手机号不正确", 'center');
+	    return false;
+	  }
+    $.postJSON(
+      '/show',  //interface
+      {
+        mobile: mobile
+      },
+      function(data){
+        console.log(data);
+        if (data.success){
+          if (timer !== null) {
+            clearTimeout(timer);
+          }
+          time('#code');
+        } else {
+          if (data.code == USER_EXIST) {
+            showMsg('该手机号已存在', 'center');
+            return false;
+          }
+        }
+      }
+    );
+    return false;
+	});
+
+  $('#confirm-replace').click(function(){
+    var mobile = $('#mobile').val();
+    var mobile_retval = $.regex.isMobile(mobile);
+    var code = $('.verify-code').val();
+    if (mobile_retval === false) {
+      showMsg("手机号不正确", 'center');
+      return false;
+    }
+    if (code === "") {
+      showMsg('验证码未填写', 'center');
+      return false;
+    }
+    $.postJSON(
+      '/',
+      {
+        mobile: mobile,
+        code: code
+      },
+      function(data) {
+        console.log(data);
+        if (data.success) {
+          $('#mobile-span').text(mobile);
+        }
+      }
+      );
+    return false;
+  });
+
+  var parent_edit = false;
+  var baby_edit = false;
+  var add_baby = false
+  $('#parent-edit').click(function(){
+    parent_edit = true;
+    $(this).hide();
+    var parent = $(this).closest(".right-div");
+    var span = parent.find("span");
+    var select = parent.find("select");
+    var replace = parent.find(".replace");
+    span.toggle();
+    select.toggle();
+    replace.toggle();
+    $('#edit-end').show();
+  });
+
+  $('.edit').click(function(){
+    baby_edit = true;
+    $(this).hide();
+    var parent = $(this).closest(".right-div");
+    var span = parent.find("span");
+    var input = parent.find("input");
+    var select = parent.find("select");
+    span.toggle();
+    input.toggle();
+    select.toggle();
+    $('#another-baby').show();
+    $("#edit-end").show();
+  });
+
+  $("#another-baby").click(function(){
+    add_baby = true;
+    baby_dom = document.createElement("div");
+    $(baby_dom).addClass("item").html($(".add-baby-div").html());
+    $(baby_dom).insertBefore("#another-baby");
+    $('#edit-end').show();
+  });
+
+  $(document).on('click', '.close-add-item', function(){
+    $(this).closest('.item').hide();
+    if (parent_edit === false && baby_edit === false && $('.item:visible').length == 2) {
+      $('#edit-end').hide();
+    }
+  });
+
+  $('#edit-end').click(function(){
+    var baby_name = [];
+    var gender = [];
+    var birthday = [];
+    if (parent_edit && baby_edit === false) {
+      var parent_statu = $("#parent").val();
+      var mobile = $("#mobile-span").text();
+      var mobile_retval = $.regex.isMobile(mobile);
+      if (mobile_retval === false) {
+        showMsg("手机号不正确", 'center');
+        return false;
+      }
+      console.log(parent_statu);
+      console.log(mobile);
+      $.postJSON(
+        url,  // 只提交parent,未有数据时创建，有就更新
+        {
+          parent_statu: parent_statu,
+          mobile: mobile 
+        },
+        function(data) {
+          if (data.success) {
+            $('#parent-span').show();
+            $('#parent-span').text(parent_statu);
+            $('#parent').hide();
+            $('#mobile-span').text(mobile);
+            $('.replace').hide();
+          }
+        }
+        );
+    }
+    if (baby_edit && parent_edit === false) {
+      $('.baby-name:visible').each(function(i){
+         baby_name[i] = $(this).val();
+      });
+      $('.gender:visible').each(function(i){
+         gender[i] = $(this).val();
+      });
+      $('.birthday:visible').each(function(i){
+         birthday[i] = $(this).val();
+      });
+      console.log(baby_name);
+      console.log(gender);
+      console.log(birthday);
+      $.postJSON(
+        url,  //只提交baby，未有数据时创建，有就更新
+        {
+          baby_name: baby_name,
+          gender: gender,
+          birthday: birthday
+        },
+        function(data) {
+          if (data.success) {
+            location.href = '';
+          }
+        }
+        );
+    }
+    if (add_baby && baby_edit === false && parent_edit === false) {
+      $('.baby-name:visible').each(function(i){
+        baby_name[i] = $(this).val();
+      });
+      $('.gender:visible').each(function(i){
+        gender[i] = $(this).val();
+      });
+      $('.birthday:visible').each(function(i){
+        birthday[i] = $(this).val();
+      });
+      console.log(baby_name);
+      console.log(gender);
+      console.log(birthday);
+      $.postJSON(
+        url,  //只提交add-baby，只创建数据
+        {
+          baby_name: baby_name,
+          gender: gender,
+          birthday: birthday
+        },
+        function(data) {
+          if (data.success) {
+            location.href = '';
+          }
+        }
+        );
+    }
+    if (parent_edit && baby_edit) {
+      var parent_statu = $("#parent").val();
+      var mobile = $("#mobile-span").text();
+      var mobile_retval = $.regex.isMobile(mobile);
+      if (mobile_retval === false) {
+        showMsg("手机号不正确", 'center');
+        return false;
+      }
+      $('.baby-name:visible').each(function(i){
+         baby_name[i] = $(this).val();
+      });
+      $('.gender:visible').each(function(i){
+         gender[i] = $(this).val();
+      });
+      $('.birthday:visible').each(function(i){
+         birthday[i] = $(this).val();
+      });
+      console.log(parent_statu);
+      console.log(mobile);
+      console.log(baby_name);
+      console.log(gender);
+      console.log(birthday);
+      $.postJSON(
+        url,   // 提交parent and baby，未有数据时创建，有就更新
+        {
+          parent_statu: parent_statu,
+          mobile: mobile,
+          baby_name: baby_name,
+          gender: gender,
+          birthday: birthday
+        },
+        function(data) {
+          if (data.success) {
+            location.href = '';
+          }
+        }
+        );
+    }
+  });
+  
 	
 });

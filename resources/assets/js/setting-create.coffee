@@ -1,22 +1,5 @@
 
 $ ->
-  uid = ""
-  timer = null
-  wait = 60
-  time = (o) ->
-    $(o).attr("disabled", true)
-    if wait == 0
-      $(o).attr("disabled", false)
-      $(o).text('发送验证码')
-      wait = 60
-    else
-      $(o).text('重发(' + wait + ')')
-      wait--
-      timer = setTimeout (->
-        time o
-        return
-      ), 1000
-    return
 
   $("#another-baby").click ->
     baby_dom = document.createElement("div")

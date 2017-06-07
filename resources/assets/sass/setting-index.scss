@@ -118,23 +118,25 @@
   border: 0;
   border-bottom: 1px solid #ccc;
   width: 3.6rem;
-
 }
-.edit {
+.add-gender {
+  background: #fff;
+}
+.edit, #parent-edit {
   position: absolute;
   bottom: 0.12rem;
   right: 0;
 }
-.edit:link {
+.edit:link, #parent-edit:link {
   color: #8dbdf2;
 }
-.edit:visited {
+.edit:visited, #parent-edit:visited {
   color: #8dbdf2;
 }
-.edit:hover {
+.edit:hover, #parent-edit:hover {
   color: #8dbdf2;
 }
-.edit:active {
+.edit:active, #parent-edit:active {
   color: #8dbdf2;
 }
 .pt16 {
