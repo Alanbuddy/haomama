@@ -48,7 +48,7 @@
     </div>
     @yield('content')
 </div>
-<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/haomama/js/jquery-3.2.1.min.js"></script>
 @yield('script')
 </body>
 </html>

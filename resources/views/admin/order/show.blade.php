@@ -4,12 +4,12 @@
 @endsection
 
 @section('title')
-    Lesson show
+    Order show
 @endsection
 
 @section('content')
     @include('common.message')
-    @include('admin.term.menu')
+    @include('admin.order.menu')
 
     <dl>
         @foreach($item->getAttributes() as $k=>$v)

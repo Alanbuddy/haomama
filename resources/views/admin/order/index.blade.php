@@ -21,6 +21,9 @@
                 <a href="{{route('orders.edit',['order'=>$item->id])}}">
                     编辑
                 </a>
+                <a href="{{route('orders.payment.query',['uuid'=>$item->uuid])}}">
+                    通过微信接口查询订单
+                </a>
                 <form action="{{route('orders.destroy',['id'=>$item->id])}}" method="post" style="display: inline">
                     {{csrf_field()}}
                     {{method_field('DELETE')}}

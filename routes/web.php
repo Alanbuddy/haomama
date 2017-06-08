@@ -56,9 +56,12 @@ Route::group([
 
     Route::resource('lessons', 'LessonController');
 
-    Route::resource('comments', 'CommentController');
+    Route::resource('comments', 'CommentController',['except'=>'store']);
 
-    Route::resource('orders', 'OrderController');
+    Route::post('/orders/pay', 'OrderController@pay')->name('orders.pay');
+    Route::resource('orders', 'OrderController',['except'=>'store']);
+    Route::get('/orders/{uuid}/query', 'OrderController@queryOrder')->name('orders.payment.query');
+    Route::any('/orders/{uuid}/payment/update', 'OrderController@updatePaymentStatus')->name('orders.payment.update');
 
     Route::resource('users', 'UserController');
 
@@ -78,9 +81,10 @@ Route::group([
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');
     Route::get('/videos/{video?}/statistics', 'VideoController@statistics')->name('video.statistics');
 
-    Route::get('/wechat/access-token', 'WechatController@accessToken');
-    Route::get('/wechat/payment/notify', 'WechatController@paymentNotify');
-    Route::get('/wechat/login', 'WechatController@login');
+    Route::get('/wechat/access-token', 'WechatController@accessToken')->name('wechat.accessToken');
+    Route::get('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment/notify');
+    Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
+    Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
 
     Route::get('/sms/send', 'SmsController@send');
     Route::get('/sms/residual', 'SmsController@residual');

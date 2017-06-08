@@ -13,9 +13,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         //Dev
-//        Auth::loginUsingId(1);
+        Auth::loginUsingId(1);
         //
-
         $items = [];
         $hasFilter = false;
         $route = $request->route();

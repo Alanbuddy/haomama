@@ -2,7 +2,7 @@
 @section('content')
     @include('admin.order.menu')
     @include('common.message')
-    <form action="{{route('orders.store')}}" method="post">
+    <form action="{{route('orders.pay')}}" method="post">
         {{csrf_field()}}
         <label for="name">title</label>
         <input type="text" name="name" placeholder="name">

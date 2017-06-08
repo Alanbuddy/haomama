@@ -2,6 +2,7 @@
 @section('content')
     <div class="row">
         <a id="wechat">wechat login</a>
+        <a id="wechatbase">wechat base</a>
         <div id="id_video_container_9031868222917328248" style="width:100%;height:0px;"></div>
         <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
         <script type="text/javascript">
@@ -74,5 +75,12 @@
                 node.setAttribute('href', app_url);
             }
         }
+
+        var snsapi_base_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
+            + appId
+            + "&redirect_uri=http%3a%2f%2f"
+            + "baby.fumubidu.com.cn/haomama/wechat/openid&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
+        var node = document.getElementById('wechatbase');
+        node.setAttribute('href', snsapi_base_url );
     </script>
 @endsection

@@ -6,9 +6,8 @@ require_once __DIR__ . "/../Wechat/WxApi.php";
 
 use App\Http\Util\Curl;
 use App\Http\Wechat\WxApi;
-use Illuminate\Http\Request;
-
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WechatController extends Controller
@@ -23,16 +22,8 @@ class WechatController extends Controller
 
     public function login(Request $request)
     {
-        $appid = config('wechat.mp.app_id');
-        $secret = config('wechat.mp.app_secret');
         $code = $request->get('code');
-        $url = "https://api.weixin.qq.com/sns/oauth2/access_token"
-            . "?appid=" . $appid
-            . "&secret=" . $secret
-            . "&code=" . $code
-            . "&grant_type=authorization_code";
-        //get access_token
-        $response = $this->request($url);
+        $response = WxApi::oauthAccessToken($code);
         if ($response["code"] == 200) {
             $data = json_decode($response["data"]);
             $response = WxApi::userInfo($data->access_token, $data->openid);
@@ -48,13 +39,16 @@ class WechatController extends Controller
                 }
                 //Login
                 Auth::loginUsingId($user->id);
-                return redirect('/haomama');
+                return redirect('/');
             }
         }
         return 'ERROR:' . $response["code"];
     }
 
-    public function paymentNotify()
+    public function openid(Request $request)
     {
+        $result = WxApi::oauthAccessToken($request->code);
+        dd($result);
     }
+
 }
