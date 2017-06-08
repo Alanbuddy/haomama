@@ -10334,6 +10334,18 @@ return jQuery;
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var bannerSwiper, mySwiper, search;
+  $('.swiper-container').scroll(function() {
+    if ($('.swiper-container').scrollTop() > 100) {
+      return $('.upper').fadeIn(1000);
+    } else {
+      return $('.upper').fadeOut(1000);
+    }
+  });
+  $('.upper').click(function() {
+    return $('.swiper-container').animate({
+      scrollTop: 0
+    });
+  });
   $(".course-nav span").click(function() {
     $(this).closest(".swiper-slide").find(".course-nav span").removeClass('course-active');
     $(this).addClass('course-active');

@@ -10340,47 +10340,129 @@ module.exports = __webpack_require__(4);
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var change_avatar;
-  $("#another-baby").click(function() {
-    var baby_dom;
-    baby_dom = document.createElement("div");
-    $(baby_dom).addClass("add-baby-div").html($(".add-baby-div").html()).css('display', 'flex');
-    return $(baby_dom).insertBefore("#another-baby");
-  });
-  $(document).on('click', '.close-add-item', function() {
-    return $(this).closest('.add-baby-div').hide();
-  });
-  change_avatar = function(gender, birthday, object) {
-    var today;
-    today = new Date();
-    if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3) {
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png');
+/* WEBPACK VAR INJECTION */(function($) {var change_avatar;
+
+$(function() {
+  $(document).scroll(function() {
+    if ($(document).scrollTop() > 100) {
+      return $('.upper').fadeIn(1000);
+    } else {
+      return $('.upper').fadeOut(1000);
     }
-    if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png');
-    }
-    if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3) {
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png');
-    }
-    if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
-      return $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png');
-    }
-  };
-  $(document).on('change', '.birthday', function() {
-    var birthday, gender;
-    birthday = $(this).val();
-    birthday = new Date(birthday);
-    gender = $(this).closest('.row-div').siblings('.row-div').find('.gender').val();
-    return change_avatar(gender, birthday, this);
   });
-  return $(document).on('change', '.gender', function() {
-    var birthday, gender;
-    gender = $(this).val();
-    birthday = $(this).closest('.row-div').siblings('.row-div').find('.birthday').val();
-    birthday = new Date(birthday);
-    return change_avatar(gender, birthday, this);
+  return $('.upper').click(function() {
+    return $('body').animate({
+      scrollTop: 0
+    });
   });
+});
+
+$("#another-baby").click(function() {
+  var baby_dom;
+  baby_dom = document.createElement("div");
+  $(baby_dom).addClass("add-baby-div").html($(".add-baby-div").html()).css('display', 'flex');
+  return $(baby_dom).insertBefore("#another-baby");
+});
+
+$(document).on('click', '.close-add-item', function() {
+  return $(this).closest('.add-baby-div').hide();
+});
+
+change_avatar = function(gender, birthday, object) {
+  var today;
+  today = new Date();
+  if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3) {
+    $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png');
+  }
+  if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
+    $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png');
+  }
+  if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3) {
+    $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png');
+  }
+  if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
+    return $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png');
+  }
+};
+
+$(document).on('change', '.birthday', function() {
+  var birthday, gender;
+  birthday = $(this).val();
+  birthday = new Date(birthday);
+  gender = $(this).closest('.row-div').siblings('.row-div').find('.gender').val();
+  return change_avatar(gender, birthday, this);
+});
+
+$(document).on('change', '.gender', function() {
+  var birthday, gender;
+  gender = $(this).val();
+  birthday = $(this).closest('.row-div').siblings('.row-div').find('.birthday').val();
+  birthday = new Date(birthday);
+  return change_avatar(gender, birthday, this);
+});
+
+$('.favorite').click(function() {
+  var fav;
+  fav = $(this).attr('data-fav');
+  return $.postJSON('/', {
+    favorite: fav
+  }, function(data) {
+    console.log(data);
+    if (data.success) {
+      if (fav === 'true') {
+        $('.favorite').attr('src', '/icon/like_selected.png');
+        $('.favorite').attr('data-fav', 'false');
+        return showMsg('成功收藏该课程', 'center');
+      } else {
+        $('.favorite').attr('src', '/icon/like_normal.png');
+        $('.favorite').attr('data-fav', 'true');
+        return showMsg('收藏已取消', 'center');
+      }
+    } else {
+      return showMsg('服务器出错，请稍后再试', 'center');
+    }
+  });
+});
+
+$('.admire-icon').click(function() {
+  var ad;
+  ad = $(this).attr('data-ad');
+  return $.postJSON('/', {
+    admire: ad
+  }, function(data) {
+    console.log(data);
+    if (data.success) {
+      if (ad === 'true') {
+        $('.admire-icon').attr('src', '/icon/like1_selected.png');
+        $('.admire-icon').attr('data-ad', 'false');
+        return showMsg('点赞完成', 'center');
+      } else {
+        $('.admire-icon').attr('src', '/icon/like1_normal.png');
+        $('.admire-icon').attr('data-ad', 'true');
+        return showMsg('取消点赞', 'center');
+      }
+    } else {
+      return showMsg('服务器出错，请稍后再试', 'center');
+    }
+  });
+});
+
+$('.view-more').click(function() {
+  var unfold_height;
+  $(this).hide();
+  unfold_height = $(this).siblings('.fold-div').find('.unview-div').height();
+  return $(this).siblings('.fold-div').slideDown($(this).siblings('.fold-div').animate({
+    height: unfold_height + 15
+  }));
+});
+
+$('.teacher-view-more').click(function() {
+  var unfold_height;
+  $(this).hide();
+  unfold_height = $(this).siblings('.teacher-fold-div').find('.teacher-unview-div').height();
+  return $(this).siblings('.teacher-fold-div').slideDown($(this).siblings('.teacher-fold-div').animate({
+    height: unfold_height + 15
+  }));
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

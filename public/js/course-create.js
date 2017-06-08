@@ -10334,8 +10334,8 @@ return jQuery;
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var search;
-  $(".input-box").keydown(function() {
-    return $(".search-auto").toggle();
+  $(".input-box").focus(function() {
+    return $(".search-auto").show();
   });
   search = function() {
     var value;
@@ -10344,13 +10344,23 @@ return jQuery;
   };
   $(".input-box").keydown(function(event) {
     var code;
+    $(".search-auto").hide();
     code = event.which;
     if (code === 13) {
       return search();
     }
   });
-  return $(".search-icon").click(function() {
+  $(".search-icon").click(function() {
     return search();
+  });
+  $('.tag-word').click(function() {
+    var word;
+    $(this).closest('.search-auto').hide();
+    word = $(this).text();
+    return $('.input-box').val(word);
+  });
+  return $('.back').click(function() {
+    return location.href = '';
   });
 });
 

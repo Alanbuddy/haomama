@@ -10,7 +10,7 @@
   %hr.div-line
 .empty-div
   %img.empty-icon{src: "/icon/empty.png"}
-  %p.empty-message.f12.color5 您还没有相关课程信息......
+  %p.empty-message.f12.color5 您还没有相关消息......
 .message-item-div
   .item-review
     .avatar-div
@@ -27,7 +27,6 @@
       %p.name.f12.color7 课程小助手
       %p.time.f12.color5 三天前
       %p.num.f14.color7 您报名的课程"名字很长很长的"已有更新～请尽快学习～
-
 
 @endsection
 

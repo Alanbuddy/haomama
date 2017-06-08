@@ -7,7 +7,8 @@
 .head-div
   %img.course-photo{src: "/icon/course.png"}
   %img.back{src: "/icon/back2.png"}
-  %img.favorite{src: "/icon/like_normal.png"}
+  // %img.favorite{src: "/icon/like_selected.png", 'data-fav'=> "false"}
+  %img.favorite{src: "/icon/like_normal.png", 'data-fav'=> 'true'}
   .course-title-div
     .course-row-div.clearfix
       %span.health-title-small.f12 健康养育
@@ -77,29 +78,51 @@
   %span.title.f14.color7.fb 课程目录
   %span.f12.color7 (共8节)
   .items-div
-    .item
-      %p.num-div.f16.color7 1
-      .item-desc
-        %p.f14.color7 宝宝生长发育特点
-        .item-row.f12.color5
-          %span.min 23min
-          %span 1233人已学
-      %img.go{src: "/icon/go.png"}
-      %img.free{src: "/icon/free.png"}
-    .item.opt55
-      %p.num-div.f16.color7 1
-      .item-desc
-        %p.f14.color7 宝宝生长发育特点
-        .item-row.f12.color5
-          %span.min 23min
-          %span 1233人已学
-      %img.go{src: "/icon/go.png"}
-    .item.opt55
-      %p.num-div.f16.color7 1
-      .item-desc
-        %p.f14.color7 宝宝生长发育特点
-        .item-row.f12.color5
-          %span 未上线
+    // 如果只有3条以下课程列表项，就去掉directory-div  unview-div, 隐藏view-more
+    .fold-div   
+      .unview-div
+        .item
+          %p.num-div.f16.color7 1
+          .item-desc
+            %p.f14.color7 宝宝生长发育特点
+            .item-row.f12.color5
+              %span.min 23min
+              %span 1233人已学
+          %img.go{src: "/icon/go.png"}
+          %img.free{src: "/icon/free.png"}
+        .item.opt55
+          %p.num-div.f16.color7 1
+          .item-desc
+            %p.f14.color7 宝宝生长发育特点
+            .item-row.f12.color5
+              %span.min 23min
+              %span 1233人已学
+          %img.go{src: "/icon/go.png"}
+        .item.opt55
+          %p.num-div.f16.color7 1
+          .item-desc
+            %p.f14.color7 宝宝生长发育特点
+            .item-row.f12.color5
+              %span 未上线
+        .item.opt55
+          %p.num-div.f16.color7 1
+          .item-desc
+            %p.f14.color7 宝宝生长发育特点
+            .item-row.f12.color5
+              %span 未上线
+        .item.opt55
+          %p.num-div.f16.color7 1
+          .item-desc
+            %p.f14.color7 宝宝生长发育特点
+            .item-row.f12.color5
+              %span 未上线
+        .item.opt55
+          %p.num-div.f16.color7 1
+          .item-desc
+            %p.f14.color7 宝宝生长发育特点
+            .item-row.f12.color5
+              %span 未上线
+
     .view-more
       %span.f12.color5 查看更多
       %img.more-icon{src: "/icon/more.png"}
@@ -108,22 +131,34 @@
   %span.title.f14.color7.fb 授课老师
   %span.f12.color7 (共5位)
   .items-div
-    .teacher-item
-      %img.avatar{src: "/icon/avatar.png"}
-      .item-desc
-        %p.f14.color7.teacher-name 王小明老师
-        %p.f12.color6 这里写的是老师的简介信息，不能写太长
-    .teacher-item
-      %img.avatar{src: "/icon/avatar.png"}
-      .item-desc
-        %p.f14.color7.teacher-name 王小明老师
-        %p.f12.color6 这里写的是老师的简介信息，不能写太长
-    .teacher-item
-      %img.avatar{src: "/icon/avatar.png"}
-      .item-desc
-        %p.f14.color7.teacher-name 王小明老师
-        %p.f12.color6 这里写的是老师的简介信息，不能写太长
-    .view-more
+    .teacher-fold-div
+      .teacher-unview-div
+        .teacher-item
+          %img.avatar{src: "/icon/avatar.png"}
+          .item-desc
+            %p.f14.color7.teacher-name 王小明老师
+            %p.f12.color6 这里写的是老师的简介信息，不能写太长
+        .teacher-item
+          %img.avatar{src: "/icon/avatar.png"}
+          .item-desc
+            %p.f14.color7.teacher-name 王小明老师
+            %p.f12.color6 这里写的是老师的简介信息，不能写太长
+        .teacher-item
+          %img.avatar{src: "/icon/avatar.png"}
+          .item-desc
+            %p.f14.color7.teacher-name 王小明老师
+            %p.f12.color6 这里写的是老师的简介信息，不能写太长
+        .teacher-item
+          %img.avatar{src: "/icon/avatar.png"}
+          .item-desc
+            %p.f14.color7.teacher-name 王小明老师
+            %p.f12.color6 这里写的是老师的简介信息，不能写太长
+        .teacher-item
+          %img.avatar{src: "/icon/avatar.png"}
+          .item-desc
+            %p.f14.color7.teacher-name 王小明老师
+            %p.f12.color6 这里写的是老师的简介信息，不能写太长
+    .teacher-view-more
       %span.f12.color5 查看更多
       %img.more-icon{src: "/icon/more.png"}
 %hr.div-line
@@ -193,7 +228,7 @@
         %span.f12.color5 第1课时
         .admire-div
           %span.f12.color5.admire-num 123
-          %img.admire-icon{src: "/icon/like1_normal.png"}
+          %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'true'}
     .review-item
       %img.review-avatar{src: "/icon/avatar.png"}
       .item-desc
@@ -204,7 +239,7 @@
         %span.f12.color5 第1课时
         .admire-div
           %span.f12.color5.admire-num 123
-          %img.admire-icon{src: "/icon/like1_selected.png"}
+          %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'false'}
     .review-item
       %img.review-avatar{src: "/icon/avatar.png"}
       .item-desc

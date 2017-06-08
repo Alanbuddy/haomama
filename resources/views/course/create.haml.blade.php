@@ -12,7 +12,7 @@
     %img.search-icon{src: "/icon/search.png"}
   .search-auto
     %span.f12.color5 热搜推荐
-    %p.f14.color7 标签词
+    %p.f14.color7.tag-word 标签词
 
 @endsection
 

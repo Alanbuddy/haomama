@@ -1,5 +1,13 @@
 
 $ ->
+  $('.swiper-container').scroll ->
+    if $('.swiper-container').scrollTop() > 100
+      $('.upper').fadeIn(1000)
+    else
+      $('.upper').fadeOut(1000)
+
+  $('.upper').click ->
+    $('.swiper-container').animate({scrollTop: 0})
 
   $(".course-nav span").click ->
     $(this).closest(".swiper-slide").find(".course-nav span").removeClass('course-active')
