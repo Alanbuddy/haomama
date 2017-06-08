@@ -1,6 +1,7 @@
 @extends('layout.app')
 @section('content')
     <div class="row">
+        <a id="wechat">wechat login</a>
         <div id="id_video_container_9031868222917328248" style="width:100%;height:0px;"></div>
         <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
         <script type="text/javascript">
@@ -58,5 +59,20 @@
                 }
             });
         });
+    </script>
+    <script>
+        var appId = "{{config('wechat.mp.app_id')}}";
+        var node = document.getElementById('wechat');
+        var app_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
+            + appId
+            + "&redirect_uri=http%3a%2f%2f"
+            + "baby.fumubidu.com.cn/haomama/wechat/login&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
+//        node.setAttribute('href', pc_url);
+//        $.ajax('/' + navigator.userAgent);
+        if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|SymbianOS)/i))) {
+            if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
+                node.setAttribute('href', app_url);
+            }
+        }
     </script>
 @endsection

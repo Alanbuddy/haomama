@@ -25,7 +25,7 @@ Route::group([
     'namespace' => 'Admin',
     'prefix' => 'admin'
 ], function () {
-    Route::get('/', 'AdminController@index')->name('admin::index');
+    Route::get('/', 'AdminController@index')->name('admin.index');
     Route::get('/phpinfo', 'AdminController@info');
 });
 
@@ -80,6 +80,7 @@ Route::group([
 
     Route::get('/wechat/access-token', 'WechatController@accessToken');
     Route::get('/wechat/payment/notify', 'WechatController@paymentNotify');
+    Route::get('/wechat/login', 'WechatController@login');
 
     Route::get('/sms/send', 'SmsController@send');
     Route::get('/sms/residual', 'SmsController@residual');

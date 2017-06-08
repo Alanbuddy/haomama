@@ -20,12 +20,12 @@
             @if (Auth::guest())
                 {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
                 <li><a href="{{ route('login',[],false) }}">Login</a></li>
-{{--                <li><a href="{{ route('register') }}">Register</a></li>--}}
+                {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
                 <li><a href="{{ route('register',[],false) }}">Register</a></li>
 
             @else
                 @role('admin')
-                <li><a href="{{ url('/admin') }}">
+                <li><a href="{{route('admin.index',[],false) }}">
                         <p>admin</p>
                     </a>
                 </li>

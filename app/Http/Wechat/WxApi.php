@@ -21,8 +21,22 @@ class WxApi
 {
     use Curl;
 
+    //微信网页授权是通过OAuth2.0机制实现的，在用户授权给公众号后，公众号可以获取到一个网页授权特有的接口调用凭证（网页授权access_token），
+    //通过网页授权access_token可以进行授权后接口调用，如获取用户基本信息；
+    /*** 获取网页授权 access_token */
+    public static function oauthAccessToken($appid, $secret, $code)
+    {
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token"
+            . "?appid=" . $appid
+            . "&secret=" . $secret
+            . "&code=" . $code
+            . "&grant_type=authorization_code";
+        $response = self::request($url);
+        return $response;
+    }
+
     /**
-     * 获取access token
+     * 获取普通access_token
      */
     public static function accessToken($timeOut = 6)
     {
@@ -37,6 +51,16 @@ class WxApi
         $response = self::request($url);
         $result = $response;
         return $result;
+    }
+
+    // call userinfo inteface
+    public static function userInfo($access_token, $openid)
+    {
+        $url = "https://api.weixin.qq.com/sns/userinfo"
+            . "?access_token=" . $access_token
+            . "&openid=" . $openid;
+        $response = self::request($url);
+        return $response;
     }
 }
 
