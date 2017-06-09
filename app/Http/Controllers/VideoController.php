@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Common;
-use App\Http\Controllers\Util\IO;
+use App\Http\Util\IO;
+use App\Models\Behavior;
 use App\Models\File;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Lib\Vod\VodApi;
-use App\Http\Controllers\Util\Parse;
+use App\Http\Util\Parse;
 
 class VideoController extends Controller
 {
@@ -339,6 +340,22 @@ class VideoController extends Controller
             return 2;
         }
         return 'error';
+    }
+
+    public function statistics(Request $request, Video $video)
+    {
+        $items = Behavior::where('id', '>', '0')
+            ->select('id', 'user_id', 'type')
+            ->addSelect(DB::raw('data->"$.time" as time'))
+            ->where(DB::raw('data->"$.video_id"'), $video->id)
+//            ->where('type','video.drag.begin')
+            ->get();
+        $dragBegin = $items->where('type', 'video.drag.begin')->all();
+//        dd($dragBegin);
+        $dragEnd = $items->where('type', 'video.drag.end')->all();
+        dd($dragBegin);
+        return compact('dragBegin','dragEnd');
+//        dd($items);
     }
 
 }

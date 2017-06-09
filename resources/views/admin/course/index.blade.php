@@ -14,7 +14,16 @@
                     详细信息
                 </a>
                 <a href="{{route('courses.edit',['course'=>$item->id])}}">
-                    编辑
+                    编辑基本信息
+                </a>
+                <a href="{{route('courses.lessons.edit',['course'=>$item->id])}}">
+                    选课
+                </a>
+                <a href="{{route('courses.tags.edit',['course'=>$item->id])}}">
+                    标签
+                </a>
+                <a href="{{route('courses.comments.index',['course'=>$item->id])}}">
+                    评论
                 </a>
                 <form action="{{route('courses.destroy',['id'=>$item->id])}}" method="post" style="display: inline">
                     {{csrf_field()}}
@@ -24,4 +33,5 @@
             </li>
         @endforeach
     </ul>
+    {{$items->render()}}
 @endsection

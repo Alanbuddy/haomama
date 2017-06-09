@@ -7,7 +7,9 @@
     <meta name="format-detection", content: "telephone=no">
     <meta name="format-detection", content: "email=no">
 
-    <title>好妈妈微课</title>
+    <title>
+        @yield('title') VOD
+    </title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/mobile-notification.css">
     <link rel="stylesheet" href="/css/layout.css">
@@ -24,33 +26,35 @@
         <ul class="nav navbar-nav navbar-right"> -->
             <!-- Authentication Links -->
 
-           <!--  @if (Auth::guest())
-                <li><a href="{{ url('/login') }}">Login</a></li>
-                <li><a href="{{ url('/register') }}">Register</a></li>
+           {{--  @if (Auth::guest())
+                {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
+                {{-- <li><a href="{{ route('login',[],false) }}">Login</a></li> --}}
+                {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
+                {{-- <li><a href="{{ route('register',[],false) }}">Register</a></li> --}} --}}
 
-            @else
-                @role('admin')
-                <li><a href="{{ url('/admin') }}">
-                        <p>admin</p>
-                    </a>
-                </li>
+           {{--  @else --}}
+                {{-- @role('admin') --}}
+                {{-- <li><a href="{{route('admin.index',[],false) }}"> --}}
+                        {{-- <p>admin</p> --}}
+                    {{-- </a> --}}
+                {{-- </li> --}}
 
-                @endrole
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-                </li>
+                {{-- @endrole --}}
+                {{-- <li class="dropdown"> --}}
+                    {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> --}}
+                        {{-- {{ Auth::user()->name }} <span class="caret"></span> --}}
+                    {{-- </a> --}}
+                {{-- </li> --}}
 
-                <li>
-                    <form class="navbar-form navbar-left" action="{{route('logout')}}" method="post">
-                        {{csrf_field()}}
-                        <button type="submit" class="btn btn-sm btn-danger">Logout</button>
-                    </form>
-                </li>
-            @endif
-        </ul>
-    </div> -->
+                {{-- <li> --}}
+                    {{-- <form class="navbar-form navbar-left" action="{{route('logout',[],false)}}" method="post"> --}}
+                        {{-- {{csrf_field()}} --}}
+                        {{-- <button type="submit" class="btn btn-sm btn-danger">Logout</button> --}}
+                    {{-- </form> --}}
+                {{-- </li> --}}
+            {{-- @endif --}}
+        {{-- </ul> --}}
+    {{-- </div> --}}
     
 </div>
 <div>

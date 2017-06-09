@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Lession extends Model
+class Behavior extends Model
 {
     //
+    protected $guarded = [];
 }

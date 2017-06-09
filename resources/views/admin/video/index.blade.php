@@ -5,6 +5,7 @@
     <ul>
         @foreach($items as $item)
             <li>
+                [{{$item->id}}]
                 {{$item->file_name}}
                 <b>{{$item->video_type}}</b>
                 <b>{{$item->created_at}}</b>

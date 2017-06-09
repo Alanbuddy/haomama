@@ -30,14 +30,18 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-    'vod'=>[
-        'secretId'=>"AKIDd2B4h6g8nGSO3eC7yax4vXkkZ9asllMi",
-        'secretKey'=>"HIdjeQxFH4cv0qTr44qNhlZ8SZQ3ax4v"
+    'vod' => [
+        'secretId' => env('TENCENT_VOD_SECRET_ID'),
+        'secretKey' => env('TENCENT_VOD_SECRET_KEY'),
+        'appId' => env('TENCENT_VOD_APP_ID'),
+    ],
+    'sms' => [
+        'url' => 'http://pi.noc.cn/SendSMS.aspx',
+        'account' => '101077004',
+        'password' => 'haomama',
     ]
-
-
 ];

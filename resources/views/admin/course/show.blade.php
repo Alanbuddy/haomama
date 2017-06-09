@@ -8,7 +8,7 @@
     @include('admin.course.menu')
 
     <dl>
-        @foreach($item->getAttributes() as $k=>$v)
+        @foreach($course->getAttributes() as $k=>$v)
             <dt>
                 {{$k}}
             </dt>
@@ -16,6 +16,17 @@
                 {{$v}}
             </dd>
         @endforeach
+        <dt>是否已加入</dt>
+        <dd>{{$hasEnrolled?'yes':'no'}} </dd>
+        <dd>已加入{{$enrolledCount}}人</dd>
+        <dt>是否已收藏</dt>
+        <dd>{{$hasFavorited?'yes':'no'}} </dd>
+        <dt>课程</dt>
+        <dd>{{count($lessons)}} </dd>
+        <dt>评论</dt>
+        <dd>{{count($comments)}} </dd>
+        <dt>推荐</dt>
+        <dd>{{json_encode($recommendedCourses)}} </dd>
     </dl>
 
 @endsection
