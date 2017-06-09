@@ -1,0 +1,92 @@
+.head-div {
+  position: relative;
+  height: 1.82rem;
+  background: #fc90a5;
+}
+.back {
+  position: absolute;
+  top: 0.16rem;
+  left: 0.16rem;
+  width: 0.88rem;
+}
+.profile-div {
+  position: relative;
+  margin-top: -0.6rem;
+  padding: 0 0.4rem 0.24rem 2.08rem;
+}
+.name {
+  margin-bottom: 0.4rem;
+  color: #fff;
+}
+.row-div {
+  margin-bottom: 0.1rem;
+  label {
+    vertical-align: top;
+  }
+  span {
+    display: inline-block;
+    width: 4.2rem;
+  }
+}
+.avatar-div {
+  position: absolute;
+  top: 0;
+  left: 0.68rem;
+  background: url("/icon/circle.png") no-repeat;
+  background-size: 100%;
+  width: 1.24rem;
+  height: 1.24rem;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: center; 
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
+.teacher-avatar {
+  width: 1.08rem;
+  border-radius: 4px;
+}
+.admire-div {
+  position: absolute;
+  top: 1.48rem;
+  left: 0.68rem;
+  border: 2px solid #fc90a5;
+  border-radius: 4px;
+  width: 1.24rem;
+  height: 0.6rem;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: center; 
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  span {
+    vertical-align: middle;
+  }
+}
+.admire-icon {
+  width: 0.32rem;
+  margin-right: 0.08rem;
+}
+.course-item-div {
+  padding-top: 0.12rem;
+}

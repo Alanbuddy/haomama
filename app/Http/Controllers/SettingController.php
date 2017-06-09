@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+>>>>>>> master
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -76,7 +77,7 @@ class SettingController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     *<
      * @param  \App\Models\Setting  $setting
      * @return \Illuminate\Http\Response
      */

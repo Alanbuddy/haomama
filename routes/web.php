@@ -76,9 +76,12 @@ Route::group([
 
 //    Route::get('/video/{video?}', 'VodController@video');
     Route::resource('videos', 'VideoController');
+    Route::resource('settings', 'SettingController');
     Route::get('/videos/{video?}/cloud/info', 'VideoController@cloudInfo')->name('video.cloud.info');
     Route::get('/videos/{video?}/cloud/transcode', 'VideoController@cloudTranscode')->name('video.cloud.transcode');
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');
+
+
     Route::get('/videos/{video?}/statistics', 'VideoController@statistics')->name('video.statistics');
 
     Route::get('/wechat/access-token', 'WechatController@accessToken')->name('wechat.accessToken');

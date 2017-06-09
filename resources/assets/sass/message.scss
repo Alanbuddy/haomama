@@ -1,0 +1,44 @@
+.wrapper {
+  min-height: 100%;
+  padding-top: 0.88rem;
+}
+.head-div {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  line-height: 0.88rem;
+  background: #fff;
+}
+.back {
+  position: absolute;
+  top: 0;
+  left: 0.06rem;
+  width: 0.88rem;
+}
+.item-review, .item-notice {
+  padding: 0.32rem 0.4rem;
+  border-bottom: 1px solid #eee;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-between; 
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+}
+.avatar-div {
+  margin-right: 0.24rem;
+}
+.avatar {
+  width: 0.8rem;
+}
+.desc-div {
+  flex: 1;
+  p:not(:last-child) {
+    margin-bottom: 0.12rem;
+  }
+}

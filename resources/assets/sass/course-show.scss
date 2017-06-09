@@ -1,0 +1,534 @@
+.wrapper {
+  padding-bottom: 0.92rem;
+}
+.head-div {
+  position: relative;
+}
+.course-photo {
+  width: 100%;
+}
+.back {
+  position: absolute;
+  top: 0.16rem;
+  left: 0.16rem;
+  width: 0.88rem;
+}
+.favorite {
+  position: absolute;
+  top: 0.16rem;
+  right: 0.16rem;
+  width: 0.88rem;
+}
+.course-title-div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: url("/icon/white.png") no-repeat;
+  background-size: 100%;
+  padding: 1.1rem 0.24rem 0.12rem 0.24rem;
+}
+#test-btn {
+  position: absolute;
+  right: 0.24rem;
+  bottom: 0.24rem;
+  width: 1.76rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  margin: 0;
+  padding: 0;
+  background: #fc90a5;
+  border-radius: 0.25rem;
+  border: 0;
+  outline: none;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: normal;
+}
+.play {
+  width: 0.32rem;
+  margin-top: -0.04rem;
+}
+.desc-div {
+  padding-left: 0.24rem;
+  padding-right: 0.24rem;
+  padding-bottom: 0.24rem;
+}
+.price {
+  margin-left: 0.16rem;
+  margin-right: 0.4rem;
+  text-decoration: line-through;
+}
+.course-content {
+  padding: 0.32rem 0.4rem 0 0.4rem;
+}
+.items-div {
+  padding-top: 0.32rem;
+}
+.fold-div {
+  height: 3.64rem;
+  overflow: hidden;
+}
+.teacher-fold-div {
+  height: 4.14rem;
+  overflow: hidden;
+}
+.go {
+  width: 0.14rem;
+}
+.title {
+  margin-left: -0.16rem;
+}
+.item {
+  position: relative;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-between; 
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  background: #f6f6f6;
+  height: 1.2rem;
+  padding-right: 0.4rem;
+  margin-bottom: 0.02rem;
+}
+.num-div {
+  width: 0.96rem;
+  text-align: center;
+}
+.item-desc {
+  flex: 1;
+}
+.item-row {
+  margin-top: 0.1rem;
+}
+.min {
+  margin-right: 0.24rem;
+}
+.free {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.32rem;
+}
+.opt55 {
+  opacity: 0.55;
+}
+.view-more, .teacher-view-more {
+  text-align: center;
+  height: 0.88rem;
+  line-height: 0.88rem;
+}
+.more-icon {
+  width: 0.16rem;
+  margin-top: -0.06rem;
+}
+.avatar {
+  width: 1.08rem;
+  margin-right: 0.2rem;
+}
+.teacher-item {
+  @extend .item;
+  background: #fff;
+  padding-right: 0;
+  height: 1.36rem;
+}
+.teacher-name {
+  margin-bottom: 0.12rem;
+}
+.course-desc {
+  padding: 0.24rem;
+}
+.desc-box {
+  margin-top: 0.2rem;
+}
+.recommend-div {
+  padding: 0.32rem 0;
+  .recommend-title {
+    padding-left: 0.24rem;
+  }
+}
+
+.review-item:nth-last-child(1) {
+  border-bottom: 0;
+}
+.review-item {
+  position: relative;
+  padding-bottom: 0.32rem;
+  padding-top: 0.32rem;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  .review-avatar {
+    width: 0.8rem;
+    float: left;
+  }
+  .item-desc {
+    width: 5.66rem;
+    margin-left: 1.04rem;
+  }
+  .review-name {
+    margin-top: 0.12rem;
+    margin-bottom: 0.08rem;
+  }
+  .review-content {
+    margin-top: 0.16rem;
+    margin-bottom: 0.1rem;
+  }
+  .admire-div {
+    position: absolute;
+    right: 0;
+    top: 0.48rem;
+  }
+  .admire-num {
+    vertical-align: bottom;
+  }
+  .admire-icon {
+    width: 0.48rem;
+  }
+}
+.review-title {
+  position: relative;
+}
+.review-score {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.btn {
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  height: 0.92rem;
+  line-height: 0.92rem;
+  color: #fff;
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+  outline: none;
+  background: #fc90a5;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 1.6em;
+}
+.btn:link {
+  color: #fff;
+}
+.btn:visited {
+  color: #fff;
+}
+.btn:hover {
+  color: #fff;
+}
+.btn:active {
+  color: #fff;
+}
+.unonline-div {
+  padding-top: 0.24rem;
+  .unonline-row {
+    margin-bottom: 0.08rem;
+  }
+}
+.mr40 {
+  margin-right: 0.4rem;
+}
+.feed-review {
+  position: relative;
+  text-align: center;
+}
+.feed-review:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  background: #ccc;
+  height: 0.02rem;
+  width: 3.2rem;
+  left: 0;
+}
+.feed-review:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  background: #ccc;
+  height: 0.02rem;
+  width: 3.2rem;
+  right: 0;
+}
+.feed-review-items-div {
+  padding: 0 0.4rem;
+}
+.feed-review-item {
+  @extend .review-item;
+}
+.sign-icon {
+  width: 0.32rem;
+}
+.refund {
+  float: right;
+}
+.address {
+  display: inline-block;
+  width: 5.9rem;
+}
+.address-span {
+  vertical-align: top;
+}
+
+
+#reviewModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 45%;
+    margin-left: -2.8rem;
+    margin-top: -1.7rem;
+    width: 5.6rem;
+    height: 3.4rem;
+    z-index: 10;
+  }
+  .modal-backdrop {
+    background-color: #999;
+  }
+  .modal-content {
+    border-radius: 12px;
+  }
+  .modal-body, input, label {
+    margin: 0;
+    padding: 0;
+  }
+  .name {
+    text-align: center;
+    margin-top: 0.6rem;
+    padding: 0 0.24rem;
+  }
+  .star-div {
+    height: 1.36rem;
+    text-align: center;
+  }
+  .star-div>input{position:relative;margin-right:2em;border:0;background:transparent;color:gold;-webkit-transition:color .8s;
+    transition:color .8s;}
+  .star-div>input:nth-of-type(1){display:none;}
+  .star-div>input:before{position:absolute;content:"★";left:0;top:0;bottom: 0;font-size:4em;height:100%;width:100%;background:#FFF;cursor:pointer;}
+  .star-div>input:checked~input{color:#666;}
+  #review-submit {
+    width: 100%;
+    background: #fc90a5;
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    border: 0;
+    outline: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+#profileModal {
+  .modal-dialog {
+    margin: 0;
+    padding: 0;
+  }
+  .modal-body, input, label {
+    margin: 0;
+    padding: 0;
+  }
+  .modal-body {
+    position: relative;
+    min-height: 100%;
+    background: #f6f6f6;
+  }
+  .head-div {
+    width: 100%;
+    line-height: 0.88rem;
+    background: #fff;
+    z-index: 10;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
+  .profile-close {
+    position: absolute;
+    top: 0;
+    left: 0.06rem;
+    width: 0.88rem;
+  }
+  .item-div {
+    background: #f6f6f6;
+    overflow: auto;
+    padding-top: 0.24rem;
+    padding-left: 0.24rem;
+    padding-right: 0.24rem;
+    padding-bottom: 1.2rem;
+  }
+  .item, .item-baby-div {
+    height: 3.2rem;
+    background: #fff;
+    border-radius: 4px;
+    margin-bottom: 0.24rem;
+    padding-right: 0.24rem;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-felx;
+    display: flex;
+    -webkit-justify-content: sapce-between; 
+    -moz-justify-content: sapce-between;
+    -ms-justify-content: sapce-between;
+    -o-justify-content: sapce-between;
+    justify-content: sapce-between;
+    .left-div {
+      width: 1.88rem;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-felx;
+      display: flex;
+      -webkit-align-items: center; 
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center; 
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      -o-justify-content: center;
+      justify-content: center;
+    }
+    .right-div {
+      position: relative;
+      flex: 1;
+      padding: 0.6rem 0;
+      label {
+        width: 1.32rem;
+      }
+      input {
+        flex: 1;
+      }
+    }
+  }
+  .avatar {
+    width: 1.08rem;
+  }
+  .row-div {
+    margin-bottom: 0.36rem;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-felx;
+    display: flex;
+    -webkit-justify-content: sapce-between; 
+    -moz-justify-content: sapce-between;
+    -ms-justify-content: sapce-between;
+    -o-justify-content: sapce-between;
+    justify-content: sapce-between;
+    -webkit-align-items: center; 
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+  }
+  .input-div {
+    font-size: 1.2em;
+    color: #666;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+  }
+  .replace {
+    display: none;
+    margin-left: 0.16rem;
+  }
+  #parent, #baby-gender {
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    width: 3.6rem;
+  }
+  .mobile-div {
+    border-bottom: 1px solid #ccc;
+  }
+  #mobile {
+    width: 2.1rem;
+  }
+  .edit {
+    position: absolute;
+    bottom: 0.12rem;
+    right: 0;
+  }
+  .edit:link {
+    color: #8dbdf2;
+  }
+  .edit:visited {
+    color: #8dbdf2;
+  }
+  .edit:hover {
+    color: #8dbdf2;
+  }
+  .edit:active {
+    color: #8dbdf2;
+  }
+  .pt16 {
+    padding-top: 0.16rem;
+    text-align: center;
+  }
+  #edit-end {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    padding: 0;
+    background: #fc90a5;
+    color: #fff;
+    font-size: 1.6em;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
+  #code {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    background: #fff;
+    width: 1.4rem;
+    text-align: center;
+  }
+
+  .add-baby-div {
+    position: relative;
+    @extend .item-baby-div;
+    display: none;
+  }
+  .add-input-div {
+    width: 3.6rem;
+    font-size: 1.2em;
+    color: #666;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+    border: 0;
+    outline: none;
+  }
+  .close-add-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.88rem;
+  }
+}
+//modal fade direction from bottom (define a class that name bottom and add it on profileModal)
+.modal.fade:not(.in).bottom .modal-dialog {
+  -webkit-transform: translate3d(0, 125%, 0);
+  transform: translate3d(0, 125%, 0);
+}
+
+

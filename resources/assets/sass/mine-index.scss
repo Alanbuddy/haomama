@@ -1,0 +1,275 @@
+
+.head-div {
+  position: relative;
+  width: 100%;
+  line-height: 2.4rem;
+  background: #fff;
+}
+.avatar-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -webkit-justify-content: sapce-around; 
+  -moz-justify-content: sapce-around;
+  -ms-justify-content: sapce-around;
+  -o-justify-content: sapce-around;
+  justify-content: sapce-around;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+}
+.avatar-icon {
+  width: 1.08rem;
+  margin-right: 0.24rem;
+}
+.name {
+  width: 3.84rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.right-div {
+  flex: 1;
+  text-align: right;
+}
+.arrow {
+  width: 0.16rem;
+  margin-left: 0.16rem;
+}
+.message-icon {
+  position: absolute;
+  top: 0.16rem;
+  right: 0.32rem;
+  width: 0.48rem;
+  z-index: 10;
+}
+.small-circle {
+  position: absolute;
+  top: 0.24rem;
+  right: 0.4rem;
+  width: 0.08rem;
+  height: 0.08rem;
+}
+
+
+.empty-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-around; 
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -o-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.empty-icon {
+  width: 1.12rem;
+}
+.empty-message {
+  margin-top: 0.4rem;
+}
+.course-div {
+  padding: 0.32rem 0.4rem;
+}
+.mb28 {
+  margin-bottom: 0.28rem;
+}
+.item {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
+  background: #f6f6f6;
+  border-radius: 4px;
+  height: 2.36rem;
+  padding: 0.24rem 0 0.24rem 0.24rem;
+}
+.item:not(:last-child) {
+  margin-bottom: 0.4rem;
+}
+.course-name {
+  margin-top: 0.04rem;
+  margin-bottom: 0.04rem;
+}
+.address-span {
+  vertical-align: top;
+}
+.address {
+  display: inline-block;
+  width: 4.4rem;
+}
+.signin {
+  width: 0.64rem;
+}
+.item-right {
+  width: 1.2rem;
+  border-left: 1px dashed #ccc;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center; 
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+}
+
+.favorite-item {
+  padding: 0.2rem 0;
+  height: 1.92rem;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
+}
+.icon-div {
+  position: relative;
+  margin-right: 0.16rem;
+}
+.recommend {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.32rem;
+}
+.icon {
+  width: 1.52rem;
+  height: 1.52rem;
+  border-radius: 4px;
+}
+.favorite-row-div {
+  width: 5.02rem;
+  // margin-bottom: 0.24rem; 
+}
+.favorite-row-div:not(:last-child) {
+  margin-bottom: 0.2rem;
+}
+.course-name {
+  display: inline-block;
+  width: 4.46rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-value {
+  float: right;
+}
+.course-status {
+  display: inline-block;
+  width: 0.48rem;
+  height: 0.24rem;
+  text-align: center;
+  color: #fc90a5;
+  border: 1px solid #fc90a5;
+  border-radius: 2px;
+  margin-left: 0.08rem;
+}
+.unstart {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
+.mb12 {
+  margin-bottom: 0.12rem;
+}
+.home, .mine {
+  width: 0.64rem;
+}
+.foot {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 0.98rem;
+  background: #f6f6f6;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-around; 
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+}
+.foot-item-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-around; 
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -o-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.wrapper {
+  padding-bottom: 0.98rem;
+}
+
+.title, .title-div {
+  margin-left: -0.16rem;
+}
+.title-div {
+  margin-bottom: 0.08rem;
+}
+.course-more, .favorite-more {
+  display: none;
+}

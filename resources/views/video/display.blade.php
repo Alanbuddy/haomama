@@ -1,5 +1,6 @@
 @extends('layout.app')
-@section('content')
+
+@section('ccc')
     <div class="row">
         <a id="wechat">wechat login</a>
         <a id="wechatbase">wechat base</a>
@@ -84,3 +85,4 @@
         node.setAttribute('href', snsapi_base_url );
     </script>
 @endsection
+

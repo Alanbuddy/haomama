@@ -1,0 +1,159 @@
+.wrapper {
+  position: absolute;
+  top: 1.72rem;
+  bottom: 1.2rem;
+  // padding-bottom: 1.2rem;
+  // margin-top: 1.72rem;
+  // padding-bottom: 1rem;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.head-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+.search {
+  width: 0.48rem;
+  margin-left: 0.2rem;
+}
+.search-input {
+  background: none;
+  width: 5.9rem;
+  height: 0.6rem;
+}
+.nav-div {
+  width: 100%;
+  padding-right: 0.24rem;
+  padding-left: 0.24rem;
+}
+.nav {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: sapce-between; 
+  -moz-justify-content: sapce-between;
+  -ms-justify-content: sapce-between;
+  -o-justify-content: sapce-between;
+  justify-content: sapce-between;
+  li {
+    flex: 1;
+    width: 1.44rem;
+    padding-bottom: 0.12rem;
+    text-align: center;
+    color: #999;
+  }
+  .active {
+    color: #fc90a5;
+    font-weight: bold;
+    border-bottom: 2px solid #fc90a5;
+  }
+}
+
+// banner
+.img-size {
+  width: 100%;
+  max-width: 7.5rem;
+}
+
+.title-row-div {
+  margin: 0.32rem 0.24rem 0.12rem 0.24rem;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-between; 
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+}
+.course-nav {
+  span {
+    padding: 0 0.16rem;
+    text-align: center;
+  }
+  span:not(:last-child) {
+    border-right: 1px solid #ccc;
+  }
+}
+.course-active {
+  color: #fc90a5;
+  font-weight: bold;
+}
+
+.home, .mine {
+  width: 0.64rem;
+}
+.foot {
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.98rem;
+  background: #f6f6f6;
+  border-top: 1px solid #eee;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-around; 
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+}
+.foot-item-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-justify-content: space-around; 
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -o-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.course-item-div {
+  display: none;
+}
+.upper {
+  display: none;
+  width: 1.08rem;
+  z-index: 1000;
+}
+
+.swiper-container {
+  width: 100%;
+  max-width: 7.5rem;
+  overflow-x: hidden;
+}
+.swiper-container-banner {
+  position: relative;
+  width: 100%;
+  max-width: 7.5rem;
+  height: 3.2rem;
+}
+.swiper-pagination-bullets {
+  position: absolute;
+}
