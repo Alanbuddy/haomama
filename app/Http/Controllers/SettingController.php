@@ -13,7 +13,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return view('setting.index');
+        //
     }
 
     /**
@@ -23,7 +23,7 @@ class SettingController extends Controller
      */
     public function create()
     {
-        return view('setting.create');
+        //
     }
 
     /**
@@ -45,7 +45,7 @@ class SettingController extends Controller
      */
     public function show($id)
     {
-        return view('setting.show');
+        //
     }
 
     /**
@@ -80,21 +80,5 @@ class SettingController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function message()
-    {
-        return view('setting.message');
-    }
-    public function teacher()
-    {
-        return view('setting.teacher');
-    }
-    public function creview()
-    {
-        return view('setting.creview');
-    }
-    public function mycourse()
-    {
-        return view('setting.mycourse');
     }
 }
