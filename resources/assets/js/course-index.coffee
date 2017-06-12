@@ -9,19 +9,17 @@ $ ->
   $('.upper').click ->
     $('.swiper-container').animate({scrollTop: 0})
 
+  $('.nav li').eq(0).addClass('active')
+
   $(".course-nav span").click ->
     $(this).closest(".swiper-slide").find(".course-nav span").removeClass('course-active')
     $(this).addClass('course-active')
     $(this).closest(".swiper-slide").find(".course-item-div").css('display', 'none');
     $(this).closest(".swiper-slide").find(".course-item-div").eq($(this).index()).css('display', 'block')
 
-  $("#home").click ->
-    # jump to home_page
-    location.href = ""
-
   $("#mine").click ->
     # jump to mine_page
-    location.href = ""
+    location.href = window.userid
 
   search = ->
     val = $(".search-input").val()
@@ -59,4 +57,17 @@ $ ->
     autoplay: 3000, 
     loop: true,
   })
+
+  $(".category-class").each ->
+    if $(this).text() == "分类N"
+      $(this).addClass('health-title')
+    else if $(this).text() == "分类t"
+      $(this).addClass('psychology-title')
+    else
+      $(this).addClass('grow-title')
+
+  $('.course-item').click ->
+    cid = $(this).attr('data-id')
+    location.href = window.course_item + "/" +cid 
+
 

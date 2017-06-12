@@ -7,8 +7,9 @@
 
 .head-div
   .avatar-div
-    %img.avatar-icon{src: "/icon/avatar.png"}
-    %p.name.f16.color7 名字很长很长名字很长很长很长名
+    - if ($item)
+      %img.avatar-icon{src: "/icon/avatar.png"}
+      %p.name.f16.color7= $item['name']
     .right-div
       %a.f12.color5{href: "#"} 个人资料
       %img.arrow{src: "/icon/go.png"}
@@ -16,6 +17,7 @@
   //有消息时显示小红点
   %img.small-circle{src: "/icon/small-dot.png"}
 %hr.div-line
+- if( count($enrolledFCourses)>0)
 .empty-div
   %img.empty-icon{src: "/icon/empty.png"}
   %p.empty-message.f12.color5 您还没有相关课程信息......
