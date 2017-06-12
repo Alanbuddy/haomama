@@ -60,9 +60,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.user.show', [
-            'item' => $user,
-        ]);
+        $enrolledCourses = $user->enrolledCourses();
+        $favoritedCourses = $user->favoritedCourses();
+        return view('admin.user.show',
+            compact('user', 'enrolledCourses', 'favoritedCourses')
+        );
     }
 
     /**

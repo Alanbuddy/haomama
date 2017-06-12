@@ -54,3 +54,8 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/teacher.coffee', 'public/js')
 .js('resources/assets/js/creview.coffee', 'public/js')
 .js('resources/assets/js/mycourse.coffee', 'public/js');
+
+
+// mix.js('resources/assets/js/app.js', 'public/js')
+//     .sass('resources/assets/sass/app.scss', 'public/css');
+
