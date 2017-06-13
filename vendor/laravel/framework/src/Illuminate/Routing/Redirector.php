@@ -112,6 +112,7 @@ class Redirector
     public function to($path, $status = 302, $headers = [], $secure = null)
     {
         return $this->createRedirect($this->generator->to($path, [], $secure), $status, $headers);
+//        return $this->createRedirect($this->generator->to($path, [], $secure), $status, $headers);
     }
 
     /**

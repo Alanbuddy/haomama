@@ -434,6 +434,7 @@ class UrlGenerator implements UrlGeneratorContract
         }
 
         return trim($root.$path, '/');
+//        return trim($root.'/haomama'.$path, '/');
     }
 
     /**
