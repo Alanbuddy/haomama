@@ -1,4 +1,3 @@
-
 $ ->
   $('.swiper-container').scroll ->
     if $('.swiper-container').scrollTop() > 100
@@ -58,16 +57,14 @@ $ ->
     loop: true,
   })
 
-  $(".category-class").each ->
-    if $(this).text() == "¿¿N"
+  $('.course-item').click ->
+    cid = $(this).attr('data-id')
+    location.href = window.course_item + "/" +cid
+
+  $('.category-class').each ->
+    if $(this).text() == "åˆ†ç±»N"
       $(this).addClass('health-title')
-    else if $(this).text() == "¿¿t"
+    else if $(this).text() == "åˆ†ç±»t"
       $(this).addClass('psychology-title')
     else
       $(this).addClass('grow-title')
-
-  $('.course-item').click ->
-    cid = $(this).attr('data-id')
-    location.href = window.course_item + "/" +cid 
-
-
