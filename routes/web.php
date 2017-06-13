@@ -63,6 +63,7 @@ Route::group([
     Route::get('/orders/{uuid}/query', 'OrderController@queryOrder')->name('orders.payment.query');
     Route::any('/orders/{uuid}/payment/update', 'OrderController@updatePaymentStatus')->name('orders.payment.update');
 
+    Route::get('/profile', 'UserController@profile')->name('user.profile');
     Route::resource('users', 'UserController');
 
     Route::resource('settings', 'SettingController');

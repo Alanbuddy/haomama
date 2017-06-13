@@ -31,18 +31,19 @@ class HomeController extends Controller
         if (!$hasFilter) {
             $items = Search::basicStat();
         }
-        $orderBy = $request->get('sort', 'created_at');
-        if ('users_count' == $orderBy) {
-            $items = $items->orderBy($orderBy, 'desc');
-        }
-        if ('comment_rating' == $orderBy) {
-            $items = $items->join('comments', 'comments.course_id', 'courses.id')
-                ->groupBy('course_id')
-                ->select(DB::raw('courses.*'))
-                ->addSelect(DB::raw('sum(comments.star) as star'))
-                ->orderBy($orderBy, 'desc');
-        }
-        $items = $items->paginate();
+        $itemsOrderByUserCount = $items->orderBy('users_count', 'desc')
+            ->paginate(10);
+//        dd($itemsOrderByUserCount);
+
+        $itemsOrderByCommentRating = $items->leftJoin('comments', 'comments.course_id', 'courses.id')
+//        $itemsOrderByCommentRating = Search::basicStat()->leftJoin('comments', 'comments.course_id', 'courses.id')
+            ->select(DB::raw('courses.*'))
+            ->addSelect(DB::raw('sum(comments.star) as star'))
+            ->groupBy('courses.id')
+            ->orderBy('star', 'desc')
+            ->paginate(10);
+        dd($itemsOrderByCommentRating);
+        $items = $items->paginate(10);
 
         //retrieve data needed by index page
         foreach ($items as $i) {
@@ -56,8 +57,8 @@ class HomeController extends Controller
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
 
-        $data = compact('categories', 'items', 'signPackage');
-        // dd($categories);
+        $data = compact('categories', 'items', 'itemsOrderByUserCount','itemsOrderByCommentRating','signPackage');
+//        dd($categories);
 
         return view('course.index', $data);
 //        return view('video.display', $data);
