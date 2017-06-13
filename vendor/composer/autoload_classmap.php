@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AlterFiles' => $baseDir . '/database/migrations/2017_05_04_152128_alter_files.php',
+    'AlterLessonAddBeginEndColumn' => $baseDir . '/database/migrations/2017_06_13_143006_alterLessonAddBeginEndColumn.php',
     'AlterOrder' => $baseDir . '/database/migrations/2017_05_24_102239_alter_order.php',
     'AlterOrder2' => $baseDir . '/database/migrations/2017_06_08_154710_alter_order2.php',
     'AlterTableCoursesAddHot' => $baseDir . '/database/migrations/2017_05_19_092518_alter_table_courses_add_hot.php',

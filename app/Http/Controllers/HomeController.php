@@ -7,6 +7,7 @@ use App\Http\Wechat\JSSDK;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,13 +29,20 @@ class HomeController extends Controller
         }
 
         if (!$hasFilter) {
-            $orderBy=$request->get('sort','created_at');
-            $limit=['users_count','comment_rate'];
-            $items = Search::latestCourse()
-                ->orderBy($orderBy,'desc')
-                ->paginate();
+            $items = Search::basicStat();
         }
-        dd($items->all());
+        $orderBy = $request->get('sort', 'created_at');
+        if ('users_count' == $orderBy) {
+            $items = $items->orderBy($orderBy, 'desc');
+        }
+        if ('comment_rating' == $orderBy) {
+            $items = $items->join('comments', 'comments.course_id', 'courses.id')
+                ->groupBy('course_id')
+                ->select(DB::raw('courses.*'))
+                ->addSelect(DB::raw('sum(comments.star) as star'))
+                ->orderBy($orderBy, 'desc');
+        }
+        $items = $items->paginate();
 
         //retrieve data needed by index page
         foreach ($items as $i) {

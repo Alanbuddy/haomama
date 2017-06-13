@@ -11,9 +11,7 @@ namespace App\Services;
 
 use App\Models\Course;
 use App\Models\Term;
-use function foo\func;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 
 class SearchService
@@ -28,7 +26,7 @@ class SearchService
     }
 
     //统计课程评论数和学员数
-    public function latestCourse()
+    public function basicStat()
     {
         $items = Course::withCount('comments')
             ->withCount(['users' => function ($query) {
@@ -36,6 +34,33 @@ class SearchService
             }])
             ->with('category');//预加载课程所属分类的信息
         return $items;
+    }
+
+    public function enrolledCourses($userId)
+    {
+        return $this->basicStat()
+            ->join('course_user', 'course_user.course_id', 'courses.id')
+            ->where('course_user.type', 'enroll')
+            ->where('course_user.user_id', $userId);
+    }
+
+    public function favoritedCourses($userId)
+    {
+        return $this->basicStat()
+            ->join('course_user', 'course_user.course_id', 'courses.id')
+            ->where('course_user.type', 'favorite')
+            ->where('course_user.user_id', $userId);
+    }
+
+    //在课程有效期内的线下课程
+    public function onGoingCourses($userId)
+    {
+        return $this->enrolledCourses($userId)
+            ->where('courses.type', 'offline')
+//            ->with('lessons')
+            ->with('onGoingLessons')
+            ->where('begin', '<', date('Y-m-d H:i:s', time()))
+            ->where('end', '>', date('Y-m-d H:i:s', time()));
     }
 
     //统计课程

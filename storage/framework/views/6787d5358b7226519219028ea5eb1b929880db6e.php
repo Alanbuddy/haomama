@@ -25,6 +25,12 @@
                 <a href="<?php echo e(route('courses.comments.index',['course'=>$item->id])); ?>">
                     评论
                 </a>
+                <a href="<?php echo e(route('courses.favorite',['course'=>$item->id])); ?>">
+                    收藏
+                </a>
+                <a href="<?php echo e(route('courses.enroll',['course'=>$item->id])); ?>">
+                    加入
+                </a>
                 <form action="<?php echo e(route('courses.destroy',['id'=>$item->id])); ?>" method="post" style="display: inline">
                     <?php echo e(csrf_field()); ?>
 

@@ -15,6 +15,13 @@ class Course extends Model
         return $this->belongsToMany(Lesson::class);
     }
 
+    public function onGoingLessons()
+    {
+        return $this->belongsToMany(Lesson::class)
+            ->whereNotNull('lessons.end')
+            ->where('lessons.end', '>', date('Y-m-d H:i:s', time()));
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');
