@@ -124,4 +124,8 @@ class UserController extends Controller
     {
         //
     }
+    public function profile(User $user)
+    {
+        return view('setting.index');
+    }
 }
