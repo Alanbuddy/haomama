@@ -10346,17 +10346,15 @@ return jQuery;
       scrollTop: 0
     });
   });
+  $('.nav li').eq(0).addClass('active');
   $(".course-nav span").click(function() {
     $(this).closest(".swiper-slide").find(".course-nav span").removeClass('course-active');
     $(this).addClass('course-active');
     $(this).closest(".swiper-slide").find(".course-item-div").css('display', 'none');
     return $(this).closest(".swiper-slide").find(".course-item-div").eq($(this).index()).css('display', 'block');
   });
-  $("#home").click(function() {
-    return location.href = "";
-  });
   $("#mine").click(function() {
-    return location.href = "";
+    return location.href = window.userid;
   });
   search = function() {
     var val;
@@ -10389,10 +10387,24 @@ return jQuery;
   $(".nav li").click(function(e) {
     return e.preventDefault();
   });
-  return bannerSwiper = new Swiper('.swiper-container-banner', {
+  bannerSwiper = new Swiper('.swiper-container-banner', {
     pagination: '.swiper-pagination',
     autoplay: 3000,
     loop: true
+  });
+  $(".category-class").each(function() {
+    if ($(this).text() === "分类N") {
+      return $(this).addClass('health-title');
+    } else if ($(this).text() === "分类t") {
+      return $(this).addClass('psychology-title');
+    } else {
+      return $(this).addClass('grow-title');
+    }
+  });
+  return $('.course-item').click(function() {
+    var cid;
+    cid = $(this).attr('data-id');
+    return location.href = window.course_item + "/" + cid;
   });
 });
 
