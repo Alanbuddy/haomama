@@ -42,7 +42,7 @@ class HomeController extends Controller
             ->groupBy('courses.id')
             ->orderBy('star', 'desc')
             ->paginate(10);
-        dd($itemsOrderByCommentRating);
+//        dd($itemsOrderByCommentRating);
         $items = $items->paginate(10);
 
         //retrieve data needed by index page
@@ -55,7 +55,7 @@ class HomeController extends Controller
             ->get();
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
-        $signPackage = $jsSdk->getSignPackage();
+//        $signPackage = $jsSdk->getSignPackage();
 
         $data = compact('categories', 'items', 'itemsOrderByUserCount','itemsOrderByCommentRating','signPackage');
 //        dd($categories);
