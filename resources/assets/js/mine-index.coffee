@@ -1,7 +1,7 @@
 $ ->
   $(".avatar-div").click ->
   	# jump to profile_page
-    location.href = ""
+    location.href = window.profile
 
   $(".message-icon").click ->
   	# juml to messgae_page

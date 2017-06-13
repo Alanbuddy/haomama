@@ -10342,7 +10342,7 @@ module.exports = __webpack_require__(8);
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   $(".avatar-div").click(function() {
-    return location.href = "";
+    return location.href = window.profile;
   });
   $(".message-icon").click(function() {
     return location.href = "";

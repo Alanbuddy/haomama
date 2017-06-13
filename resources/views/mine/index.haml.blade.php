@@ -7,6 +7,7 @@
   window.course = "#{route('courses.index')}"
   window.enrolled_course = "#{route('courses.enrolled')}"
   window.favorited_course = "#{route('courses.favorited')}"
+  window.profile = "#{route('user.profile')}"
 
 @section('content')
 
