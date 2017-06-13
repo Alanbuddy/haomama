@@ -47,8 +47,8 @@ class HomeController extends Controller
         $data = compact('categories', 'items', 'signPackage');
 //        dd($categories);
 
-//        return view('course.index', $data);
-        return view('video.display', $data);
+        return view('course.index', $data);
+//        return view('video.display', $data);
     }
 
 }
