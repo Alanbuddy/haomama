@@ -28,9 +28,13 @@ class HomeController extends Controller
         }
 
         if (!$hasFilter) {
+            $orderBy=$request->get('sort','created_at');
+            $limit=['users_count','comment_rate'];
             $items = Search::latestCourse()
+                ->orderBy($orderBy,'desc')
                 ->paginate();
         }
+        dd($items->all());
 
         //retrieve data needed by index page
         foreach ($items as $i) {
