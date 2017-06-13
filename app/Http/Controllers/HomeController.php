@@ -48,7 +48,7 @@ class HomeController extends Controller
         //retrieve data needed by index page
         foreach ($items as $i) {
             echo($i->id);
-            echo($i->category->name);
+            // echo($i->category->name);
         }
         $categories = Term::where('type', 'category')
             ->select('id', 'name')
@@ -58,7 +58,7 @@ class HomeController extends Controller
 //        $signPackage = $jsSdk->getSignPackage();
 
         $data = compact('categories', 'items', 'itemsOrderByUserCount','itemsOrderByCommentRating','signPackage');
-//        dd($categories);
+       // dd($itemsOrderByCommentRating);
 
         return view('course.index', $data);
 //        return view('video.display', $data);
