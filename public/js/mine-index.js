@@ -10356,6 +10356,9 @@ module.exports = __webpack_require__(8);
   $(".course-more").click(function() {
     return location.href = "";
   });
+  $('.home').click(function() {
+    return location.href = window.home;
+  });
   if ($('.course-div.mine-course').find('.favorite-item').length >= 3) {
     $('.course-more').show();
   }

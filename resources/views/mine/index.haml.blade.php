@@ -2,6 +2,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/mine-index.css') }}">
 @endsection
+:javascript
+  window.home = "#{route('index')}"
 
 @section('content')
 
@@ -17,7 +19,6 @@
   //有消息时显示小红点
   %img.small-circle{src: "/icon/small-dot.png"}
 %hr.div-line
-- if( count($enrolledFCourses)>0)
 .empty-div
   %img.empty-icon{src: "/icon/empty.png"}
   %p.empty-message.f12.color5 您还没有相关课程信息......
