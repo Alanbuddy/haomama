@@ -37,7 +37,7 @@
             %p.course-name.f16.color7= $onGoingCourse['name']
             .row-divf.f12.color6
               %span 时间：
-              %span 5/20、6/20、7/20
+              %span= $onGoingCourse['time']
             .row-div.f12.color6
               %span.address-span 地址：
               %span.address= $onGoingCourse['name']
@@ -62,7 +62,7 @@
               - if ($enrolledCourse['type'] == 'offline')
                 %span.course-status.f8 线下
             .favorite-row-div.f12.color6
-              %span.participate= $enrolledCourse['user_count']."人已报名"
+              %span.participate= $enrolledCourse['users_count']."人已报名"
               %span .
               %span= date_format(date_create($enrolledCourse['begin']),"m月/d日")."开课"
   .hr.div-line
@@ -84,7 +84,7 @@
               - if ($favoritedCourse['type'] == 'offline')
                 %span.course-status.f8 线下
             .favorite-row-div.f12.color6
-              %span.participate= $favoritedCourse['user_count']."人已报名"
+              %span.participate= $favoritedCourse['users_count']."人已报名"
               %span .
               %span= date_format(date_create($favoritedCourse['begin']),"m月/d日")."开课"
 .foot
