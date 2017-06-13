@@ -35,8 +35,8 @@ class HomeController extends Controller
             ->paginate(10);
 //        dd($itemsOrderByUserCount);
 
-        $itemsOrderByCommentRating = $items->leftJoin('comments', 'comments.course_id', 'courses.id')
-//        $itemsOrderByCommentRating = Search::basicStat()->leftJoin('comments', 'comments.course_id', 'courses.id')
+//        $itemsOrderByCommentRating = $items->leftJoin('comments', 'comments.course_id', 'courses.id')
+        $itemsOrderByCommentRating = Search::basicStat()->leftJoin('comments', 'comments.course_id', 'courses.id')
             ->select(DB::raw('courses.*'))
             ->addSelect(DB::raw('sum(comments.star) as star'))
             ->groupBy('courses.id')
