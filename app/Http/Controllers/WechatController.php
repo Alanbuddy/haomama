@@ -34,7 +34,9 @@ class WechatController extends Controller
                     $user = new User();
                     $user->name = $data->nickname;
                     $user->openid = $data->openid;
+                    $user->avatar = $data->headimgurl;
                     $user->password = '123';
+                    $user->wx = $response["data"];
                     $user->save();
                 }
                 //Login

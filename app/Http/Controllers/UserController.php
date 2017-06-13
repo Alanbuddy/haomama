@@ -60,12 +60,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $enrolledCourses = $user->enrolledCourses();
-        $favoritedCourses = $user->favoritedCourses();
-        // dd($user)
-        dd($enrolledCourses);
+        $enrolledCourses = $user->enrolledCourses()->get();
+        $favoritedCourses = $user->favoritedCourses()->get();
+        $onGoingCourses = $user->onGoingCourses()->get();
         return view('mine.index',
-            compact('user', 'enrolledCourses', 'favoritedCourses')
+            compact('user', 'enrolledCourses', 'favoritedCourses','onGoingCourses')
         );
     }
 
