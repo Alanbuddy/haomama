@@ -62,8 +62,9 @@ class UserController extends Controller
     {
         $enrolledCourses = $user->enrolledCourses();
         $favoritedCourses = $user->favoritedCourses();
+        $onGoingCourses = $user->onGoingCourses();
         return view('mine.index',
-            compact('user', 'enrolledCourses', 'favoritedCourses')
+            compact('user', 'enrolledCourses', 'favoritedCourses','onGoingCourses')
         );
     }
 

@@ -65,4 +65,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Course')
             ->wherePivot('type', 'favorite');
     }
+
+    public function onGoingCourses()
+    {
+        return $this->enrolledCourses('App\Models\Course')
+            ->where('begin','<',date('Y-m-d H:i:s',time()))
+            ->where('end','>',date('Y-m-d H:i:s',time()));
+    }
 }
