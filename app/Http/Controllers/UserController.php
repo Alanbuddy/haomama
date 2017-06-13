@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Search;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -60,12 +61,21 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $enrolledCourses = $user->enrolledCourses()->get();
-        $favoritedCourses = $user->favoritedCourses()->get();
-        $onGoingCourses = $user->onGoingCourses()->get();
-        // dd($favoritedCourses);
+        $userId = $user->id;
+        $enrolledCourses = Search::enrolledCourses($userId)->get();
+        $favoritedCourses = Search::favoritedCourses($userId)->get();
+//        dd($favoritedCourses);
+        $onGoingCourses = Search::onGoingCourses($userId)->get(); //on going offline courses that I've enrolled
+        foreach ($onGoingCourses as $c) {
+            $timeInfo = "";
+            foreach ($c->onGoingLessons as $lesson) {
+                $timeInfo .= date('m/d',strtotime($lesson->begin)).' ';
+            }
+            $c->time = $timeInfo;
+        }
+        dd($onGoingCourses);
         return view('mine.index',
-            compact('user', 'enrolledCourses', 'favoritedCourses','onGoingCourses')
+            compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses')
         );
     }
 

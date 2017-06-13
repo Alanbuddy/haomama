@@ -25,6 +25,12 @@
                 <a href="{{route('courses.comments.index',['course'=>$item->id])}}">
                     评论
                 </a>
+                <a href="{{route('courses.favorite',['course'=>$item->id])}}">
+                    收藏
+                </a>
+                <a href="{{route('courses.enroll',['course'=>$item->id])}}">
+                    加入
+                </a>
                 <form action="{{route('courses.destroy',['id'=>$item->id])}}" method="post" style="display: inline">
                     {{csrf_field()}}
                     {{method_field('DELETE')}}

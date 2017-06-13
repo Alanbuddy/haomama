@@ -50,6 +50,8 @@ class LessonController extends Controller
         $item->fill($request->only([
             'name',
             'video_id',
+            'begin',
+            'end',
         ]));
 //        $item->teacher_id = auth()->user()->id;
         $item->save();
