@@ -10393,9 +10393,9 @@ return jQuery;
     loop: true
   });
   $(".category-class").each(function() {
-    if ($(this).text() === "分类N") {
+    if ($(this).text() === "��N") {
       return $(this).addClass('health-title');
-    } else if ($(this).text() === "分类t") {
+    } else if ($(this).text() === "��t") {
       return $(this).addClass('psychology-title');
     } else {
       return $(this).addClass('grow-title');

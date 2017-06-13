@@ -10351,20 +10351,36 @@ module.exports = __webpack_require__(8);
     return location.href = "";
   });
   $(".favorite-more").click(function() {
-    return location.href = "";
+    return location.href = window.favorited_course;
   });
   $(".course-more").click(function() {
-    return location.href = "";
+    return location.href = window.enrolled_course;
   });
   $('.home').click(function() {
     return location.href = window.home;
   });
-  if ($('.course-div.mine-course').find('.favorite-item').length >= 3) {
+  if ($('.course-div.enrolled-course').find('.favorite-item').length >= 3) {
     $('.course-more').show();
   }
   if ($('.favorite-div').find('.favorite-item').length >= 3) {
-    return $('.favorite-more').show();
+    $('.favorite-more').show();
   }
+  $(".category-class").each(function() {
+    if ($(this).text() === "分类N") {
+      return $(this).addClass('health-title');
+    } else if ($(this).text() === "分类t") {
+      return $(this).addClass('psychology-title');
+    } else {
+      return $(this).addClass('grow-title');
+    }
+  });
+  $('.favorite-item').click(function() {
+    var cid;
+    cid = $(this).attr('data-id');
+    return location.href = window.course + "/" + cid;
+  });
+  $('.enrolled-course').find(".favorite-item:gt(2)").hide();
+  return $('.favorite-div').find(".favorite-item:gt(2)").hide();
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

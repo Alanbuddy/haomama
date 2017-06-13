@@ -34,7 +34,7 @@ class HomeController extends Controller
                 ->orderBy($orderBy,'desc')
                 ->paginate();
         }
-        dd($items->all());
+        // dd($items->all());
 
         //retrieve data needed by index page
         foreach ($items as $i) {
@@ -49,7 +49,7 @@ class HomeController extends Controller
         $signPackage = $jsSdk->getSignPackage();
 
         $data = compact('categories', 'items', 'signPackage');
-//        dd($categories);
+        // dd($categories);
 
         return view('course.index', $data);
 //        return view('video.display', $data);
