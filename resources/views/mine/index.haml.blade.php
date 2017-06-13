@@ -4,14 +4,15 @@
 @endsection
 :javascript
   window.home = "#{route('index')}"
+  alert("#{count($enrolledCourses)}")
 
 @section('content')
 
 .head-div
   .avatar-div
-    - if ($item)
+    - if ($user)
       %img.avatar-icon{src: "/icon/avatar.png"}
-      %p.name.f16.color7= $item['name']
+      %p.name.f16.color7= $user['name']
     .right-div
       %a.f12.color5{href: "#"} 个人资料
       %img.arrow{src: "/icon/go.png"}
@@ -19,9 +20,10 @@
   //有消息时显示小红点
   %img.small-circle{src: "/icon/small-dot.png"}
 %hr.div-line
-.empty-div
-  %img.empty-icon{src: "/icon/empty.png"}
-  %p.empty-message.f12.color5 您还没有相关课程信息......
+- if (count($enrolledCourses) == 0)
+  .empty-div
+    %img.empty-icon{src: "/icon/empty.png"}
+    %p.empty-message.f12.color5 您还没有相关课程信息......
 .course-div
   %p.f14.color7.fb.mb28.title 待参加课程
   .item
