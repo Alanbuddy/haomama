@@ -55,6 +55,10 @@ class HomeController extends Controller
             ->select('id', 'name')
             ->get();
 
+        foreach ($categories as $category) {
+            $courses = Search::coursesByCategory($category);
+        }
+
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
 

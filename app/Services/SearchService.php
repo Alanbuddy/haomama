@@ -81,8 +81,7 @@ class SearchService
     public function coursesByTag($tag)
     {
         $tag = Term::findOrFail($tag);
-        $items = $tag->coursesByTag()
-            ->paginate(10);
+        $items = $tag->coursesByTag();
         return $items;
     }
 
@@ -91,11 +90,9 @@ class SearchService
      * @param Request $request
      * @param Term $category
      */
-    public function coursesByCategory($category)
+    public function coursesByCategory(Term $category)
     {
-        $category = Term::findOrFail($category);
-        $items = $category->coursesByCategory()
-            ->paginate(10);
+        $items = $category->coursesByCategory();
         return $items;
     }
 
