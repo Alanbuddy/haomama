@@ -16,7 +16,7 @@ class CreateTsTable extends Migration
         Schema::table('users', function ($table) {
             $table->string('phone')->nullable();
             $table->enum('parenthood', ['妈妈', '爸爸']);
-            $table->text('baby')->nullable()->comment('json');
+            $table->json('baby')->nullable()->comment('json');
 //            default('{"name":"","gender":"m","birthday":"2016/01/01"}')->
         });
     }

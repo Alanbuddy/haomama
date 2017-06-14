@@ -12,7 +12,6 @@ class AlterLessonAddBeginEndColumn extends Migration
      */
     public function up()
     {
-        //
         Schema::table('lessons', function ($table) {
             $table->timestamp('begin')->nullable();
             $table->timestamp('end')->nullable();
