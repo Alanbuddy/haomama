@@ -35,8 +35,8 @@ $(document).ready(function($) {
 	    showMsg("手机号不正确", 'center');
 	    return false;
 	  }
-    $.postJSON(
-      '/show',  //interface
+    $.getJSON(
+      window.sms_send,
       {
         mobile: mobile
       },
@@ -47,11 +47,6 @@ $(document).ready(function($) {
             clearTimeout(timer);
           }
           time('#code');
-        } else {
-          if (data.code == USER_EXIST) {
-            showMsg('该手机号已存在', 'center');
-            return false;
-          }
         }
       }
     );

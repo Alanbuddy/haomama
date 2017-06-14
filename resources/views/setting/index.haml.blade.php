@@ -1,6 +1,9 @@
 @extends('layout.app')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/setting-index.css') }}">
+:javascript
+  window.sms_send = "#{route('sms.send')}"
+  window.mine_page = "#{route('users.show',auth()->user())}"
 
 @endsection
 @section('content')
@@ -25,30 +28,30 @@
       .row-div
         %label.f14.color7.fn 手机号码
         %p.f12.color6#mobile-span= $user['phone'] ? $user['phone'] : "未绑定"
-        // %p.replace.f12.color10{"data-toggle" => "modal", "data-target" => "#mobileModal"} 更换
         %p.replace.f12.color10 更换
       .row-div
         %a.f12.color10#parent-edit 编辑
-  .item.baby-div
-    .left-div
-      %img.avatar{src: "/icon/baby_female.png"}
-    .right-div
-      .row-div
-        %label.f14.color7.fn 宝宝姓名
-        %span.f12.color6.span-desc= $user['baby']['name'] ? $user['baby']['name'] : "不知道"
-        %input.input-div#baby-name.baby-name
-      .row-div
-        %label.f14.color7.fn 宝宝性别
-        %span.f12.color6.span-desc= $user['baby']['gender'] ? $user['baby']['gender'] : "不知道"
-        %select.input-div#baby-gender.gender
-          %option{value: "male"} 男子汉
-          %option{value: "female"} 小姑娘
-      .row-div
-        %label.f14.color7.fn 宝宝生日
-        %span.f12.color6.span-desc= $user['baby']['birthday'] ? $user['baby']['birthday'] : "不知道"
-        %input.input-div#baby-birthday.birthday{type: "date"}
-      .row-div
-        %a.edit.f12.color10#baby-edit 编辑
+  - foreach ($user->baby as $baby)
+    .item.baby-div
+      .left-div
+        %img.avatar{src: "/icon/baby_female.png"}
+      .right-div
+        .row-div
+          %label.f14.color7.fn 宝宝姓名
+          %span.f12.color6.span-desc= $baby['name'] ? $baby['name'] : "不知道"
+          %input.input-div#baby-name.baby-name
+        .row-div
+          %label.f14.color7.fn 宝宝性别
+          // %span.f12.color6.span-desc= $user['baby']['gender'] ? $user['baby']['gender'] : "不知道"
+          %select.input-div#baby-gender.gender
+            %option{value: "male"} 男子汉
+            %option{value: "female"} 小姑娘
+        .row-div
+          %label.f14.color7.fn 宝宝生日
+          // %span.f12.color6.span-desc= $user['baby']['birthday'] ? $user['baby']['birthday'] : "不知道"
+          %input.input-div#baby-birthday.birthday{type: "date"}
+        .row-div
+          %a.edit.f12.color10#baby-edit 编辑
   %p.f12.color10.pt16#another-baby 还有一个宝宝?
 .btn#edit-end 编辑完成
 
