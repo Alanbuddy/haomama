@@ -10337,16 +10337,16 @@ return jQuery;
   change_avatar = function(gender, birthday, object) {
     var today;
     today = new Date();
-    if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3) {
+    if (gender === "male" && (today.getFullYear() - birthday.getFullYear()) > 3) {
       $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png');
     }
-    if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
+    if (gender === "male" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
       $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png');
     }
-    if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3) {
+    if (gender === "female" && (today.getFullYear() - birthday.getFullYear()) > 3) {
       $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png');
     }
-    if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
+    if (gender === "female" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
       return $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png');
     }
   };
