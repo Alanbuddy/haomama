@@ -90,7 +90,7 @@ Route::group([
     Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
     Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
 
-    Route::get('/sms/send', 'SmsController@send');
-    Route::get('/sms/residual', 'SmsController@residual');
+    Route::get('/sms/send', 'SmsController@send')->name('sms.send');
+    Route::get('/sms/residual', 'SmsController@residual')->name('sms.residual');
 });
 
