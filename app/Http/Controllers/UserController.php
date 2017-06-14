@@ -127,6 +127,7 @@ class UserController extends Controller
     public function profile()
     {
         $user=auth()->user();
+        $user->baby=json_decode($user->baby);
         return view('setting.index',['user'=>$user]);
     }
 }
