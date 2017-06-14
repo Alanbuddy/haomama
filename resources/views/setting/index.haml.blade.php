@@ -38,17 +38,17 @@
       .right-div
         .row-div
           %label.f14.color7.fn 宝宝姓名
-          %span.f12.color6.span-desc= $baby['name'] ? $baby['name'] : "不知道"
+          %span.f12.color6.span-desc= $baby->name ? $baby->name : "不知道"
           %input.input-div#baby-name.baby-name
         .row-div
           %label.f14.color7.fn 宝宝性别
-          // %span.f12.color6.span-desc= $user['baby']['gender'] ? $user['baby']['gender'] : "不知道"
+          %span.f12.color6.span-desc= $baby->gender ? $baby->gender : "不知道"
           %select.input-div#baby-gender.gender
-            %option{value: "male"} 男子汉
-            %option{value: "female"} 小姑娘
+            %option{value: "男子汉"} 男子汉
+            %option{value: "小姑娘"} 小姑娘
         .row-div
           %label.f14.color7.fn 宝宝生日
-          // %span.f12.color6.span-desc= $user['baby']['birthday'] ? $user['baby']['birthday'] : "不知道"
+          %span.f12.color6.span-desc= $baby->birthday ? $baby->birthday : "不知道"
           %input.input-div#baby-birthday.birthday{type: "date"}
         .row-div
           %a.edit.f12.color10#baby-edit 编辑
@@ -66,8 +66,8 @@
     .row-div
       %label.f14.color7.fn 宝宝性别
       %select.add-input-div.add-gender#add-baby-gender.gender
-        %option{value: "male"} 男子汉
-        %option{value: "female"} 小姑娘
+        %option{value: "男子汉"} 男子汉
+        %option{value: "小姑娘"} 小姑娘
     .row-div
       %label.f14.color7.fn 宝宝生日
       %input.add-input-div#add-baby-birthday.birthday{type: "date"}
