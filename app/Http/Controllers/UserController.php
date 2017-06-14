@@ -124,9 +124,18 @@ class UserController extends Controller
     {
         //
     }
-    public function profile()
+    public function profile(Request $request)
     {
         $user=auth()->user();
+        if($request->isMethod('POST')){
+            if($request->has('parenthood')){
+                $user->parenthood=$request->parenthood;
+            }
+            if($request->has('phone')){
+                $user->parenthood=$request->phone;
+            }
+            $user->save();
+        }
         $user->baby=json_decode($user->baby);
         return view('setting.index',['user'=>$user]);
     }
