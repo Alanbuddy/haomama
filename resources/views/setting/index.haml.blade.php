@@ -10,21 +10,21 @@
 .item-div 
   .item.parent-div
     .left-div
-      %img.avatar{src: "/icon/avatar.png"}
+      %img.avatar{src: $user['avatar'] ? $user['avatar'] : "/icon/avatar.png"}
     .right-div
       .row-div
         %label.f14.color7.fn 微信名称
-        %p.f12.color6.fn#wechat-name 限制十四个字
+        %p.f12.color6.fn#wechat-name= $user['name']
       .row-div
         %label.f14.color7.fn 家长身份
-        %span.f12.color6.span-desc#parent-span 妈妈(默认)
+        %span.f12.color6.span-desc#parent-span= $user['parenthood'] ? $user['parenthood'] : "妈妈"
         %select.input-div#parent
           %option{value: "请选择"} 请选择
           %option{value: "爸爸"} 爸爸
           %option{value: "妈妈", selected: "selected"} 妈妈
       .row-div
         %label.f14.color7.fn 手机号码
-        %p.f12.color6#mobile-span 13011111111
+        %p.f12.color6#mobile-span= $user['phone'] ? $user['phone'] : "未绑定"
         // %p.replace.f12.color10{"data-toggle" => "modal", "data-target" => "#mobileModal"} 更换
         %p.replace.f12.color10 更换
       .row-div
@@ -35,17 +35,17 @@
     .right-div
       .row-div
         %label.f14.color7.fn 宝宝姓名
-        %span.f12.color6.span-desc 小凉粉
+        %span.f12.color6.span-desc= $user['baby']['name'] ? $user['baby']['name'] : "不知道"
         %input.input-div#baby-name.baby-name
       .row-div
         %label.f14.color7.fn 宝宝性别
-        %span.f12.color6.span-desc 小姑娘
+        %span.f12.color6.span-desc= $user['baby']['gender'] ? $user['baby']['gender'] : "不知道"
         %select.input-div#baby-gender.gender
-          %option{value: "男子汉"} 男子汉
-          %option{value: "小姑娘"} 小姑娘
+          %option{value: "male"} 男子汉
+          %option{value: "female"} 小姑娘
       .row-div
         %label.f14.color7.fn 宝宝生日
-        %span.f12.color6.span-desc 2016/04/05
+        %span.f12.color6.span-desc= $user['baby']['birthday'] ? $user['baby']['birthday'] : "不知道"
         %input.input-div#baby-birthday.birthday{type: "date"}
       .row-div
         %a.edit.f12.color10#baby-edit 编辑
@@ -63,8 +63,8 @@
     .row-div
       %label.f14.color7.fn 宝宝性别
       %select.add-input-div.add-gender#add-baby-gender.gender
-        %option{value: "男子汉"} 男子汉
-        %option{value: "小姑娘"} 小姑娘
+        %option{value: "male"} 男子汉
+        %option{value: "female"} 小姑娘
     .row-div
       %label.f14.color7.fn 宝宝生日
       %input.add-input-div#add-baby-birthday.birthday{type: "date"}

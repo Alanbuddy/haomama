@@ -88,7 +88,7 @@ $(document).ready(function($) {
 
   var parent_edit = false;
   var baby_edit = false;
-  var add_baby = false
+  var add_baby = false;
   $('#parent-edit').click(function(){
     parent_edit = true;
     $(this).hide();
