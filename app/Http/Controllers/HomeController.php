@@ -40,7 +40,7 @@ class HomeController extends Controller
             ->select(DB::raw('courses.*'))
             ->addSelect(DB::raw('sum(comments.star) as star'))
             ->groupBy('courses.id')
-            ->orderBy('star', 'desc');
+            ->orderBy('star', 'desc')
             ->paginate(10);
 //        $itemsOrderByCommentRating = $itemsOrderByCommentRating->toSql();
         Log::info('------');
