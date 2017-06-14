@@ -124,8 +124,9 @@ class UserController extends Controller
     {
         //
     }
-    public function profile(User $user)
+    public function profile()
     {
+        $user=auth()->user();
         return view('setting.index',['user'=>$user]);
     }
 }
