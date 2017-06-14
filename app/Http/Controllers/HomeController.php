@@ -65,7 +65,7 @@ class HomeController extends Controller
 //        $signPackage = $jsSdk->getSignPackage();
 
         $data = compact('categories', 'items', 'itemsOrderByUserCount','itemsOrderByCommentRating','signPackage');
-//        dd($categories);
+       // dd($itemsOrderByCommentRating);
 
         return view('course.index', $data);
 //        return view('video.display', $data);

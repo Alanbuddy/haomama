@@ -62,37 +62,41 @@
                   %span= $item['comments_count'] ."条评论"
         
         .course-item-div
-          .course-item
-            .course-icon-div
-              %img.course-recommend{src: "/icon/recommend.png"}
-              %img.course-icon{src: "/icon/example.png"}
-            .word-div
-              .course-row-div.clearfix
-                %span.health-title.f12 健康养育
-                %span.course-item-value.f14.color5 200
-              .course-row-div.color7
-                %span.coures-name.f16 名字很长很长很长
-                // %span.course-status.f8 线下
-              .course-row-div.f12.color6
-                %span.participate 2315人已学
-                %span .
-                %span 810条评论
+          - foreach ($itemsOrderByUserCount as $itemOrderByUserCount)
+            .course-item{'data-id' => $itemOrderByUserCount['id']}
+              .course-icon-div
+                %img.course-recommend{src: "/icon/recommend.png"}
+                %img.course-icon{src: $itemOrderByUserCount['cover'] ? $itemOrderByUserCount['cover'] : "/icon/example.png"}
+              .word-div
+                .course-row-div.clearfix
+                  %span.category-class.f12= $itemOrderByUserCount['category']['name']
+                  %span.course-item-value.f14.color5= "￥". $itemOrderByUserCount['price']
+                .course-row-div.color7
+                  %span.coures-name.f16= $itemOrderByUserCount['name']
+                  - if ($itemOrderByUserCount['type'] == 'offline')
+                    %span.course-status.f8 线下
+                .course-row-div.f12.color6
+                  %span.participate= $itemOrderByUserCount['users_count']."人已学"
+                  %span .
+                  %spann= $itemOrderByUserCount['comments_count'] ."条评论"
         .course-item-div
-          .course-item
-            .course-icon-div
-              %img.course-recommend{src: "/icon/recommend.png"}
-              %img.course-icon{src: "/icon/example.png"}
-            .word-div
-              .course-row-div.clearfix
-                %span.grow-title.f12 自我成长
-                %span.course-item-value.f14.color5 200
-              .course-row-div.color7
-                %span.coures-name.f16 名字很长很长很长
-                // %span.course-status.f8 线下
-              .course-row-div.f12.color6
-                %span.participate 2315人已学
-                %span .
-                %span 810条评论
+          - foreach ($itemsOrderByCommentRating as $itemOrderByCommentRating)
+            .course-item{'data-id' => $itemOrderByCommentRating['id']}
+              .course-icon-div
+                %img.course-recommend{src: "/icon/recommend.png"}
+                %img.course-icon{src: $itemOrderByCommentRating['cover'] ? $itemOrderByCommentRating['cover'] : "/icon/example.png"}
+              .word-div
+                .course-row-div.clearfix
+                  %span.category-class.f12= $itemOrderByCommentRating['category']['name']
+                  %span.course-item-value.f14.color5= "￥". $itemOrderByCommentRating['price']
+                .course-row-div.color7
+                  %span.coures-name.f16= $itemOrderByCommentRating['name']
+                  - if ($itemOrderByCommentRating['type'] == 'offline')
+                    %span.course-status.f8 线下
+                .course-row-div.f12.color6
+                  %span.participate= $itemOrderByCommentRating['users_count']."人已学"
+                  %span .
+                  %span= $itemOrderByCommentRating['comments_count'] ."条评论"
     .swiper-slide
       .course-title-div
         .title-row-div
