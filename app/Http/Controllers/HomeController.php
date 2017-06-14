@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Facades\Search;
 use App\Http\Wechat\JSSDK;
+use App\Models\Course;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -16,7 +18,7 @@ class HomeController extends Controller
         //Dev
         Auth::loginUsingId(1);
         //
-        $items = [];
+        $items = Course::where('id','>',0);
         $hasFilter = false;
         $route = $request->route();
         if ($route->hasParameter('tag')) {
@@ -31,24 +33,29 @@ class HomeController extends Controller
         if (!$hasFilter) {
             $items = Search::basicStat();
         }
+        $items->orderBy('name','desc');
+        dd($items);
+//        dd($itemsOrderByUserCount);
         $itemsOrderByUserCount = $items->orderBy('users_count', 'desc')
             ->paginate(10);
-//        dd($itemsOrderByUserCount);
 
 //        $itemsOrderByCommentRating = $items->leftJoin('comments', 'comments.course_id', 'courses.id')
+        Log::info('------');
         $itemsOrderByCommentRating = Search::basicStat()->leftJoin('comments', 'comments.course_id', 'courses.id')
             ->select(DB::raw('courses.*'))
             ->addSelect(DB::raw('sum(comments.star) as star'))
             ->groupBy('courses.id')
-            ->orderBy('star', 'desc')
-            ->paginate(10);
-//        dd($itemsOrderByCommentRating);
+            ->orderBy('star', 'desc');
+//            ->paginate(10);
+        $itemsOrderByCommentRating = $itemsOrderByCommentRating->toSql();
+        dd($itemsOrderByCommentRating);
+        Log::info('------');
         $items = $items->paginate(10);
 
         //retrieve data needed by index page
         foreach ($items as $i) {
             echo($i->id);
-            echo($i->category->name);
+//            echo($i->category->name);
         }
         $categories = Term::where('type', 'category')
             ->select('id', 'name')

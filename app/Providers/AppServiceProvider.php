@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\SearchService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
@@ -20,8 +21,9 @@ class AppServiceProvider extends ServiceProvider
             Log::info( $query->sql);
             Log::info( $query->time);
             Log::info( $query->bindings);
-            // $query->bindings
-            // $query->time
+        });
+        $this->app->resolving(SearchService::class, function ($api, $app) {
+            Log::info(' 解析「SearchSearvice」类型的对象时调用');
         });
     }
 
