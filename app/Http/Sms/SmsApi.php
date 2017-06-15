@@ -18,6 +18,7 @@ class SmsApi
     public static function send(Request $request)
     {
         $api_url = config('services.sms.url');
+        session(['mobile'=>$request->mobile]);
         $code=rand(100000,999999);
 //        session(['code'=>$code]);
         session(['code'=>111111]);

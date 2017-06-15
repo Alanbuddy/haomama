@@ -30,9 +30,9 @@ class SmsController extends Controller
 
     public static function verify(Request $request)
     {
-        if ($request->has('code')) {
-            // var_dump($request->all());
-            $result = $request->code == session('code');
+        if ($request->has('code') && $request->has('mobile')) {
+            $result = ($request->code == session('code')) &&
+                ($request->mobile == session('mobile'));
             return ['success' => $result];
         }
         return ['success' => false];

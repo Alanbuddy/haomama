@@ -18,7 +18,7 @@ class HomeController extends Controller
         //Dev
         Auth::loginUsingId(1);
         //
-        $items = Course::where('id','>',0);
+        $items = Course::where('id', '>', 0);
         $hasFilter = false;
         $route = $request->route();
         if ($route->hasParameter('tag')) {
@@ -51,12 +51,14 @@ class HomeController extends Controller
 //            echo($i->id);
 //            echo($i->category->name);
 //        }
-        $categories =['id'=>0,'name'=>'index'];
+        $index = new Term();
+        $index->id = '0';
+        $index->name = 'index';
+        $categories = [$index];
         $categoriesFromDB = Term::where('type', 'category')
             ->select('id', 'name')
             ->get();
-        $categories=array_merge($categories,$categoriesFromDB->all());
-        // dd($categories);
+        $categories = array_merge($categories, $categoriesFromDB->all());
 
         foreach ($categories as $category) {
             $courses = Search::coursesByCategory($category);
@@ -65,7 +67,7 @@ class HomeController extends Controller
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
 
-        $data = compact('categories', 'items', 'itemsOrderByUserCount','itemsOrderByCommentRating','signPackage');
+        $data = compact('categories', 'items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating', 'signPackage');
 //        dd($itemsOrderByCommentRating);
 
         return view('course.index', $data);

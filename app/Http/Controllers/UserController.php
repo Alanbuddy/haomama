@@ -132,7 +132,7 @@ class UserController extends Controller
                 $user->parenthood=$request->parenthood;
             }
             if($request->has('phone')){
-                $user->parenthood=$request->phone;
+                $user->phone=$request->mobile;
             }
             $user->save();
         }
