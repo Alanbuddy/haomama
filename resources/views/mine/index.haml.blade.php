@@ -63,11 +63,13 @@
               - if ($enrolledCourse['type'] == 'offline')
                 %span.course-status.f8 线下
             .favorite-row-div.f12.color6
-              %span.participate= $enrolledCourse['users_count']."人已报名"
-              %span .
               - if ($enrolledCourse['type'] == 'offline')
+                %span.participate= $enrolledCourse['users_count']."人已报名"
+                %span .
                 %span= date_format(date_create($enrolledCourse['begin']),"m月/d日")."开课"
               - else 
+                %span.participate= $enrolledCourse['users_count']."人已学"
+                %span .
                 %span= $enrolledCourse['comments_count'] ."条评论"
   .hr.div-line
   - if (count($favoritedCourses) > 0)
@@ -88,11 +90,13 @@
               - if ($favoritedCourse['type'] == 'offline')
                 %span.course-status.f8 线下
             .favorite-row-div.f12.color6
-              %span.participate= $favoritedCourse['users_count']."人已报名"
-              %span .
               - if ($favoritedCourse['type'] == 'offline')
+                %span.participate= $favoritedCourse['users_count']."人已报名"
+                %span .
                 %span= date_format(date_create($favoritedCourse['begin']),"m月/d日")."开课"
               - else
+                %span.participate= $favoritedCourse['users_count']."人已学"
+                %span .
                 %span= $favoritedCourse['comments_count'] ."条评论"
 .foot
   .foot-item-div#home
