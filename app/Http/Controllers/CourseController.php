@@ -298,10 +298,12 @@ class CourseController extends Controller
     {
         $items = auth()->user()
             ->favoritedCourses()
+            ->withCount('comments')
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
             }])
             ->paginate(10);
+        dd($items);
         return view('mine.show', ['items' => $items]);
     }
 
@@ -309,6 +311,7 @@ class CourseController extends Controller
     public function enrolledCourses()
     {
         $items = auth()->user()->enrolledCourses()
+            ->withCount('comments')
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
             }])
