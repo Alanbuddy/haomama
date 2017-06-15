@@ -10341,7 +10341,7 @@ module.exports = __webpack_require__(9);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $(".category-class").each(function() {
+  $(".category-class").each(function() {
     if ($(this).text() === "鍒嗙被N") {
       return $(this).addClass('health-title');
     } else if ($(this).text() === "鍒嗙被t") {
@@ -10349,6 +10349,9 @@ module.exports = __webpack_require__(9);
     } else {
       return $(this).addClass('grow-title');
     }
+  });
+  return $(".back").click(function() {
+    return location.href = window.userid;
   });
 });
 
