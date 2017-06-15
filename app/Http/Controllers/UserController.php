@@ -69,7 +69,7 @@ class UserController extends Controller
         foreach ($onGoingCourses as $c) {
             $timeInfo = "";
             foreach ($c->onGoingLessons as $lesson) {
-                $timeInfo .= date('m/d',strtotime($lesson->begin)).' ';
+                $timeInfo .= date('m/d', strtotime($lesson->begin)) . ' ';
             }
             $c->time = $timeInfo;
         }
@@ -124,19 +124,23 @@ class UserController extends Controller
     {
         //
     }
+
     public function profile(Request $request)
     {
-        $user=auth()->user();
-        if($request->isMethod('POST')){
-            if($request->has('parenthood')){
-                $user->parenthood=$request->parenthood;
+        $user = auth()->user();
+        if ($request->isMethod('POST')) {
+            if ($request->has('parenthood')) {
+                $user->parenthood = $request->parenthood;
             }
-            if($request->has('phone')){
-                $user->phone=$request->mobile;
+            if ($request->has('phone')) {
+                $user->phone = $request->mobile;
             }
             $user->save();
         }
-        $user->baby=json_decode($user->baby);
-        return view('setting.index',['user'=>$user]);
+        $user->baby = json_decode($user->baby);
+        if ($request->ajax()) {
+            return ['success' => true];
+        }
+        return view('setting.index', ['user' => $user]);
     }
 }
