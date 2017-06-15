@@ -73,12 +73,11 @@ class HomeController extends Controller
             $data[] = compact('items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating');
         }
 //        dd($data);
-
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
 
         $arr = compact('categories', 'data ', 'signPackage');
-
+        // dd($data);
         return view('course.index', $arr);
 //        return view('video.display', $data);
     }
