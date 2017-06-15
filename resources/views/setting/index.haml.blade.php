@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/setting-index.css') }}">
 :javascript
   window.sms_send = "#{route('sms.send')}"
+  window.sms_verify = "#{route('sms.verify')}"
   window.mine_page = "#{route('users.show',auth()->user())}"
 
 @endsection
