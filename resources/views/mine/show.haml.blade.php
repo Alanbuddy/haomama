@@ -1,6 +1,8 @@
 @extends('layout.app')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/mine-show.css') }}">
+:javascript
+  window.userid = "#{route('users.show',auth()->user())}"
 
 @endsection
 @section('content')
@@ -21,16 +23,20 @@
         .course-row-div.clearfix
           %span.f12.category-class= $item['category']['name']
           %span.course-item-value.f14.color5= "￥". $item['price']
-        .course-row-div.color7
-          %span.name-span.f16= $item['name']
+        .course-row-div.color7.unstart
           - if ($item['type'] == 'offline')
+            %span.name-span.f16= $item['name']
             %span.course-status.f8 线下
+          - else 
+            %span.course-name.f16= $item['name']
         .course-row-div.f12.color6
-          %span.participate= $item['users_count']."人已学"
-          %span .
           - if ($item['type'] == "offline")
+            %span.participate= $item['users_count']."人已报名"
+            %span .
             %span= date_format(date_create($item['begin']),"m月/d日")."开课"
           - else
+            %span.participate= $item['users_count']."人已学"
+            %span .
             %span= $item['comments_count'] ."条评论"
 @endsection
 

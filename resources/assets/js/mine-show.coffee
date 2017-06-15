@@ -6,3 +6,6 @@ $ ->
       $(this).addClass('psychology-title')
     else
       $(this).addClass('grow-title')
+
+  $(".back").click ->
+    location.href = window.userid
