@@ -61,7 +61,7 @@ $(document).ready(function($) {
       showMsg("手机号不正确", 'center');
       return false;
     }
-    if (code === "") {
+    if (code == "") {
       showMsg('验证码未填写', 'center');
       return false;
     }
@@ -131,25 +131,25 @@ $(document).ready(function($) {
     var gender = [];
     var birthday = [];
     if (parent_edit && baby_edit === false) {
-      var parent_statu = $("#parent").val();
+      var parenthood = $("#parent").val();
       var mobile = $("#mobile-span").text();
       var mobile_retval = $.regex.isMobile(mobile);
       if (mobile_retval === false) {
         showMsg("手机号不正确", 'center');
         return false;
       }
-      console.log(parent_statu);
+      console.log(parenthood);
       console.log(mobile);
       $.postJSON(
         url,  // 只提交parent,未有数据时创建，有就更新
         {
-          parent_statu: parent_statu,
+          parenthood: parenthood,
           mobile: mobile 
         },
         function(data) {
           if (data.success) {
             $('#parent-span').show();
-            $('#parent-span').text(parent_statu);
+            $('#parent-span').text(parenthood);
             $('#parent').hide();
             $('#mobile-span').text(mobile);
             $('.replace').hide();
@@ -212,7 +212,7 @@ $(document).ready(function($) {
         );
     }
     if (parent_edit && baby_edit) {
-      var parent_statu = $("#parent").val();
+      var parenthood = $("#parent").val();
       var mobile = $("#mobile-span").text();
       var mobile_retval = $.regex.isMobile(mobile);
       if (mobile_retval === false) {
@@ -228,7 +228,7 @@ $(document).ready(function($) {
       $('.birthday:visible').each(function(i){
          birthday[i] = $(this).val();
       });
-      console.log(parent_statu);
+      console.log(parenthood);
       console.log(mobile);
       console.log(baby_name);
       console.log(gender);
@@ -236,7 +236,7 @@ $(document).ready(function($) {
       $.postJSON(
         url,   // 提交parent and baby，未有数据时创建，有就更新
         {
-          parent_statu: parent_statu,
+          parenthood: parenthood,
           mobile: mobile,
           baby_name: baby_name,
           gender: gender,
