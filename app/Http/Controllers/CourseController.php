@@ -296,14 +296,23 @@ class CourseController extends Controller
     //我收藏的课程
     public function favoriteCourses()
     {
-        $items = auth()->user()->favoritedCourses()->paginate(10);
+        $items = auth()->user()
+            ->favoritedCourses()
+            ->withCount(['users' => function ($query) {
+                $query->where('type', 'enroll');
+            }])
+            ->paginate(10);
         return view('mine.show', ['items' => $items]);
     }
 
     //我加入的课程
     public function enrolledCourses()
     {
-        $items = auth()->user()->enrolledCourses()->paginate(10);
+        $items = auth()->user()->enrolledCourses()
+            ->withCount(['users' => function ($query) {
+                $query->where('type', 'enroll');
+            }])
+            ->paginate(10);
         return view('mine.mycourse', ['items' => $items]);
     }
 
