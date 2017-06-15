@@ -25,14 +25,14 @@ class HomeController extends Controller
             $items = Search::coursesByTag($request->route('tag'));
             $hasFilter = true;
         }
-        if ($route->hasParameter('category')) {
-            $items = Search::coursesByCategory($request->route('category'));
-            $hasFilter = true;
-        }
+//        if ($route->hasParameter('category')) {
+//            $items = Search::coursesByCategory($request->route('category'));
+//            $hasFilter = true;
+//        }
 
-        if (!$hasFilter) {
-            $items = Search::basicStat();
-        }
+//        if (!$hasFilter) {
+//            $items = Search::basicStat();
+//        }
         $itemsOrderByUserCount = $items->orderBy('users_count', 'desc')
             ->paginate(10);
 
@@ -60,8 +60,13 @@ class HomeController extends Controller
             ->get();
         $categories = array_merge($categories, $categoriesFromDB->all());
 
+        $data=[];
+        $items = Search::basicStat();
         foreach ($categories as $category) {
-            $courses = Search::coursesByCategory($category);
+            $items = Search::basicStat();
+            if($category->id>0){
+                $items->where('category_id',$category->id);
+            }
         }
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
