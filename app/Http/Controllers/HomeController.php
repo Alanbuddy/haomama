@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Facades\Search;
 use App\Http\Wechat\JSSDK;
-use App\Models\Course;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -50,7 +48,7 @@ class HomeController extends Controller
             ->get();
         $categories = array_merge($categories, $categoriesFromDB->all());
 
-        $data=[];
+        $data = [];
         foreach ($categories as $category) {
             $items = Search::basicStat();
 
@@ -64,28 +62,24 @@ class HomeController extends Controller
                 ->groupBy('courses.id')
                 ->orderBy('star', 'desc');
 //                ->paginate(10);
-            foreach ([$items,$itemsOrderByUserCount,$itemsOrderByCommentRating] as $builder){
-                if($category->id>0){
-                    $builder->where('category_id',$category->id);
+            foreach ([$items, $itemsOrderByUserCount, $itemsOrderByCommentRating] as $builder) {
+                if ($category->id > 0) {
+                    $builder->where('category_id', $category->id);
                 }
             }
-            $items=$items->paginate(10);
-            $itemsOrderByUserCount=$itemsOrderByUserCount->paginate(10);
-            $itemsOrderByCommentRating=$itemsOrderByCommentRating->paginate(10);
-            $data[]=compact('items','itemsOrderByUserCount','itemsOrderByCommentRating');
+            $items = $items->paginate(10);
+            $itemsOrderByUserCount = $itemsOrderByUserCount->paginate(10);
+            $itemsOrderByCommentRating = $itemsOrderByCommentRating->paginate(10);
+            $data[] = compact('items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating');
         }
-<<<<<<< HEAD
 //        dd($data);
-=======
-        // dd($data);
->>>>>>> c7ede02b3b22cd837d367352f967725303a63dab
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
 
-        $data = compact('categories', 'items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating', 'signPackage');
+        $arr = compact('categories', 'data ', 'signPackage');
 
-        return view('course.index', $data);
+        return view('course.index', $arr);
 //        return view('video.display', $data);
     }
 
