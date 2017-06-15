@@ -77,9 +77,13 @@ $(document).ready(function($) {
           $("#mobileModal").modal("hide");
           $('#mobile-span').text(mobile);
         } else {
-          showMsg('验证码错误', 'center');
-        }
+          // 需要修改
+            showMsg('验证码错误', 'center');
 
+          // if (data.message == "WRONG_VERIFY_CODE") {
+          //   showMsg('验证码错误', 'center');
+          // }
+        }
       }
       );
     return false;
@@ -134,7 +138,7 @@ $(document).ready(function($) {
     var baby_name = [];
     var gender = [];
     var birthday = [];
-    if (parent_edit && baby_edit === false) {
+    if (parent_edit && baby_edit === false && add_baby === false) {
       var parenthood = $("#parent").val();
       var mobile = $("#mobile-span").text();
       var mobile_retval = $.regex.isMobile(mobile);
@@ -145,18 +149,22 @@ $(document).ready(function($) {
       console.log(parenthood);
       console.log(mobile);
       $.postJSON(
-        url,  // 只提交parent,未有数据时创建，有就更新
+        window.user_profile,
         {
           parenthood: parenthood,
-          mobile: mobile 
+          mobile: mobile,
+          _token: window.token 
         },
         function(data) {
+          console.log(data);
           if (data.success) {
+            parent_edit = false;
             $('#parent-span').show();
             $('#parent-span').text(parenthood);
             $('#parent').hide();
             $('#mobile-span').text(mobile);
             $('.replace').hide();
+            // location.href = window.user_profile;
           }
         }
         );
