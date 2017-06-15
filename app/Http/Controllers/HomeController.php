@@ -47,13 +47,16 @@ class HomeController extends Controller
         $items = $items->paginate(10);
 
         //retrieve data needed by index page
-        foreach ($items as $i) {
-            echo($i->id);
-            echo($i->category->name);
-        }
-        $categories = Term::where('type', 'category')
+//        foreach ($items as $i) {
+//            echo($i->id);
+//            echo($i->category->name);
+//        }
+        $categories =['id'=>0,'name'=>'index'];
+        $categoriesFromDB = Term::where('type', 'category')
             ->select('id', 'name')
             ->get();
+        $categories=array_merge($categories,$categoriesFromDB->all());
+        dd($categories);
 
         foreach ($categories as $category) {
             $courses = Search::coursesByCategory($category);
