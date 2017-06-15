@@ -138,9 +138,14 @@ $(document).ready(function($) {
     var name = [];
     var gender = [];
     var birthday = [];
-    var parenthood = $("#parent:visible").val();
+    var parenthood = null;
     var mobile = $("#mobile-span").text();
     var mobile_retval = $.regex.isMobile(mobile);
+    if (parent_edit) {
+      parenthood = $("#parent").val();
+    } else {
+      parenthood = $("#parent-span").text();
+    }
     if (mobile_retval === false) {
       showMsg("手机号不正确", 'center');
       return false;
@@ -148,9 +153,9 @@ $(document).ready(function($) {
     console.log(parenthood);
     console.log(mobile);
     $(".baby-item:visible").each(function(i){
-      name[i] = $(this).find(".baby-name:visible").val();
-      gender[i] = $(this).find(".gender:visible").val();
-      birthday[i] = $(this).find(".birthday:visible").val();
+      name[i] = $(this).find(".baby-name:visible").val() || $(this).find(".name-span").text();
+      gender[i] = $(this).find(".gender:visible").val() || $(this).find(".gender-span").text();
+      birthday[i] = $(this).find(".birthday:visible").val() || $(this).find(".birthday-span").text();
       baby[i] = {
         name: name[i],
         gender: gender[i],
@@ -163,7 +168,7 @@ $(document).ready(function($) {
       {
         parenthood: parenthood,
         phone: mobile,
-        baby: baby,
+        baby: JSON.stringify(baby),
         _token: window.token 
       },
       function(data) {
@@ -174,117 +179,4 @@ $(document).ready(function($) {
       }
       );
   });
-
-
-    // if (baby_edit && parent_edit === false && add_baby === false) {
-    //   // $('.baby-name:visible').each(function(i){
-    //   //    name[i] = $(this).val();
-    //   // });
-    //   // $('.gender:visible').each(function(i){
-    //   //    gender[i] = $(this).val();
-    //   // });
-    //   // $('.birthday:visible').each(function(i){
-    //   //    birthday[i] = $(this).val();
-    //   // });
-    //   name = $("#baby-name").val();
-    //   gender = $("#baby-gender").val();
-    //   birthday = $("#baby-birthday").val();
-    //   console.log(name);
-    //   console.log(gender);
-    //   console.log(birthday);
-    //   $.postJSON(
-    //     window.user_profile,
-    //     {
-    //       baby: [
-    //         {
-    //           name: name,
-    //           gender: gender,
-    //           birthday: birthday
-    //         }
-    //       ],
-    //       _token: window.token
-    //     },
-    //     function(data) {
-    //       console.log(data);
-    //       if (data.success) {
-    //         baby_edit = false;
-    //         $(".baby-div").find(".input-div").hide();
-    //         $(".baby-div").find("span").show();
-    //         $("#name-span").text(name);
-    //         $("#gender-span").text(gender);
-    //         $("#birthday-span").text(birthday);
-    //         $("#baby-edit").show();
-    //         $(".btn").hide();
-    //       }
-    //     }
-    //     );
-    // }
-    // if (add_baby && baby_edit === false && parent_edit === false) {
-    //   $('.baby-name:visible').each(function(i){
-    //     name[i] = $(this).val();
-    //   });
-    //   $('.gender:visible').each(function(i){
-    //     gender[i] = $(this).val();
-    //   });
-    //   $('.birthday:visible').each(function(i){
-    //     birthday[i] = $(this).val();
-    //   });
-    //   console.log(name);
-    //   console.log(gender);
-    //   console.log(birthday);
-    //   $.postJSON(
-    //     url,  //只提交add-baby，只创建数据
-    //     {
-    //       name: name,
-    //       gender: gender,
-    //       birthday: birthday
-    //     },
-    //     function(data) {
-    //       if (data.success) {
-    //         location.href = '';
-    //       }
-    //     }
-    //     );
-    // }
-    // if (parent_edit && baby_edit) {
-    //   var parenthood = $("#parent").val();
-    //   var mobile = $("#mobile-span").text();
-    //   var mobile_retval = $.regex.isMobile(mobile);
-    //   if (mobile_retval === false) {
-    //     showMsg("手机号不正确", 'center');
-    //     return false;
-    //   }
-    //   $('.baby-name:visible').each(function(i){
-    //      name[i] = $(this).val();
-    //   });
-    //   $('.gender:visible').each(function(i){
-    //      gender[i] = $(this).val();
-    //   });
-    //   $('.birthday:visible').each(function(i){
-    //      birthday[i] = $(this).val();
-    //   });
-    //   console.log(parenthood);
-    //   console.log(mobile);
-    //   console.log(name);
-    //   console.log(gender);
-    //   console.log(birthday);
-    //   $.postJSON(
-    //     url,   // 提交parent and baby，未有数据时创建，有就更新
-    //     {
-    //       parenthood: parenthood,
-    //       mobile: mobile,
-    //       name: name,
-    //       gender: gender,
-    //       birthday: birthday
-    //     },
-    //     function(data) {
-    //       if (data.success) {
-    //         location.href = '';
-    //       }
-    //     }
-    //     );
-    // }
-
-  
-	
 });
