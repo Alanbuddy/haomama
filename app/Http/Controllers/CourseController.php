@@ -303,7 +303,6 @@ class CourseController extends Controller
                 $query->where('type', 'enroll');
             }])
             ->paginate(10);
-        dd($items);
         return view('mine.show', ['items' => $items]);
     }
 
