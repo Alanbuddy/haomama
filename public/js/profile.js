@@ -149,19 +149,22 @@ $(document).ready(function($) {
       console.log(parenthood);
       console.log(mobile);
       $.postJSON(
-        window.user_profile,  // 只提交parent,未有数据时创建，有就更新
+        window.user_profile,
         {
           parenthood: parenthood,
           mobile: mobile,
           _token: window.token 
         },
         function(data) {
+          console.log(data);
           if (data.success) {
+            parent_edit = false;
             $('#parent-span').show();
             $('#parent-span').text(parenthood);
             $('#parent').hide();
             $('#mobile-span').text(mobile);
             $('.replace').hide();
+            // location.href = window.user_profile;
           }
         }
         );
