@@ -135,6 +135,9 @@ class UserController extends Controller
             if ($request->has('phone')) {
                 $user->phone = $request->phone;
             }
+            if ($request->has('baby')) {
+                $user->baby = $request->baby;
+            }
             $user->save();
         }
         $user->baby = json_decode($user->baby);

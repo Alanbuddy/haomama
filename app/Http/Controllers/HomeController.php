@@ -18,13 +18,13 @@ class HomeController extends Controller
         //Dev
         Auth::loginUsingId(1);
         //
-        $items = Course::where('id', '>', 0);
-        $hasFilter = false;
-        $route = $request->route();
-        if ($route->hasParameter('tag')) {
-            $items = Search::coursesByTag($request->route('tag'));
-            $hasFilter = true;
-        }
+//        $items = Course::where('id', '>', 0);
+//        $hasFilter = false;
+//        if ($route->hasParameter('tag')) {
+//            $items = Search::coursesByTag($request->route('tag'));
+//            $hasFilter = true;
+//        }
+
 //        if ($route->hasParameter('category')) {
 //            $items = Search::coursesByCategory($request->route('category'));
 //            $hasFilter = true;
@@ -33,18 +33,8 @@ class HomeController extends Controller
 //        if (!$hasFilter) {
 //            $items = Search::basicStat();
 //        }
-        $itemsOrderByUserCount = $items->orderBy('users_count', 'desc')
-            ->paginate(10);
+//        Log::info('------');
 
-        $itemsOrderByCommentRating = Search::basicStat()->leftJoin('comments', 'comments.course_id', 'courses.id')
-            ->select(DB::raw('courses.*'))
-            ->addSelect(DB::raw('sum(comments.star) as star'))
-            ->groupBy('courses.id')
-            ->orderBy('star', 'desc')
-            ->paginate(10);
-//        $itemsOrderByCommentRating = $itemsOrderByCommentRating->toSql();
-        Log::info('------');
-        $items = $items->paginate(10);
 
         //retrieve data needed by index page
 //        foreach ($items as $i) {
@@ -61,13 +51,26 @@ class HomeController extends Controller
         $categories = array_merge($categories, $categoriesFromDB->all());
 
         $data=[];
-        $items = Search::basicStat();
         foreach ($categories as $category) {
             $items = Search::basicStat();
             if($category->id>0){
                 $items->where('category_id',$category->id);
             }
+            dd($items->toSql());
+            $items = $items->paginate(10);
+
+            $itemsOrderByUserCount = Search::basicStat()->orderBy('users_count', 'desc')
+                ->paginate(10);
+
+            $itemsOrderByCommentRating = Search::basicStat()->leftJoin('comments', 'comments.course_id', 'courses.id')
+                ->select(DB::raw('courses.*'))
+                ->addSelect(DB::raw('sum(comments.star) as star'))
+                ->groupBy('courses.id')
+                ->orderBy('star', 'desc')
+                ->paginate(10);
+            $data[]=compact('items','itemsOrderByUserCount','itemsOrderByCommentRating');
         }
+        dd($data);
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
