@@ -35,30 +35,30 @@
       .row-div
         %a.f12.color10#parent-edit 编辑
   - foreach ($user->baby as $baby)
-    .item.baby-div
+    .baby-item.baby-div
       .left-div
         %img.avatar{src: "/icon/baby_female.png"}
       .right-div
         .row-div
           %label.f14.color7.fn 宝宝姓名
-          %span.f12.color6.span-desc= $baby->name ? $baby->name : "不知道"
+          %span.f12.color6.span-desc#name-span= $baby->name ? $baby->name : "不知道"
           %input.input-div#baby-name.baby-name
         .row-div
           %label.f14.color7.fn 宝宝性别
-          %span.f12.color6.span-desc= $baby->gender ? $baby->gender : "不知道"
+          %span.f12.color6.span-desc#gender-span= $baby->gender ? $baby->gender : "不知道"
           %select.input-div#baby-gender.gender
             %option{value: "男子汉"} 男子汉
             %option{value: "小姑娘"} 小姑娘
         .row-div
           %label.f14.color7.fn 宝宝生日
-          %span.f12.color6.span-desc= $baby->birthday ? $baby->birthday : "不知道"
+          %span.f12.color6.span-desc#birthday-span= $baby->birthday ? $baby->birthday : "不知道"
           %input.input-div#baby-birthday.birthday{type: "date"}
         .row-div
           %a.edit.f12.color10#baby-edit 编辑
   %p.f12.color10.pt16#another-baby 还有一个宝宝?
 .btn#edit-end 编辑完成
 
-.item.add-baby-div
+.baby-item.add-baby-div
   %img.close-add-item{src: "/icon/close.png"}
   .left-div
     %img.avatar{src: "/icon/baby_female.png"}

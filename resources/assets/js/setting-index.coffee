@@ -49,13 +49,13 @@ $ ->
 
   change_avatar = (gender, birthday, object) ->
     today = new Date()
-    if gender == "male" && (today.getFullYear() - birthday.getFullYear()) > 3
+    if gender == "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3
       $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png')
-    if gender == "male" && (today.getFullYear() - birthday.getFullYear()) <= 3
+    if gender == "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3
       $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png')
-    if gender == "female" && (today.getFullYear() - birthday.getFullYear()) > 3
+    if gender == "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3
       $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png')
-    if gender == "female" && (today.getFullYear() - birthday.getFullYear()) <= 3
+    if gender == "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3
       $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png')
 
   $(document).on 'change', '.birthday', ->
