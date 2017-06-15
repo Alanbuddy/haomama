@@ -297,14 +297,14 @@ class CourseController extends Controller
     public function favoriteCourses()
     {
         $items = auth()->user()->favoritedCourses()->paginate(10);
-        return view('mime.show', ['items' => $items]);
+        return view('mine.show', ['items' => $items]);
     }
 
     //我加入的课程
     public function enrolledCourses()
     {
         $items = auth()->user()->enrolledCourses()->paginate(10);
-        return view('mime.show', ['items' => $items]);
+        return view('mine.mycourse', ['items' => $items]);
     }
 
     //置顶与取消置顶
