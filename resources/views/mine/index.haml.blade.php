@@ -65,7 +65,10 @@
             .favorite-row-div.f12.color6
               %span.participate= $enrolledCourse['users_count']."人已报名"
               %span .
-              %span= date_format(date_create($enrolledCourse['begin']),"m月/d日")."开课"
+              - if ($enrolledCourse['type'] == 'offline')
+                %span= date_format(date_create($enrolledCourse['begin']),"m月/d日")."开课"
+              - else 
+                %span= $enrolledCourse['comments_count'] ."条评论"
   .hr.div-line
   - if (count($favoritedCourses) > 0)
     .course-div.favorite-div
@@ -87,7 +90,10 @@
             .favorite-row-div.f12.color6
               %span.participate= $favoritedCourse['users_count']."人已报名"
               %span .
-              %span= date_format(date_create($favoritedCourse['begin']),"m月/d日")."开课"
+              - if ($favoritedCourse['type'] == 'offline')
+                %span= date_format(date_create($favoritedCourse['begin']),"m月/d日")."开课"
+              - else
+                %span= $favoritedCourse['comments_count'] ."条评论"
 .foot
   .foot-item-div#home
     %img.home{src: "/icon/home_normal.png"}
