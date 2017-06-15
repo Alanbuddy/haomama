@@ -65,8 +65,8 @@ $(document).ready(function($) {
       showMsg('验证码未填写', 'center');
       return false;
     }
-    $.postJSON(
-      '/',
+    $.getJSON(
+      window.sms_verify,
       {
         mobile: mobile,
         code: code
@@ -74,8 +74,12 @@ $(document).ready(function($) {
       function(data) {
         console.log(data);
         if (data.success) {
+          $("#mobileModal").modal("hide");
           $('#mobile-span').text(mobile);
+        } else {
+          showMsg('验证码错误', 'center');
         }
+
       }
       );
     return false;
