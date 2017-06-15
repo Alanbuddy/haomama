@@ -56,7 +56,7 @@ class HomeController extends Controller
             if($category->id>0){
                 $items->where('category_id',$category->id);
             }
-            dd($items->toSql());
+//            dd($items->toSql());
             $items = $items->paginate(10);
 
             $itemsOrderByUserCount = Search::basicStat()->orderBy('users_count', 'desc')
@@ -70,7 +70,7 @@ class HomeController extends Controller
                 ->paginate(10);
             $data[]=compact('items','itemsOrderByUserCount','itemsOrderByCommentRating');
         }
-        dd($data);
+//        dd($data);
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
