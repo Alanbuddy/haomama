@@ -152,7 +152,7 @@ $(document).ready(function($) {
         window.user_profile,
         {
           parenthood: parenthood,
-          mobile: mobile,
+          phone: mobile,
           _token: window.token 
         },
         function(data) {
@@ -164,7 +164,8 @@ $(document).ready(function($) {
             $('#parent').hide();
             $('#mobile-span').text(mobile);
             $('.replace').hide();
-            // location.href = window.user_profile;
+            $("#parent-edit").show();
+            $(".btn").hide();
           }
         }
         );
