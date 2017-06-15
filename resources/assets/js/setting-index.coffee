@@ -70,6 +70,9 @@ $ ->
     birthday = new Date(birthday)
     change_avatar(gender, birthday, this)
 
+  $(".back").click ->
+    location.href = window.mine_page
+
 
   
 

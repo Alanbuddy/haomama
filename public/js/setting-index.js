@@ -10357,12 +10357,15 @@ return jQuery;
     gender = $(this).closest('.row-div').siblings('.row-div').find('.gender').val();
     return change_avatar(gender, birthday, this);
   });
-  return $(document).on('change', '.gender', function() {
+  $(document).on('change', '.gender', function() {
     var birthday, gender;
     gender = $(this).val();
     birthday = $(this).closest('.row-div').siblings('.row-div').find('.birthday').val();
     birthday = new Date(birthday);
     return change_avatar(gender, birthday, this);
+  });
+  return $(".back").click(function() {
+    return location.href = window.mine_page;
   });
 });
 
