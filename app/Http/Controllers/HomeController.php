@@ -56,7 +56,7 @@ class HomeController extends Controller
             ->select('id', 'name')
             ->get();
         $categories=array_merge($categories,$categoriesFromDB->all());
-        dd($categories);
+        // dd($categories);
 
         foreach ($categories as $category) {
             $courses = Search::coursesByCategory($category);

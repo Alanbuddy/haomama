@@ -4,7 +4,9 @@
 :javascript
   window.sms_send = "#{route('sms.send')}"
   window.sms_verify = "#{route('sms.verify')}"
+  window.user_profile = "#{route('user.profile')}"
   window.mine_page = "#{route('users.show',auth()->user())}"
+  window.token = "#{csrf_token())}"
 
 @endsection
 @section('content')
