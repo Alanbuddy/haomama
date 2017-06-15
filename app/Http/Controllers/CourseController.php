@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Facades\Search;
 use App\Http\Util\IO;
 use App\Models\Course;
-use Illuminate\Database\QueryException;
+use Exception;
 use Illuminate\Http\Request;
-use \Exception;
 use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
@@ -16,7 +15,7 @@ class CourseController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin')->except(['index', 'show','statistics']);
+        $this->middleware('role:admin')->except(['index', 'show', 'statistics']);
     }
 
     /**
@@ -298,14 +297,14 @@ class CourseController extends Controller
     public function favoriteCourses()
     {
         $items = auth()->user()->favoritedCourses()->paginate(10);
-        return $items;
+        return view('mine.show', ['items' => $items]);
     }
 
     //我加入的课程
     public function enrolledCourses()
     {
         $items = auth()->user()->enrolledCourses()->paginate(10);
-        return $items;
+        return view('mine.mycourse', ['items' => $items]);
     }
 
     //置顶与取消置顶
@@ -324,7 +323,7 @@ class CourseController extends Controller
 //                , DB::raw('date_sub(`courses`.`created_at`, INTERVAL ' . $begin . ' DAY)'))
             ->where('courses.created_at', '>', date('Y-m-d H:i:s', strtotime("today -" . $begin . " days")))
             ->join('orders', 'courses.id', '=', 'orders.product_id')
-            ->select('courses.id', 'courses.name', 'courses.created_at','comment_count', 'users_count', 'favorite_count')
+            ->select('courses.id', 'courses.name', 'courses.created_at', 'comment_count', 'users_count', 'favorite_count')
             ->addSelect(DB::raw('sum(amount) as amount'))
             ->addSelect(DB::raw('count(*) as amount'))
             ->groupBy('courses.id')
