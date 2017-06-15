@@ -18,6 +18,9 @@ class SmsApi
     public static function send(Request $request)
     {
         $api_url = config('services.sms.url');
+        $code=rand(100000,999999);
+//        session(['code'=>$code]);
+        session(['code'=>111111]);
 
         $Msisdn = '18911209450';
         $SMSContent = 'haha你好吗';
@@ -33,6 +36,7 @@ class SmsApi
         );
         $url = $api_url . '?' . http_build_query($queryData);
         return Curl::request($url);
+
     }
 
     //查询余量

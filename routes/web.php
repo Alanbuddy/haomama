@@ -92,5 +92,6 @@ Route::group([
 
     Route::any('/sms/send', 'SmsController@send')->name('sms.send');
     Route::any('/sms/residual', 'SmsController@residual')->name('sms.residual');
+    Route::get('/sms/verify', 'SmsController@verify')->name('sms.verify');
 });
 

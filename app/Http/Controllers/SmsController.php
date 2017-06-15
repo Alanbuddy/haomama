@@ -10,6 +10,7 @@ class SmsController extends Controller
     public function send(Request $request)
     {
         $response = SmsApi::send($request);
+        return ['success' => true];
         if ($response['code'] == 200) {
             $arr = explode('|', $response['data']);
             if ($arr[0] == 1) {
@@ -25,5 +26,14 @@ class SmsController extends Controller
         if ($response['code'] == 200) {
             return ['success' => true, 'data' => $response];
         }
+    }
+
+    public static function verify(Request $request)
+    {
+        if ($request->has('code')) {
+            $result = $request->code == session('code');
+            return ['success' => $result];
+        }
+        return ['success' => false];
     }
 }
