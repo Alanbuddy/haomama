@@ -23,7 +23,7 @@ $ ->
   search = ->
     val = $(".search-input").val()
     # jump to search_page
-    location.href = ""
+    location.href = window.course_search
 
   $(".search").click ->
     search()

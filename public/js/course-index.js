@@ -10359,7 +10359,7 @@ return jQuery;
   search = function() {
     var val;
     val = $(".search-input").val();
-    return location.href = "";
+    return location.href = window.course_search;
   };
   $(".search").click(function() {
     return search();
