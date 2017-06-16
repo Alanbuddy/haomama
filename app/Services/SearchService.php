@@ -129,10 +129,11 @@ class SearchService
 
     public function search($key)
     {
-        $items = Course::where('name', 'like', '%' . $key . '%')
-            ->orWhere('users.name', 'like', '%' . $key . '%')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $items = $this->basicStat()
+            ->leftJoin('users','users.id','courses.teacher_id')
+            ->where('courses.name','like','%'.$key.'%')
+            ->orWhere('courses.name','like','%'.$key.'%')
+            ->orderBy('courses.id','desc');
         return $items;
     }
 }

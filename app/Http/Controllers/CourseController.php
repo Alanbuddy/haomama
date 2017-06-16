@@ -361,7 +361,9 @@ class CourseController extends Controller
             ]);
         }
         if ($request->has('key')) {
-            $items = Course::get();
+            $items = Search::search($request->key)
+                ->paginate(6);
+            dd($items);
             return view('course.edit', [
                 'items' => $items,
             ]);
