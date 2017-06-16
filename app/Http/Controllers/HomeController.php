@@ -14,15 +14,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $itemsOrderByCommentRating = Course:: leftJoin('comments', 'comments.course_id', 'courses.id')
-            ->leftJoin('users')
-            ->select(DB::raw('courses.*'))
-            ->addSelect(DB::raw(''))
-            ->addSelect(DB::raw('sum(comments.star) as star'))
-            ->groupBy('courses.id')
-            ->orderBy('star', 'desc');
-        //Dev
-        dd($itemsOrderByCommentRating->toSql());
         Auth::loginUsingId(1);
         //
 //        $items = Course::where('id', '>', 0);
@@ -60,17 +51,20 @@ class HomeController extends Controller
         $data = [];
         foreach ($categories as $category) {
             $items = Search::basicStat();
+//            dd($items->toSql());
 
             $itemsOrderByUserCount = Search::basicStat()->orderBy('users_count', 'desc');
-//                ->paginate(10);
 
-            $itemsOrderByCommentRating = Search::basicStat()
-                ->leftJoin('comments', 'comments.course_id', 'courses.id')
+            $itemsOrderByCommentRating = Course:: leftJoin('comments', 'comments.course_id', 'courses.id')
+                ->leftJoin('course_user','course_user.course_id','courses.id')
                 ->select(DB::raw('courses.*'))
+                ->addSelect(DB::raw('count(comments.id) as comments_count'))
+                ->addSelect(DB::raw('count(course_user.user_id) as users_count'))
                 ->addSelect(DB::raw('sum(comments.star) as star'))
                 ->groupBy('courses.id')
                 ->orderBy('star', 'desc');
-//                ->paginate(10);
+            //Dev
+//            dd(->toSql());
             foreach ([$items, $itemsOrderByUserCount, $itemsOrderByCommentRating] as $builder) {
                 if ($category->id > 0) {
                     $builder->where('category_id', $category->id);
@@ -81,7 +75,7 @@ class HomeController extends Controller
             $itemsOrderByCommentRating = $itemsOrderByCommentRating->paginate(10);
             $data[] = compact('items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating');
         }
-        dd($data);
+//        dd($data);
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
