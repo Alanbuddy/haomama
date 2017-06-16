@@ -112,4 +112,11 @@ class SearchService
         $sorted->pull($course->id);
         return $sorted;
     }
+    public function search($key){
+        $items=Course::where('name','like','%'.$key.'%')
+            ->orWhere('users.name','like','%'.$key.'%')
+            ->orderBy('id','desc')
+            ->paginate(10);
+        return $items;
+    }
 }

@@ -44,7 +44,7 @@
               %span.address= $onGoingCourse['name']
           .item-right
             %img.signin{src: "/icon/signin.png"}
-  %hr.div-line
+    %hr.div-line
   - if (count($enrolledCourses) > 0)
     .course-div.enrolled-course
       .title-div.clearfix
@@ -71,7 +71,7 @@
                 %span.participate= $enrolledCourse['users_count']."人已学"
                 %span .
                 %span= $enrolledCourse['comments_count'] ."条评论"
-  .hr.div-line
+    .hr.div-line
   - if (count($favoritedCourses) > 0)
     .course-div.favorite-div
       .title-div.clearfix
