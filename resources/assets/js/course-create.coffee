@@ -22,5 +22,5 @@ $ ->
 
   $('.back').click ->
     # back to front page
-    location.href = ''
+    location.href = window.home
 

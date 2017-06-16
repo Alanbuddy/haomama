@@ -28,11 +28,9 @@ $ ->
   $(".search").click ->
     search()
 
-  $(".search-input").keydown (event) ->
-    code = event.which
-    if code == 13
-      search()
-
+  $(".search-input").click ->
+    location.href = window.course_search
+    
   mySwiper = new Swiper('.swiper-container',{
     speed: 300,
     onSlideChangeStart : ->
