@@ -352,7 +352,17 @@ class CourseController extends Controller
     //搜索页面
     public function search(Request $request)
     {
-        return view('course.create', [
-        ]);
+        //搜索结果页面
+        $route = $request->route();
+        if ($route->hasParameter('tag')) {
+            $items = Search::coursesByTag($request->route('tag'));
+            return view('course.edit', [
+                'items' => $items,
+            ]);
+        } else {
+            //搜索页面
+            $popularTags = Search::popularTags();
+            return view('course.create', compact('popularTags'));
+        }
     }
 }

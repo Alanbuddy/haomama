@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\Search;
 use App\Http\Wechat\JSSDK;
+use App\Models\Course;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,15 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $itemsOrderByCommentRating = Course:: leftJoin('comments', 'comments.course_id', 'courses.id')
+            ->leftJoin('users')
+            ->select(DB::raw('courses.*'))
+            ->addSelect(DB::raw(''))
+            ->addSelect(DB::raw('sum(comments.star) as star'))
+            ->groupBy('courses.id')
+            ->orderBy('star', 'desc');
+        //Dev
+        dd($itemsOrderByCommentRating->toSql());
         Auth::loginUsingId(1);
         //
 //        $items = Course::where('id', '>', 0);
@@ -71,7 +81,7 @@ class HomeController extends Controller
             $itemsOrderByCommentRating = $itemsOrderByCommentRating->paginate(10);
             $data[] = compact('items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating');
         }
-//        dd($data);
+        dd($data);
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
