@@ -78,7 +78,7 @@ class HomeController extends Controller
         $signPackage = $jsSdk->getSignPackage();
         // dd($data);
         return view('course.index',
-            compact('categories', 'data ', 'signPackage')
+            compact('categories', 'data', 'signPackage')
         );
 //        return view('video.display', $data);
     }
