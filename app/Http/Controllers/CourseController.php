@@ -348,4 +348,11 @@ class CourseController extends Controller
         dd($sorted->all());
         dd($sorted->keys()->all());
     }
+
+    //搜索页面
+    public function search(Request $request)
+    {
+        return view('course.create', [
+        ]);
+    }
 }

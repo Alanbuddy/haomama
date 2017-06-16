@@ -45,7 +45,6 @@
 <!-- / .main-div -->
 <div class="swiper-container">
   <div class="swiper-wrapper">
-    <?php dd($data); ?>
     <?php foreach ($data as $dd) { ?>
       <div class="swiper-slide">
         <div class="course-title-div">

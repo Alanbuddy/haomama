@@ -40,6 +40,7 @@ Route::group([
     Route::get('/category/{category}', 'HomeController@index')->name('category');
 
 
+    Route::get('/courses/search', 'CourseController@search')->name('courses.search');
     Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');
     Route::get('/courses/enrolled', 'CourseController@enrolledCourses')->name('courses.enrolled');//我加入的课程
     Route::get('/courses/favorited', 'CourseController@favoriteCourses')->name('courses.favorited');//我收藏的课程

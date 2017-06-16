@@ -13,7 +13,14 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $itemsOrderByCommentRating = Search::basicStat()
+            ->leftJoin('comments', 'comments.course_id', 'courses.id')
+            ->select(DB::raw('courses.*'))
+            ->addSelect(DB::raw('sum(comments.star) as star'))
+            ->groupBy('courses.id')
+            ->orderBy('star', 'desc');
         //Dev
+        dd($itemsOrderByCommentRating->toSql());
         Auth::loginUsingId(1);
         //
 //        $items = Course::where('id', '>', 0);
@@ -72,7 +79,7 @@ class HomeController extends Controller
             $itemsOrderByCommentRating = $itemsOrderByCommentRating->paginate(10);
             $data[] = compact('items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating');
         }
-//        dd($data);
+        dd($data);
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
