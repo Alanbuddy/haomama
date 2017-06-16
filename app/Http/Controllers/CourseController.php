@@ -89,7 +89,7 @@ class CourseController extends Controller
         $enrolledCount = $this->enrolledCount($course);
         $favoritedCount = $this->favoritedCount($course);
         $recommendedCourses = Search::recommend($course)->keys()->all();
-        return view('admin.course.show',
+        return view('course.show',//'admin.course.show',
             compact('course',
                 'hasEnrolled',
                 'hasFavorited',
