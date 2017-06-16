@@ -13,14 +13,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $itemsOrderByCommentRating = Search::basicStat()
-            ->leftJoin('comments', 'comments.course_id', 'courses.id')
-            ->select(DB::raw('courses.*'))
-            ->addSelect(DB::raw('sum(comments.star) as star'))
-            ->groupBy('courses.id')
-            ->orderBy('star', 'desc');
-        //Dev
-        dd($itemsOrderByCommentRating->toSql());
         Auth::loginUsingId(1);
         //
 //        $items = Course::where('id', '>', 0);
