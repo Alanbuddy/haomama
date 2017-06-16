@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/swiper-3.4.2.min.css">
 :javascript
   window.course_item="#{route('courses.index')}"
+  window.course_search="#{route('courses.search')}"
   window.userid = "#{route('users.show',auth()->user())}"
 @endsection
 @section('header')
