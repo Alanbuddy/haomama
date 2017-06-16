@@ -21,6 +21,8 @@
   "/js/setting-create.js": "/js/setting-create.js",
   "/js/search-result.js": "/js/search-result.js",
   "/js/register.js": "/js/register.js",
+  "/js/mycourse.js": "/js/mycourse.js",
+  "/js/mine-show.js": "/js/mine-show.js",
   "/js/mine-index.js": "/js/mine-index.js",
   "/js/layout.js": "/js/layout.js",
   "/js/creview.js": "/js/creview.js",
@@ -30,7 +32,5 @@
   "/js/teacher.js": "/js/teacher.js",
   "/js/sign.js": "/js/sign.js",
   "/js/pay-success.js": "/js/pay-success.js",
-  "/js/mycourse.js": "/js/mycourse.js",
-  "/js/mine-show.js": "/js/mine-show.js",
   "/js/message.js": "/js/message.js"
 }
