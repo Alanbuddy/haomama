@@ -10360,7 +10360,7 @@ return jQuery;
     return $('.input-box').val(word);
   });
   return $('.back').click(function() {
-    return location.href = '';
+    return location.href = window.home;
   });
 });
 

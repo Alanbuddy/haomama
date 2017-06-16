@@ -11,7 +11,7 @@
 .head-div
   .search-div.f12
     %img.search{src: '/icon/search.png'}
-    %input.search-input.color5{type: "text", placeholder: "搜索课程名/老师名"}
+    %input.search-input.color5{type: "text", placeholder: "搜索课程名/老师名", readonly: "readonly"}
   .nav-div
     %ul.nav.f14
       // %li 新课速递

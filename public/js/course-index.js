@@ -10364,12 +10364,8 @@ return jQuery;
   $(".search").click(function() {
     return search();
   });
-  $(".search-input").keydown(function(event) {
-    var code;
-    code = event.which;
-    if (code === 13) {
-      return search();
-    }
+  $(".search-input").click(function() {
+    return location.href = window.course_search;
   });
   mySwiper = new Swiper('.swiper-container', {
     speed: 300,
