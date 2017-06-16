@@ -359,11 +359,16 @@ class CourseController extends Controller
             return view('course.edit', [
                 'items' => $items,
             ]);
-        } else {
-            //搜索页面
-            $popularTags = Search::popularTags();
-            // dd($popularTags);
-            return view('course.create', compact('popularTags'));
         }
+        if ($request->has('key')) {
+            $items = Search::coursesByTag($request->route('tag'));
+            return view('course.edit', [
+                'items' => $items,
+            ]);
+        }
+
+        //搜索页面
+        $popularTags = Search::popularTags();
+        return view('course.create', compact('popularTags'));
     }
 }
