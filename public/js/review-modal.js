@@ -38,8 +38,8 @@ $(document).ready(function($) {
 	    showMsg("手机号不正确", 'center');
 	    return false;
 	  }
-	  $.postJSON(
-	  	'/show',  //interface
+	  $.getJSON(
+	  	 window.sms_send,  
 	  	{
 	  		mobile: mobile
 	  	},
@@ -50,12 +50,7 @@ $(document).ready(function($) {
 	  				clearTimeout(timer);
 	  			}
 	  			time('#code');
-	  		} else {
-	  			if (data.code == USER_EXIST) {
-	  				showMsg('该手机号已存在', 'center');
-	  				return false;
-	  			}
-	  		}
+	  		} 
 	  	}
 	  );
     return false;
@@ -65,40 +60,62 @@ $(document).ready(function($) {
     var parent = $('#parent').val();
     var mobile = $('#mobile').val();
     var code = $('#mobile-code').val();
-    var baby_name = [];
+    var baby = [];
+    var name = [];
     var gender = [];
     var birthday = [];
-    $('.baby-name:visible').each(function(i){
-       baby_name[i] = $(this).val();
+    console.log(parent);
+    console.log(mobile);
+    console.log(code);
+    $(".baby-item:visible").each(function(i){
+      name[i] = $(this).find(".baby-name:visible").val();
+      gender[i] = $(this).find(".gender:visible").val();
+      birthday[i] = $(this).find(".birthday:visible").val();
+      baby[i] = {
+        name: name[i],
+        gender: gender[i],
+        birthday: birthday[i]
+      };
     });
-    $('.gender:visible').each(function(i){
-       gender[i] = $(this).val();
-    });
-    $('.birthday:visible').each(function(i){
-       birthday[i] = $(this).val();
-    });
-    console.log(baby_name);
-    console.log(gender);
-    console.log(birthday);
-    $.postJSON(
-      url,
+    console.log(baby);
+    $.getJSON(
+      window.sms_verify,
       {
-        parent: parent,
         mobile: mobile,
-        code: code,
-        baby_name: baby_name,
-        gender: gender,
-        birthday: birthday
+        code: code
       },
       function(data) {
+        console.log(data);
         if (data.success) {
-          $('#profileModal').modal('hide');
+          $.postJSON(
+            window.user_profile,
+            {
+              parenthood: parent,
+              phone: mobile,
+              baby: JSON.stringify(baby),
+              _token: window.token 
+            },
+            function(data) {
+              if (data.success) {
+                $('#profileModal').modal('hide');
+                showMsg("资料已提交", "center");
+              }
+              // else {
+              //   if (data.code == WRONG_CODE) {
+              //     showMsg('验证码错误', 'center');
+              //   }
+              // }
+            }  
+            );
         } else {
-          if (data.code == WRONG_CODE) {
-            showMsg('验证码错误', 'center');
-          }
+          // 需要修改
+          showMsg('验证码错误', 'center');
+
+          // if (data.message == "WRONG_VERIFY_CODE") {
+          //   showMsg('验证码错误', 'center');
+          // }
         }
-      }  
+      }
       );
   });
 });

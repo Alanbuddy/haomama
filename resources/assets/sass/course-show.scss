@@ -6,6 +6,7 @@
 }
 .course-photo {
   width: 100%;
+  height: 4.21875rem;
 }
 .back {
   position: absolute;
@@ -371,7 +372,8 @@
     padding-right: 0.24rem;
     padding-bottom: 1.2rem;
   }
-  .item, .item-baby-div {
+  .item, .baby-item {
+    position: relative;
     height: 3.2rem;
     background: #fff;
     border-radius: 4px;
@@ -505,8 +507,6 @@
   }
 
   .add-baby-div {
-    position: relative;
-    @extend .item-baby-div;
     display: none;
   }
   .add-input-div {

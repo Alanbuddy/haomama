@@ -11,11 +11,11 @@ $ ->
 
 	$("#another-baby").click ->
     baby_dom = document.createElement("div")
-    $(baby_dom).addClass("add-baby-div").html($(".add-baby-div").html()).css('display', 'flex')
+    $(baby_dom).addClass("baby-item").html($(".add-baby-div").html())
     $(baby_dom).insertBefore("#another-baby")
 
   $(document).on 'click', '.close-add-item', ->
-    $(this).closest('.add-baby-div').hide()
+    $(this).closest('.baby-item').hide()
 
   change_avatar = (gender, birthday, object) ->
     today = new Date()
@@ -97,4 +97,12 @@ $ ->
     $(this).siblings('.teacher-fold-div').slideDown(
       $(this).siblings('.teacher-fold-div').animate({height: unfold_height + 15})
       )
+
+  $('.category-class').each ->
+    if $(this).text() == "分类N"
+      $(this).addClass('health-title-small')
+    else if $(this).text() == "分类t"
+      $(this).addClass('psychology-title-small')
+    else
+      $(this).addClass('grow-title-small')
 

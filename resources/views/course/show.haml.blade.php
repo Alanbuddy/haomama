@@ -1,132 +1,150 @@
 @extends('layout.app')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/course-show.css') }}">
+:javascript
+  window.sms_send = "#{route('sms.send')}"
+  window.sms_verify = "#{route('sms.verify')}"
+  window.user_profile = "#{route('user.profile')}"
+  window.token = "#{csrf_token()}"
 
 @endsection
 @section('content')
 .head-div
-  %img.course-photo{src: "/icon/course.png"}
+  %img.course-photo{src: $course['cover'] ? $course['cover'] : "/icon/example.png"}
   %img.back{src: "/icon/back2.png"}
-  // %img.favorite{src: "/icon/like_selected.png", 'data-fav'=> "false"}
-  %img.favorite{src: "/icon/like_normal.png", 'data-fav'=> 'true'}
+  - if ($hasFavorited == true)
+    %img.favorite{src: "/icon/like_selected.png", 'data-fav'=> "false"}
+  - else
+    %img.favorite{src: "/icon/like_normal.png", 'data-fav'=> 'true'}
   .course-title-div
     .course-row-div.clearfix
-      %span.health-title-small.f12 健康养育
+      %span.f12.category-class= $course['category_id']
     .course-row-div.color7.status-flex
-      %span.name-span.f16.fb.color7 名字很长很长
-      // 线下课程出现
-      %span.course-status.f8 线下
+      %span.name-span.f16.fb.color7= $course['name']
+      - if ($course['type'] == "offline")
+        %span.course-status.f8 线下
     .btn#test-btn{type: "button"}
       %img.play{src: "/icon/play.png"}
-      // 购买后变为立即听课
-      %span 立即试课    
+      - if ($hasEnrolled == true)
+        %span 立即听课
+      - else    
+        %span 立即试课    
 .desc-div
   .common-div
-    // unpay
-    %span.price-pay.f16.fb.color11 ¥200
-    %span.price.f12.color6 ¥400
-    %span.f12.color5 18人已报名
-    //pay
-    %span.f12.color6.mr40 已报名
-    %span.f12.color5 18人已报名(限30人)
+    - if ($hasEnrolled == false)
+      %span.price-pay.f16.fb.color11= "￥". $course['price']
+      %span.price.f12.color6 ¥400
+      - if ($course['type'] == "offline")
+        %span.f12.color5= $enrolledCount."人已报名"."(限30人)"
+      - else
+        %span.f12.color5= $enrolledCount."人已报名"
+    - else
+      %span.f12.color6.mr40 已报名
+      - if ($course['type'] == "offline")
+        %span.f12.color5= $enrolledCount."人已报名"."(限30人)"
+      - else
+        %span.f12.color5= $enrolledCount."人已报名"
   // underline course
-  .unonline-div
-    .unonline-row.f14.color7
-      %span 时间：
-      %span 2017/05/20~2017/07/20
-    .unonline-row.f14.color7
-      %span.address-span 地址：
-      %span.address 北京市朝阳区安立路北京市朝阳区安立路安立路北京市朝阳安立路北京市朝阳
+  - if ($course['type'] == "offline")
+    .unonline-div
+      .unonline-row.f14.color7
+        %span 时间：
+        %span 2017/05/20~2017/07/20
+      .unonline-row.f14.color7
+        %span.address-span 地址：
+        %span.address= $course['address']
 %hr.div-line
 // underline course
-.course-content.clearfix
-  %span.title.f14.color7.fb 课时情况
-  //报名后会出现退款
-  %span.refund.f12.color5 退款
-  .items-div
-    .item.opt55
-      %p.num-div.f16.color7 1
-      .item-desc
-        %p.f14.color7 这是第一节线下课程的名字
-        .item-row.f12.color5
-          %span.min 2017/05/20
-          %span 14:00~16:00
-      //报名后会出现sign-icon，未报名不显示
-      %img.sign-icon{src: "/icon/arrive.png"}
-    .item.opt55
-      %p.num-div.f16.color7 1
-      .item-desc
-        %p.f14.color7 这是第一节线下课程的名字
-        .item-row.f12.color5
-          %span.min 2017/05/20
-          %span 14:00~16:00
-      %img.sign-icon{src: "/icon/absent.png"}
-    .item.opt55
-      %p.num-div.f16.color7 1
-      .item-desc
-        %p.f14.color7 这是第一节线下课程的名字
-        .item-row.f12.color5
-          %span.min 2017/05/20
-          %span 14:00~16:00
-    // 三条以下不显示
-    .view-more
-      %span.f12.color5 查看更多
-      %img.more-icon{src: "/icon/more.png"}
-%hr.div-line
+- if ($course['type'] == "offline")
+  .course-content.clearfix
+    %span.title.f14.color7.fb 课时情况
+    //报名后会出现退款
+    %span.refund.f12.color5 退款
+    .items-div
+      .item.opt55
+        %p.num-div.f16.color7 1
+        .item-desc
+          %p.f14.color7 这是第一节线下课程的名字
+          .item-row.f12.color5
+            %span.min 2017/05/20
+            %span 14:00~16:00
+        //报名后会出现sign-icon，未报名不显示
+        %img.sign-icon{src: "/icon/arrive.png"}
+      .item.opt55
+        %p.num-div.f16.color7 1
+        .item-desc
+          %p.f14.color7 这是第一节线下课程的名字
+          .item-row.f12.color5
+            %span.min 2017/05/20
+            %span 14:00~16:00
+        %img.sign-icon{src: "/icon/absent.png"}
+      .item.opt55
+        %p.num-div.f16.color7 1
+        .item-desc
+          %p.f14.color7 这是第一节线下课程的名字
+          .item-row.f12.color5
+            %span.min 2017/05/20
+            %span 14:00~16:00
+      // 三条以下不显示
+      .view-more
+        %span.f12.color5 查看更多
+        %img.more-icon{src: "/icon/more.png"}
+  %hr.div-line
 //online course
-.course-content
-  %span.title.f14.color7.fb 课程目录
-  %span.f12.color7 (共8节)
-  .items-div
-    // 如果只有3条以下课程列表项，就去掉directory-div  unview-div, 隐藏view-more
-    .fold-div   
-      .unview-div
-        .item
-          %p.num-div.f16.color7 1
-          .item-desc
-            %p.f14.color7 宝宝生长发育特点
-            .item-row.f12.color5
-              %span.min 23min
-              %span 1233人已学
-          %img.go{src: "/icon/go.png"}
-          %img.free{src: "/icon/free.png"}
-        .item.opt55
-          %p.num-div.f16.color7 1
-          .item-desc
-            %p.f14.color7 宝宝生长发育特点
-            .item-row.f12.color5
-              %span.min 23min
-              %span 1233人已学
-          %img.go{src: "/icon/go.png"}
-        .item.opt55
-          %p.num-div.f16.color7 1
-          .item-desc
-            %p.f14.color7 宝宝生长发育特点
-            .item-row.f12.color5
-              %span 未上线
-        .item.opt55
-          %p.num-div.f16.color7 1
-          .item-desc
-            %p.f14.color7 宝宝生长发育特点
-            .item-row.f12.color5
-              %span 未上线
-        .item.opt55
-          %p.num-div.f16.color7 1
-          .item-desc
-            %p.f14.color7 宝宝生长发育特点
-            .item-row.f12.color5
-              %span 未上线
-        .item.opt55
-          %p.num-div.f16.color7 1
-          .item-desc
-            %p.f14.color7 宝宝生长发育特点
-            .item-row.f12.color5
-              %span 未上线
+- else 
+  .course-content
+    %span.title.f14.color7.fb 课程目录
+    %span.f12.color7 (共8节)
+    .items-div
+      // 如果只有3条以下课程列表项，就去掉directory-div  unview-div, 隐藏view-more
+      .fold-div   
+        .unview-div
+          .item
+            %p.num-div.f16.color7 1
+            .item-desc
+              %p.f14.color7 宝宝生长发育特点
+              .item-row.f12.color5
+                %span.min 23min
+                %span 1233人已学
+            %img.go{src: "/icon/go.png"}
+            %img.free{src: "/icon/free.png"}
+          .item.opt55
+            %p.num-div.f16.color7 1
+            .item-desc
+              %p.f14.color7 宝宝生长发育特点
+              .item-row.f12.color5
+                %span.min 23min
+                %span 1233人已学
+            %img.go{src: "/icon/go.png"}
+          .item.opt55
+            %p.num-div.f16.color7 1
+            .item-desc
+              %p.f14.color7 宝宝生长发育特点
+              .item-row.f12.color5
+                %span 未上线
+          .item.opt55
+            %p.num-div.f16.color7 1
+            .item-desc
+              %p.f14.color7 宝宝生长发育特点
+              .item-row.f12.color5
+                %span 未上线
+          .item.opt55
+            %p.num-div.f16.color7 1
+            .item-desc
+              %p.f14.color7 宝宝生长发育特点
+              .item-row.f12.color5
+                %span 未上线
+          .item.opt55
+            %p.num-div.f16.color7 1
+            .item-desc
+              %p.f14.color7 宝宝生长发育特点
+              .item-row.f12.color5
+                %span 未上线
 
-    .view-more
-      %span.f12.color5 查看更多
-      %img.more-icon{src: "/icon/more.png"}
-%hr.div-line
+      .view-more
+        %span.f12.color5 查看更多
+        %img.more-icon{src: "/icon/more.png"}
+  %hr.div-line
 .course-content
   %span.title.f14.color7.fb 授课老师
   %span.f12.color7 (共5位)
@@ -322,7 +340,7 @@
               .row-div
                 %label.f14.color7.fn 验证码
                 %input.input-div.f12.color6#mobile-code
-          .item-baby-div
+          .baby-item.item-baby-div
             .left-div
               %img.avatar{src: "/icon/baby_female.png"}
             .right-div
@@ -339,7 +357,7 @@
                 %label.f14.color7.fn 宝宝生日
                 %input.input-div#baby-birthday.birthday{type: "date"}
 
-          .add-baby-div
+          .baby-item.add-baby-div
             %img.close-add-item{src: "/icon/close.png"}
             .left-div
               %img.avatar{src: "/icon/baby_female.png"}
