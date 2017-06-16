@@ -13,7 +13,7 @@
 <div class="head-div">
   <div class="search-div f12">
     <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'search'), array('src', ('/icon/search.png'))), 'html5', 'UTF-8'); ?>>
-    <input class="search-input color5" type="text" placeholder="搜索课程名/老师名">
+    <input class="search-input color5" type="text" placeholder="搜索课程名/老师名" readonly="readonly">
   </div>
   <div class="nav-div">
     <ul class="nav f14">
