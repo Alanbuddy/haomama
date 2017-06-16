@@ -12,6 +12,7 @@ namespace App\Services;
 use App\Models\Course;
 use App\Models\Term;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class SearchService
@@ -112,10 +113,25 @@ class SearchService
         $sorted->pull($course->id);
         return $sorted;
     }
-    public function search($key){
-        $items=Course::where('name','like','%'.$key.'%')
-            ->orWhere('users.name','like','%'.$key.'%')
-            ->orderBy('id','desc')
+
+    //根据标签相似程度推荐课程,返回包含其他课程ID的数组
+    public function popularTags()
+    {
+        $tags = DB::table('term_object')
+            ->join('terms', 'term_object.term_id', '=', 'terms.id')
+            ->select(DB::raw('terms.*'))
+            ->addSelect(DB::raw('count(*) as count'))
+            ->groupBy('term_id')
+            ->where('term_object.type', 'tag')
+            ->paginate(6);
+        return $tags;
+    }
+
+    public function search($key)
+    {
+        $items = Course::where('name', 'like', '%' . $key . '%')
+            ->orWhere('users.name', 'like', '%' . $key . '%')
+            ->orderBy('id', 'desc')
             ->paginate(10);
         return $items;
     }

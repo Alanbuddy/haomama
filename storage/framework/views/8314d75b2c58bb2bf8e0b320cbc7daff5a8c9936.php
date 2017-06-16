@@ -4,6 +4,7 @@
 <script type="text/javascript">
 //<![CDATA[
    window.course_item="<?php echo htmlspecialchars(route('courses.index'),ENT_QUOTES,'UTF-8'); ?>"
+   window.course_search="<?php echo htmlspecialchars(route('courses.search'),ENT_QUOTES,'UTF-8'); ?>"
    window.userid = "<?php echo htmlspecialchars(route('users.show',auth()->user()),ENT_QUOTES,'UTF-8'); ?>"
 //]]>
 </script>
@@ -45,11 +46,11 @@
 <!-- / .main-div -->
 <div class="swiper-container">
   <div class="swiper-wrapper">
-    <?php foreach ($data as $dd) { ?>
+    <?php for ($i=0;$i<4;$i++) { ?>
       <div class="swiper-slide">
         <div class="course-title-div">
           <div class="title-row-div">
-            <p class="color7 fb f14"><?php echo htmlspecialchars($dd['$loop->index'],ENT_QUOTES,'UTF-8'); ?></p>
+            <p class="color7 fb f14"><?php echo htmlspecialchars($categories[$i]['name'],ENT_QUOTES,'UTF-8'); ?></p>
             <div class="course-nav f12 color5">
               <span class="course-active">最新</span>
               <span>最热</span>
@@ -57,7 +58,7 @@
             </div>
           </div>
           <div class="course-item-div" style="display:block">
-            <?php foreach ($dd['items'] as $item) { ?>
+            <?php foreach ($data[$i]['items'] as $item) { ?>
               <div <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-item'), array(('data-id'), ($item['id']))), 'html5', 'UTF-8'); ?>>
                 <div class="course-icon-div">
                   <img class="course-recommend" src="/icon/recommend.png">
@@ -68,23 +69,29 @@
                     <span class="f12 category-class"><?php echo htmlspecialchars($item['category']['name'],ENT_QUOTES,'UTF-8'); ?></span>
                     <span class="course-item-value f14 color5"><?php echo htmlspecialchars("￥". $item['price'],ENT_QUOTES,'UTF-8'); ?></span>
                   </div>
-                  <div class="course-row-div color7">
+                  <div class="course-row-div color7 unstart">
                     <span class="coures-name f16"><?php echo htmlspecialchars($item['name'],ENT_QUOTES,'UTF-8'); ?></span>
                     <?php if ($item['type'] == 'offline') { ?>
                       <span class="course-status f8">线下</span>
                     <?php } ?>
                   </div>
                   <div class="course-row-div f12 color6">
-                    <span class="participate"><?php echo htmlspecialchars($item['users_count']."人已学",ENT_QUOTES,'UTF-8'); ?></span>
-                    <span>.</span>
-                    <span><?php echo htmlspecialchars($item['comments_count'] ."条评论",ENT_QUOTES,'UTF-8'); ?></span>
+                    <?php if ($item['type'] == 'offline') { ?>
+                      <span class="participate"><?php echo htmlspecialchars($item['users_count']."人已报名",ENT_QUOTES,'UTF-8'); ?></span>
+                      <span>.</span>
+                      <span><?php echo htmlspecialchars(date_format(date_create($item['begin']),"m月/d日") ."开课",ENT_QUOTES,'UTF-8'); ?></span>
+                    <?php } else { ?>
+                      <span class="participate"><?php echo htmlspecialchars($item['users_count']."人已学",ENT_QUOTES,'UTF-8'); ?></span>
+                      <span>.</span>
+                      <span><?php echo htmlspecialchars($item['comments_count'] ."条评论",ENT_QUOTES,'UTF-8'); ?></span>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
             <?php } ?>
           </div>
           <div class="course-item-div">
-            <?php foreach ($dd['itemsOrderByUserCount'] as $itemOrderByUserCount) { ?>
+            <?php foreach ($data[$i]['itemsOrderByUserCount'] as $itemOrderByUserCount) { ?>
               <div <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-item'), array(('data-id'), ($itemOrderByUserCount['id']))), 'html5', 'UTF-8'); ?>>
                 <div class="course-icon-div">
                   <img class="course-recommend" src="/icon/recommend.png">
@@ -95,23 +102,29 @@
                     <span class="category-class f12"><?php echo htmlspecialchars($itemOrderByUserCount['category']['name'],ENT_QUOTES,'UTF-8'); ?></span>
                     <span class="course-item-value f14 color5"><?php echo htmlspecialchars("￥". $itemOrderByUserCount['price'],ENT_QUOTES,'UTF-8'); ?></span>
                   </div>
-                  <div class="course-row-div color7">
+                  <div class="course-row-div color7 unstart">
                     <span class="coures-name f16"><?php echo htmlspecialchars($itemOrderByUserCount['name'],ENT_QUOTES,'UTF-8'); ?></span>
                     <?php if ($itemOrderByUserCount['type'] == 'offline') { ?>
                       <span class="course-status f8">线下</span>
                     <?php } ?>
                   </div>
                   <div class="course-row-div f12 color6">
-                    <span class="participate"><?php echo htmlspecialchars($itemOrderByUserCount['users_count']."人已学",ENT_QUOTES,'UTF-8'); ?></span>
-                    <span>.</span>
-                    <spann><?php echo htmlspecialchars($itemOrderByUserCount['comments_count'] ."条评论",ENT_QUOTES,'UTF-8'); ?></spann>
+                    <?php if ($itemOrderByUserCount['type'] == 'offline') { ?>
+                      <span class="participate"><?php echo htmlspecialchars($itemOrderByUserCount['users_count']."人已报名",ENT_QUOTES,'UTF-8'); ?></span>
+                      <span>.</span>
+                      <span><?php echo htmlspecialchars(date_format(date_create($itemOrderByUserCount['begin']),"m月/d日") ."开课",ENT_QUOTES,'UTF-8'); ?></span>
+                    <?php } else { ?>
+                      <span class="participate"><?php echo htmlspecialchars($itemOrderByUserCount['users_count']."人已学",ENT_QUOTES,'UTF-8'); ?></span>
+                      <span>.</span>
+                      <spann><?php echo htmlspecialchars($itemOrderByUserCount['comments_count'] ."条评论",ENT_QUOTES,'UTF-8'); ?></spann>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
             <?php } ?>
           </div>
           <div class="course-item-div">
-            <?php foreach ($dd['itemsOrderByCommentRating'] as $itemOrderByCommentRating) { ?>
+            <?php foreach ($data[$i]['itemsOrderByCommentRating'] as $itemOrderByCommentRating) { ?>
               <div <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-item'), array(('data-id'), ($itemOrderByCommentRating['id']))), 'html5', 'UTF-8'); ?>>
                 <div class="course-icon-div">
                   <img class="course-recommend" src="/icon/recommend.png">
@@ -122,16 +135,22 @@
                     <span class="category-class f12"><?php echo htmlspecialchars($itemOrderByCommentRating['category']['name'],ENT_QUOTES,'UTF-8'); ?></span>
                     <span class="course-item-value f14 color5"><?php echo htmlspecialchars("￥". $itemOrderByCommentRating['price'],ENT_QUOTES,'UTF-8'); ?></span>
                   </div>
-                  <div class="course-row-div color7">
+                  <div class="course-row-div color7 unstart">
                     <span class="coures-name f16"><?php echo htmlspecialchars($itemOrderByCommentRating['name'],ENT_QUOTES,'UTF-8'); ?></span>
                     <?php if ($itemOrderByCommentRating['type'] == 'offline') { ?>
                       <span class="course-status f8">线下</span>
                     <?php } ?>
                   </div>
                   <div class="course-row-div f12 color6">
-                    <span class="participate"><?php echo htmlspecialchars($itemOrderByCommentRating['users_count']."人已学",ENT_QUOTES,'UTF-8'); ?></span>
-                    <span>.</span>
-                    <span><?php echo htmlspecialchars($itemOrderByCommentRating['comments_count'] ."条评论",ENT_QUOTES,'UTF-8'); ?></span>
+                    <?php if ($itemOrderByCommentRating['type'] == 'offline') { ?>
+                      <span class="participate"><?php echo htmlspecialchars($itemOrderByCommentRating['users_count']."人已报名",ENT_QUOTES,'UTF-8'); ?></span>
+                      <span>.</span>
+                      <span><?php echo htmlspecialchars(date_format(date_create($itemOrderByCommentRating['begin']),"m月/d日") ."开课",ENT_QUOTES,'UTF-8'); ?></span>
+                    <?php } else { ?>
+                      <span class="participate"><?php echo htmlspecialchars($itemOrderByCommentRating['users_count']."人已学",ENT_QUOTES,'UTF-8'); ?></span>
+                      <span>.</span>
+                      <span><?php echo htmlspecialchars($itemOrderByCommentRating['comments_count'] ."条评论",ENT_QUOTES,'UTF-8'); ?></span>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
@@ -140,354 +159,6 @@
         </div>
       </div>
     <?php } ?>
-    <!-- / .swiper-slide -->
-    <!-- /   .course-title-div -->
-    <!-- /     .title-row-div -->
-    <!-- /       %p.color7.fb.f14 健康教育 -->
-    <!-- /       .course-nav.f12.color5 -->
-    <!-- /         %span.course-active 最新 -->
-    <!-- /         %span 最热 -->
-    <!-- /         %span 好评 -->
-    <!-- /     .course-item-div{style: &quot;display:block&quot;} -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.health-title.f12 健康养育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.health-title.f12 健康教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7.status-flex -->
-    <!-- /             %span.name-span.f16 名字很长很长很长 -->
-    <!-- /             %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已报名 -->
-    <!-- /             %span . -->
-    <!-- /             %span 5月9日开课 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.health-title.f12 健康教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /     .course-item-div -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.health-title.f12 健康教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /     .course-item-div -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.health-title.f12 健康教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- / .swiper-slide -->
-    <!-- /   .course-title-div -->
-    <!-- /     .title-row-div -->
-    <!-- /       %p.color7.fb.f14 心理教育 -->
-    <!-- /       .course-nav.f12.color5 -->
-    <!-- /         %span.course-active 最新 -->
-    <!-- /         %span 最热 -->
-    <!-- /         %span 好评 -->
-    <!-- /     .course-item-div{style: &quot;display:block&quot;} -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.psychology-title.f12 心理教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.psychology-title.f12 心理教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7.status-flex -->
-    <!-- /             %span.name-span.f16 名字很长很长很长 -->
-    <!-- /             %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已报名 -->
-    <!-- /             %span . -->
-    <!-- /             %span 5月9日开课 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.psychology-title.f12 心理教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.psychology-title.f12 心理教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.psychology-title.f12 心理教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.psychology-title.f12 心理教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /     .course-item-div -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.psychology-title.f12 心理教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /     .course-item-div -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.psychology-title.f12 心理教育 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- / .swiper-slide -->
-    <!-- /   .course-title-div -->
-    <!-- /     .title-row-div -->
-    <!-- /       %p.color7.fb.f14 自我成长 -->
-    <!-- /       .course-nav.f12.color5 -->
-    <!-- /         %span.course-active 最新 -->
-    <!-- /         %span 最热 -->
-    <!-- /         %span 好评 -->
-    <!-- /     .course-item-div{style: &quot;display:block&quot;} -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.grow-title.f12 自我成长 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.grow-title.f12 自我成长 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7.status-flex -->
-    <!-- /             %span.name-span.f16 名字很长很长很长 -->
-    <!-- /             %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已报名 -->
-    <!-- /             %span . -->
-    <!-- /             %span 5月9日开课 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.grow-title.f12 自我成长 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.grow-title.f12 自我成长 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.grow-title.f12 自我成长 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.grow-title.f12 自我成长 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /     .course-item-div -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.grow-title.f12 自我成长 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
-    <!-- /     .course-item-div -->
-    <!-- /       .course-item -->
-    <!-- /         .course-icon-div -->
-    <!-- /           %img.course-recommend{src: &quot;/icon/recommend.png&quot;} -->
-    <!-- /           %img.course-icon{src: &quot;/icon/example.png&quot;} -->
-    <!-- /         .word-div -->
-    <!-- /           .course-row-div.clearfix -->
-    <!-- /             %span.grow-title.f12 自我成长 -->
-    <!-- /             %span.course-item-value.f14.color5 200 -->
-    <!-- /           .course-row-div.color7 -->
-    <!-- /             %span.coures-name.f16 名字很长很长很长 -->
-    <!-- /             // %span.course-status.f8 线下 -->
-    <!-- /           .course-row-div.f12.color6 -->
-    <!-- /             %span.participate 2315人已学 -->
-    <!-- /             %span . -->
-    <!-- /             %span 810条评论 -->
   </div>
 </div>
 <img class="upper" src="/icon/top.png">

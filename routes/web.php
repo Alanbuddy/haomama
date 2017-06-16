@@ -36,7 +36,7 @@ Route::group([
     Route::auth();
     Route::get('/', 'HomeController@index')->name('index');
 
-    Route::get('/tag/{tag}', 'HomeController@index')->name('tag');
+    Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
     Route::get('/category/{category}', 'HomeController@index')->name('category');
 
 
