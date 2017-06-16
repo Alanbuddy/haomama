@@ -361,7 +361,7 @@ class CourseController extends Controller
             ]);
         }
         if ($request->has('key')) {
-            $items = Search::coursesByTag($request->route('tag'));
+            $items = Course::get();
             return view('course.edit', [
                 'items' => $items,
             ]);

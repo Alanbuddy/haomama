@@ -75,7 +75,7 @@ class HomeController extends Controller
             $itemsOrderByCommentRating = $itemsOrderByCommentRating->paginate(10);
             $data[] = compact('items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating');
         }
-        // dd($data);
+//        dd($data);
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
