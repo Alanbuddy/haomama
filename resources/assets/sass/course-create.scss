@@ -44,11 +44,13 @@
   display: none;
   padding-left: 0.4rem;
   padding-top: 0.4rem;
-  p {
-    margin-bottom: 0.3rem;
-  }
   span {
     display: inline-block;
+    margin-bottom: 0.3rem;
+  }
+  .tag-word {
+    display: inline-block;
+    width: 100%;
     margin-bottom: 0.3rem;
   }
 }

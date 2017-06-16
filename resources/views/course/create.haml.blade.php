@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/course-create.css') }}">
 :javascript
   window.home = "#{route('index')}"
+  window.course_search="#{route('courses.search')}"
 
 @endsection
 
@@ -14,7 +15,8 @@
     %img.search-icon{src: "/icon/search.png"}
   .search-auto
     %span.f12.color5 热搜推荐
-    %p.f14.color7.tag-word 标签词
+    - foreach ($popularTags as $popularTag)
+      %a.f14.color7.tag-word{href: route('tag',$popularTag->id)}= $popularTag->name
 
 @endsection
 

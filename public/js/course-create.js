@@ -10340,7 +10340,7 @@ return jQuery;
   search = function() {
     var value;
     value = $(".input-box").val();
-    return location.href = "/courses";
+    return location.href = window.course_search + "?key=" + value;
   };
   $(".input-box").keydown(function(event) {
     var code;

@@ -4,7 +4,7 @@ $ ->
 
   search = ->
     value = $(".input-box").val()
-    location.href = "/courses"
+    location.href = window.course_search + "?key=" + value
 
   $(".input-box").keydown (event) ->
     $(".search-auto").hide()
@@ -23,4 +23,6 @@ $ ->
   $('.back').click ->
     # back to front page
     location.href = window.home
+
+
 

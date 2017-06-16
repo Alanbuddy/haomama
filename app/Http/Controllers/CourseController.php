@@ -362,6 +362,7 @@ class CourseController extends Controller
         } else {
             //搜索页面
             $popularTags = Search::popularTags();
+            // dd($popularTags);
             return view('course.create', compact('popularTags'));
         }
     }
