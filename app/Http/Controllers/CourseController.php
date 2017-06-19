@@ -79,7 +79,6 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-//        dd($course->teachers()->get());
         $count = $this->hasEnrolled($course);
         $hasEnrolled = $count == 1 ? true : false;
 
@@ -87,9 +86,15 @@ class CourseController extends Controller
 
         $hasFavorited = $count == 1 ? true : false;
         $comments = $course->comments()
-            ->orderBy('vote','desc')
             ->with('user')
-            ->paginate(10);
+            ->orderBy('vote', 'desc')
+            ->paginate(3);
+        if (count($comments) > 3) {
+            $latestComments=$course->comments()
+                ->with('user')
+                ->orderBy('id','desc')
+                ->paginate(10);
+        }
 //        dd($comments);
         $lessons = $course->lessons()
             ->paginate(10);
@@ -99,11 +104,15 @@ class CourseController extends Controller
                 ->where('user_id', auth()->user()->id)
                 ->count();
         }
+        //学员数
         $enrolledCount = $this->enrolledCount($course);
+        //收藏次数
         $favoritedCount = $this->favoritedCount($course);
+        //推荐的课程ID集合
         $recommendedCoursesIds = Search::recommend($course)->keys()
             ->take(3)
             ->all();
+        //推荐的课程
         $recommendedCourses = Course::whereIn('id', $recommendedCoursesIds)
             ->withCount('comments')
             ->withCount(['users' => function ($query) {
@@ -111,12 +120,13 @@ class CourseController extends Controller
             }])
             ->with('category')//预加载课程所属分类的信息
             ->get();
+        //平均评分
         $avgRate = $course->comments()
             ->select(DB::raw('avg(star) as avg'))
             ->first()
             ->avg;
 
-        $teachers=$course->teachers()->get();
+        $teachers = $course->teachers()->get();
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
@@ -124,6 +134,7 @@ class CourseController extends Controller
                 'enrolledCount',//学员数
                 'lessons',//课时信息
                 'comments',//评论
+                'latestComments',
                 'recommendedCourses',//按标签推荐相关课程
                 'avgRate',
                 'teachers'
