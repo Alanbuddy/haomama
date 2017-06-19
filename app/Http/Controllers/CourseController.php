@@ -58,7 +58,6 @@ class CourseController extends Controller
             'description',
             'price',
         ]));
-//        $item->teacher_id = auth()->user()->id;
         $ids = $request->teacherId;
         $arr = explode(',', $ids);
         $arr = array_map('intval', $arr);
@@ -106,8 +105,16 @@ class CourseController extends Controller
         }
         $enrolledCount = $this->enrolledCount($course);
         $favoritedCount = $this->favoritedCount($course);
-        $recommendedCourses = Search::recommend($course)->keys()->take(3)->all();
-        dd($recommendedCourses);
+        $recommendedCoursesIds = Search::recommend($course)->keys()
+            ->take(3)->all();
+        $recommendedCourses = Course::whereIn('id', $recommendedCoursesIds)
+            ->withCount('comments')
+            ->withCount(['users' => function ($query) {
+                $query->where('type', 'enroll');
+            }])
+            ->with('category')//预加载课程所属分类的信息
+            ->get();
+
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
@@ -151,7 +158,16 @@ class CourseController extends Controller
             'end',
             'category_id',
         ]));
-//        $course->teacher_id = auth()->user()->id;
+        $ids = $request->teacherId;
+        $arr = explode(',', $ids);
+        $arr = array_map('intval', $arr);
+//        dd($arr);
+        try {
+            $course->teachers()->sync($arr);
+        } catch (Exception $e) {
+            return back()->withErrors('数据错误' . $e->getMessage());
+
+        }
 
         if ($request->file('cover')) {
             $folderPath = public_path('storage/course/' . $course->id);
