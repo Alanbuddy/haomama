@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AlterCommentAddVoteColumn' => $baseDir . '/database/migrations/2017_06_19_152838_alterCommentAddVoteColumn.php',
     'AlterCourseAddColumnLimit' => $baseDir . '/database/migrations/2017_06_16_164459_alterCourseAddColumnLimit.php',
     'AlterCourseAddStatusColumn' => $baseDir . '/database/migrations/2017_06_19_095916_alterCourseAddStatusColumn.php',
     'AlterFiles' => $baseDir . '/database/migrations/2017_05_04_152128_alter_files.php',

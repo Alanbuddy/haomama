@@ -86,7 +86,11 @@ class CourseController extends Controller
         $count = $this->hasFavorited($course);
 
         $hasFavorited = $count == 1 ? true : false;
-        $comments = $course->comments()->paginate(10);
+        $comments = $course->comments()
+            ->orderBy('vote','desc')
+            ->with('user')
+            ->paginate(10);
+//        dd($comments);
         $lessons = $course->lessons()
             ->paginate(10);
         foreach ($lessons as $lesson) {
@@ -111,7 +115,8 @@ class CourseController extends Controller
             ->select(DB::raw('avg(star) as avg'))
             ->first()
             ->avg;
-        dd($comments);
+
+        $teachers=$course->teachers()->get();
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
@@ -120,7 +125,8 @@ class CourseController extends Controller
                 'lessons',//课时信息
                 'comments',//评论
                 'recommendedCourses',//按标签推荐相关课程
-                'avgRate'
+                'avgRate',
+                'teachers'
             )
         );
     }
