@@ -105,9 +105,9 @@ class CourseController extends Controller
         }
         $enrolledCount = $this->enrolledCount($course);
         $favoritedCount = $this->favoritedCount($course);
-        $recommendedCourses = Search::recommend($course)->keys()
+        $recommendedCoursesIds = Search::recommend($course)->keys()
             ->take(3)->all();
-        $recommendedCourses = Course::whereIn('id', $recommendedCourses)
+        $recommendedCourses = Course::whereIn('id', $recommendedCoursesIds)
             ->withCount('comments')
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
