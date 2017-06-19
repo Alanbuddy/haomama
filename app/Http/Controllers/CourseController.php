@@ -58,15 +58,6 @@ class CourseController extends Controller
             'description',
             'price',
         ]));
-        $ids = $request->teacherId;
-        $arr = explode(',', $ids);
-        $arr = array_map('intval', $arr);
-//        dd($arr);
-        try {
-            $item->teachers()->sync($arr);
-        } catch (Exception $e) {
-            return back()->withErrors('数据错误');
-        }
         $item->save();
 
         if ($request->file('cover')) {
@@ -88,6 +79,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+//        dd($course->teachers()->get());
         $count = $this->hasEnrolled($course);
         $hasEnrolled = $count == 1 ? true : false;
 
@@ -106,7 +98,8 @@ class CourseController extends Controller
         $enrolledCount = $this->enrolledCount($course);
         $favoritedCount = $this->favoritedCount($course);
         $recommendedCoursesIds = Search::recommend($course)->keys()
-            ->take(3)->all();
+            ->take(3)
+            ->all();
         $recommendedCourses = Course::whereIn('id', $recommendedCoursesIds)
             ->withCount('comments')
             ->withCount(['users' => function ($query) {
@@ -114,6 +107,11 @@ class CourseController extends Controller
             }])
             ->with('category')//预加载课程所属分类的信息
             ->get();
+        $avgRate = $course->comments()
+            ->select(DB::raw('avg(star) as avg'))
+            ->first()
+            ->avg;
+
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
@@ -121,7 +119,8 @@ class CourseController extends Controller
                 'enrolledCount',//学员数
                 'lessons',//课时信息
                 'comments',//评论
-                'recommendedCourses'//按标签推荐相关课程
+                'recommendedCourses',//按标签推荐相关课程
+                'avgRate'
             )
         );
     }
@@ -160,7 +159,7 @@ class CourseController extends Controller
         $ids = $request->teacherId;
         $arr = explode(',', $ids);
         $arr = array_map('intval', $arr);
-//        dd($arr);
+        dd($arr);
         try {
             $course->teachers()->sync($arr);
         } catch (Exception $e) {
