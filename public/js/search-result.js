@@ -10346,10 +10346,21 @@ return jQuery;
     });
   });
   $('.back').click(function() {
-    return location.href = '/';
+    return location.href = window.home;
   });
-  return $('.course-item').click(function() {
-    return location.href = '/';
+  $('.course-item').click(function() {
+    var cid;
+    cid = $(this).attr('data-id');
+    return location.href = window.course_item + "/" + cid;
+  });
+  return $('.category-class').each(function() {
+    if ($(this).text() === "分类N") {
+      return $(this).addClass('health-title');
+    } else if ($(this).text() === "分类t") {
+      return $(this).addClass('psychology-title');
+    } else {
+      return $(this).addClass('grow-title');
+    }
   });
 });
 

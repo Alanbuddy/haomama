@@ -10360,12 +10360,12 @@ $(function() {
 $("#another-baby").click(function() {
   var baby_dom;
   baby_dom = document.createElement("div");
-  $(baby_dom).addClass("add-baby-div").html($(".add-baby-div").html()).css('display', 'flex');
+  $(baby_dom).addClass("baby-item").html($(".add-baby-div").html());
   return $(baby_dom).insertBefore("#another-baby");
 });
 
 $(document).on('click', '.close-add-item', function() {
-  return $(this).closest('.add-baby-div').hide();
+  return $(this).closest('.baby-item').hide();
 });
 
 change_avatar = function(gender, birthday, object) {
@@ -10463,6 +10463,16 @@ $('.teacher-view-more').click(function() {
   return $(this).siblings('.teacher-fold-div').slideDown($(this).siblings('.teacher-fold-div').animate({
     height: unfold_height + 15
   }));
+});
+
+$('.category-class').each(function() {
+  if ($(this).text() === "分类N") {
+    return $(this).addClass('health-title-small');
+  } else if ($(this).text() === "分类t") {
+    return $(this).addClass('psychology-title-small');
+  } else {
+    return $(this).addClass('grow-title-small');
+  }
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

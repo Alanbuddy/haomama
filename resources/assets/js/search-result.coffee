@@ -9,9 +9,18 @@ $ ->
     $('body').animate({scrollTop: 0})
 
   $('.back').click ->
-    location.href = '/'
+    location.href = window.home
 
   $('.course-item').click ->
-    location.href = '/'
+    cid = $(this).attr('data-id')
+    location.href = window.course_item + "/" +cid
+
+  $('.category-class').each ->
+    if $(this).text() == "分类N"
+      $(this).addClass('health-title')
+    else if $(this).text() == "分类t"
+      $(this).addClass('psychology-title')
+    else
+      $(this).addClass('grow-title')
 
   # 上拉刷新没完成

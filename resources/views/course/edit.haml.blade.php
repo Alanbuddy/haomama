@@ -1,6 +1,9 @@
 @extends('layout.app')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/search-result.css') }}">
+:javascript
+  window.home = "#{route('index')}"
+  window.course_item="#{route('courses.index')}"
 
 @endsection
 
@@ -8,7 +11,7 @@
 .search-box
   %img.back{src: "/icon/back.png"}
   %p.fb.color7.f18 搜索结果
-- if (!$items)
+- if (count($items) == 0)
   .empty-div
     %img.empty-icon{src: "/icon/empty.png"}
     %p.empty-message.f12.color5 您还没有相关课程信息......
