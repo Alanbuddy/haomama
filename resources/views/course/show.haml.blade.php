@@ -33,7 +33,7 @@
   .common-div
     - if ($hasEnrolled == false)
       %span.price-pay.f16.fb.color11= "￥". $course['price']
-      %span.price.f12.color6 ¥400
+      %span.price.f12.color6= "￥". $course['original_price']
       - if ($course['type'] == "offline")
         %span.f12.color5= $enrolledCount."人已报名"."(限30人)"
       - else
@@ -49,7 +49,7 @@
     .unonline-div
       .unonline-row.f14.color7
         %span 时间：
-        %span 2017/05/20~2017/07/20
+        %span= date_format(date_create($course['begin']),"Y/m/d")."~".date_format(date_create($course['end']),"Y/m/d")
       .unonline-row.f14.color7
         %span.address-span 地址：
         %span.address= $course['address']
@@ -58,131 +58,97 @@
 - if ($course['type'] == "offline")
   .course-content.clearfix
     %span.title.f14.color7.fb 课时情况
+    - if ($hasEnrolled == true)
     //报名后会出现退款
-    %span.refund.f12.color5 退款
+      %span.refund.f12.color5 退款
     .items-div
-      .item.opt55
-        %p.num-div.f16.color7 1
-        .item-desc
-          %p.f14.color7 这是第一节线下课程的名字
-          .item-row.f12.color5
-            %span.min 2017/05/20
-            %span 14:00~16:00
-        //报名后会出现sign-icon，未报名不显示
-        %img.sign-icon{src: "/icon/arrive.png"}
-      .item.opt55
-        %p.num-div.f16.color7 1
-        .item-desc
-          %p.f14.color7 这是第一节线下课程的名字
-          .item-row.f12.color5
-            %span.min 2017/05/20
-            %span 14:00~16:00
-        %img.sign-icon{src: "/icon/absent.png"}
-      .item.opt55
-        %p.num-div.f16.color7 1
-        .item-desc
-          %p.f14.color7 这是第一节线下课程的名字
-          .item-row.f12.color5
-            %span.min 2017/05/20
-            %span 14:00~16:00
+      - foreach ($lessons as $lesson)
+        .item.opt55{"data-id" => $lesson['id']}
+          %p.num-div.f16.color7= ($loop->index + 1)
+          .item-desc
+            %p.f14.color7= $lesson['name']
+            .item-row.f12.color5
+              %span.min= date_format(date_create($lesson['begin']),"Y年/m月/d日")
+              %span= date_format(date_create($lesson['begin']),"H:i")."~".date_format(date_create($lesson['end']),"H:i")
+          //签到后会出现sign-icon，未报名不显
+          - if ($hasAttended)
+            %img.sign-icon{src: "/icon/arrive.png"}
+          - else
+            %img.sign-icon{src: "/icon/absent.png"}
       // 三条以下不显示
-      .view-more
-        %span.f12.color5 查看更多
-        %img.more-icon{src: "/icon/more.png"}
+      - if (count($lessons) > 3)
+        .view-more
+          %span.f12.color5 查看更多
+          %img.more-icon{src: "/icon/more.png"}
   %hr.div-line
 //online course
 - else 
   .course-content
     %span.title.f14.color7.fb 课程目录
-    %span.f12.color7 (共8节)
-    .items-div
-      // 如果只有3条以下课程列表项，就去掉directory-div  unview-div, 隐藏view-more
-      .fold-div   
-        .unview-div
-          .item
-            %p.num-div.f16.color7 1
+    - if (count($lessons) > 3)
+      %span.f12.color7= "(共".count($lessons)."节)"
+    .items-div.online-course
+      - foreach ($lessons as $lesson)
+        - if ($lesson['status'] == 'publish')
+          .item{"data-id" => $lesson['id'], "data-status" => $lesson['status'], "data-enrolled" => $hasEnrolled}
+            %p.num-div.f16.color7= ($loop->index + 1)
             .item-desc
-              %p.f14.color7 宝宝生长发育特点
+              %p.f14.color7= $lesson['name']
               .item-row.f12.color5
-                %span.min 23min
+                %span.min= (date_create($lesson['end']) - date_create($lesson['begin']))."min"
                 %span 1233人已学
             %img.go{src: "/icon/go.png"}
-            %img.free{src: "/icon/free.png"}
-          .item.opt55
-            %p.num-div.f16.color7 1
+            - if ($lesson['id'] == 1)
+              %img.free{src: "/icon/free.png"}
+        - else 
+          .item.opt55{"data-id" => $lesson['id'], "data-status" => $lesson['status'], "data-enrolled" => $hasEnrolled}
+            %p.num-div.f16.color7= ($loop->index + 1)
             .item-desc
-              %p.f14.color7 宝宝生长发育特点
-              .item-row.f12.color5
-                %span.min 23min
-                %span 1233人已学
-            %img.go{src: "/icon/go.png"}
-          .item.opt55
-            %p.num-div.f16.color7 1
-            .item-desc
-              %p.f14.color7 宝宝生长发育特点
+              %p.f14.color7= $lesson['name']
               .item-row.f12.color5
                 %span 未上线
-          .item.opt55
-            %p.num-div.f16.color7 1
-            .item-desc
-              %p.f14.color7 宝宝生长发育特点
-              .item-row.f12.color5
-                %span 未上线
-          .item.opt55
-            %p.num-div.f16.color7 1
-            .item-desc
-              %p.f14.color7 宝宝生长发育特点
-              .item-row.f12.color5
-                %span 未上线
-          .item.opt55
-            %p.num-div.f16.color7 1
-            .item-desc
-              %p.f14.color7 宝宝生长发育特点
-              .item-row.f12.color5
-                %span 未上线
-
-      .view-more
-        %span.f12.color5 查看更多
-        %img.more-icon{src: "/icon/more.png"}
+      - if (count($lessons) > 3)
+        .view-more
+          %span.f12.color5 查看更多
+          %img.more-icon{src: "/icon/more.png"}
   %hr.div-line
 .course-content
   %span.title.f14.color7.fb 授课老师
-  %span.f12.color7 (共5位)
+  - if ($course['type'] == "online")
+    %span.f12.color7 (共5位)
   .items-div
-    .teacher-fold-div
-      .teacher-unview-div
-        .teacher-item
-          %img.avatar{src: "/icon/avatar.png"}
-          .item-desc
-            %p.f14.color7.teacher-name 王小明老师
-            %p.f12.color6 这里写的是老师的简介信息，不能写太长
-        .teacher-item
-          %img.avatar{src: "/icon/avatar.png"}
-          .item-desc
-            %p.f14.color7.teacher-name 王小明老师
-            %p.f12.color6 这里写的是老师的简介信息，不能写太长
-        .teacher-item
-          %img.avatar{src: "/icon/avatar.png"}
-          .item-desc
-            %p.f14.color7.teacher-name 王小明老师
-            %p.f12.color6 这里写的是老师的简介信息，不能写太长
-        .teacher-item
-          %img.avatar{src: "/icon/avatar.png"}
-          .item-desc
-            %p.f14.color7.teacher-name 王小明老师
-            %p.f12.color6 这里写的是老师的简介信息，不能写太长
-        .teacher-item
-          %img.avatar{src: "/icon/avatar.png"}
-          .item-desc
-            %p.f14.color7.teacher-name 王小明老师
-            %p.f12.color6 这里写的是老师的简介信息，不能写太长
+    .teacher-item
+      %img.avatar{src: "/icon/avatar.png"}
+      .item-desc
+        %p.f14.color7.teacher-name 王小明老师
+        %p.f12.color6 这里写的是老师的简介信息，不能写太长
+    .teacher-item
+      %img.avatar{src: "/icon/avatar.png"}
+      .item-desc
+        %p.f14.color7.teacher-name 王小明老师
+        %p.f12.color6 这里写的是老师的简介信息，不能写太长
+    .teacher-item
+      %img.avatar{src: "/icon/avatar.png"}
+      .item-desc
+        %p.f14.color7.teacher-name 王小明老师
+        %p.f12.color6 这里写的是老师的简介信息，不能写太长
+    .teacher-item
+      %img.avatar{src: "/icon/avatar.png"}
+      .item-desc
+        %p.f14.color7.teacher-name 王小明老师
+        %p.f12.color6 这里写的是老师的简介信息，不能写太长
+    .teacher-item
+      %img.avatar{src: "/icon/avatar.png"}
+      .item-desc
+        %p.f14.color7.teacher-name 王小明老师
+        %p.f12.color6 这里写的是老师的简介信息，不能写太长
     .teacher-view-more
       %span.f12.color5 查看更多
       %img.more-icon{src: "/icon/more.png"}
 %hr.div-line
 .course-desc
   %span.f14.color7.fb 课程介绍
-  .desc-box.f12.color7 开始介绍这门课程...
+  .desc-box.f12.color7= $course['description']
 %hr.div-line
 .recommend-div
   %span.recommend-title.f14.color7.fb 推荐课程
@@ -230,38 +196,52 @@
         %span 810条评论
 %hr.div-line
 // 线下课程不显示评论
-.course-content
-  .review-title
-    %span.title.f14.color7.fb 课程评论
-    %span.f12.color7 (共810条)
-    %p.review-score.f12.color5 4.8分/2100人已评
-  .review-items-div
-    .review-item
+- if ($course['type'] == "online")
+  .course-content
+    .review-title
+      %span.title.f14.color7.fb 课程评论
+      %span.f12.color7 (共810条)
+      %p.review-score.f12.color5 4.8分/2100人已评
+    .review-items-div
+      .review-item
+        %img.review-avatar{src: "/icon/avatar.png"}
+        .item-desc
+          %p.f12.color7.review-name 最赞评论者
+          %p.f12.color5 3天前
+          %p.f14.color7.review-content 这是评论 
+          %span.f12.color5 评论来源：
+          %span.f12.color5 第1课时
+          .admire-div
+            %span.f12.color5.admire-num 123
+            %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'true'}
+      .review-item
+        %img.review-avatar{src: "/icon/avatar.png"}
+        .item-desc
+          %p.f12.color7.review-name 二赞评论者
+          %p.f12.color5 3天前
+          %p.f14.color7.review-content 这是评论 
+          %span.f12.color5 评论来源：
+          %span.f12.color5 第1课时
+          .admire-div
+            %span.f12.color5.admire-num 123
+            %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'false'}
+      .review-item
+        %img.review-avatar{src: "/icon/avatar.png"}
+        .item-desc
+          %p.f12.color7.review-name 三赞评论者
+          %p.f12.color5 3天前
+          %p.f14.color7.review-content 这是评论 
+          %span.f12.color5 评论来源：
+          %span.f12.color5 第1课时
+          .admire-div
+            %span.f12.color5.admire-num 123
+            %img.admire-icon{src: "/icon/like1_normal.png"}
+  %p.f12.color6.feed-review 最新评论
+  .feed-review-items-div
+    .feed-review-item
       %img.review-avatar{src: "/icon/avatar.png"}
       .item-desc
-        %p.f12.color7.review-name 最赞评论者
-        %p.f12.color5 3天前
-        %p.f14.color7.review-content 这是评论 
-        %span.f12.color5 评论来源：
-        %span.f12.color5 第1课时
-        .admire-div
-          %span.f12.color5.admire-num 123
-          %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'true'}
-    .review-item
-      %img.review-avatar{src: "/icon/avatar.png"}
-      .item-desc
-        %p.f12.color7.review-name 二赞评论者
-        %p.f12.color5 3天前
-        %p.f14.color7.review-content 这是评论 
-        %span.f12.color5 评论来源：
-        %span.f12.color5 第1课时
-        .admire-div
-          %span.f12.color5.admire-num 123
-          %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'false'}
-    .review-item
-      %img.review-avatar{src: "/icon/avatar.png"}
-      .item-desc
-        %p.f12.color7.review-name 三赞评论者
+        %p.f12.color7.review-name 评论者
         %p.f12.color5 3天前
         %p.f14.color7.review-content 这是评论 
         %span.f12.color5 评论来源：
@@ -269,30 +249,17 @@
         .admire-div
           %span.f12.color5.admire-num 123
           %img.admire-icon{src: "/icon/like1_normal.png"}
-%p.f12.color6.feed-review 最新评论
-.feed-review-items-div
-  .feed-review-item
-    %img.review-avatar{src: "/icon/avatar.png"}
-    .item-desc
-      %p.f12.color7.review-name 评论者
-      %p.f12.color5 3天前
-      %p.f14.color7.review-content 这是评论 
-      %span.f12.color5 评论来源：
-      %span.f12.color5 第1课时
-      .admire-div
-        %span.f12.color5.admire-num 123
-        %img.admire-icon{src: "/icon/like1_normal.png"}
-  .feed-review-item
-    %img.review-avatar{src: "/icon/avatar.png"}
-    .item-desc
-      %p.f12.color7.review-name 评论者
-      %p.f12.color5 3天前
-      %p.f14.color7.review-content 这是评论 
-      %span.f12.color5 评论来源：
-      %span.f12.color5 第1课时
-      .admire-div
-        %span.f12.color5.admire-num 123
-        %img.admire-icon{src: "/icon/like1_normal.png"}
+    .feed-review-item
+      %img.review-avatar{src: "/icon/avatar.png"}
+      .item-desc
+        %p.f12.color7.review-name 评论者
+        %p.f12.color5 3天前
+        %p.f14.color7.review-content 这是评论 
+        %span.f12.color5 评论来源：
+        %span.f12.color5 第1课时
+        .admire-div
+          %span.f12.color5.admire-num 123
+          %img.admire-icon{src: "/icon/like1_normal.png"}
 %img.upper{src: "/icon/top.png"}
 .btn#add-btn{type: "button"} 立即报名
 .btn#sign-btn{type: "button"} 课程签到
