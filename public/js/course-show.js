@@ -10475,6 +10475,16 @@ $('.category-class').each(function() {
   }
 });
 
+$(".online-course .item:eq(0)").attr("data-status", "publish");
+
+$(".online-course .item").each(function() {
+  var hasEnrolled;
+  hasEnrolled = $(this).attr("data-enrolled");
+  if (hasEnrolled === false) {
+    return $(this).addClass("opt55");
+  }
+});
+
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })

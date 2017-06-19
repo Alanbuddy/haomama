@@ -106,3 +106,10 @@ $ ->
     else
       $(this).addClass('grow-title-small')
 
+  $(".online-course .item:eq(0)").attr("data-status", "publish")
+  
+  $(".online-course .item").each ->
+    hasEnrolled = $(this).attr("data-enrolled")
+    if hasEnrolled == false
+      $(this).addClass("opt55")
+
