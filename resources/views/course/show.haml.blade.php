@@ -67,9 +67,9 @@
           .item-desc
             %p.f14.color7= $lessons[$i]['name']
             .item-row.f12.color5
-              %span.min= date_format(date_create($lessons[$i]['begin']),"Y年/m月/d日")
+              %span.min= date_format(date_create($lessons[$i]['begin']),"Y/m/d")
               %span= date_format(date_create($lessons[$i]['begin']),"H:i")."~".date_format(date_create($lessons[$i]['end']),"H:i")
-          - if ($hasAttended)
+          - if ($lessons[$i]['hasAttended'])
             %img.sign-icon{src: "/icon/arrive.png"}
           - else
             %img.sign-icon{src: "/icon/absent.png"}
@@ -148,56 +148,36 @@
 %hr.div-line
 .recommend-div
   %span.recommend-title.f14.color7.fb 推荐课程
-  .course-item
-    .course-icon-div
-      %img.course-icon{src: "/icon/example.png"}
-    .word-div
-      .course-row-div.clearfix
-        %span.health-title.f12 健康养育
-        %span.course-item-value.f14.color5 200
-      .course-row-div.color7
-        %span.course-name.f16 名字很长很长很长
-        // %span.course-status.f8 线下
-      .course-row-div.f12.color6
-        %span.participate 2315人已学
-        %span .
-        %span 810条评论
-  .course-item
-    .course-icon-div
-      %img.course-icon{src: "/icon/example.png"}
-    .word-div
-      .course-row-div.clearfix
-        %span.psychology-title.f12 心理教育
-        %span.course-item-value.f14.color5 200
-      .course-row-div.color7.status-flex
-        %span.name-span.f16 名字很长名字很长名字很名字
-        %span.course-status.f8 线下
-      .course-row-div.f12.color6
-        %span.participate 2315人已报名
-        %span .
-        %span 5月9日开课
-  .course-item
-    .course-icon-div
-      %img.course-icon{src: "/icon/example.png"}
-    .word-div
-      .course-row-div.clearfix
-        %span.grow-title.f12 自我成长
-        %span.course-item-value.f14.color5 200
-      .course-row-div.color7
-        %span.course-name.f16 名字很长很长很长
-        // %span.course-status.f8 线下
-      .course-row-div.f12.color6
-        %span.participate 2315人已学
-        %span .
-        %span 810条评论
+  - foreach ($recommendedCourses as $recommendedCourse)
+    .course-item{"data-id" => $recommendedCourse['id']}
+      .course-icon-div
+        %img.course-icon{src: $recommendedCourse['cover'] ? $recommendedCourse['cover'] : "/icon/example.png"}
+      .word-div
+        .course-row-div.clearfix
+          %span.f12.category-class= $recommendedCourse['category']['name']
+          %span.course-item-value.f14.color5= "￥". $recommendedCourse['price']
+        .course-row-div.color7
+          %span.course-name.f16= $recommendedCourse['name']
+          - if ($recommendedCourse['type'] == 'offline')
+            %span.course-status.f8 线下
+        .course-row-div.f12.color6
+          - if ($recommendedCourse['type'] == 'offline')
+            %span.participate= $recommendedCourse['users_count']."人已报名"
+            %span .
+            %span= date_format(date_create($recommendedCourse['begin']),"m月/d日") ."开课"
+          - else
+            %span.participate= $recommendedCourse['users_count']."人已学"
+            %span .
+            %span= $recommendedCourse['comments_count'] ."条评论"
 %hr.div-line
 // 线下课程不显示评论
 - if ($course['type'] == "online")
   .course-content
     .review-title
       %span.title.f14.color7.fb 课程评论
-      %span.f12.color7 (共810条)
-      %p.review-score.f12.color5 4.8分/2100人已评
+      %span.f12.color7= "(共".count($comments)."条)"
+      %p.review-score.f12.color5= count($comments) > 0 ?  
+       4.8分/2100人已评
     .review-items-div
       .review-item
         %img.review-avatar{src: "/icon/avatar.png"}
