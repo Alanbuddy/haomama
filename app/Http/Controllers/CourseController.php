@@ -59,6 +59,15 @@ class CourseController extends Controller
             'price',
         ]));
 //        $item->teacher_id = auth()->user()->id;
+        $ids = $request->teacherId;
+        $arr = explode(',', $ids);
+        $arr = array_map('intval', $arr);
+//        dd($arr);
+        try {
+            $item->teachers()->sync($arr);
+        } catch (Exception $e) {
+            return back()->withErrors('数据错误');
+        }
         $item->save();
 
         if ($request->file('cover')) {
@@ -90,7 +99,7 @@ class CourseController extends Controller
         $lessons = $course->lessons()
             ->paginate(10);
         foreach ($lessons as $lesson) {
-            $lesson->hasAttended = Attendance::where('course_id', $course->id)
+            $lesson->hasAttended = (bool)Attendance::where('course_id', $course->id)
                 ->where('lesson_id', $lesson->id)
                 ->where('user_id', auth()->user()->id)
                 ->count();
@@ -393,11 +402,11 @@ class CourseController extends Controller
      */
     public function signIn(Request $request, Course $course, Lesson $lesson)
     {
-        $hasAttended = Attendance::where('course_id', $course->id)
+        $hasAttended = (bool)Attendance::where('course_id', $course->id)
             ->where('lesson_id', $lesson->id)
             ->where('user_id', auth()->user()->id)
             ->count();
-        if ($hasAttended == 0) {
+        if (!$hasAttended) {
             $attendance = new Attendance();
             $attendance->fill([
                 'user_id' => auth()->user()->id,

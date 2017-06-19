@@ -43,6 +43,12 @@ class Course extends Model
         return $this->belongsToMany('App\Models\User');
     }
 
+    public function teachers()
+    {
+        return $this->belongsToMany('App\Models\User')
+            ->wherePivot('user_type','teacher');
+    }
+
     public function orders()
     {
         return $this->hasMany('App\Models\Order', 'product_id');
