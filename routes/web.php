@@ -15,6 +15,8 @@
 //		$a=DB::table('user')->get();
 //    return view('welcome');
 //});
+Route::auth();
+Route::get('/', 'HomeController@index')->name('index');
 
 include('test.php');
 //Route::get('/', 'VodController@index');
@@ -31,10 +33,8 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['web'],
+    'middleware' => ['web','auth'],
 ], function () {
-    Route::auth();
-    Route::get('/', 'HomeController@index')->name('index');
 
     Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
     Route::get('/category/{category}', 'HomeController@index')->name('category');
@@ -54,6 +54,7 @@ Route::group([
     Route::get('/courses/{course}/enroll', 'CourseController@enroll')->name('courses.enroll');
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');
     Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');
+    Route::get('/courses/{course}/sign-in', 'CourseController@signIn')->name('courses.signIn');//签到
 
     Route::resource('lessons', 'LessonController');
 

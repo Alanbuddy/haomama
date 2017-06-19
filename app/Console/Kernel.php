@@ -28,6 +28,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function () {
+//            DB::table('recent_users')->delete();
+            file_put_contents('/home/gao/run.log', date('Y-m-d H:i:s')."\r\n", FILE_APPEND);
+        })->everyMinute();
     }
 
     /**
