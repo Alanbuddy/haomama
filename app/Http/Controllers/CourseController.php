@@ -90,13 +90,13 @@ class CourseController extends Controller
         $favoritedCount = $this->favoritedCount($course);
         $recommendedCourses = Search::recommend($course)->keys()->all();
         return view('course.show',//'admin.course.show',
-            compact('course',
-                'hasEnrolled',
-                'hasFavorited',
-                'enrolledCount',
-                'lessons',
-                'comments',
-                'recommendedCourses'
+            compact('course',//课程信息
+                'hasEnrolled',//是否已经加入（购买）课程
+                'hasFavorited',//是否已经收藏课程
+                'enrolledCount',//学员数
+                'lessons',//课时信息
+                'comments',//评论
+                'recommendedCourses'//按标签推荐相关课程
             )
         );
     }
