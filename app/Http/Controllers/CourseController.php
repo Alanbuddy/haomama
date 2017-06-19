@@ -373,4 +373,9 @@ class CourseController extends Controller
         $popularTags = Search::popularTags();
         return view('course.create', compact('popularTags'));
     }
+
+    public function signIn(Request $request, Course $course)
+    {
+
+    }
 }
