@@ -59,52 +59,48 @@
   .course-content.clearfix
     %span.title.f14.color7.fb 课时情况
     - if ($hasEnrolled == true)
-    //报名后会出现退款
       %span.refund.f12.color5 退款
     .items-div
-      - foreach ($lessons as $lesson)
-        .item.opt55{"data-id" => $lesson['id']}
-          %p.num-div.f16.color7= ($loop->index + 1)
+      - for ($i=0;$i<4;$i++)
+        .item.opt55{"data-id" => $lessons[$i]['id']}
+          %p.num-div.f16.color7= ($i + 1)
           .item-desc
-            %p.f14.color7= $lesson['name']
+            %p.f14.color7= $lessons[$i]['name']
             .item-row.f12.color5
-              %span.min= date_format(date_create($lesson['begin']),"Y年/m月/d日")
-              %span= date_format(date_create($lesson['begin']),"H:i")."~".date_format(date_create($lesson['end']),"H:i")
-          //签到后会出现sign-icon，未报名不显
+              %span.min= date_format(date_create($lessons[$i]['begin']),"Y年/m月/d日")
+              %span= date_format(date_create($lessons[$i]['begin']),"H:i")."~".date_format(date_create($lessons[$i]['end']),"H:i")
           - if ($hasAttended)
             %img.sign-icon{src: "/icon/arrive.png"}
           - else
             %img.sign-icon{src: "/icon/absent.png"}
-      // 三条以下不显示
       - if (count($lessons) > 3)
         .view-more
           %span.f12.color5 查看更多
           %img.more-icon{src: "/icon/more.png"}
   %hr.div-line
-//online course
 - else 
   .course-content
     %span.title.f14.color7.fb 课程目录
     - if (count($lessons) > 3)
       %span.f12.color7= "(共".count($lessons)."节)"
     .items-div.online-course
-      - foreach ($lessons as $lesson)
-        - if ($lesson['status'] == 'publish')
-          .item{"data-id" => $lesson['id'], "data-status" => $lesson['status'], "data-enrolled" => $hasEnrolled}
-            %p.num-div.f16.color7= ($loop->index + 1)
+      - for ($i=0;$i<4;$i++)
+        - if ($lessons[$i]['status'] == 'publish')
+          .item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled}
+            %p.num-div.f16.color7= ($i + 1)
             .item-desc
-              %p.f14.color7= $lesson['name']
+              %p.f14.color7= $lessons[$i]['name']
               .item-row.f12.color5
-                %span.min= (date_create($lesson['end']) - date_create($lesson['begin']))."min"
+                %span.min= (date_create($lessons[$i]['end']) - date_create($lessons[$i]['begin']))."min"
                 %span 1233人已学
             %img.go{src: "/icon/go.png"}
-            - if ($lesson['id'] == 1)
+            - if ($lessons[$i]['id'] == 1)
               %img.free{src: "/icon/free.png"}
         - else 
-          .item.opt55{"data-id" => $lesson['id'], "data-status" => $lesson['status'], "data-enrolled" => $hasEnrolled}
-            %p.num-div.f16.color7= ($loop->index + 1)
+          .item.opt55{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled}
+            %p.num-div.f16.color7= ($i + 1)
             .item-desc
-              %p.f14.color7= $lesson['name']
+              %p.f14.color7= $lessons[$i]['name']
               .item-row.f12.color5
                 %span 未上线
       - if (count($lessons) > 3)
