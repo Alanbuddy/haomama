@@ -98,7 +98,8 @@ class CourseController extends Controller
         $enrolledCount = $this->enrolledCount($course);
         $favoritedCount = $this->favoritedCount($course);
         $recommendedCoursesIds = Search::recommend($course)->keys()
-            ->take(3)->all();
+            ->take(3)
+            ->all();
         $recommendedCourses = Course::whereIn('id', $recommendedCoursesIds)
             ->withCount('comments')
             ->withCount(['users' => function ($query) {
@@ -107,7 +108,9 @@ class CourseController extends Controller
             ->with('category')//预加载课程所属分类的信息
             ->get();
         $avgRate = $course->comments()
-            ->select(DB::raw('avg(star) as avg'))->first()->avg;
+            ->select(DB::raw('avg(star) as avg'))
+            ->first()
+            ->avg;
 
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
