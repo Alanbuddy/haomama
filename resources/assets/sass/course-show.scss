@@ -198,6 +198,7 @@
 }
 .review-title {
   position: relative;
+  margin-bottom: 0.24rem;
 }
 .review-score {
   position: absolute;
@@ -265,7 +266,7 @@
   right: 0;
 }
 .feed-review-items-div {
-  padding: 0 0.4rem;
+  padding: 0 0.16rem 0 0.4rem;
 }
 .feed-review-item {
   @extend .review-item;
