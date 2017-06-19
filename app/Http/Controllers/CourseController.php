@@ -83,19 +83,35 @@ class CourseController extends Controller
         $hasEnrolled = $count == 1 ? true : false;
 
         $count = $this->hasFavorited($course);
-
         $hasFavorited = $count == 1 ? true : false;
+
         $comments = $course->comments()
             ->with('user')
+            ->with('lesson')
+            ->with('votes')
             ->orderBy('vote', 'desc')
             ->paginate(3);
+        foreach ($comments as $comment) {
+            $comment->voteCount = count($comment->votes);
+            $hasVoted = false;
+            foreach ($comment->votes as $vote) {
+                if ($vote->user_id == auth()->user()->id)
+                    $hasVoted = true;
+            }
+            $comment->hasVoted = $hasVoted;
+        }
+        dd($comments[0]);
+
         if (count($comments) > 3) {
-            $latestComments=$course->comments()
+            $latestComments = $course->comments()
                 ->with('user')
-                ->orderBy('id','desc')
+                ->with('lesson')
+                ->orderBy('id', 'desc')
                 ->paginate(10);
         }
 //        dd($comments);
+
+
         $lessons = $course->lessons()
             ->paginate(10);
         foreach ($lessons as $lesson) {
@@ -106,12 +122,15 @@ class CourseController extends Controller
         }
         //学员数
         $enrolledCount = $this->enrolledCount($course);
+
         //收藏次数
         $favoritedCount = $this->favoritedCount($course);
+
         //推荐的课程ID集合
         $recommendedCoursesIds = Search::recommend($course)->keys()
             ->take(3)
             ->all();
+
         //推荐的课程
         $recommendedCourses = Course::whereIn('id', $recommendedCoursesIds)
             ->withCount('comments')
@@ -120,6 +139,7 @@ class CourseController extends Controller
             }])
             ->with('category')//预加载课程所属分类的信息
             ->get();
+
         //平均评分
         $avgRate = $course->comments()
             ->select(DB::raw('avg(star) as avg'))
@@ -133,8 +153,8 @@ class CourseController extends Controller
                 'hasFavorited',//是否已经收藏课程
                 'enrolledCount',//学员数
                 'lessons',//课时信息
-                'comments',//评论
-                'latestComments',
+                'comments',//评论 按点赞数排序
+                'latestComments',//评论 按时间倒序排序
                 'recommendedCourses',//按标签推荐相关课程
                 'avgRate',
                 'teachers'
