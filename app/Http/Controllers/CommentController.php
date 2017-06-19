@@ -112,4 +112,9 @@ class CommentController extends Controller
         $comment->delete();
         return redirect()->route('comments.index');
     }
+
+    public function vote(Request $request ,Comment $comment)
+    {
+       $hasVoted=$comment->user()
+    }
 }
