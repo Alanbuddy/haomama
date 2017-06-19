@@ -88,7 +88,9 @@ class CourseController extends Controller
         $hasFavorited = $count == 1 ? true : false;
         $comments = $course->comments()
             ->orderBy('vote','desc')
+            ->with('user')
             ->paginate(10);
+//        dd($comments);
         $lessons = $course->lessons()
             ->paginate(10);
         foreach ($lessons as $lesson) {

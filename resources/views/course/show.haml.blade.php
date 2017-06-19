@@ -156,8 +156,8 @@
         .course-row-div.clearfix
           %span.f12.category-class= $recommendedCourse['category']['name']
           %span.course-item-value.f14.color5= "￥". $recommendedCourse['price']
-        .course-row-div.color7
-          %span.course-name.f16= $recommendedCourse['name']
+        .course-row-div.color7.unstart
+          %span.name-span.f16= $recommendedCourse['name']
           - if ($recommendedCourse['type'] == 'offline')
             %span.course-status.f8 线下
         .course-row-div.f12.color6
@@ -169,15 +169,15 @@
             %span.participate= $recommendedCourse['users_count']."人已学"
             %span .
             %span= $recommendedCourse['comments_count'] ."条评论"
-%hr.div-line
+- if ($course['type'] == "online")
+  %hr.div-line
 // 线下课程不显示评论
 - if ($course['type'] == "online")
   .course-content
     .review-title
       %span.title.f14.color7.fb 课程评论
-      %span.f12.color7= "(共".count($comments)."条)"
-      %p.review-score.f12.color5= count($comments) > 0 ?  
-       4.8分/2100人已评
+      %span.f12.color7= "(共".$course['comments_count']."条)"
+      %p.review-score.f12.color5= $course['comments_count'] > 0 ? $avgRate."分/".count($comments)."人已评" : "5分/1人已评"
     .review-items-div
       .review-item
         %img.review-avatar{src: "/icon/avatar.png"}
@@ -237,9 +237,15 @@
           %span.f12.color5.admire-num 123
           %img.admire-icon{src: "/icon/like1_normal.png"}
 %img.upper{src: "/icon/top.png"}
-.btn#add-btn{type: "button"} 立即报名
-.btn#sign-btn{type: "button"} 课程签到
-.btn#review-btn{type: "button"} 评价课程
+- if ($hasEnrolled == true)
+  - if ($course['type'] == "online")
+    .btn#review-btn{type: "button"} 评价课程
+  - else
+    .btn#sign-btn{type: "button"} 课程签到
+- else
+  .btn#add-btn{type: "button"} 立即报名
+
+
 
 @endsection
 #reviewModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 

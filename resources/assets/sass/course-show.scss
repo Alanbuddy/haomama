@@ -525,6 +525,19 @@
     width: 0.88rem;
   }
 }
+
+.unstart {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
 //modal fade direction from bottom (define a class that name bottom and add it on profileModal)
 .modal.fade:not(.in).bottom .modal-dialog {
   -webkit-transform: translate3d(0, 125%, 0);

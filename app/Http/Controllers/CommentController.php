@@ -115,6 +115,6 @@ class CommentController extends Controller
 
     public function vote(Request $request ,Comment $comment)
     {
-       $hasVoted=$comment->user()
+       $hasVoted=$comment->user();
     }
 }
