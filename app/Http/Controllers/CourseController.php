@@ -111,7 +111,6 @@ class CourseController extends Controller
             ->select(DB::raw('avg(star) as avg'))
             ->first()
             ->avg;
-
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
