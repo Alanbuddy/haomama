@@ -175,8 +175,8 @@
   .course-content
     .review-title
       %span.title.f14.color7.fb 课程评论
-      %span.f12.color7= "(共".count($comments)."条)"
-      %p.review-score.f12.color5= count($comments) > 0 ?  
+      %span.f12.color7= "(共".$course['comments_count']."条)"
+      %p.review-score.f12.color5= $course['comments_count'] > 0 ? $course['avgRate']."分" 
        4.8分/2100人已评
     .review-items-div
       .review-item

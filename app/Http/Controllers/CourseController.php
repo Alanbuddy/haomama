@@ -114,7 +114,6 @@ class CourseController extends Controller
             }])
             ->with('category')//预加载课程所属分类的信息
             ->get();
-
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
