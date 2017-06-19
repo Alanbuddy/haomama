@@ -54,7 +54,7 @@ Route::group([
     Route::get('/courses/{course}/enroll', 'CourseController@enroll')->name('courses.enroll');
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');
     Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');
-    Route::get('/courses/{course}/sign-in', 'CourseController@signIn')->name('courses.signIn');//签到
+    Route::get('/courses/{course}/lessons/{lesson}/sign-in', 'CourseController@signIn')->name('courses.signIn');//签到
 
     Route::resource('lessons', 'LessonController');
 
