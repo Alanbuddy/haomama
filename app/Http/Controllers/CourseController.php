@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Facades\Search;
 use App\Http\Util\IO;
+use App\Models\Attendance;
 use App\Models\Course;
+use App\Models\Lesson;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -85,10 +87,17 @@ class CourseController extends Controller
 
         $hasFavorited = $count == 1 ? true : false;
         $comments = $course->comments()->paginate(10);
-        $lessons = $course->lessons()->paginate(10);
+        $lessons = $course->lessons()
+            ->paginate(10);
+        foreach ($lessons as $lesson) {
+            $lesson->hasAttended = Attendance::where('course_id', $course->id)
+                ->where('lesson_id', $lesson->id)
+                ->where('user_id', auth()->user()->id)
+                ->count();
+        }
         $enrolledCount = $this->enrolledCount($course);
         $favoritedCount = $this->favoritedCount($course);
-        $recommendedCourses = Search::recommend($course)->keys()->all();
+        $recommendedCourses = Search::recommend($course)->keys()->take(3)->all();
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
@@ -374,8 +383,30 @@ class CourseController extends Controller
         return view('course.create', compact('popularTags'));
     }
 
-    public function signIn(Request $request, Course $course)
-    {
 
+    /**
+     * 线下课程签到
+     * @param Request $request
+     * @param Course $course
+     * @param Lesson $lesson
+     * @return \Illuminate\Http\RedirectResponse|string
+     */
+    public function signIn(Request $request, Course $course, Lesson $lesson)
+    {
+        $hasAttended = Attendance::where('course_id', $course->id)
+            ->where('lesson_id', $lesson->id)
+            ->where('user_id', auth()->user()->id)
+            ->count();
+        if ($hasAttended == 0) {
+            $attendance = new Attendance();
+            $attendance->fill([
+                'user_id' => auth()->user()->id,
+                'course_id' => $request->route('course')->id,
+                'lesson_id' => $request->route('lesson')->id,
+            ]);
+            $attendance->save();
+        }
+        return 'success';
+        return back();
     }
 }
