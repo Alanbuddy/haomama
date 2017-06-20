@@ -18,6 +18,30 @@ $(document).ready(function($) {
 		return false;
 	};
 
+  $("#review-submit").click(function(){
+    var score = $("input:checked").val();
+    if (score == 0) {
+      showMsg("请评分", "center");
+      return false;
+    }
+    console.log(window.course_id);
+    $.postJSON(
+      window.review,
+      {
+        star: score,
+        course_id: window.course_id,
+        _token: window.token
+      },
+      function(data){
+        console.log(data);
+        if (data.success){
+          $("#reviewModal").modal("hide");
+        } else {
+          showMsg("服务器出错，请稍后重试", "center");
+        }
+      }
+      );
+  });
 
 	$("#review-btn").click(function(){
 	    $("#reviewModal").modal("show");

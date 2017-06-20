@@ -8,6 +8,8 @@
   window.token = "#{csrf_token()}"
   window.course_item="#{route('courses.index')}"
   window.favorite = "#{route('courses.favorite',$course['id'])}"
+  window.review = "#{route('comments.store')}"
+  window.course_id = "#{$course['id']}"
 
 @endsection
 @section('content')
