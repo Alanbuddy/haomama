@@ -10425,6 +10425,7 @@ $('.favorite').click(function() {
 $('.admire-icon').click(function() {
   var url;
   url = $(this).closest(".review-item").attr("data-url");
+  console.log(url);
   return $.getJSON(url, {}, function(data) {
     console.log(data);
     if (data.success) {

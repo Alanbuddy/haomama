@@ -63,6 +63,7 @@ $ ->
   $('.admire-icon').click ->
     url = $(this).closest(".review-item").attr("data-url")
     # ad = $(this).attr('data-ad')
+    console.log(url)
     $.getJSON(
       url,
       {},
