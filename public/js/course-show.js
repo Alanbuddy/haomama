@@ -10423,20 +10423,16 @@ $('.favorite').click(function() {
 });
 
 $('.admire-icon').click(function() {
-  var ad, url;
+  var url;
   url = $(this).closest(".review-item").attr("data-url");
-  console.log(url);
-  ad = $(this).attr('data-ad');
   return $.getJSON(url, {}, function(data) {
     console.log(data);
     if (data.success) {
-      if (ad === 'true') {
+      if (data.message === 'yes') {
         $('.admire-icon').attr('src', '/icon/like1_selected.png');
-        $('.admire-icon').attr('data-ad', 'false');
         return showMsg('点赞完成', 'center');
       } else {
         $('.admire-icon').attr('src', '/icon/like1_normal.png');
-        $('.admire-icon').attr('data-ad', 'true');
         return showMsg('取消点赞', 'center');
       }
     } else {
