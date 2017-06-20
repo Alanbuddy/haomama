@@ -90,6 +90,7 @@ Route::group([
     Route::get('/videos/{video?}/statistics', 'VideoController@statistics')->name('video.statistics');
 
     Route::get('/wechat/message/get-industry', 'WechatController@getIndustry')->name('wechat.getIndustry');
+    Route::get('/wechat/message/get-template', 'WechatController@getTemplate')->name('wechat.getTemplate');
     Route::get('/wechat/message/template-id', 'WechatController@getTemplateID')->name('wechat.getTemplateID');
     Route::get('/wechat/access-token', 'WechatController@accessToken')->name('wechat.accessToken');
     Route::get('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment/notify');
