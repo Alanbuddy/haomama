@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Vote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -115,6 +116,12 @@ class CommentController extends Controller
 
     public function vote(Request $request ,Comment $comment)
     {
-       $hasVoted=$comment->user();
+       $hasVoted=$comment->user==auth()->user();
+       if($hasVoted){
+           $vote=Vote::where('comment_id',$comment->id)
+               ->where('user_id',auth()->user()->id)
+               ->first();
+           $vote->delete();
+       }
     }
 }

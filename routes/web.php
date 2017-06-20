@@ -61,8 +61,6 @@ Route::group([
     Route::get('/comments/{comment}/vote', 'CommentController@vote')->name('comments.vote');
     Route::resource('comments', 'CommentController',['except'=>'store']);
 
-    Route::resource('vote', 'VoteController');
-
     Route::post('/orders/pay', 'OrderController@pay')->name('orders.pay');
     Route::resource('orders', 'OrderController',['except'=>'store']);
     Route::get('/orders/{uuid}/query', 'OrderController@queryOrder')->name('orders.payment.query');

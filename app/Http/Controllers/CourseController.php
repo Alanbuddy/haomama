@@ -91,6 +91,7 @@ class CourseController extends Controller
             ->with('votes')
             ->orderBy('vote', 'desc')
             ->paginate(3);
+//        dd($comments->lastPage());
         foreach ($comments as $comment) {
             $comment->voteCount = count($comment->votes);
             $hasVoted = false;
@@ -100,7 +101,6 @@ class CourseController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
-        dd($comments[0]);
 
         if (count($comments) > 3) {
             $latestComments = $course->comments()
