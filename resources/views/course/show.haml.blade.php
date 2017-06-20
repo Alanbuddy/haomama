@@ -10,7 +10,7 @@
   window.favorite = "#{route('courses.favorite',$course['id'])}"
   window.review = "#{route('comments.store')}"
   window.course_id = "#{$course['id']}"
-  window.teacher_id = "#{}"
+
 
 @endsection
 @section('content')
@@ -119,7 +119,7 @@
     %span.f12.color7= "(共".count($teachers)."位)"
   .items-div
     - foreach ($teachers as $teacher)
-      .teacher-item{"data-id" => $teacher['id']}
+      %a.teacher-item{href: route('users.show', $teacher['id'])}
         %img.avatar{src: $teacher['avatar'] ? $teacher['avatar'] : "/icon/avatar.png"}
         .item-desc
           %p.f14.color7.teacher-name= $teacher['name']."老师"
