@@ -79,18 +79,39 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-//        dd($course->teachers()->get());
         $count = $this->hasEnrolled($course);
         $hasEnrolled = $count == 1 ? true : false;
 
         $count = $this->hasFavorited($course);
-
         $hasFavorited = $count == 1 ? true : false;
+
         $comments = $course->comments()
-            ->orderBy('vote','desc')
             ->with('user')
-            ->paginate(10);
+            ->with('lesson')
+            ->with('votes')
+            ->orderBy('vote', 'desc')
+            ->paginate(3);
+        foreach ($comments as $comment) {
+            $comment->voteCount = count($comment->votes);
+            $hasVoted = false;
+            foreach ($comment->votes as $vote) {
+                if ($vote->user_id == auth()->user()->id)
+                    $hasVoted = true;
+            }
+            $comment->hasVoted = $hasVoted;
+        }
+        dd($comments[0]);
+
+        if (count($comments) > 3) {
+            $latestComments = $course->comments()
+                ->with('user')
+                ->with('lesson')
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        }
 //        dd($comments);
+
+
         $lessons = $course->lessons()
             ->paginate(10);
         foreach ($lessons as $lesson) {
@@ -99,11 +120,18 @@ class CourseController extends Controller
                 ->where('user_id', auth()->user()->id)
                 ->count();
         }
+        //学员数
         $enrolledCount = $this->enrolledCount($course);
+
+        //收藏次数
         $favoritedCount = $this->favoritedCount($course);
+
+        //推荐的课程ID集合
         $recommendedCoursesIds = Search::recommend($course)->keys()
             ->take(3)
             ->all();
+
+        //推荐的课程
         $recommendedCourses = Course::whereIn('id', $recommendedCoursesIds)
             ->withCount('comments')
             ->withCount(['users' => function ($query) {
@@ -111,19 +139,22 @@ class CourseController extends Controller
             }])
             ->with('category')//预加载课程所属分类的信息
             ->get();
+
+        //平均评分
         $avgRate = $course->comments()
             ->select(DB::raw('avg(star) as avg'))
             ->first()
             ->avg;
 
-        $teachers=$course->teachers()->get();
+        $teachers = $course->teachers()->get();
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
                 'hasFavorited',//是否已经收藏课程
                 'enrolledCount',//学员数
                 'lessons',//课时信息
-                'comments',//评论
+                'comments',//评论 按点赞数排序
+                'latestComments',//评论 按时间倒序排序
                 'recommendedCourses',//按标签推荐相关课程
                 'avgRate',
                 'teachers'

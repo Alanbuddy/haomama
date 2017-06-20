@@ -15,8 +15,17 @@ class CommentSeeder extends Seeder
 
             DB::table('comments')->insert([
                 'user_id' => 1,
-                'content' => str_random(30 * $i),
                 'star'=>rand(1,5),
+                'course_id'=>1
+            ]);
+        }
+        for ($i = 0; $i < 20; $i++) {
+
+            DB::table('comments')->insert([
+                'user_id' => 1,
+                'content' => str_random(3 * $i),
+                'course_id'=>1,
+                'lesson_id'=>1
             ]);
         }
     }

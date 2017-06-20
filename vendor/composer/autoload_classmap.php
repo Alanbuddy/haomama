@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AlterCommentAddLessonId' => $baseDir . '/database/migrations/2017_06_19_164641_alterCommentAddLessonId.php',
     'AlterCommentAddVoteColumn' => $baseDir . '/database/migrations/2017_06_19_152838_alterCommentAddVoteColumn.php',
     'AlterCourseAddColumnLimit' => $baseDir . '/database/migrations/2017_06_16_164459_alterCourseAddColumnLimit.php',
     'AlterCourseAddStatusColumn' => $baseDir . '/database/migrations/2017_06_19_095916_alterCourseAddStatusColumn.php',
@@ -15,6 +16,7 @@ return array(
     'AlterOrder2' => $baseDir . '/database/migrations/2017_06_08_154710_alter_order2.php',
     'AlterTableCoursesAddHot' => $baseDir . '/database/migrations/2017_05_19_092518_alter_table_courses_add_hot.php',
     'AlterUser3' => $baseDir . '/database/migrations/2017_06_13_104433_alterUser3.php',
+    'AlterUserAddDescription' => $baseDir . '/database/migrations/2017_06_19_160555_alterUserAddDescription.php',
     'AlterUserAddOpenid' => $baseDir . '/database/migrations/2017_06_07_161930_alter_user_add_openid.php',
     'AlterVideoAddColumn' => $baseDir . '/database/migrations/2017_05_05_164220_alter_video_add_column.php',
     'AlterVideoFile' => $baseDir . '/database/migrations/2017_05_04_150527_alter_video_file.php',
@@ -37,6 +39,7 @@ return array(
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateVideo' => $baseDir . '/database/migrations/2017_05_03_005808_create_Video.php',
     'CreateVideoPicture' => $baseDir . '/database/migrations/2017_05_04_032210_create_video_picture.php',
+    'CreateVotesTable' => $baseDir . '/database/migrations/2017_06_19_172200_create_votes_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'EntrustSeeder' => $baseDir . '/database/seeds/EntrustSeeder.php',
     'EntrustSetupTables' => $baseDir . '/database/migrations/2017_05_02_070200_entrust_setup_tables.php',
@@ -573,5 +576,6 @@ return array(
     'TagSeeder' => $baseDir . '/database/seeds/TagSeeder.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UserTableSeeder' => $baseDir . '/database/seeds/UserTableSeeder.php',
+    'VoteSeeder' => $baseDir . '/database/seeds/VoteSeeder.php',
     'Zizaco\\Entrust\\MigrationCommand' => $vendorDir . '/zizaco/entrust/src/commands/MigrationCommand.php',
 );

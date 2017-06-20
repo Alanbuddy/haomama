@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserTableSeeder::class);
+//        $this->call(UserTableSeeder::class);
 //        $this->call(EntrustSeeder::class);
 //        $this->call(TagSeeder::class);
 //        $this->call(LessonSeeder::class);
@@ -27,5 +27,7 @@ class DatabaseSeeder extends Seeder
 //        DB::table('term_object')->insert([ 'term_id' => 1, 'object_id' => 5, 'type' => 'tag', ]);
 //        DB::table('term_object')->insert([ 'term_id' => 2, 'object_id' => 5, 'type' => 'tag', ]);
 //        DB::table('term_object')->insert([ 'term_id' => 3, 'object_id' => 5, 'type' => 'tag', ]);
+
+        $this->call(VoteSeeder::class);
     }
 }
