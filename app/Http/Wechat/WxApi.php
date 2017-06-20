@@ -115,6 +115,7 @@ class WxApi
         $buff = trim($buff, "&");
         return $buff;
     }
+
 }
 
 /**
