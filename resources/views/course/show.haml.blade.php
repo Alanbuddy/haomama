@@ -10,6 +10,7 @@
   window.favorite = "#{route('courses.favorite',$course['id'])}"
   window.review = "#{route('comments.store')}"
   window.course_id = "#{$course['id']}"
+  window.teacher_id = "#{}"
 
 @endsection
 @section('content')
@@ -164,7 +165,7 @@
       .review-title
         %span.title.f14.color7.fb 课程评论
         %span.f12.color7= "(共".$comments->total()."条)"
-        %p.review-score.f12.color5= $course['comments_count'] > 0 ? $avgRate."分/".count($comments)."人已评" : "5分/1人已评"
+        %p.review-score.f12.color5= $avgRate."分/".count($comments)."人已评"
       .review-items-div
         - foreach ($comments as $comment)
           .review-item{"data-id" => $comment['id']}
@@ -203,7 +204,7 @@
       .review-title
         %span.title.f14.color7.fb 课程评论
         %span.f12.color7= "(共".$comments->total()."条)"
-        %p.review-score.f12.color5= $course['comments_count'] > 0 ? $avgRate."分/".count($comments)."人已评" : "5分/1人已评"
+        %p.review-score.f12.color5= count($comments) > 0 ? $avgRate."分/".count($comments)."人已评" : "5分/1人已评"
       .review-items-div
         - foreach ($comments as $comment)
           .review-item{"data-url" => route("comments.vote", $comment['id'])}

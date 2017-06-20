@@ -36,6 +36,7 @@ $(document).ready(function($) {
         console.log(data);
         if (data.success){
           $("#reviewModal").modal("hide");
+          window.location.reload(); 
         } else {
           showMsg("服务器出错，请稍后重试", "center");
         }
