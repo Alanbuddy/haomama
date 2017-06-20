@@ -9,6 +9,7 @@
 namespace App\Http\Wechat;
 
 use App\Http\Util\Curl;
+use App\Models\Setting;
 
 /**
  *
@@ -42,17 +43,26 @@ class WxApi
      */
     public static function accessToken($timeOut = 6)
     {
-        $url = "https://api.weixin.qq.com/cgi-bin/token";
-        $queryData = [
-            'grant_type' => 'client_credential',
-            'appid' => config('wechat.mp.app_id'),//公众账号ID
-            'secret' => config('wechat.mp.app_secret'),//应用密钥
-        ];
-        $url .= "?" . http_build_query($queryData);
-//        var_dump($url);
-        $response = self::request($url);
-        $result = $response;
-        return $result;
+        $accessToken = Setting::where('key', 'access_token')->first();
+        $data = json_decode($accessToken->value);
+        if ($data->expire_time < time()) {
+            $url = "https://api.weixin.qq.com/cgi-bin/token";
+            $queryData = [
+                'grant_type' => 'client_credential',
+                'appid' => config('wechat.mp.app_id'),//公众账号ID
+                'secret' => config('wechat.mp.app_secret'),//应用密钥
+            ];
+            $url .= "?" . http_build_query($queryData);
+            $response = self::request($url);
+            if ($response['code']==200) {
+                $access_token = json_decode($response['data'])->access_token;
+                $data->expire_time = time() + 7000;
+                $data->access_token = $access_token;
+                $accessToken->value = json_encode($data);
+                $accessToken->update();
+            }
+        }
+        return $data;
     }
 
     // call userinfo inteface
@@ -64,18 +74,20 @@ class WxApi
         $response = self::request($url);
         return $response;
     }
+
     /**
      * copy from app/Http/Wechat/sdk/lib/WxPay.Api.php:435
      * 产生随机字符串，不长于32位
      * @param int $length
      * @return 产生的随机字符串
      */
-    public static function getNonceStr($length = 32)
+    public
+    static function getNonceStr($length = 32)
     {
         $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-        $str ="";
-        for ( $i = 0; $i < $length; $i++ )  {
-            $str .= substr($chars, mt_rand(0, strlen($chars)-1), 1);
+        $str = "";
+        for ($i = 0; $i < $length; $i++) {
+            $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
         }
         return $str;
     }
@@ -84,13 +96,14 @@ class WxApi
      * 生成签名
      * @return 签名
      */
-    public static function makeSign($values)
+    public
+    static function makeSign($values)
     {
         //签名步骤一：按字典序排序参数
         ksort($values);
         $string = self::toUrlParams($values);
         //签名步骤二：在string后加入KEY
-        $string = $string . "&key=".config('wechat.mch.key');
+        $string = $string . "&key=" . config('wechat.mch.key');
         //签名步骤三：MD5加密
         $string = md5($string);
         //签名步骤四：所有字符转为大写
@@ -102,12 +115,12 @@ class WxApi
      * copy from \App\Http\Wechat\sdk\lib\WxPayDataBase::ToUrlParams
      * 格式化参数格式化成url参数
      */
-    public static function toUrlParams($values)
+    public
+    static function toUrlParams($values)
     {
         $buff = "";
-        foreach ($values as $k => $v)
-        {
-            if($k != "sign" && $v != "" && !is_array($v)){
+        foreach ($values as $k => $v) {
+            if ($k != "sign" && $v != "" && !is_array($v)) {
                 $buff .= $k . "=" . $v . "&";
             }
         }
