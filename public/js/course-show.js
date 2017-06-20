@@ -10423,17 +10423,20 @@ $('.favorite').click(function() {
 });
 
 $('.admire-icon').click(function() {
-  var url;
+  var ad, num, url;
   url = $(this).closest(".review-item").attr("data-url");
-  console.log(url);
+  num = $(this).siblings(".admire-num").text();
+  ad = $(this);
   return $.getJSON(url, {}, function(data) {
     console.log(data);
     if (data.success) {
       if (data.message === 'yes') {
-        $('.admire-icon').attr('src', '/icon/like1_selected.png');
+        ad.attr('src', '/icon/like1_selected.png');
+        ad.siblings(".admire-num").text(parseInt(num) + 1);
         return showMsg('点赞完成', 'center');
       } else {
-        $('.admire-icon').attr('src', '/icon/like1_normal.png');
+        ad.attr('src', '/icon/like1_normal.png');
+        ad.siblings(".admire-num").text(parseInt(num) - 1);
         return showMsg('取消点赞', 'center');
       }
     } else {
@@ -10480,6 +10483,10 @@ $(".course-item").click(function() {
   var cid;
   cid = $(this).attr("data-id");
   return location.href = window.course_item + "/" + cid;
+});
+
+$(".back").click(function() {
+  return location.href = history.back();
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
