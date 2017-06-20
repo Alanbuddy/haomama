@@ -6,6 +6,7 @@ require_once __DIR__ . "/../Wechat/WxApi.php";
 
 use App\Http\Util\Curl;
 use App\Http\Wechat\WxApi;
+use App\Http\Wechat\WxMessageApi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,27 @@ class WechatController extends Controller
     public function accessToken(Request $request)
     {
         $result = WxApi::accessToken();
+        dd($result);
+    }
+
+    // 获得模板ID
+    public function getTemplateID(Request $request)
+    {
+        $result = WxApi::accessToken();
+        if($result['success']){
+            $access_token=$result['data']->access_token;
+            $result = WxMessageApi::getTemplateId($access_token);
+        }
+        dd($result);
+    }
+
+    public function getIndustry(Request $request)
+    {
+        $result = WxApi::accessToken();
+        if($result['success']){
+            $access_token=$result['data']->access_token;
+            $result = WxMessageApi::getIndustry($access_token);
+        }
         dd($result);
     }
 

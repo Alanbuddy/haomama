@@ -49,7 +49,8 @@ class CommentController extends Controller
         $item->fill($request->only([
             'content',
             'star',
-            'course_id'
+            'course_id',
+            'lesson_id',
         ]));
 //        $item->course_id = 2;
 //        $item->teacher_id = auth()->user()->id;

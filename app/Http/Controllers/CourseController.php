@@ -89,8 +89,10 @@ class CourseController extends Controller
             ->with('user')
             ->with('lesson')
             ->with('votes')
+            ->whereNotNull('lesson_id')
             ->orderBy('vote', 'desc')
             ->paginate(3);
+//        dd($comments);
 //        dd($comments->lastPage());
         foreach ($comments as $comment) {
             $comment->voteCount = count($comment->votes);
