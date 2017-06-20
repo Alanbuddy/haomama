@@ -141,7 +141,9 @@ class CourseController extends Controller
             ->get();
 
         //平均评分
+        //评分功能只针对课程，不针对课时打分,所以要筛选没有lesson_id的评价记录
         $avgRate = $course->comments()
+            ->whereNull('lesson_id')
             ->select(DB::raw('avg(star) as avg'))
             ->first()
             ->avg;

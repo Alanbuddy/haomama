@@ -27,7 +27,10 @@ class DatabaseSeeder extends Seeder
 //        DB::table('term_object')->insert([ 'term_id' => 1, 'object_id' => 5, 'type' => 'tag', ]);
 //        DB::table('term_object')->insert([ 'term_id' => 2, 'object_id' => 5, 'type' => 'tag', ]);
 //        DB::table('term_object')->insert([ 'term_id' => 3, 'object_id' => 5, 'type' => 'tag', ]);
+//        $this->call(VoteSeeder::class);
 
-        $this->call(VoteSeeder::class);
+        DB::table('settings')->insert([ 'key' => 'access_token',
+            'value' => '{"access_token":"example","expire_time":1497937039}' ]);
+
     }
 }

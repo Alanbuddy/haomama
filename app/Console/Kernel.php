@@ -27,9 +27,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         file_put_contents('/home/gao/run.log', date('Y-m-d H:i:s')."\r\n", FILE_APPEND);
+        print("success\n");
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(function () {
+            print("every 5 minute\n");
 //            DB::table('recent_users')->delete();
         })->everyMinute();
     }

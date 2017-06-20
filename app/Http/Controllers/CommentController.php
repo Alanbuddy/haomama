@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Vote;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
@@ -114,14 +113,22 @@ class CommentController extends Controller
         return redirect()->route('comments.index');
     }
 
-    public function vote(Request $request ,Comment $comment)
+    public function vote(Request $request, Comment $comment)
     {
-       $hasVoted=$comment->user==auth()->user();
-       if($hasVoted){
-           $vote=Vote::where('comment_id',$comment->id)
-               ->where('user_id',auth()->user()->id)
-               ->first();
-           $vote->delete();
-       }
+        $vote = Vote::where('comment_id', $comment->id)
+            ->where('user_id', auth()->user()->id)
+            ->first();
+        $hasVoted = (bool)$vote;
+        if ($vote) {
+            $vote->delete();
+        } else {
+            $vote = new Vote();
+            $vote->fill([
+                'comment_id' => $comment->id,
+                'user_id' => auth()->user()->id
+            ]);
+            $vote->save();
+        }
+        return ['success' => true, 'message' => '' . !$hasVoted];
     }
 }

@@ -11,13 +11,13 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 7; $i++) {
+        for ($i = 0; $i < 22; $i++) {
             DB::table('courses')->insert([
                 'name' => str_random('7'),
                 'teacher_id' => 1,
                 'category_id' => 12,
                 'price' => rand(10, 100),
-                'type' => 'online',
+                'type' => $i % 2 == 0 ? 'online' : 'offline',
                 'status' => 'publish',
                 'description' => 'some description',
                 'cover' => '/storage/a.png',
@@ -27,9 +27,16 @@ class CourseSeeder extends Seeder
             ]);
         }
 
-        DB::table('course_lesson')->insert([
-            'course_id' => 1,
-            'lesson_id' => 1,
-        ]);
+        for ($i = 0; $i < 20; $i++) {
+            $lessons=\App\Models\Lesson::get();
+            DB::table('course_lesson')->insert([
+                'course_id' => 1,
+                'lesson_id' => $lessons[$i]->id,
+            ]);
+            DB::table('course_lesson')->insert([
+                'course_id' => 2,
+                'lesson_id' => $lessons[$i]->id,
+            ]);
+        }
     }
 }

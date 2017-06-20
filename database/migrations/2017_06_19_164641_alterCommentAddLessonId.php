@@ -29,7 +29,7 @@ class AlterCommentAddLessonId extends Migration
     public function down()
     {
         Schema::table('comments', function ($table) {
-            $table->dropColumn('lessons');
+            $table->dropColumn('lesson_id');
         });
     }
 }
