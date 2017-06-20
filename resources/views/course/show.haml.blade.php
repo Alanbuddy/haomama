@@ -157,7 +157,7 @@
     .course-content
       .review-title
         %span.title.f14.color7.fb 课程评论
-        %span.f12.color7= "(共".$comments->total."条)"
+        %span.f12.color7= "(共"+ $comments->total() + "条)"
         %p.review-score.f12.color5= $course['comments_count'] > 0 ? $avgRate."分/".count($comments)."人已评" : "5分/1人已评"
       .review-items-div
         - foreach ($comments as $comment)
@@ -165,10 +165,10 @@
             %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
-              %p.f12.color5= (gettimeofday() - date_create($comment['created_at']))."天前"
+              %p.f12.color5= (strtotime(time()) - strtotime($comment['created_at']))."天前"
               %p.f14.color7.review-content= $comment['content']
               %span.f12.color5 评论来源：
-              %span.f12.color5= $comment->lesson->name
+              // %span.f12.color5= $comment->lesson->name
               .admire-div
                 %span.f12.color5.admire-num= $comment['vote']
                 %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'true'}
@@ -180,10 +180,10 @@
           %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "/icon/avatar.png"}
           .item-desc
             %p.f12.color7.review-name= $latestComment->user->name
-            %p.f12.color5= strtotime($latestComment['created_at'])."天前"
+            %p.f12.color5= (strtotime(time()) - strtotime($latestComment['created_at']))."天前"
             %p.f14.color7.review-content= $latestComment['content']
             %span.f12.color5 评论来源：
-            %span.f12.color5= $latestComment->lesson->name
+            // %span.f12.color5= $latestComment->lesson->name
             .admire-div
               %span.f12.color5.admire-num= $latestComment['vote']
               %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'true'}
@@ -200,7 +200,7 @@
             %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
-              %p.f12.color5= strtotime($comment['created_at'])."天前"
+              %p.f12.color5= (strtotime(time()) - strtotime($comment['created_at']))."天前"
               %p.f14.color7.review-content= $comment['content']
               %span.f12.color5 评论来源：
               // %span.f12.color5= $comment->lesson->name
