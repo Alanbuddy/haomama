@@ -61,6 +61,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        if ($user->hasRole('teacher')) {
+            return $this->showTeacher($user);
+        }
         $userId = $user->id;
         $enrolledCourses = Search::enrolledCourses($userId)->get();
         $favoritedCourses = Search::favoritedCourses($userId)->get();
@@ -75,6 +78,16 @@ class UserController extends Controller
         }
         return view('mine.index',
             compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses')
+        );
+    }
+
+    public function showTeacher(User $user)
+    {
+        $courses = $user->coachingCourse()
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('setting.teacher',
+            compact('user', 'courses')
         );
     }
 

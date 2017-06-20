@@ -14,7 +14,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        Auth::loginUsingId(1);
+        Auth::loginUsingId(10);
         //
 //        $items = Course::where('id', '>', 0);
 //        $hasFilter = false;
