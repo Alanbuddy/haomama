@@ -54,15 +54,17 @@ class WxApi
             ];
             $url .= "?" . http_build_query($queryData);
             $response = self::request($url);
-            if ($response['code']==200) {
+            if ($response['code'] == 200) {
                 $access_token = json_decode($response['data'])->access_token;
                 $data->expire_time = time() + 7000;
                 $data->access_token = $access_token;
                 $accessToken->value = json_encode($data);
                 $accessToken->update();
+            } else {
+                return ['success' => false, 'message' => 'curl error'];
             }
         }
-        return $data;
+        return ['success' => true, 'data' => $data];
     }
 
     // call userinfo inteface

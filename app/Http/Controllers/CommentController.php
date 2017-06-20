@@ -129,6 +129,6 @@ class CommentController extends Controller
             ]);
             $vote->save();
         }
-        return ['success' => true, 'message' => '' . !$hasVoted];
+        return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }
 }
