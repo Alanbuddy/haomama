@@ -60,6 +60,12 @@ class User extends Authenticatable
             ->wherePivot('type', 'enroll');
     }
 
+    public function coachingCourse()
+    {
+        return $this->belongsToMany('App\Models\Course')
+            ->wherePivot('user_type', 'teacher');
+    }
+
     public function favoritedCourses()
     {
         return $this->belongsToMany('App\Models\Course')
