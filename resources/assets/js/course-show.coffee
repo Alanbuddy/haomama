@@ -8,7 +8,6 @@ $ ->
   $('.upper').click ->
     $('body').animate({scrollTop: 0})
 
-
 	$("#another-baby").click ->
     baby_dom = document.createElement("div")
     $(baby_dom).addClass("baby-item").html($(".add-baby-div").html())
@@ -62,8 +61,8 @@ $ ->
 
   $('.admire-icon').click ->
     url = $(this).closest(".review-item").attr("data-url")
-    # ad = $(this).attr('data-ad')
-    console.log(url)
+    num = $(this).siblings(".admire-num").text()
+    ad = $(this)
     $.getJSON(
       url,
       {},
@@ -71,12 +70,12 @@ $ ->
         console.log(data)
         if data.success
           if data.message == 'yes'
-            $('.admire-icon').attr('src', '/icon/like1_selected.png')
-            # $('.admire-icon').attr('data-ad', 'true')
+            ad.attr('src', '/icon/like1_selected.png')
+            ad.siblings(".admire-num").text(parseInt(num) + 1)
             showMsg('点赞完成', 'center')
           else
-            $('.admire-icon').attr('src', '/icon/like1_normal.png')
-            # $('.admire-icon').attr('data-ad', 'true')
+            ad.attr('src', '/icon/like1_normal.png')
+            ad.siblings(".admire-num").text(parseInt(num) - 1)
             showMsg('取消点赞', 'center')
         else
           showMsg('服务器出错，请稍后再试', 'center')
@@ -112,5 +111,8 @@ $ ->
   $(".course-item").click ->
     cid = $(this).attr("data-id")
     location.href = window.course_item + "/" +cid
+
+  $(".back").click ->
+    location.href = history.back()
 
 
