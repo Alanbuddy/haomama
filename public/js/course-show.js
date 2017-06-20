@@ -10404,18 +10404,16 @@ $(document).on('change', '.gender', function() {
 $('.favorite').click(function() {
   var fav;
   fav = $(this).attr('data-fav');
-  return $.postJSON('/', {
-    favorite: fav
-  }, function(data) {
+  return $.getJSON(window.favorite, {}, function(data) {
     console.log(data);
     if (data.success) {
-      if (fav === 'true') {
+      if (fav === "false") {
         $('.favorite').attr('src', '/icon/like_selected.png');
-        $('.favorite').attr('data-fav', 'false');
+        $('.favorite').attr('data-fav', 'true');
         return showMsg('成功收藏该课程', 'center');
       } else {
         $('.favorite').attr('src', '/icon/like_normal.png');
-        $('.favorite').attr('data-fav', 'true');
+        $('.favorite').attr('data-fav', 'false');
         return showMsg('收藏已取消', 'center');
       }
     } else {
@@ -10425,44 +10423,22 @@ $('.favorite').click(function() {
 });
 
 $('.admire-icon').click(function() {
-  var ad;
-  ad = $(this).attr('data-ad');
-  return $.postJSON('/', {
-    admire: ad
-  }, function(data) {
+  var url;
+  url = $(this).closest(".review-item").attr("data-url");
+  return $.getJSON(url, {}, function(data) {
     console.log(data);
     if (data.success) {
-      if (ad === 'true') {
+      if (data.message === 'yes') {
         $('.admire-icon').attr('src', '/icon/like1_selected.png');
-        $('.admire-icon').attr('data-ad', 'false');
         return showMsg('点赞完成', 'center');
       } else {
         $('.admire-icon').attr('src', '/icon/like1_normal.png');
-        $('.admire-icon').attr('data-ad', 'true');
         return showMsg('取消点赞', 'center');
       }
     } else {
       return showMsg('服务器出错，请稍后再试', 'center');
     }
   });
-});
-
-$('.view-more').click(function() {
-  var unfold_height;
-  $(this).hide();
-  unfold_height = $(this).siblings('.fold-div').find('.unview-div').height();
-  return $(this).siblings('.fold-div').slideDown($(this).siblings('.fold-div').animate({
-    height: unfold_height + 15
-  }));
-});
-
-$('.teacher-view-more').click(function() {
-  var unfold_height;
-  $(this).hide();
-  unfold_height = $(this).siblings('.teacher-fold-div').find('.teacher-unview-div').height();
-  return $(this).siblings('.teacher-fold-div').slideDown($(this).siblings('.teacher-fold-div').animate({
-    height: unfold_height + 15
-  }));
 });
 
 $('.category-class').each(function() {
@@ -10483,6 +10459,26 @@ $(".online-course .item").each(function() {
   if (hasEnrolled === false) {
     return $(this).addClass("opt55");
   }
+});
+
+$(".items-div > .item:gt(2)").hide();
+
+$(".view-more").click(function() {
+  $(this).siblings(".item").slideDown();
+  return $(this).hide();
+});
+
+$(".items-div > .teacher-item:gt(2)").hide();
+
+$(".view-more").click(function() {
+  $(this).siblings(".teacher-item").slideDown();
+  return $(this).hide();
+});
+
+$(".course-item").click(function() {
+  var cid;
+  cid = $(this).attr("data-id");
+  return location.href = window.course_item + "/" + cid;
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
