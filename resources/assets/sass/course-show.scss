@@ -65,6 +65,7 @@
 }
 .items-div {
   padding-top: 0.32rem;
+  padding-bottom: 0.32rem;
 }
 .fold-div {
   height: 3.64rem;
@@ -126,8 +127,8 @@
 }
 .view-more, .teacher-view-more {
   text-align: center;
-  height: 0.88rem;
-  line-height: 0.88rem;
+  height: 0.56rem;
+  line-height: 0.56rem;
 }
 .more-icon {
   width: 0.16rem;
@@ -181,8 +182,10 @@
     margin-bottom: 0.08rem;
   }
   .review-content {
+    width: 100%;
     margin-top: 0.16rem;
     margin-bottom: 0.1rem;
+    word-wrap: break-word;
   }
   .admire-div {
     position: absolute;

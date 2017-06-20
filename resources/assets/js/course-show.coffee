@@ -42,33 +42,31 @@ $ ->
 
   $('.favorite').click ->
     fav = $(this).attr('data-fav')
-    $.postJSON(
-      '/',
-      {
-        favorite: fav
-      },
+    $.getJSON(
+      window.favorite,
+      {},
       (data) ->
         console.log(data)
         if data.success
-          if fav == 'true'
+          if fav == "false"
             $('.favorite').attr('src', '/icon/like_selected.png')
-            $('.favorite').attr('data-fav', 'false')
+            $('.favorite').attr('data-fav', 'true')
             showMsg('成功收藏该课程', 'center')
           else
             $('.favorite').attr('src', '/icon/like_normal.png')
-            $('.favorite').attr('data-fav', 'true')
+            $('.favorite').attr('data-fav', 'false')
             showMsg('收藏已取消', 'center')
         else
           showMsg('服务器出错，请稍后再试', 'center')
       )
 
   $('.admire-icon').click ->
+    url = $(this).closest(".review-item").attr("data-url")
+    console.log(url)
     ad = $(this).attr('data-ad')
-    $.postJSON(
-      '/',
-      {
-        admire: ad
-      },
+    $.getJSON(
+      url,
+      {},
       (data) ->
         console.log(data)
         if data.success
@@ -82,20 +80,6 @@ $ ->
             showMsg('取消点赞', 'center')
         else
           showMsg('服务器出错，请稍后再试', 'center')
-      )
-
-  $('.view-more').click ->
-    $(this).hide()
-    unfold_height = $(this).siblings('.fold-div').find('.unview-div').height()
-    $(this).siblings('.fold-div').slideDown(
-      $(this).siblings('.fold-div').animate({height: unfold_height + 15})
-      )
-
-  $('.teacher-view-more').click ->
-    $(this).hide()
-    unfold_height = $(this).siblings('.teacher-fold-div').find('.teacher-unview-div').height()
-    $(this).siblings('.teacher-fold-div').slideDown(
-      $(this).siblings('.teacher-fold-div').animate({height: unfold_height + 15})
       )
 
   $('.category-class').each ->
@@ -112,5 +96,21 @@ $ ->
     hasEnrolled = $(this).attr("data-enrolled")
     if hasEnrolled == false
       $(this).addClass("opt55")
+
+  $(".items-div > .item:gt(2)").hide()
+
+  $(".view-more").click ->
+    $(this).siblings(".item").slideDown()
+    $(this).hide()
+
+  $(".items-div > .teacher-item:gt(2)").hide()
+
+  $(".view-more").click ->
+    $(this).siblings(".teacher-item").slideDown()
+    $(this).hide()
+
+  $(".course-item").click ->
+    cid = $(this).attr("data-id")
+    location.href = window.course_item + "/" +cid
 
 
