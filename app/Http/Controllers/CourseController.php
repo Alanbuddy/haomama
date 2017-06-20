@@ -149,6 +149,7 @@ class CourseController extends Controller
             ->select(DB::raw('avg(star) as avg'))
             ->first()
             ->avg;
+        $avgRate=round($avgRate,1);
 
         $teachers = $course->teachers()->get();
         return view('course.show',//'admin.course.show',

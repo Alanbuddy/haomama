@@ -32,6 +32,17 @@ class WechatController extends Controller
         dd($result);
     }
 
+    // 获得所有模板
+    public function getTemplate(Request $request)
+    {
+        $result = WxApi::accessToken();
+        if($result['success']){
+            $access_token=$result['data']->access_token;
+            $result = WxMessageApi::getTemplate($access_token);
+        }
+        dd($result);
+    }
+
     public function getIndustry(Request $request)
     {
         $result = WxApi::accessToken();
