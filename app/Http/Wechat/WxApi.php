@@ -45,6 +45,7 @@ class WxApi
     {
         $accessToken = Setting::where('key', 'access_token')->first();
         $data = json_decode($accessToken->value);
+//        dd(time().' '.$data->expire_time);
         if ($data->expire_time < time()) {
             $url = "https://api.weixin.qq.com/cgi-bin/token";
             $queryData = [
