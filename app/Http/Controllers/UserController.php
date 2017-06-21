@@ -166,4 +166,24 @@ class UserController extends Controller
         }
         return view('setting.index', ['user' => $user]);
     }
+
+    //老师主页点赞功能
+    public function vote(Request $request,User $user)
+    {
+        $vote = Vote::where('teacher_id', $user->id)
+            ->where('user_id', auth()->user()->id)
+            ->first();
+        $hasVoted = (bool)$vote;
+        if ($vote) {
+            $vote->delete();
+        } else {
+            $vote = new Vote();
+            $vote->fill([
+                'teacher_id' => $user->id,
+                'user_id' => auth()->user()->id
+            ]);
+            $vote->save();
+        }
+        return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
+    }
 }

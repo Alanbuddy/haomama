@@ -19,6 +19,7 @@ return array(
     'AlterUser3' => $baseDir . '/database/migrations/2017_06_13_104433_alterUser3.php',
     'AlterUserAddDescription' => $baseDir . '/database/migrations/2017_06_19_160555_alterUserAddDescription.php',
     'AlterUserAddOpenid' => $baseDir . '/database/migrations/2017_06_07_161930_alter_user_add_openid.php',
+    'AlterUserAddTeacherIdColumn' => $baseDir . '/database/migrations/2017_06_21_173720_alterUserAddTeacherIdColumn.php',
     'AlterVideoAddColumn' => $baseDir . '/database/migrations/2017_05_05_164220_alter_video_add_column.php',
     'AlterVideoFile' => $baseDir . '/database/migrations/2017_05_04_150527_alter_video_file.php',
     'AlterVideoPictureDropColumn' => $baseDir . '/database/migrations/2017_05_04_160626_alter_video_picture_drop_column.php',
