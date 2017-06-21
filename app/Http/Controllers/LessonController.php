@@ -88,8 +88,8 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
-
-        return view('admin.lesson.show', compact(
+        
+        return view('setting.lesson', compact(
             'lesson',
             'comments'
         ));

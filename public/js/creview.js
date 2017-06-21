@@ -10358,8 +10358,30 @@ module.exports = __webpack_require__(5);
     $(".main-div").css("display", "none");
     return $(".main-div").eq($(this).index()).css("display", "block");
   });
-  return $(".back").click(function() {
+  $(".back").click(function() {
     return location.href = history.back();
+  });
+  return $('.admire-icon').click(function() {
+    var ad, num, url;
+    url = $(this).closest(".review-item").attr("data-url");
+    num = $(this).siblings(".admire-num").text();
+    ad = $(this);
+    return $.getJSON(url, {}, function(data) {
+      console.log(data);
+      if (data.success) {
+        if (data.message === 'yes') {
+          ad.attr('src', '/icon/like1_selected.png');
+          ad.siblings(".admire-num").text(parseInt(num) + 1);
+          return showMsg('点赞完成', 'center');
+        } else {
+          ad.attr('src', '/icon/like1_normal.png');
+          ad.siblings(".admire-num").text(parseInt(num) - 1);
+          return showMsg('取消点赞', 'center');
+        }
+      } else {
+        return showMsg('服务器出错，请稍后再试', 'center');
+      }
+    });
   });
 });
 
