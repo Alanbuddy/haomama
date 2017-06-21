@@ -14,7 +14,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        Auth::loginUsingId(10);
+        Auth::loginUsingId(1);
         //
 //        $items = Course::where('id', '>', 0);
 //        $hasFilter = false;
@@ -79,11 +79,9 @@ class HomeController extends Controller
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
-        // dd($data);
-        return view('course.index',
+        return view('video.display',//'course.index',
             compact('categories', 'data', 'signPackage')
         );
-//        return view('video.display', $data);
     }
 
 }

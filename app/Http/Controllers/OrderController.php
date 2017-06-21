@@ -154,6 +154,7 @@ class OrderController extends Controller
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
+            dd($ret);
 
             $appId = $ret['appid'];
             $timeStamp = time();

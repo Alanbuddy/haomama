@@ -90,7 +90,7 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
-        dd($comments);
+        
         return view('setting.lesson', compact(
             'lesson',
             'comments'
@@ -128,12 +128,14 @@ class LessonController extends Controller
             ->first()
             ->avg;
         $avgRate = round($avgRate, 1);
-        
-        return view('setting.lesson', compact(
+        $lessons=$course->lessons()->get();
+        return view('setting.show', compact(
             'lesson',
             'comments',
             'hasEnrolled',
-            'avgRate'
+            'avgRate',
+            'course',
+            'lessons'
         ));
     }
 
