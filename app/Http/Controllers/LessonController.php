@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\Search;
 use App\Models\Lession;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
@@ -11,7 +10,7 @@ class LessonController extends Controller
 {
     function __construct()
     {
-        $this->middleware('role:admin')->except('index','show');
+        $this->middleware('role:admin')->except('index', 'show');
     }
 
     /**
@@ -74,9 +73,26 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
-        return view('setting.lesson', [
-            'item' => $lesson,
-        ]);
+        $comments = $lesson->comments()
+            ->with('user')
+            ->with('votes')
+            ->orderBy('vote', 'desc')
+            ->paginate(10);
+
+        foreach ($comments as $comment) {
+            $comment->voteCount = count($comment->votes);
+            $hasVoted = false;
+            foreach ($comment->votes as $vote) {
+                if ($vote->user_id == auth()->user()->id)
+                    $hasVoted = true;
+            }
+            $comment->hasVoted = $hasVoted;
+        }
+
+        return view('admin.lesson.show', compact(
+            'lesson',
+            'comments'
+        ));
     }
 
     /**

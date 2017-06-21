@@ -17,4 +17,9 @@ class Lesson extends Model
     {
         return $this->belongsTo(Video::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment')->whereNull('star');
+    }
 }
