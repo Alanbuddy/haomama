@@ -15,13 +15,13 @@
     .row-div.clearfix
       %span.name.f18.color7.fb= $lesson['name']
       %span.num.f12.color5 1113人已学
-    %p.f14.color6= $course['name']."-第"."课"
+    %p.f14.color6= $course['name']."-第".$index."课"
   .div-line
   .dir-div
     %span.title.f14.color7.fb 课程目录
     .nums-div{"data-enroll" => $hasEnrolled}
       - for ($i=0;$i<count($lessons);$i++)
-        %a.common{"data-status" => $lessons[$i]['status']}
+        %a.common{"data-status" => $lessons[$i]['status'], "data-index" => $index, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
           %span= ($i + 1)
   .div-line
   .desc-div.f14.color7

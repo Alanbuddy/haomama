@@ -135,7 +135,7 @@ class LessonController extends Controller
                 $index=$item->id;
             }
         }
-
+        
         return view('setting.lesson', compact(
             'lesson',
             'comments',
