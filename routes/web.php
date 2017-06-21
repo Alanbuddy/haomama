@@ -56,6 +56,7 @@ Route::group([
     Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');//获取推荐的课程
     Route::get('/courses/{course}/lessons/{lesson}/sign-in', 'CourseController@signIn')->name('courses.signIn');//签到
 
+    Route::get('/courses/{course}/lessons/{lesson}', 'LessonController@detail')->name('courses.lessons.show');//课时详情
     Route::resource('lessons', 'LessonController');
 
     Route::get('/comments/{comment}/vote', 'CommentController@vote')->name('comments.vote');
