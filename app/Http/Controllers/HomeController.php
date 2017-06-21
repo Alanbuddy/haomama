@@ -79,7 +79,7 @@ class HomeController extends Controller
 
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
-        return view('video.display',//'course.index',
+        return view('course.index',
             compact('categories', 'data', 'signPackage')
         );
     }

@@ -128,14 +128,22 @@ class LessonController extends Controller
             ->first()
             ->avg;
         $avgRate = round($avgRate, 1);
-        $lessons=$course->lessons()->get();
+        $lessons=$course->lessons()->get();//TODO  orderBy no.
+        $index=0;
+        foreach($lessons as $item){
+            if($item->id==$lesson->id){
+                $index=$item->id;
+            }
+        }
+
         return view('setting.lesson', compact(
             'lesson',
             'comments',
             'hasEnrolled',
             'avgRate',
             'course',
-            'lessons'
+            'lessons',
+            'index'
         ));
     }
 

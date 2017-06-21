@@ -154,7 +154,6 @@ class OrderController extends Controller
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
-            dd($ret);
 
             $appId = $ret['appid'];
             $timeStamp = time();
@@ -170,7 +169,7 @@ class OrderController extends Controller
             return view('admin.order.pay', $data);
         } catch (\Exception $e) {
             print($e->getMessage());
-            dd($e);
+//            dd($e);
 //            return ['success' => false];
             return view('admin.order.pay');
         }
