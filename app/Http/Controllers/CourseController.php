@@ -122,6 +122,7 @@ class CourseController extends Controller
                 ->where('lesson_id', $lesson->id)
                 ->where('user_id', auth()->user()->id)
                 ->count();
+            $lesson->learnedCount=$lesson->attendances($course->id)->count();
         }
         //学员数
         $enrolledCount = $this->enrolledCount($course);

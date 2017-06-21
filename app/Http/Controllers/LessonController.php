@@ -90,7 +90,7 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
-        
+
         return view('setting.lesson', compact(
             'lesson',
             'comments'
@@ -128,12 +128,15 @@ class LessonController extends Controller
             ->first()
             ->avg;
         $avgRate = round($avgRate, 1);
-        $lessons=$course->lessons()->get();//TODO  orderBy no.
-        $index=0;
-        $i=0;
-        foreach($lessons as $item){
-            if($item->id==$lesson->id){
-                $index=$i;
+
+        $learnedCount = $lesson->attendances($course->id)->count();
+
+        $lessons = $course->lessons()->get();//TODO  orderBy no.
+        $index = 0;
+        $i = 0;
+        foreach ($lessons as $item) {
+            if ($item->id == $lesson->id) {
+                $index = $i;
             }
             $i++;
         }
@@ -145,7 +148,8 @@ class LessonController extends Controller
             'avgRate',
             'course',
             'lessons',
-            'index'
+            'index',
+            'learnedCount'
         ));
     }
 
