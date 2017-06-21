@@ -23,11 +23,18 @@ class UserTableSeeder extends Seeder
 //            ])
 //        ]);
 
-       //teacher
+        //teacher
         DB::table('users')->insert([
-            'name' => 'teacher0',
-            'email' => 'fis@163.com',
+            'name' => 'teacher'.rand(0,10),
+            'email' => str_random(2) . 'fis@163.com',
             'password' => bcrypt('1234'),
+            'description' => json_encode([
+                'title' => 'ABC',
+                'major' => 'popular disease',
+                'award' => 'blab blab',
+                'book' => '<<asa>>',
+                'introduction' => str_random(20)
+            ]),
             'baby' => json_encode([[
                 'name' => str_random(3),
                 'gender' => '男子汉',
