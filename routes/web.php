@@ -69,6 +69,7 @@ Route::group([
     Route::any('/orders/{uuid}/payment/update', 'OrderController@updatePaymentStatus')->name('orders.payment.update');
 
     Route::any('/profile', 'UserController@profile')->name('user.profile');
+    Route::get('/users/{user}/vote', 'UserController@vote')->name('users.vote');
     Route::resource('users', 'UserController');
 
     Route::resource('settings', 'SettingController');
