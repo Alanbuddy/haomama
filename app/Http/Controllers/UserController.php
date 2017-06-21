@@ -93,7 +93,7 @@ class UserController extends Controller
             ->orderBy('id', 'desc')
             ->get();
         $user->description=json_decode($user->description);
-
+    
         return view('setting.teacher',
             compact('user', 'courses')
         );
