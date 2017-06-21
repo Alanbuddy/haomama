@@ -90,7 +90,7 @@
     .items-div.online-course
       - for ($i=0;$i<count($lessons);$i++)
         - if ($lessons[$i]['status'] == 'publish')
-          .item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled}
+          %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("lessons.show", $lessons[$i]['id'])}
             %p.num-div.f16.color7= ($i + 1)
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
@@ -101,7 +101,7 @@
             - if ($lessons[$i]['id'] == 1)
               %img.free{src: "/icon/free.png"}
         - else 
-          .item.opt55{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled}
+          %a.item.opt55{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("lessons.show", $lessons[$i]['id'])}
             %p.num-div.f16.color7= ($i + 1)
             .item-desc
               %p.f14.color7= $lessons[$i]['name']

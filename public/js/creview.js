@@ -10352,11 +10352,14 @@ module.exports = __webpack_require__(5);
   $(".review-input").keyup(function() {
     return check_review_input();
   });
-  return $(".nav li").click(function() {
+  $(".nav li").click(function() {
     $(".nav li").removeClass("active");
     $(this).addClass("active");
     $(".main-div").css("display", "none");
     return $(".main-div").eq($(this).index()).css("display", "block");
+  });
+  return $(".back").click(function() {
+    return location.href = history.back();
   });
 });
 
