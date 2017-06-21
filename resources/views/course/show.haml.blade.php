@@ -96,7 +96,7 @@
               %p.f14.color7= $lessons[$i]['name']
               .item-row.f12.color5
                 %span.min= (strtotime($lessons[$i]['end']) - strtotime($lessons[$i]['begin']))."min"
-                %span 1233人已学
+                %span= $lessons[$i]->learnedCount."人已学"
             %img.go{src: "/icon/go.png"}
             - if ($lessons[$i]['id'] == 1)
               %img.free{src: "/icon/free.png"}

@@ -17,7 +17,7 @@ $ ->
     $(".main-div").eq($(this).index()).css("display", "block")
 
   $(".back").click ->
-    location.href = history.back()
+    location.href = window.course
 
   $('.admire-icon').click ->
     url = $(this).closest(".review-item").attr("data-url")
@@ -43,11 +43,8 @@ $ ->
 
   $(".nums-div a").each ->
     index = $(this).attr("data-index")
-    span_text = $(this).find("span").text()
-    ln = $(this)
-    if index == span_text
-      ln.siblings().removeClass("red-border")
-      ln.addClass("red-border")
+    $(this).siblings("a").removeClass("red-border")
+    $(".nums-div a").eq(index).addClass("red-border")
 
 
 
