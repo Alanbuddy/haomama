@@ -13,7 +13,7 @@
 .main-div{style: "display:block"}
   .title-div
     .row-div.clearfix
-      %span.name.f18.color7.fb 宝宝生长发育特点
+      %span.name.f18.color7.fb= $item['name']
       %span.num.f12.color5 1113人已学
     %p.f14.color6 名字很长很长-第1课
   .div-line

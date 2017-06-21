@@ -16,6 +16,9 @@ $ ->
     $(".main-div").css("display", "none")
     $(".main-div").eq($(this).index()).css("display", "block")
 
+  $(".back").click ->
+    location.href = history.back()
+
 
     
 
