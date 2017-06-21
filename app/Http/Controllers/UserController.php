@@ -92,7 +92,8 @@ class UserController extends Controller
             ->with('category')//预加载课程所属分类的信息
             ->orderBy('id', 'desc')
             ->get();
-        
+        $user->description=json_decode($user->description);
+
         return view('setting.teacher',
             compact('user', 'courses')
         );

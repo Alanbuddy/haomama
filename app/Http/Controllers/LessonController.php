@@ -197,4 +197,5 @@ class LessonController extends Controller
         $lesson->delete();
         return redirect()->route('lessons.index');
     }
+
 }
