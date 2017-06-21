@@ -15,7 +15,7 @@
     .row-div.clearfix
       %span.name.f18.color7.fb= $lesson['name']
       %span.num.f12.color5 1113人已学
-    %p.f14.color6 名字很长很长-第1课
+    %p.f14.color6= $course['name']."-第"."课"
   .div-line
   .dir-div
     %span.title.f14.color7.fb 课程目录
@@ -40,7 +40,7 @@
   .div-line
   .desc-div.f14.color7
     %span.fb 本课内容
-    .desc 这是一门直播的课程.......
+    .desc= $lesson['description']
 
 .main-div
   - if (count($comments) > 3)
