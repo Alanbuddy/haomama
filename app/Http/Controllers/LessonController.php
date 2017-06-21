@@ -121,10 +121,18 @@ class LessonController extends Controller
             $comment->hasVoted = $hasVoted;
         }
 
+        $avgRate = $course->comments()
+            ->whereNull('lesson_id')
+            ->select(DB::raw('avg(star) as avg'))
+            ->first()
+            ->avg;
+        $avgRate = round($avgRate, 1);
+
         return view('admin.lesson.show', compact(
             'lesson',
             'comments',
-            'hasEnrolled'
+            'hasEnrolled',
+            'avgRate'
         ));
     }
 
