@@ -129,7 +129,8 @@ class LessonController extends Controller
             ->avg;
         $avgRate = round($avgRate, 1);
         $lessons=$course->lessons()->get();
-        return view('setting.show', compact(
+        
+        return view('setting.lesson', compact(
             'lesson',
             'comments',
             'hasEnrolled',

@@ -19,24 +19,10 @@
   .div-line
   .dir-div
     %span.title.f14.color7.fb 课程目录
-    .nums-div
-      %a.common
-        %img.free-icon{src: "/icon/free.png"}
-        1
-      %a.common 1
-      %a.common 1
-      %a.common 1
-      %a.common 1
-      %a.common 1
-      %a.common 1
-      %a.common 1
-      %a.common 1
-      %a.common 1
-      //未购买的免费课和购买后的新增课程均为red-border
-      %a.red-border
-        %img.new-icon{src: "/icon/new.png"}
-        2
-      %a.unopen 3
+    .nums-div{"data-enroll" => $hasEnrolled}
+      - for ($i=0;$i<count($lessons);$i++)
+        %a.common{"data-status" => $lessons[$i]['status']}
+          %span= ($i + 1)
   .div-line
   .desc-div.f14.color7
     %span.fb 本课内容
