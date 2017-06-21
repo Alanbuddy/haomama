@@ -22,4 +22,9 @@ class Lesson extends Model
     {
         return $this->hasMany('App\Models\Comment')->whereNull('star');
     }
+
+    public function attendances($course_id)
+    {
+        return $this->hasMany('App\Models\Attendance')->where('course_id',$course_id);
+    }
 }
