@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Lession;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
