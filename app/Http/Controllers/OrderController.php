@@ -170,6 +170,7 @@ class OrderController extends Controller
             return view('admin.order.pay', $data);
         } catch (\Exception $e) {
             print($e->getMessage());
+            dd($e);
 //            return ['success' => false];
             return view('admin.order.pay');
         }
