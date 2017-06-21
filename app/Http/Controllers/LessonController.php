@@ -140,7 +140,7 @@ class LessonController extends Controller
             }
             $i++;
         }
-
+        
         return view('setting.lesson', compact(
             'lesson',
             'comments',

@@ -10341,7 +10341,7 @@ module.exports = __webpack_require__(5);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_review_input, check_status;
+  var check_review_input;
   check_review_input = function() {
     if ($(".review-input").val() === "") {
       return $("#delivery").attr("disabled", true).css("opacity", "0.5");
@@ -10383,28 +10383,16 @@ module.exports = __webpack_require__(5);
       }
     });
   });
-  check_status = function() {
-    var enroll, img;
-    enroll = $(".num-div").attr("data-enroll");
-    img = $("<img class='free-icon' src= '/icon/free.png'>");
-    $(".nums-div a:eq(0)").find("span").before(img);
-    if (!enroll) {
-      $(".nums-div a:eq(0)").addClass("red-border");
-      return $(".nums-div a:gt(0)").addClass("unopen").click(function(e) {
-        return e.preventDefault();
-      });
-    } else {
-      return $(".nums-div a").each(function() {
-        var an, status;
-        status = $(this).attr("data-status");
-        an = $(this);
-        if (status !== "publish") {
-          return an.addClass("unopen");
-        }
-      });
+  return $(".nums-div a").each(function() {
+    var index, ln, span_text;
+    index = $(this).attr("data-index");
+    span_text = $(this).find("span").text();
+    ln = $(this);
+    if (index === span_text) {
+      ln.siblings().removeClass("red-border");
+      return ln.addClass("red-border");
     }
-  };
-  return check_status();
+  });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
