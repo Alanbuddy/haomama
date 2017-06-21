@@ -89,7 +89,7 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
-        
+        dd($comments);
         return view('setting.lesson', compact(
             'lesson',
             'comments'

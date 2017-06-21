@@ -66,7 +66,7 @@
       %span.refund.f12.color5 退款
     .items-div.offline-lesson
       - for ($i=0;$i<count($lessons);$i++)
-        %a.item.opt55{"data-id" => $lessons[$i]['id'], href: route("lessons.show", $lessons[$i]['id'])}
+        %a.item.opt55{"data-id" => $lessons[$i]['id'], href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
           %p.num-div.f16.color7= ($i + 1)
           .item-desc
             %p.f14.color7= $lessons[$i]['name']
@@ -90,7 +90,7 @@
     .items-div.online-course
       - for ($i=0;$i<count($lessons);$i++)
         - if ($lessons[$i]['status'] == 'publish')
-          %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("lessons.show", $lessons[$i]['id'])}
+          %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
             %p.num-div.f16.color7= ($i + 1)
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
@@ -101,7 +101,7 @@
             - if ($lessons[$i]['id'] == 1)
               %img.free{src: "/icon/free.png"}
         - else 
-          %a.item.opt55{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("lessons.show", $lessons[$i]['id'])}
+          %a.item.opt55{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
             %p.num-div.f16.color7= ($i + 1)
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
