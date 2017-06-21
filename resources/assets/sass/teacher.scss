@@ -90,3 +90,16 @@
 .course-item-div {
   padding-top: 0.12rem;
 }
+
+.unstart {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
