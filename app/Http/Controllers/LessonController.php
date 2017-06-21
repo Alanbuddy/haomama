@@ -128,8 +128,8 @@ class LessonController extends Controller
             ->first()
             ->avg;
         $avgRate = round($avgRate, 1);
-
-        return view('admin.lesson.show', compact(
+        
+        return view('setting.lesson', compact(
             'lesson',
             'comments',
             'hasEnrolled',
