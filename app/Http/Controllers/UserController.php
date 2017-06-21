@@ -76,7 +76,6 @@ class UserController extends Controller
             }
             $c->time = $timeInfo;
         }
-        // dd($onGoingCourses);
         return view('mine.index',
             compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses')
         );
