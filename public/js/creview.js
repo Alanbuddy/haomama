@@ -10359,7 +10359,7 @@ module.exports = __webpack_require__(5);
     return $(".main-div").eq($(this).index()).css("display", "block");
   });
   $(".back").click(function() {
-    return location.href = history.back();
+    return location.href = window.course;
   });
   $('.admire-icon').click(function() {
     var ad, num, url;
@@ -10384,14 +10384,10 @@ module.exports = __webpack_require__(5);
     });
   });
   return $(".nums-div a").each(function() {
-    var index, ln, span_text;
+    var index;
     index = $(this).attr("data-index");
-    span_text = $(this).find("span").text();
-    ln = $(this);
-    if (index === span_text) {
-      ln.siblings().removeClass("red-border");
-      return ln.addClass("red-border");
-    }
+    $(this).siblings("a").removeClass("red-border");
+    return $(".nums-div a").eq(index).addClass("red-border");
   });
 });
 

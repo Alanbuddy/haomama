@@ -2,7 +2,7 @@
 
 $(document).ready(function($){
   function check_status(){
-    var enroll = $(".num-div").attr("data-enroll");
+    var enroll = window.enroll;
     var img = $("<img class='free-icon' src= '/icon/free.png'>");
     $(".nums-div a:eq(0)").find("span").before(img);
     if (!enroll) {

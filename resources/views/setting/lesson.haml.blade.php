@@ -1,6 +1,9 @@
 @extends('layout.app')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/creview.css') }}">
+:javascript
+  window.enroll = "#{$hasEnrolled}"
+  window.course = "#{route('courses.show',$course)}"
 
 @endsection
 @section('content')
@@ -14,12 +17,12 @@
   .title-div
     .row-div.clearfix
       %span.name.f18.color7.fb= $lesson['name']
-      %span.num.f12.color5 1113人已学
-    %p.f14.color6= $course['name']."-第".$index."课"
+      %span.num.f12.color5= $learnedCount."人已学"
+    %p.f14.color6= $course['name']."-第".($index + 1)."课"
   .div-line
   .dir-div
     %span.title.f14.color7.fb 课程目录
-    .nums-div{"data-enroll" => $hasEnrolled}
+    .nums-div
       - for ($i=0;$i<count($lessons);$i++)
         %a.common{"data-status" => $lessons[$i]['status'], "data-index" => $index, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
           %span= ($i + 1)
@@ -90,10 +93,10 @@
                   %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
 @endsection
 @section('foot-div')
-//未购买时不显示底部评论input
-.foot-div
-  %input.review-input{placeholder: "写评论......"}
-  .btn#delivery 发送
+- if ($hasEnrolled)
+  .foot-div
+    %input.review-input{placeholder: "写评论......"}
+    .btn#delivery 发送
 @endsection
 #confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

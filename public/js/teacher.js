@@ -10333,19 +10333,23 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $(".back").click(function() {
+  $(".back").click(function() {
     return location.href = history.back();
   });
-});
-
-$('.category-class').each(function() {
-  if ($(this).text() === "分类N") {
-    return $(this).addClass('health-title');
-  } else if ($(this).text() === "分类t") {
-    return $(this).addClass('psychology-title');
-  } else {
-    return $(this).addClass('grow-title');
-  }
+  $('.category-class').each(function() {
+    if ($(this).text() === "分类N") {
+      return $(this).addClass('health-title');
+    } else if ($(this).text() === "分类t") {
+      return $(this).addClass('psychology-title');
+    } else {
+      return $(this).addClass('grow-title');
+    }
+  });
+  return $(".course-item").click(function() {
+    var cid;
+    cid = $(this).attr("data-id");
+    return location.href = window.course_item + "/" + cid;
+  });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

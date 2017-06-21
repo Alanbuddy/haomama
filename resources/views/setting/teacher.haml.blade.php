@@ -1,6 +1,8 @@
 @extends('layout.app')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/teacher.css') }}">
+:javascript
+  window.course_item = "#{route('courses.index')}"
 
 @endsection
 @section('content')
@@ -10,7 +12,7 @@
   %p.name.f16.fb.color1 张老师
   .row-div.f12.color6
     %label 职称：
-    %span 某某医院科室主任医师
+    %span
   .row-div.f12.color6
     %label 专长：
     %span 婴幼儿常见病
@@ -31,10 +33,10 @@
     // 赞后框和文字颜色变为ccc,like2_selected.png
 .div-line
 .course-item-div
-   - foreach ($courses as $course)
+  - foreach ($courses as $course)
     .course-item{"data-id" => $course['id']}
       .course-icon-div
-        %img.course-icon{src: $coures['cover'] ? $course['cover'] : "/icon/example.png"}
+        %img.course-icon{src: $course['cover'] ? $course['cover'] : "/icon/example.png"}
       .word-div
         .course-row-div.clearfix
           %span.f12.category-class= $course['category']['name']
