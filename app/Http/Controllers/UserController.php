@@ -85,6 +85,11 @@ class UserController extends Controller
     public function showTeacher(User $user)
     {
         $courses = $user->coachingCourse()
+            ->withCount('comments')
+            ->withCount(['users' => function ($query) {
+                $query->where('type', 'enroll');
+            }])
+            ->with('category')//预加载课程所属分类的信息
             ->orderBy('id', 'desc')
             ->get();
         return view('setting.teacher',
