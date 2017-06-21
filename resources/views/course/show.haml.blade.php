@@ -9,7 +9,6 @@
   window.course_item="#{route('courses.index')}"
   window.favorite = "#{route('courses.favorite',$course['id'])}"
   window.review = "#{route('comments.store')}"
-  window.course_id = "#{$course['id']}"
 
 
 @endsection
@@ -67,7 +66,7 @@
       %span.refund.f12.color5 退款
     .items-div.offline-lesson
       - for ($i=0;$i<count($lessons);$i++)
-        .item.opt55{"data-id" => $lessons[$i]['id']}
+        %a.item.opt55{"data-id" => $lessons[$i]['id'], href: route("lessons.show", $lessons[$i]['id'])}
           %p.num-div.f16.color7= ($i + 1)
           .item-desc
             %p.f14.color7= $lessons[$i]['name']
