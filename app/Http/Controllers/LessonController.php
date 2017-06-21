@@ -74,7 +74,7 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
-        return view('admin.lesson.show', [
+        return view('setting.lesson', [
             'item' => $lesson,
         ]);
     }
