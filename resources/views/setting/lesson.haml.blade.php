@@ -13,7 +13,7 @@
 .main-div{style: "display:block"}
   .title-div
     .row-div.clearfix
-      %span.name.f18.color7.fb= $item['name']
+      %span.name.f18.color7.fb= $lesson['name']
       %span.num.f12.color5 1113人已学
     %p.f14.color6 名字很长很长-第1课
   .div-line
@@ -43,69 +43,67 @@
     .desc 这是一门直播的课程.......
 
 .main-div
-  .hot-review-div
-    .review-title
-      %span.title.f14.color7.fb 课程评论
-      %span.f12.color7 (共810条)
-      %p.review-score.f12.color5 4.8分/2100人已评
-    .review-items-div
-      .review-item
-        %img.review-avatar{src: "/icon/avatar.png"}
-        .item-desc
-          %p.f12.color7.review-name 最赞评论者
-          %p.f12.color5 3天前
-          %p.f14.color7.review-content 这是评论 
-          %span.f12.color5 评论来源：
-          %span.f12.color5 第1课时
-          .admire-div
-            %span.f12.color5.admire-num 123
-            %img.admire-icon{src: "/icon/like1_normal.png"}
-      .review-item
-        %img.review-avatar{src: "/icon/avatar.png"}
-        .item-desc
-          %p.f12.color7.review-name 二赞评论者
-          %p.f12.color5 3天前
-          %p.f14.color7.review-content 这是评论 
-          %span.f12.color5 评论来源：
-          %span.f12.color5 第1课时
-          .admire-div
-            %span.f12.color5.admire-num 123
-            %img.admire-icon{src: "/icon/like1_selected.png"}
-      .review-item
-        %img.review-avatar{src: "/icon/avatar.png"}
-        .item-desc
-          %p.f12.color7.review-name 三赞评论者
-          %p.f12.color5 3天前
-          %p.f14.color7.review-content 这是评论 
-          %span.f12.color5 评论来源：
-          %span.f12.color5 第1课时
-          .admire-div
-            %span.f12.color5.admire-num 123
-            %img.admire-icon{src: "/icon/like1_normal.png"}
-  %p.f12.color6.feed-review 最新评论
-  .feed-review-items-div
-    .feed-review-item
-      %img.review-avatar{src: "/icon/avatar.png"}
-      .item-desc
-        %p.f12.color7.review-name 评论者
-        %p.f12.color5 3天前
-        %p.f14.color7.review-content 这是评论 
-        %span.f12.color5 评论来源：
-        %span.f12.color5 第1课时
-        .admire-div
-          %span.f12.color5.admire-num 123
-          %img.admire-icon{src: "/icon/like1_normal.png"}
-    .feed-review-item
-      %img.review-avatar{src: "/icon/avatar.png"}
-      .item-desc
-        %p.f12.color7.review-name 评论者
-        %p.f12.color5 3天前
-        %p.f14.color7.review-content 这是评论 
-        %span.f12.color5 评论来源：
-        %span.f12.color5 第1课时
-        .admire-div
-          %span.f12.color5.admire-num 123
-          %img.admire-icon{src: "/icon/like1_normal.png"}
+  - if (count($comments) > 3)
+    .hot-review-div
+      .review-title
+        %span.title.f14.color7.fb 课程评论
+        %span.f12.color7= "(共".$comments->total()."条)"
+        %p.review-score.f12.color5= $avgRate."分/".count($comments)."人已评"
+      .review-items-div
+        - foreach ($comments as $comment)
+          .review-item{"data-url" => route("comments.vote", $comment['id'])}
+            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
+            .item-desc
+              %p.f12.color7.review-name= $comment->user->name
+              %p.f12.color5= (strtotime(time()) - strtotime($comment['created_at']))."天前"
+              %p.f14.color7.review-content= $comment['content']
+              %span.f12.color5 评论来源：
+              %span.f12.color5= $comment->lesson->name
+              .admire-div
+                %span.f12.color5.admire-num= $comment['voteCount']
+                - if ($comment['hasVoted'] == false)
+                  %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+                - else
+                  %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
+    %p.f12.color6.feed-review 最新评论
+    .feed-review-items-div
+      - foreach ($latestComments as $latestComment)
+        .review-item{"data-url" => route("comments.vote", $latestComment['id'])}
+          %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "/icon/avatar.png"}
+          .item-desc
+            %p.f12.color7.review-name= $latestComment->user->name
+            %p.f12.color5= (strtotime(time()) - strtotime($latestComment['created_at']))."天前"
+            %p.f14.color7.review-content= $latestComment['content']
+            %span.f12.color5 评论来源：
+            %span.f12.color5= $latestComment->lesson->name
+            .admire-div
+              %span.f12.color5.admire-num= $latestComment['voteCount']
+              - if ($latestComment['hasVoted'] == false)
+                %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+              - else
+                %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
+  - else
+    .hot-review-div
+      .review-title
+        %span.title.f14.color7.fb 课程评论
+        %span.f12.color7= "(共".$comments->total()."条)"
+        %p.review-score.f12.color5= $avgRate."分/".count($comments)."人已评"
+      .review-items-div
+        - foreach ($comments as $comment)
+          .review-item{"data-url" => route("comments.vote", $comment['id'])}
+            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
+            .item-desc
+              %p.f12.color7.review-name= $comment->user->name
+              %p.f12.color5= (strtotime(time()) - strtotime($comment['created_at']))."天前"
+              %p.f14.color7.review-content= $comment['content']
+              %span.f12.color5 评论来源：
+              %span.f12.color5= $comment->lesson->name
+              .admire-div
+                %span.f12.color5.admire-num= $comment['voteCount']
+                - if ($comment['hasVoted'] == false)
+                  %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+                - else
+                  %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
 @endsection
 @section('foot-div')
 //未购买时不显示底部评论input
