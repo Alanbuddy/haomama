@@ -7,10 +7,6 @@ $ ->
   	# juml to messgae_page
   	location.href = ""
 
-  $(".item-right").click ->
-  	# jump to signin_page
-  	location.href = ""
-
   $(".favorite-more").click ->
   	# jump to favorite page 
   	location.href = window.favorited_course
@@ -43,3 +39,15 @@ $ ->
   $('.enrolled-course').find(".favorite-item:gt(2)").hide()
 
   $('.favorite-div').find(".favorite-item:gt(2)").hide()
+
+  sign_in = ->
+    wx.scanQRCode
+      needResult: 1
+      scanType: ["qrCode"]
+      success: (res) ->
+        result = res.resultStr
+        window.location.href = result
+
+  $(".item-right").click ->
+    sign_in()
+
