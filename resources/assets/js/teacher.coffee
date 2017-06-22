@@ -16,7 +16,6 @@ $ ->
     location.href = window.course_item + "/" +cid
 
   $(".admire-icon").click ->
-    console.log(window.has)
     num = $(this).siblings("span").text()
     _this = $(this)
     $.getJSON(

@@ -10352,7 +10352,6 @@ return jQuery;
   });
   return $(".admire-icon").click(function() {
     var _this, num;
-    console.log(window.has);
     num = $(this).siblings("span").text();
     _this = $(this);
     return $.getJSON(window.vote, {}, function(data) {
