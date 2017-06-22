@@ -78,8 +78,10 @@ class UserController extends Controller
             $c->time = $timeInfo;
         }
 
+        $messagesCount=$user->messages()->where('has_read',false)->count();
+
         return view('mine.index',
-            compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses')
+            compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses','messagesCount')
         );
     }
 
