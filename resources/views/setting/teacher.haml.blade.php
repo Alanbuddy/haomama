@@ -4,7 +4,6 @@
 :javascript
   window.course_item = "#{route('courses.index')}"
   window.vote = "#{route('users.vote', $user['id'])}"
-  window.has = "#{$hasVoted}"
 
 @endsection
 @section('content')
