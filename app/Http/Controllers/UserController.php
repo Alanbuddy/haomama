@@ -101,7 +101,6 @@ class UserController extends Controller
             if ($vote->user_id == auth()->user()->id)
                 $hasVoted = true;
         }
-
         return view('setting.teacher',
             compact('user', 'courses','hasVoted','votes')
         );

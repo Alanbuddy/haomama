@@ -10337,18 +10337,42 @@ return jQuery;
     return location.href = history.back();
   });
   $('.category-class').each(function() {
-    if ($(this).text() === "分类N") {
+    if ($(this).text() === "·ÖÀàN") {
       return $(this).addClass('health-title');
-    } else if ($(this).text() === "分类t") {
+    } else if ($(this).text() === "·ÖÀàt") {
       return $(this).addClass('psychology-title');
     } else {
       return $(this).addClass('grow-title');
     }
   });
-  return $(".course-item").click(function() {
+  $(".course-item").click(function() {
     var cid;
     cid = $(this).attr("data-id");
     return location.href = window.course_item + "/" + cid;
+  });
+  return $(".admire-icon").click(function() {
+    var _this, num;
+    console.log(window.has);
+    num = $(this).siblings("span").text();
+    _this = $(this);
+    return $.getJSON(window.vote, {}, function(data) {
+      console.log(data);
+      if (data.success) {
+        if (data.message === "yes") {
+          _this.attr("src", "/icon/like2_selected.png");
+          _this.siblings("span").text(parseInt(num) + 1).css("color", "#ccc");
+          _this.closest(".admire-div").css("border-color", "#ccc");
+          return showMsg("点赞完成", "center");
+        } else {
+          _this.attr('src', '/icon/like2_normal.png');
+          _this.siblings("span").text(parseInt(num) - 1).css("color", "#fc90a5");
+          _this.closest(".admire-div").css("border-color", "#fc90a5");
+          return showMsg("取消点赞", "center");
+        }
+      } else {
+        return showMsg('服务器出错，请稍后再试', 'center');
+      }
+    });
   });
 });
 
