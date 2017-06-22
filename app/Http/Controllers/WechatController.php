@@ -25,8 +25,8 @@ class WechatController extends Controller
     public function getTemplateID(Request $request)
     {
         $result = WxApi::accessToken();
-        if($result['success']){
-            $access_token=$result['data']->access_token;
+        if ($result['success']) {
+            $access_token = $result['data']->access_token;
             $result = WxMessageApi::getTemplateId($access_token);
         }
         dd($result);
@@ -36,8 +36,8 @@ class WechatController extends Controller
     public function getTemplate(Request $request)
     {
         $result = WxApi::accessToken();
-        if($result['success']){
-            $access_token=$result['data']->access_token;
+        if ($result['success']) {
+            $access_token = $result['data']->access_token;
             $result = WxMessageApi::getTemplate($access_token);
         }
         dd($result);
@@ -46,8 +46,8 @@ class WechatController extends Controller
     public function getIndustry(Request $request)
     {
         $result = WxApi::accessToken();
-        if($result['success']){
-            $access_token=$result['data']->access_token;
+        if ($result['success']) {
+            $access_token = $result['data']->access_token;
             $result = WxMessageApi::getIndustry($access_token);
         }
         dd($result);
@@ -84,6 +84,17 @@ class WechatController extends Controller
     {
         $result = WxApi::oauthAccessToken($request->code);
         dd($result);
+    }
+
+    public function send()
+    {
+        $result = WxApi::accessToken();
+        if ($result['success']) {
+            $access_token = $result['data']->access_token;
+            $result = WxMessageApi::send($access_token);
+        }
+        dd($result);
+
     }
 
 }

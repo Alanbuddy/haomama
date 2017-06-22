@@ -95,7 +95,7 @@ class UserController extends Controller
             ->get();
         $user->description = json_decode($user->description);
 
-        $votes = $user->votes();
+        $votes = $user->votes()->get();
         $hasVoted = false;
         foreach ($votes as $vote) {
             if ($vote->user_id == auth()->user()->id)

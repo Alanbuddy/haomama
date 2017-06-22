@@ -98,6 +98,7 @@ Route::group([
     Route::get('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment/notify');
     Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
     Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
+    Route::get('/wechat/send', 'WechatController@send')->name('wechat.send');
 
     Route::any('/sms/send', 'SmsController@send')->name('sms.send');
     Route::any('/sms/residual', 'SmsController@residual')->name('sms.residual');
