@@ -93,7 +93,6 @@ class UserController extends Controller
             ->with('category')//预加载课程所属分类的信息
             ->orderBy('id', 'desc')
             ->get();
-<<<<<<< HEAD
         $user->description = json_decode($user->description);
 
         $votes = $user->votes();
@@ -102,11 +101,6 @@ class UserController extends Controller
             if ($vote->user_id == auth()->user()->id)
                 $hasVoted = true;
         }
-
-=======
-        $user->description=json_decode($user->description);
-        dd($hasVoted);
->>>>>>> f05221c4a9492b74d8204b08de134041913f7798
         return view('setting.teacher',
             compact('user', 'courses','hasVoted')
         );
