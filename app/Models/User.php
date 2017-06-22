@@ -78,4 +78,9 @@ class User extends Authenticatable
             ->where('begin','<',date('Y-m-d H:i:s',time()))
             ->where('end','>',date('Y-m-d H:i:s',time()));
     }
+    //教师获得的赞
+    public function votes()
+    {
+        return $this->hasMany('App\Models\Vote','teacher_id');
+    }
 }

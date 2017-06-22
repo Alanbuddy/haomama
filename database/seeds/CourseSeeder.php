@@ -28,7 +28,7 @@ class CourseSeeder extends Seeder
         }
 
         for ($i = 0; $i < 20; $i++) {
-            $lessons=\App\Models\Lesson::get();
+            $lessons = \App\Models\Lesson::get();
             DB::table('course_lesson')->insert([
                 'course_id' => 1,
                 'lesson_id' => $lessons[$i]->id,
@@ -37,6 +37,16 @@ class CourseSeeder extends Seeder
                 'course_id' => 2,
                 'lesson_id' => $lessons[$i]->id,
             ]);
+        }
+
+        $course = \App\Models\Course::first();
+        $teachers = \App\Models\User::where('name', 'like', 'teacher%')->get();
+        foreach ($teachers as $user) {
+            $course->users()->syncWithoutDetaching([$user->id => ['user_type' => 'teacher']]);
+        }
+        $teachers = \App\Models\User::where('name', 'like', 'teacher%')->get();
+        foreach ($teachers as $user) {
+            $course->users()->syncWithoutDetaching([$user->id => ['user_type' => 'teacher']]);
         }
     }
 }

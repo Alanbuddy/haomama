@@ -79,7 +79,9 @@ class LessonController extends Controller
             ->with('user')
             ->with('votes')
             ->orderBy('vote', 'desc')
+            ->orderBy('id', 'desc')
             ->paginate(10);
+
 
         foreach ($comments as $comment) {
             $comment->voteCount = count($comment->votes);
@@ -105,6 +107,12 @@ class LessonController extends Controller
             ->with('votes')
             ->where('course_id', $course->id)
             ->orderBy('vote', 'desc')
+            ->paginate(10);
+
+        $latestComments = $course->comments()
+            ->with('user')
+            ->with('lesson')
+            ->orderBy('id', 'desc')
             ->paginate(10);
 
         $count = auth()->user()->enrolledCourses()
@@ -149,7 +157,8 @@ class LessonController extends Controller
             'course',
             'lessons',
             'index',
-            'learnedCount'
+            'learnedCount',
+            'latestComments'
         ));
     }
 
