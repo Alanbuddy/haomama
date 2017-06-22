@@ -83,4 +83,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Vote','teacher_id');
     }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Models\Message','to');
+    }
 }

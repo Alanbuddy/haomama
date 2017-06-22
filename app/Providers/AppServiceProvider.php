@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Http\Wechat\JSSDK;
 use App\Services\SearchService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,9 +20,9 @@ class AppServiceProvider extends ServiceProvider
     {
 //        监听查询事件
         DB::listen(function ($query) {
-            Log::info( $query->sql);
-            Log::info( $query->time);
-            Log::info( $query->bindings);
+            Log::info($query->sql);
+            Log::info($query->time);
+//            Log::info( $query->bindings);
         });
         $this->app->resolving(SearchService::class, function ($api, $app) {
             Log::info(' 解析「SearchSearvice」类型的对象时调用');
@@ -36,4 +38,5 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
 }

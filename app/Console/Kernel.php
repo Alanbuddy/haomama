@@ -3,8 +3,10 @@
 namespace App\Console;
 
 use App\Console\Commands\test;
+use App\Console\Commands\WechatMessage;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use MtHaml\Exception;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         test::class,
+        WechatMessage::class,
     ];
 
     /**
@@ -34,6 +37,7 @@ class Kernel extends ConsoleKernel
             print("every 5 minute\n");
 //            DB::table('recent_users')->delete();
         })->everyMinute();
+        $schedule->command('wechatMessage:send');
     }
 
     /**
