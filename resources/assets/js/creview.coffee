@@ -44,7 +44,8 @@ $ ->
   $(".nums-div a").each ->
     index = $(this).attr("data-index")
     $(this).siblings("a").removeClass("red-border")
-    $(".nums-div a").eq(index).addClass("red-border")
+    $(this).siblings("a").find("span").css("color", "#999")
+    $(".nums-div a").eq(index).addClass("red-border").find("span").css("color", "#333")
 
 
 
