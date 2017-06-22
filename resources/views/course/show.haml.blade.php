@@ -122,7 +122,7 @@
         %img.avatar{src: $teacher['avatar'] ? $teacher['avatar'] : "/icon/avatar.png"}
         .item-desc
           %p.f14.color7.teacher-name= $teacher['name']."老师"
-          %p.f12.color6= json_decode($teacher->description)->introduction
+          %p.f12.color6= json_decode($teacher['description'])->introduction
     - if (count($teachers) > 3)
       .view-more
         %span.f12.color5 查看更多
