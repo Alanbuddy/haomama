@@ -28,7 +28,10 @@
   .avatar-div
     %img.teacher-avatar{src: $user['avatar'] ? $user['avatar'] : "/icon/teacher_avatar.png"}
   .admire-div
-    %img.admire-icon{src: "/icon/like2_normal.png"}
+    - if ($user['hasVoted'] == false)
+      %img.admire-icon{src: "/icon/like2_normal.png"}
+    - else
+      %img.admire-icon{src: "/icon/like2_selected.png"}
     %span.f14.color8 999
     // 赞后框和文字颜色变为ccc,like2_selected.png
 .div-line
