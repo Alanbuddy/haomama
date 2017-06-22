@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\Search;
 use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -76,7 +77,7 @@ class UserController extends Controller
             }
             $c->time = $timeInfo;
         }
-        
+
         return view('mine.index',
             compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses')
         );
@@ -92,10 +93,17 @@ class UserController extends Controller
             ->with('category')//预加载课程所属分类的信息
             ->orderBy('id', 'desc')
             ->get();
-        $user->description=json_decode($user->description);
+        $user->description = json_decode($user->description);
+
+        $votes = $user->votes();
+        $hasVoted = false;
+        foreach ($votes as $vote) {
+            if ($vote->user_id == auth()->user()->id)
+                $hasVoted = true;
+        }
 
         return view('setting.teacher',
-            compact('user', 'courses')
+            compact('user', 'courses','hasVoted')
         );
     }
 
@@ -168,7 +176,7 @@ class UserController extends Controller
     }
 
     //老师主页点赞功能
-    public function vote(Request $request,User $user)
+    public function vote(Request $request, User $user)
     {
         $vote = Vote::where('teacher_id', $user->id)
             ->where('user_id', auth()->user()->id)

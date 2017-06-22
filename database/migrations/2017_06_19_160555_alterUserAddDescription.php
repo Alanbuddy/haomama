@@ -14,7 +14,7 @@ class AlterUserAddDescription extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->text('description')->nullable();
+            $table->json('description')->nullable();
         });
     }
 
