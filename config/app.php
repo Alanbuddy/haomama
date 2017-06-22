@@ -181,6 +181,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Bkwld\LaravelHaml\ServiceProvider::class,
         App\Providers\SearchServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class
 
     ],
 

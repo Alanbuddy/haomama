@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Wechat\JSSDK;
 use App\Services\SearchService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use App\Http\Wechat\JSSDK;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,13 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
-        $signPackage = $jsSdk->getSignPackage();
-        View::share('signPackage', $signPackage);
 //        监听查询事件
         DB::listen(function ($query) {
-            Log::info( $query->sql);
-            Log::info( $query->time);
+            Log::info($query->sql);
+            Log::info($query->time);
 //            Log::info( $query->bindings);
         });
         $this->app->resolving(SearchService::class, function ($api, $app) {
@@ -41,4 +38,5 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
 }

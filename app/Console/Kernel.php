@@ -38,6 +38,7 @@ class Kernel extends ConsoleKernel
 //            DB::table('recent_users')->delete();
         })->everyMinute();
 
+        var_dump($_SERVER);
 //        $schedule->command('wechatMessage:send');
     }
 
