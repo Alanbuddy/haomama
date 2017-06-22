@@ -66,7 +66,7 @@
       %span.refund.f12.color5 退款
     .items-div.offline-lesson
       - for ($i=0;$i<count($lessons);$i++)
-        %a.item.opt55{"data-id" => $lessons[$i]['id'], href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
+        .item.opt55{"data-id" => $lessons[$i]['id']}
           %p.num-div.f16.color7= ($i + 1)
           .item-desc
             %p.f14.color7= $lessons[$i]['name']
@@ -89,9 +89,9 @@
       %span.f12.color7= "(共".count($lessons)."节)"
     .items-div.online-course
       - for ($i=0;$i<count($lessons);$i++)
-        - if ($lessons[$i]['status'] == 'publish')
-          %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
-            %p.num-div.f16.color7= ($i + 1)
+        %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
+          %p.num-div.f16.color7= ($i + 1)
+          - if ($lessons[$i]['status'] == 'publish')
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
               .item-row.f12.color5
@@ -100,13 +100,11 @@
             %img.go{src: "/icon/go.png"}
             - if ($lessons[$i]['id'] == 1)
               %img.free{src: "/icon/free.png"}
-        - else 
-          %a.item.opt55{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
-            %p.num-div.f16.color7= ($i + 1)
+          - else
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
               .item-row.f12.color5
-                %span 未上线
+                %span 未上线     
       - if (count($lessons) > 3)
         .view-more
           %span.f12.color5 查看更多
@@ -233,6 +231,16 @@
 
 
 @endsection
+#confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %p.prompt 未报名课程
+        %p.question　确认立即报名当前课程？
+        .confirm-div
+          %a#register 报名
+          %a{"data-dismiss" => "modal"} 取消
+
 #reviewModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content

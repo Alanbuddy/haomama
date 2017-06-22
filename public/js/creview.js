@@ -10387,7 +10387,8 @@ module.exports = __webpack_require__(5);
     var index;
     index = $(this).attr("data-index");
     $(this).siblings("a").removeClass("red-border");
-    return $(".nums-div a").eq(index).addClass("red-border");
+    $(this).siblings("a").find("span").css("color", "#999");
+    return $(".nums-div a").eq(index).addClass("red-border").find("span").css("color", "#333");
   });
 });
 

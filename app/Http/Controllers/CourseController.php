@@ -154,7 +154,7 @@ class CourseController extends Controller
         $avgRate = round($avgRate, 1);
 
         $teachers = $course->teachers()->get();
-       
+        
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程

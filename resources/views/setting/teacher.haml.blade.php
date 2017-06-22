@@ -28,7 +28,7 @@
   .avatar-div
     %img.teacher-avatar{src: $user['avatar'] ? $user['avatar'] : "/icon/teacher_avatar.png"}
   .admire-div
-    - if ($user['hasVoted'] == false)
+    - if ($hasVoted == false)
       %img.admire-icon{src: "/icon/like2_normal.png"}
     - else
       %img.admire-icon{src: "/icon/like2_selected.png"}

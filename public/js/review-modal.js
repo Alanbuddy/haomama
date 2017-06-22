@@ -144,4 +144,25 @@ $(document).ready(function($) {
       }
       );
   });
+
+
+  $(".online-course .item").each(function(){
+    var status = $(this).attr("data-status");
+    var enroll = $(this).attr("data-enrolled");
+    var _this = $(this);
+    if (status != "publish") {
+      _this.addClass("opt55");
+      _this.click(function(e){
+        e.preventDefault();
+        showMsg("这节课还没有上线哦～", "center");
+      });
+    }
+    // if (!enroll) {
+    //   _this.click(function(e){
+    //     e.preventDefault();
+    //     $("#confirmModal").modal("show");
+    //   });
+    // }
+  });
+    
 });

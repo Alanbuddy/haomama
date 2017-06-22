@@ -542,6 +542,74 @@
   -o-align-items: center;
   align-items: center;
 }
+
+#confirmModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 40%;
+    margin-left: -2.7rem;
+    margin-top: -1.44rem;
+    width: 5.4rem;
+    height: 2.88rem;
+    z-index: 10;
+  }
+  .modal-backdrop {
+    background-color: #999;
+  }
+  .modal-content {
+    border-radius: 12px;
+  }
+  .modal-body, input, label {
+    margin: 0;
+    padding: 0;
+  }
+  p {
+    text-align: center;
+  }
+  .prompt {
+    font-size: 1.7em;
+    color: #333;
+    margin-top: 0.46rem;
+  }
+  .question {
+    font-size: 1.3em;
+    color: #666;
+    margin-top: 0.24rem;
+  }
+  .confirm-div {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-felx;
+    display: flex;
+    -webkit-justify-content: space-between; 
+    -moz-justify-content: space-between;
+    -ms-justify-content: space-between;
+    -o-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center; 
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    margin-top: 0.4rem;
+    border-top: 1px solid #ccc;
+  }
+  a {
+    width: 50%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    font-size: 1.6em;
+    color: #227dda;
+  }
+  a:nth-child(1) {
+    border-right: 1px solid #ccc;
+  }
+}
+
+
 //modal fade direction from bottom (define a class that name bottom and add it on profileModal)
 .modal.fade:not(.in).bottom .modal-dialog {
   -webkit-transform: translate3d(0, 125%, 0);
