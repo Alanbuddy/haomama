@@ -17,6 +17,7 @@
   "/css/creview.css": "/css/creview.css",
   "/css/mycourse.css": "/css/mycourse.css",
   "/css/app.css": "/css/app.css",
+  "/js/teacher.js": "/js/teacher.js",
   "/js/setting-index.js": "/js/setting-index.js",
   "/js/setting-create.js": "/js/setting-create.js",
   "/js/search-result.js": "/js/search-result.js",
@@ -29,7 +30,6 @@
   "/js/course-show.js": "/js/course-show.js",
   "/js/course-index.js": "/js/course-index.js",
   "/js/course-create.js": "/js/course-create.js",
-  "/js/teacher.js": "/js/teacher.js",
   "/js/sign.js": "/js/sign.js",
   "/js/pay-success.js": "/js/pay-success.js",
   "/js/message.js": "/js/message.js"

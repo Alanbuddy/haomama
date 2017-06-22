@@ -12,23 +12,26 @@
   %p.name.f16.fb.color1 张老师
   .row-div.f12.color6
     %label 职称：
-    %span
+    %span= $user->description->title
   .row-div.f12.color6
     %label 专长：
-    %span 婴幼儿常见病
+    %span= $user->description->major
   .row-div.f12.color6
     %label 获奖：
-    %span 第十届“中国好医师奖”第第十届“中国好医师奖”十届“中国好医师奖”
+    %span= $user->description->award
   .row-div.f12.color6
     %label 出书：
-    %span 《聪明宝宝》
+    %span= $user->description->book
   .row-div.f12.color6
     %label 简介：
-    %span 某某医院科室主任医师某某某某某某医院科室主任医师某医院科室主任医师某医院科室主任医师某医院科室主任医师某医院科室主任医师
+    %span= $user->description->introduction
   .avatar-div
-    %img.teacher-avatar{src: "/icon/teacher_avatar.png"}
+    %img.teacher-avatar{src: $user['avatar'] ? $user['avatar'] : "/icon/teacher_avatar.png"}
   .admire-div
-    %img.admire-icon{src: "/icon/like2_normal.png"}
+    - if ($user['hasVoted'] == false)
+      %img.admire-icon{src: "/icon/like2_normal.png"}
+    - else
+      %img.admire-icon{src: "/icon/like2_selected.png"}
     %span.f14.color8 999
     // 赞后框和文字颜色变为ccc,like2_selected.png
 .div-line

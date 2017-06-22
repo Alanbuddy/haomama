@@ -45,13 +45,12 @@
                 // 所有要调用的 API 都要加到这个列表中
                 'onMenuShareTimeline',
                 'scanQRCode',
+                'hideAllNonBaseMenuItem'
             ]
         });
         wx.ready(function () {
             // 在这里调用 API
-            wx.hideMenuItems({
-                menuList: [] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
-            });
+//            wx.hideAllNonBaseMenuItem();
             wx.onMenuShareTimeline({
                 title: '', // 分享标题
                 link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致

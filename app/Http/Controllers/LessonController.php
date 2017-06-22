@@ -79,6 +79,7 @@ class LessonController extends Controller
             ->with('user')
             ->with('votes')
             ->orderBy('vote', 'desc')
+            ->orderBy('id', 'desc')
             ->paginate(10);
 
         foreach ($comments as $comment) {
