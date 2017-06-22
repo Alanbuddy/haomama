@@ -10341,13 +10341,11 @@ module.exports = __webpack_require__(8);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
+  var sign_in;
   $(".avatar-div").click(function() {
     return location.href = window.profile;
   });
   $(".message-icon").click(function() {
-    return location.href = "";
-  });
-  $(".item-right").click(function() {
     return location.href = "";
   });
   $(".favorite-more").click(function() {
@@ -10380,7 +10378,21 @@ module.exports = __webpack_require__(8);
     return location.href = window.course + "/" + cid;
   });
   $('.enrolled-course').find(".favorite-item:gt(2)").hide();
-  return $('.favorite-div').find(".favorite-item:gt(2)").hide();
+  $('.favorite-div').find(".favorite-item:gt(2)").hide();
+  sign_in = function() {
+    return wx.scanQRCode({
+      needResult: 1,
+      scanType: ["qrCode"],
+      success: function(res) {
+        var result;
+        result = res.resultStr;
+        return window.location.href = result;
+      }
+    });
+  };
+  return $(".item-right").click(function() {
+    return sign_in();
+  });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

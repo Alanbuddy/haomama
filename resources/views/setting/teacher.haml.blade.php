@@ -28,12 +28,15 @@
     %span= $user->description->introduction
   .avatar-div
     %img.teacher-avatar{src: $user['avatar'] ? $user['avatar'] : "/icon/teacher_avatar.png"}
-  .admire-div
-    - if ($hasVoted == false)
+  - if ($hasVoted == false)
+    .admire-div
       %img.admire-icon{src: "/icon/like2_normal.png"}
-    - else
+      %span.f14.color8= count($votes)
+  - else
+    .admire-div.bc
       %img.admire-icon{src: "/icon/like2_selected.png"}
-    %span.f14.color8= count($votes)
+      %span.f14.color12= count($votes)
+    
 .div-line
 .course-item-div
   - foreach ($courses as $course)
