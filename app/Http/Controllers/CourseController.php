@@ -122,7 +122,7 @@ class CourseController extends Controller
                 ->where('lesson_id', $lesson->id)
                 ->where('user_id', auth()->user()->id)
                 ->count();
-            $lesson->learnedCount=$lesson->attendances($course->id)->count();
+            $lesson->learnedCount = $lesson->attendances($course->id)->count();
         }
         //学员数
         $enrolledCount = $this->enrolledCount($course);
@@ -154,7 +154,7 @@ class CourseController extends Controller
         $avgRate = round($avgRate, 1);
 
         $teachers = $course->teachers()->get();
-        
+
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
@@ -475,7 +475,15 @@ class CourseController extends Controller
             ]);
             $attendance->save();
         }
-        return 'success';
-        return back();
+        $lessons = $course->lessons()->get();//TODO  orderBy no.
+        $index = 0;
+        $i = 0;
+        foreach ($lessons as $item) {
+            if ($item->id == $lesson->id) {
+                $index = $i;
+            }
+            $i++;
+        }
+        return view('mime.create', compact('course', 'index'));
     }
 }
