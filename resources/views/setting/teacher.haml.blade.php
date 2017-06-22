@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="{{ mix('/css/teacher.css') }}">
 :javascript
   window.course_item = "#{route('courses.index')}"
+  window.vote = "#{route('users.vote', $user['id'])}"
+  window.has = "#{$hasVoted}"
 
 @endsection
 @section('content')
@@ -32,8 +34,7 @@
       %img.admire-icon{src: "/icon/like2_normal.png"}
     - else
       %img.admire-icon{src: "/icon/like2_selected.png"}
-    %span.f14.color8 999
-    // 赞后框和文字颜色变为ccc,like2_selected.png
+    %span.f14.color8= count($votes)
 .div-line
 .course-item-div
   - foreach ($courses as $course)
