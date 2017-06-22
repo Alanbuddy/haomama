@@ -103,7 +103,7 @@ class UserController extends Controller
         }
 
         return view('setting.teacher',
-            compact('user', 'courses','hasVoted')
+            compact('user', 'courses','hasVoted','votes')
         );
     }
 
