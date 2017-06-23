@@ -38,7 +38,7 @@ class MessageController extends Controller
 //            ->addSelect(DB::raw('sum(object_id) as voteCount'))
 //            ->groupBy('comments.id')
 //            ->get();
-        dd($messages);
+        // dd($messages);
 //        dd($messages, $messages[3]);
 //        dd($messages[3]->comment,$messages[3]->comment->user);
         return view('setting.message', compact('messages'));
