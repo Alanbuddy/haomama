@@ -84,6 +84,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Vote','teacher_id');
     }
 
+    //发给我的消息
     public function messages()
     {
         return $this->hasMany('App\Models\Message','to');
