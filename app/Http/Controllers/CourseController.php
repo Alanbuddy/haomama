@@ -462,6 +462,7 @@ class CourseController extends Controller
      */
     public function signIn(Request $request, Course $course, Lesson $lesson)
     {
+
         $hasAttended = (bool)Attendance::where('course_id', $course->id)
             ->where('lesson_id', $lesson->id)
             ->where('user_id', auth()->user()->id)
