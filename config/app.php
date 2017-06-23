@@ -181,6 +181,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Bkwld\LaravelHaml\ServiceProvider::class,
         App\Providers\SearchServiceProvider::class,
+        App\Providers\MessageServiceProvider::class,
         App\Providers\ComposerServiceProvider::class
 
     ],
@@ -233,7 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Search' => App\Facades\Search::class,
-
+        'MessageFacade' => App\Facades\Message::class,
     ],
 
 ];
