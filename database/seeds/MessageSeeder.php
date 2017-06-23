@@ -12,10 +12,16 @@ class MessageSeeder extends Seeder
     public function run()
     {
         for ($i = 0; $i < 3; $i++) {
-            DB::table('messages')->insert([
+//            DB::table('messages')->insert([ ]);
+
+            $message=new \App\Models\Message();
+
+            $message->fill([
                 'to' => '1',
                 'content' => str_random(20),
             ]);
+
+            $message->save();
         }
     }
 }
