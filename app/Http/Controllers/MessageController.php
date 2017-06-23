@@ -21,23 +21,10 @@ class MessageController extends Controller
             ->update(['has_read' => true]);
 
         $messages = auth()->user()
-            ->comments()
-            ->with(['votes' => function ($query) {
-                $query->orderBy('id', 'desc')->paginate(1);
-            }])
-            ->join('messages', 'messages.object_id', '=', 'comments.id')
-            ->select(DB::raw('comments.*'))//->where('messages.has_read',false)
-            ->addSelect(DB::raw('sum(messages.id) as messageCount'))
-            ->groupBy('comments.id')
+            ->messages()
+            ->orderBy('id','desc')
+            ->with('comment.user')
             ->get();
-//            ->messages()
-//            ->leftJoin('comments', 'comments.id', '=', 'messages.object_id')
-//            ->orderBy('id','desc')
-//            ->with('comment.user')
-//            ->select('from')
-//            ->addSelect(DB::raw('sum(object_id) as voteCount'))
-//            ->groupBy('comments.id')
-//            ->get();
         // dd($messages);
 //        dd($messages, $messages[3]);
 //        dd($messages[3]->comment,$messages[3]->comment->user);

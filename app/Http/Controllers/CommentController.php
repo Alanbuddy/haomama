@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\MessageFacade;
 use App\Models\Comment;
+use App\Models\Message;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 
@@ -134,6 +135,7 @@ class CommentController extends Controller
                 'user_id' => auth()->user()->id
             ]);
             $vote->save();
+
             MessageFacade::send([
                 'from' => auth()->user()->id,
                 'to' => $comment->user_id,
