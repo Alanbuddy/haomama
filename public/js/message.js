@@ -10342,20 +10342,26 @@ module.exports = __webpack_require__(7);
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   return $(".time").each(function() {
-    var _this, data_time, time;
-    data_time = $(this).attr("data-time");
-    time = parseInt($(this).text());
+    var _this, data_time, dd, dm, dt, dtime, dy, time, time_now;
+    data_time = $(this).text();
+    dtime = Date.parse(data_time);
+    dt = new Date(dtime);
+    dy = dt.getFullYear();
+    dm = dt.getMonth() + 1;
+    dd = dt.getDate();
+    time_now = Date.parse(Date());
+    time = time_now - dtime;
     _this = $(this);
-    if (time < 60) {
-      return _this.text(time + "秒前");
-    } else if ((60 < time && time < 3600)) {
-      return _this.text(time / 60 + "分前");
-    } else if ((3600 < time && time < 86400)) {
-      return _this.text(time / 3600 + "小时前");
-    } else if ((86400 < time && time < 604800)) {
-      return _this.text(time / 7 + "天前");
+    if (time < 60000) {
+      return _this.text(time / 1000 + "秒前");
+    } else if ((60000 < time && time < 3600000)) {
+      return _this.text(time / 60000 + "分前");
+    } else if ((3600000 < time && time < 86400000)) {
+      return _this.text(time / 3600000 + "小时前");
+    } else if ((86400000 < time && time < 604800000)) {
+      return _this.text(time / 86400000 + "天前");
     } else {
-      return _this.text();
+      return _this.text(dy + "年" + dm + "月" + dd + "日");
     }
   });
 });
