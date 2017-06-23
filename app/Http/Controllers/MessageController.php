@@ -14,9 +14,16 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
-        $messages=auth()->user()->messages()->get();
-        dd($messages);
+        //set all messages status to has been read
+        auth()->user()->messages()
+            ->where('has_read',false)
+            ->update(['has_read'=>true]);
+
+        $messages=auth()->user()
+            ->messages()
+            ->with('comment')
+            ->get();
+//        dd($messages);
         return view('setting.message',compact('messages'));
     }
 

@@ -78,6 +78,7 @@ class UserController extends Controller
             $c->time = $timeInfo;
         }
 
+        //unread messages count;
         $messagesCount=$user->messages()->where('has_read',false)->count();
 
         return view('mine.index',
