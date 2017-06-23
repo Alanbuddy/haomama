@@ -126,7 +126,7 @@ class CommentController extends Controller
             ->first();
         $hasVoted = (bool)$vote;
         if ($vote) {
-            $vote->delete();
+            $vote->delete();//already voted for this comment,now cancel that vote
         } else {
             $vote = new Vote();
             $vote->fill([
@@ -134,14 +134,14 @@ class CommentController extends Controller
                 'user_id' => auth()->user()->id
             ]);
             $vote->save();
+            MessageFacade::send([
+                'from' => auth()->user()->id,
+                'to' => $comment->user_id,
+                'object_id' => $comment->id,
+                'object_type' => 'comment',
+                'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
+            ]);
         }
-        MessageFacade::send([
-            'from' => auth()->user()->id,
-            'to' => $comment->user_id,
-            'object_id' => $comment->id,
-            'object_type' => 'comment',
-            'has_read'=>false,//this statement here is just for readability,it can be omitted since its default value is false
-        ]);
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }
 }

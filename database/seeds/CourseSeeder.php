@@ -23,8 +23,14 @@ class CourseSeeder extends Seeder
 
         $users = \App\Models\User::where('name', 'like', 'user%')->get();
         foreach ($users as $user) {
-            $course->users()->syncWithoutDetaching([$user->id => ['user_type' => 'user','type'=>'enroll']]);
-            $course->users()->syncWithoutDetaching([$user->id => ['user_type' => 'user','type'=>'favorite']]);
+            $course->users()->syncWithoutDetaching([$user->id => ['user_type' => 'student','type'=>'enroll']]);
+            $course->users()->syncWithoutDetaching([$user->id => ['user_type' => 'student','type'=>'favorite']]);
+        }
+        $admin=\App\Models\User::first();
+        $courses=\App\Models\Course::get();
+        foreach ($courses as $course){
+            $course->users()->syncWithoutDetaching([$admin->id => ['user_type' => 'student','type'=>'favorite']]);
+            $course->users()->syncWithoutDetaching([$admin->id => ['user_type' => 'student','type'=>'enroll']]);
         }
     }
 

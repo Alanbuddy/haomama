@@ -11,6 +11,7 @@ class Message extends Model
 
     public function comment()
     {
-        return $this->belongsTo('App\Models\Comment','object_id');
+        return $this->belongsTo('App\Models\Comment','object_id')
+            ->orderBy('comments.id','desc');
     }
 }

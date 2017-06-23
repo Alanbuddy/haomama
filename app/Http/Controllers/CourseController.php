@@ -462,6 +462,7 @@ class CourseController extends Controller
      */
     public function signIn(Request $request, Course $course, Lesson $lesson)
     {
+        $hasEnrolled=(bool)auth()->user()->enrolledCourses()->where('id',$course->id)->count();
 
         $hasAttended = (bool)Attendance::where('course_id', $course->id)
             ->where('lesson_id', $lesson->id)
@@ -486,6 +487,6 @@ class CourseController extends Controller
             $i++;
         }
         
-        return view('mine.create', compact('course', 'index','lesson'));
+        return view('mine.create', compact('hasEnrolled','course', 'index','lesson'));
     }
 }

@@ -49,7 +49,7 @@ class UserTableSeeder extends Seeder
 
     public function seedUser()
     {
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             DB::table('users')->insert([
                     'name' => 'user' . str_random(4),
                     'email' => str_random(5) . '@163.com',
