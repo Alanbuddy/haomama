@@ -17,7 +17,7 @@
             %img.avatar{src: $message['avatar'] ? $message['avatar'] : "/icon/avatar.png"}
           .desc-div
             %p.name.f12.color7= $message['name']
-            %p.time.f12.color5= (strtotime(time()) - strtotime($message['created_at']))."天前"
+            %p.time.f12.color5{"data-time" => $message['created_at']}= (strtotime(time()) - strtotime($message['created_at']))."天前"
             %p.num.f14.color7= "等".$message['num']."人赞了您的评论"
             %p.notice.f14.color5= $message['content']
       - if (!$message['from'])
@@ -26,7 +26,7 @@
             %img.avatar{src: "/icon/ma_icon.png"}
           .desc-div
             %p.name.f12.color7 课程小助手
-            %p.time.f12.color5= (strtotime(time()) - strtotime($message['created_at']))."天前"
+            %p.time.f12.color5{"data-time" => $message['created_at']}= (strtotime(time()) - strtotime($message['created_at']))."天前"
             %p.num.f14.color7= $message['content']
 - else
   .empty-div

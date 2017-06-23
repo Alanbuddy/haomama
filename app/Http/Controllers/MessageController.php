@@ -23,7 +23,7 @@ class MessageController extends Controller
             ->messages()
             ->with('comment')
             ->get();
-//        dd($messages);
+       
         return view('setting.message',compact('messages'));
     }
 
