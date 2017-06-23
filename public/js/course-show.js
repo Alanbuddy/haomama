@@ -10340,7 +10340,7 @@ module.exports = __webpack_require__(4);
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var change_avatar;
+/* WEBPACK VAR INJECTION */(function($) {var cb, ce, change_avatar, course_begin, course_end, ctime;
 
 $(function() {
   $(document).scroll(function() {
@@ -10488,6 +10488,47 @@ $(".course-item").click(function() {
 $(".back").click(function() {
   return location.href = history.back();
 });
+
+$(".time").each(function() {
+  var data_time, dd, dm, dt, dtime, dy, time, time_now;
+  data_time = $(this).text();
+  dtime = Date.parse(data_time);
+  dt = new Date(dtime);
+  dy = dt.getFullYear();
+  dm = dt.getMonth() + 1;
+  dd = dt.getDate();
+  time_now = Date.parse(Date());
+  time = (time_now - dtime) / 1000;
+  if (time < 60) {
+    return $(this).text(time + "秒前");
+  } else if ((60 <= time && time < 3600)) {
+    return $(this).text(Math.round(time / 60) + "分前");
+  } else if ((3600 <= time && time < 86400)) {
+    return $(this).text(Math.round(time / 3600) + "小时前");
+  } else if ((86400 <= time && time < 604800)) {
+    return $(this).text(Math.round(time / 86400) + "天前");
+  } else {
+    return $(this).text(dy + "年" + dm + "月" + dd + "日");
+  }
+});
+
+course_begin = $(".course-time").text();
+
+course_end = $(".course-time").attr("time-end");
+
+cb = Date.parse(course_begin);
+
+ce = Date.parse(course_end);
+
+ctime = (cb - ce) / 1000;
+
+if (ctime < 60) {
+  $(".course-time").text(ctime + "sec");
+} else if ((60 <= ctime && ctime < 3600)) {
+  $(".course-time").text(Math.round(ctime / 60) + "min");
+} else {
+  $(".course-time").text(Math.floor(ctime / 3600) + "h" + Math.round((ctime % 3600) / 60) + "m");
+}
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 

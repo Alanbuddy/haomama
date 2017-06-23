@@ -10383,12 +10383,34 @@ module.exports = __webpack_require__(5);
       }
     });
   });
-  return $(".nums-div a").each(function() {
+  $(".nums-div a").each(function() {
     var index;
     index = $(this).attr("data-index");
     $(this).siblings("a").removeClass("red-border");
     $(this).siblings("a").find("span").css("color", "#999");
     return $(".nums-div a").eq(index).addClass("red-border").find("span").css("color", "#333");
+  });
+  return $(".time").each(function() {
+    var data_time, dd, dm, dt, dtime, dy, time, time_now;
+    data_time = $(this).text();
+    dtime = Date.parse(data_time);
+    dt = new Date(dtime);
+    dy = dt.getFullYear();
+    dm = dt.getMonth() + 1;
+    dd = dt.getDate();
+    time_now = Date.parse(Date());
+    time = (time_now - dtime) / 1000;
+    if (time < 60) {
+      return $(this).text(time + "秒前");
+    } else if ((60 <= time && time < 3600)) {
+      return $(this).text(Math.round(time / 60) + "分前");
+    } else if ((3600 <= time && time < 86400)) {
+      return $(this).text(Math.round(time / 3600) + "小时前");
+    } else if ((86400 <= time && time < 604800)) {
+      return $(this).text(Math.round(time / 86400) + "天前");
+    } else {
+      return $(this).text(dy + "年" + dm + "月" + dd + "日");
+    }
   });
 });
 
