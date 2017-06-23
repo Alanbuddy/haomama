@@ -8,6 +8,7 @@
   window.enrolled_course = "#{route('courses.enrolled')}"
   window.favorited_course = "#{route('courses.favorited')}"
   window.profile = "#{route('user.profile')}"
+  window.message = "#{route('messages.index')}"
 
 @section('content')
 
@@ -20,8 +21,8 @@
       %a.f12.color5{href: "#"} 个人资料
       %img.arrow{src: "/icon/go.png"}
   %img.message-icon{src: "/icon/message.png"}
-  //有消息时显示小红点
-  %img.small-circle{src: "/icon/small-dot.png"}
+  - if ($messagesCount)
+    %img.small-circle{src: "/icon/small-dot.png"}
 %hr.div-line
 - if (count($onGoingCourses) == 0 && count($enrolledCourses) == 0 && count($favoritedCourses) == 0)
   .empty-div
