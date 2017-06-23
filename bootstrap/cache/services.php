@@ -32,7 +32,8 @@
     28 => 'Zizaco\\Entrust\\EntrustServiceProvider',
     29 => 'Bkwld\\LaravelHaml\\ServiceProvider',
     30 => 'App\\Providers\\SearchServiceProvider',
-    31 => 'App\\Providers\\ComposerServiceProvider',
+    31 => 'App\\Providers\\MessageServiceProvider',
+    32 => 'App\\Providers\\ComposerServiceProvider',
   ),
   'eager' => 
   array (
@@ -54,7 +55,8 @@
     15 => 'Zizaco\\Entrust\\EntrustServiceProvider',
     16 => 'Bkwld\\LaravelHaml\\ServiceProvider',
     17 => 'App\\Providers\\SearchServiceProvider',
-    18 => 'App\\Providers\\ComposerServiceProvider',
+    18 => 'App\\Providers\\MessageServiceProvider',
+    19 => 'App\\Providers\\ComposerServiceProvider',
   ),
   'deferred' => 
   array (

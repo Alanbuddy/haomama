@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\MessageFacade;
 use App\Models\Comment;
 use App\Models\Vote;
 use Illuminate\Http\Request;
@@ -117,6 +118,7 @@ class CommentController extends Controller
         return redirect()->route('comments.index');
     }
 
+    //评论点赞
     public function vote(Request $request, Comment $comment)
     {
         $vote = Vote::where('comment_id', $comment->id)
@@ -133,6 +135,10 @@ class CommentController extends Controller
             ]);
             $vote->save();
         }
+        MessageFacade::send([
+           'from'=>auth()->user()->id,
+            'to'=>
+        ]);
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }
 }
