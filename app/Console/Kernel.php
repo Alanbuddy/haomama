@@ -37,7 +37,8 @@ class Kernel extends ConsoleKernel
             print("every 5 minute\n");
 //            DB::table('recent_users')->delete();
         })->everyMinute();
-        $schedule->command('wechatMessage:send');
+
+//        $schedule->command('wechatMessage:send');
     }
 
     /**
