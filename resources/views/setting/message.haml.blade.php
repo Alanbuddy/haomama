@@ -14,19 +14,19 @@
       - if ($message['from'])
         .item-review
           .avatar-div
-            %img.avatar{src: $message['avatar'] ? $message['avatar'] : "/icon/avatar.png"}
+            %img.avatar{src: $message->comment->user['avatar'] ? $message->comment->user['avatar'] : "/icon/avatar.png"}
           .desc-div
-            %p.name.f12.color7= $message['name']
-            %p.time.f12.color5= (strtotime(time()) - strtotime($message['created_at']))."天前"
+            %p.name.f12.color7= $message->comment->user['name']
+            %p.time.f12.color5= $message->comment['created_at']
             %p.num.f14.color7= "等".$message['num']."人赞了您的评论"
-            %p.notice.f14.color5= $message['content']
-      - if (!$message['from'])
+            %p.notice.f14.color5= $message->comment['content']
+      - else
         .item-notice
           .avatar-div
             %img.avatar{src: "/icon/ma_icon.png"}
           .desc-div
             %p.name.f12.color7 课程小助手
-            %p.time.f12.color5= (strtotime(time()) - strtotime($message['created_at']))."天前"
+            %p.time.f12.color5= $message['created_at']
             %p.num.f14.color7= $message['content']
 - else
   .empty-div
