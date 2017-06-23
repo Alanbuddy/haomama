@@ -9,15 +9,22 @@
 namespace App\Services;
 
 
-
 use App\Models\Message;
 
 class MessageService
 {
     public function send($attributes)
     {
-        $message=new Message();
+        $message = new Message();
+        if ($attributes['object_type'] == 'comment') {
+            $existingMessage = Message::where('object_id', $attributes['object_id'])->first();
+            $message = $existingMessage ?: $message;
+        }
         $message->fill($attributes);
-        $message->save();
+        if ($existingMessage) {
+            $message->update();
+        } else {
+            $message->save();
+        }
     }
 }
