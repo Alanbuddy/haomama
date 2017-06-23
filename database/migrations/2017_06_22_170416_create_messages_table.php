@@ -20,7 +20,7 @@ class CreateMessagesTable extends Migration
             $table->integer('object_id')->unsigned()->nullable()->comment('The id of something which is related to this message');
             $table->string('object_type')->nullable();
             $table->boolean('has_read')->default(false);
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }

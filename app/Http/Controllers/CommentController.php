@@ -136,8 +136,11 @@ class CommentController extends Controller
             $vote->save();
         }
         MessageFacade::send([
-           'from'=>auth()->user()->id,
-            'to'=>
+            'from' => auth()->user()->id,
+            'to' => $comment->user_id,
+            'object_id' => $comment->id,
+            'object_type' => 'comment',
+            'has_read'=>false,//this statement here is just for readability,it can be omitted since its default value is false
         ]);
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }

@@ -21,9 +21,11 @@ class MessageController extends Controller
 
         $messages=auth()->user()
             ->messages()
-            ->with('comment')
+            ->with('comment.user')
             ->get();
-       
+//        dd($messages);
+//        dd($messages[3]->comment);
+//        dd($messages[3]->comment->user);
         return view('setting.message',compact('messages'));
     }
 

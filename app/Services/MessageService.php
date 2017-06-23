@@ -17,7 +17,7 @@ class MessageService
     public function send($attributes)
     {
         $message=new Message();
-        $message->fill(attributes);
+        $message->fill($attributes);
         $message->save();
     }
 }
