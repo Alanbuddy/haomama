@@ -10341,8 +10341,8 @@ module.exports = __webpack_require__(7);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $(".time").each(function() {
-    var _this, data_time, dd, dm, dt, dtime, dy, time, time_now;
+  $(".time").each(function() {
+    var data_time, dd, dm, dt, dtime, dy, time, time_now;
     data_time = $(this).text();
     dtime = Date.parse(data_time);
     dt = new Date(dtime);
@@ -10350,19 +10350,21 @@ module.exports = __webpack_require__(7);
     dm = dt.getMonth() + 1;
     dd = dt.getDate();
     time_now = Date.parse(Date());
-    time = time_now - dtime;
-    _this = $(this);
-    if (time < 60000) {
-      return _this.text(time / 1000 + "秒前");
-    } else if ((60000 < time && time < 3600000)) {
-      return _this.text(time / 60000 + "分前");
-    } else if ((3600000 < time && time < 86400000)) {
-      return _this.text(time / 3600000 + "小时前");
-    } else if ((86400000 < time && time < 604800000)) {
-      return _this.text(time / 86400000 + "天前");
+    time = (time_now - dtime) / 1000;
+    if (time < 60) {
+      return $(this).text(time + "秒前");
+    } else if ((60 <= time && time < 3600)) {
+      return $(this).text(Math.round(time / 60) + "分前");
+    } else if ((3600 <= time && time < 86400)) {
+      return $(this).text(Math.round(time / 3600) + "小时前");
+    } else if ((86400 <= time && time < 604800)) {
+      return $(this).text(Math.round(time / 86400) + "天前");
     } else {
-      return _this.text(dy + "年" + dm + "月" + dd + "日");
+      return $(this).text(dy + "年" + dm + "月" + dd + "日");
     }
+  });
+  return $(".back").click(function() {
+    return location.href = history.back();
   });
 });
 

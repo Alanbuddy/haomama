@@ -95,7 +95,7 @@
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
               .item-row.f12.color5
-                %span.min= (strtotime($lessons[$i]['end']) - strtotime($lessons[$i]['begin']))."min"
+                %span.min.course-time{"time-end" => $lessons[$i]['end']}= $lessons[$i]['begin']
                 %span= $lessons[$i]->learnedCount."人已学"
             %img.go{src: "/icon/go.png"}
             - if ($lessons[$i]['id'] == 1)
@@ -169,7 +169,7 @@
             %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
-              %p.f12.color5= (strtotime(time()) - strtotime($comment['created_at']))."天前"
+              %p.f12.color5.time= $comment['created_at']
               %p.f14.color7.review-content= $comment['content']
               %span.f12.color5 评论来源：
               %span.f12.color5= $comment->lesson->name
@@ -186,7 +186,7 @@
           %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "/icon/avatar.png"}
           .item-desc
             %p.f12.color7.review-name= $latestComment->user->name
-            %p.f12.color5= (strtotime(time()) - strtotime($latestComment['created_at']))."天前"
+            %p.f12.color5.time= $latestComment['created_at']
             %p.f14.color7.review-content= $latestComment['content']
             %span.f12.color5 评论来源：
             %span.f12.color5= $latestComment->lesson->name
@@ -208,7 +208,7 @@
             %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
-              %p.f12.color5= (strtotime(time()) - strtotime($comment['created_at']))."天前"
+              %p.f12.color5.time= $comment['created_at']
               %p.f14.color7.review-content= $comment['content']
               %span.f12.color5 评论来源：
               %span.f12.color5= $comment->lesson->name
