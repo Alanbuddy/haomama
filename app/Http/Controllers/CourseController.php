@@ -485,6 +485,7 @@ class CourseController extends Controller
             }
             $i++;
         }
-        return view('mime.create', compact('course', 'index','lesson'));
+        
+        return view('mine.create', compact('course', 'index','lesson'));
     }
 }

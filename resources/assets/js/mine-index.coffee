@@ -5,7 +5,7 @@ $ ->
 
   $(".message-icon").click ->
   	# juml to messgae_page
-  	location.href = ""
+  	location.href = window.message
 
   $(".favorite-more").click ->
   	# jump to favorite page 

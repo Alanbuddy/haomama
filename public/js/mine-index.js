@@ -10346,7 +10346,7 @@ module.exports = __webpack_require__(8);
     return location.href = window.profile;
   });
   $(".message-icon").click(function() {
-    return location.href = "";
+    return location.href = window.message;
   });
   $(".favorite-more").click(function() {
     return location.href = window.favorited_course;
