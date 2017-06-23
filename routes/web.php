@@ -72,23 +72,23 @@ Route::group([
     Route::get('/users/{user}/vote', 'UserController@vote')->name('users.vote');
     Route::resource('users', 'UserController');
 
-    Route::resource('settings', 'SettingController');
-
     Route::resource('roles', 'RoleController');
 
-    Route::resource('terms', 'TermController');
+    Route::resource('terms', 'TermController');//分类和标签
 
     Route::get('/behaviors/latest', 'BehaviorController@latest');
     Route::resource('behaviors', 'BehaviorController');
 
 //    Route::get('/video/{video?}', 'VodController@video');
     Route::resource('videos', 'VideoController');
-    Route::resource('settings', 'SettingController');
+
+    Route::resource('settings', 'SettingController');//系统设置
+
+    Route::resource('messages', 'MessageController');//消息
+
     Route::get('/videos/{video?}/cloud/info', 'VideoController@cloudInfo')->name('video.cloud.info');
     Route::get('/videos/{video?}/cloud/transcode', 'VideoController@cloudTranscode')->name('video.cloud.transcode');
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');
-
-
     Route::get('/videos/{video?}/statistics', 'VideoController@statistics')->name('video.statistics');
 
     Route::get('/wechat/message/get-industry', 'WechatController@getIndustry')->name('wechat.getIndustry');
