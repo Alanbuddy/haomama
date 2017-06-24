@@ -18,7 +18,7 @@
           .desc-div
             %p.name.f12.color7= $message->comment->user['name']
             %p.time.f12.color5= $message->comment['created_at']
-            %p.num.f14.color7= "等".$message['num']."人赞了您的评论"
+            %p.num.f14.color7= "等".$voteCount."人赞了您的评论"
             %p.notice.f14.color5= $message->comment['content']
       - else
         .item-notice
