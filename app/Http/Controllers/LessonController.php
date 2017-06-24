@@ -82,15 +82,7 @@ class LessonController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
 
-        foreach ($comments as $comment) {
-            $comment->voteCount = count($comment->votes);
-            $hasVoted = false;
-            foreach ($comment->votes as $vote) {
-                if ($vote->user_id == auth()->user()->id)
-                    $hasVoted = true;
-            }
-            $comment->hasVoted = $hasVoted;
-        }
+         $this->processComments($comments);
 
 //        $item->video->id
 //        $item->video->file_name
@@ -124,25 +116,9 @@ class LessonController extends Controller
             ->count();
         $hasEnrolled = $count == 1 ? true : false;
 
-        foreach ($comments as $comment) {
-            $comment->voteCount = count($comment->votes);
-            $hasVoted = false;
-            foreach ($comment->votes as $vote) {
-                if ($vote->user_id == auth()->user()->id)
-                    $hasVoted = true;
-            }
-            $comment->hasVoted = $hasVoted;
-        }
+        $this->processComments($comments);
+        $this->processComments($latestComments);
 
-        foreach ($latestComments as $comment) {
-            $comment->voteCount = count($comment->votes);
-            $hasVoted = false;
-            foreach ($comment->votes as $vote) {
-                if ($vote->user_id == auth()->user()->id)
-                    $hasVoted = true;
-            }
-            $comment->hasVoted = $hasVoted;
-        }
         $avgRate = $course->comments()
             ->whereNull('lesson_id')
             ->select(DB::raw('avg(star) as avg'))
@@ -218,6 +194,24 @@ class LessonController extends Controller
     {
         $lesson->delete();
         return redirect()->route('lessons.index');
+    }
+
+    /**
+     * @param $comments
+     * @return array
+     */
+    public function processComments($comments)
+    {
+        foreach ($comments as $comment) {
+            $comment->voteCount = count($comment->votes);
+            $hasVoted = false;
+            foreach ($comment->votes as $vote) {
+                if ($vote->user_id == auth()->user()->id)
+                    $hasVoted = true;
+            }
+            $comment->hasVoted = $hasVoted;
+        }
+        return array($comment, $hasVoted, $vote);
     }
 
 }
