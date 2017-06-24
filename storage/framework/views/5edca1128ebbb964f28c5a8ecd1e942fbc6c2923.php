@@ -10,7 +10,6 @@
         <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <li>
                 [<?php echo e($item->id); ?>]
-                [<?php echo e(json_encode($loop->index)); ?>]
                 <?php echo e($item->name); ?>
 
                 <b><?php echo e($item->status); ?></b>

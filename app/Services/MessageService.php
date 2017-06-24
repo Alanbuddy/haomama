@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Http\Wechat\WxApi;
+use App\Http\Wechat\WxException;
 use App\Http\Wechat\WxMessageApi;
 use App\Models\Course;
 use App\Models\Error;
@@ -39,16 +40,16 @@ class MessageService
     }
 
     //发送微信模板消息
-    public function sendWechatPreClassMessage(User $user,Course $course)
+    public function sendWechatPreClassMessage(User $user, Course $course)
     {
         $template_id = "YOjEUmaFcJ-27cx82zG6UVz9D23Mvbtv_5NDjhKT-Lw";
-        $url = route('courses.show',$course);
+        $url = route('courses.show', $course);
         $result = WxApi::accessToken();
         if ($result['success']) {
             $access_token = $result['data']->access_token;
             $data = [
                 "first" => [
-                    "value" => "恭喜你购买成功！",
+                    "value" => '课程'.$course->name."快要上课了！",
                     "color" => "#f21212"
                 ],
                 "keyword1" => [
@@ -76,15 +77,16 @@ class MessageService
                     'user_id' => 1,
                     'type' => 'wx.send',
                     'message' => 'send message failed',
-                    'data' => $result,
+                    'data' => json_encode($result),
                     'context' => json_encode(compact('access_token', 'template_id', 'url'))
                 ]);
+                throw new WxException(json_decode($result['data'])->errmsg);
             }
         } else {
             Error::create([
                 'type' => 'wx.access_token',
                 'message' => 'access_token',
-                'data' => $result,
+                'data' => $result['message'],
             ]);
         }
     }

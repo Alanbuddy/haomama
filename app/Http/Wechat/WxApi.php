@@ -41,7 +41,7 @@ class WxApi
     /**
      * 获取普通access_token
      */
-    public static function accessToken($timeOut = 6)
+    public static function accessToken($timeOut = 1000)
     {
         $accessToken = Setting::where('key', 'access_token')->first();
         $data = json_decode($accessToken->value);
@@ -62,7 +62,7 @@ class WxApi
                 $accessToken->value = json_encode($data);
                 $accessToken->update();
             } else {
-                return ['success' => false, 'message' => 'curl error'];
+                return ['success' => false, 'message' => 'curl error:' . $response];
             }
         }
         return ['success' => true, 'data' => $data];
