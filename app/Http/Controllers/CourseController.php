@@ -154,7 +154,7 @@ class CourseController extends Controller
         $avgRate = round($avgRate, 1);
 
         $teachers = $course->teachers()->get();
-        
+
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
@@ -250,12 +250,23 @@ class CourseController extends Controller
 
     public function updateLessons(Request $request, Course $course)
     {
+        dd($course->students()->get());
         $lessons = $request->lessons;
         $arr = explode(',', $lessons);
         $arr = array_map('intval', $arr);
-//        dd($arr);
         try {
-            $course->lessons()->sync($arr);
+            $changes = $course->lessons()->sync($arr);
+//            dd($changes);
+            if ($changes['attached']) {
+
+//                MessageFacade::send([
+//                    'to' => $comment->user_id,
+//                    'object_id' => $course->id,
+//                    'object_type' => 'course',
+//                    'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
+//                ]);
+
+            }
         } catch (Exception $e) {
             return back()->withErrors('数据错误');
         }
@@ -315,7 +326,7 @@ class CourseController extends Controller
             ->count();
         if ($count == 0) {
             //收藏课程
-            $course->users()->attach($user, ['type' => 'favorite']);
+            $course->users()->attach($user, ['type' => 'favorite', 'user_type' => 'student']);
         } else {
             //取消收藏
             DB::table('course_user')
@@ -324,7 +335,7 @@ class CourseController extends Controller
                 ->where('type', 'favorite')
                 ->delete();
         }
-        return ['success' => 'true'];
+        return ['success' => 'true', 'message' => !$count ? 'yes' : 'no'];
     }
 
     /**
@@ -462,7 +473,7 @@ class CourseController extends Controller
      */
     public function signIn(Request $request, Course $course, Lesson $lesson)
     {
-        $hasEnrolled=(bool)auth()->user()->enrolledCourses()->where('id',$course->id)->count();
+        $hasEnrolled = (bool)auth()->user()->enrolledCourses()->where('id', $course->id)->count();
 
         $hasAttended = (bool)Attendance::where('course_id', $course->id)
             ->where('lesson_id', $lesson->id)
@@ -486,7 +497,7 @@ class CourseController extends Controller
             }
             $i++;
         }
-        
-        return view('mine.create', compact('hasEnrolled','course', 'index','lesson'));
+
+        return view('mine.create', compact('hasEnrolled', 'course', 'index', 'lesson'));
     }
 }

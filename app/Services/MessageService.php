@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Http\Wechat\WxApi;
 use App\Http\Wechat\WxMessageApi;
+use App\Models\Course;
 use App\Models\Error;
 use App\Models\Message;
 use App\Models\User;
@@ -21,6 +22,9 @@ class MessageService
     {
         $message = new Message();
         if ($attributes['object_type'] == 'comment') {
+            $existingMessage = Message::where('object_id', $attributes['object_id'])->first();
+            $message = $existingMessage ?: $message;
+        } else if ($attributes['object_type'] == 'course') {
             $existingMessage = Message::where('object_id', $attributes['object_id'])->first();
             $message = $existingMessage ?: $message;
         }
@@ -35,25 +39,24 @@ class MessageService
     }
 
     //发送微信模板消息
-    public function sendWechatMessage(User $user,
-                                      $template_id = "YOjEUmaFcJ-27cx82zG6UVz9D23Mvbtv_5NDjhKT-Lw",
-                                      $url = 'http://www.baidu.com',
-                                      $data = null)
+    public function sendWechatPreClassMessage(User $user,Course $course)
     {
+        $template_id = "YOjEUmaFcJ-27cx82zG6UVz9D23Mvbtv_5NDjhKT-Lw";
+        $url = route('courses.show',$course);
         $result = WxApi::accessToken();
         if ($result['success']) {
             $access_token = $result['data']->access_token;
-            $data = $data ?: [
+            $data = [
                 "first" => [
                     "value" => "恭喜你购买成功！",
-                    "color" => "#173177"
+                    "color" => "#f21212"
                 ],
                 "keyword1" => [
-                    "value" => "上课时间",
+                    "value" => $course->begin,
                     "color" => "#173177"
                 ],
                 "keyword2" => [
-                    "value" => "课程类型",
+                    "value" => '线下',
                     "color" => "#173177"
                 ],
                 "keyword3" => [
