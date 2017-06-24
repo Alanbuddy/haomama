@@ -4,7 +4,7 @@ namespace App\Http\Util;
 
 trait Curl
 {
-    public static function request($url, $postData = [], $timeout = 100, $method = 'get')
+    public static function request($url, $postData = [], $timeout = 1000, $method = 'get')
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

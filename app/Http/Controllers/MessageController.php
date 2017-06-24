@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +25,13 @@ class MessageController extends Controller
             ->messages()
             ->orderBy('id','desc')
             ->with('comment.user')
-            ->get();
-        // dd($messages);
+            ->paginate(10);
+        foreach ($messages as $message){
+            if($message->object_type=='comment'){
+                $message->voteCount=Comment::find($message->object_id)->votes()->count();
+            }
+        }
+//        dd($messages);
 //        dd($messages, $messages[3]);
 //        dd($messages[3]->comment,$messages[3]->comment->user);
         return view('setting.message', compact('messages'));

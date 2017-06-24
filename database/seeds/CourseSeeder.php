@@ -11,9 +11,9 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-//        $this->seedCourse();
+        $this->seedCourse();
 
-//        $this->selectLessons();
+        $this->selectLessons();
 
         $course = \App\Models\Course::first();
         $teachers = \App\Models\User::where('name', 'like', 'teacher%')->get();

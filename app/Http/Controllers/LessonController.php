@@ -82,7 +82,6 @@ class LessonController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
 
-
         foreach ($comments as $comment) {
             $comment->voteCount = count($comment->votes);
             $hasVoted = false;
@@ -92,6 +91,11 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
+
+//        $item->video->id
+//        $item->video->file_name
+//        $item->video->video_type
+//        dd($comments);
 
         return view('setting.lesson', compact(
             'lesson',
@@ -130,6 +134,15 @@ class LessonController extends Controller
             $comment->hasVoted = $hasVoted;
         }
 
+        foreach ($latestComments as $comment) {
+            $comment->voteCount = count($comment->votes);
+            $hasVoted = false;
+            foreach ($comment->votes as $vote) {
+                if ($vote->user_id == auth()->user()->id)
+                    $hasVoted = true;
+            }
+            $comment->hasVoted = $hasVoted;
+        }
         $avgRate = $course->comments()
             ->whereNull('lesson_id')
             ->select(DB::raw('avg(star) as avg'))
