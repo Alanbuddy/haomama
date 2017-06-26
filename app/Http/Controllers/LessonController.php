@@ -144,7 +144,7 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
-        dd($comments);
+//        dd($comments);
 
         $avgRate = $course->comments()
             ->whereNull('lesson_id')
@@ -164,7 +164,10 @@ class LessonController extends Controller
             }
             $i++;
         }
-        
+
+        $video = $lesson->video;
+//        $item->video->file_name
+//        $item->video->video_type
         return view('setting.lesson', compact(
             'lesson',
             'comments',
@@ -174,7 +177,8 @@ class LessonController extends Controller
             'lessons',
             'index',
             'learnedCount',
-            'latestComments'
+            'latestComments',
+            'video'
         ));
     }
 

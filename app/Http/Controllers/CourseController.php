@@ -320,6 +320,7 @@ class CourseController extends Controller
         if ($count == 0) {
             $changed = $course->users()->attach($user, ['user_type' => 'student']);
         }
+        $changed = $course->users()->syncWithoutDetaching($user, ['user_type' => 'student']);
         return ['success' => 'true', 'changed' => $changed];
     }
 
