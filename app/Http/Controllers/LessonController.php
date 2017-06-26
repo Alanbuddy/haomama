@@ -126,6 +126,7 @@ class LessonController extends Controller
         $hasEnrolled = $count == 1 ? true : false;
         addVoteStatisticsOfComment($comments);
         addVoteStatisticsOfComment($latestComments);
+        dd($comments);
 //        foreach ($comments as $comment) {
 //            $comment->voteCount = count($comment->votes);
 //            $hasVoted = false;
