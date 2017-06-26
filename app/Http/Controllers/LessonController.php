@@ -124,16 +124,18 @@ class LessonController extends Controller
             ->where('id', $course->id)
             ->count();
         $hasEnrolled = $count == 1 ? true : false;
-
-        foreach ($comments as $comment) {
-            $comment->voteCount = count($comment->votes);
-            $hasVoted = false;
-            foreach ($comment->votes as $vote) {
-                if ($vote->user_id == auth()->user()->id)
-                    $hasVoted = true;
-            }
-            $comment->hasVoted = $hasVoted;
-        }
+        addVoteStatisticsOfComment($comments);
+        addVoteStatisticsOfComment($latestComments);
+        dd($comments);
+//        foreach ($comments as $comment) {
+//            $comment->voteCount = count($comment->votes);
+//            $hasVoted = false;
+//            foreach ($comment->votes as $vote) {
+//                if ($vote->user_id == auth()->user()->id)
+//                    $hasVoted = true;
+//            }
+//            $comment->hasVoted = $hasVoted;
+//        }
 
         foreach ($latestComments as $comment) {
             $comment->voteCount = count($comment->votes);
@@ -166,8 +168,6 @@ class LessonController extends Controller
         }
 
         $video = $lesson->video;
-//        $item->video->file_name
-//        $item->video->video_type
         return view('setting.lesson', compact(
             'lesson',
             'comments',
@@ -225,6 +225,19 @@ class LessonController extends Controller
     {
         $lesson->delete();
         return redirect()->route('lessons.index');
+    }
+
+    public function addVoteStatisticsOfComment(&$comments)
+    {
+        foreach ($comments as $comment) {
+            $comment->voteCount = count($comment->votes);
+            $hasVoted = false;
+            foreach ($comment->votes as $vote) {
+                if ($vote->user_id == auth()->user()->id)
+                    $hasVoted = true;
+            }
+            $comment->hasVoted = $hasVoted;
+        }
     }
 
 }
