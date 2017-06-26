@@ -128,7 +128,7 @@ class CourseController extends Controller
         $enrolledCount = $this->enrolledCount($course);
 
         //收藏次数
-        $favoritedCount = $this->favoritedCount($course);
+//        $favoritedCount = $this->favoritedCount($course);
 
         //推荐的课程ID集合
         $recommendedCoursesIds = Search::recommend($course)->keys()
