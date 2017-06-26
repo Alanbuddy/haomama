@@ -12,6 +12,8 @@
   top: 0.16rem;
   left: 0.16rem;
   width: 0.88rem;
+  z-index: 10;
+  display: none;
 }
 .course-photo {
   width: 100%;
@@ -325,4 +327,9 @@
   a:nth-child(1) {
     border-right: 1px solid #ccc;
   }
+}
+
+
+.video-div {
+  height: 4.22rem;
 }

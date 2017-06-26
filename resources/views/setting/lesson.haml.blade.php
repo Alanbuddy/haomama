@@ -9,7 +9,7 @@
 @section('content')
 .head-div
   %img.back{src: "/icon/back2.png"}
-  %img.course-photo{src: "/icon/course.png"}
+  .video-div#id_video_container{style: "width:100%;height:auto;"}
 %ul.nav
   %li.active 详情
   %li 评论
@@ -111,6 +111,7 @@
 
 
 @section('script')
+<script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
 <script src= "{{ mix('/js/creview.js') }}"></script>
 <script src= "/js/prompt.js"></script>
 @endsection
