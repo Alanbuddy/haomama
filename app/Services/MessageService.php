@@ -65,7 +65,7 @@ class MessageService
                     "color" => "#173177"
                 ],
                 "remark" => [
-                    "value" => "欢迎再次购买！",
+                    "value" => "预祝学习愉快！",
                     "color" => "#173177"
                 ]
             ];

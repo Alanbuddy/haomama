@@ -256,7 +256,7 @@ class CourseController extends Controller
         $arr = array_map('intval', $arr);
         try {
             $changes = $course->lessons()->sync($arr);
-//            dd($changes);
+            dd($changes);
             if ($changes['attached']) {
 
 //                MessageFacade::send([
@@ -305,13 +305,21 @@ class CourseController extends Controller
         return $course->comments()->get();
     }
 
-    //加入课程
+    //学生加入课程
     public function enroll(Course $course)
     {
         $user = auth()->user();
-        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
+//        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
 //        $course->users()->attach(auth()->user(), ['type' => $type]);
-        $changed = $course->users()->syncWithoutDetaching($user, ['user_type' => $user_type]);
+        $count = $course->users()
+            ->withPivot('type')
+            ->where('type', 'enroll')
+            ->where('user_type', 'student')
+            ->where('user_id', $user->id)
+            ->count();
+        if ($count == 0) {
+            $changed = $course->users()->attach($user, ['user_type' => 'student']);
+        }
         return ['success' => 'true', 'changed' => $changed];
     }
 
