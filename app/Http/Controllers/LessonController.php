@@ -144,7 +144,7 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
-//        dd($comments);
+       // dd($comments);
 
         $avgRate = $course->comments()
             ->whereNull('lesson_id')
