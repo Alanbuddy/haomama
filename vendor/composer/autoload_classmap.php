@@ -25,6 +25,7 @@ return array(
     'AlterVideoPictureDropColumn' => $baseDir . '/database/migrations/2017_05_04_160626_alter_video_picture_drop_column.php',
     'CommentSeeder' => $baseDir . '/database/seeds/CommentSeeder.php',
     'CourseSeeder' => $baseDir . '/database/seeds/CourseSeeder.php',
+    'CourseUserSeeder' => $baseDir . '/database/seeds/CourseUserSeeder.php',
     'CreateAttendancesTable' => $baseDir . '/database/migrations/2017_06_19_130222_create_attendances_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2017_05_10_135552_create_comments_table.php',
     'CreateCoursesTable' => $baseDir . '/database/migrations/2017_05_10_140345_create_courses_table.php',

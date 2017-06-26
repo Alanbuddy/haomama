@@ -18,6 +18,7 @@ class Lesson extends Model
         return $this->belongsTo(Video::class);
     }
 
+    //TODO comments($course_id)
     public function comments()
     {
         return $this->hasMany('App\Models\Comment')->whereNull('star');

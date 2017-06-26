@@ -106,7 +106,8 @@ class LessonController extends Controller
     //课程下的某一个课时详情
     public function detail(Course $course, Lesson $lesson)
     {
-        $comments = $lesson->comments()
+//        $comments = $lesson->comments()
+        $comments = $course->comments()
             ->with('user')
             ->with('votes')
             ->where('course_id', $course->id)
@@ -143,6 +144,8 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
+        dd($comments);
+
         $avgRate = $course->comments()
             ->whereNull('lesson_id')
             ->select(DB::raw('avg(star) as avg'))
