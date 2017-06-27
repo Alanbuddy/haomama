@@ -35,6 +35,7 @@ Route::group([
 Route::group([
     'middleware' => ['web', 'auth'],
 ], function () {
+    Route::get('/statistics/watching', 'StatisticsController@watchingStatistics');
 
     Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
     Route::get('/category/{category}', 'HomeController@index')->name('category');

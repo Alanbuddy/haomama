@@ -18,6 +18,7 @@ class CreateUserBehaviorsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('lesson_id')->unsigned()->nullable();
             $table->integer('video_id')->unsigned()->nullable();
+            $table->integer('duration')->unsigned()->nullable();
             $table->string('type');
             $table->json('data')->nullable();
             $table->timestamps();
