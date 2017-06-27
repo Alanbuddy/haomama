@@ -23,6 +23,7 @@ class BehaviorController extends Controller
         $items = Behavior::where('id', '>', '0')
             ->select('id', 'user_id', 'type')
             ->addSelect(DB::raw('data->"$.time" as time'))
+            ->orderBy(DB::raw('data->"$.time"'),'desc')
             ->paginate(10);
 //        dd($items);
         return view('admin.user_behavior.index', [
@@ -52,6 +53,8 @@ class BehaviorController extends Controller
         $item->fill($request->only([
             'type',
             'data',
+            'lesson_id',
+            'video_id'
         ]));
         auth()->user()->behaviors()->save($item);
 

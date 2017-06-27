@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUserBehaviorsTable extends Migration
 {
@@ -16,6 +16,8 @@ class CreateUserBehaviorsTable extends Migration
         Schema::create('behaviors', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('lesson_id')->unsigned()->nullable();
+            $table->integer('video_id')->unsigned()->nullable();
             $table->string('type');
             $table->json('data')->nullable();
             $table->timestamps();
