@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
@@ -75,18 +75,20 @@ class User extends Authenticatable
     public function onGoingCourses()
     {
         return $this->enrolledCourses('App\Models\Course')
-            ->where('begin','<',date('Y-m-d H:i:s',time()))
-            ->where('end','>',date('Y-m-d H:i:s',time()));
+            ->where('begin', '<', date('Y-m-d H:i:s', time()))
+            ->where('end', '>', date('Y-m-d H:i:s', time()));
     }
+
     //教师获得的赞
     public function votes()
     {
-        return $this->hasMany('App\Models\Vote','teacher_id');
+        return $this->hasMany('App\Models\Vote', 'teacher_id');
     }
 
     //发给我的消息
     public function messages()
     {
-        return $this->hasMany('App\Models\Message','to');
+        return $this->hasMany('App\Models\Message', 'to');
     }
+
 }

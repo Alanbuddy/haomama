@@ -10,7 +10,7 @@ class BehaviorController extends Controller
 {
     function __construct()
     {
-        $this->middleware('role:admin')->except('index');
+        $this->middleware('role:admin')->except(['index', 'create', 'store']);
     }
 
     /**
@@ -23,6 +23,7 @@ class BehaviorController extends Controller
         $items = Behavior::where('id', '>', '0')
             ->select('id', 'user_id', 'type')
             ->addSelect(DB::raw('data->"$.time" as time'))
+            ->orderBy(DB::raw('data->"$.time"'), 'desc')
             ->paginate(10);
 //        dd($items);
         return view('admin.user_behavior.index', [
@@ -52,8 +53,28 @@ class BehaviorController extends Controller
         $item->fill($request->only([
             'type',
             'data',
+            'lesson_id',
+            'video_id'
         ]));
-        auth()->user()->behaviors()->save($item);
+
+        $valid = true;
+
+        if ($request->get('type') == 'video.watch') {
+            $record = auth()->user()->behaviors()
+                ->where('video_id', $request->video_id)
+                ->orderBy('id', 'desc')
+                ->first();
+            if ($record && (time() - strtotime($record->created_at) < 10 * 60)) {//10分钟内重复看一个视频只算一次观看记录
+                $valid = false;
+            }
+        }
+
+        if ($valid)
+            auth()->user()->behaviors()->save($item);
+
+        if ($request->isJson()) {
+            return ['success' => $valid ? true : false];
+        }
 
         return redirect()->route('behaviors.index');
     }
@@ -69,6 +90,16 @@ class BehaviorController extends Controller
         return view('admin.user_behavior.show', [
             'item' => $behavior,
         ]);
+    }
+
+    //更新观看时长
+    public function updateDuration(Request $request)
+    {
+        $record = auth()->user()->behaviors()
+            ->where('lesson_id', $request->get('lesson_id'))
+            ->orderBy('id', 'desc')
+            ->increment('duration', $request->get('duration'));
+        dd($record);
     }
 
     /**

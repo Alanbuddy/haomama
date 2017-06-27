@@ -37,6 +37,21 @@
         <input type="text" name="data" placeholder="" value={"video_id":1}>
         <button class="btn" type="submit">提交分享视频行为</button>
     </form>
+    <form action="<?php echo e(route('behaviors.store')); ?>" method="post">
+        <?php echo e(csrf_field()); ?>
+
+        <label for="name">type</label>
+        <input type="text" name="type" placeholder="" value="video.watch">
+        <label for="name">data</label>
+        <input type="text" name="data" placeholder="" value={"video_id":1}>
+        
+        
+        <label for="name">video_id</label>
+        <input type="text" name="video_id" placeholder="" value=1>
+        <label for="name">lesson_id</label>
+        <input type="text" name="lesson_id" placeholder="" value=1>
+        <button class="btn" type="submit">提交观看视频行为</button>
+    </form>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layout.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

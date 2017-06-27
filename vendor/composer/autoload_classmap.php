@@ -23,6 +23,7 @@ return array(
     'AlterVideoAddColumn' => $baseDir . '/database/migrations/2017_05_05_164220_alter_video_add_column.php',
     'AlterVideoFile' => $baseDir . '/database/migrations/2017_05_04_150527_alter_video_file.php',
     'AlterVideoPictureDropColumn' => $baseDir . '/database/migrations/2017_05_04_160626_alter_video_picture_drop_column.php',
+    'BehaviorSeeder' => $baseDir . '/database/seeds/BehaviorSeeder.php',
     'CommentSeeder' => $baseDir . '/database/seeds/CommentSeeder.php',
     'CourseSeeder' => $baseDir . '/database/seeds/CourseSeeder.php',
     'CourseUserSeeder' => $baseDir . '/database/seeds/CourseUserSeeder.php',

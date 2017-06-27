@@ -23,7 +23,7 @@ include('test.php');
 Route::get('/haml', 'TestController@index');
 
 Route::group([
-    'middleware' => ['web', 'role:admin'],
+    'middleware' => ['web', 'auth', 'role:admin'],
     'namespace' => 'Admin',
     'prefix' => 'admin'
 ], function () {
@@ -33,8 +33,9 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['web','auth'],
+    'middleware' => ['web', 'auth'],
 ], function () {
+    Route::get('/statistics/watching', 'StatisticsController@watchingStatistics');
 
     Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
     Route::get('/category/{category}', 'HomeController@index')->name('category');
@@ -64,7 +65,7 @@ Route::group([
 //    Route::resource('comments', 'CommentController',['except'=>'store']);
 
     Route::post('/orders/pay', 'OrderController@pay')->name('orders.pay');
-    Route::resource('orders', 'OrderController',['except'=>'store']);
+    Route::resource('orders', 'OrderController', ['except' => 'store']);
     Route::get('/orders/{uuid}/query', 'OrderController@queryOrder')->name('orders.payment.query');
     Route::any('/orders/{uuid}/payment/update', 'OrderController@updatePaymentStatus')->name('orders.payment.update');
 
