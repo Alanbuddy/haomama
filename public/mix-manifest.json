@@ -17,7 +17,11 @@
   "/css/creview.css": "/css/creview.css",
   "/css/mycourse.css": "/css/mycourse.css",
   "/css/app.css": "/css/app.css",
+  "/css/signup.css": "/css/signup.css",
+  "/css/forget.css": "/css/forget.css",
   "/js/teacher.js": "/js/teacher.js",
+  "/js/signup.js": "/js/signup.js",
+  "/js/signin.js": "/js/signin.js",
   "/js/sign.js": "/js/sign.js",
   "/js/setting-index.js": "/js/setting-index.js",
   "/js/setting-create.js": "/js/setting-create.js",
@@ -28,9 +32,11 @@
   "/js/mine-index.js": "/js/mine-index.js",
   "/js/message.js": "/js/message.js",
   "/js/layout.js": "/js/layout.js",
+  "/js/forget.js": "/js/forget.js",
   "/js/creview.js": "/js/creview.js",
   "/js/course-show.js": "/js/course-show.js",
   "/js/course-index.js": "/js/course-index.js",
   "/js/course-create.js": "/js/course-create.js",
+  "/js/admin-layout.js": "/js/admin-layout.js",
   "/js/pay-success.js": "/js/pay-success.js"
 }

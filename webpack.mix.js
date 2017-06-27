@@ -38,6 +38,9 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .sass('resources/assets/sass/app.scss', 'public/css')
 
 
+.sass('resources/assets/sass/signup.scss', 'public/css')
+.sass('resources/assets/sass/forget.scss', 'public/css')
+
 .js('resources/assets/js/layout.coffee', 'public/js')
 .js('resources/assets/js/register.coffee', 'public/js')
 .js('resources/assets/js/course-index.coffee', 'public/js')
@@ -53,7 +56,12 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/course-show.coffee', 'public/js')
 .js('resources/assets/js/teacher.coffee', 'public/js')
 .js('resources/assets/js/creview.coffee', 'public/js')
-.js('resources/assets/js/mycourse.coffee', 'public/js');
+.js('resources/assets/js/mycourse.coffee', 'public/js')
+
+.js('resources/assets/js/signin.coffee', 'public/js')
+.js('resources/assets/js/signup.coffee', 'public/js')
+.js('resources/assets/js/forget.coffee', 'public/js')
+.js('resources/assets/js/admin-layout.coffee', 'public/js');
 
 
 // mix.js('resources/assets/js/app.js', 'public/js')

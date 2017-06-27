@@ -14,7 +14,7 @@
 @endsection
 @section('content')
 .head-div
-  %img.course-photo{src: $course['cover'] ? $course['cover'] : "/icon/example.png"}
+  %img.course-photo{src: $course['cover'] ? $course['cover'] : "/icon/course.png"}
   %img.back{src: "/icon/back2.png"}
   - if ($hasFavorited == true)
     %img.favorite{src: "/icon/like_selected.png", 'data-fav'=> "true"}
