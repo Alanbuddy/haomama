@@ -10333,6 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
+  var ref, ref1, votes;
   $(".back").click(function() {
     return location.href = history.back();
   });
@@ -10350,7 +10351,7 @@ return jQuery;
     cid = $(this).attr("data-id");
     return location.href = window.course_item + "/" + cid;
   });
-  return $(".admire-icon").click(function() {
+  $(".admire-icon").click(function() {
     var _this, num;
     num = $(this).siblings("span").text();
     _this = $(this);
@@ -10373,6 +10374,19 @@ return jQuery;
       }
     });
   });
+  votes = $(".admire-div span").text();
+  if (votes.length < 4) {
+    return $(".admire-div span").text(votes);
+  } else if ((4 <= (ref = votes.length) && ref < 5)) {
+    votes = votes / 1000..toFixed(1);
+    return $(".admire-div span").text(votes + "K");
+  } else if ((5 <= (ref1 = votes.length) && ref1 < 6)) {
+    votes = Math.floor(votes / 1000);
+    return $(".admire-div span").text(votes + "K");
+  } else {
+    votes = Math.floor(votes / 10000);
+    return $(".admire-div span").text(votes + "W");
+  }
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

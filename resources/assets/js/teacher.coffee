@@ -37,3 +37,16 @@ $ ->
         else
           showMsg('服务器出错，请稍后再试', 'center')
       )
+
+  votes = $(".admire-div span").text()
+  if votes.length < 4
+    $(".admire-div span").text(votes)
+  else if 4 <= votes.length < 5
+    votes = votes/1000.toFixed(1)
+    $(".admire-div span").text(votes + "K")
+  else if 5 <= votes.length < 6
+    votes = Math.floor(votes/1000)
+    $(".admire-div span").text(votes + "K")
+  else
+    votes = Math.floor(votes/10000)
+    $(".admire-div span").text(votes + "W")
