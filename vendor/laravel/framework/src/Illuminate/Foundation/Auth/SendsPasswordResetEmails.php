@@ -14,13 +14,14 @@ trait SendsPasswordResetEmails
      */
     public function showLinkRequestForm()
     {
-        return view('auth.passwords.email');
+//        return view('auth.passwords.email');
+        return view('auth.forget');
     }
 
     /**
      * Send a reset link to the given user.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function sendResetLinkEmail(Request $request)
@@ -35,14 +36,14 @@ trait SendsPasswordResetEmails
         );
 
         return $response == Password::RESET_LINK_SENT
-                    ? $this->sendResetLinkResponse($response)
-                    : $this->sendResetLinkFailedResponse($request, $response);
+            ? $this->sendResetLinkResponse($response)
+            : $this->sendResetLinkFailedResponse($request, $response);
     }
 
     /**
      * Validate the email for the given request.
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return void
      */
     protected function validateEmail(Request $request)
@@ -53,7 +54,7 @@ trait SendsPasswordResetEmails
     /**
      * Get the response for a successful password reset link.
      *
-     * @param  string  $response
+     * @param  string $response
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendResetLinkResponse($response)
@@ -65,7 +66,7 @@ trait SendsPasswordResetEmails
      * Get the response for a failed password reset link.
      *
      * @param  \Illuminate\Http\Request
-     * @param  string  $response
+     * @param  string $response
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendResetLinkFailedResponse(Request $request, $response)
