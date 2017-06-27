@@ -30,6 +30,7 @@ return array(
     'CreateCommentsTable' => $baseDir . '/database/migrations/2017_05_10_135552_create_comments_table.php',
     'CreateCoursesTable' => $baseDir . '/database/migrations/2017_05_10_140345_create_courses_table.php',
     'CreateErrorsTable' => $baseDir . '/database/migrations/2017_06_22_130032_create_errors_table.php',
+    'CreateFailedJobsTable' => $baseDir . '/database/migrations/2017_06_27_085951_create_failed_jobs_table.php',
     'CreateJobsTable' => $baseDir . '/database/migrations/2017_06_26_155609_create_jobs_table.php',
     'CreateLessionsTable' => $baseDir . '/database/migrations/2017_05_10_140354_create_lessions_table.php',
     'CreateMessagesTable' => $baseDir . '/database/migrations/2017_06_22_170416_create_messages_table.php',

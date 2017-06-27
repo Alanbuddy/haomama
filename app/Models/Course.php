@@ -24,7 +24,7 @@ class Course extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment')->whereNull('star');
+        return $this->hasMany('App\Models\Comment');
     }
 
     public function tags()
