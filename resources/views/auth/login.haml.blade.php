@@ -12,6 +12,7 @@
     :javascript
       window.register = "#{route('register')}"
       window.forget = "#{route('password.request')}"
+      window.login = "#{route('logout')}"
   %body
     .wrapper
       .content-area
@@ -33,5 +34,6 @@
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
     <script src= "{{mix('/js/signin.js')}}"></script>
+    <script src= "/js/admin-signin.js"></script>
 
     

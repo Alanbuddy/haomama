@@ -132,7 +132,7 @@ $ ->
       signup()
 
   $("#jump_to_signin").click ->
-    location.href = "/sessions/signin_page"
+    location.href = window.login
 
 
 

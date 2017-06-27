@@ -10479,7 +10479,7 @@ return jQuery;
     }
   });
   return $("#jump_to_signin").click(function() {
-    return location.href = "/sessions/signin_page";
+    return location.href = window.login;
   });
 });
 
