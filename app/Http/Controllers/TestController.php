@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\MessageFacade;
 use App\Http\Wechat\WxException;
+use App\Jobs\SendWechatMessage;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\User;
@@ -41,5 +42,12 @@ class TestController extends Controller
             return ['success' => false, 'message' => $e->getMessage()];
         }
         return ['success' => true];
+    }
+
+    public function qsend()
+    {
+        $job = (new SendWechatMessage(auth()->user(), Course::first()))->onQueue('wechat');
+        $this->dispatch($job);
+        return 'successfully dispatched a SendWechatMessage job';
     }
 }
