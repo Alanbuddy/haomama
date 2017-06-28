@@ -10530,6 +10530,8 @@ if (ctime < 60) {
   $(".course-time").text(Math.floor(ctime / 3600) + "h" + Math.round((ctime % 3600) / 60) + "m");
 }
 
+$(".star-div input").attr("checked", "checked");
+
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })

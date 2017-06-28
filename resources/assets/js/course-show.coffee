@@ -147,6 +147,8 @@ $ ->
   else
     $(".course-time").text(Math.floor(ctime/3600) + "h" + Math.round((ctime%3600)/60) + "m")
 
+  $(".star-div input").attr("checked", "checked")
+
 
 
 
