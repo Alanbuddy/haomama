@@ -19,7 +19,7 @@ $(document).ready(function($){
       },
       function(data){
         if (data.success){
-
+          location.href = window.course_index;
         } else {
           if (data) {
             $("#error_notice").text("帐号不存在").css("visibility","visible");

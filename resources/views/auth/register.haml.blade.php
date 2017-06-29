@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="{{ mix('/css/signup.css') }}">    
     :javascript
       window.login = "#{route('logout')}"
+      window.sms_send = "#{route('sms.send')}"
+      window.sms_verify = "#{route('sms.verify')}"
+      window.token = "#{csrf_token()}"
+      
   %body
     .wrapper
       .content-area
@@ -43,6 +47,7 @@
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
     <script src= "{{mix('/js/signup.js')}}"></script>
+    <script src= "/js/admin-signup.js"></script>
 
 
 

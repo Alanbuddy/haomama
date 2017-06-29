@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 64);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,74 +10329,98 @@ return jQuery;
 
 /***/ }),
 
-/***/ 22:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var ref, ref1, votes;
-  $(".back").click(function() {
-    return location.href = history.back();
-  });
-  $('.category-class').each(function() {
-    if ($(this).text() === "·ÖÀàN") {
-      return $(this).addClass('health-title');
-    } else if ($(this).text() === "·ÖÀàt") {
-      return $(this).addClass('psychology-title');
+  var back, search, text;
+  if (window.profile === "template") {
+    $('.nav-tabs a[href="#tab2"]').tab('show');
+  }
+  text = $("#search-input").val();
+  if (text === "") {
+    $("#search-btn").addClass("search");
+    $("#search-btn").removeClass("delete");
+  } else {
+    $("#search-btn").addClass("delete");
+    $("#search-btn").removeClass("search");
+  }
+  search = function() {
+    var value;
+    value = $("#search-input").val();
+    return location.href = "/staff/courses?keyword=" + value + "&page=1";
+  };
+  back = function() {
+    return location.href = "/staff/courses";
+  };
+  $("#search-btn").click(function() {
+    if ($("#search-btn").hasClass("search")) {
+      search();
+      $("#search-btn").addClass("delete");
+      return $("#search-btn").removeClass("search");
     } else {
-      return $(this).addClass('grow-title');
+      back();
+      $("#search-btn").addClass("search");
+      return $("#search-btn").removeClass("delete");
     }
   });
-  $(".course-item").click(function() {
-    var cid;
-    cid = $(this).attr("data-id");
-    return location.href = window.course_item + "/" + cid;
+  $("#search-input").keydown(function(event) {
+    var code;
+    code = event.which;
+    if (code === 13) {
+      search();
+      $("#search-btn").addClass("delete");
+      return $("#search-btn").removeClass("search");
+    } else {
+      $("#search-btn").addClass("search");
+      return $("#search-btn").removeClass("delete");
+    }
   });
-  $(".admire-icon").click(function() {
-    var _this, num;
-    num = $(this).siblings("span").text();
-    _this = $(this);
-    return $.getJSON(window.vote, {}, function(data) {
+  $("#new-template").click(function() {
+    return location.href = "/staff/courses/new";
+  });
+  return $(".set-available").click(function() {
+    var cid, current_state, link;
+    current_state = "unavailable";
+    if ($(this).hasClass("font-color-red")) {
+      current_state = "available";
+    }
+    cid = $(this).closest("tr").attr("data-id");
+    link = $(this);
+    console.log(current_state);
+    $.postJSON('/staff/courses/' + cid + '/set_available', {
+      available: current_state === "unavailable"
+    }, function(data) {
       console.log(data);
       if (data.success) {
-        if (data.message === "yes") {
-          _this.attr("src", "/icon/like2_selected.png");
-          _this.siblings("span").text(parseInt(num) + 1).css("color", "#ccc");
-          _this.closest(".admire-div").css("border-color", "#ccc");
-          return showMsg("点赞完成", "center");
+        $.page_notification("操作完成");
+        if (current_state === "available") {
+          link.removeClass("font-color-red");
+          link.addClass("font-color-green");
+          return link.text("上架");
         } else {
-          _this.attr('src', '/icon/like2_normal.png');
-          _this.siblings("span").text(parseInt(num) - 1).css("color", "#fc90a5");
-          _this.closest(".admire-div").css("border-color", "#fc90a5");
-          return showMsg("取消点赞", "center");
+          link.addClass("font-color-red");
+          link.removeClass("font-color-green");
+          return link.text("下架");
         }
       } else {
-        return showMsg('服务器出错，请稍后再试', 'center');
+        if (data.code === COURSE_PARTICIPATE_EXIST) {
+          return $.page_notification("该课程有人报名，不能下架");
+        }
       }
     });
+    return false;
   });
-  votes = $(".admire-div span").text();
-  if (votes.length < 4) {
-    return $(".admire-div span").text(votes);
-  } else if ((4 <= (ref = votes.length) && ref < 5)) {
-    votes = votes / 1000..toFixed(1);
-    return $(".admire-div span").text(votes + "K");
-  } else if ((5 <= (ref1 = votes.length) && ref1 < 6)) {
-    votes = Math.floor(votes / 1000);
-    return $(".admire-div span").text(votes + "K");
-  } else {
-    votes = Math.floor(votes / 10000);
-    return $(".admire-div span").text(votes + "W");
-  }
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 64:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(22);
+module.exports = __webpack_require__(2);
 
 
 /***/ })
