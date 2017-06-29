@@ -20,6 +20,13 @@ $(document).ready(function($){
         }
       });
     }
+    $(".nums-div a").each(function(){
+      var newest = $(this).attr("data-newest");
+      var new_img = $("<img class='new-icon' src= '/icon/new.png'>");
+      if (newest == true) {
+        $(this).find("span").before(new_img);
+      }
+    });
   }
 	check_status();
 
