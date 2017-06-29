@@ -10333,8 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_signup_input, signup, toggle_password_tip, uid;
-  uid = "";
+  var check_signup_input, toggle_password_tip;
   $("#signup_btn").attr("disabled", true);
   toggle_password_tip = function(wrong) {
     if (wrong) {
@@ -10344,7 +10343,7 @@ return jQuery;
     }
   };
   check_signup_input = function() {
-    if ($("#mobile").val().trim() === "" || $("#mobilecode").val().trim() === "" || $("#password").val().trim() === "" || $("#password_again").val().trim() === "" || uid === "") {
+    if ($("#mobile").val().trim() === "" || $("#mobilecode").val().trim() === "" || $("#password").val().trim() === "" || $("#password_again").val().trim() === "") {
       return $("#signup_btn").attr("disabled", true);
     } else {
       return $("#signup_btn").attr("disabled", false);
@@ -10381,52 +10380,6 @@ return jQuery;
       toggle_password_tip(false);
     }
     return check_signup_input();
-  });
-  signup = function() {
-    var password, password_again, verify_code;
-    console.log(uid);
-    if (uid === "") {
-      return;
-    }
-    if ($("#signup_btn").attr("disabled") === true) {
-      return;
-    }
-    verify_code = $("#mobilecode").val();
-    password = $("#password").val();
-    password_again = $("#password_again").val();
-    console.log(verify_code);
-    if (password !== password_again) {
-      toggle_password_tip(true);
-      return;
-    }
-    return $.postJSON('/sessions/' + uid + '/verify', {
-      password: password,
-      verify_code: verify_code
-    }, function(data) {
-      if (data.success) {
-        $.page_notification("注册完成，请登录", 1000);
-        $(".input-div input").val("");
-        return location.href = "/sessions/signin_page";
-      } else {
-        if (data.code === WRONG_VERIFY_CODE) {
-          $("#code_notice").text("验证码错误").css("visibility", "visible");
-        }
-        if (data.code === USER_NOT_EXIST) {
-          return $("#mobile_notice").text("账号不存在").css("visibility", "visible");
-        }
-      }
-    });
-  };
-  $("#signup_btn").click(function() {
-    signup();
-    return false;
-  });
-  $("#password_again").keydown(function(event) {
-    var code;
-    code = event.which;
-    if (code === 13) {
-      return signup();
-    }
   });
   return $("#jump_to_signin").click(function() {
     return location.href = window.login;

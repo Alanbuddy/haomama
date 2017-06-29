@@ -4,8 +4,7 @@
 :javascript
   window.enroll = "#{$hasEnrolled}"
   window.course = "#{route('courses.show',$course)}"
-  window.behavior = "#{route('behaviors.store')}"
-  // window.token = "#{csrf_field()}"
+  window.behavior = "#{route('behaviors.store')}" 
   window.video_id = "#{$video['id']}"
   window.token = "#{csrf_token()}"
 
@@ -29,7 +28,7 @@
     %span.title.f14.color7.fb 课程目录
     .nums-div
       - for ($i=0;$i<count($lessons);$i++)
-        %a.common{"data-status" => $lessons[$i]['status'], "data-index" => $index, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
+        %a.common{"data-status" => $lessons[$i]['status'], "data-newest" => $lessons[$i]['isNewest'], "data-index" => $index, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
           %span= ($i + 1)
   .div-line
   .desc-div.f14.color7

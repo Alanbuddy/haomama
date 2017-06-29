@@ -16,7 +16,8 @@
       window.sms_send = "#{route('sms.send')}"
       window.sms_verify = "#{route('sms.verify')}"
       window.token = "#{csrf_token()}"
-      
+      window.register = "#{route('register')}"
+      window.login = "#{route('logout')}"
   %body
     .wrapper
       .content-area
