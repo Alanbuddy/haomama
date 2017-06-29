@@ -74,6 +74,7 @@ class UserTableSeeder extends Seeder
                 'name' => str_random(3),
                 'gender' => 'male',
                 'birthday' => date('Y-m-d', strtotime('-1 month'))],
+                'openid'=>'ouxmWjtwxX9y21AX4y3YEHuZHHFY'
             ])
         ]);
     }

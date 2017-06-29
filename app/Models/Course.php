@@ -12,7 +12,8 @@ class Course extends Model
 
     public function lessons()
     {
-        return $this->belongsToMany(Lesson::class);
+        return $this->belongsToMany(Lesson::class)
+            ->withPivot('no');
     }
 
     public function onGoingLessons()
