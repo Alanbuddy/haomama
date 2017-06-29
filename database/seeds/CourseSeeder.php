@@ -28,6 +28,7 @@ class CourseSeeder extends Seeder
                 'teacher_id' => 1,
                 'category_id' => 12,
                 'price' => rand(10, 100),
+                'original_price' => 100,
                 'type' => $i % 2 == 0 ? 'online' : 'offline',
                 'status' => 'publish',
                 'description' => 'some description',
@@ -48,7 +49,7 @@ class CourseSeeder extends Seeder
                 'course_id' => 1,
                 'lesson_id' => $lessons[$i]->id,
                 'no' => 20 - $i,
-                'created_at' => date('Y-m-d H:i:s',strtotime('-'.$i.' hours')),
+                'created_at' => date('Y-m-d H:i:s', strtotime('-' . $i . ' hours')),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
 
@@ -56,7 +57,7 @@ class CourseSeeder extends Seeder
                 'course_id' => 2,
                 'lesson_id' => $lessons[$i]->id,
                 'no' => 40 - $i,
-                'created_at' => date('Y-m-d H:i:s',strtotime('-'.$i.' days')),
+                'created_at' => date('Y-m-d H:i:s', strtotime('-' . $i . ' days')),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
         }

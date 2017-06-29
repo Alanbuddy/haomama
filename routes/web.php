@@ -29,7 +29,7 @@ Route::group([
 });
 
 include('test.php');
-//Route::get('/', 'VodController@index');
+
 Route::get('/haml', 'TestController@index');
 
 Route::group([
