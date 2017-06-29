@@ -15,8 +15,17 @@
 //		$a=DB::table('user')->get();
 //    return view('welcome');
 //});
-Route::auth();
-Route::get('/', 'HomeController@index')->name('index');
+
+Route::group([
+    'middleware' => ['web']
+], function () {
+    Route::auth();
+    Route::get('/', 'HomeController@index')->name('index');
+
+    Route::any('/sms/send', 'SmsController@send')->name('sms.send');
+    Route::any('/sms/residual', 'SmsController@residual')->name('sms.residual');
+    Route::get('/sms/verify', 'SmsController@verify')->name('sms.verify');
+});
 
 include('test.php');
 //Route::get('/', 'VodController@index');
@@ -102,8 +111,5 @@ Route::group([
     Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
     Route::get('/wechat/send', 'WechatController@send')->name('wechat.send');
 
-    Route::any('/sms/send', 'SmsController@send')->name('sms.send');
-    Route::any('/sms/residual', 'SmsController@residual')->name('sms.residual');
-    Route::get('/sms/verify', 'SmsController@verify')->name('sms.verify');
 });
 

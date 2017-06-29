@@ -116,14 +116,24 @@ class CourseController extends Controller
 
 
         $lessons = $course->lessons()
-            ->paginate(10);
+            ->withPivot('created_at')
+            ->orderBy('no','desc')
+            ->get();
+
+        $lessons->sortByDesc->created_at;
+        dd($lessons);
+
         foreach ($lessons as $lesson) {
-            $lesson->hasAttended = (bool)Attendance::where('course_id', $course->id)
-                ->where('lesson_id', $lesson->id)
+            $lesson->hasAttended = (bool)Attendance::where('course_id', $course->id)//线下课程每一个课时是否签到
+            ->where('lesson_id', $lesson->id)
                 ->where('user_id', auth()->user()->id)
                 ->count();
-            $lesson->learnedCount = $lesson->attendances($course->id)->count();
+            $lesson->learnedCount = $lesson->attendances($course->id)->count();//多少人已学
+            //新课程标记
         }
+
+//      if(time()-strtotime($lesson->created_at)<)
+
         //学员数
         $enrolledCount = $this->enrolledCount($course);
 
@@ -154,7 +164,7 @@ class CourseController extends Controller
         $avgRate = round($avgRate, 1);
 
         $teachers = $course->teachers()->get();
-        
+
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程

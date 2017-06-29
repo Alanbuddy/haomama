@@ -23,8 +23,8 @@ class SmsApi
 //        session(['code'=>$code]);
         session(['code'=>111111]);
 
-        $Msisdn = '18911209450';
-        $SMSContent = 'haha你好吗';
+        $Msisdn = '18911209450';//接收号码，多个用逗号隔开，非空。
+        $SMSContent = 'haha你好吗';//短信内容，非空。长度不能超过500字符，超出返回失败信息。
         $MSGType = 1;
         $ECECCID = config('services.sms.account');
         $Password = config('services.sms.password');

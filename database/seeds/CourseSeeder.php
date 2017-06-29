@@ -47,10 +47,17 @@ class CourseSeeder extends Seeder
             DB::table('course_lesson')->insert([
                 'course_id' => 1,
                 'lesson_id' => $lessons[$i]->id,
+                'no' => 20 - $i,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ]);
+
             DB::table('course_lesson')->insert([
                 'course_id' => 2,
                 'lesson_id' => $lessons[$i]->id,
+                'no' => 40 - $i,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ]);
         }
     }
