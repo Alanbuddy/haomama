@@ -18,13 +18,13 @@ class SmsApi
     public static function send(Request $request)
     {
         $api_url = config('services.sms.url');
-        session(['mobile'=>$request->mobile]);
-        $code=rand(100000,999999);
+        session(['mobile' => $request->mobile]);
+        $code = rand(100000, 999999);
 //        session(['code'=>$code]);
-        session(['code'=>111111]);
+        session(['code' => 111111]);
 
         $Msisdn = '18911209450';//接收号码，多个用逗号隔开，非空。
-        $SMSContent = 'haha你好吗';//短信内容，非空。长度不能超过500字符，超出返回失败信息。
+        $SMSContent = 'haha你好吗' . $code;//短信内容，非空。长度不能超过500字符，超出返回失败信息。
         $MSGType = 1;
         $ECECCID = config('services.sms.account');
         $Password = config('services.sms.password');

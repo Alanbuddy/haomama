@@ -48,7 +48,7 @@ class CourseSeeder extends Seeder
                 'course_id' => 1,
                 'lesson_id' => $lessons[$i]->id,
                 'no' => 20 - $i,
-                'created_at' => date('Y-m-d H:i:s'),
+                'created_at' => date('Y-m-d H:i:s',strtotime('-'.$i.' hours')),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
 
@@ -56,7 +56,7 @@ class CourseSeeder extends Seeder
                 'course_id' => 2,
                 'lesson_id' => $lessons[$i]->id,
                 'no' => 40 - $i,
-                'created_at' => date('Y-m-d H:i:s'),
+                'created_at' => date('Y-m-d H:i:s',strtotime('-'.$i.' days')),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
         }

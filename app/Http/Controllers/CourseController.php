@@ -114,26 +114,27 @@ class CourseController extends Controller
         }
 //        dd($comments);
 
-
         $lessons = $course->lessons()
             ->withPivot('created_at')
-            ->orderBy('no','desc')
+            ->orderBy('no', 'desc')
             ->get();
 
-        $lessons->sortByDesc->created_at;
-        dd($lessons);
+        if (count($lessons)) {
 
-        foreach ($lessons as $lesson) {
-            $lesson->hasAttended = (bool)Attendance::where('course_id', $course->id)//线下课程每一个课时是否签到
-            ->where('lesson_id', $lesson->id)
-                ->where('user_id', auth()->user()->id)
-                ->count();
-            $lesson->learnedCount = $lesson->attendances($course->id)->count();//多少人已学
-            //新课程标记
+            list($tmp, $hasNewest) = $this->newestLesson($course, $lessons);
+
+            foreach ($lessons as $lesson) {
+                $lesson->hasAttended = (bool)Attendance::where('course_id', $course->id)//线下课程每一个课时是否签到
+                ->where('lesson_id', $lesson->id)
+                    ->where('user_id', auth()->user()->id)
+                    ->count();
+                $lesson->learnedCount = $lesson->attendances($course->id)->count();//多少人已学
+                //新课程标记
+                $lesson->isNewest = $hasNewest ? $lesson->id == $tmp->id : false;
+            }
         }
 
-//      if(time()-strtotime($lesson->created_at)<)
-
+        dd($lessons);
         //学员数
         $enrolledCount = $this->enrolledCount($course);
 
@@ -174,8 +175,8 @@ class CourseController extends Controller
                 'comments',//评论 按点赞数排序
                 'latestComments',//评论 按时间倒序排序
                 'recommendedCourses',//按标签推荐相关课程
-                'avgRate',
-                'teachers'
+                'avgRate',//平均评分
+                'teachers'//老师信息
             )
         );
     }
@@ -518,5 +519,28 @@ class CourseController extends Controller
         }
 
         return view('mine.create', compact('hasEnrolled', 'course', 'index', 'lesson'));
+    }
+
+    /**
+     * @param Course $course
+     * @param $lessons
+     * @return array
+     */
+    public function newestLesson(Course $course, $lessons)
+    {
+//        $lessons = $lessons->sortByDesc->created_at; //HOM
+        $tmp = $lessons->sortByDesc('created_at')->first();
+        $hasNewest = true;
+        if (time() - strtotime($tmp->created_at) > 7 * 24 * 60 * 60) {
+            $hasNewest = false;
+        }
+        if ($hasNewest) {
+            $hasAttended = (bool)Attendance::where('course_id', $course->id)
+                ->where('lesson_id', $tmp->id)
+                ->where('user_id', auth()->user()->id)
+                ->count();
+            $hasNewest = !$hasAttended;
+        }
+        return array($tmp, $hasNewest);
     }
 }

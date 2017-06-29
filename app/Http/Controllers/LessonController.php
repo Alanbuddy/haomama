@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Lession;
 use App\Models\Lesson;
@@ -96,7 +97,8 @@ class LessonController extends Controller
     //课程下的某一个课时详情
     public function detail(Course $course, Lesson $lesson)
     {
-//        $comments = $lesson->comments()
+        $this->recordAttendance($course, $lesson);
+
         $comments = $course->comments()
             ->whereNull('star')
             ->with('user')
@@ -140,7 +142,7 @@ class LessonController extends Controller
         }
 
         $video = $lesson->video;
-       
+
         return view('setting.lesson', compact(
             'lesson',
             'comments',
@@ -211,6 +213,21 @@ class LessonController extends Controller
             }
             $comment->hasVoted = $hasVoted;
         }
+    }
+
+    /**
+     * @param Course $course
+     * @param Lesson $lesson
+     */
+    public function recordAttendance(Course $course, Lesson $lesson)
+    {
+        $attendance = new Attendance();
+        $attendance->fill([
+            'course_id' => $course->id,
+            'lesson_id' => $lesson->id,
+            'user_id' => auth()->user()->id,
+        ]);
+        $attendance->save();
     }
 
 }
