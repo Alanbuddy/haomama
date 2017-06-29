@@ -116,10 +116,11 @@ class CourseController extends Controller
 
 
         $lessons = $course->lessons()
+            ->withPivot('created_at')
             ->orderBy('no','desc')
             ->get();
 
-        $lessons->sortByDesc('id');
+        $lessons->sortByDesc->created_at;
         dd($lessons);
 
         foreach ($lessons as $lesson) {
