@@ -126,8 +126,7 @@
     %img.mine{src: "/icon/mine_normal.png"}
     %p.f10.color5 我的
 @endsection
-  
-</section>
+
 @section('script')
 <script src= "/js/jquery.event.drag.js"></script>
 <script src= "/js/jquery.touchSlider.js"></script>

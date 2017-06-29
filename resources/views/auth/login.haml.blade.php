@@ -13,6 +13,7 @@
       window.register = "#{route('register')}"
       window.forget = "#{route('password.request')}"
       window.login = "#{route('logout')}"
+      window.course_index = "#{route('admin.index')}"
   %body
     .wrapper
       .content-area

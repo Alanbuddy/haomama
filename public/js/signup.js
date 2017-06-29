@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 60);
+/******/ 	return __webpack_require__(__webpack_require__.s = 63);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,63 +10329,13 @@ return jQuery;
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_signup_input, signup, time, timer, toggle_password_tip, uid, wait;
+  var check_signup_input, signup, toggle_password_tip, uid;
   uid = "";
-  timer = null;
-  wait = 60;
   $("#signup_btn").attr("disabled", true);
-  time = function(o) {
-    $(o).attr("disabled", true);
-    $(o).addClass("clicked");
-    $(o).removeClass("verify-code-btn");
-    if (wait === 0) {
-      $(o).attr("disabled", false);
-      $(o).text("获取验证码");
-      wait = 60;
-      $(o).removeClass("clicked");
-      $(o).addClass("verify-code-btn");
-    } else {
-      $(o).text("重发" + wait + "s");
-      wait--;
-      timer = setTimeout((function() {
-        time(o);
-      }), 1000);
-    }
-  };
-  $("#verifycode").click(function() {
-    var mobile, mobile_retval;
-    mobile = $("#mobile").val();
-    mobile_retval = $.regex.isMobile(mobile);
-    if (mobile_retval === false) {
-      $("#mobile_notice").text("请输入正确手机号").css("visibility", "visible");
-      return false;
-    }
-    $.postJSON("/sessions/signup", {
-      mobile: mobile
-    }, function(data) {
-      if (data.success) {
-        $("#mobile_notice").css("visibility", "hidden");
-        uid = data.uid;
-        console.log(uid);
-        if (timer !== null) {
-          clearTimeout(timer);
-        }
-        return time("#verifycode");
-      } else {
-        if (data.code === USER_EXIST) {
-          $("#mobile_notice").text("该手机号已注册，请直接登录").css("visibility", "visible");
-        }
-        if (data.code === OTHER_TYPE_USER_EXIST) {
-          return $("#mobile_notice").text("用户类型错误").css("visibility", "visible");
-        }
-      }
-    });
-    return false;
-  });
   toggle_password_tip = function(wrong) {
     if (wrong) {
       return $("#password_notice").css("visibility", "visible");
@@ -10487,10 +10437,10 @@ return jQuery;
 
 /***/ }),
 
-/***/ 60:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(20);
+module.exports = __webpack_require__(21);
 
 
 /***/ })

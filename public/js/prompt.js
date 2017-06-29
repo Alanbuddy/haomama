@@ -97,7 +97,7 @@ $(document).ready(function($){
               $.postJSON(
                 window.behavior,
                 {
-                  type: "video.drag.end",
+                  type: "video.play",
                   data: JSON.stringify(window.video_id),
                   _token: window.token
                 },
