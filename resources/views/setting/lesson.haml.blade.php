@@ -4,6 +4,10 @@
 :javascript
   window.enroll = "#{$hasEnrolled}"
   window.course = "#{route('courses.show',$course)}"
+  window.behavior = "#{route('behaviors.store')}"
+  // window.token = "#{csrf_field()}"
+  window.video_id = "#{$video['id']}"
+  window.token = "#{csrf_token()}"
 
 @endsection
 @section('content')

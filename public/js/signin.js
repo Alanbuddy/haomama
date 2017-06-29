@@ -10333,7 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_signin_input, signin, toggle_signin_tip;
+  var check_signin_input, toggle_signin_tip;
   $("#to_signup").click(function() {
     $("input").val("");
     return location.href = window.register;
@@ -10365,71 +10365,13 @@ return jQuery;
     }
     return check_signin_input();
   });
-  $("#password").keyup(function(event) {
+  return $("#password").keyup(function(event) {
     var code;
     code = event.which;
     if (code !== 13) {
       toggle_signin_tip(false);
     }
     return check_signin_input();
-  });
-  signin = function() {
-    var mobile, mobile_retval, password;
-    if ($("#signin_btn").attr("disabled") === true) {
-      return;
-    }
-    mobile = $("#mobile").val();
-    password = $("#password").val();
-    console.log(mobile);
-    mobile_retval = $.regex.isMobile(mobile);
-    if (mobile_retval === false) {
-      $("#error_notice").text("手机号或密码错误").css("visibility", "visible");
-      return;
-    }
-    return $.postJSON('/sessions', {
-      mobile: mobile,
-      password: password
-    }, function(data) {
-      if (data.success) {
-        if (data.user_type === 4) {
-          return location.href = "/staff/accounts";
-        } else {
-          if (data.has_name) {
-            return location.href = "/staff/courses";
-          } else {
-            return location.href = "/staff/accounts";
-          }
-        }
-      } else {
-        console.log(data.code);
-        if (data.code === NO_CENTER) {
-          $.page_notification("请通知管理员开通账号", 2000);
-        }
-        if (data.code === ACCOUNT_LOCKED) {
-          $.page_notification("账号已被管理员锁定，无法登录", 2000);
-        }
-        if (data.code === USER_NOT_EXIST) {
-          $("#error_notice").text("帐号不存在").css("visibility", "visible");
-        }
-        if (data.code === USER_NOT_VERIFIED) {
-          $("#error_notice").text("手机号未验证").css("visibility", "visible");
-        }
-        if (data.code === WRONG_PASSWORD) {
-          return $("#error_notice").text("密码错误").css("visibility", "visible");
-        }
-      }
-    });
-  };
-  $("#signin_btn").click(function() {
-    signin();
-    return false;
-  });
-  return $("#password").keydown(function(event) {
-    var code;
-    code = event.which;
-    if (code === 13) {
-      return signin();
-    }
   });
 });
 

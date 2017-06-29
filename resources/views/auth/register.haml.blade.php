@@ -11,6 +11,8 @@
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "/css/sign-layout.css", :rel => "stylesheet"}
     <link rel="stylesheet" href="{{ mix('/css/signup.css') }}">    
+    :javascript
+      window.login = "#{route('logout')}"
   %body
     .wrapper
       .content-area

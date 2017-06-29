@@ -31,14 +31,12 @@ $(document).ready(function($){
       var file_id = $(".file-id").text();
       var option = {
           "auto_play": "1",
-          "file_id": file_id,
+          "file_id": "9031868222953457775",    // file_id替换
           "app_id": "1253793695",
           "width": 750,
           "height": 422,
           "https": 1
       };
-      /*调用播放器进行播放*/
-      player = new qcVideo.Player("id_video_container", option);
 
       var barrage = [
           {"type": "content", "content": "hello world", "time": "1"},
@@ -50,6 +48,68 @@ $(document).ready(function($){
           console.log(2);
       }, 1000);
 
+      var listener = {
+        playStatus: function (status){
+          console.log(status);
+          if (status == "seeking") {
+            var time = null;
+            if (player.getCurrentTime()) {
+              time = player.getCurrentTime();
+              console.log(time);
+              var data = {
+                time: time,
+                video_id: window.video_id
+              };
+              $.postJSON(
+                window.behavior,
+                {
+                  type: "video.drag.begin",
+                  data: JSON.stringify(data),
+                  _token: window.token
+                },
+                function(data){
+                  console.log(data);
+                }
+                );
+            }
+          }
+          if (status == "playing") {
+            var drag_time = null;
+            if (player.getCurrentTime()) {
+              drag_time = player.getCurrentTime();
+              console.log(drag_time);
+              var data1 = {
+                time: drag_time,
+                video_id: window.video_id
+              };
+              $.postJSON(
+                window.behavior,
+                {
+                  type: "video.drag.end",
+                  data: JSON.stringify(data1),
+                  _token: window.token
+                },
+                function(data){
+                  console.log(data);
+                }
+                );
+            } else {
+              $.postJSON(
+                window.behavior,
+                {
+                  type: "video.drag.end",
+                  data: JSON.stringify(window.video_id),
+                  _token: window.token
+                },
+                function(data){
+                  console.log(data);
+                }
+                );
+            }
+          }
+        }
+      };
+      player = new qcVideo.Player("id_video_container", option, listener);
   })();
 
   $("#id_video_container").hover(function(){
