@@ -175,7 +175,6 @@
   </div>
 </div>
 <?php $__env->stopSection(); ?>
-</section>
 <?php $__env->startSection('script'); ?>
 <script src= "/js/jquery.event.drag.js"></script>
 <script src= "/js/jquery.touchSlider.js"></script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Sms\SmsApi;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SmsController extends Controller
@@ -36,5 +37,13 @@ class SmsController extends Controller
             return ['success' => $result];
         }
         return ['success' => false];
+    }
+
+    //判断手机号有没有占用
+    public function isOccupied(Request $request)
+    {
+        $phone = $request->phone;
+        $isOccupied = (bool)User::where('phone', $phone)->count();
+        return compact('isOccupied');
     }
 }
