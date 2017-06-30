@@ -40,6 +40,7 @@ class SmsController extends Controller
     }
 
     //判断手机号有没有占用
+    //返回示例: {"isOccupied":false}
     public function isOccupied(Request $request)
     {
         $phone = $request->phone;

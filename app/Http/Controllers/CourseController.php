@@ -11,9 +11,11 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class CourseController extends Controller
 {
     use IO;
+    use SignIn;
 
     function __construct()
     {
@@ -495,19 +497,8 @@ class CourseController extends Controller
     {
         $hasEnrolled = (bool)auth()->user()->enrolledCourses()->where('id', $course->id)->count();
 
-        $hasAttended = (bool)Attendance::where('course_id', $course->id)
-            ->where('lesson_id', $lesson->id)
-            ->where('user_id', auth()->user()->id)
-            ->count();
-        if (!$hasAttended) {
-            $attendance = new Attendance();
-            $attendance->fill([
-                'user_id' => auth()->user()->id,
-                'course_id' => $request->route('course')->id,
-                'lesson_id' => $request->route('lesson')->id,
-            ]);
-            $attendance->save();
-        }
+        $this->recordAttendance($course, $lesson);
+
         $lessons = $course->lessons()->get();//TODO  orderBy no.
         $index = 0;
         $i = 0;

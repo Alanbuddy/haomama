@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Lession;
 use App\Models\Lesson;
@@ -11,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
+    use SignIn;
+
     function __construct()
     {
         $this->middleware('role:admin')->except('index', 'show', 'detail');
@@ -214,20 +215,4 @@ class LessonController extends Controller
             $comment->hasVoted = $hasVoted;
         }
     }
-
-    /**
-     * @param Course $course
-     * @param Lesson $lesson
-     */
-    public function recordAttendance(Course $course, Lesson $lesson)
-    {
-        $attendance = new Attendance();
-        $attendance->fill([
-            'course_id' => $course->id,
-            'lesson_id' => $lesson->id,
-            'user_id' => auth()->user()->id,
-        ]);
-        $attendance->save();
-    }
-
 }
