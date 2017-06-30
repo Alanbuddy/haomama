@@ -18,6 +18,7 @@
       window.token = "#{csrf_token()}"
       window.register = "#{route('register')}"
       window.login = "#{route('logout')}"
+      window.validmobile = "#{route('validate.phone')}"
   %body
     .wrapper
       .content-area

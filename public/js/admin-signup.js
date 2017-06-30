@@ -23,26 +23,40 @@ $(document).ready(function($) {
     if (mobile_retval == false) {
       $("#mobile_notice").text("请输入正确手机号").css("visibility", "visible");
       return false;
-    }
-    $.getJSON(
-      window.sms_send,
-      {
-        mobile: mobile
-      },
-      function(data){
-        console.log(data);
-        if (data.success){
-          $("#mobile_notice").css("visibility", "hidden");
-          if (timer !== null) {
-            clearTimeout(timer);
+    } else {
+      $.getJSON(
+        window.validmobile,
+        {
+          phone: mobile
+        },
+        function(data){
+          console.log(data);
+          if(data.isOccupied == false){
+            $.getJSON(
+              window.sms_send,
+              {
+                mobile: mobile
+              },
+              function(data){
+                console.log(data);
+                if (data.success){
+                  $("#mobile_notice").css("visibility", "hidden");
+                  if (timer !== null) {
+                    clearTimeout(timer);
+                  }
+                  time("#verifycode");
+                } else {
+                  $("#mobile_notice").text("请稍后再重新获取").css("visibility", "visible");
+                }
+              }
+            );
+          } else {
+            $("#mobile_notice").text("该号码已经注册!").css("visibility", "visible");
+            return false;
           }
-          time("#verifycode");
-        } else {
-          $("#mobile_notice").text("请稍后再重新获取").css("visibility", "visible");
         }
-      }
-    );
-    return false;
+        );
+    }
   });
   
   function toggle_password_tip(wrong) {
