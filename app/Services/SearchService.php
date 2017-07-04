@@ -26,7 +26,7 @@ class SearchService
         return $items;
     }
 
-    //统计课程评论数和学员数
+    //课程评论数和学员数和所属分类信息
     public function basicStat()
     {
         $items = Course::withCount('comments')

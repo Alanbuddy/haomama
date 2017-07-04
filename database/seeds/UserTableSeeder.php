@@ -74,8 +74,9 @@ class UserTableSeeder extends Seeder
                 'name' => str_random(3),
                 'gender' => 'male',
                 'birthday' => date('Y-m-d', strtotime('-1 month'))],
-                'openid'=>'ouxmWjtwxX9y21AX4y3YEHuZHHFY'
-            ])
+            ]),
+            'openid' => 'ouxmWjtwxX9y21AX4y3YEHuZHHFY',
+            'wx' => ' {"sex": 1, "city": "Luliang", "openid": "ouxmWjtwxX9y21AX4y3YEHuZHHFY", "country": "CN", "language": "zh_CN", "nickname": "高尚衡", "province": "Shanxi", "privilege": [], "headimgurl": "http://wx.qlogo.cn/mmopen/oy6t7Y5iag6Qf6iaUh3EGArfnVdgDEyo0tRia3dGfoq0MmRykBySPbibYS79VsRFjIm8IX7a9ticnITN97NF7GhJBC2iaYJJQxSsq5/0"}'
         ]);
     }
 }

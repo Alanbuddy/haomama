@@ -18,9 +18,10 @@ class TagSeeder extends Seeder
             ]);
         }
 
+        $arr = ['健康养育', '心理教育', '自我成长'];
         for ($i = 0; $i < 3; $i++) {
             DB::table('terms')->insert([
-                'name' => '分类' . str_random('1'),
+                'name' => $arr[$i],
                 'type' => 'category'
             ]);
         }
