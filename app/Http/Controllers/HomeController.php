@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-//        Auth::loginUsingId(1, true);
+       // Auth::loginUsingId(1, true);
 
         $pageSize = 10;
         $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);

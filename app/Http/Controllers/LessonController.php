@@ -143,7 +143,7 @@ class LessonController extends Controller
         }
 
         $video = $lesson->video;
-
+        
         return view('setting.lesson', compact(
             'lesson',
             'comments',

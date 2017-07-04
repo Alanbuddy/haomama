@@ -119,10 +119,26 @@ $(document).ready(function($){
       player = new qcVideo.Player("id_video_container", option, listener);
   })();
 
-  $("#id_video_container").hover(function(){
-    $(".back").show();
-  },function(){
-    $(".back").hide();
+  $("#delivery").click(function(){
+    var content = $(".review-input").val();
+    var course_id = $(".course-id").attr("data-id");
+    var lesson_id = $(".lesson-id").attr("data-id");
+    console.log(content);
+    console.log(course_id);
+    console.log(lesson_id);
+    $.postJSON(
+      window.comment,
+      {
+        content: content,
+        course_id: course_id,
+        lesson_id: lesson_id
+      },
+      function(data){
+        if (data.success){
+          showMsg("评论完成", "center");
+        }
+      }
+    );
   });
 
 });
