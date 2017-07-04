@@ -15,7 +15,7 @@ $(document).ready(function($){
       type: "post",
       url: window.login,
       data: {
-        email: mobile,
+        phone: mobile,
         password: password,
         _token: window.token
       },
