@@ -9,7 +9,14 @@
     %title 好妈妈微学院
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "/css/sign-layout.css", :rel => "stylesheet"}
-    <link rel="stylesheet" href="{{ mix('/css/forget.css') }}">    
+    <link rel="stylesheet" href="{{ mix('/css/forget.css') }}">  
+    :javascript
+      window.sms_send = "#{route('sms.send')}"
+      window.sms_verify = "#{route('sms.verify')}"
+      window.token = "#{csrf_token()}"
+      window.login = "#{route('login')}"
+      window.validmobile = "#{route('validate.phone')}"
+      window.forget = "#{route('password.request')}" 
 
   %body
     .wrapper
@@ -40,5 +47,6 @@
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
     <script src= "{{mix('/js/forget.js')}}"></script>
+    <script src= "/js/admin-forget.js"></script>
 
     

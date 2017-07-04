@@ -1,4 +1,5 @@
-$(document).ready(function() {
+
+$(document).ready(function(){
   var timer = null;
   var wait = 60;
   var time = function(o) {
@@ -31,7 +32,7 @@ $(document).ready(function() {
         },
         function(data){
           console.log(data);
-          if(data.isOccupied == false){
+          if(data.isOccupied == true){
             $.getJSON(
               window.sms_send,
               {
@@ -51,14 +52,14 @@ $(document).ready(function() {
               }
             );
           } else {
-            $("#mobile_notice").text("该号码已经注册!").css("visibility", "visible");
+            $("#mobile_notice").text("该号码未注册!").css("visibility", "visible");
             return false;
           }
         }
         );
     }
   });
-  
+
   function toggle_password_tip(wrong) {
     if (wrong) {
       $("#password_notice").css("visibility", "visible");
@@ -67,8 +68,8 @@ $(document).ready(function() {
     }
   }
 
-  function signup(){
-    if ($("#signup_btn").attr("disabled") == true) {
+  function forget(){
+    if ($("#confirm_btn").attr("disabled") == true) {
       return false;
     }
     var phone = $("#mobile").val();
@@ -81,7 +82,7 @@ $(document).ready(function() {
     }
     $.ajax({
       type: 'post',
-      url: window.register,
+      url: window.forget,
       data: {
         phone: phone,
         password: password,
@@ -91,7 +92,8 @@ $(document).ready(function() {
       },
       async: false,
       success: function(){
-        location.href = window.home_page;
+        alert("aaa");
+        location.href = window.login;
       }
     });
 
@@ -118,16 +120,15 @@ $(document).ready(function() {
     //   ); 
   }
 
-  $("#signup_btn").click(function(){
-    signup();
+  $("#confirm_btn").click(function(){
+    forget();
     return false;
   });
     
   $("#password_again").keydown(function(event){
     var code = event.which;
     if (code == 13){
-      signup();
+      forget();
     }
   });
-    
 });
