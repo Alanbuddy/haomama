@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        // Auth::loginUsingId(1, true);
+//        Auth::loginUsingId(1, true);
 
         $pageSize = 10;
         $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
@@ -49,6 +49,14 @@ class HomeController extends Controller
                 ->addSelect(DB::raw('sum(comments.star) as star'))
                 ->groupBy('courses.id')
                 ->orderBy('star', 'desc');
+
+//            $itemsOrderByCommentRating = Course::select(DB::raw('courses.*'))
+//                ->addSelect(DB::raw('(select count(*) from `users` inner join `course_user` on `users`.`id` = `course_user`.`user_id` where `courses`.`id` = `course_user`.`course_id` and `type` = ' . '\'student\'' . ') as `users_count`'))
+//                ->addSelect(DB::raw('(select count(*) from `comments` where `comments`.`course_id` = `courses`.`id`) as `comments_count`'))
+//                ->addSelect(DB::raw('(select sum(comments.star) from `comments` where `comments`.`course_id` = `courses`.`id`) as `star`'))
+//                ->orderBy('star', 'desc');
+
+//            dd($itemsOrderByCommentRating->toSql());
             //Dev
 //            dd(->toSql());
             foreach ([$items, $itemsOrderByUserCount, $itemsOrderByCommentRating] as $builder) {
