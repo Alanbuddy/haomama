@@ -149,7 +149,7 @@ class CourseController extends Controller
             }
         }
 
-        dd($lessons);
+//        dd($lessons);
         //学员数
         $enrolledCount = $this->enrolledCount($course);
 

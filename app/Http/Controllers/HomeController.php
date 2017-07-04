@@ -15,12 +15,13 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $pageSize = 10;
-        $recommendedCourse = Setting::where('key', 'recommendedCourse')->get();//dd($recommendedCourse);
-        if ($recommendedCourse) {
-            $recommendedCourse = Course::find($recommendedCourse->first()->value);
-        }
         Auth::loginUsingId(1, true);
+
+        $pageSize = 10;
+        $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
+        $recommendedCourse = $recommendedCourseSetting
+            ? Course::where('id', ($recommendedCourseSetting->value))->get()
+            : null;
         $index = new Term();
         $index->id = '0';
         $index->name = '新课速递';
@@ -55,32 +56,21 @@ class HomeController extends Controller
                     $builder->where('category_id', $category->id);
                 }
                 if (count($recommendedCourse)) {
-                    $builder->where('id', '<>', $recommendedCourse->first()->id);
+                    $builder->where('courses.id', '<>', $recommendedCourse->first()->id);
                 }
             }
 
-            if ($page > 1) {
-                $count = count($items->get());
-                $prevPageItems = $items
-                    ->offset(($page - 2) * $pageSize) ->limit($pageSize)
-                    ->get()->slice($pageSize - count($recommendedCourse));
-//                dd($prevPageItems);
-                $currPageItems = $items->paginate($pageSize);//->forPage(1, $pageSize - count($recommendedCourse));
-//                dd($currPageItems);
-                $items = $prevPageItems->merge($currPageItems);
-                $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
-            } else {
-                $items = $items->paginate($pageSize)->slice(0, $pageSize - count($recommendedCourse));
-                $items = $recommendedCourse->merge($items);
-            }
-            dd($items);
-
-            $itemsOrderByUserCount = $itemsOrderByUserCount->paginate(10);
-            $itemsOrderByCommentRating = $itemsOrderByCommentRating->paginate(10);
+            $items = $this->processPage($page, $items, $pageSize, $recommendedCourse);
+            $itemsOrderByUserCount = $this->processPage($page, $itemsOrderByUserCount, $pageSize, $recommendedCourse);
+            $itemsOrderByCommentRating = $this->processPage($page, $itemsOrderByCommentRating, $pageSize, $recommendedCourse);
+//            dd($items);
+//            $itemsOrderByUserCount = $itemsOrderByUserCount->paginate(10);
+//            $itemsOrderByCommentRating = $itemsOrderByCommentRating->paginate(10);
             $data[] = compact('items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating');
         }
-        dd($data[0]['items']);
-        dd($data);
+
+//        dd($data[0]);
+//        dd($data);
 //        $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
 //        $signPackage = $jsSdk->getSignPackage();
 //        return view('video.display',
@@ -116,6 +106,32 @@ class HomeController extends Controller
 //            echo($i->id);
 //            echo($i->category->name);
 //        }
+    }
+
+    /**
+     * @param $page
+     * @param $items
+     * @param $pageSize
+     * @param $recommendedCourse
+     * @return LengthAwarePaginator
+     */
+    public function processPage($page, $items, $pageSize, $recommendedCourse)
+    {
+        if ($page > 1) {
+            $count = $items->count();
+            $prevPageItems = $items
+                ->offset(($page - 2) * $pageSize)->limit($pageSize)
+                ->get()->slice($pageSize - count($recommendedCourse));
+            $currPageItems = $items->paginate($pageSize);//->forPage(1, $pageSize - count($recommendedCourse));
+//                dd($currPageItems);
+            $items = $prevPageItems->merge($currPageItems);
+            $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
+        } else {
+            $items = $items->paginate($pageSize)->splice(0, $pageSize - 1);
+            $items = $recommendedCourse->merge($items);
+//                dd($recommendedCourse);
+        }
+        return $items;
     }
 
 }
