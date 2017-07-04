@@ -11,28 +11,44 @@ $(document).ready(function($){
       $("#error_notice").text("手机号错误").css("visibility", "visible");
       return false;
     }
-    $.postJSON(
-      window.login,
-      {
+    $.ajax({
+      type: "post",
+      url: window.login,
+      data: {
         email: mobile,
-        password: password
+        password: password,
+        _token: window.token
       },
-      function(data){
-        if (data.success){
-          location.href = window.course_index;
-        } else {
-          if (data) {
-            $("#error_notice").text("帐号不存在").css("visibility","visible");
-          }
-          if (data) {
-            $("#error_notice").text("手机号未验证").css("visibility","visible");
-          }
-          if (data) {
-            $("#error_notice").text("密码错误").css("visibility","visible");
-          }
-        }
-      }
-      );
+      async: false,
+      success: function(){
+        alert("aaa");
+        location.href = window.course_index;
+      },
+      error: function(){}
+    });
+
+    // $.postJSON(
+    //   window.login,
+    //   {
+    //     email: mobile,
+    //     password: password
+    //   },
+    //   function(data){
+    //     if (data.success){
+    //       location.href = window.course_index;
+    //     } else {
+    //       if (data) {
+    //         $("#error_notice").text("帐号不存在").css("visibility","visible");
+    //       }
+    //       if (data) {
+    //         $("#error_notice").text("手机号未验证").css("visibility","visible");
+    //       }
+    //       if (data) {
+    //         $("#error_notice").text("密码错误").css("visibility","visible");
+    //       }
+    //     }
+    //   }
+    //   );
   }
   $("#signin_btn").click(function(){
     signin();

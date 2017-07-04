@@ -12,8 +12,9 @@
     :javascript
       window.register = "#{route('register')}"
       window.forget = "#{route('password.request')}"
-      window.login = "#{route('logout')}"
+      window.login = "#{route('login')}"
       window.course_index = "#{route('admin.index')}"
+      window.token = "#{csrf_token()}"
   %body
     .wrapper
       .content-area

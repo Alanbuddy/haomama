@@ -12,13 +12,13 @@
     %link{:href => "/css/sign-layout.css", :rel => "stylesheet"}
     <link rel="stylesheet" href="{{ mix('/css/signup.css') }}">    
     :javascript
-      window.login = "#{route('logout')}"
       window.sms_send = "#{route('sms.send')}"
       window.sms_verify = "#{route('sms.verify')}"
       window.token = "#{csrf_token()}"
       window.register = "#{route('register')}"
-      window.login = "#{route('logout')}"
+      window.login = "#{route('login')}"
       window.validmobile = "#{route('validate.phone')}"
+      window.home_page = "#{route('courses.index')}"
   %body
     .wrapper
       .content-area

@@ -79,28 +79,43 @@ $(document).ready(function($) {
       toggle_password_tip(true);
       return false;
     }
-    $.postJSON(
-      window.register,
-      {
+    $.ajax({
+      type: 'post',
+      url: window.register,
+      data: {
         phone: phone,
         password: password,
         password_confirmation: password_again,
         captcha: verify_code,
         _token: window.token
       },
-      function(data){
-        console.log(data);
-        if (data.success) {
-          $(".input-div input").val("");
-          location.href = window.login;
-        }
-        // else
-        //   if data.code == WRONG_VERIFY_CODE
-        //    $("#code_notice").text("验证码错误").css("visibility", "visible")
-        //   if data.code == USER_NOT_EXIST
-        //     $("#mobile_notice").text("账号不存在").css("visibility", "visible")
+      async: false,
+      success: function(){
+        location.href = window.home_page;
       }
-      ); 
+    });
+
+    // $.postJSON(
+    //   window.register,
+    //   {
+    //     phone: phone,
+    //     password: password,
+    //     password_confirmation: password_again,
+    //     captcha: verify_code,
+    //     _token: window.token
+    //   },
+    //   function(data){
+    //     console.log(ajax.status);
+    //     if (ajax.status == 302) {
+    //       location.href = window.home_page;
+    //     }
+    //     // else
+    //     //   if data.code == WRONG_VERIFY_CODE
+    //     //    $("#code_notice").text("验证码错误").css("visibility", "visible")
+    //     //   if data.code == USER_NOT_EXIST
+    //     //     $("#mobile_notice").text("账号不存在").css("visibility", "visible")
+    //   }
+    //   ); 
   }
 
   $("#signup_btn").click(function(){
