@@ -15,6 +15,8 @@ class CourseSeeder extends Seeder
 
         $this->selectLessons();
 
+        $this->setRecommendedCourse();
+
     }
 
     /**
@@ -22,13 +24,15 @@ class CourseSeeder extends Seeder
      */
     public function seedCourse()
     {
+        $category = \App\Models\Term::where('type', 'category')->first();
         for ($i = 0; $i < 22; $i++) {
             DB::table('courses')->insert([
                 'name' => str_random('7'),
                 'teacher_id' => 1,
-                'category_id' => 12,
+                'category_id' => $category->id,
                 'price' => rand(10, 100),
                 'original_price' => 100,
+                'hot' => $i == 11 ? 1 : 0,
                 'type' => $i % 2 == 0 ? 'online' : 'offline',
                 'status' => 'publish',
                 'description' => 'some description',
@@ -61,5 +65,12 @@ class CourseSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
         }
+    }
+
+    public function setRecommendedCourse()
+    {
+        DB::table('settings')->insert(['key' => 'recommendedCourse',
+            'value' => 12,
+        ]);
     }
 }

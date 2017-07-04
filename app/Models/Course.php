@@ -37,6 +37,7 @@ class Course extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Term', 'category_id');
+//        return $this->belongsToMany('App\Models\Term', 'term_object', 'object_id', 'term_id');
     }
 
     public function users()
