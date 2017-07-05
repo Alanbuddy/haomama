@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 55);
+/******/ 	return __webpack_require__(__webpack_require__.s = 47);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,45 +10329,21 @@ return jQuery;
 
 /***/ }),
 
-/***/ 11:
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  $(".time").each(function() {
-    var data_time, dd, dm, dt, dtime, dy, time, time_now;
-    data_time = $(this).text();
-    dtime = Date.parse(data_time);
-    dt = new Date(dtime);
-    dy = dt.getFullYear();
-    dm = dt.getMonth() + 1;
-    dd = dt.getDate();
-    time_now = Date.parse(Date());
-    time = (time_now - dtime) / 1000;
-    if (time < 60) {
-      return $(this).text(time + "秒前");
-    } else if ((60 <= time && time < 3600)) {
-      return $(this).text(Math.round(time / 60) + "分前");
-    } else if ((3600 <= time && time < 86400)) {
-      return $(this).text(Math.round(time / 3600) + "小时前");
-    } else if ((86400 <= time && time < 604800)) {
-      return $(this).text(Math.round(time / 86400) + "天前");
-    } else {
-      return $(this).text(dy + "年" + dm + "月" + dd + "日");
-    }
-  });
-  return $(".back").click(function() {
-    return location.href = history.back();
-  });
+  return $("#type-tag").tagit();
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 55:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(11);
+module.exports = __webpack_require__(3);
 
 
 /***/ })

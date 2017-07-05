@@ -41,6 +41,7 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .sass('resources/assets/sass/signup.scss', 'public/css')
 .sass('resources/assets/sass/forget.scss', 'public/css')
 .sass('resources/assets/sass/admin_c_index.scss', 'public/css')
+.sass('resources/assets/sass/admin_course_new.scss', 'public/css')
 
 .js('resources/assets/js/layout.coffee', 'public/js')
 .js('resources/assets/js/register.coffee', 'public/js')
@@ -63,6 +64,7 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/signup.coffee', 'public/js')
 .js('resources/assets/js/forget.coffee', 'public/js')
 .js('resources/assets/js/admin_c_index.coffee', 'public/js')
+.js('resources/assets/js/admin_course_new.coffee', 'public/js')
 .js('resources/assets/js/admin-layout.coffee', 'public/js');
 
 

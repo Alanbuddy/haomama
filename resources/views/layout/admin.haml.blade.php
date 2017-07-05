@@ -11,6 +11,8 @@
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "/css/mobile-notification.css", :rel => "stylesheet"}
     %link{:href => "/css/admin-layout.css", :rel => "stylesheet"}
+    %link{:href => "/css/plugin/jquery.tagit.css", :rel => "stylesheet"}
+
     @yield('css')
   %body
     .wrapper
@@ -52,5 +54,6 @@
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
     <script src= "{{mix('/js/admin-layout.js')}}"></script>
-   
+    <script src= "/js/plugin/tag-it.min.js"></script>
+    
     @yield('script')

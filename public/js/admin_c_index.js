@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 44);
+/******/ 	return __webpack_require__(__webpack_require__.s = 46);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10333,7 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var back, search, text;
+  var search, text;
   if (window.profile === "template") {
     $('.nav-tabs a[href="#tab2"]').tab('show');
   }
@@ -10349,9 +10349,6 @@ return jQuery;
     var value;
     value = $("#search-input").val();
     return location.href = "/staff/courses?keyword=" + value + "&page=1";
-  };
-  back = function() {
-    return location.href = "/staff/courses";
   };
   $("#search-btn").click(function() {
     if ($("#search-btn").hasClass("search")) {
@@ -10376,10 +10373,7 @@ return jQuery;
       return $("#search-btn").removeClass("delete");
     }
   });
-  $("#new-template").click(function() {
-    return location.href = "/staff/courses/new";
-  });
-  return $(".set-available").click(function() {
+  $(".set-available").click(function() {
     var cid, current_state, link;
     current_state = "unavailable";
     if ($(this).hasClass("font-color-red")) {
@@ -10411,13 +10405,32 @@ return jQuery;
     });
     return false;
   });
+  $(".course-video").click(function() {
+    return location.href = window.course_create;
+  });
+  $(".offline").click(function() {
+    return location.href = window.course_create(+"/?type=offline");
+  });
+  return $("#exit").click(function() {
+    return $.ajax({
+      type: 'post',
+      url: window.logout,
+      data: {
+        _token: window.token
+      },
+      async: false,
+      success: function() {
+        return location.href = window.login;
+      }
+    });
+  });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 44:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);

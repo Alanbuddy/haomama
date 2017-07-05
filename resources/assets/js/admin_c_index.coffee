@@ -15,9 +15,6 @@ $ ->
     value = $("#search-input").val()
     location.href = "/staff/courses?keyword=" + value + "&page=1"
 
-  back = ->
-    location.href = "/staff/courses"
-
   $("#search-btn").click ->
     if $("#search-btn").hasClass("search")
       search()
@@ -38,9 +35,6 @@ $ ->
     else
       $("#search-btn").addClass("search")
       $("#search-btn").removeClass("delete")
-
-  $("#new-template").click ->
-    location.href = "/staff/courses/new"
 
   $(".set-available").click ->
     current_state = "unavailable"
@@ -72,18 +66,18 @@ $ ->
       )
     return false
 
+  $(".course-video").click ->
+    location.href = window.course_create
 
-  # $("#confirm-btn").click ->
-  #   course_name = $("#coursename").val()
-  #   $.getJSON "/staff/courses/get_id_by_name?course_name=" + course_name, (data) ->
-  #     if data.success
-  #       location.href = "/staff/courses/new?course_id=" + data.id
-  #     else
-  #       $.page_notification "课程不存在"
+  $(".offline").click ->
+    location.href = window.course_create +"/?type=offline"
 
-  # $("#cancel").click ->
-  #   $("#course-addModal").modal("hide")
-  # $("#coursename").autocomplete(
-  #   source: "/courses"
-  #   appendTo: "#course-addModal"
-  # )
+  $("#exit").click ->
+    $.ajax({
+      type: 'post',
+      url: window.logout,
+      data: {_token: window.token},
+      async: false,
+      success: ->
+        location.href = window.login
+    })

@@ -21,7 +21,6 @@ $(document).ready(function(){
       },
       async: false,
       success: function(){
-        alert("aaa");
         location.href = window.course_index;
       },
       error: function(){}
