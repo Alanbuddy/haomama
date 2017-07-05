@@ -4,7 +4,7 @@
 /public/hot
 /storage/*.key
 /vendor
-/app/Http/Wechat/*.php
+/app/Http/Wechat/*.*
 /.idea
 Homestead.json
 Homestead.yaml

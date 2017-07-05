@@ -21,6 +21,7 @@ Route::group([
 ], function () {
     Route::auth();
     Route::get('/', 'HomeController@index')->name('index');
+    Route::get('/logout', 'Auth\LoginController@logout');
 
     Route::get('/validate/phone', 'SmsController@isOccupied')->name('validate.phone');
     Route::any('/sms/send', 'SmsController@send')->name('sms.send');
@@ -76,7 +77,7 @@ Route::group([
 //    Route::resource('comments', 'CommentController',['except'=>'store']);
 
     Route::post('/orders/pay', 'OrderController@pay')->name('orders.pay');
-    Route::post('/orders/{uuid}/refund', 'OrderController@refund')->name('orders.refund');
+    Route::get('/orders/{uuid}/refund', 'OrderController@refund')->name('orders.refund');
     Route::resource('orders', 'OrderController', ['except' => 'store']);
     Route::get('/orders/{uuid}/query', 'OrderController@queryOrder')->name('orders.payment.query');
     Route::any('/orders/{uuid}/payment/update', 'OrderController@updatePaymentStatus')->name('orders.payment.update');

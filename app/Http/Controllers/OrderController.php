@@ -9,6 +9,7 @@ use App\Http\Wechat\sdk\lib\WxPayOrderQuery;
 use App\Http\Wechat\sdk\lib\WxPayRefund;
 use App\Http\Wechat\sdk\lib\WxPayUnifiedOrder;
 use App\Http\Wechat\WxApi;
+use App\Http\Wechat\WxException;
 use App\Models\Course;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
+    use ErrorTrait;
     /**
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -170,18 +173,23 @@ class OrderController extends Controller
             return view('admin.order.pay', $data);
         } catch (\Exception $e) {
             print($e->getMessage());
+            $this->logError('wxpay.unifiedOrder',$e->getMessage(),'','');
 //            return ['success' => false];
             return view('admin.order.pay');
         }
     }
 
-    public function refund(Request $request)
+    //退款
+    public function refund(Request $request, $uuid)
     {
+        $order = Order::where('uuid', $uuid)->firstOrFail();
         $input = new WxPayRefund();
-        $input->SetOut_refund_no();
-        $input->SetRefund_fee();
-        $input->SetTotal_fee();
-        $input->SetOp_user_id();
+        $input->SetOut_trade_no($order->uuid);
+        $input->SetOut_refund_no($order->uuid);
+//        $input->SetRefund_fee($order->amount*100);
+        $input->SetRefund_fee(1);
+        $input->SetTotal_fee($order->amount * 100);
+        $input->SetOp_user_id(config('wechat.mch.mch_id'));
         $result = WxPayApi::refund($input);
         dd($result);
     }
