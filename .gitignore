@@ -5,6 +5,7 @@
 /storage/*.key
 /vendor
 /app/Http/Wechat/*.*
+/app/Http/Wechat/cert/*.*
 /.idea
 Homestead.json
 Homestead.yaml
