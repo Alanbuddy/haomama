@@ -20,7 +20,7 @@
         %a.f16{href: "#"} 人员管理
         .dot
       %li
-        %a.f16{href: "#"} 账号设置
+        %a.f16.left-border{href: "#"} 账号设置
       %li
         %a.f16.set-left-border#exit{href: "#"} 退出登录
     
