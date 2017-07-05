@@ -22,6 +22,7 @@ class TestController extends Controller
         $method = $request->get('m', 'lessons');
         if ($method) {
             $result = call_user_func([$this, $method], $request);
+//            $result = $this->{$method}();
             dd($result);
         }
         return 'no method found';
