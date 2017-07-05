@@ -44,7 +44,7 @@ class CourseController extends Controller
                 ->get();
         }
 
-        dd($items);
+        // dd($items);
         return view('admin.course.index', [
             'items' => $items
         ]);

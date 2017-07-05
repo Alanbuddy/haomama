@@ -1,4 +1,4 @@
-$(document).ready(function($){
+$(document).ready(function(){
 
   function signin(){
     if ($("#signin_btn").attr("disabled") == true) {
@@ -50,6 +50,7 @@ $(document).ready(function($){
     //   }
     //   );
   }
+  
   $("#signin_btn").click(function(){
     signin();
     return false;

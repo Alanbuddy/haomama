@@ -131,10 +131,13 @@ $(document).ready(function($){
       {
         content: content,
         course_id: course_id,
-        lesson_id: lesson_id
+        lesson_id: lesson_id,
+        _token: window.token
       },
       function(data){
+        console.log(data);
         if (data.success){
+          $(".review-input").val("");
           showMsg("评论完成", "center");
         }
       }
