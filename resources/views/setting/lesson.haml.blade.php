@@ -7,6 +7,7 @@
   window.behavior = "#{route('behaviors.store')}" 
   window.video_id = "#{$video['id']}"
   window.token = "#{csrf_token()}"
+  window.comment = "#{route('comments.store')}"
 
 @endsection
 @section('content')
@@ -20,9 +21,9 @@
 .main-div{style: "display:block"}
   .title-div
     .row-div.clearfix
-      %span.name.f18.color7.fb= $lesson['name']
+      %span.name.f18.color7.fb.lesson-id{"data-id" => $lesson['id']}= $lesson['name']
       %span.num.f12.color5= $learnedCount."人已学"
-    %p.f14.color6= $course['name']."-第".($index + 1)."课"
+    %p.f14.color6.course-id{"data-id" => $course['id']}= $course['name']."-第".($index + 1)."课"
   .div-line
   .dir-div
     %span.title.f14.color7.fb 课程目录

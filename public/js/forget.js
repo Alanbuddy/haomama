@@ -10341,63 +10341,12 @@ module.exports = __webpack_require__(8);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_forget_input, forget, time, timer, toggle_password_tip, uid, wait;
-  uid = "";
-  timer = null;
-  wait = 60;
+  var check_forget_input, toggle_password_tip;
   $("#to_signin").click(function() {
     $("input").val("");
-    return location.href = "/sessions/signin_page";
+    return location.href = window.login;
   });
   $("#confirm_btn").attr("disabled", true);
-  time = function(o) {
-    $(o).attr("disabled", true);
-    $(o).addClass("clicked");
-    $(o).removeClass("verify-code-btn");
-    if (wait === 0) {
-      $(o).attr("disabled", false);
-      $(o).text("获取验证码");
-      wait = 60;
-      $(o).removeClass("clicked");
-      $(o).addClass("verify-code-btn");
-    } else {
-      $(o).text("重发" + wait + "s");
-      wait--;
-      timer = setTimeout((function() {
-        time(o);
-      }), 1000);
-    }
-  };
-  $("#verifycode").click(function() {
-    var mobile, mobile_retval;
-    mobile = $("#mobile").val();
-    mobile_retval = $.regex.isMobile(mobile);
-    if (mobile_retval === false) {
-      $("#mobile_notice").text("请输入正确手机号").css("visibility", "visible");
-      return false;
-    }
-    $.postJSON("/sessions/forget_password", {
-      mobile: mobile
-    }, function(data) {
-      if (data.success) {
-        $("#mobile_notice").css("visibility", "hidden");
-        uid = data.uid;
-        console.log(uid);
-        if (timer !== null) {
-          clearTimeout(timer);
-        }
-        return time("#verifycode");
-      } else {
-        if (data.code === USER_NOT_VERIFIED) {
-          $("#mobile_notice").text("手机号未验证").css("visibility", "visible");
-        }
-        if (data.code === USER_NOT_EXIST) {
-          return $("#mobile_notice").text("手机号未注册").css("visibility", "visible");
-        }
-      }
-    });
-    return false;
-  });
   toggle_password_tip = function(wrong) {
     if (wrong) {
       return $("#password_notice").css("visibility", "visible");
@@ -10406,7 +10355,7 @@ module.exports = __webpack_require__(8);
     }
   };
   check_forget_input = function() {
-    if ($("#mobile").val().trim() === "" || $("#mobilecode").val().trim() === "" || $("#password").val().trim() === "" || $("#password_again").val().trim() === "" || uid === "") {
+    if ($("#mobile").val().trim() === "" || $("#mobilecode").val().trim() === "" || $("#password").val().trim() === "" || $("#password_again").val().trim() === "") {
       return $("#confirm_btn").attr("disabled", true);
     } else {
       return $("#confirm_btn").attr("disabled", false);
@@ -10436,62 +10385,13 @@ module.exports = __webpack_require__(8);
     }
     return check_forget_input();
   });
-  $("#password_again").keyup(function(event) {
+  return $("#password_again").keyup(function(event) {
     var code;
     code = event.which;
     if (code !== 13) {
       toggle_password_tip(false);
     }
     return check_forget_input();
-  });
-  forget = function() {
-    var password, password_again, verify_code;
-    console.log(uid);
-    if (uid === "") {
-      return;
-    }
-    if ($("#confirm_btn").attr("disabled") === true) {
-      return;
-    }
-    verify_code = $("#mobilecode").val();
-    password = $("#password").val();
-    password_again = $("#password_again").val();
-    console.log(verify_code);
-    if (password !== password_again) {
-      toggle_password_tip(true);
-      return;
-    }
-    return $.postJSON('/sessions/' + uid + '/reset_password', {
-      password: password,
-      verify_code: verify_code
-    }, function(data) {
-      if (data.success) {
-        $.page_notification("密码已重置，请登录", 1000);
-        $(".input-div input").val("");
-        return location.href = "/sessions/signin_page";
-      } else {
-        if (data.code === WRONG_VERIFY_CODE) {
-          $("#code_notice").text("验证码错误").css("visibility", "visible");
-        }
-        if (data.code === USER_NOT_EXIST) {
-          $("#mobile_notice").text("账号不存在").css("visibility", "visible");
-        }
-        if (data.code === USER_NOT_VERIFIED) {
-          return $("#mobile_notice").text("手机号未验证").css("visibility", "visible");
-        }
-      }
-    });
-  };
-  $("#confirm_btn").click(function() {
-    forget();
-    return false;
-  });
-  return $("#password_again").keydown(function(event) {
-    var code;
-    code = event.which;
-    if (code === 13) {
-      return forget();
-    }
   });
 });
 

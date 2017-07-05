@@ -13,7 +13,7 @@
       window.register = "#{route('register')}"
       window.forget = "#{route('password.request')}"
       window.login = "#{route('login')}"
-      window.course_index = "#{route('admin.index')}"
+      window.course_index = "#{route('courses.index')}"
       window.token = "#{csrf_token()}"
   %body
     .wrapper
