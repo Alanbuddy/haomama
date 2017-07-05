@@ -10332,9 +10332,7 @@ return jQuery;
 /***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $("#type-tag").tagit();
-});
+/* WEBPACK VAR INJECTION */(function($) {$(function() {});
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 

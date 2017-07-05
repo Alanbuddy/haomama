@@ -55,7 +55,8 @@
               .controls.controls-row
                 %label.input-caption.f16 课程标签:
                 // %input.input-area.form-control#tag-input
-                %ul#type-tag
+                %span  
+                  %ul#type-tag
                 
               .controls.controls-row
                 %label.input-caption.course-length.f16 课次:
