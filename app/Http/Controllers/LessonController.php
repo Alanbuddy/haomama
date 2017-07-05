@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
-    use SignIn;
+    use SignIn, CommentTrait;
 
     function __construct()
     {
@@ -100,20 +100,8 @@ class LessonController extends Controller
     {
         $this->recordAttendance($course, $lesson);
 
-        $comments = $course->comments()
-            ->whereNull('star')
-            ->with('user')
-            ->with('votes')
-            ->where('course_id', $course->id)
-            ->orderBy('vote', 'desc')
-            ->paginate(10);
-
-        $latestComments = $course->comments()
-            ->whereNull('star')
-            ->with('user')
-            ->with('lesson')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $comments = $this->hottestComments($course, 3);
+        $latestComments = $this->latestComments($course);
 
         $count = auth()->user()->enrolledCourses()
             ->where('id', $course->id)
@@ -143,7 +131,7 @@ class LessonController extends Controller
         }
 
         $video = $lesson->video;
-        
+
         return view('setting.lesson', compact(
             'lesson',
             'comments',

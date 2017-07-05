@@ -6,6 +6,7 @@ require_once __DIR__ . "/../Wechat/sdk/lib/WxPay.Data.php";
 require_once __DIR__ . "/../Wechat/sdk/lib/WxPay.Api.php";
 use App\Http\Wechat\sdk\lib\WxPayApi;
 use App\Http\Wechat\sdk\lib\WxPayOrderQuery;
+use App\Http\Wechat\sdk\lib\WxPayRefund;
 use App\Http\Wechat\sdk\lib\WxPayUnifiedOrder;
 use App\Http\Wechat\WxApi;
 use App\Models\Course;
@@ -154,7 +155,7 @@ class OrderController extends Controller
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
-
+//            dd($ret);
             $appId = $ret['appid'];
             $timeStamp = time();
             $nonceStr = WxApi::getNonceStr();
@@ -169,9 +170,19 @@ class OrderController extends Controller
             return view('admin.order.pay', $data);
         } catch (\Exception $e) {
             print($e->getMessage());
-//            dd($e);
 //            return ['success' => false];
             return view('admin.order.pay');
         }
+    }
+
+    public function refund(Request $request)
+    {
+        $input = new WxPayRefund();
+        $input->SetOut_refund_no();
+        $input->SetRefund_fee();
+        $input->SetTotal_fee();
+        $input->SetOp_user_id();
+        $result = WxPayApi::refund($input);
+        dd($result);
     }
 }
