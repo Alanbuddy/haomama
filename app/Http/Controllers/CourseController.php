@@ -55,8 +55,12 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+//        return view('admin.course.create');
+        if($request->get('type')=='offline'){
+            return view('admin.course.offline');
+        }
         return view('admin.course.new');
     }
 
