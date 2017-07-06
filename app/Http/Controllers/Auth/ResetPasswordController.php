@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
 {
+    use SendsPasswordResetSms;
+
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -25,7 +27,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -36,4 +38,5 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
 }

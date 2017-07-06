@@ -13,31 +13,23 @@ use Illuminate\Http\Request;
 
 class SmsApi
 {
-    use Curl;
+    use Curl, SendSms;
+
+    /**
+     * 返回值示例  array:2 [ "code" => 200, "data" => "1|1707061719486692|操作成功" ]
+     * @param Request $request
+     * @return array
+     */
 
     public static function send(Request $request)
     {
-        $api_url = config('services.sms.url');
         session(['mobile' => $request->mobile]);
         $code = rand(100000, 999999);
 //        session(['code'=>$code]);
         session(['code' => 111111]);
 
-        $Msisdn = '18911209450';//接收号码，多个用逗号隔开，非空。
-        $SMSContent = 'haha你好吗' . $code;//短信内容，非空。长度不能超过500字符，超出返回失败信息。
-        $MSGType = 1;
-        $ECECCID = config('services.sms.account');
-        $Password = config('services.sms.password');
-        $queryData = compact(
-            'MSGType',
-            'Msisdn',
-            'SMSContent',
-            'ECECCID',
-            'Password'
-        );
-        $url = $api_url . '?' . http_build_query($queryData);
-        return Curl::request($url);
-
+        $content = 'haha你好吗' . $code;
+        return static::sendSms(['18911209450'], $content);
     }
 
     //查询余量

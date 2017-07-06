@@ -16,6 +16,10 @@ trait Curl
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
         $data = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if (!$data) {
+            $error = curl_errno($ch);
+            $data = "curl出错，错误码:$error";
+        }
         curl_close($ch);
         return [
             'code' => $httpCode,

@@ -12,25 +12,27 @@ namespace App\Http\Controllers;
 trait CommentTrait
 {
 
-    public function latestComments($course, $pageSize = 10)
+    public function latestComments($course, $lesson, $pageSize = 10)
     {
         return $course->comments()
             ->whereNull('star')
+            ->where('lesson_id', $lesson->id)
             ->with('user')
             ->with('lesson')
             ->orderBy('id', 'desc')
             ->paginate($pageSize);
-
     }
 
-    public function hottestComments($course, $pageSize = 10)
+    public function hottestComments($course, $lesson, $pageSize = 10)
     {
         return $course->comments()
             ->whereNull('star')
+            ->where('lesson_id', $lesson->id)
             ->with('user')
             ->with('votes')
             ->where('course_id', $course->id)
             ->orderBy('vote', 'desc')
             ->paginate($pageSize);
     }
+
 }

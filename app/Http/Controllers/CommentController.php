@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Facades\MessageFacade;
 use App\Models\Comment;
-use App\Models\Message;
+use App\Models\Course;
+use App\Models\Lesson;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use MtHaml\Filter\Less;
 
 class CommentController extends Controller
 {
+    use CommentTrait;
+
     function __construct()
     {
-//        $this->middleware('role:admin')->except('index');
+        $this->middleware('role:admin')->only('index');
     }
 
     /**
@@ -27,6 +31,12 @@ class CommentController extends Controller
         return view('admin.comment.index', [
             'items' => $items
         ]);
+    }
+
+    //课时下的评论
+    public function commentsOfLesson(Course $course, Lesson $lesson, $pageSize = 10)
+    {
+        return $this->latestComments($course, $lesson);
     }
 
     /**
