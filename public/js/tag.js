@@ -1,40 +1,55 @@
+
 $(document).ready(function(){
-  
-
   $(function(){
-    var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
-    $('#type-tag').tagit();
-    var eventTags = $('#eventTags');
+      var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
 
-    var addEvent = function(text) {
-        $('#events_container').append(text + '<br>');
-    };
+      //-------------------------------
+      // Minimal
+      //-------------------------------
+      $('#type-tag').tagit();
+      $('#teacher-tag').tagit();
+      //-------------------------------
+      // Preloading data in markup
+      //-------------------------------
+      $('#myULTags').tagit({
+          availableTags: sampleTags, // this param is of course optional. it's for autocomplete.
+          // configure the name of the input field (will be submitted with form), default: item[tags]
+          itemName: 'item',
+          fieldName: 'tags'
+      });
 
-    eventTags.tagit({
-        availableTags: sampleTags,
-        beforeTagAdded: function(evt, ui) {
-            if (!ui.duringInitialization) {
-                addEvent('beforeTagAdded: ' + eventTags.tagit('tagLabel', ui.tag));
-            }
-        },
-        afterTagAdded: function(evt, ui) {
-            if (!ui.duringInitialization) {
-                addEvent('afterTagAdded: ' + eventTags.tagit('tagLabel', ui.tag));
-            }
-        },
-        beforeTagRemoved: function(evt, ui) {
-            addEvent('beforeTagRemoved: ' + eventTags.tagit('tagLabel', ui.tag));
-        },
-        afterTagRemoved: function(evt, ui) {
-            addEvent('afterTagRemoved: ' + eventTags.tagit('tagLabel', ui.tag));
-        },
-        onTagClicked: function(evt, ui) {
-            addEvent('onTagClicked: ' + eventTags.tagit('tagLabel', ui.tag));
-        },
-        onTagExists: function(evt, ui) {
-            addEvent('onTagExists: ' + eventTags.tagit('tagLabel', ui.existingTag));
-        }
-    });
+      var eventTags = $('#eventTags');
+
+      var addEvent = function(text) {
+          $('#events_container').append(text + '<br>');
+      };
+
+      eventTags.tagit({
+          availableTags: sampleTags,
+          beforeTagAdded: function(evt, ui) {
+              if (!ui.duringInitialization) {
+                  addEvent('beforeTagAdded: ' + eventTags.tagit('tagLabel', ui.tag));
+              }
+          },
+          afterTagAdded: function(evt, ui) {
+              if (!ui.duringInitialization) {
+                  addEvent('afterTagAdded: ' + eventTags.tagit('tagLabel', ui.tag));
+              }
+          },
+          beforeTagRemoved: function(evt, ui) {
+              addEvent('beforeTagRemoved: ' + eventTags.tagit('tagLabel', ui.tag));
+          },
+          afterTagRemoved: function(evt, ui) {
+              addEvent('afterTagRemoved: ' + eventTags.tagit('tagLabel', ui.tag));
+          },
+          onTagClicked: function(evt, ui) {
+              addEvent('onTagClicked: ' + eventTags.tagit('tagLabel', ui.tag));
+          },
+          onTagExists: function(evt, ui) {
+              addEvent('onTagExists: ' + eventTags.tagit('tagLabel', ui.existingTag));
+          }
+      });
+      
   });
 
 });

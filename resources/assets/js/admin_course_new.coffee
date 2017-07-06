@@ -1,48 +1,19 @@
 
 $ ->
-  # $('#type-tag').tagit
-  #   fieldName: 'skills'
-  #   availableTags: [
-  #     'c++'
-  #     'java'
-  #     'php'
-  #     'javascript'
-  #     'ruby'
-  #     'python'
-  #     'c'
-  #   ]
-  #   autocomplete:
-  #     delay: 0
-  #     minLength: 2
-  #   showAutocompleteOnFocus: false
-  #   removeConfirmation: false
-  #   caseSensitive: true
-  #   allowDuplicates: false
-  #   allowSpaces: false
-  #   readOnly: false
-  #   tagLimit: null
-  #   singleField: false
-  #   singleFieldDelimiter: ','
-  #   singleFieldNode: null
-  #   tabIndex: null
-  #   placeholderText: null
-  #   beforeTagAdded: (event, ui) ->
-  #     console.log ui.tag
-  #     return
-  #   afterTagAdded: (event, ui) ->
-  #     console.log ui.tag
-  #     return
-  #   beforeTagRemoved: (event, ui) ->
-  #     console.log ui.tag
-  #     return
-  #   onTagExists: (event, ui) ->
-  #     console.log ui.tag
-  #     return
-  #   onTagClicked: (event, ui) ->
-  #     console.log ui.tag
-  #     return
-  #   onTagLimitExceeded: (event, ui) ->
-  #     console.log ui.tag
-  #     return
+  E = window.wangEditor
+  editor = new E('#edit-area')
+  # 图片上传地址
+  editor.customConfig.uploadImgServer = '/upload' 
+  editor.customConfig.showLinkImg = false
+  editor.customConfig.menus = [
+        'head',
+        'image'
+     ]
+  editor.customConfig.uploadHeaders = {
+    'Accept' : 'HTML'
+  }
+  editor.create()
+
+  
   
   
