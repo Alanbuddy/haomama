@@ -12,6 +12,8 @@
     %link{:href => "/css/mobile-notification.css", :rel => "stylesheet"}
     %link{:href => "/css/admin-layout.css", :rel => "stylesheet"}
     %link{:href => "/css/plugin/jquery.tagit.css", :rel => "stylesheet"}
+    %link{:href => "/css/plugin/jquery-ui.css", :rel => "stylesheet"}
+    %link{:href => "/css/plugin/tagit.ui-zendesk.css", :rel => "stylesheet"}
 
     @yield('css')
   %body
@@ -54,6 +56,9 @@
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
     <script src= "{{mix('/js/admin-layout.js')}}"></script>
+    <script src= "/js/plugin/jquery-ui.min.js"></script>
     <script src= "/js/plugin/tag-it.min.js"></script>
+    <script src= "/js/tag.js"></script>
+
     
     @yield('script')
