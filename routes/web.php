@@ -27,7 +27,9 @@ Route::group([
     Route::any('/sms/send', 'SmsController@send')->name('sms.send');
     Route::any('/sms/residual', 'SmsController@residual')->name('sms.residual');
     Route::get('/sms/verify', 'SmsController@verify')->name('sms.verify');
+
 });
+Route::any('/password/sms/send', 'Auth\ResetPasswordController@sendResetSms')->name('password.sms.send');
 
 include('test.php');
 
@@ -62,7 +64,7 @@ Route::group([
     Route::put('/courses/{course}/lessons/update', 'CourseController@updateLessons')->name('courses.lessons.update');
     Route::get('/courses/{course}/tag/edit', 'CourseController@editTags')->name('courses.tags.edit');
     Route::put('/courses/{course}/tag/update', 'CourseController@updateTags')->name('courses.tags.update');
-    Route::get('/courses/{course}/comments', 'CourseController@commentsIndex')->name('courses.comments.index');
+    Route::get('/courses/{course}/comments', 'CourseController@commentsIndex')->name('courses.comments.index');//课程评论
     Route::get('/courses/{course}/hot', 'CourseController@toggleHot')->name('courses.hot');//置顶与取消置顶
     Route::get('/courses/{course}/enroll', 'CourseController@enroll')->name('courses.enroll');//加入课程
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');//收藏课程

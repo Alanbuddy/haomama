@@ -332,7 +332,7 @@ class CourseController extends Controller
     //课程的评论
     public function commentsIndex(Request $request, Course $course)
     {
-        return $course->comments()->get();
+        return $course->comments()->orderBy('id','desc')->paginate(10);
     }
 
     //学生加入课程
