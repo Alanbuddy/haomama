@@ -68,6 +68,7 @@ Route::group([
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');//收藏课程
     Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');//获取推荐的课程
     Route::get('/courses/{course}/lessons/{lesson}/sign-in', 'CourseController@signIn')->name('courses.signIn');//签到
+    Route::get('/courses/{course}/lessons/{lesson}/comments', 'CommentController@commentsOfLesson')->name('courses.lesson.comments');//课时评论
 
     Route::get('/courses/{course}/lessons/{lesson}', 'LessonController@detail')->name('courses.lessons.show');//课时详情
     Route::resource('lessons', 'LessonController');

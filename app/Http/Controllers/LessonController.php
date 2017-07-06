@@ -100,8 +100,8 @@ class LessonController extends Controller
     {
         $this->recordAttendance($course, $lesson);
 
-        $comments = $this->hottestComments($course, 3);
-        $latestComments = $this->latestComments($course);
+        $comments = $this->hottestComments($course,$lesson, 3);
+        $latestComments = $this->latestComments($course,$lesson);
 
         $count = auth()->user()->enrolledCourses()
             ->where('id', $course->id)
