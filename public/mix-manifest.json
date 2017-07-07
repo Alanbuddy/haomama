@@ -39,8 +39,8 @@
   "/js/course-show.js": "/js/course-show.js",
   "/js/course-index.js": "/js/course-index.js",
   "/js/course-create.js": "/js/course-create.js",
+  "/js/admin_course_new.js": "/js/admin_course_new.js",
   "/js/admin_c_index.js": "/js/admin_c_index.js",
   "/js/admin-layout.js": "/js/admin-layout.js",
-  "/js/pay-success.js": "/js/pay-success.js",
-  "/js/admin_course_new.js": "/js/admin_course_new.js"
+  "/js/pay-success.js": "/js/pay-success.js"
 }

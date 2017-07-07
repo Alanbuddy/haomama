@@ -10332,7 +10332,18 @@ return jQuery;
 /***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(function() {});
+/* WEBPACK VAR INJECTION */(function($) {$(function() {
+  var E, editor;
+  E = window.wangEditor;
+  editor = new E('#edit-area');
+  editor.customConfig.uploadImgServer = '/upload';
+  editor.customConfig.showLinkImg = false;
+  editor.customConfig.menus = ['head', 'image'];
+  editor.customConfig.uploadHeaders = {
+    'Accept': 'HTML'
+  };
+  return editor.create();
+});
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 

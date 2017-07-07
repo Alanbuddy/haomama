@@ -43,8 +43,8 @@
               //   .undiscover.f14
               //     %img.undiscover-icon{src: asset_path("undiscover.png")}
               // - else
-              .table-box.f14
-                %table.table.table-hover.table-height
+              .table-box
+                %table.table.table-hover.table-height.f14
                   %thead.th-bg.font-color2
                     %tr
                       %th 课程名称
@@ -80,8 +80,8 @@
               //   .undiscover.f14
               //     %img.undiscover-icon{src: asset_path("undiscover.png")}
               // - else
-              .table-box.f14
-                %table.table.table-hover.table-height
+              .table-box
+                %table.table.table-hover.table-height.f14
                   %thead.th-bg.font-color2
                     %tr
                       %th 课程名称
@@ -114,8 +114,8 @@
               //   .undiscover.f14
               //     %img.undiscover-icon{src: asset_path("undiscover.png")}
               // - else
-              .table-box.f14
-                %table.table.table-hover.table-height
+              .table-box
+                %table.table.table-hover.table-height.f14
                   %thead.th-bg.font-color2
                     %tr
                       %th 课程名称
@@ -159,5 +159,6 @@
 @section('script')
 <script src= "{{mix('/js/admin_c_index.js')}}"></script>
 <script src= "/js/admin-add-course.js"></script>
+
 
 @endsection
