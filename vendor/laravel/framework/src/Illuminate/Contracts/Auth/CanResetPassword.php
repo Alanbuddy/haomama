@@ -4,6 +4,8 @@ namespace Illuminate\Contracts\Auth;
 
 interface CanResetPassword
 {
+    public function getWayToContactForPasswordReset($way);
+
     /**
      * Get the e-mail address where password reset links are sent.
      *
@@ -11,10 +13,11 @@ interface CanResetPassword
      */
     public function getEmailForPasswordReset();
 
+
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param  string $token
      * @return void
      */
     public function sendPasswordResetNotification($token);

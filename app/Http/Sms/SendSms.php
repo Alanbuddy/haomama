@@ -6,7 +6,7 @@
  * Time: 下午5:22
  */
 
-namespace app\Http\Sms;
+namespace App\Http\Sms;
 
 
 use App\Http\Util\Curl;

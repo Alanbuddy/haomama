@@ -207,6 +207,11 @@ class PasswordBroker implements PasswordBrokerContract
         return $this->tokens->create($user);
     }
 
+    public function createCustomToken(CanResetPasswordContract $user, $token = null)
+    {
+        return $this->tokens->create($user, $token);
+    }
+
     /**
      * Delete password reset tokens of the given user.
      *

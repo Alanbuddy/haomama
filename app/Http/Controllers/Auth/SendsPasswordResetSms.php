@@ -9,21 +9,46 @@
 namespace App\Http\Controllers\Auth;
 
 
-use App\Http\Sms\SmsApi;
+use App\Http\Sms\SendSms;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
 trait SendsPasswordResetSms
 {
 
+    use SendSms;
+
+//http://www.baby.com/password/sms/send?phone=18911209450
     public function sendResetSms(Request $request)
     {
-//        baby.com/password/sms/send?phone=18911209450
         $this->validate($request, ['phone' => 'required|digits:11']);
-        $response = SmsApi::send($request);
-        dd($response);
-        if ($response['code'] == 200) {
-            echo 'success';
+        $code = rand(100000, 999999);
+        $content = 'verification code ' . $code;
+        $result = self::sendSms([$request->get('phone')], $content);
+//        $result = ['success' => true];
+        if ($result['success']) {
+            $user = $this->myBroker()->getUser($request->only('phone'));
+            if (is_null($user)) {
+                return ['success' => false, 'message' => '用户不存在'];
+            }
+            $response = $this->myBroker()->createCustomToken($user, $code);
+//            dd($response, $code);
+            return ['success' => true];
+//            return ['success' => true, 'data' => $response];
+
+        } else {
+            return ['success' => false, 'message' => '发送失败', 'data' => $result];
         }
-        return 2;
     }
+
+    /**
+     * Get the broker to be used during password reset.
+     *
+     * @return \Illuminate\Contracts\Auth\PasswordBroker
+     */
+    public function myBroker()
+    {
+        return Password::broker('sms');
+    }
+
 }
