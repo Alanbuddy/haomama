@@ -24,7 +24,7 @@
           .sidebar
             %ul
               %li
-                %a{:href => "#"}
+                %a{href: route('courses.index')}
                   %img.mini-icon{src: "/icon/admin/1class.png"}
                   %span.f18.sidebar-title 课程管理
               %li

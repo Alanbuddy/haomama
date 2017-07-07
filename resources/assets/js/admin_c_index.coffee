@@ -70,7 +70,11 @@ $ ->
     location.href = window.course_create
 
   $(".offline").click ->
-    location.href = window.course_create +"/?type=offline"
+    console.log(window.course_create)
+    location.href = window.course_create + "?type=offline"
+
+  $(".show-name").click ->
+    location.href = "/courses/1"
 
   $("#exit").click ->
     $.ajax({

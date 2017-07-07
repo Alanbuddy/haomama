@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/admin_course_new.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/admin_course_offline.css') }}">
 <link href="/css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
 
 :javascript
@@ -91,24 +91,20 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
       .modal-body
-        .lessons-div
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-         
-          
+        .courses-div
+          .item.course-video
+            %img{src: "/icon/admin/media.png"}
+            %p 音/视频课程
+          .item.offline
+            %img{src: "/icon/admin/class.png"}
+            %p 线下课程
 
 @section('script')
-<script src= "{{mix('/js/admin_course_new.js')}}"></script>
+<script src= "{{mix('/js/admin_course_offline.js')}}"></script>
 <script src="/js/plugin/jquery-ui.min.js"></script>
 <script src="/js/plugin/wangEditor.min.js"></script>
 <script src="/js/plugin/jquery.tag-editor.min.js"></script>
-<script src="/js/preview.js"></script>
-<script src="/js/lesson-title.js"></script>
+// <script src="/js/preview.js"></script>
+// <script src="/js/lesson-title.js"></script>
 
 @endsection

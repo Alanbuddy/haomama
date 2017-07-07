@@ -80,44 +80,44 @@ $(document).ready(function(){
       toggle_password_tip(true);
       return false;
     }
-    $.ajax({
-      type: 'post',
-      url: window.forget,
-      data: {
-        phone: phone,
-        password: password,
-        password_confirmation: password_again,
-        captcha: verify_code,
-        _token: window.token
-      },
-      async: false,
-      success: function(){
-        alert("aaa");
-        location.href = window.login;
-      }
-    });
-
-    // $.postJSON(
-    //   window.register,
-    //   {
+    // $.ajax({
+    //   type: 'post',
+    //   url: window.forget,
+    //   data: {
     //     phone: phone,
     //     password: password,
     //     password_confirmation: password_again,
-    //     captcha: verify_code,
+    //     token: verify_code,
     //     _token: window.token
     //   },
-    //   function(data){
-    //     console.log(ajax.status);
-    //     if (ajax.status == 302) {
-    //       location.href = window.home_page;
-    //     }
-    //     // else
-    //     //   if data.code == WRONG_VERIFY_CODE
-    //     //    $("#code_notice").text("验证码错误").css("visibility", "visible")
-    //     //   if data.code == USER_NOT_EXIST
-    //     //     $("#mobile_notice").text("账号不存在").css("visibility", "visible")
+    //   async: false,
+    //   success: function(){
+    //     alert("aaa");
+    //     location.href = window.login;
     //   }
-    //   ); 
+    // });
+
+    $.postJSON(
+      window.forget,
+      {
+        phone: phone,
+        password: password,
+        password_confirmation: password_again,
+        token: verify_code,
+        _token: window.token
+      },
+      function(data){
+        console.log(data);
+        if (ajax.success) {
+          location.href = window.login;
+        }
+        // else
+        //   if data.code == WRONG_VERIFY_CODE
+        //    $("#code_notice").text("验证码错误").css("visibility", "visible")
+        //   if data.code == USER_NOT_EXIST
+        //     $("#mobile_notice").text("账号不存在").css("visibility", "visible")
+      }
+      ); 
   }
 
   $("#confirm_btn").click(function(){

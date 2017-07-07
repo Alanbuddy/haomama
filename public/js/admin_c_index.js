@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 46);
+/******/ 	return __webpack_require__(__webpack_require__.s = 50);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10409,7 +10409,11 @@ return jQuery;
     return location.href = window.course_create;
   });
   $(".offline").click(function() {
-    return location.href = window.course_create(+"/?type=offline");
+    console.log(window.course_create);
+    return location.href = window.course_create + "?type=offline";
+  });
+  $(".show-name").click(function() {
+    return location.href = "/courses/1";
   });
   return $("#exit").click(function() {
     return $.ajax({
@@ -10430,7 +10434,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 46:
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);

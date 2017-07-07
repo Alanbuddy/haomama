@@ -48,8 +48,7 @@ $(document).ready(function(){
           onTagExists: function(evt, ui) {
               addEvent('onTagExists: ' + eventTags.tagit('tagLabel', ui.existingTag));
           }
-      });
-      
+      });  
   });
-
+  
 });

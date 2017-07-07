@@ -21,6 +21,8 @@
   "/css/forget.css": "/css/forget.css",
   "/css/admin_c_index.css": "/css/admin_c_index.css",
   "/css/admin_course_new.css": "/css/admin_course_new.css",
+  "/css/admin_course_offline.css": "/css/admin_course_offline.css",
+  "/css/admin_course_show.css": "/css/admin_course_show.css",
   "/js/teacher.js": "/js/teacher.js",
   "/js/signup.js": "/js/signup.js",
   "/js/signin.js": "/js/signin.js",
@@ -42,5 +44,7 @@
   "/js/admin_course_new.js": "/js/admin_course_new.js",
   "/js/admin_c_index.js": "/js/admin_c_index.js",
   "/js/admin-layout.js": "/js/admin-layout.js",
-  "/js/pay-success.js": "/js/pay-success.js"
+  "/js/pay-success.js": "/js/pay-success.js",
+  "/js/admin_course_show.js": "/js/admin_course_show.js",
+  "/js/admin_course_offline.js": "/js/admin_course_offline.js"
 }

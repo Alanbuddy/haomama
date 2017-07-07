@@ -57,7 +57,7 @@
                     // - @course_insts[:data].each do |ci|
                     %tr{class: ""}
                       // %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
-                      %td 课程的名字
+                      %td.show-name 课程的名字
                       %td 线上视频or线下课程
                       %td 健康教育
                       %td 李老师、王老师
