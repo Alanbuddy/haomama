@@ -85,23 +85,58 @@
                 %ul.lesson-title
                   %li 11111
 @endsection
-#lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+#lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog
     .modal-content
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
-      .modal-body
-        .lessons-div
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-          %input.lesson{type: "checkbox", name: "lesson-check"} 第一课时
-         
-          
+      .modal-body.f14
+        .all-div
+          .checkbox
+            %label
+              %input{type: "checkbox", id: "all-select"} 全选/全不选
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        
+        .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
+        .select-page 
+          %span.totalitems 共2页，总计18条
+          %span.choice-page
+            %ul.pagination.pagination-sm
+              %li
+                %a{href: "#"} «
+              %li
+                %a{href: "#"} 1
+              %li
+                %a{href: "#"} »
 
 @section('script')
 <script src= "{{mix('/js/admin_course_new.js')}}"></script>

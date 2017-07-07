@@ -2,6 +2,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_course_offline.css') }}">
 <link href="/css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
+<link href="/css/plugin/fullcalendar.min.css" rel="stylesheet" type="text/css">
+
 
 :javascript
   window.course_index = "#{route('courses.index')}"
@@ -53,8 +55,18 @@
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
                 %img.edit-photo#imghead{src: "/icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
-                
+
             .controls-div.font-color3.f14
+              .controls.controls-row
+                %label.input-caption 上课时间:
+                %input.form-control.input-width#lesson-date{:type => "text"}
+                %label.input-caption 最少人数:
+                %input.form-control.input-width{:type => "text"}
+              .controls.controls-row
+                %label.input-caption 上课地点:
+                %input.form-control.input-width#lesson-address{:type => "text"}
+                %label.input-caption 最多人数:
+                %input.form-control.input-width{:type => "text"}
               .controls.controls-row
                 %label.input-caption 课程标签:  
                 %span.tag-div
@@ -72,14 +84,28 @@
                   %p.tag-word 热词一 
                   %p.tag-word 热词一 
                   %p.tag-word 热词一 
-
+              .calendar-wrapper.clearfix
+                .calendar-operation-wrapper
+                  %p.title.f18 课程日历
+                  %p.small-tips.f16 （单击日历中的时间进行删除）
+                  .form-inline.f16
+                    %label.input-date 上课日期:
+                    %input.input-area.form-control.no-margin-right#datepicker{:type => "text"}
+                  .form-inline.f16
+                    %label.input-date 开始时间:
+                    %input.input-area.form-control.no-margin-right#start-time{:type => "text"}
+                  .form-inline.f16
+                    %label.input-date 结束时间:
+                    %input.input-area.form-control.no-margin-right#end-time{:type => "text"}
+                  .btn#add-event{:type => "button"} 添加单次
+                  .repeat.clearfix
+                    %button.btn.date-btn#date-btn{:type => "button"} 次日重复
+                    %button.btn.week-btn#week-btn{:type => "button"} 每周重复
+                #calendar
               .course-introduce
                 %span.introduce 课程介绍:
                 %span.wangedit-area
                   #edit-area
-              .course-lesson
-                %span.introduce 选择课时:
-                %span.addlesson 添加
               .lesson-div
                 %span.introduce 课时标题:
                 %ul.lesson-title
@@ -104,7 +130,11 @@
 <script src="/js/plugin/jquery-ui.min.js"></script>
 <script src="/js/plugin/wangEditor.min.js"></script>
 <script src="/js/plugin/jquery.tag-editor.min.js"></script>
-// <script src="/js/preview.js"></script>
-// <script src="/js/lesson-title.js"></script>
+<script src="/js/plugin/moment.min.js"></script>
+<script src="/js/plugin/fullcalendar.min.js"></script>
+<script src="/js/plugin/locale-all.js"></script>
+
+<script src="/js/preview.js"></script>
+<script src="/js/lesson-title.js"></script>
 
 @endsection
