@@ -17,12 +17,15 @@
 	padding: 0;
 	max-height: 600px;
 }
+.unedit {
+  margin-top: 30px;
+}
 .text-message {
 	width: 50%;
 	float: left;
-}
-.margin20 {
-  margin: 16px 0 24px 0;
+  .controls-row {
+    margin-bottom: 22px;
+  }
 }
 .controls-row:nth-of-type(3) {
   margin-bottom: 0;
@@ -34,7 +37,7 @@
   margin-right: 40px;
 }
 .input-width {
-  width: 151px;
+  width: 157px;
   height: 30px;
   display: inline-block;
   color: #6f6f7e;
@@ -46,7 +49,7 @@
   color: #6f6f7e;
 }
 .controls-row {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 #course-price {
   margin-right: 40px;
@@ -60,10 +63,22 @@
   width: 17.25%;
   display: inline-block;
   margin-left: 7.5%;
-  margin-top: 1%;
+  // margin-top: 1%;
 }
 .controls-div {
   padding: 0 3.24%;
+}
+.tag-flex {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+  -webkit-align-items: center; 
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
 }
 .tag-div {
   display: inline-block;
@@ -73,6 +88,7 @@
   height: 30px;
   font-size: 12px;
   font-family: "微软雅黑";
+  margin-left: 4px;
 }
 .hot-tag-div {
   margin-top: 8px;
@@ -102,8 +118,8 @@
   margin-left: 2px;
 }
 .teacher-div {
-  width: 71%;
-  margin-left: 62px;
+  width: 70.7%;
+  margin-left: 4px;
 }
 .no-mb {
   margin-bottom: 0;
@@ -122,6 +138,7 @@
   display: inline-block;
   width: 70.5%;
   font-size: 14px;
+  margin-left: 4px;
 }
 .w-e-text-container {
   height: 200px !important;
@@ -133,6 +150,7 @@
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
+  margin-left: 4px;
 }
 .input-caption {
   font-weight: normal;
@@ -148,8 +166,12 @@
   width: 70.5%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  height: 200px;
   margin-bottom: 20px;
+  margin-left: 4px;
+  padding: 10px;
+}
+.ml4 {
+  margin-left: 4px;
 }
 
 #lessonModal {
@@ -231,4 +253,114 @@
   .item:nth-of-type(1) {
     border-right: 1px solid #eee;
   }
+}
+
+.edit-box {
+  display: none;
+}
+.short-span {
+  display: inline-block;
+  width: 154px;
+}
+.mr40 {
+  margin-right: 40px;
+}
+.unshelve-btn-position {
+  position: absolute;
+  right: 12%;
+  top: 24px;
+  z-index: 10;
+}
+.create-btn-position {
+  position: absolute;
+  right: 2.07%;
+  top: 24px;
+  z-index: 10;
+}
+#edit-btn, #unshelve-btn, #shelve-btn, #finish-btn {
+  width: 8.63%;
+  color: #fff;
+  outline: none;
+}
+.introduce-flex {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-felx;
+  display: flex;
+}
+
+//tab2
+.mr30 {
+  margin-right: 50px;
+}
+.tag2-page {
+  float: right;
+  width: 70%;
+}
+
+//tab3
+.review-items {
+  padding: 2.4% 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eaebf2;
+}
+.avatar-icon {
+  border-radius: 4px;
+  width: 100%;
+  max-width: 60px;
+  height: 4.2588em;
+  object-fit: contain;
+}
+.img-div {
+  width: 6%;
+  height: 4.2588em;
+}
+.review-div {
+  width: 92%;
+}
+.head-div, .reviews {
+  margin-bottom: 1%;
+}
+.show-review, .hide-review {
+  color: #fff;
+  width: 7.65%;
+  outline: none;
+  padding: 0;
+  border-radius: 4px;
+}
+.show-review:link {
+  color: #fff;
+}
+.show-review:visited {
+  color: #fff;
+}
+.show-review:hover {
+  color: #fff;
+}
+.show-review:active {
+  color: #fff;
+}
+.hide-review:link {
+  color: #fff;
+}
+.hide-review:visited {
+  color: #fff;
+}
+.hide-review:hover {
+  color: #fff;
+}
+.hide-review:active {
+  color: #fff;
+}
+
+.user-name {
+  font-size: 16px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.user-search-box {
+  margin: 10px;
 }

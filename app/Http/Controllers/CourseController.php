@@ -185,7 +185,7 @@ class CourseController extends Controller
 
         $teachers = $course->teachers()->get();
 
-        return view('course.show',//'admin.course.show',
+        return view('admin.course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
                 'hasFavorited',//是否已经收藏课程

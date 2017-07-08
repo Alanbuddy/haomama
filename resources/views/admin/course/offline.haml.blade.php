@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/admin_course_offline.css') }}">
 <link href="/css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
 <link href="/css/plugin/fullcalendar.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/css/plugin/selector.css">
 
 
 :javascript
@@ -64,6 +65,12 @@
                 %input.form-control.input-width{:type => "text"}
               .controls.controls-row
                 %label.input-caption 上课地点:
+                %dl#AreaSelector.m-select
+                  %dt
+                  %dd.region{:style => "height:210px;"}
+                    %input{:name => "", :type => "hidden", :value => ""}
+                    %ul.tab
+                    .tab-con.clearfix
                 %input.form-control.input-width#lesson-address{:type => "text"}
                 %label.input-caption 最多人数:
                 %input.form-control.input-width{:type => "text"}
@@ -86,15 +93,15 @@
                   %p.tag-word 热词一 
               .calendar-wrapper.clearfix
                 .calendar-operation-wrapper
-                  %p.title.f18 课程日历
-                  %p.small-tips.f16 （单击日历中的时间进行删除）
-                  .form-inline.f16
+                  %p.title 课程日历
+                  %p.small-tips （单击日历中的时间进行删除）
+                  .form-inline
                     %label.input-date 上课日期:
                     %input.input-area.form-control.no-margin-right#datepicker{:type => "text"}
-                  .form-inline.f16
+                  .form-inline
                     %label.input-date 开始时间:
                     %input.input-area.form-control.no-margin-right#start-time{:type => "text"}
-                  .form-inline.f16
+                  .form-inline
                     %label.input-date 结束时间:
                     %input.input-area.form-control.no-margin-right#end-time{:type => "text"}
                   .btn#add-event{:type => "button"} 添加单次
@@ -108,8 +115,8 @@
                   #edit-area
               .lesson-div
                 %span.introduce 课时标题:
-                %ul.lesson-title
-                  %li 11111
+                %span.wangedit-area
+                  #edit-title
 @endsection
 #lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
@@ -133,8 +140,10 @@
 <script src="/js/plugin/moment.min.js"></script>
 <script src="/js/plugin/fullcalendar.min.js"></script>
 <script src="/js/plugin/locale-all.js"></script>
+<script src="/js/plugin/Selector.js"></script>
+<script src="/js/plugin/address.js"></script>
 
 <script src="/js/preview.js"></script>
-<script src="/js/lesson-title.js"></script>
+<script src="/js/calendar.js"></script>
 
 @endsection

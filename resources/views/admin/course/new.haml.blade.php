@@ -83,7 +83,7 @@
               .lesson-div
                 %span.introduce 课时标题:
                 %ul.lesson-title
-                  %li 11111
+                  // %li 11111
 @endsection
 #lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog
@@ -97,13 +97,13 @@
               %input{type: "checkbox", id: "all-select"} 全选/全不选
         .checkbox
           %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
+            %input{type: "checkbox", name: "lesson-check", value: "第一课时"} 第一课时
         .checkbox
           %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
+            %input{type: "checkbox", name: "lesson-check", value: "第二课时"} 第二课时
         .checkbox
           %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
+            %input{type: "checkbox", name: "lesson-check", value: "第三课时"} 第三课时
         .checkbox
           %label
             %input{type: "checkbox", name: "lesson-check"} 第一课时

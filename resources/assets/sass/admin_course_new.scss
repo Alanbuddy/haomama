@@ -146,8 +146,9 @@
   width: 70.5%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  height: 200px;
+  // height: auto;
   margin-bottom: 20px;
+  padding: 10px;
 }
 
 #lessonModal {
@@ -156,9 +157,9 @@
     left: 50%;
     top: 50%;
     margin-left: -400px;
-    margin-top: -183px;
+    margin-top: -210px;
     width: 800px;
-    height: 366px;
+    height: 420px;
   }
   .modal-backdrop {
     background-color: #999;
@@ -180,7 +181,7 @@
   .confirm-btn-position {
     position: absolute;
     right: 350px;
-    bottom: 20px;
+    bottom: 60px;
   }
   #confirm-btn {
     width: 100px;
@@ -191,5 +192,8 @@
   .all-div {
     margin: 0 auto;
     text-align: center;
+  }
+  .select-page {
+    margin-top: 60px;
   }
 }

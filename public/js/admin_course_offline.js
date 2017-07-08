@@ -10333,16 +10333,29 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var E, editor;
+  var E, editor, editor1;
+  editor = function(id) {
+    var E;
+    E = window.wangEditor;
+    editor = new E(id);
+    editor.customConfig.uploadImgServer = '/upload';
+    editor.customConfig.showLinkImg = false;
+    editor.customConfig.menus = ['head', 'image'];
+    editor.customConfig.uploadHeaders = {
+      'Accept': 'HTML'
+    };
+    return editor.create();
+  };
+  editor("#edit-area");
   E = window.wangEditor;
-  editor = new E('#edit-area');
-  editor.customConfig.uploadImgServer = '/upload';
-  editor.customConfig.showLinkImg = false;
-  editor.customConfig.menus = ['head', 'image'];
-  editor.customConfig.uploadHeaders = {
+  editor1 = new E("#edit-title");
+  editor1.customConfig.uploadImgServer = '/upload';
+  editor1.customConfig.showLinkImg = false;
+  editor1.customConfig.menus = ['head'];
+  editor1.customConfig.uploadHeaders = {
     'Accept': 'HTML'
   };
-  return editor.create();
+  return editor1.create();
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

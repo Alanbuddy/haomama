@@ -149,6 +149,11 @@
   height: 200px;
   margin-bottom: 20px;
 }
+.lesson-div {
+  margin-bottom: 20px;
+}
+
+
 
 #lessonModal {
   .modal-dialog {
@@ -201,7 +206,7 @@
 
 
 .calendar-wrapper {
-  width: 87%;
+  width: 77%;
   border: 1px solid #c8c8c8;
   border-radius: 6px;
   margin-top: 2%;
@@ -214,7 +219,7 @@
 #calendar {
   width: 65%;
   float: right;
-  font-size: 14px;
+  // font-size: 14px;
 }
 .title {
   text-align: center;
@@ -234,7 +239,6 @@
 #add-event {
   width: 75%;
   background: #10c078;
-  font-size: 16px;
   color: white;
 }
 .add-btn:hover {
@@ -248,7 +252,6 @@
   float: left;
   width: 46%;
   background: #c8c8c8;
-  font-size: 1.6em;
   color: white;
 }
 #date-btn, #week-btn {
@@ -263,8 +266,7 @@
   float: right;
 }
 h2 {
-  font-size: 18px;
-  padding-top: 5px;
+  padding-top: 10px;
 }
 
 .active-btn {
@@ -272,4 +274,7 @@ h2 {
 }
 .no-margin-right {
   margin-right: 0;
+}
+.form-inline {
+  margin-bottom: 20px;
 }
