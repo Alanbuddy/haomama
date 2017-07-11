@@ -72,7 +72,6 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/admin_course_offline.coffee', 'public/js')
 .js('resources/assets/js/admin_course_show.coffee', 'public/js')
 .js('resources/assets/js/admin_lesson_index.coffee', 'public/js')
-.js('resources/assets/js/user-index.coffee', 'public/js')
 .js('resources/assets/js/admin-layout.coffee', 'public/js');
 
 

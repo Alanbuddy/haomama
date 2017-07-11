@@ -76,14 +76,5 @@ $ ->
   $(".show-name").click ->
     location.href = "/courses/1"
 
-  $("#exit").click ->
-    $.ajax({
-      type: 'post',
-      url: window.logout,
-      data: {_token: window.token},
-      async: false,
-      success: ->
-        location.href = window.login
-    })
 
 

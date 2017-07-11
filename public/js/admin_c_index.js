@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 54);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10412,21 +10412,8 @@ return jQuery;
     console.log(window.course_create);
     return location.href = window.course_create + "?type=offline";
   });
-  $(".show-name").click(function() {
+  return $(".show-name").click(function() {
     return location.href = "/courses/1";
-  });
-  return $("#exit").click(function() {
-    return $.ajax({
-      type: 'post',
-      url: window.logout,
-      data: {
-        _token: window.token
-      },
-      async: false,
-      success: function() {
-        return location.href = window.login;
-      }
-    });
   });
 });
 
@@ -10434,7 +10421,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 54:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);

@@ -14,6 +14,8 @@
 
     @yield('css')
     :javascript
+      window.logout = "#{route('logout')}"
+      window.login = "#{route('login')}"
       window.token = "#{csrf_token()}"
   %body
     .wrapper
