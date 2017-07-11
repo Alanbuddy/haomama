@@ -18,12 +18,12 @@
       %img.back{src: "/icon/admin/back.png"}
     %ul.set
       %li
-        %a.f16{href: "#"} 人员管理
+        %a.f16{href: route('users.index')} 人员管理
         .dot
       %li
-        %a.f16.left-border{href: "#"} 账号设置
+        %a.f16.left-border{href: route('admin.profile')} 账号设置
       %li
-        %a.f16.set-left-border{href: "#"} 退出登录
+        %a.f16.set-left-border#exit{href: "#"} 退出登录
 
   .main-content.bg2
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存

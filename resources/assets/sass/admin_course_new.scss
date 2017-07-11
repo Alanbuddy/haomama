@@ -141,13 +141,16 @@
 .course-lesson {
   margin-bottom: 20px;
 }
+.lesson-div {
+  margin-bottom: 20px;
+}
 .lesson-title {
-  display: inline-block;
   width: 70.5%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  // height: auto;
   margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 66px;
   padding: 10px;
 }
 
@@ -196,4 +199,13 @@
   .select-page {
     margin-top: 60px;
   }
+}
+
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
 }

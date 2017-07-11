@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 49);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10334,12 +10334,25 @@ return jQuery;
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   $(".sidebar ul li:eq(0)").addClass("active-li");
-  return $(".sidebar ul li").each(function() {
+  $(".sidebar ul li").each(function() {
     var that;
     that = $(this);
     return $(this).click(function() {
       that.siblings("li").removeClass("active-li");
       return that.addClass("active-li");
+    });
+  });
+  return $("#exit").click(function() {
+    return $.ajax({
+      type: 'post',
+      url: window.logout,
+      data: {
+        _token: window.token
+      },
+      async: false,
+      success: function() {
+        return location.href = window.login;
+      }
     });
   });
 });
@@ -10348,7 +10361,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 49:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 51);
+/******/ 	return __webpack_require__(__webpack_require__.s = 55);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10342,6 +10342,15 @@ return jQuery;
   editor.customConfig.uploadHeaders = {
     'Accept': 'HTML'
   };
+  editor.create();
+  E = window.wangEditor;
+  editor = new E('#title-area');
+  editor.customConfig.uploadImgServer = '/upload';
+  editor.customConfig.showLinkImg = false;
+  editor.customConfig.menus = ['head'];
+  editor.customConfig.uploadHeaders = {
+    'Accept': 'HTML'
+  };
   return editor.create();
 });
 
@@ -10349,7 +10358,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 51:
+/***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(3);

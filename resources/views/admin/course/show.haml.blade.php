@@ -15,22 +15,23 @@
       %img.back{src: "/icon/admin/back.png"}
     %ul.set
       %li
-        %a.f16{href: "#"} 人员管理
+        %a.f16{href: route('users.index')} 人员管理
         .dot
       %li
-        %a.f16.left-border{href: "#"} 账号设置
+        %a.f16.left-border{href: route('admin.profile')} 账号设置
       %li
-        %a.f16.set-left-border{href: "#"} 退出登录
+        %a.f16.set-left-border#exit{href: "#"} 退出登录
 
   .main-content.bg2
-    %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation.available{type: "button"} 下架课程
+    // %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation.available{type: "button"} 下架课程
+    %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation.unavailable{type: "button"} 上线课程
     %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
-    // %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
+    %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
     .table-div
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 课程详情
+            %a.f16.font-color1#course-desc{"data-toggle" => "tab", :href => "#tab1"} 课程详情
           %li
             %a.f16.font-color1#register-message{"data-toggle" => "tab", :href => "#tab2"} 报名信息
           %li
@@ -64,7 +65,7 @@
                   %span.edit-box
                     %input.form-control.input-width#course-price{:type => "text"}
                   %label.input-caption 促销价格:
-                  %span.unedit-box.short-span.font-color-red 50
+                  %span.unedit-box.short-span.font-color-red 50/无促销价格时显示无
                   %span.edit-box
                     %input.form-control.input-width{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
@@ -98,7 +99,21 @@
                 %span.introduce 课程介绍:
                 %span.unedit-box.ml4 该课程是少儿类视频第一名
                 %span.edit-box.wangedit-area
-                  #edit-area
+                  #edit-area 
+              .lesson-div
+                %span.unedit-box.introduce 课程课时:
+                %span.edit-box 选择课时:
+                %span.unedit-box.ml4.lesson-position
+                  .caption-item
+                    %img{src: "/icon/admin/music-small.png"}
+                    %span 第一课时标题
+                  .caption-item
+                    %img{src: "/icon/admin/video-small.png"}
+                    %span 第一课时标题
+                %span.edit-box.addlesson 添加
+                .lesson-title
+                  %ol.example
+
               .course-lesson.introduce-flex
                 %span.introduce 课时标题:
                 .unedit-box.ml4
@@ -108,18 +123,8 @@
                   %p 第一课时标题
                   %p 第一课时标题
                   %p 第一课时标题
-                %span.edit-box.addlesson 添加
-              .lesson-div.introduce-flex
-                %span.introduce 课程课时:
-                .unedit-box.ml4
-                  .caption-item
-                    %img{src: "/icon/admin/search.png"}
-                    %span 第一课时标题
-                  .caption-item
-                    %img{src: "/icon/admin/search.png"}
-                    %span 第一课时标题
-                %ul.edit-box.lesson-title
-                  // %li 11111
+                %span.edit-box.wangedit-area
+                  #title-area 
           #tab2.tab-pane
             .desc-div
               // - if @courses[:data].length == 0
@@ -197,19 +202,70 @@
                     %li
                       %a{href: "#"} »
 @endsection
-#lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+#lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog
     .modal-content
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
+      .modal-body.f14
+        .all-div
+          .checkbox
+            %label
+              %input{type: "checkbox", id: "all-no"} 全选/全不选
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check", value: "第一课时"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check", value: "第二课时"} 第二课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check", value: "第三课时"} 第三课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        .checkbox
+          %label
+            %input{type: "checkbox", name: "lesson-check"} 第一课时
+        
+        .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
+        .select-page 
+          %span.totalitems 共2页，总计18条
+          %span.choice-page
+            %ul.pagination.pagination-sm
+              %li
+                %a{href: "#"} «
+              %li
+                %a{href: "#"} 1
+              %li
+                %a{href: "#"} »
+
+
+#shelfModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/close.png"}
       .modal-body
-        .courses-div
-          .item.course-video
-            %img{src: "/icon/admin/media.png"}
-            %p 音/视频课程
-          .item.offline
-            %img{src: "/icon/admin/class.png"}
-            %p 线下课程
+        %p.message 是否确认下架当前课程？
+        .btn-div
+          %button.btn#shelf-cancel{type: "button"} 取&nbsp消
+          %button.btn#shelf-confirm{type: "button"} 确&nbsp定
 
 @section('script')
 <script src= "{{mix('/js/admin_course_show.js')}}"></script>

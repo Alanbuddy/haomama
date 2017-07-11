@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 53);
+/******/ 	return __webpack_require__(__webpack_require__.s = 57);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10333,11 +10333,16 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var E, editor;
+  var E, editor, editor1, is_edit;
+  is_edit = false;
   $("#edit-btn").click(function() {
+    is_edit = true;
     $(".unedit-box").toggle();
     $(".edit-box").toggle();
-    return $(".text-message").removeClass("unedit");
+    $(".text-message").removeClass("unedit");
+    $(".lesson-title").toggle();
+    $(this).toggle();
+    return $("#finish-btn").toggle();
   });
   E = window.wangEditor;
   editor = new E('#edit-area');
@@ -10347,14 +10352,44 @@ return jQuery;
   editor.customConfig.uploadHeaders = {
     'Accept': 'HTML'
   };
-  return editor.create();
+  editor.create();
+  E = window.wangEditor;
+  editor1 = new E("#title-area");
+  editor1.customConfig.uploadImgServer = '/upload';
+  editor1.customConfig.showLinkImg = false;
+  editor1.customConfig.menus = ['head'];
+  editor1.customConfig.uploadHeaders = {
+    'Accept': 'HTML'
+  };
+  editor1.create();
+  $("#register-message").click(function() {
+    $("#unshelve-btn").hide();
+    $("#edit-btn").hide();
+    $("#finish-btn").hide();
+    return $("#shelve-btn").hide();
+  });
+  $("#course-comment").click(function() {
+    $("#unshelve-btn").hide();
+    $("#edit-btn").hide();
+    $("#finish-btn").hide();
+    return $("#shelve-btn").hide();
+  });
+  return $("#course-desc").click(function() {
+    $("#unshelve-btn").show();
+    $("#shelve-btn").show();
+    if (is_edit) {
+      return $("#finish-btn").show();
+    } else {
+      return $("#edit-btn").show();
+    }
+  });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 53:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(5);

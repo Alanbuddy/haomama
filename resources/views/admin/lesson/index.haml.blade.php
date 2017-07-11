@@ -1,12 +1,12 @@
 @extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/admin_c_index.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/admin_lesson_index.css') }}">
 :javascript
-    window.course_index = "#{route('courses.index')}"
-    window.course_create = "#{route('courses.create')}"
-    window.logout = "#{route('logout')}"
-    window.login = "#{route('login')}"
-    window.token = "#{csrf_token()}"
+    // window.course_index = "#{route('courses.index')}"
+    // window.course_create = "#{route('courses.create')}"
+    // window.logout = "#{route('logout')}"
+    // window.login = "#{route('login')}"
+    // window.token = "#{csrf_token()}"
 @endsection
 
 @section('content')
@@ -157,8 +157,8 @@
             %img{src: "/icon/admin/class.png"}
             %p 线下课程
 @section('script')
-<script src= "{{mix('/js/admin_c_index.js')}}"></script>
-<script src= "/js/admin-add-course.js"></script>
+<script src= "{{mix('/js/admin_lesson_index.js')}}"></script>
+// <script src= "/js/admin-add-course.js"></script>
 
 
 @endsection

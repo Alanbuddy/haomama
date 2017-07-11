@@ -15,12 +15,12 @@
       %img.back{src: "/icon/admin/back.png"}
     %ul.set
       %li
-        %a.f16{href: "#"} 人员管理
+        %a.f16{href: route('users.index')} 人员管理
         .dot
       %li
-        %a.f16.left-border{href: "#"} 账号设置
+        %a.f16.left-border{href: route('admin.profile')} 账号设置
       %li
-        %a.f16.set-left-border{href: "#"} 退出登录
+        %a.f16.set-left-border#exit{href: "#"} 退出登录
 
   .main-content.bg2
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
@@ -80,10 +80,14 @@
               .course-lesson
                 %span.introduce 选择课时:
                 %span.addlesson 添加
+                .lesson-title
+                  %ol.example
+                                  
               .lesson-div
                 %span.introduce 课时标题:
-                %ul.lesson-title
-                  // %li 11111
+                %span.wangedit-area
+                  #title-area
+              
 @endsection
 #lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog
@@ -94,7 +98,7 @@
         .all-div
           .checkbox
             %label
-              %input{type: "checkbox", id: "all-select"} 全选/全不选
+              %input{type: "checkbox", id: "all-no"} 全选/全不选
         .checkbox
           %label
             %input{type: "checkbox", name: "lesson-check", value: "第一课时"} 第一课时
@@ -143,6 +147,7 @@
 <script src="/js/plugin/jquery-ui.min.js"></script>
 <script src="/js/plugin/wangEditor.min.js"></script>
 <script src="/js/plugin/jquery.tag-editor.min.js"></script>
+<script src="/js/plugin/jquery-sortable.js"></script>
 <script src="/js/preview.js"></script>
 <script src="/js/lesson-title.js"></script>
 

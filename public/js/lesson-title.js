@@ -34,16 +34,40 @@ $(document).ready(function(){
         title_arr.push(value);
     });
     var len = title_arr.length;
+
     for(var i=0;i<len;i++){
       var oLi = $("<li>" + title_arr[i] + "</li>");
-      $(".lesson-title").append(oLi);
+      $(".example").append(oLi);
     }
-    $("[name='lesson-check']:input").attr("checked", false);
+
+    $("[name='lesson-check']:input:checked").each(function(){
+      this.checked = false;
+    });
     $("#lessonModal").modal("hide");
   });
 
   $(".close").click(function(){
-    $("[name='lesson-check']:input").attr("checked", false);
+    $("[name='lesson-check']:input:checked").each(function(){
+      this.checked = false;
+    });
     $("#lessonModal").modal("hide");
   });
+
+  $("#all-no").click(function(){
+    $("[name='lesson-check']:input").each(function(){
+      this.checked = !this.checked;
+    });
+  });
+
+  $("ol.example").sortable();
+
+  $("#shelve-btn").click(function(){
+    $("#shelfModal").modal("show");
+  });
+
+  $("#shelf-cancel").click(function(){
+    $("#shelfModal").modal("hide");
+  });
+  
 });
+
