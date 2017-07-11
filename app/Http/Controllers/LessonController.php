@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
-    use SignIn, CommentTrait;
+    use SignInTrait, CommentTrait;
 
     function __construct()
     {

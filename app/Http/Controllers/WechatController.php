@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 require_once __DIR__ . "/../Wechat/WxApi.php";
 
 use App\Http\Util\Curl;
+use App\Http\Wechat\PayNotifyCallBack;
 use App\Http\Wechat\WxApi;
 use App\Http\Wechat\WxMessageApi;
 use App\Models\Error;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class WechatController extends Controller
 {
@@ -130,6 +132,25 @@ class WechatController extends Controller
             ]);
         }
         return $result;
+    }
+
+
+    /**
+     * 支付结果通知
+     * https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_7
+     * @param Request $request
+     */
+    public function paymentNotify()
+    {
+        Log::info('支付结果通知');
+        try{
+            $notify = new PayNotifyCallBack();
+            $notify->Handle(false);
+        }catch (\Exception $e){
+            Log::info($e->getMessage());
+            Log::info($e->getTrace());
+
+        }
     }
 
 }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\MessageFacade;
 use App\Facades\Search;
 use App\Http\Util\IO;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Lesson;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +17,13 @@ use Illuminate\Support\Facades\DB;
 class CourseController extends Controller
 {
     use IO;
-    use SignIn;
+    use SignInTrait;
+    use CourseEnrollTrait;
 
     function __construct()
     {
         $this->middleware('role:admin')
-            ->except(['index', 'show', 'statistics', 'enroll', 'favorite', 'search', 'signIn']);
+            ->except(['index', 'show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn']);
     }
 
     /**
@@ -58,7 +61,7 @@ class CourseController extends Controller
     public function create(Request $request)
     {
 //        return view('admin.course.create');
-        if($request->get('type')=='offline'){
+        if ($request->get('type') == 'offline') {
             return view('admin.course.offline');
         }
         return view('admin.course.new');
@@ -280,21 +283,29 @@ class CourseController extends Controller
 
     public function updateLessons(Request $request, Course $course)
     {
-        dd($course->students()->get());
+        $students = $course->students()->get();
         $lessons = $request->lessons;
         $arr = explode(',', $lessons);
-        $arr = array_map('intval', $arr);
+//        $arr = array_map('intval', $arr);
+        $arr = array_map(function ($v) {
+            return [intval($v) => [
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]];
+        }, $arr);
+        dd($arr);
         try {
             $changes = $course->lessons()->sync($arr);
             dd($changes);
             if ($changes['attached']) {
-
-//                MessageFacade::send([
-//                    'to' => $comment->user_id,
-//                    'object_id' => $course->id,
-//                    'object_type' => 'course',
-//                    'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
-//                ]);
+                foreach ($students as $student) {
+                    MessageFacade::send([
+                        'to' => $student->id,
+                        'object_id' => $course->id,
+                        'object_type' => 'course.update',
+                        'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
+                    ]);
+                }
 
             }
         } catch (Exception $e) {
@@ -332,26 +343,22 @@ class CourseController extends Controller
     //课程的评论
     public function commentsIndex(Request $request, Course $course)
     {
-        return $course->comments()->orderBy('id','desc')->paginate(10);
+        return $course->comments()->orderBy('id', 'desc')->paginate(10);
     }
 
-    //学生加入课程
-    public function enroll(Course $course)
+    public function enrollHandle(Course $course)
     {
         $user = auth()->user();
-//        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
-//        $course->users()->attach(auth()->user(), ['type' => $type]);
-        $count = $course->users()
-            ->withPivot('type')
-            ->where('type', 'enroll')
-            ->where('user_type', 'student')
-            ->where('user_id', $user->id)
-            ->count();
-        if ($count == 0) {
-            $changed = $course->users()->attach($user, ['user_type' => 'student']);
-        }
-        $changed = $course->users()->syncWithoutDetaching($user, ['user_type' => 'student']);
-        return ['success' => 'true', 'changed' => $changed];
+        $order = $user->orders()
+            ->where('product_id', $course->id)
+            ->where('status', 'paid')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        return $order
+            ? $this->enroll($course, $user->id)
+            : ['success' => false];
+
     }
 
     //收藏课程与取消收藏

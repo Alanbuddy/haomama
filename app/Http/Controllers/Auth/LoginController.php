@@ -25,8 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-//    protected $redirectTo = '/';
-    protected $redirectTo = 'http://baby.fumubidu.com.cn/haomama/';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,6 +34,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        $this->redirectTo = env('APP_URL') . '/haomama';
         $this->middleware('guest', ['except' => 'logout']);
     }
 }

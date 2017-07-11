@@ -102,7 +102,7 @@ return [
         'sms' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 60,
+            'expire' => 5,
             'column'=>'phone'
         ],
     ],

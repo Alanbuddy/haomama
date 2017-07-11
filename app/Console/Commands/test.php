@@ -2,10 +2,19 @@
 
 namespace App\Console\Commands;
 
+use App\Facades\MessageFacade;
+use App\Http\Controllers\OrderController;
+use App\Http\Util\Curl;
+use App\Models\Course;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 
 class test extends Command
 {
+    use Curl;
     /**
      * The name and signature of the console command.
      *
@@ -21,12 +30,18 @@ class test extends Command
     protected $description = 'test';
 
     /**
+     * @var Application
+     */
+    protected $app;
+
+    /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Application $app)
     {
+        $this->app = $app;
         parent::__construct();
     }
 
@@ -37,17 +52,34 @@ class test extends Command
      */
     public function handle()
     {
-        $str = "";
-        $str .= date("Y-m-d H:i:s", time()) . ",1234\n";
-        $str .= date("Y-m-d H:i:s", time()) . ",5678\n";
-        file_put_contents('csv.txt', $str);
-        $str = file_get_contents(base_path("csv.txt"));
-        $str = chop($str);
-//        $str=preg_replace('/[sS]*?$/','',$str);
-        print($str);
-        $arr = explode(PHP_EOL, $str);
-        print_r($arr);
-        $this->info($str);
+//        MessageFacade::sendBuyCompletedMessage(User::find(1), Course::find(1));
+        $this->refundOrder();
+    }
+
+    public function refundOrder()
+    {
+        $uuid = $this->ask('uuid');
+        $this->info($uuid);
+
+        $controller = app(OrderController::class);
+        $request = app(Request::class);
+        $order = Order::where('uuid', $uuid)->first();
+        $result = $controller->refund($request, $order->uuid);
+        var_dump($result);
+    }
+
+
+    public function refundAllOrder()
+    {
+//        $controller = $this->app->make(OrderController::class);
+        $controller = app(OrderController::class);
+//        $request = $this->app->make(Request::class);
+        $request = app(Request::class);
+        $orders = Order::get();
+        foreach ($orders as $order) {
+            $result = $controller->refund($request, $order->uuid);
+            var_dump($result);
+        }
     }
 
     protected function sendRequest($requestMethod, $request, $data)

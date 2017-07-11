@@ -12,7 +12,7 @@ class UserController extends Controller
 
     function __construct()
     {
-//        $this->middleware('role:admin')->except('index');
+//        $this->middleware('role:admin')->except(['show', 'vote']);
     }
 
     /**
@@ -79,10 +79,10 @@ class UserController extends Controller
         }
 
         //unread messages count;
-        $messagesCount=$user->messages()->where('has_read',false)->count();
+        $messagesCount = $user->messages()->where('has_read', false)->count();
 
         return view('mine.index',
-            compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses','messagesCount')
+            compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses', 'messagesCount')
         );
     }
 
@@ -104,9 +104,9 @@ class UserController extends Controller
             if ($vote->user_id == auth()->user()->id)
                 $hasVoted = true;
         }
-        
+
         return view('setting.teacher',
-            compact('user', 'courses','hasVoted','votes')
+            compact('user', 'courses', 'hasVoted', 'votes')
         );
     }
 
@@ -195,7 +195,7 @@ class UserController extends Controller
             ]);
             $vote->save();
         }
-       
+
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }
 }

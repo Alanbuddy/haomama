@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Facades\MessageFacade;
-use App\Http\Wechat\WxException;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -25,7 +24,7 @@ class SendWechatMessage implements ShouldQueue
      *
      * @return void
      */
-    public function __construct( User $user,Course $course)
+    public function __construct(User $user, Course $course)
     {
         //
         $this->user = $user;
@@ -41,6 +40,7 @@ class SendWechatMessage implements ShouldQueue
     {
 //        try {
             MessageFacade::sendWechatPreClassMessage($this->user, $this->course);
+//        MessageFacade::sendBuyCompletedMessage($this->user, $this->course);
 //        } catch (WxException $e) {
 //            Error::create([
 //                'user_id' => 1,

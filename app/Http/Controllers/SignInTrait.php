@@ -13,7 +13,7 @@ use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Lesson;
 
-trait SignIn
+trait SignInTrait
 {
     public function recordAttendance(Course $course, Lesson $lesson)
     {

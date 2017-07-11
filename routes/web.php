@@ -21,7 +21,6 @@ Route::group([
 ], function () {
     Route::auth();
     Route::get('/', 'HomeController@index')->name('index');
-    Route::get('/logout', 'Auth\LoginController@logout');
 
     Route::get('/validate/phone', 'SmsController@isOccupied')->name('validate.phone');
     Route::any('/sms/send', 'SmsController@send')->name('sms.send');
@@ -41,6 +40,7 @@ Route::group([
     'prefix' => 'admin'
 ], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::get('/profile', 'AdminController@profile')->name('admin.profile');
     Route::get('/phpinfo', 'AdminController@info');
 });
 
@@ -66,7 +66,7 @@ Route::group([
     Route::put('/courses/{course}/tag/update', 'CourseController@updateTags')->name('courses.tags.update');
     Route::get('/courses/{course}/comments', 'CourseController@commentsIndex')->name('courses.comments.index');//课程评论
     Route::get('/courses/{course}/hot', 'CourseController@toggleHot')->name('courses.hot');//置顶与取消置顶
-    Route::get('/courses/{course}/enroll', 'CourseController@enroll')->name('courses.enroll');//加入课程
+    Route::get('/courses/{course}/enroll', 'CourseController@enrollHandle')->name('courses.enroll');//加入课程
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');//收藏课程
     Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');//获取推荐的课程
     Route::get('/courses/{course}/lessons/{lesson}/sign-in', 'CourseController@signIn')->name('courses.signIn');//签到
@@ -108,14 +108,19 @@ Route::group([
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');
     Route::get('/videos/{video?}/statistics', 'VideoController@statistics')->name('video.statistics');
 
+});
+
+Route::group([
+    'middleware' => ['web'],
+], function () {
     Route::get('/wechat/message/get-industry', 'WechatController@getIndustry')->name('wechat.getIndustry');
     Route::get('/wechat/message/get-template', 'WechatController@getTemplate')->name('wechat.getTemplate');
     Route::get('/wechat/message/template-id', 'WechatController@getTemplateID')->name('wechat.getTemplateID');
     Route::get('/wechat/access-token', 'WechatController@accessToken')->name('wechat.accessToken');
-    Route::get('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment/notify');
     Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
     Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
     Route::get('/wechat/send', 'WechatController@send')->name('wechat.send');
-
 });
 
+//用户支付完成后，微信服务器通知商启系统支付情况的回调地址
+Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');

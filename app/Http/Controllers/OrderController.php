@@ -9,7 +9,6 @@ use App\Http\Wechat\sdk\lib\WxPayOrderQuery;
 use App\Http\Wechat\sdk\lib\WxPayRefund;
 use App\Http\Wechat\sdk\lib\WxPayUnifiedOrder;
 use App\Http\Wechat\WxApi;
-use App\Http\Wechat\WxException;
 use App\Models\Course;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -18,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 class OrderController extends Controller
 {
     use ErrorTrait;
+
     /**
      *
      * Display a listing of the resource.
@@ -106,6 +106,7 @@ class OrderController extends Controller
         //
     }
 
+    //调用统一下单API
     public function placeUnifiedOrder($order)
     {
         $input = new WxPayUnifiedOrder();
@@ -113,16 +114,15 @@ class OrderController extends Controller
         $input->SetAttach("test");
         $input->SetOut_trade_no($order->uuid); //$input->SetOut_trade_no(WxPayConfig::MCHID . date("YmdHis"));
         $input->SetTotal_fee($order->amount * 100);
-        $input->SetTotal_fee(1);//dev set to 1 cent
+//        $input->SetTotal_fee(1);//dev set to 1 cent
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag("test");
-        $input->SetNotify_url("http://baby.fumubidu.com.cn/wechat/payment/notify");
+        $input->SetNotify_url("http://baby.fumubidu.com.cn/haomama/wechat/payment/notify");
         $input->SetTrade_type("JSAPI");//交易类型为公众号支付
         $input->SetProduct_id("32");
         $input->SetOpenid(auth()->user()->openid);
         $result = WxPayApi::unifiedOrder($input);
-//        dd($result);
         Log::debug('统一下单api返回值:' . json_encode($result));
         if ($result['result_code'] == 'FAIL') {
             throw  new \Exception(json_encode($result));
@@ -135,7 +135,6 @@ class OrderController extends Controller
         $payOrderQuery = new WxPayOrderQuery();
         $payOrderQuery->SetOut_trade_no($uuid);
         $result = WxPayApi::orderQuery($payOrderQuery);
-        dd($result);
         return $result;
     }
 
@@ -144,12 +143,13 @@ class OrderController extends Controller
         $order = Order::where('uuid', $uuid)->firstOrFail();
         $result = self::queryOrder($request, $order->uuid);
         if ('SUCCESS' == $result['result_code']) {
-            $order->status = 'paid';
+            $order->status = $result['trade_state'] == 'SUCCESS' ? 'paid' : 'refunded';
             $order->wx_transaction_id = $result['transaction_id'];
             $order->wx_total_fee = $result['total_fee'];
-            $order->save();
+            $order->update();
         }
-        dd($result);
+        Log::info(json_encode($result));
+        dd($result, $result['result_code']);
     }
 
     public function pay(Request $request)
@@ -173,7 +173,7 @@ class OrderController extends Controller
             return view('admin.order.pay', $data);
         } catch (\Exception $e) {
             print($e->getMessage());
-            $this->logError('wxpay.unifiedOrder',$e->getMessage(),'','');
+            $this->logError('wxpay.unifiedOrder', $e->getMessage(), '', '');
 //            return ['success' => false];
             return view('admin.order.pay');
         }
@@ -183,14 +183,26 @@ class OrderController extends Controller
     public function refund(Request $request, $uuid)
     {
         $order = Order::where('uuid', $uuid)->firstOrFail();
+
         $input = new WxPayRefund();
         $input->SetOut_trade_no($order->uuid);
         $input->SetOut_refund_no($order->uuid);
-//        $input->SetRefund_fee($order->amount*100);
-        $input->SetRefund_fee(1);
-        $input->SetTotal_fee($order->amount * 100);
+        $input->SetRefund_fee($order->amount * 100 );//单位为分 //$input->SetRefund_fee(1);
+        $input->SetTotal_fee($order->wx_total_fee);//单位为分
         $input->SetOp_user_id(config('wechat.mch.mch_id'));
         $result = WxPayApi::refund($input);
+        if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
+            $order->status = 'refunded';
+            $order->save();
+            return ['success' => true];
+        } else {
+            return [
+                'success' => false,
+                'message' => array_key_exists('err_code', $result)
+                    ? $result['err_code']
+                    : $result['return_msg']
+            ];
+        }
         dd($result);
     }
 }

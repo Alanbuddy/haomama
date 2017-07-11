@@ -46,7 +46,7 @@
         }
 
         function checkPayment() {
-            alert('call');
+            alert('call checkPayment');
             $.ajax({
                 type: 'post',
                 url: "{{route('orders.payment.update',$order->uuid)}}",

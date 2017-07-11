@@ -19,7 +19,6 @@ class TestController extends Controller
 
     public function index(Request $request)
     {
-        dd(url(config('app.url').route('admin.index')));
         $method = $request->get('m', 'lessons');
         if ($method) {
             $result = call_user_func([$this, $method], $request);

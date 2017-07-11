@@ -14,6 +14,9 @@ class UserTableSeeder extends Seeder
 //        admin
         $this->seedAdmin();
 
+//        operator
+        $this->seedOperator();
+
 //        teacher
         $this->seedTeacher();
 
@@ -49,7 +52,7 @@ class UserTableSeeder extends Seeder
 
     public function seedUser()
     {
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             DB::table('users')->insert([
                     'name' => 'user' . str_random(4),
                     'email' => str_random(5) . '@163.com',
@@ -67,9 +70,10 @@ class UserTableSeeder extends Seeder
     public function seedAdmin()
     {
         DB::table('users')->insert([
-            'name' => 'aj',
+            'name' => 'adminDemo',
             'email' => 'fishis@163.com',
-            'password' => bcrypt('1234'),
+            'phone' => '18911209450',
+            'password' => bcrypt('123'),
             'baby' => json_encode([[
                 'name' => str_random(3),
                 'gender' => 'male',
@@ -77,6 +81,16 @@ class UserTableSeeder extends Seeder
             ]),
             'openid' => 'ouxmWjtwxX9y21AX4y3YEHuZHHFY',
             'wx' => ' {"sex": 1, "city": "Luliang", "openid": "ouxmWjtwxX9y21AX4y3YEHuZHHFY", "country": "CN", "language": "zh_CN", "nickname": "高尚衡", "province": "Shanxi", "privilege": [], "headimgurl": "http://wx.qlogo.cn/mmopen/oy6t7Y5iag6Qf6iaUh3EGArfnVdgDEyo0tRia3dGfoq0MmRykBySPbibYS79VsRFjIm8IX7a9ticnITN97NF7GhJBC2iaYJJQxSsq5/0"}'
+        ]);
+    }
+
+    public function seedOperator()
+    {
+        DB::table('users')->insert([
+            'name' => 'operatorDemo',
+            'email' => 'operatorDemo@163.com',
+            'phone' => '18912341234',
+            'password' => bcrypt('123'),
         ]);
     }
 }
