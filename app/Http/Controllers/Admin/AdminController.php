@@ -87,4 +87,10 @@ class AdminController extends Controller
     {
         phpinfo();
     }
+
+    //后台的账号设置页面
+    public function profile(Request $request)
+    {
+        return view('admin.user.profile');
+    }
 }

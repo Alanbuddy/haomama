@@ -287,30 +287,31 @@ class CourseController extends Controller
         $lessons = $request->lessons;
         $arr = explode(',', $lessons);
 //        $arr = array_map('intval', $arr);
-        $arr = array_map(function ($v) {
-            return [intval($v) => [
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]];
-        }, $arr);
-        dd($arr);
+        $arr = array_map('intval', $arr);
+        $tmp = [];
+        foreach ($arr as $id) {
+            $tmp[$id] = [
+                'created_at' => '' . Carbon::now(),
+                'updated_at' => '' . Carbon::now(),
+            ];
+        }
         try {
-            $changes = $course->lessons()->sync($arr);
-            dd($changes);
+            $changes = $course->lessons()->sync($tmp);
             if ($changes['attached']) {
                 foreach ($students as $student) {
                     MessageFacade::send([
                         'to' => $student->id,
                         'object_id' => $course->id,
-                        'object_type' => 'course.update',
+                        'object_type' => 'course',
                         'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
+                        'content' => 'Some Update',
                     ]);
                 }
-
             }
         } catch (Exception $e) {
             return back()->withErrors('数据错误');
         }
+        dd($changes);
         return redirect()->route('courses.lessons.edit', $course);
     }
 
