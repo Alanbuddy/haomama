@@ -13,6 +13,8 @@
     %link{:href => "/css/admin-layout.css", :rel => "stylesheet"}
 
     @yield('css')
+    :javascript
+      window.token = "#{csrf_token()}"
   %body
     .wrapper
       .layout-left

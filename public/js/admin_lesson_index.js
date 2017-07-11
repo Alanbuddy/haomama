@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 72);
+/******/ 	return __webpack_require__(__webpack_require__.s = 58);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,50 +10329,20 @@ return jQuery;
 
 /***/ }),
 
-/***/ 20:
+/***/ 58:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(function() {
-  $(document).scroll(function() {
-    if ($(document).scrollTop() > 200) {
-      return $('.upper').fadeIn(1000);
-    } else {
-      return $('.upper').fadeOut(1000);
-    }
-  });
-  $('.upper').click(function() {
-    return $('body').animate({
-      scrollTop: 0
-    });
-  });
-  $('.back').click(function() {
-    return location.href = window.home;
-  });
-  $('.course-item').click(function() {
-    var cid;
-    cid = $(this).attr('data-id');
-    return location.href = window.course_item + "/" + cid;
-  });
-  return $('.category-class').each(function() {
-    if ($(this).text() === "分类N") {
-      return $(this).addClass('health-title');
-    } else if ($(this).text() === "分类t") {
-      return $(this).addClass('psychology-title');
-    } else {
-      return $(this).addClass('grow-title');
-    }
-  });
-});
+module.exports = __webpack_require__(6);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 72:
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(20);
+/* WEBPACK VAR INJECTION */(function($) {$(function() {});
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })
 
