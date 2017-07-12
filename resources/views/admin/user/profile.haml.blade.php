@@ -2,11 +2,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/user-profile.css') }}">
 :javascript
-    // window.course_index = "#{route('courses.index')}"
-    // window.course_create = "#{route('courses.create')}"
-    // window.logout = "#{route('logout')}"
-    // window.login = "#{route('login')}"
-    // window.token = "#{csrf_token()}"
+    window.account_set = "#{route('admin.profile')}"
+    window.token = "#{csrf_token()}"
 @endsection
 
 @section('content')
@@ -31,26 +28,30 @@
           #tab1.tab-pane.active
             .desc
               %p.f24.font-color4.tc.bg2.work-cert 工作证
-              // = form_tag("/staff/accounts/" + @current_user.id.to_s, method: "put", multipart: true, id: "upload-photo-form", class: "person-div") do
-              //   = file_field_tag "photo_file", { class: "hide", accept: ".jpg,.png" }
-              //   .photo-div
-              //     %a.upload-div#upload-photo{href: "#"}
-              //       %img.bg2.photo#figure-photo{ src:"/icon/admin/default.png"}
-              //     %img.fingure{src: "/icon/admin/photo.png"}
+              .person-div
                 %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
-                .photo#preview
-                  %img.edit-photo#imghead{src: "/icon/admin/photo.png", onclick: "$('#previewImg').click()"}
+                .photo-div#preview
+                  %img.bg2.photo#imghead{src: "/icon/admin/default.png", onclick: "$('#previewImg').click()"}
+                  %img.figure{src: "/icon/admin/photo.png"}
                 %p.mobile
                   %span.f20.font-color3.mobile-num 手机号:
                   %span.f20.font-color3 13232344345
                 %p
                   %span.f20.font-color3.name 姓名:
                   %input.form-control.font-color3#user_name{placeholder: "请输入姓名", value: ""}
-
 @endsection
-
+#setModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/close.png"}
+      .modal-body
+        %p.message 您尚未保存账号设置，是否确定离开？
+        .btn-div
+          %button.btn#set-cancel{type: "button"} 取&nbsp消
+          %button.btn#set-confirm{type: "button"} 确&nbsp定
 @section('script')
-<script src="/js/preview.js"></script>
+<script src="/js/profile-preview.js"></script>
 <script src= "/js/admin-user-profile.js"></script>
 
 

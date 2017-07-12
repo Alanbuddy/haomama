@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 57);
+/******/ 	return __webpack_require__(__webpack_require__.s = 61);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,18 +10329,28 @@ return jQuery;
 
 /***/ }),
 
-/***/ 57:
+/***/ 61:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(6);
+module.exports = __webpack_require__(7);
 
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(function() {});
+/* WEBPACK VAR INJECTION */(function($) {$(function() {
+  $(".lesson-video").click(function() {
+    return location.href = window.lesson_store + "?/type=video";
+  });
+  $(".lesson-audio").click(function() {
+    return location.href = window.lesson_store + "?type=audio";
+  });
+  return $(".show-name").click(function() {
+    return location.href = "/lessons/1";
+  });
+});
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 

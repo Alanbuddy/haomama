@@ -1,0 +1,48 @@
+.direction {
+  justify-content: space-between;
+}
+.finish-btn-position {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  z-index: 10;
+}
+#finish-btn {
+  width: 100px;
+  color: #fff;
+  outline: none;
+}
+.input-caption {
+  font-weight: normal;
+}
+.input-area {
+  display: inline-block;
+  width: 20%;
+  height: 2.143em;
+  margin: 0 6.3% 0 1%;
+}
+.form-group {
+  margin-bottom: 2%;
+  .form-control {
+    display: inline-block;
+    width: 70%;
+    margin-left: 1%;
+  }
+}
+.introduce {
+  float: left;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 1.5%;
+}
+.notice-introduce {
+  margin-top: 2%;
+}
+.wangedit-area {
+  float: left;
+  width: 70%;
+  font-size: 16px;
+}
+#edit-box {
+  height: 22em;
+}
