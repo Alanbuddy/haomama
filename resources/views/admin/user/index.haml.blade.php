@@ -31,7 +31,7 @@
             .desc-div
               // - if @staffs[:data].length == 0
               //   .undiscover.f14
-              //     %img.undiscover-icon{src: asset_path("undiscover.png")}
+              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
               // - else
               .table-box.f14
                 %table.table.table-hover.table-height#admin
@@ -45,28 +45,27 @@
                     // - @staffs[:data].each do |s|
                     %tr
                       %td 1312234434343
-                      %td dadga 
+                      %td dadga/没有名字时显示“-” 
                       %td 新注册账号/正常/关闭
                       %td
-                        %a.change_status.available.font-color-brown{:href => "javascript:void(0);"} 关闭
-                        // %a.change_status.unavailable.font-color-green{:href => "javascript:void(0);"} 开通
+                        // %a.change_status.available.font-color-brown{:href => "javascript:void(0);"} 关闭
+                        %a.change_status.unavailable.font-color-green{:href => "javascript:void(0);"} 开通
                       %td
                         %a.font-color-red{href: "#"} 删除
-                  .select-page 
-                    %span.totalitems 共2页，总计18条
-                    %span.choice-page
-                      %ul.pagination.pagination-sm
-                        %li
-                          %a{href: "#"} «
-                        %li
-                          %a{href: "#"} 1
-                        %li
-                          %a{href: "#"} »
+                .select-page 
+                  %span.totalitems 共2页，总计18条
+                  %span.choice-page
+                    %ul.pagination.pagination-sm
+                      %li
+                        %a{href: "#"} «
+                      %li
+                        %a{href: "#"} 1
+                      %li
+                        %a{href: "#"} »
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/user-index.js')}}"></script>
-// <script src= "/js/admin-add-course.js"></script>
+<script src= "/js/admin-user-index.js"></script>
 
 
 @endsection
