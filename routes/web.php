@@ -41,7 +41,7 @@ Route::group([
     'prefix' => 'admin'
 ], function () {
     Route::get('/', 'AdminController@index')->name('admin.index');
-    Route::get('/profile', 'AdminController@profile')->name('admin.profile');
+    Route::any('/profile', 'AdminController@profile')->name('admin.profile');
     Route::get('/phpinfo', 'AdminController@info');
 });
 
@@ -125,3 +125,6 @@ Route::group([
 
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
 Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');
+
+Route::get('/3rd/map/render', 'TestController@renderReverse')->name('api.map.render.reverse');
+

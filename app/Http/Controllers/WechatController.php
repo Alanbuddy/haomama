@@ -12,6 +12,7 @@ use App\Models\Error;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class WechatController extends Controller
@@ -20,8 +21,10 @@ class WechatController extends Controller
 
     public function accessToken(Request $request)
     {
+        DB::table('settings')->where('key', 'access_token')->update(['key' => 'access_token',
+            'value' => '{"access_token":"example","expire_time":1497937039}']);
         $result = WxApi::accessToken();
-        dd($result);
+        dd($result['data']);
     }
 
     // 获得模板ID
@@ -143,10 +146,10 @@ class WechatController extends Controller
     public function paymentNotify()
     {
         Log::info('支付结果通知');
-        try{
+        try {
             $notify = new PayNotifyCallBack();
             $notify->Handle(false);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             Log::info($e->getTrace());
 

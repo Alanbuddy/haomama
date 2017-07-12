@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Search;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;
@@ -16,14 +17,42 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     *
+     * 用户列表页
+     * 地址:http://localhost/users?type=operator
+     * type参数代表用户在系统中的角色，根据此参数从数据库筛选用户数据
+     * type参数可能值是Role表中的name字段所有取值之一(目前存在的值为'teacher','operator','admin')
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = User::paginate(10);
-        return view('admin.user.index', [
+        $type = $request->get('type', 'user');
+        if ($type != 'user') {
+            $roles = array_map(function ($v) {
+                return $v->name;
+            }, Role::select('name')->get()->all());
+            $role = Role::where('name', $type)->first();
+            $items = in_array($type, $roles)
+                ? $role->users()->paginate(10)
+                : [];
+        } else {
+            $items = User::paginate(10);
+        }
+        switch ($type) {
+            case 'user':
+                $view = 'admin.user.index';
+                break;
+            case 'teacher':
+                $view = 'admin.teacher.index';
+                break;
+            case 'operator':
+                $view = 'admin.teacher.index';
+                break;
+            default:
+                $view = 'admin.user.index';
+        }
+        return view($view, [
             'items' => $items
         ]);
     }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Util;
 
-use Illuminate\Http\Request;
 use App\Models\File;
+use Illuminate\Http\Request;
 
 /**
  * Created by PhpStorm.
@@ -27,6 +27,8 @@ trait IO
             $item->fill($this->getFileBaseInfo($file));
             $item->save();
             return $item;
+        } else {
+            return $moved;
         }
     }
 
