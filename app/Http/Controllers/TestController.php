@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\MessageFacade;
+use App\Http\Util\BaiduMap;
 use App\Http\Wechat\WxException;
 use App\Jobs\SendWechatMessage;
 use App\Models\Course;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
+    use BaiduMap;
     function __construct()
     {
         $this->middleware('auth')->only('send');

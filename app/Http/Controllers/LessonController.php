@@ -14,7 +14,7 @@ class LessonController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin')->except('index', 'show', 'detail');
+        $this->middleware('role:admin|operator')->except('index', 'show', 'detail');
     }
 
     /**
@@ -22,8 +22,9 @@ class LessonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $type = $request->get('type', 'video');
         $items = Lesson::where('id', '>', '0')
             ->paginate(10);
         return view('admin.lesson.index', [
@@ -36,9 +37,10 @@ class LessonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.lesson.create');
+        $type = $request->get('type', 'video');
+        return view($type == 'video' ? 'admin.lesson.new' : 'admin.lesson.audio');
     }
 
     /**
@@ -100,8 +102,8 @@ class LessonController extends Controller
     {
         $this->recordAttendance($course, $lesson);
 
-        $comments = $this->hottestComments($course,$lesson, 3);
-        $latestComments = $this->latestComments($course,$lesson);
+        $comments = $this->hottestComments($course, $lesson, 3);
+        $latestComments = $this->latestComments($course, $lesson);
 
         $count = auth()->user()->enrolledCourses()
             ->where('id', $course->id)

@@ -16,19 +16,26 @@ use App\Models\Course;
 use App\Models\Error;
 use App\Models\Message;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class MessageService
 {
-    public function send($attributes)
+    /**
+     * @param $attributes
+     * @param $to User Id
+     */
+    public function send($attributes, $to)
     {
         $message = new Message();
-        if ($attributes['object_type'] == 'comment') {
-            $existingMessage = Message::where('object_id', $attributes['object_id'])->first();
-            $message = $existingMessage ?: $message;
-        } else if ($attributes['object_type'] == 'course') {
-            $existingMessage = Message::where('object_id', $attributes['object_id'])->first();
-            $message = $existingMessage ?: $message;
-        }
+//        if ($attributes['object_type'] == 'comment') {
+        $existingMessage = Message::where('object_id', $attributes['object_id'])
+            ->where('to', $to)
+            ->first();
+        $message = $existingMessage ?: $message;
+//        } else if ($attributes['object_type'] == 'course') {
+//            $existingMessage = Message::where('object_id', $attributes['object_id'])->first();
+//            $message = $existingMessage ?: $message;
+//        }
         $message->fill($attributes);
         if ($existingMessage) {
             //消息列表按created_at排序，所以要更新created_at字段使这条消息重新排到前面
@@ -42,8 +49,9 @@ class MessageService
     //线下课程开课前24小时发送微信模板消息
     public function sendWechatPreClassMessage(User $user, Course $course)
     {
+        Log::info('sendWechatPreClassMessage');
         $template_id = "YOjEUmaFcJ-27cx82zG6UVz9D23Mvbtv_5NDjhKT-Lw";
-        $url = route('courses.show', $course);
+        $url = env('APP_URL') . route('courses.show', $course);
         $result = WxApi::accessToken();
         if ($result['success']) {
             $access_token = $result['data']->access_token;

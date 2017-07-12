@@ -297,7 +297,7 @@ class CourseController extends Controller
         }
         try {
             $changes = $course->lessons()->sync($tmp);
-            if ($changes['attached']) {
+            if ($changes['attached']) {//如果有新课时添加,给所属课程的学员发送站内通知
                 foreach ($students as $student) {
                     MessageFacade::send([
                         'to' => $student->id,
@@ -305,13 +305,13 @@ class CourseController extends Controller
                         'object_type' => 'course',
                         'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
                         'content' => 'Some Update',
-                    ]);
+                    ],$student->id);
                 }
             }
         } catch (Exception $e) {
             return back()->withErrors('数据错误');
         }
-        dd($changes);
+//        dd($changes);
         return redirect()->route('courses.lessons.edit', $course);
     }
 
