@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 69);
+/******/ 	return __webpack_require__(__webpack_require__.s = 63);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,92 +10329,31 @@ return jQuery;
 
 /***/ }),
 
-/***/ 13:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_review_input;
-  check_review_input = function() {
-    if ($(".review-input").val() === "") {
-      return $("#delivery").attr("disabled", true).css("opacity", "0.5");
-    } else {
-      return $("#delivery").attr("disabled", false).css("opacity", "1");
-    }
-  };
-  $(".review-input").keyup(function() {
-    return check_review_input();
-  });
-  $(".nav li").click(function() {
-    $(".nav li").removeClass("active");
-    $(this).addClass("active");
-    $(".main-div").css("display", "none");
-    return $(".main-div").eq($(this).index()).css("display", "block");
-  });
-  $(".back").click(function() {
-    return location.href = window.course;
-  });
-  $('.admire-icon').click(function() {
-    var ad, num, url;
-    url = $(this).closest(".review-item").attr("data-url");
-    num = $(this).siblings(".admire-num").text();
-    ad = $(this);
-    return $.getJSON(url, {}, function(data) {
-      console.log(data);
-      if (data.success) {
-        if (data.message === 'yes') {
-          ad.attr('src', '/icon/like1_selected.png');
-          ad.siblings(".admire-num").text(parseInt(num) + 1);
-          return showMsg('点赞完成', 'center');
-        } else {
-          ad.attr('src', '/icon/like1_normal.png');
-          ad.siblings(".admire-num").text(parseInt(num) - 1);
-          return showMsg('取消点赞', 'center');
-        }
-      } else {
-        return showMsg('服务器出错，请稍后再试', 'center');
-      }
-    });
-  });
-  $(".nums-div a").each(function() {
-    var index;
-    index = $(this).attr("data-index");
-    $(this).siblings("a").removeClass("red-border");
-    $(this).siblings("a").find("span").css("color", "#999");
-    return $(".nums-div a").eq(index).addClass("red-border").find("span").css("color", "#333");
-  });
-  return $(".time").each(function() {
-    var data_time, dd, dm, dt, dtime, dy, time, time_now;
-    data_time = $(this).text();
-    dtime = Date.parse(data_time);
-    dt = new Date(dtime);
-    dy = dt.getFullYear();
-    dm = dt.getMonth() + 1;
-    dd = dt.getDate();
-    time_now = Date.parse(Date());
-    time = (time_now - dtime) / 1000;
-    if (time < 60) {
-      return $(this).text(time + "秒前");
-    } else if ((60 <= time && time < 3600)) {
-      return $(this).text(Math.round(time / 60) + "分前");
-    } else if ((3600 <= time && time < 86400)) {
-      return $(this).text(Math.round(time / 3600) + "小时前");
-    } else if ((86400 <= time && time < 604800)) {
-      return $(this).text(Math.round(time / 86400) + "天前");
-    } else {
-      return $(this).text(dy + "年" + dm + "月" + dd + "日");
-    }
-  });
-});
+module.exports = __webpack_require__(7);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 69:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(13);
+/* WEBPACK VAR INJECTION */(function($) {$(function() {
+  var E, editor;
+  E = window.wangEditor;
+  editor = new E('#edit-box');
+  editor.customConfig.uploadImgServer = '/upload';
+  editor.customConfig.showLinkImg = false;
+  editor.customConfig.menus = ['head', 'image'];
+  editor.customConfig.uploadHeaders = {
+    'Accept': 'HTML'
+  };
+  return editor.create();
+});
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })
 

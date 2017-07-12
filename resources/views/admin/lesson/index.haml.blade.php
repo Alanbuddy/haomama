@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/admin_lesson_index.css') }}">
 :javascript
     window.lesson_index = "#{route('lessons.index')}"
-    window.lesson_store = "#{route('lessons.store')}"
+    window.lesson_create = "#{route('lessons.create')}"
     window.token = "#{csrf_token()}"
 @endsection
 
