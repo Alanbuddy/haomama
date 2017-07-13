@@ -40,7 +40,19 @@ class LessonController extends Controller
     public function create(Request $request)
     {
         $type = $request->get('type', 'video');
-        return view($type == 'video' ? 'admin.lesson.new' : 'admin.lesson.audio');
+        return view($type == 'video'
+            ? 'admin.lesson.new'
+            : 'admin.lesson.audio'
+        );
+    }
+
+    public function storeVideoLesson(Request $request)
+    {
+    }
+
+    public function storeAudioLesson(Request $request)
+    {
+
     }
 
     /**
@@ -51,14 +63,16 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
+        $type = $request->get('type', 'video');
+        $video_id = $type == 'video' ? $this->storeVideoLesson($request) : $this->storeAudioLesson($request);
         $item = new Lesson();
         $item->fill($request->only([
             'name',
-            'video_id',
             'begin',
             'end',
         ]));
 //        $item->teacher_id = auth()->user()->id;
+        $item->video_id = $video_id;
         $item->save();
 
         if ($request->file('cover')) {

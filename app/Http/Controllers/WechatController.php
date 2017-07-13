@@ -21,10 +21,10 @@ class WechatController extends Controller
 
     public function accessToken(Request $request)
     {
-        DB::table('settings')->where('key', 'access_token')->update(['key' => 'access_token',
-            'value' => '{"access_token":"example","expire_time":1497937039}']);
+//        DB::table('settings')->where('key', 'access_token')->update(['key' => 'access_token',
+//            'value' => '{"access_token":"example","expire_time":1497937039}']);
         $result = WxApi::accessToken();
-        dd($result['data']);
+        dd($result);
     }
 
     // 获得模板ID

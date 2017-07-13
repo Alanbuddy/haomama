@@ -40,15 +40,14 @@ class WechatMessage extends Command
      */
     public function handle()
     {
-        Log::info('----------------------------executed----------------------------');
+        Log::info('----------------------------send wechat notification----------------------------');
         $courses = Course::where('type', 'offline')
             ->where('id', '>', 0)
             ->with('users')
             ->get();
         foreach ($courses as $course) {
             foreach ($course->users as $user) {
-                Log::info($user->id);
-                $job = (new SendWechatMessage(auth()->user(), Course::first()))->onQueue('wechat');
+                $job = (new SendWechatMessage($user, $course))->onQueue('wechat');
                 dispatch($job);
             }
         }

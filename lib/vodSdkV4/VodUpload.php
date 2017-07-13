@@ -1,19 +1,25 @@
 <?php
+
 namespace Lib\Vod;
+
+use Illuminate\Support\Facades\Log;
+
 /**
  * Created by PhpStorm.
  * User: root
  * Date: 17-4-26
  * Time: 下午4:59
  */
-
 //文件分片信息
-class PartFileInfo {
+class PartFileInfo
+{
     public $_offset;
     public $_dataSize;
     public $_isSent;
     public $_retryTimes;
-    public function __construct($offset, $dataSize, $isSent, $retryTimes) {
+
+    public function __construct($offset, $dataSize, $isSent, $retryTimes)
+    {
         $this->_offset = $offset;
         $this->_dataSize = $dataSize;
         $this->_isSent = $isSent;
@@ -21,7 +27,8 @@ class PartFileInfo {
     }
 }
 
-class VodApi {
+class VodApi
+{
     protected $_serverHost;
     protected $_serverPort;
     protected $_defaultRegion;
@@ -43,10 +50,10 @@ class VodApi {
     protected $_classId;
     protected $_fileTags;
 
-    protected $_arrPartFiles;		//文件分片列表
-    protected $_concurUploadNum;	//并发上传分片数目
-    protected $_retryTimes;			//上传失败时，可重试上传的次数
-    protected $_fileId = '-1';		//上传成功时，FinishUpload会设置该值
+    protected $_arrPartFiles;        //文件分片列表
+    protected $_concurUploadNum;    //并发上传分片数目
+    protected $_retryTimes;            //上传失败时，可重试上传的次数
+    protected $_fileId = '-1';        //上传成功时，FinishUpload会设置该值
 
     protected $_usage;
     protected $_uploadServerHost;
@@ -61,7 +68,8 @@ class VodApi {
     const USAGE_UGC_UPLOAD = 1;
     const USAGE_VOD_REST_API_CALL = 2;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->_uploadServerHost = "vod2.qcloud.com";
         $this->_uploadServerUri = "/v3/index.php";
 
@@ -78,16 +86,17 @@ class VodApi {
         $this->_fileTags = array();
     }
 
-    public function Init($secretId, $secretKey, $usage, $region) {
+    public function Init($secretId, $secretKey, $usage, $region)
+    {
         $this->_secretId = $secretId;
         $this->_secretKey = $secretKey;
         $this->_defaultRegion = $region;
         $this->_usage = $usage;
-        if($this->_usage == self::USAGE_VOD_REST_API_CALL) {
+        if ($this->_usage == self::USAGE_VOD_REST_API_CALL) {
             $this->_serverHost = $this->_restApiServerHost;
             $this->_serverUri = $this->_restApiServerUri;
             $this->_requestMethod = $this->_restApiReqMethod;
-        } else if($this->_usage == self::USAGE_UPLOAD || $this->_usage == self::USAGE_UGC_UPLOAD) {
+        } else if ($this->_usage == self::USAGE_UPLOAD || $this->_usage == self::USAGE_UGC_UPLOAD) {
             $this->_serverHost = $this->_uploadServerHost;
             $this->_serverUri = $this->_uploadServerUri;
             $this->_requestMethod = $this->_uploadReqMethod;
@@ -95,8 +104,9 @@ class VodApi {
         //$this->_serverHost = "vod2.qcloud.com";
     }
 
-    public function CallRestApi($paraMap) {
-        if($this->_usage != self::USAGE_VOD_REST_API_CALL) {
+    public function CallRestApi($paraMap)
+    {
+        if ($this->_usage != self::USAGE_VOD_REST_API_CALL) {
             echo "CallRestApi|usage error!\n";
             return -1;
         }
@@ -105,7 +115,7 @@ class VodApi {
         $paraMap["Timestamp"] = time();
         $paraMap["Nonce"] = rand(0, 1000000);
         $this->makeRequest($paraMap["Action"], $paraMap, $request);
-        if(!($response = $this->sendRequest($request, ""))) {
+        if (!($response = $this->sendRequest($request, ""))) {
             echo "CallRestApi|sendRequest error\n";
             echo "CallRestApi|recv:" . json_encode($response) . "\n";
             return -1;
@@ -118,8 +128,9 @@ class VodApi {
 
 
 //    修改原来SDK提供的CallRestApi方法，使返回值带上腾讯云的响应信息
-    public function CallMyRestApi($paraMap) {
-        if($this->_usage != self::USAGE_VOD_REST_API_CALL) {
+    public function CallMyRestApi($paraMap)
+    {
+        if ($this->_usage != self::USAGE_VOD_REST_API_CALL) {
             return [-1, "CallRestApi|usage error!\n"];
         }
         $paraMap["Region"] = $this->_defaultRegion;
@@ -127,22 +138,24 @@ class VodApi {
         $paraMap["Timestamp"] = time();
         $paraMap["Nonce"] = rand(0, 1000000);
         $this->makeRequest($paraMap["Action"], $paraMap, $request);
-        if(!($response = $this->sendRequest($request, ""))) {
+        if (!($response = $this->sendRequest($request, ""))) {
             echo "CallRestApi|sendRequest error\n";
             echo "CallRestApi|recv:" . json_encode($response) . "\n";
-            return [-1,$response];
+            return [-1, $response];
         } else {
             echo "CallRestApi|recv:" . json_encode($response) . "\n";
-            return [0,$response];
+            return [0, $response];
         }
 
     }
+
     /**
      * SetConcurrentNum
      * 设置并发上传分片数目
      * @param int $concurNum 并发上传分片数目
      */
-    public function SetConcurrentNum($concurNum) {
+    public function SetConcurrentNum($concurNum)
+    {
         $this->_concurUploadNum = (int)$concurNum;
     }
 
@@ -151,15 +164,18 @@ class VodApi {
      * 设置并发上传分片数目
      * @param int $retryTimes 每个分片可重传的次数
      */
-    public function SetRetryTimes($retryTimes) {
+    public function SetRetryTimes($retryTimes)
+    {
         $this->_retryTimes = (int)$retryTimes;
     }
 
-    public function AddFileTag($fileTag) {
+    public function AddFileTag($fileTag)
+    {
         $this->_fileTags[] = $fileTag;
     }
 
-    public function getFileId() {
+    public function getFileId()
+    {
         return $this->_fileId;
     }
 
@@ -167,20 +183,24 @@ class VodApi {
      * CheckParams
      * 校验参数合法性
      * @param array $params API参数
-     * @return	bool 校验通过返回true，否则返回false
+     * @return    bool 校验通过返回true，否则返回false
      */
-    public function CheckParams($params) {
+    public function CheckParams($params)
+    {
         //设置API请求参数
-        if(!isset($params['fileName'])) {
+        if (!isset($params['fileName'])) {
             echo "API fileName参数为空，为必填选项\n";
+            Log::error("API fileName参数为空，为必填选项\n");
             return false;
         }
-        if(empty($params['fileName'])) {
+        if (empty($params['fileName'])) {
             echo "fileName为空，请检测参数\n";
+            Log::error("fileName为空，请检测参数\n");
             return false;
         }
-        if(!is_file($params['fileName'])) {
-            echo $params['fileName']."  不存在，请检测\n";
+        if (!is_file($params['fileName'])) {
+            echo $params['fileName'] . "  不存在，请检测\n";
+            Log::error($params['fileName'] . "  不存在，请检测\n");
             return false;
         }
         return true;
@@ -192,19 +212,20 @@ class VodApi {
      * @param array $package API参数
      * @return 0表示上传成功，负数表示上传失败
      */
-    public function UploadVideo($package) {
-        if($this->CheckParams($package) == false)
+    public function UploadVideo($package)
+    {
+        if ($this->CheckParams($package) == false)
             return -1;
 
-        if($this->InitUpload($package) == false) {
+        if ($this->InitUpload($package) == false) {
             echo "\n[UploadVodFile] InitUpload failed!\n";
             return -2;
         }
-        if($this->UploadPart() == false) {
+        if ($this->UploadPart() == false) {
             echo "\n[UploadVodFile] upload request failed!\n";
             return -3;
         }
-        if($this->FinishUpload() == false) {
+        if ($this->FinishUpload() == false) {
             echo "\n[UploadVodFile] finish upload request failed!\n";
             return -4;
         }
@@ -220,14 +241,15 @@ class VodApi {
      * @param int $retryTimes 每个分片的可重试上传次数
      * @return 无返回
      */
-    public function GeneratePartInfo($fileSize, $dataSize, $retryTimes) {
+    public function GeneratePartInfo($fileSize, $dataSize, $retryTimes)
+    {
         $partNum = floor($fileSize / $dataSize);
-        for($i = 0; $i < $partNum; ++$i) {
-            $offset  = $dataSize * $i;
+        for ($i = 0; $i < $partNum; ++$i) {
+            $offset = $dataSize * $i;
             $partFileInfo = new PartFileInfo($offset, $dataSize, 0, $retryTimes);
             $this->_arrPartFiles[] = $partFileInfo;
         }
-        if($partNum * $dataSize < $fileSize) {
+        if ($partNum * $dataSize < $fileSize) {
             $offset = $partNum * $dataSize;
             $dataSize = $fileSize - $partNum * $dataSize;
             $partFileInfo = new PartFileInfo($offset, $dataSize, 0, $retryTimes);
@@ -241,18 +263,19 @@ class VodApi {
      * @param array $params API请求参数
      * @return bool 成功返回true，失败返回false
      */
-    public function InitUpload($params) {
+    public function InitUpload($params)
+    {
         echo "\n===InitUpload begin===\n";
         $name = 'InitUpload';
 
         $retry = $this->_retryTimes;
-        while(true) {
+        while (true) {
             $this->_filePath = $params['fileName'];
             $this->_fileSha = sha1_file($params['fileName']);
             $this->_fileSize = filesize($params['fileName']);
             //防止中文文件名中有空格
             $len_dir = strlen(dirname($params['fileName']));
-            if(dirname($params['fileName']) == '.')
+            if (dirname($params['fileName']) == '.')
                 $this->_fileName = $params['fileName'];
             else
                 $this->_fileName = substr($params['fileName'], $len_dir + 1);
@@ -292,39 +315,39 @@ class VodApi {
                 'name' => $this->_fileName
             );
             $sizeFileTags = count($this->_fileTags);
-            for($i = 0; $i < $sizeFileTags; ++$i) {
-                $arguments['tag.'.(string)($i+1)] = $this->_fileTags[$i];
+            for ($i = 0; $i < $sizeFileTags; ++$i) {
+                $arguments['tag.' . (string)($i + 1)] = $this->_fileTags[$i];
             }
             $send_retry_times = 0;
             $this->makeRequest($name, $arguments, $request);
-            while(!($response = $this->sendRequest($request, $data))) {
-                if($send_retry_times > 3) {
+            while (!($response = $this->sendRequest($request, $data))) {
+                if ($send_retry_times > 3) {
                     echo "[InitUpload] send retry times reach MAX 3,failed!\n";
                     return false;
                 }
                 ++$send_retry_times;
-                echo "[InitUpload] send retry " . $send_retry_times. " times\n";
+                echo "[InitUpload] send retry " . $send_retry_times . " times\n";
             }
             echo "[InitUpload] recv:" . json_encode($response) . "\n";
 
-            if($response['code'] == 1) {//文件部分分片已经上传到服务器
+            if ($response['code'] == 1) {//文件部分分片已经上传到服务器
                 echo "[InitUpload] file part existed!\n";
                 $this->_dataSize = $response['dataSize'];
                 $this->GeneratePartInfo($this->_fileSize, $this->_dataSize, $this->_retryTimes);
-                foreach($response['listParts'] as $val) {
+                foreach ($response['listParts'] as $val) {
                     $index = floor($val["offset"] / $this->_dataSize);
                     $this->_arrPartFiles[$index]->_isSent = 1;
                 }
                 return true;
-            } else if($response['code'] == 0) {
+            } else if ($response['code'] == 0) {
                 $this->GeneratePartInfo($this->_fileSize, $this->_dataSize, $this->_retryTimes);
                 return true;
-            } else if($response['code'] == 2) {//文件已经存在于服务器
+            } else if ($response['code'] == 2) {//文件已经存在于服务器
                 echo "[InitUpload] file existed!\n";
                 $this->_fileId = $response['fileId'];
                 return true;
             } else {
-                if($retry-- && $response['canRetry'] == 1)
+                if ($retry-- && $response['canRetry'] == 1)
                     continue;
                 return false;
             }
@@ -336,24 +359,25 @@ class VodApi {
      * 文件分片上传(并发)
      * @return bool 成功返回true，失败返回false
      */
-    public function UploadPart() {
+    public function UploadPart()
+    {
         echo "\n===UploadPart begin===\n";
         $name = 'UploadPart';
 
         $partNum = count($this->_arrPartFiles);
         $nextIndex = 0;
         $fp = fopen($this->_filePath, "rb");
-        while(true) {
+        while (true) {
             $index = $nextIndex;
             $count = 0;
             $arr_request = array();
             $arr_data = array();
             $arr_index = array();
-            while(true) {
-                if($index > $partNum - 1 || $count > $this->_concurUploadNum - 1) {
+            while (true) {
+                if ($index > $partNum - 1 || $count > $this->_concurUploadNum - 1) {
                     break;
                 }
-                if($this->_arrPartFiles[$index]->_isSent === 1) {
+                if ($this->_arrPartFiles[$index]->_isSent === 1) {
                     ++$index;
                     continue;
                 }
@@ -363,7 +387,7 @@ class VodApi {
 
                 $Nonce = rand(0, 1000000);
                 $timestamp = time();
-                $dataMd5= md5($data);
+                $dataMd5 = md5($data);
                 $arguments = array(
                     'Action' => $name,
                     'Nonce' => $Nonce,
@@ -387,13 +411,12 @@ class VodApi {
                 ++$count;
             }
 
-            if($this->httpReqMulti($arr_request, $arr_data, $arr_index) === false) {
+            if ($this->httpReqMulti($arr_request, $arr_data, $arr_index) === false) {
                 echo "[UploadPart] httpReqMulti return false\n";
-                var_dump($arr_request);
                 return false;
             }
             $nextIndex = $index;
-            if($nextIndex >= $partNum)
+            if ($nextIndex >= $partNum)
                 break;
         }
         fclose($fp);
@@ -408,19 +431,20 @@ class VodApi {
      * @param array $arr_index 索引的数组
      * @return bool 成功返回true，失败返回false
      */
-    public function httpReqMulti($arr_request, $arr_data, $arr_index) {
-        while(true) {
+    public function httpReqMulti($arr_request, $arr_data, $arr_index)
+    {
+        while (true) {
             $mh = curl_multi_init();
             $ch_list = array();
             $reqNum = count($arr_data);
             $arr_retry_index = array();
-            for($i = 0; $i < $reqNum; ++ $i) {
+            for ($i = 0; $i < $reqNum; ++$i) {
                 $request = $arr_request[$i];
                 $data = $arr_data[$i];
                 $header = array(
                     "POST {$request['uri']}?{$request['query']} HTTP/1/1",
                     "HOST:{$request['host']}",
-                    "Content-Length:".$request['contentLen'],
+                    "Content-Length:" . $request['contentLen'],
                     "Content-type:application/octet-stream",
                     "Accept:*/*",
                     "User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36",
@@ -428,44 +452,45 @@ class VodApi {
                 );
 
                 $ch = curl_init($request['url']);
-                curl_setopt($ch,CURLOPT_POST,1);
-                curl_setopt($ch,CURLOPT_HEADER,0);
-                curl_setopt($ch,CURLOPT_FRESH_CONNECT,1);
-                curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-                curl_setopt($ch,CURLOPT_FORBID_REUSE,1);
-                curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 
                 if (false !== strpos($request['url'], "https")) {
                     // 证书
                     // curl_setopt($ch,CURLOPT_CAINFO,"ca.crt");
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,  false);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,  false);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
                 }
-                curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
                 //curl_setopt($ch, CURLOPT_TIMEOUT,100000);//超时时间
                 curl_multi_add_handle($mh, $ch);
+                Log::info(__FILE__ . ":" . __LINE__ . ' Data length:' . strlen($data));
                 $ch_list[] = $ch;
             }
 
             do {
                 $mret = curl_multi_exec($mh, $active);
-            }while($mret == CURLM_CALL_MULTI_PERFORM);
+            } while ($mret == CURLM_CALL_MULTI_PERFORM);
 
-            while($active and $mret == CURLM_OK) {
-                if(curl_multi_select($mh) === -1) {
+            while ($active and $mret == CURLM_OK) {
+                if (curl_multi_select($mh) === -1) {
                     usleep(100);
                 }
                 do {
                     $mret = curl_multi_exec($mh, $active);
-                }while($mret == CURLM_CALL_MULTI_PERFORM);
+                } while ($mret == CURLM_CALL_MULTI_PERFORM);
             }
 
 
-            for($i = 0; $i < $reqNum; $i++) {
+            for ($i = 0; $i < $reqNum; $i++) {
                 $ret = curl_multi_getcontent($ch_list[$i]);
                 $result = json_decode($ret, true);
-                if($result['code'] < 0) {
-                    if($result['canRetry'] == 1 && $this->_arrPartFiles[$arr_index[$i]]->_retryTimes-->0)
+                if ($result['code'] < 0) {
+                    if ($result['canRetry'] == 1 && $this->_arrPartFiles[$arr_index[$i]]->_retryTimes-- > 0)
                         $arr_retry_index[] = $i;
                     else
                         return false;
@@ -473,10 +498,10 @@ class VodApi {
                 curl_multi_remove_handle($mh, $ch_list[$i]);
             }
             curl_multi_close($mh);
-            if(empty($arr_retry_index))
+            if (empty($arr_retry_index))
                 break;
 
-            foreach($arr_retry_index as $k => $v) {
+            foreach ($arr_retry_index as $k => $v) {
                 array_splice($arr_request, $v, 1);
                 array_splice($arr_data, $v, 1);
                 array_splice($arr_index, $v, 1);
@@ -491,12 +516,13 @@ class VodApi {
      * 完成上传协议
      * @return bool 成功返回true，失败返回false
      */
-    public function FinishUpload() {
+    public function FinishUpload()
+    {
         echo "\n===FinishUpload begin===\n";
         $name = 'FinishUpload';
         $retry = $this->_retryTimes;
-        while(true) {
-            $Nonce = rand(0,1000000);
+        while (true) {
+            $Nonce = rand(0, 1000000);
             $timestamp = time();
             $data = "";
             //封装API参数，arguments参数只支持GET
@@ -512,22 +538,22 @@ class VodApi {
             $send_retry_times = 0;
 
             $this->makeRequest($name, $arguments, $request);
-            while(!($response = $this->sendRequest($request, $data))) {
-                if($send_retry_times > 3) {
+            while (!($response = $this->sendRequest($request, $data))) {
+                if ($send_retry_times > 3) {
                     //$this->setError("", 'request falied!');
                     echo "[FinishUpload] send retry times reach MAX 3,failed!\n";
                     return false;
                 }
 
                 ++$send_retry_times;
-                echo "[FinishUpload] send retry ".$send_retry_times." times\n";
+                echo "[FinishUpload] send retry " . $send_retry_times . " times\n";
             }
 
             echo "[FinishUpload] recv:" . json_encode($response) . "\n";
-            if($response['code'] == 0)
+            if ($response['code'] == 0)
                 $this->_fileId = $response['fileId'];
-            else if($response['code'] < 0) {
-                if($retry-- && $response['canRetry'] == 1)
+            else if ($response['code'] < 0) {
+                if ($retry-- && $response['canRetry'] == 1)
                     continue;
                 echo "[FinishUpload]response error,message: " . $response['message'] . "\n";
                 return false;
@@ -539,10 +565,11 @@ class VodApi {
     /**
      * GetReqSign
      * 生成请求的签名字符串
-     * @param array 	$paraMap  请求参数
+     * @param array $paraMap 请求参数
      * @return
      */
-    public function GetReqSign($paraMap) {
+    public function GetReqSign($paraMap)
+    {
         $paramStr = "";
         ksort($paraMap);
         $i = 0;
@@ -572,12 +599,13 @@ class VodApi {
     /**
      * makeRequest
      * 生成请求结构
-     * @param string	$name 		协议命令字
-     * @param array 	$arguments 	API参数数组
-     * @param array 	&$request 	待返回的请求结构
+     * @param string $name 协议命令字
+     * @param array $arguments API参数数组
+     * @param array &$request 待返回的请求结构
      * @return 无返回
      */
-    protected function makeRequest($name, $arguments, &$request) {
+    protected function makeRequest($name, $arguments, &$request)
+    {
         $action = ucfirst($name);
         $params = $arguments;
         $params['Action'] = $action;
@@ -588,14 +616,14 @@ class VodApi {
         $request['uri'] = $this->_serverUri;
         $request['host'] = $this->_serverHost;
         $request['query'] = http_build_query($params);
-        $request['query'] = str_replace('+','%20',$request['query']);
+        $request['query'] = str_replace('+', '%20', $request['query']);
         $url = $request['host'] . $request['uri'];
 
-        if($this->_serverPort != '' && $this->_serverPort != 80)
+        if ($this->_serverPort != '' && $this->_serverPort != 80)
             $url = $request['host'] . ":" . $this->_serverPort . $request['uri'];
 
-        $url = $url.'?'.$request['query'];
-        $url = 'https://'.$url;
+        $url = $url . '?' . $request['query'];
+        $url = 'https://' . $url;
 
         $request['url'] = $url;
         echo "makeRequest|request url:" . $request['url'] . "\n";
@@ -604,16 +632,18 @@ class VodApi {
 
     /**
      * sendRequest
-     * @param array  $request    http请求参数
-     * @param string $data       发送的数据
+     * @param array $request http请求参数
+     * @param string $data 发送的数据
      * @return
      */
-    protected function sendRequest($request, $data) {
+    protected function sendRequest($request, $data)
+    {
+        Log::info(__FILE__ . ':' . __LINE__ . "------Send Request------" . $request['uri'].$request['query']);
         $url = $request['url'];
         $ch = curl_init($url);
-        if($this->_requestMethod == "GET") {
+        if ($this->_requestMethod == "GET") {
             $MethodLine = "GET {$request['uri']}?{$request['query']} HTTP/1/1";
-        } else if($this->_requestMethod == "POST") {
+        } else if ($this->_requestMethod == "POST") {
             curl_setopt($ch, CURLOPT_POST, 1);
             $MethodLine = "POST {$request['uri']}?{$request['query']} HTTP/1/1";
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -622,7 +652,7 @@ class VodApi {
         $header = array(
             $MethodLine,
             "HOST:{$request['host']}",
-            "Content-Length:".$request['contentLen'],
+            "Content-Length:" . $request['contentLen'],
             "Content-type:application/octet-stream",
             "Accept:*/*",
             "User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36",
