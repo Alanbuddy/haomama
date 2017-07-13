@@ -69,7 +69,7 @@ class TestController extends Controller
 
     public function upload(Request $request)
     {
-        $file = $request->file('video');
+        $file = $request->file('file');
         $fileName = $file->move(storage_path('app/video'));
         return ['success' => true];
     }

@@ -43,18 +43,19 @@
                   #thelist.uploader-list
                   .btns
                     #picker 选择文件
+                    %button#ctlBtn.btn.btn-default 开始上传
               .notice-introduce.clearfix
                 %span.introduce 内容介绍:
                 %span.wangedit-area
                   #edit-box
               .video-file.margin20
                 %span 图片文件:
-                #uploader.wu-example
-                  #thelist.uploader-list
+                #uploader_img.wu-example
+                  
                   .btns
                     #picker_img 选择文件
-              .img-div.margin20
-                
+                    %button#imgBtn.btn.btn-default 开始上传
+              #imglist.uploader-list.img-div.margin20      
 
 @endsection
 
@@ -64,6 +65,6 @@
 <script src="/js/plugin/jquery-ui.min.js"></script>
 <script src="/js/plugin/webuploader.js"></script>
 
-<script src="/js/fileupload.js"></script>
+<script src="/js/fileupload_audio.js"></script>
 
 @endsection
