@@ -58,6 +58,7 @@ class VideoController extends Controller
 //            $fileName = $file->move(storage_path('app/video'), $file->getClientOriginalName())->getPathname();
             $fileName = $file->move(storage_path('app/video'));
             //return $file; var/www/baby.com/storage/app/video/phpMRDcqc
+            return $this->asyncStoreVideo($request);
         } else {
             if ($request->ajax()) {
                 return ['success' => false, 'message' => '没有选择视频文件'];
@@ -65,33 +66,33 @@ class VideoController extends Controller
             return back()->withErrors('no file selected');
         }
 
-        ob_start();
-        //上传视频文件到腾讯云
-        list($vod, $ret) = $this->callVodUploadApi($fileName);
-        $log = ob_get_contents();
-        ob_end_clean();
-        if ($ret !== 0) {
-            return back()->withErrors('error');
-        } else {
-            $item = new Video();
-            $item->cloud_file_id = $vod->getFileId();
-            $item->fill($this->getFileBaseInfo($file));
-            $item->video_type = 'common';
-            auth()->user()->videos()->save($item);
-
-            list($ret, $response) = $this->callCloudTranscodeApi($item);
-            Log::info(__FILE__ . "\n转码结果：" . $ret);
-            Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
-            if ($ret == 0) {
-                $item->video_status = 'transcoding';
-                $item->save();
-            }
-
-            if ($request->ajax()) {
-                return ['success' => true];
-            }
-            return redirect()->route('videos.index');
-        }
+//        ob_start();
+//        //上传视频文件到腾讯云
+//        list($vod, $ret) = $this->callVodUploadApi($fileName);
+//        $log = ob_get_contents();
+//        ob_end_clean();
+//        if ($ret !== 0) {
+//            return back()->withErrors('error');
+//        } else {
+//            $item = new Video();
+//            $item->cloud_file_id = $vod->getFileId();
+//            $item->fill($this->getFileBaseInfo($file));
+//            $item->video_type = 'common';
+//            auth()->user()->videos()->save($item);
+//
+//            list($ret, $response) = $this->callCloudTranscodeApi($vod->getFileId());
+//            Log::info(__FILE__ . "\n转码结果：" . $ret);
+//            Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
+//            if ($ret == 0) {
+//                $item->video_status = 'transcoding';
+//                $item->save();
+//            }
+//
+//            if ($request->ajax()) {
+//                return ['success' => true];
+//            }
+//            return redirect()->route('videos.index');
+//        }
     }
 
     public function asyncStoreVideo(Request $request)
@@ -100,11 +101,14 @@ class VideoController extends Controller
         $filePath = $file->move(storage_path('app/video')); //$filePath = '/home/gao/Downloads/purple.mp4';
 
         $video = new Video();
+        $video->size = filesize($filePath);
+        $video->path = $filePath;
         $video->fill($this->getFileBaseInfo($file));
         $video->video_type = 'common';
         auth()->user()->videos()->save($video);
-        $this->dispatch((new TecentVodUpload($filePath,$video))->onQueue('wechat'));
+        $this->dispatch((new TecentVodUpload($filePath, $video))->onQueue('wechat'));
     }
+
     /**
      * Display the specified resource.
      *
@@ -317,16 +321,17 @@ class VideoController extends Controller
 
     /**
      * 调用腾讯云视频转码接口
-     * @param Video $video
+     * @param $cloud_file_id
      * @return mixed
+     * @internal param Video $video
      */
-    public function callCloudTranscodeApi(Video $video)
+    public function callCloudTranscodeApi($cloud_file_id)
     {
         $vod = new VodApi();
         $vod->Init(config('services.vod.secretId'), config('services.vod.secretKey'), VodApi::USAGE_VOD_REST_API_CALL, "gz");
         $arguments = array(
             'Action' => 'ConvertVodFile',
-            'fileId' => $video->cloud_file_id,
+            'fileId' => $cloud_file_id,
             'contentLen' => 0,
         );
         ob_start();

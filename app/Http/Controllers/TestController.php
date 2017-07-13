@@ -61,6 +61,7 @@ class TestController extends Controller
     {
         $filePath = '/home/gao/Downloads/purple.mp4';
         $item = new Video();
+        $item->size = filesize($filePath);
         $item->video_type = 'common';
         auth()->user()->videos()->save($item);
         $this->dispatch((new TecentVodUpload($filePath, $item))->onQueue('wechat'));
@@ -69,7 +70,7 @@ class TestController extends Controller
 
     public function upload(Request $request)
     {
-        $file = $request->file('video');
+        $file = $request->file('file');
         $fileName = $file->move(storage_path('app/video'));
         return ['success' => true];
     }
