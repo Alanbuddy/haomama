@@ -52,7 +52,8 @@ class test extends Command
      */
     public function handle()
     {
-//        MessageFacade::sendBuyCompletedMessage(User::find(1), Course::find(1));
+//        MessageFacade::send)BuyCompletedMessage(User::find(1), Course::find(1));
+        var_dump(app('schedule:run'));
         $this->refundOrder();
     }
 

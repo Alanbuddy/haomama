@@ -30,9 +30,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire') ->hourly();
-        $schedule->command('wx:send');
+
+//        $schedule->command('wx:send')->everyTenMinutes();
         $schedule->call(function () {
-            print("every 5 minute\n");
+//            print("every 5 minute\n");
 //            DB::table('recent_users')->delete();
         })->everyMinute();
 

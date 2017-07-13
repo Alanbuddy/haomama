@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Common;
 use App\Http\Util\IO;
+use App\Http\Util\Parse;
 use App\Models\Behavior;
-use App\Models\File;
 use App\Models\Video;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Lib\Vod\VodApi;
-use App\Http\Util\Parse;
 
 class VideoController extends Controller
 {
@@ -60,6 +58,9 @@ class VideoController extends Controller
             $fileName = $file->move(storage_path('app/video'));
             //return $file; var/www/baby.com/storage/app/video/phpMRDcqc
         } else {
+            if ($request->ajax()) {
+                return ['success' => false, 'message' => '没有选择视频文件'];
+            }
             return back()->withErrors('no file selected');
         }
 
@@ -67,7 +68,6 @@ class VideoController extends Controller
         //上传视频文件到腾讯云
         list($vod, $ret) = $this->callVodUploadApi($fileName);
         $log = ob_get_contents();
-        Log::info($log);
         ob_end_clean();
         if ($ret !== 0) {
             return back()->withErrors('error');
@@ -93,6 +93,17 @@ class VideoController extends Controller
         }
     }
 
+    public function asyncStoreVideo(Request $request)
+    {
+        $file = $request->file('video');
+        $filePath = $file->move(storage_path('app/video')); //$filePath = '/home/gao/Downloads/purple.mp4';
+
+        $video = new Video();
+        $video->fill($this->getFileBaseInfo($file));
+        $video->video_type = 'common';
+        auth()->user()->videos()->save($video);
+        $this->dispatch((new TecentVodUpload($filePath,$video))->onQueue('wechat'));
+    }
     /**
      * Display the specified resource.
      *
@@ -354,7 +365,7 @@ class VideoController extends Controller
 //        dd($dragBegin);
         $dragEnd = $items->where('type', 'video.drag.end')->all();
         dd($dragBegin);
-        return compact('dragBegin','dragEnd');
+        return compact('dragBegin', 'dragEnd');
 //        dd($items);
     }
 

@@ -6,14 +6,17 @@ use App\Facades\MessageFacade;
 use App\Http\Util\BaiduMap;
 use App\Http\Wechat\WxException;
 use App\Jobs\SendWechatMessage;
+use App\Jobs\TecentVodUpload;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\User;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
     use BaiduMap;
+
     function __construct()
     {
         $this->middleware('auth')->only('send');
@@ -52,5 +55,22 @@ class TestController extends Controller
         $job = (new SendWechatMessage(auth()->user(), Course::first()))->onQueue('wechat');
         $this->dispatch($job);
         return 'successfully dispatched a SendWechatMessage job';
+    }
+
+    public function vodUpload()
+    {
+        $filePath = '/home/gao/Downloads/purple.mp4';
+        $item = new Video();
+        $item->video_type = 'common';
+        auth()->user()->videos()->save($item);
+        $this->dispatch((new TecentVodUpload($filePath, $item))->onQueue('wechat'));
+        return 'success';
+    }
+
+    public function upload(Request $request)
+    {
+        $file = $request->file('video');
+        $fileName = $file->move(storage_path('app/video'));
+        return ['success' => true];
     }
 }

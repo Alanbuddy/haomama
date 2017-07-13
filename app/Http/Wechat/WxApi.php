@@ -10,6 +10,7 @@ namespace App\Http\Wechat;
 
 use App\Http\Util\Curl;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Log;
 
 /**
  *
@@ -47,6 +48,7 @@ class WxApi
         $data = json_decode($accessToken->value);
 //        dd(time().' '.$data->expire_time);
         if ($data->expire_time < time()) {
+            Log::info("access token expired  !!!");
             $url = "https://api.weixin.qq.com/cgi-bin/token";
             $queryData = [
                 'grant_type' => 'client_credential',
@@ -57,6 +59,7 @@ class WxApi
             $response = self::request($url);
             if ($response['code'] == 200) {
                 $access_token = json_decode($response['data'])->access_token;
+
                 $data->expire_time = time() + 7000;
                 $data->access_token = $access_token;
                 $accessToken->value = json_encode($data);

@@ -49,7 +49,7 @@ class MessageService
     //线下课程开课前24小时发送微信模板消息
     public function sendWechatPreClassMessage(User $user, Course $course)
     {
-        Log::info('sendWechatPreClassMessage');
+        Log::info(__FILE__.'sendWechatPreClassMessage');
         $template_id = "YOjEUmaFcJ-27cx82zG6UVz9D23Mvbtv_5NDjhKT-Lw";
         $url = env('APP_URL') . route('courses.show', $course);
         $result = WxApi::accessToken();
@@ -81,6 +81,7 @@ class MessageService
 
 //        dd($result);
             if (json_decode($result['data'])->errcode > 0) {
+                Log::error('error :'.$result['data']);
                 Error::create([
                     'user_id' => 1,
                     'type' => 'wx.send',
