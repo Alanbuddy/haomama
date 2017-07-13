@@ -1,8 +1,7 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_lesson_audio.css') }}">
-
-<link href="/css/plugin/html5uploader.css" rel="stylesheet" type="text/css">
+<link href="/css/plugin/webuploader.css" rel="stylesheet" type="text/css">
 
 :javascript
     window.lesson_index = "#{route('lessons.index')}"
@@ -40,14 +39,20 @@
                 %input.form-control#input-caption{:type => "text"}
               .video-file
                 %span 音频文件:
-                %span#upload
+                #uploader.wu-example
+                  #thelist.uploader-list
+                  .btns
+                    #picker 选择文件
               .notice-introduce.clearfix
                 %span.introduce 内容介绍:
                 %span.wangedit-area
                   #edit-box
               .video-file.margin20
                 %span 图片文件:
-                %span#upload_img
+                #uploader.wu-example
+                  #thelist.uploader-list
+                  .btns
+                    #picker_img 选择文件
               .img-div.margin20
                 
 
@@ -57,8 +62,7 @@
 <script src= "{{mix('/js/admin_lesson_audio.js')}}"></script>
 <script src="/js/plugin/wangEditor.min.js"></script>
 <script src="/js/plugin/jquery-ui.min.js"></script>
-<script src="/js/plugin/jquery.js"></script>
-<script src="/js/plugin/jquery.html5uploader.js"></script>
+<script src="/js/plugin/webuploader.js"></script>
 
 <script src="/js/fileupload.js"></script>
 
