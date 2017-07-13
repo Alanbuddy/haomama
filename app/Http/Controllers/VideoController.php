@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Common;
 use App\Http\Util\IO;
 use App\Http\Util\Parse;
+use App\Jobs\TecentVodUpload;
 use App\Models\Behavior;
 use App\Models\Video;
 use Illuminate\Http\Request;
