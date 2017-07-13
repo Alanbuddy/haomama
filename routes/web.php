@@ -33,7 +33,7 @@ Route::any('/password/sms/send', 'Auth\ResetPasswordController@sendResetSms')->n
 
 include('test.php');
 
-Route::get('/haml', 'TestController@index');
+Route::any('/haml', 'TestController@index');
 
 Route::group([
     'middleware' => ['web', 'auth', 'role:admin'],
