@@ -32,7 +32,7 @@
                   %img.mini-icon{src: "/icon/admin/1class.png"}
                   %span.f18.sidebar-title 课程管理
               %li
-                %a{:href => "#"}
+                %a{:href => route("lessons.index")}
                   %img.mini-icon{src: "/icon/admin/2single.png"}
                   %span.f18.sidebar-title 课时管理
               %li

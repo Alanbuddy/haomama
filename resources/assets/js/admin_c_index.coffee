@@ -1,5 +1,6 @@
 
 $ ->
+
   if window.profile == "template"
     $('.nav-tabs a[href="#tab2"]').tab('show')
   # search-btn press

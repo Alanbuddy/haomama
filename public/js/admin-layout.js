@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 52);
+/******/ 	return __webpack_require__(__webpack_require__.s = 57);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10333,14 +10333,14 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  $(".sidebar ul li:eq(0)").addClass("active-li");
-  $(".sidebar ul li").each(function() {
-    var that;
-    that = $(this);
-    return $(this).click(function() {
-      that.siblings("li").removeClass("active-li");
-      return that.addClass("active-li");
-    });
+  var currenturl;
+  currenturl = window.location.href;
+  $(".sidebar ul li a").each(function() {
+    var url;
+    url = $(this).attr("href");
+    if (currenturl.indexOf(url) !== -1) {
+      return $(this).closest("li").addClass("active-li");
+    }
   });
   return $("#exit").click(function() {
     return $.ajax({
@@ -10361,7 +10361,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 52:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

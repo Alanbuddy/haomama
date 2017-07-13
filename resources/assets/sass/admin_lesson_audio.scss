@@ -1,0 +1,66 @@
+.direction {
+  justify-content: space-between;
+}
+.finish-btn-position {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  z-index: 10;
+}
+#finish-btn {
+  width: 100px;
+  color: #fff;
+  outline: none;
+}
+.desc-div {
+  padding-top: 40px;
+}
+
+.input-caption {
+  font-weight: normal;  
+}
+.input-area {
+  display: inline-block;
+  width: 20%;
+  height: 2.143em;
+  margin: 0 6.3% 0 1%;
+}
+.form-group {
+  margin-bottom: 2%;
+  .form-control {
+    display: inline-block;
+    width: 50%;
+    margin-left: 1%;
+  }
+}
+.introduce {
+  float: left;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 1.5%;
+}
+.notice-introduce {
+  margin-top: 2%;
+}
+.wangedit-area {
+  float: left;
+  width: 70%;
+  font-size: 16px;
+}
+.w-e-text-container {
+  height: 200px !important;
+}
+.progress {
+  width: auto;
+  margin-bottom: 0;
+}
+.margin20 {
+  margin: 20px 0;
+}
+.img-div {
+  width: 70%;
+  margin-left: 74px;
+  border: 1px solid #ccc;
+  height: 200px;
+  border-radius: 6px;
+}

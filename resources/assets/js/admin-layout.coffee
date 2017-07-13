@@ -1,11 +1,12 @@
 $ ->
-  $(".sidebar ul li:eq(0)").addClass("active-li")
-  $(".sidebar ul li").each ->
-    that = $(this)
-    $(this).click ->
-      that.siblings("li").removeClass("active-li")
-      that.addClass("active-li")
+  # 侧边栏sidebar高亮显示
+  currenturl = window.location.href
+  $(".sidebar ul li a").each ->
+    url = $(this).attr("href")
+    if currenturl.indexOf(url) != -1
+      $(this).closest("li").addClass("active-li")
 
+  # 退出登录
   $("#exit").click ->
     $.ajax({
       type: 'post',
@@ -15,3 +16,6 @@ $ ->
       success: ->
         location.href = window.login
     })
+
+  
+

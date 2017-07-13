@@ -1,3 +1,14 @@
+.direction {
+  -webkit-justify-content: flex-end;
+  -moz-justify-content: flex-end;
+  -os-justify-content: flex-end;
+  -o-justify-content: flex-end;
+  justify-content: flex-end;
+}
+.desc-div {
+  padding-bottom: 0;
+}
+
 #finish {
   color: #fff;
   width: 7.143em;
@@ -27,7 +38,7 @@
 .upload-div {
   display: inline-block;
 }
-.fingure {
+.figure {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -35,7 +46,7 @@
   left: 0;
   display: none;
 }
-.photo, .fingure {
+.photo, .figure {
   width: 180px;
   height: 252px;
   object-fit: contain;
@@ -57,4 +68,66 @@
 .form-control {
   display: inline-block;
   width: 50%;
+}
+
+#setModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -220px;
+    margin-top: -113px;
+    width: 438px;
+    height: 226px;
+    border-radius: 6px; 
+  }
+  .modal-body {
+    padding: 40px;
+  }
+}
+.modal-backdrop {
+  background-color: #999;
+}
+.close {
+  position: absolute;
+  right: -14px;
+  top: -14px;
+  opacity: 0.7;
+  z-index: 10;
+}
+.close:hover {
+  opacity: 1;
+}
+.message {
+  margin: 20px 0;
+  font-size: 16px;
+  color: #323232;
+  text-align: center;
+}
+.btn-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  .btn {
+    width: 45%;
+    font-size: 16px;
+    color: white;
+    border: 0;
+    height: 40px;
+  }
+}
+#set-cancel {
+  background: #10c078;
+  outline: none;
+}
+#set-confirm {
+  background: #f7873d;
+  outline: none;
 }
