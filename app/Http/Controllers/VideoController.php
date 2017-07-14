@@ -61,6 +61,7 @@ class VideoController extends Controller
             $file = $request->file('file');
             $video = new Video();
             $video->fill($this->getFileBaseInfo($file));
+            $video->description = $request->chunks;
             $video->video_type = 'common';
             auth()->user()->videos()->save($video);
         }
