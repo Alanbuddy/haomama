@@ -25,7 +25,7 @@ $(document).ready(function(){
   });
 
   uploader.options.formData = {
-      _token: window.token,
+      _token: window.token
     };
 
   var name = null;
@@ -62,13 +62,15 @@ $(document).ready(function(){
     var video_size = video_file[0].size;
     var chunksize = 0.5*1024*1024;
     var chunks = Math.ceil(video_size / chunksize);
+    var video_id = $(".video-id").text();
     console.log(chunks);
     $.postJSON(
       window.merge,
       {
         _token: window.token,
         name: name,
-        count: chunks
+        count: chunks,
+        video_id: video_id
       },
       function(data){
         console.log(data);
@@ -97,10 +99,14 @@ $(document).ready(function(){
         console.log(data);
         if(data.success){
           $(".video-id").text(data.data.id);
+          uploader.options.formData = {
+              video_id: data.data.id,
+              _token: window.token
+            };
+          uploader.upload();
         }
       }
       );
-    uploader.upload();
   });
 
   $("#thelist").on("click", ".delete_btn", function(){  

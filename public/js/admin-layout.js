@@ -10338,7 +10338,6 @@ return jQuery;
   $(".sidebar ul li a").each(function() {
     var url;
     url = $(this).attr("href");
-    console.log(url);
     if (currenturl.indexOf(url) !== -1) {
       return $(this).closest("li").addClass("active-li");
     }
