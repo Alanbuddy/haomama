@@ -135,7 +135,7 @@ class VideoController extends Controller
         try {
             $ret = $this->merge($request);
             if ($ret['success']) {
-                $video = Video::find('video_id');
+                $video = Video::find($request->video_id);
                 $video->path = $ret['path'];
                 $video->save();
 //        $video->fill($this->getFileBaseInfo($file));
@@ -143,7 +143,7 @@ class VideoController extends Controller
                 return ['success' => true, 'data' => $file];
             }
         } catch (\Exception $e) {
-            return ['success' => false, 'message' => $e->getMessage()];
+            return ['success' => false, 'message' => $e->getMessage(),'e'=>$e];
         }
     }
 
