@@ -114,6 +114,7 @@ $(document).ready(function(){
     '</div>' );
     name = file.name;
     $img = $("#"+ file.id).find('.img_wrap').find("img");
+    $("#"+file.id).css("marginBottom");
     uploader_img.makeThumb(file, function(error, src) {
       if (error) {
         $img.replaceWith('<span>不能预览</span>');
@@ -177,5 +178,5 @@ $(document).ready(function(){
     $(this).find(".delete_img").hide();
   });
 
-  
+
 });
