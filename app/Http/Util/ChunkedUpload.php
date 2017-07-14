@@ -35,7 +35,7 @@ trait ChunkedUpload
             $filename = $name . $index;
             $file->move($path, $filename);
             Log::info('chunk size' . $size);
-            return ['success'=>true];
+            return ['success' => true];
         }
 
     }
@@ -56,7 +56,7 @@ trait ChunkedUpload
         $dst = fopen($targetPath, 'wb');
         Log::info('about to merge ' . $chunksCount . 'chunks');
         for ($i = 0; $i < $chunksCount; $i++) {
-            $chunk = $dir . $fileName . $i;
+            $chunk = $dir . DIRECTORY_SEPARATOR . $fileName . $i;
             $src = fopen($chunk, 'rb');
             stream_copy_to_stream($src, $dst);
             fclose($src);
