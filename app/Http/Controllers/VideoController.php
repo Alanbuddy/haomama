@@ -54,7 +54,7 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'video' => 'required',
+            'file' => 'required',
             'chunk' => 'required',
         ]);
         return $this->uploadChunkedFile($request);
