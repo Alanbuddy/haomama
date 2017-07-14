@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class TecentVodUpload implements ShouldQueue
 {
@@ -47,6 +48,9 @@ class TecentVodUpload implements ShouldQueue
             Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             $this->file->video_status = 'transcoding';
             $this->file->save();
+            Storage::delete(substr($this->file->path, strpos($this->file->path,'video')));
+            Log::info('has deleted temp video file!');
+
         } else {
             $this->file->video_status = '';
             $this->file->save();

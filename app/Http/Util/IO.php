@@ -40,4 +40,5 @@ trait IO
         $item['size'] = $file->getClientSize();
         return $item;
     }
+
 }

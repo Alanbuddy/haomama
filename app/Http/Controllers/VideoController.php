@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Common;
+use App\Http\Util\ChunkedUpload;
 use App\Http\Util\IO;
 use App\Http\Util\Parse;
 use App\Jobs\TecentVodUpload;
@@ -16,8 +17,7 @@ use Lib\Vod\VodApi;
 
 class VideoController extends Controller
 {
-    use Parse;
-    use IO;
+    use Parse, IO, ChunkedUpload;
 
     /**
      * Display a listing of the resource.
@@ -49,65 +49,85 @@ class VideoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Video
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['video' => 'required']);
-        return $this->asyncStoreVideo($request);
-//        $file = $request->file('video');
-//            $fileName = $file->move(storage_path('app/video'), $file->getClientOriginalName())->getPathname();
-//        $fileName = $file->move(storage_path('app/video'));
-        //return $file; var/www/baby.com/storage/app/video/phpMRDcqc
-//        if ($request->ajax()) {
-//            return ['success' => false, 'message' => '没有选择视频文件'];
-//        }
-//        return back()->withErrors('no file selected');
-//    }
-
-//        ob_start();
-//        //上传视频文件到腾讯云
-//        list($vod, $ret) = $this->callVodUploadApi($fileName);
-//        $log = ob_get_contents();
-//        ob_end_clean();
-//        if ($ret !== 0) {
-//            return back()->withErrors('error');
-//        } else {
-//            $item = new Video();
-//            $item->cloud_file_id = $vod->getFileId();
-//            $item->fill($this->getFileBaseInfo($file));
-//            $item->video_type = 'common';
-//            auth()->user()->videos()->save($item);
-//
-//            list($ret, $response) = $this->callCloudTranscodeApi($vod->getFileId());
-//            Log::info(__FILE__ . "\n转码结果：" . $ret);
-//            Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
-//            if ($ret == 0) {
-//                $item->video_status = 'transcoding';
-//                $item->save();
-//            }
-//
-//            if ($request->ajax()) {
-//                return ['success' => true];
-//            }
-//            return redirect()->route('videos.index');
-//        }
+        $this->validate($request, [
+            'video' => 'required',
+            'chunk' => 'required',
+        ]);
+        return $this->uploadChunkedFile($request);
     }
 
-    public function asyncStoreVideo(Request $request)
+    public function syncStoreVide(Request $request)
     {
         $file = $request->file('video');
-        $filePath = $file->move(storage_path('app/video')); //$filePath = '/home/gao/Downloads/purple.mp4';
-//    dd($filePath->getPathname());
+//            $fileName = $file->move(storage_path('app/video'), $file->getClientOriginalName())->getPathname();
+        $fileName = $file->move(storage_path('app/video'));
+        //return $file; var/www/baby.com/storage/app/video/phpMRDcqc
+        ob_start();
+        //上传视频文件到腾讯云
+        list($vod, $ret) = $this->callVodUploadApi($fileName);
+        $log = ob_get_contents();
+        ob_end_clean();
+        if ($ret !== 0) {
+            return back()->withErrors('error');
+        } else {
+            $item = new Video();
+            $item->cloud_file_id = $vod->getFileId();
+            $item->fill($this->getFileBaseInfo($file));
+            $item->video_type = 'common';
+            auth()->user()->videos()->save($item);
 
+            list($ret, $response) = $this->callCloudTranscodeApi($vod->getFileId());
+            Log::info(__FILE__ . "\n转码结果：" . $ret);
+            Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
+            if ($ret == 0) {
+                $item->video_status = 'transcoding';
+                $item->save();
+            }
+
+            if ($request->ajax()) {
+                return ['success' => true];
+            }
+            return redirect()->route('videos.index');
+        }
+    }
+
+
+    /**
+     * 以后台任务队列方式上传视频文件到腾讯云
+     * @param Request $request
+     * @return Video
+     */
+    public function upload2TecentCloud($file)
+    {
         $video = new Video();
-        $video->size = filesize($filePath);
-        $video->path = $filePath;
+        $video->size = filesize($file);
+        $video->path = $file;
         $video->fill($this->getFileBaseInfo($file));
         $video->video_type = 'common';
         auth()->user()->videos()->save($video);
-        $this->dispatch((new TecentVodUpload('' . $filePath, $video))->onQueue('wechat'));
-        return ['success' => true];
+        $this->dispatch((new TecentVodUpload($file, $video))->onQueue('wechat'));
+        return $video;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function mergeVideo(Request $request)
+    {
+        try {
+            $ret = $this->merge($request);
+            if ($ret['success']) {
+                $file = $this->upload2TecentCloud($ret['file']);
+                return ['success' => true, 'data' => $file];
+            }
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
     }
 
     /**
@@ -116,8 +136,7 @@ class VideoController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function show(Video $video)
+    public function show(Video $video)
     {
         return view('admin.video.show', [
             'item' => $video,
@@ -131,8 +150,7 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public
-    function edit(Video $video)
+    public function edit(Video $video)
     {
         $view = $video->video_type == 'common' ? 'admin.video.edit' : 'admin.video.editCompound';
         $data = ['item' => $video];
@@ -162,8 +180,7 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public
-    function update(Request $request, Video $video)
+    public function update(Request $request, Video $video)
     {
         if ($request->has('name')) {
             $video->file_name = $request->name;
@@ -194,8 +211,7 @@ class VideoController extends Controller
      * @param Video $video
      * @return \Illuminate\Http\Response
      */
-    public
-    function destroy(Video $video)
+    public function destroy(Video $video)
     {
         $video->delete();
         if ($video->video_type == 'common') {//如果是腾讯云上存储的视频文件，调用腾讯云提供的API来删除云上的视频
@@ -226,8 +242,7 @@ class VideoController extends Controller
      * @param $fileName
      * @return array
      */
-    public
-    function callVodUploadApi($fileName)
+    public function callVodUploadApi($fileName)
     {
         $vod = new VodApi();
         $vod->Init(config('services.vod.secretId'), config('services.vod.secretKey'), VodApi::USAGE_UPLOAD, "gz");
@@ -253,8 +268,7 @@ class VideoController extends Controller
     }
 
 //创建类似PPT的视频
-    private
-    function storeCompound(Request $request)
+    private function storeCompound(Request $request)
     {
         $item = new Video();
         $item->video_type = "compound";
@@ -269,8 +283,7 @@ class VideoController extends Controller
      * @param $videoId
      * @return mixed
      */
-    public
-    function updateAttachmentOrder(Request $request, $videoId)
+    public function updateAttachmentOrder(Request $request, $videoId)
     {
         $data = $request->get('data');
 //        dd($data);//array:8 [ 0 => array:2 [ "id" => "33" "no" => "0" ] 1 => array:2 [ "id" => "34" "no" => "1" ] 2 => array:2 [ "id" => "18" "no" => "2" ] 3 => array:2 [ "id" => "22" "no" => "3" ] 4 => array:2 [ "id" => "19" "no" => "4" ] 5 => array:2 [ "id" => "23" "no" => "5" ] 6 => array:2 [ "id" => "17" "no" => "6" ] 7 => array:2 [ "id" => "16" "no" => "7" ] ]
@@ -290,8 +303,7 @@ class VideoController extends Controller
      * @param Video $video
      * @return string
      */
-    public
-    function cloudInfo(Request $request, Video $video)
+    public function cloudInfo(Request $request, Video $video)
     {
         $vod = new VodApi();
         $vod->Init(config('services.vod.secretId'), config('services.vod.secretKey'), VodApi::USAGE_VOD_REST_API_CALL, "gz");
@@ -318,8 +330,7 @@ class VideoController extends Controller
      * @param Video $video
      * @return string
      */
-    public
-    function cloudTranscode(Request $request, Video $video)
+    public function cloudTranscode(Request $request, Video $video)
     {
         list($ret, $response) = $this->callCloudTranscodeApi($video);
         if ($ret != 0) {
@@ -335,8 +346,7 @@ class VideoController extends Controller
      * @return mixed
      * @internal param Video $video
      */
-    public
-    function callCloudTranscodeApi($cloud_file_id)
+    public function callCloudTranscodeApi($cloud_file_id)
     {
         $vod = new VodApi();
         $vod->Init(config('services.vod.secretId'), config('services.vod.secretKey'), VodApi::USAGE_VOD_REST_API_CALL, "gz");
@@ -355,8 +365,7 @@ class VideoController extends Controller
 
 //接收点播服务端回调 假定回调URL为https://www.example.com/path/to/your/service。
 
-    public
-    function cloudCallback(Request $request)
+    public function cloudCallback(Request $request)
     {
 //        TODO  这个功能只能线上环境测试
         $response = json_decode($request->getContent());
@@ -371,8 +380,7 @@ class VideoController extends Controller
         return 'error';
     }
 
-    public
-    function statistics(Request $request, Video $video)
+    public function statistics(Request $request, Video $video)
     {
         $items = Behavior::where('id', '>', '0')
             ->select('id', 'user_id', 'type')
@@ -387,5 +395,6 @@ class VideoController extends Controller
         return compact('dragBegin', 'dragEnd');
 //        dd($items);
     }
+
 
 }
