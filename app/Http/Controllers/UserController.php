@@ -65,9 +65,9 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $type = $request->get('type', 'user');
-        if($type=='teacher'){
+        if ($type == 'teacher') {
             return view('admin.teacher.teacher_new');
-        }elseif ($type=='operator'){
+        } elseif ($type == 'operator') {
 
         }
         return view('admin.user.create');
@@ -95,8 +95,11 @@ class UserController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Request $request, User $user)
     {
+        if ('teacher' == $request->get('type')) {
+            return view('admin.teacher.teacher_show', ['user' => $user]);
+        }
         if ($user->hasRole('teacher')) {
             return $this->showTeacher($user);
         }
