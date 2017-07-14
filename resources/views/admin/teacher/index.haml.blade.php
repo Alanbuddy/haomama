@@ -7,7 +7,8 @@
     window.lesson_store = "#{route('lessons.store')}"
     window.video = "#{route('videos.store')}"
     window.token = "#{csrf_token()}"
-    window.teacher = "#{route('users.create')}"
+    window.teacher_new = "#{route('users.create')}"
+
 @endsection
 
 @section('content')
@@ -49,7 +50,7 @@
                   %tbody.font-color3
                     // - @users[:data].each do |u|
                     %tr
-                      %td 张老师
+                      %td.teacher-show 张老师
                       %td 132344324535
                       %td xx医院xx科室主治医师
               .select-page 
