@@ -26,6 +26,7 @@ trait ChunkedUpload
         $name = $request->get('name');
         if ($request->hasFile('file')) {
             $file = $request->file('file');
+            $size=$file->getSize();
 //            $path = storage_path('app/' . md5(uniqid(rand(), true))); //$path = storage_path('/' . date('Ymd-His', time()));
             $path = storage_path('app/' . md5($name)); //$path = storage_path('/' . date('Ymd-His', time()));
             if (!is_dir($path)) {
@@ -34,7 +35,7 @@ trait ChunkedUpload
             }
             $filename = $name . $index;
             $file->move($path, $filename);
-            Log::info('chunk size' . $file->getSize());
+            Log::info('chunk size' .$size);
             return true;
         }
 
