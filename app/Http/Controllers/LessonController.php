@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Util\ChunkedUpload;
 use App\Models\Course;
 use App\Models\Lession;
 use App\Models\Lesson;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
-    use SignInTrait, CommentTrait;
+    use SignInTrait, CommentTrait, ChunkedUpload;
 
     function __construct()
     {
@@ -40,19 +42,33 @@ class LessonController extends Controller
     public function create(Request $request)
     {
         $type = $request->get('type', 'video');
+        $item = null;
+        if ('audio' == $type) {
+            $item = new Video();
+            $item->video_type = "compound";
+            $item->mime = "video/";
+            auth()->user()->videos()->save($item);
+        }
         return view($type == 'video'
             ? 'admin.lesson.new'
-            : 'admin.lesson.audio'
+            : 'admin.lesson.audio',
+            [
+                'item' => $item,
+            ]
         );
     }
 
-    public function storeVideoLesson(Request $request)
+    public function storeAudioLessonAudio(Request $request)
     {
+        //TODO
     }
 
-    public function storeAudioLesson(Request $request)
+    public function storeAudioLessonPictures(Request $request)
     {
+        $ret = $this->uploadChunkedFile($request);
+        if($ret){
 
+        }
     }
 
     /**
@@ -64,15 +80,14 @@ class LessonController extends Controller
     public function store(Request $request)
     {
         $type = $request->get('type', 'video');
-        $video_id = $type == 'video' ? $this->storeVideoLesson($request) : $this->storeAudioLesson($request);
         $item = new Lesson();
         $item->fill($request->only([
             'name',
+            'video_id',
             'begin',
             'end',
         ]));
 //        $item->teacher_id = auth()->user()->id;
-        $item->video_id = $video_id;
         $item->save();
 
         if ($request->file('cover')) {

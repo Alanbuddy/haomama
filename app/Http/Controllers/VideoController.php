@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Common;
+use App\Http\Util\ChunkedUpload;
 use App\Http\Util\IO;
 use App\Http\Util\Parse;
 use App\Jobs\TecentVodUpload;
@@ -16,8 +17,7 @@ use Lib\Vod\VodApi;
 
 class VideoController extends Controller
 {
-    use Parse;
-    use IO;
+    use Parse, IO, ChunkedUpload;
 
     /**
      * Display a listing of the resource.
@@ -49,22 +49,23 @@ class VideoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Video
      */
     public function store(Request $request)
     {
-        if ($request->file('video')) {
-            $file = $request->file('video');
-//            $fileName = $file->move(storage_path('app/video'), $file->getClientOriginalName())->getPathname();
-            $fileName = $file->move(storage_path('app/video'));
-            //return $file; var/www/baby.com/storage/app/video/phpMRDcqc
-        } else {
-            if ($request->ajax()) {
-                return ['success' => false, 'message' => '没有选择视频文件'];
-            }
-            return back()->withErrors('no file selected');
-        }
+        $this->validate($request, [
+            'video' => 'required',
+            'chunk' => 'required',
+        ]);
+        return $this->uploadChunkedFile($request);
+    }
 
+    public function syncStoreVide(Request $request)
+    {
+        $file = $request->file('video');
+//            $fileName = $file->move(storage_path('app/video'), $file->getClientOriginalName())->getPathname();
+        $fileName = $file->move(storage_path('app/video'));
+        //return $file; var/www/baby.com/storage/app/video/phpMRDcqc
         ob_start();
         //上传视频文件到腾讯云
         list($vod, $ret) = $this->callVodUploadApi($fileName);
@@ -79,7 +80,7 @@ class VideoController extends Controller
             $item->video_type = 'common';
             auth()->user()->videos()->save($item);
 
-            list($ret, $response) = $this->callCloudTranscodeApi($item);
+            list($ret, $response) = $this->callCloudTranscodeApi($vod->getFileId());
             Log::info(__FILE__ . "\n转码结果：" . $ret);
             Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             if ($ret == 0) {
@@ -94,17 +95,41 @@ class VideoController extends Controller
         }
     }
 
-    public function asyncStoreVideo(Request $request)
-    {
-        $file = $request->file('video');
-        $filePath = $file->move(storage_path('app/video')); //$filePath = '/home/gao/Downloads/purple.mp4';
 
+    /**
+     * 以后台任务队列方式上传视频文件到腾讯云
+     * @param Request $request
+     * @return Video
+     */
+    public function upload2TecentCloud($file)
+    {
         $video = new Video();
+        $video->size = filesize($file);
+        $video->path = $file;
         $video->fill($this->getFileBaseInfo($file));
         $video->video_type = 'common';
         auth()->user()->videos()->save($video);
-        $this->dispatch((new TecentVodUpload($filePath,$video))->onQueue('wechat'));
+        $this->dispatch((new TecentVodUpload($file, $video))->onQueue('wechat'));
+        return $video;
     }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function mergeVideo(Request $request)
+    {
+        try {
+            $ret = $this->merge($request);
+            if ($ret['success']) {
+                $file = $this->upload2TecentCloud($ret['file']);
+                return ['success' => true, 'data' => $file];
+            }
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -242,7 +267,7 @@ class VideoController extends Controller
         return array($vod, $ret);
     }
 
-    //创建类似PPT的视频
+//创建类似PPT的视频
     private function storeCompound(Request $request)
     {
         $item = new Video();
@@ -317,16 +342,17 @@ class VideoController extends Controller
 
     /**
      * 调用腾讯云视频转码接口
-     * @param Video $video
+     * @param $cloud_file_id
      * @return mixed
+     * @internal param Video $video
      */
-    public function callCloudTranscodeApi(Video $video)
+    public function callCloudTranscodeApi($cloud_file_id)
     {
         $vod = new VodApi();
         $vod->Init(config('services.vod.secretId'), config('services.vod.secretKey'), VodApi::USAGE_VOD_REST_API_CALL, "gz");
         $arguments = array(
             'Action' => 'ConvertVodFile',
-            'fileId' => $video->cloud_file_id,
+            'fileId' => $cloud_file_id,
             'contentLen' => 0,
         );
         ob_start();
@@ -369,5 +395,6 @@ class VideoController extends Controller
         return compact('dragBegin', 'dragEnd');
 //        dd($items);
     }
+
 
 }

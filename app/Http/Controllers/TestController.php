@@ -61,6 +61,7 @@ class TestController extends Controller
     {
         $filePath = '/home/gao/Downloads/purple.mp4';
         $item = new Video();
+        $item->size = filesize($filePath);
         $item->video_type = 'common';
         auth()->user()->videos()->save($item);
         $this->dispatch((new TecentVodUpload($filePath, $item))->onQueue('wechat'));

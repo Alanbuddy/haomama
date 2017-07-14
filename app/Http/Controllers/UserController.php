@@ -62,8 +62,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $type = $request->get('type', 'user');
+        if($type=='teacher'){
+            return view('teacher_new.haml.blade.php');
+        }elseif ($type=='operator'){
+
+        }
         return view('admin.user.create');
     }
 

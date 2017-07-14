@@ -2,15 +2,13 @@
 
 namespace App\Console\Commands;
 
-use App\Facades\MessageFacade;
 use App\Http\Controllers\OrderController;
 use App\Http\Util\Curl;
-use App\Models\Course;
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class test extends Command
 {
@@ -53,8 +51,13 @@ class test extends Command
     public function handle()
     {
 //        MessageFacade::send)BuyCompletedMessage(User::find(1), Course::find(1));
-        var_dump(app('schedule:run'));
-        $this->refundOrder();
+        $str = '/var/www/baby.com/storage/app/video/phpLeB0hE';
+//        $this->info(substr($str,strpos()))
+//        Storage::delete('video');
+        dd(fopen('asdfas','r'));
+        Storage::deleteDirectory('video');
+        $this->info(md5(uniqid(rand(), true)));
+//        $this->refundOrder();
     }
 
     public function refundOrder()
