@@ -15,7 +15,6 @@ class TecentVodUpload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $filePath;
 
     protected $file;
 
@@ -25,9 +24,8 @@ class TecentVodUpload implements ShouldQueue
      * @param $filePath
      * @param null $file
      */
-    public function __construct($filePath, $file)
+    public function __construct($file)
     {
-        $this->filePath = $filePath;
         $this->file = $file;
     }
 
@@ -40,17 +38,17 @@ class TecentVodUpload implements ShouldQueue
     {
         //
         $videoController = app(VideoController::class);
-        list($vod, $ret) = $videoController->callVodUploadApi($this->filePath);
+        list($vod, $ret) = $videoController->callVodUploadApi($this->file->path);
         if ($ret == 0) {
             $this->file->cloud_file_id = $vod->getFileId();
             list($ret2, $response) = $videoController->callCloudTranscodeApi($vod->getFileId());
             Log::info(__FILE__ . "\n转码结果：" . $ret2);
             Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             $this->file->video_status = 'transcoding';
-            $this->file->size = filesize($this->filePath);
+            $this->file->size = filesize($this->file->path);
             Log::info($this->file->id);
             $this->file->save();
-            Storage::delete(substr($this->file->path, strpos($this->file->path,'video')));
+            Storage::delete(substr($this->file->path, strpos($this->file->path, 'video')));
             Log::info('has deleted temp video file!');
 
         } else {

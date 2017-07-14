@@ -236,4 +236,11 @@ class UserController extends Controller
 
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }
+
+    //后台用户管理
+    public function showAdmin(Request $request)
+    {
+        $items = User::paginate();
+        return view('admin.client.show', compact('items'));
+    }
 }

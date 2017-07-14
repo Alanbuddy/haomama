@@ -74,6 +74,7 @@ Route::group([
     Route::get('/courses/{course}/lessons/{lesson}/comments', 'CommentController@commentsOfLesson')->name('courses.lesson.comments');//课时评论
 
     Route::get('/courses/{course}/lessons/{lesson}', 'LessonController@detail')->name('courses.lessons.show');//课时详情
+    Route::get('/admin/lessons/{lesson}/', 'LessonController@detailAdmin')->name('lesson.admin');//课时详情管理
     Route::resource('lessons', 'LessonController');
 
     Route::get('/comments/{comment}/vote', 'CommentController@vote')->name('comments.vote');
@@ -87,6 +88,7 @@ Route::group([
     Route::any('/orders/{uuid}/payment/update', 'OrderController@updatePaymentStatus')->name('orders.payment.update');
 
     Route::any('/profile', 'UserController@profile')->name('user.profile');
+    Route::get('/admin/users/{user}', 'UserController@showAdmin')->name('admin.user.show');
     Route::get('/users/{user}/vote', 'UserController@vote')->name('users.vote');
     Route::resource('users', 'UserController');
 
@@ -98,6 +100,7 @@ Route::group([
     Route::resource('behaviors', 'BehaviorController');
 
 //    Route::get('/video/{video?}', 'VodController@video');
+    Route::get('/videos/upload/init', 'VideoController@mergeVideo')->name('videos.upload.init');
     Route::post('/videos/merge', 'VideoController@mergeVideo')->name('videos.merge');
     Route::resource('videos', 'VideoController');
 
