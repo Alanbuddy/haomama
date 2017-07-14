@@ -100,7 +100,7 @@ Route::group([
     Route::resource('behaviors', 'BehaviorController');
 
 //    Route::get('/video/{video?}', 'VodController@video');
-    Route::get('/videos/upload/init', 'VideoController@mergeVideo')->name('videos.upload.init');
+    Route::get('/videos/upload/init', 'VideoController@initUpload')->name('videos.upload.init');
     Route::post('/videos/merge', 'VideoController@mergeVideo')->name('videos.merge');
     Route::resource('videos', 'VideoController');
 
