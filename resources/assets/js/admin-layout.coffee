@@ -3,6 +3,7 @@ $ ->
   currenturl = window.location.href
   $(".sidebar ul li a").each ->
     url = $(this).attr("href")
+    console.log(url)
     if currenturl.indexOf(url) != -1
       $(this).closest("li").addClass("active-li")
 

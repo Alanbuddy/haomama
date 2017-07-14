@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 66);
+/******/ 	return __webpack_require__(__webpack_require__.s = 67);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,7 +10329,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 66:
+/***/ 67:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(8);
@@ -10348,7 +10348,7 @@ module.exports = __webpack_require__(8);
     return location.href = window.lesson_create + "?type=audio";
   });
   return $(".show-name").click(function() {
-    return location.href = "/lessons/1";
+    return location.href = "/admin/lessons/1";
   });
 });
 

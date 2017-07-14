@@ -56,5 +56,6 @@
   "/js/admin_c_index.js": "/js/admin_c_index.js",
   "/js/admin-lesson-new.js": "/js/admin-lesson-new.js",
   "/js/admin-layout.js": "/js/admin-layout.js",
-  "/js/pay-success.js": "/js/pay-success.js"
+  "/js/pay-success.js": "/js/pay-success.js",
+  "/js/admin_client.js": "/js/admin_client.js"
 }

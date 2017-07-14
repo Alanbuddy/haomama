@@ -62,6 +62,7 @@ $(document).ready(function(){
     var video_size = video_file[0].size;
     var chunksize = 0.5*1024*1024;
     var chunks = Math.ceil(video_size / chunksize);
+    console.log(chunks);
     $.postJSON(
       window.merge,
       {

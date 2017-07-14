@@ -63,23 +63,15 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 80);
+/******/ 	return __webpack_require__(__webpack_require__.s = 62);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 21:
-/***/ (function(module, exports) {
-
-
-
-
-/***/ }),
-
-/***/ 80:
+/***/ 62:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(21);
+(function webpackMissingModule() { throw new Error("Cannot find module \"/home/alan/WxMpVod/resources/assets/js/admin_client.coffee\""); }());
 
 
 /***/ })

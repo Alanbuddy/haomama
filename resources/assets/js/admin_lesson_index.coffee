@@ -6,4 +6,4 @@ $ ->
     location.href = window.lesson_create + "?type=audio"
 
   $(".show-name").click ->
-    location.href = "/lessons/1"
+    location.href = "/admin/lessons/1"
