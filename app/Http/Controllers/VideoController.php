@@ -57,10 +57,18 @@ class VideoController extends Controller
             'file' => 'required',
             'chunk' => 'required',
         ]);
+        if ($request->chunk == 0 || !$request->has('chunk')) {
+            $file = $request->file('file');
+            $video = new Video();
+            $video->fill($this->getFileBaseInfo($file));
+            $video->description = $request->chunks;
+            $video->video_type = 'common';
+            auth()->user()->videos()->save($video);
+        }
         return $this->uploadChunkedFile($request);
     }
 
-    public function syncStoreVide(Request $request)
+    public function syncStoreVideo(Request $request)
     {
         $file = $request->file('video');
 //            $fileName = $file->move(storage_path('app/video'), $file->getClientOriginalName())->getPathname();
@@ -101,15 +109,14 @@ class VideoController extends Controller
      * @param Request $request
      * @return Video
      */
-    public function upload2TecentCloud($file)
+    public function upload2TecentCloud($fileName, $path)
     {
-        $video = new Video();
-        $video->size = filesize($file);
-        $video->path = $file;
-        $video->fill($this->getFileBaseInfo($file));
-        $video->video_type = 'common';
-        auth()->user()->videos()->save($video);
-        $this->dispatch((new TecentVodUpload($file, $video))->onQueue('wechat'));
+        $video = Video::where('file_name', $fileName)->orderBy('id', 'desc')->first();
+        $video->path = $path;
+        $video->save();
+//        $video->fill($this->getFileBaseInfo($file));
+        Log::info(__FILE__ . __LINE__ . $video->id);
+        $this->dispatch((new TecentVodUpload($path, $video))->onQueue('wechat'));
         return $video;
     }
 
@@ -122,7 +129,7 @@ class VideoController extends Controller
         try {
             $ret = $this->merge($request);
             if ($ret['success']) {
-                $file = $this->upload2TecentCloud($ret['file']);
+                $file = $this->upload2TecentCloud($ret['fileName'], $ret['path']);
                 return ['success' => true, 'data' => $file];
             }
         } catch (\Exception $e) {

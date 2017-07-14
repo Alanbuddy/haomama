@@ -47,6 +47,7 @@ class TecentVodUpload implements ShouldQueue
             Log::info(__FILE__ . "\n转码结果：" . $ret2);
             Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             $this->file->video_status = 'transcoding';
+            Log::info($this->file->id);
             $this->file->save();
             Storage::delete(substr($this->file->path, strpos($this->file->path,'video')));
             Log::info('has deleted temp video file!');
