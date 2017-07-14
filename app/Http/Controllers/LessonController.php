@@ -66,7 +66,7 @@ class LessonController extends Controller
     public function storeAudioLessonPictures(Request $request)
     {
         $ret = $this->uploadChunkedFile($request);
-        if($ret){
+        if ($ret) {
 
         }
     }
@@ -175,6 +175,12 @@ class LessonController extends Controller
             'latestComments',
             'video'
         ));
+    }
+
+    //后台课时详情管理页
+    public function detailAdmin(Request $request, Lesson $lesson)
+    {
+        return view('admin.lesson.show', compact($lesson));
     }
 
     /**
