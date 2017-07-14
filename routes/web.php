@@ -98,7 +98,7 @@ Route::group([
     Route::resource('behaviors', 'BehaviorController');
 
 //    Route::get('/video/{video?}', 'VodController@video');
-    Route::post('/videos/merge', 'VodController@mergeVideo')->name('videos.merge');
+    Route::post('/videos/merge', 'VideoController@mergeVideo')->name('videos.merge');
     Route::resource('videos', 'VideoController');
 
     Route::resource('settings', 'SettingController');//系统设置
