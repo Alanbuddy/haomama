@@ -45,6 +45,7 @@
                   .btns
                     #picker 选择文件
                     %button#ctlBtn.btn.btn-default 开始上传
+              %span.video-id
              
               .notice-introduce.clearfix
                 %span.introduce 内容介绍:

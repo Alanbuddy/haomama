@@ -27,6 +27,7 @@ $(document).ready(function(){
   uploader.options.formData = {
       _token: window.token,
     };
+
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
         '<h4 class="info">' + file.name + '</h4>' +
@@ -54,9 +55,24 @@ $(document).ready(function(){
 
   uploader.on( 'uploadSuccess', function( file ) {
     $( '#'+file.id ).find('p.state').text('已上传');
+    var video_file = uploader.getFiles();
+    var video_size = video_file[0].size;
+    var chunksize = 0.5*1024*1024;
+    var chunks = Math.ceil(video_size / chunksize);
+    var name = $("#"+ file.id).find(".info").val();
+    console.log(names);
     $.postJSON(
       window.merge,
-      {}
+      {
+        _token: window.token,
+        name: name,
+        count: chunks
+      },
+      function(data){
+        if(data.success){
+          $(".video-id").text(data.data.id);
+        }
+      }
       );
   });
 
