@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         $type = $request->get('type', 'user');
         if($type=='teacher'){
-            return view('teacher_new.haml.blade.php');
+            return view('admin.teacher.teacher_new');
         }elseif ($type=='operator'){
 
         }
