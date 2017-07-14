@@ -177,4 +177,5 @@ $(document).ready(function(){
     $(this).find(".delete_img").hide();
   });
 
+  
 });
