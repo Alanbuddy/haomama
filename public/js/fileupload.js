@@ -54,6 +54,10 @@ $(document).ready(function(){
 
   uploader.on( 'uploadSuccess', function( file ) {
     $( '#'+file.id ).find('p.state').text('已上传');
+    $.postJSON(
+      window.merge,
+      {}
+      );
   });
 
   uploader.on( 'uploadError', function( file ) {

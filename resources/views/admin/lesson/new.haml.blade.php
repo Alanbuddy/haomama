@@ -8,6 +8,7 @@
     window.lesson_store = "#{route('lessons.store')}"
     window.video = "#{route('videos.store')}"
     window.token = "#{csrf_token()}"
+    window.merge = "#{route('videos.merge')}"
 @endsection
 
 @section('content')

@@ -102,15 +102,13 @@ $(document).ready(function(){
     // chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
 
-  uploader_img.options.formData = {
-      _token: window.token,
-    };
   uploader_img.on( 'fileQueued', function( file ) {
     $list_img.append( '<div id="' + file.id + '" class="pre_img">' +
         '<p class="img_wrap"><img></p>' +
         '<h4 class="info_img">' + file.name + '</h4>' +
         '<p class="state_img">等待上传...</p>' +
-        '<img src="/icon/admin/delete.png" class="delete_img">' +
+        '<img src="/icon/admin/rubbish.png" class="delete_img">' +
+        '<input class="img_time" placeholder="请输入时间">' +
     '</div>' );
     $img = $("#"+ file.id).find('.img_wrap').find("img");
     uploader_img.makeThumb(file, function(error, src) {
@@ -122,6 +120,9 @@ $(document).ready(function(){
     }, 100, 100);
   });
 
+  uploader_img.options.formData = {
+      _token: window.token
+    };
 
   uploader_img.on( 'uploadProgress', function( file, percentage ) {
     var $li = $( '#'+file.id ),
@@ -154,6 +155,7 @@ $(document).ready(function(){
 
   $("#imgBtn").click(function(){
     uploader_img.upload();
+    console.log(uploader_img.options.formData);
   });
 
   $("#imglist").on("click", ".delete_img", function(){  
@@ -161,11 +163,19 @@ $(document).ready(function(){
     $(this).closest(".pre_img").remove();   //从上传列表dom中删除  
   }); 
 
-  $("#imglist").on("mouseover", ".img_wrap", function(){
-    $(this).siblings(".delete_img").show();
+  $("#imglist").on("mouseover", ".pre_img", function(){
+    $(this).find(".delete_img").show();
   });
-  $("#imglist").on("mouseout", ".img_wrap", function(){
-    $(this).siblings(".delete_img").hide();
+  $("#imglist").on("mouseout", ".pre_img", function(){
+    $(this).find(".delete_img").hide();
   });
 
+  var img_time = [];
+  $(".img_time").each(function(){
+    img_time.push($(this).val());
+  });
+
+  $("#finish-btn").click(function(){
+    alert(img_time);
+  });
 });
