@@ -49,7 +49,7 @@ class VideoController extends Controller
     {
         $video = new Video();
         auth()->user()->videos()->save($video);
-        return $video;
+        return ['success' => true, 'data' => $video];
     }
 
     /**
