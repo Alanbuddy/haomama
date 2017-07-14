@@ -102,12 +102,6 @@ $(document).ready(function(){
     // chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
 
-  var name = [];
-  var wrap_height = $("#imglist").height();
-  console.log(wrap_height);
-  
-  var wrap_width = $("#imglist").width();
-  console.log(wrap_width);
   uploader_img.on( 'fileQueued', function( file ) {
     $list_img.append( '<div id="' + file.id + '" class="pre_img">' +
         '<p class="img_wrap"><img></p>' +
@@ -116,10 +110,7 @@ $(document).ready(function(){
         '<img src="/icon/admin/rubbish.png" class="delete_img">' +
         '<input class="img_time" placeholder="请输入时间">' +
     '</div>' );
-    name = file.name;
     $img = $("#"+ file.id).find('.img_wrap').find("img");
-    // $("#"+file.id).css("marginBottom", (wrap_height - 240)/2);
-    $("#"+file.id).css("margin", (wrap_width -600)/6);
 
     uploader_img.makeThumb(file, function(error, src) {
       if (error) {
@@ -164,11 +155,16 @@ $(document).ready(function(){
   });
 
   var img_time = [];
-
+  var img_name = [];
   $("#imgBtn").click(function(){
     $(".img_time").each(function(){
       img_time.push($(this).val());
     });
+    $(".info_img").each(function(){
+      img_name.push($(this).text());
+    });
+    console.log(img_name);
+    console.log(img_time);
     uploader_img.upload();
   });
 

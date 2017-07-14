@@ -17,6 +17,7 @@
       window.logout = "#{route('logout')}"
       window.login = "#{route('login')}"
       window.token = "#{csrf_token()}"
+      window.teacher = "#{route('users.index')}"
   %body
     .wrapper
       .layout-left
@@ -36,7 +37,7 @@
                   %img.mini-icon{src: "/icon/admin/2single.png"}
                   %span.f18.sidebar-title 课时管理
               %li
-                %a{:href => "#"}
+                %a{:href => route('users.index')."?type=teacher"}
                   %img.mini-icon{src: "/icon/admin/3teacher.png"}
                   %span.f18.sidebar-title 讲师管理
               %li

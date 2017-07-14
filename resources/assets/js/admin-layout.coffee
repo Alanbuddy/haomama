@@ -16,6 +16,5 @@ $ ->
       success: ->
         location.href = window.login
     })
-
   
 
