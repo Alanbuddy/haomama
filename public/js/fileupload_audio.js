@@ -103,7 +103,8 @@ $(document).ready(function(){
   });
 
   var name = [];
-
+  var wrap_height = $("#uploader_img").height();
+  var wrap_width = $("#uploader_img").width();
   uploader_img.on( 'fileQueued', function( file ) {
     $list_img.append( '<div id="' + file.id + '" class="pre_img">' +
         '<p class="img_wrap"><img></p>' +
