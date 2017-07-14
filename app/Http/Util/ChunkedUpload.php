@@ -11,7 +11,6 @@ namespace App\Http\Util;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use PhpParser\Node\Expr\Closure;
 
 trait ChunkedUpload
 {
@@ -26,7 +25,7 @@ trait ChunkedUpload
         $name = $request->get('name');
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $size=$file->getSize();
+            $size = $file->getSize();
 //            $path = storage_path('app/' . md5(uniqid(rand(), true))); //$path = storage_path('/' . date('Ymd-His', time()));
             $path = storage_path('app/' . md5($name)); //$path = storage_path('/' . date('Ymd-His', time()));
             if (!is_dir($path)) {
@@ -35,8 +34,8 @@ trait ChunkedUpload
             }
             $filename = $name . $index;
             $file->move($path, $filename);
-            Log::info('chunk size' .$size);
-            return true;
+            Log::info('chunk size' . $size);
+            return ['success'=>true];
         }
 
     }
@@ -53,7 +52,7 @@ trait ChunkedUpload
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
-        $targetPath = $dir . $fileName;
+        $targetPath = $dir . DIRECTORY_SEPARATOR . $fileName;
         $dst = fopen($targetPath, 'wb');
         Log::info('about to merge ' . $chunksCount . 'chunks');
         for ($i = 0; $i < $chunksCount; $i++) {
