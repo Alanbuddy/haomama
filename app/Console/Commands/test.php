@@ -54,7 +54,9 @@ class test extends Command
         $str = '/var/www/baby.com/storage/app/video/phpLeB0hE';
 //        $this->info(substr($str,strpos()))
 //        Storage::delete('video');
-        dd(fopen('asdfas','r'));
+        $directory = public_path('');
+        $files = Storage::files($directory);
+        var_dump($files);
         Storage::deleteDirectory('video');
         $this->info(md5(uniqid(rand(), true)));
 //        $this->refundOrder();

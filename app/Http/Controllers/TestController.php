@@ -12,6 +12,7 @@ use App\Models\Lesson;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TestController extends Controller
 {
@@ -52,7 +53,7 @@ class TestController extends Controller
 
     public function qsend()
     {
-        $job = (new SendWechatMessage(auth()->user(), Course::first()))->onQueue('wechat');
+        $job = (new SendWechatMessage(User::find(1), Course::first()))->onQueue('wechat');
         $this->dispatch($job);
         return 'successfully dispatched a SendWechatMessage job';
     }
@@ -73,5 +74,14 @@ class TestController extends Controller
         $file = $request->file('file');
         $fileName = $file->move(storage_path('app/video'));
         return ['success' => true];
+    }
+
+    public function files()
+    {
+        return (memory_get_usage() / 1024 / 1024);
+        $directory = public_path('c');
+        $files = Storage::allDirectories($directory);
+        dd(Storage::makeDirectory($directory),$directory);
+        dd($directory, $files);
     }
 }
