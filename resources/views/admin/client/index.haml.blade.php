@@ -52,16 +52,16 @@
                       %td.client-show 张老师
                       %td 132344324535
                       %td xx医院xx科室主治医师
-              .select-page 
-                %span.totalitems 共2页，总计18条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
+              // .select-page 
+              //   %span.totalitems 共2页，总计18条
+              //   %span.choice-page
+              //     %ul.pagination.pagination-sm
+              //       %li
+              //         %a{href: "#"} «
+              //       %li
+              //         %a{href: "#"} 1
+              //       %li
+              //         %a{href: "#"} »
 
 @endsection
 

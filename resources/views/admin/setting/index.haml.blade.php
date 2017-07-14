@@ -14,9 +14,6 @@
 @section('content')
 .content-area
   .main-top.direction
-    .user-search-box.f14.bg2
-      %input.input-style#search-input.font-color3{:type => "text", :placeholder => "请输入讲师姓名、手机号", value: ""}
-      .search#search-btn
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -32,7 +29,7 @@
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 所有讲师
+            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 首页宣传
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div

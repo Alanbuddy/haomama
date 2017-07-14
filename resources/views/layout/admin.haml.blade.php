@@ -41,11 +41,11 @@
                   %img.mini-icon{src: "/icon/admin/3teacher.png"}
                   %span.f18.sidebar-title 讲师管理
               %li
-                %a{:href => "#"}
+                %a{:href => route('settings.index')}
                   %img.mini-icon{src: "/icon/admin/4announcement.png"}
                   %span.f18.sidebar-title 宣传管理
               %li
-                %a{:href => route('users.index')."?type=operator"}
+                %a{:href => route('users.index')}
                   %img.mini-icon{src: "/icon/admin/5user.png"}
                   %span.f18.sidebar-title 用户管理
               %li
