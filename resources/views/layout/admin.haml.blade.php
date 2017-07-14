@@ -45,7 +45,7 @@
                   %img.mini-icon{src: "/icon/admin/4announcement.png"}
                   %span.f18.sidebar-title 宣传管理
               %li
-                %a{:href => "#"}
+                %a{:href => route('users.index')."?type=operator"}
                   %img.mini-icon{src: "/icon/admin/5user.png"}
                   %span.f18.sidebar-title 用户管理
               %li
