@@ -28,12 +28,15 @@ $(document).ready(function(){
       _token: window.token,
     };
 
+  var name = null;
+
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
         '<h4 class="info">' + file.name + '</h4>' +
         '<p class="state">等待上传...</p>' +
         '<button class="delete_btn">删除</button>' +
     '</div>' );
+    name = file.name;
   });
 
   uploader.on( 'uploadProgress', function( file, percentage ) {
@@ -59,8 +62,6 @@ $(document).ready(function(){
     var video_size = video_file[0].size;
     var chunksize = 0.5*1024*1024;
     var chunks = Math.ceil(video_size / chunksize);
-    var name = $("#"+ file.id).find(".info").val();
-    console.log(names);
     $.postJSON(
       window.merge,
       {
@@ -69,6 +70,7 @@ $(document).ready(function(){
         count: chunks
       },
       function(data){
+        console.log(data);
         if(data.success){
           $(".video-id").text(data.data.id);
         }
@@ -95,5 +97,9 @@ $(document).ready(function(){
 
     $(this).closest(".item").remove();   //从上传列表dom中删除  
   }); 
+
+  $("#finish-btn").click(function(){
+
+  });
 
 });
