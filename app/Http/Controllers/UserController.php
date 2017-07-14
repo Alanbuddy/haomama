@@ -41,13 +41,13 @@ class UserController extends Controller
         }
         switch ($type) {
             case 'user':
-                $view = 'admin.user.index';
+                $view = 'admin.client.index';
                 break;
             case 'teacher':
                 $view = 'admin.teacher.index';
                 break;
             case 'operator':
-                $view = 'admin.teacher.index';
+                $view = 'admin.user.index';
                 break;
             default:
                 $view = 'admin.user.index';
