@@ -73,7 +73,7 @@ $(document).ready(function(){
       function(data){
         console.log(data);
         if(data.success){
-          $(".video-id").text(data.data.id);
+          // $(".video-id").text(data.data.id);
         }
       }
       );
@@ -90,6 +90,16 @@ $(document).ready(function(){
   var title = $("#input-caption").val();
 
   $btn.click(function(){
+    $.getJSON(
+      window.init,
+      {},
+      function(data){
+        console.log(data);
+        if(data.success){
+          $(".video-id").text(data.data.id);
+        }
+      }
+      );
     uploader.upload();
   });
 

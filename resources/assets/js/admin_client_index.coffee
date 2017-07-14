@@ -1,3 +1,3 @@
 $ ->
   $(".client-show").click ->
-    location.href =  "/users/1" + "?type=operator"
+    location.href =  "/admin/users/1"

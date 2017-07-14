@@ -7,7 +7,7 @@
     window.lesson_store = "#{route('lessons.store')}"
     window.video = "#{route('videos.store')}"
     window.token = "#{csrf_token()}"
-    window.teacher_new = "#{route('users.create')}"
+  
 
 @endsection
 
