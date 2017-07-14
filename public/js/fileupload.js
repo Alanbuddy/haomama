@@ -16,14 +16,22 @@ $(document).ready(function(){
     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
     resize: false,
     auto: false,
-    method: 'POST'       //是否自动上传,true为自动上传
-    // chunked: true,     //是否要分片处理大文件上传
-    // chunkSize: 5*1024*1024    //分片上传，每片2M，默认是5M
+    dnd: "#thelist",
+    disableGlobalDnd: true,
+    fileNumLimit: 1,   //限制只能上传一个文件
+
+    chunked: true,     //是否要分片处理大文件上传
+    chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
+
+  uploader.options.formData = {
+      _token: window.token,
+    };
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
         '<h4 class="info">' + file.name + '</h4>' +
         '<p class="state">等待上传...</p>' +
+        '<button class="delete_btn">删除</button>' +
     '</div>' );
   });
 
@@ -45,7 +53,6 @@ $(document).ready(function(){
   });
 
   uploader.on( 'uploadSuccess', function( file ) {
-    $( '#'+file.id ).addClass('upload-state-done');
     $( '#'+file.id ).find('p.state').text('已上传');
   });
 
@@ -57,8 +64,16 @@ $(document).ready(function(){
     $( '#'+file.id ).find('.progress').fadeOut();
   });
 
+  var title = $("#input-caption").val();
+
   $btn.click(function(){
     uploader.upload();
   });
+
+  $("#thelist").on("click", ".delete_btn", function(){  
+    uploader.removeFile($(this).closest(".item").attr("id"));    //从上传文件列表中删除  
+
+    $(this).closest(".item").remove();   //从上传列表dom中删除  
+  }); 
 
 });

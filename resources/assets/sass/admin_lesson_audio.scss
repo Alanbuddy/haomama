@@ -61,6 +61,113 @@
   width: 70%;
   margin-left: 74px;
   border: 1px solid #ccc;
-  height: 200px;
+  height: 232px;
   border-radius: 6px;
+  padding: 16px;
+}
+
+//  webuploader
+.video-file {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: flex;
+}
+.wu-example {
+  width: 70%;
+  margin-left: 1.5%;
+  .item {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -os-flex;
+    display: -o-flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -os-align-items: center;
+    -o-align-items: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -os-justify-content: space-between;
+    -o-justify-content: space-between;
+    justify-content: space-between;
+  }
+  .btn-xs {
+    width: 60px;
+  }
+  .delete_btn {
+    padding: 1px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid #ccc;
+  }
+}
+.webuploader-pick {
+  border: 1px solid #ccc;
+}
+#ctlBtn, #imgBtn {
+  outline: none;
+  padding: 6px 12px;
+  margin-left: 20px;
+}
+.webuploader-container {
+  height: 232px;
+}
+.btns {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: flex;
+  height: 34px;
+}
+.pre_img {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-right: 14px;
+  margin-bottom: 10px;
+}
+.info_img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  display: none;
+}
+.state_img {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  text-align: center;
+  background: red;
+}
+.delete_img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  cursor: pointer;
+}
+.img_wrap {
+  width: 100px;
+  height: 100px;
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+.delete_img {
+  width: 16px;
+  height: 16px;
 }
