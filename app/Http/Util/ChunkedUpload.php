@@ -63,6 +63,6 @@ trait ChunkedUpload
             unlink($chunk);
             Log::info('merged chunk' . $chunk);
         }
-        return ['success' => true, 'file' => $targetPath];
+        return ['success' => true, 'path' => $targetPath, 'fileName' => $fileName];
     }
 }
