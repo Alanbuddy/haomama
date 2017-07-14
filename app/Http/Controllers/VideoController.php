@@ -45,6 +45,13 @@ class VideoController extends Controller
         return view('admin.video.create');
     }
 
+    public function initUpload(Request $request)
+    {
+        $video = new Video();
+        auth()->user()->videos()->save($video);
+        return $video;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -56,14 +63,15 @@ class VideoController extends Controller
         $this->validate($request, [
             'file' => 'required',
             'chunk' => 'required',
+            'video_id' => 'required',
         ]);
         if ($request->chunk == 0 || !$request->has('chunk')) {
             $file = $request->file('file');
-            $video = new Video();
+            $video = Video::find($request->video_id);
             $video->fill($this->getFileBaseInfo($file));
             $video->description = $request->chunks;
             $video->video_type = 'common';
-            auth()->user()->videos()->save($video);
+            $video->save();
         }
         return $this->uploadChunkedFile($request);
     }
@@ -109,14 +117,9 @@ class VideoController extends Controller
      * @param Request $request
      * @return Video
      */
-    public function upload2TecentCloud($fileName, $path)
+    public function upload2TecentCloud($video)
     {
-        $video = Video::where('file_name', $fileName)->orderBy('id', 'desc')->first();
-        $video->path = $path;
-        $video->save();
-//        $video->fill($this->getFileBaseInfo($file));
-        Log::info(__FILE__ . __LINE__ . $video->id);
-        $this->dispatch((new TecentVodUpload($path, $video))->onQueue('wechat'));
+        $this->dispatch((new TecentVodUpload($video))->onQueue('wechat'));
         return $video;
     }
 
@@ -126,10 +129,17 @@ class VideoController extends Controller
      */
     public function mergeVideo(Request $request)
     {
+        $this->validate($request, [
+            'video_id' => 'required',
+        ]);
         try {
             $ret = $this->merge($request);
             if ($ret['success']) {
-                $file = $this->upload2TecentCloud($ret['fileName'], $ret['path']);
+                $video = Video::find('video_id');
+                $video->path = $ret['path'];
+                $video->save();
+//        $video->fill($this->getFileBaseInfo($file));
+                $file = $this->upload2TecentCloud($video);
                 return ['success' => true, 'data' => $file];
             }
         } catch (\Exception $e) {
