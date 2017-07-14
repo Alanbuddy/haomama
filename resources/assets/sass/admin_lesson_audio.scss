@@ -61,9 +61,9 @@
   width: 70%;
   margin-left: 74px;
   border: 1px solid #ccc;
-  height: 276px;
+  min-height: 280px;
   border-radius: 6px;
-  padding: 16px;
+  // padding: 15px;
 }
 
 //  webuploader
@@ -118,7 +118,7 @@
   margin-left: 20px;
 }
 .webuploader-container {
-  min-height: 276px;
+  min-height: 280px;
 }
 .btns {
   display: -webkit-flex;
@@ -133,7 +133,7 @@
   position: relative;
   width: 100px;
   height: 120px;
-  margin-right: 14px;
+  // margin-right: 14px;
   margin-bottom: 10px;
 }
 .info_img {

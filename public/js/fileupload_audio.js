@@ -103,8 +103,11 @@ $(document).ready(function(){
   });
 
   var name = [];
-  var wrap_height = $("#uploader_img").height();
-  var wrap_width = $("#uploader_img").width();
+  var wrap_height = $("#imglist").height();
+  console.log(wrap_height);
+  
+  var wrap_width = $("#imglist").width();
+  console.log(wrap_width);
   uploader_img.on( 'fileQueued', function( file ) {
     $list_img.append( '<div id="' + file.id + '" class="pre_img">' +
         '<p class="img_wrap"><img></p>' +
@@ -115,7 +118,9 @@ $(document).ready(function(){
     '</div>' );
     name = file.name;
     $img = $("#"+ file.id).find('.img_wrap').find("img");
-    $("#"+file.id).css("marginBottom");
+    // $("#"+file.id).css("marginBottom", (wrap_height - 240)/2);
+    $("#"+file.id).css("margin", (wrap_width -600)/6);
+
     uploader_img.makeThumb(file, function(error, src) {
       if (error) {
         $img.replaceWith('<span>不能预览</span>');
