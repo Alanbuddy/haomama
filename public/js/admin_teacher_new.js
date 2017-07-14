@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 85);
+/******/ 	return __webpack_require__(__webpack_require__.s = 74);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,32 +10329,30 @@ return jQuery;
 
 /***/ }),
 
-/***/ 22:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  $(".category-class").each(function() {
-    if ($(this).text() === "鍒嗙被N") {
-      return $(this).addClass('health-title');
-    } else if ($(this).text() === "鍒嗙被t") {
-      return $(this).addClass('psychology-title');
-    } else {
-      return $(this).addClass('grow-title');
-    }
-  });
-  return $(".back").click(function() {
-    return location.href = window.userid;
-  });
+  var E, editor;
+  E = window.wangEditor;
+  editor = new E('#edit-area');
+  editor.customConfig.uploadImgServer = '/upload';
+  editor.customConfig.showLinkImg = false;
+  editor.customConfig.menus = ['head', 'image'];
+  editor.customConfig.uploadHeaders = {
+    'Accept': 'HTML'
+  };
+  return editor.create();
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 85:
+/***/ 74:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(22);
+module.exports = __webpack_require__(11);
 
 
 /***/ })

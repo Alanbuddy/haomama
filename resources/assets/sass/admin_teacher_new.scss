@@ -1,0 +1,100 @@
+.direction {
+  justify-content: space-between;
+}
+.finish-btn-position {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  z-index: 10;
+}
+#finish-btn {
+  width: 100px;
+  color: #fff;
+  outline: none;
+}
+.text-message {
+  width: 50%;
+  float: left;
+  margin-top: 6px;
+}
+.margin20 {
+  margin: 16px 0 24px 0;
+}
+#mobile-label {
+  margin-left: 15px;
+}
+#tencent-label {
+  margin-left: 20px;
+}
+#Email-label {
+  margin-left: 28px;
+}
+.text-message .controls-row:last-child {
+  margin-bottom: 0;
+}
+#teacher-name {
+  margin: 0;
+  padding: 0;
+  padding-left: 8px;
+  margin-right: 40px;
+}
+.input-width {
+  width: 154px;
+  height: 30px;
+  display: inline-block;
+  color: #6f6f7e;
+}
+.input-area {
+  display: inline-block;
+  width: 17.2%;
+  height: 30px;
+  color: #6f6f7e;
+}
+.controls-row {
+  margin-bottom: 20px;
+}
+#tencent {
+  margin-right: 40px;
+}
+#imghead {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+}
+.photo {
+  width: 17.25%;
+  display: inline-block;
+  margin-left: 7.5%;
+}
+.controls-div {
+  padding: 0 3.24%;
+}
+
+.course-introduce {
+  margin:20px 0;
+}
+.introduce {
+  margin-right: 2px;
+  vertical-align: top;
+}
+.wangedit-area {
+  display: inline-block;
+  width: 694px;
+  font-size: 14px;
+}
+.w-e-text-container {
+  height: 180px !important;
+}
+.input-caption {
+  font-weight: normal;
+}
+.middle {
+  width: 416px;
+  margin-right: 84px;
+}
+.double-label {
+  margin-left: 28px;
+}
+.longinput {
+  width: 694px;
+}

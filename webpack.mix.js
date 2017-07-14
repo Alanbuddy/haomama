@@ -50,6 +50,8 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .sass('resources/assets/sass/user-index.scss', 'public/css')
 .sass('resources/assets/sass/user-profile.scss', 'public/css')
 .sass('resources/assets/sass/admin_teacher_index.scss', 'public/css')
+.sass('resources/assets/sass/admin_teacher_new.scss', 'public/css')
+.sass('resources/assets/sass/admin_teacher_show.scss', 'public/css')
 
 .js('resources/assets/js/layout.coffee', 'public/js')
 .js('resources/assets/js/register.coffee', 'public/js')
@@ -79,6 +81,8 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/admin_lesson_audio.coffee', 'public/js')
 .js('resources/assets/js/admin-lesson-new.coffee', 'public/js')
 .js('resources/assets/js/admin_teacher_index.coffee', 'public/js')
+.js('resources/assets/js/admin_teacher_new.coffee', 'public/js')
+.js('resources/assets/js/admin_teacher_show.coffee', 'public/js')
 .js('resources/assets/js/admin_client_index.coffee', 'public/js')
 .js('resources/assets/js/admin-layout.coffee', 'public/js');
 
