@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 104);
+/******/ 	return __webpack_require__(__webpack_require__.s = 75);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,72 +10329,33 @@ return jQuery;
 
 /***/ }),
 
-/***/ 104:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(34);
-
-
-/***/ }),
-
-/***/ 34:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_signup_input, toggle_password_tip;
-  $("#signup_btn").attr("disabled", true);
-  toggle_password_tip = function(wrong) {
-    if (wrong) {
-      return $("#password_notice").css("visibility", "visible");
+  return $(".details").click(function() {
+    var row, span, status;
+    span = $(this).find("span");
+    row = $(this).closest("tr");
+    status = row.next();
+    status.toggle();
+    if (span.hasClass("triangle-down")) {
+      return span.removeClass("triangle-down").addClass("triangle-up");
     } else {
-      return $("#password_notice").css("visibility", "hidden");
+      return span.removeClass("triangle-up").addClass("triangle-down");
     }
-  };
-  check_signup_input = function() {
-    if ($("#mobile").val().trim() === "" || $("#mobilecode").val().trim() === "" || $("#password").val().trim() === "" || $("#password_again").val().trim() === "") {
-      return $("#signup_btn").attr("disabled", true);
-    } else {
-      return $("#signup_btn").attr("disabled", false);
-    }
-  };
-  $("#mobile").keyup(function() {
-    check_signup_input();
-    return $("#mobile_notice").css("visibility", "hidden");
-  });
-  $("#mobilecode").keyup(function() {
-    check_signup_input();
-    return $("#code_notice").css("visibility", "hidden");
-  });
-  $("#password").keyup(function() {
-    check_signup_input();
-    return $("#password_notice").css("visibility", "hidden");
-  });
-  $("#password_again").keyup(function() {
-    check_signup_input();
-    return $("#password_notice").css("visibility", "hidden");
-  });
-  $("#password").keyup(function(event) {
-    var code;
-    code = event.which;
-    if (code !== 13) {
-      toggle_password_tip(false);
-    }
-    return check_signup_input();
-  });
-  $("#password_again").keyup(function(event) {
-    var code;
-    code = event.which;
-    if (code !== 13) {
-      toggle_password_tip(false);
-    }
-    return check_signup_input();
-  });
-  return $("#jump_to_signin").click(function() {
-    return location.href = window.login;
   });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 75:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(5);
+
 
 /***/ })
 

@@ -36,7 +36,7 @@
                 %a{:href => route("lessons.index")}
                   %img.mini-icon{src: "/icon/admin/2single.png"}
                   %span.f18.sidebar-title 课时管理
-              %li
+              %li.teacher_li
                 %a{:href => route('users.index')."?type=teacher"}
                   %img.mini-icon{src: "/icon/admin/3teacher.png"}
                   %span.f18.sidebar-title 讲师管理

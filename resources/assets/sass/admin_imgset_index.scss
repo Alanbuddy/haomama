@@ -1,0 +1,99 @@
+.direction {
+  justify-content: flex-end;
+}
+.finish-btn-position {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  z-index: 10;
+}
+.desc-div {
+  padding-top: 40px;
+}
+.create-btn-position {
+  position: absolute;
+  right: 2.07%;
+  top: 24px;
+  z-index: 10;
+}
+#finish-btn {
+  display: none;
+}
+#tab2-edit-btn, #tab2-finish-btn {
+  display: none;
+}
+#edit-btn, #finish-btn, #tab2-edit-btn, #tab2-finish-btn {
+  width: 8.63%;
+  color: #fff;
+  outline: none;
+}
+.img-item, .item {
+  width: 750px;
+  height: 320px;
+  margin-bottom: 40px;
+}
+.img-div .img-item:last-child {
+  margin-bottom: 0;
+}
+.add-img {
+  width: 120px;
+  text-align: center;
+  padding: 8px 20px;
+  background: #10c078;
+  color: #fff;
+  border-radius: 6px;
+  margin-right: 20px;
+}
+.edit-img-div {
+  border: 1px solid #ccc;
+  padding: 40px;
+  padding-bottom: 0;
+  width: 830px;
+  border-radius: 8px;
+}
+.mt40 {
+  margin-top: 40px;
+}
+.item {
+  position: relative;
+}
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+.btns {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: flex;
+  height: 34px;
+  align-items: center;
+}
+#picker {
+  margin-right: 20px;
+}
+
+
+//tab2
+.controls-div {
+  padding: 0 3.24%;
+}
+.controls-row {
+  margin-bottom: 20px;
+}
+.input-caption {
+  font-weight: normal;
+}
+.edit-box {
+  display: none;
+}
+.input-area {
+  display: inline-block;
+  width: 400px;
+  height: 30px;
+  color: #6f6f7e;
+}

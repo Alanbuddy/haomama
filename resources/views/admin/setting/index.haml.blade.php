@@ -1,14 +1,12 @@
 @extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/admin_teacher_index.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/admin_imgset_index.css') }}">
+<link href="/css/plugin/webuploader.css" rel="stylesheet" type="text/css">
 
 :javascript
-    window.lesson_index = "#{route('lessons.index')}"
-    window.lesson_store = "#{route('lessons.store')}"
-    window.video = "#{route('videos.store')}"
-    window.token = "#{csrf_token()}"
-    window.teacher_new = "#{route('users.create')}"
-
+  window.token = "#{csrf_token()}"
+  window.video = "#{route('videos.store')}"
+    
 @endsection
 
 @section('content')
@@ -24,12 +22,18 @@
         %a.f16.set-left-border#exit{href: "#"} 退出登录
     
   .main-content.bg2
-    %button.btn.new-normal.font-color1.btn-position#new-client{type: "button", "data-target" => "#kidsaddModal", "data-toggle" => "modal"} 添加讲师
+    %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
+    %button.btn.edit-normal.font-color1.create-btn-position#tab2-edit-btn{type: "button"} 编辑
+
+    %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
+    %button.btn.finish-normal.font-color1.finish-btn-position#tab2-finish-btn{type: "button"} 保存
     .table-div
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 首页宣传
+            %a.f16.font-color1#announce{"data-toggle" => "tab", :href => "#tab1"} 首页宣传
+          %li
+            %a.f16.font-color1#course{"data-toggle" => "tab", :href => "#tab2"} 课程推荐
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
@@ -37,37 +41,55 @@
               //   .undiscover.f14
               //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
               // - else
-              .table-box.f14
-                %table.table.table-hover.table-height
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 讲师姓名
-                      %th 手机号
-                      %th 职称
-                  %tbody.font-color3
-                    // - @users[:data].each do |u|
-                    %tr
-                      %td.client-show 张老师
-                      %td 132344324535
-                      %td xx医院xx科室主治医师
-              .select-page 
-                %span.totalitems 共2页，总计18条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
+              .img-div.unedit-box
+                %img.img-item{src: "/icon/banner.png"}
+                %img.img-item{src: "/icon/banner.png"}
+                %img.img-item{src: "/icon/banner.png"}
+              .edit-img-div.edit-box.f14.font-color3
+                #uploader.wu-example
+                  #thelist.uploader-list
+                  .btns
+                    #picker 添加图片
+                    %span 请上传尺寸为750*320的图片文件
+                    
+                .img-edit-div.mt40
+                  .item
+                    %img.edit-img-item{src: "/icon/banner.png"}
+                    %img.delete{src: "/icon/admin/delete2.png"}
+                  .item
+                    %img.edit-img-item{src: "/icon/banner.png"}
+                    %img.delete{src: "/icon/admin/delete2.png"}
+
+          #tab2.tab-pane
+            .desc-div
+              .controls-div.font-color3.f14
+                .controls.controls-row
+                  %label.input-caption 新课速递推荐:
+                  %span.unedit-box.longspan 课程的名字很长
+                  %span.edit-box
+                    %input.input-area.form-control{:type => "text"}
+                .controls.controls-row
+                  %label.input-caption 健康养育推荐:
+                  %span.unedit-box.longspan 课程的名字很长
+                  %span.edit-box
+                    %input.input-area.form-control{:type => "text"}
+                .controls.controls-row
+                  %label.input-caption 心理教育推荐:
+                  %span.unedit-box.longspan 课程的名字很长
+                  %span.edit-box
+                    %input.input-area.form-control{:type => "text"}
+                .controls.controls-row
+                  %label.input-caption 自我成长推荐:
+                  %span.unedit-box.longspan 无
+                  %span.edit-box
+                    %input.input-area.form-control{:type => "text"}
 
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/admin_teacher_index.js')}}"></script>
-// <script src="/js/plugin/wangEditor.min.js"></script>
-// <script src="/js/plugin/jquery-ui.min.js"></script>
+<script src= "{{mix('/js/admin_imgset_index.js')}}"></script>
+<script src="/js/plugin/webuploader.js"></script>
 
-// <script src="/js/fileupload.js"></script>
+<script src="/js/fileupload.js"></script>
 
 @endsection

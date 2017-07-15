@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 64);
+/******/ 	return __webpack_require__(__webpack_require__.s = 71);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10338,8 +10338,13 @@ return jQuery;
   $(".sidebar ul li a").each(function() {
     var url;
     url = $(this).attr("href");
-    if (currenturl.indexOf(url) !== -1) {
-      return $(this).closest("li").addClass("active-li");
+    if (currenturl.indexOf(url) !== -1 && currenturl.indexOf("type=teacher") !== -1) {
+      $(this).closest("li.teacher_li").addClass("active-li");
+    } else if (currenturl.indexOf(url) !== -1) {
+      $(this).closest("li").not(".teacher_li").addClass("active-li");
+    }
+    if (currenturl.indexOf("users") !== -1 && currenturl.indexOf("type=teacher") !== -1) {
+      return $(this).closest("li.teacher_li").addClass("active-li");
     }
   });
   return $("#exit").click(function() {
@@ -10361,7 +10366,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 64:
+/***/ 71:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

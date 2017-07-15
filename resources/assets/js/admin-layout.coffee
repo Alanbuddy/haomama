@@ -3,9 +3,12 @@ $ ->
   currenturl = window.location.href
   $(".sidebar ul li a").each ->
     url = $(this).attr("href")
-    # console.log(url)
-    if currenturl.indexOf(url) != -1
-      $(this).closest("li").addClass("active-li")
+    if currenturl.indexOf(url) != -1 && currenturl.indexOf("type=teacher") != -1 
+      $(this).closest("li.teacher_li").addClass("active-li")
+    else if currenturl.indexOf(url) != -1
+      $(this).closest("li").not(".teacher_li").addClass("active-li")
+    if currenturl.indexOf("users") != -1 && currenturl.indexOf("type=teacher") != -1
+      $(this).closest("li.teacher_li").addClass("active-li")
 
   # 退出登录
   $("#exit").click ->

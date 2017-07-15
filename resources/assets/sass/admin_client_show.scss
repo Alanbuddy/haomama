@@ -1,0 +1,98 @@
+.direction {
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -os-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+}
+.desc-div {
+  padding-bottom: 0;
+}
+
+.details:link {
+  color: #e9885d;
+}
+.details:visited {
+  color: #e9885d;
+}
+.details:hover {
+  color: #e9885d;
+}
+.details:active {
+  color: #e9885d;
+}
+.triangle-down {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-top: 5px solid #e9885d;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+.triangle-up {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-bottom: 5px solid #e9885d;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+.unpay-triangle-down {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-top: 5px solid #adadbe;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+.pay-fail {
+  text-align: left;
+}
+.status {
+  display: none;
+}
+.course-status {
+  margin: 1% 0 0.5% 0;
+}
+.comments {
+  line-height: 150%;
+}
+.comments-title {
+  display: inline-block;
+  float: left;
+}
+.comments-content, .uncomment {
+  display: inline-block;
+  width: 93%;
+} 
+.square {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: #cfcfcf;
+  border-radius: 2px;
+  margin-right: 0.3%;
+  vertical-align: middle;
+}
+.join-square {
+  @extend .square;
+  background: #0fc077;
+}
+.miss-square {
+  @extend .square;
+  background: #d70c19;
+}
+.active-btn {
+  background: #f7873d;
+}
+
+.mr30 {
+  margin-right: 50px;
+}
+.tag2-page {
+  float: right;
+  width: 50%;
+}

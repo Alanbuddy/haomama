@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 104);
+/******/ 	return __webpack_require__(__webpack_require__.s = 79);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,68 +10329,46 @@ return jQuery;
 
 /***/ }),
 
-/***/ 104:
+/***/ 79:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(34);
+module.exports = __webpack_require__(9);
 
 
 /***/ }),
 
-/***/ 34:
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_signup_input, toggle_password_tip;
-  $("#signup_btn").attr("disabled", true);
-  toggle_password_tip = function(wrong) {
-    if (wrong) {
-      return $("#password_notice").css("visibility", "visible");
-    } else {
-      return $("#password_notice").css("visibility", "hidden");
-    }
-  };
-  check_signup_input = function() {
-    if ($("#mobile").val().trim() === "" || $("#mobilecode").val().trim() === "" || $("#password").val().trim() === "" || $("#password_again").val().trim() === "") {
-      return $("#signup_btn").attr("disabled", true);
-    } else {
-      return $("#signup_btn").attr("disabled", false);
-    }
-  };
-  $("#mobile").keyup(function() {
-    check_signup_input();
-    return $("#mobile_notice").css("visibility", "hidden");
+  $("#edit-btn").click(function() {
+    $(this).toggle();
+    return $("#finish-btn").toggle();
   });
-  $("#mobilecode").keyup(function() {
-    check_signup_input();
-    return $("#code_notice").css("visibility", "hidden");
+  $("#tab2-edit-btn").click(function() {
+    $(this).toggle();
+    $("#tab2-finish-btn").toggle();
+    $(".unedit-box").toggle();
+    return $(".edit-box").toggle();
   });
-  $("#password").keyup(function() {
-    check_signup_input();
-    return $("#password_notice").css("visibility", "hidden");
+  $("#announce").click(function() {
+    $("#edit-btn").show();
+    $("#tab2-edit-btn").hide();
+    return $("#tab2-finish-btn").hide();
   });
-  $("#password_again").keyup(function() {
-    check_signup_input();
-    return $("#password_notice").css("visibility", "hidden");
+  $("#course").click(function() {
+    $("#tab2-edit-btn").show();
+    $("#edit-btn").hide();
+    return $("#finish-btn").hide();
   });
-  $("#password").keyup(function(event) {
-    var code;
-    code = event.which;
-    if (code !== 13) {
-      toggle_password_tip(false);
-    }
-    return check_signup_input();
+  $("#edit-btn").click(function() {
+    $(this).toggle();
+    $("#finish-btn").toggle();
+    $(".unedit-box").toggle();
+    return $(".edit-box").toggle();
   });
-  $("#password_again").keyup(function(event) {
-    var code;
-    code = event.which;
-    if (code !== 13) {
-      toggle_password_tip(false);
-    }
-    return check_signup_input();
-  });
-  return $("#jump_to_signin").click(function() {
-    return location.href = window.login;
+  return $(".delete").click(function() {
+    return $(this).closest(".item").remove();
   });
 });
 

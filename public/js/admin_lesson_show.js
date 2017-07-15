@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 104);
+/******/ 	return __webpack_require__(__webpack_require__.s = 82);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,72 +10329,37 @@ return jQuery;
 
 /***/ }),
 
-/***/ 104:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(34);
-
-
-/***/ }),
-
-/***/ 34:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_signup_input, toggle_password_tip;
-  $("#signup_btn").attr("disabled", true);
-  toggle_password_tip = function(wrong) {
-    if (wrong) {
-      return $("#password_notice").css("visibility", "visible");
-    } else {
-      return $("#password_notice").css("visibility", "hidden");
-    }
+  var E, editor;
+  E = window.wangEditor;
+  editor = new E('#edit-box');
+  editor.customConfig.uploadImgServer = '/upload';
+  editor.customConfig.showLinkImg = false;
+  editor.customConfig.menus = ['head', 'image'];
+  editor.customConfig.uploadHeaders = {
+    'Accept': 'HTML'
   };
-  check_signup_input = function() {
-    if ($("#mobile").val().trim() === "" || $("#mobilecode").val().trim() === "" || $("#password").val().trim() === "" || $("#password_again").val().trim() === "") {
-      return $("#signup_btn").attr("disabled", true);
-    } else {
-      return $("#signup_btn").attr("disabled", false);
-    }
-  };
-  $("#mobile").keyup(function() {
-    check_signup_input();
-    return $("#mobile_notice").css("visibility", "hidden");
-  });
-  $("#mobilecode").keyup(function() {
-    check_signup_input();
-    return $("#code_notice").css("visibility", "hidden");
-  });
-  $("#password").keyup(function() {
-    check_signup_input();
-    return $("#password_notice").css("visibility", "hidden");
-  });
-  $("#password_again").keyup(function() {
-    check_signup_input();
-    return $("#password_notice").css("visibility", "hidden");
-  });
-  $("#password").keyup(function(event) {
-    var code;
-    code = event.which;
-    if (code !== 13) {
-      toggle_password_tip(false);
-    }
-    return check_signup_input();
-  });
-  $("#password_again").keyup(function(event) {
-    var code;
-    code = event.which;
-    if (code !== 13) {
-      toggle_password_tip(false);
-    }
-    return check_signup_input();
-  });
-  return $("#jump_to_signin").click(function() {
-    return location.href = window.login;
+  editor.create();
+  return $("#edit-btn").click(function() {
+    $(this).toggle();
+    $("#finish-btn").toggle();
+    $(".unedit-box").toggle();
+    return $(".edit-box").toggle();
   });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 82:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(12);
+
 
 /***/ })
 
