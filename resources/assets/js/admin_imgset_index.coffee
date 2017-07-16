@@ -1,7 +1,4 @@
 $ ->
-	$("#edit-btn").click ->
-		$(this).toggle()
-		$("#finish-btn").toggle()
 
 	$("#tab2-edit-btn").click ->
 		$(this).toggle()
@@ -21,8 +18,8 @@ $ ->
 	$("#edit-btn").click ->
 		$(this).toggle()
 		$("#finish-btn").toggle()
-		$(".unedit-box").toggle()
-		$(".edit-box").toggle()
+		$(".tab1-unedit-box").toggle()
+		$(".tab1-edit-box").toggle()
 
 	$(".delete").click ->
 		$(this).closest(".item").remove()

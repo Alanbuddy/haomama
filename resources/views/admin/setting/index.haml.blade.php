@@ -41,13 +41,13 @@
               //   .undiscover.f14
               //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
               // - else
-              .img-div.unedit-box
+              
+              .img-div.tab1-unedit-box
                 %img.img-item{src: "/icon/banner.png"}
                 %img.img-item{src: "/icon/banner.png"}
                 %img.img-item{src: "/icon/banner.png"}
-              .edit-img-div.edit-box.f14.font-color3
+              .edit-img-div.tab1-edit-box.f14.font-color3
                 #uploader.wu-example
-                  #thelist.uploader-list
                   .btns
                     #picker 添加图片
                     %span 请上传尺寸为750*320的图片文件
@@ -59,6 +59,7 @@
                   .item
                     %img.edit-img-item{src: "/icon/banner.png"}
                     %img.delete{src: "/icon/admin/delete2.png"}
+                  #thelist.uploader-list
 
           #tab2.tab-pane
             .desc-div
@@ -90,6 +91,6 @@
 <script src= "{{mix('/js/admin_imgset_index.js')}}"></script>
 <script src="/js/plugin/webuploader.js"></script>
 
-<script src="/js/fileupload.js"></script>
+<script src="/js/set_banner.js"></script>
 
 @endsection

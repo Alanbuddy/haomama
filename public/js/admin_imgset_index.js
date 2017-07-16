@@ -10341,10 +10341,6 @@ module.exports = __webpack_require__(9);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  $("#edit-btn").click(function() {
-    $(this).toggle();
-    return $("#finish-btn").toggle();
-  });
   $("#tab2-edit-btn").click(function() {
     $(this).toggle();
     $("#tab2-finish-btn").toggle();
@@ -10364,8 +10360,8 @@ module.exports = __webpack_require__(9);
   $("#edit-btn").click(function() {
     $(this).toggle();
     $("#finish-btn").toggle();
-    $(".unedit-box").toggle();
-    return $(".edit-box").toggle();
+    $(".tab1-unedit-box").toggle();
+    return $(".tab1-edit-box").toggle();
   });
   return $(".delete").click(function() {
     return $(this).closest(".item").remove();

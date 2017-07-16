@@ -44,12 +44,12 @@
                     %option{value: "类型二"} 类型二
                     %option{value: "类型三"} 类型三
                   %label.input-caption 课程节数:
-                  %input.form-control.input-width{:type => "text"}
+                  %input.form-control.input-width#course-length{:type => "text"}
                 .controls.controls-row
                   %label.input-caption 课程价格:
                   %input.form-control.input-width#course-price{:type => "text"}
                   %label.input-caption 促销价格:
-                  %input.form-control.input-width{:type => "text"}
+                  %input.form-control.input-width#pay-price{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
                 %img.edit-photo#imghead{src: "/icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
@@ -61,7 +61,7 @@
                   #type-tag
                 .hot-tag-div
                   %span 标签一
-                  %span 标签一
+                  %span 标签二
                   %span 标签十分大
               .controls.controls-row.no-mb
                 %label.input-caption 授课老师:

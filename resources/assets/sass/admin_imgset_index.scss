@@ -76,7 +76,9 @@
 #picker {
   margin-right: 20px;
 }
-
+.edit-img-item {
+  object-fit: contain;
+}
 
 //tab2
 .controls-div {
@@ -88,7 +90,7 @@
 .input-caption {
   font-weight: normal;
 }
-.edit-box {
+.edit-box, .tab1-edit-box {
   display: none;
 }
 .input-area {
@@ -96,4 +98,7 @@
   width: 400px;
   height: 30px;
   color: #6f6f7e;
+}
+.info {
+  display: none;
 }
