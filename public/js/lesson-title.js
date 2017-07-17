@@ -30,21 +30,18 @@ $(document).ready(function(){
        "Scheme"
      ];
 
-  $("#teacher").keyup(function(){
-    var teacher_name = $(this).val();
-    $.getJSON(
-      window.teacher,
-      {
-        name: teacher_name
-      },
-      function(data){
-        availableTags = JSON.parse(data);
-      }
-      );
-  });
-
   $( "#teacher" ).autocomplete({
-      source: availableTags,
+      source: function(request, response){
+        $.ajax({
+          url: window.teacher,
+          data: {
+            name: request.term
+          },
+          success: function(data){
+            console.log(data);
+          }
+        });
+      },
       select: function( event, ui ) {
               $( "#teacher" ).val("");
               $(".unadd").hide();
