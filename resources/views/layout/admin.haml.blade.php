@@ -9,9 +9,10 @@
     %meta{"content:" => "email=no", :name => "format-detection"}
     %title
       @yield('title') VOD
-    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
-    %link{:href => "css/mobile-notification.css", :rel => "stylesheet"}
-    %link{:href => "css/admin-layout.css", :rel => "stylesheet"}
+    %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
+    %link{:href => "/css/mobile-notification.css", :rel => "stylesheet"}
+    %link{:href => "/css/notification.css", :rel => "stylesheet" }
+    %link{:href => "/css/admin-layout.css", :rel => "stylesheet"}
 
     @yield('css')
     :javascript
@@ -54,10 +55,11 @@
                   %img.mini-icon{src: "icon/admin/6statistic.png"}
                   %span.f18.sidebar-title 统计数据
       @yield('content')
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src = "js/ajax.js"></script>
-    <script src = "js/regex.js"></script>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src = "/js/ajax.js"></script>
+    <script src = "/js/regex.js"></script>
+    <script src = "/js/mobile-notification.js"></script>
     <script src= "{{mix('/js/admin-layout.js')}}"></script>
 
 

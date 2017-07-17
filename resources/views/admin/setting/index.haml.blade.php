@@ -41,18 +41,21 @@
               //   .undiscover.f14
               //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
               // - else
-              
+              #uploader.wu-example.f14.font-color3
+                .btns
+                  #picker 添加图片
+                  %span 请上传尺寸为750*320的图片文件
               .img-div.tab1-unedit-box
                 %img.img-item{src: "/icon/banner.png"}
                 %img.img-item{src: "/icon/banner.png"}
                 %img.img-item{src: "/icon/banner.png"}
               .edit-img-div.tab1-edit-box.f14.font-color3
-                #uploader.wu-example
-                  .btns
-                    #picker 添加图片
-                    %span 请上传尺寸为750*320的图片文件
+                // #uploader.wu-example
+                //   .btns
+                //     #picker 添加图片
+                //     %span 请上传尺寸为750*320的图片文件
                     
-                .img-edit-div.mt40
+                .img-edit-div
                   .item
                     %img.edit-img-item{src: "/icon/banner.png"}
                     %img.delete{src: "/icon/admin/delete2.png"}

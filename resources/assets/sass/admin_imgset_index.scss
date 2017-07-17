@@ -35,6 +35,9 @@
 .img-div .img-item:last-child {
   margin-bottom: 0;
 }
+#uploader {
+  margin-bottom: 20px;
+}
 .add-img {
   width: 120px;
   text-align: center;
@@ -101,4 +104,12 @@
 }
 .info {
   display: none;
+}
+.state {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  display: none;
+  color: red;
 }
