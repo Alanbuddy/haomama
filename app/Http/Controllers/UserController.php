@@ -276,7 +276,7 @@ class UserController extends Controller
         $name = $request->name;
         $role = Role::where('name', 'teacher')->first();
         $items = $role->users()
-            ->where('name', 'like', $name)
+            ->where('name', 'like', '%'.$name.'%')
             ->orderBy('id', 'desc')
             ->paginate(10);
         return $items;
