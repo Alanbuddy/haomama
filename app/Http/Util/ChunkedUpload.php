@@ -40,14 +40,13 @@ trait ChunkedUpload
 
     }
 
-    public function merge(Request $request)
+    public function merge(Request $request,$chunksCount)
     {
         $this->validate($request, [
             'name' => 'required',
-            'count' => 'required',
+//            'count' => 'required',
         ]);
         $fileName = $request->get('name');
-        $chunksCount = $request->get('count');
         $dir = storage_path('app/' . md5($fileName));
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);

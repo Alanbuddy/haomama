@@ -22,6 +22,7 @@ Route::group([
     Route::auth();
     Route::get('/', 'HomeController@index')->name('index');
     Route::get('/logout', 'Auth\LoginController@logout');
+    Route::post('/upload', 'FileController@upload')->name('file.upload');
 
     Route::get('/validate/phone', 'SmsController@isOccupied')->name('validate.phone');
     Route::any('/sms/send', 'SmsController@send')->name('sms.send');
