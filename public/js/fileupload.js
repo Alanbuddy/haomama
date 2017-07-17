@@ -122,7 +122,7 @@ $(document).ready(function(){
   var E = window.wangEditor;
   var editor = new E('#edit-box');
   
-  editor.customConfig.uploadImgServer = '/upload' ;
+  editor.customConfig.uploadImgServer = window.wangeditor;
   editor.customConfig.showLinkImg = false;
   editor.customConfig.menus = [
         'head',

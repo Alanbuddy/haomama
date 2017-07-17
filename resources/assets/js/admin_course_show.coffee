@@ -9,33 +9,33 @@ $ ->
     $(this).toggle()
     $("#finish-btn").toggle()
 
-  E = window.wangEditor
-  editor = new E('#edit-area')
-  # 图片上传地址
-  editor.customConfig.uploadImgServer = '/upload' 
-  editor.customConfig.showLinkImg = false
-  editor.customConfig.menus = [
-        'head',
-        'image'
-     ]
-  editor.customConfig.uploadHeaders = {
-    'Accept' : 'HTML'
-  }
-  editor.create()
+  # E = window.wangEditor
+  # editor = new E('#edit-area')
+  # # 图片上传地址
+  # editor.customConfig.uploadImgServer = '/upload' 
+  # editor.customConfig.showLinkImg = false
+  # editor.customConfig.menus = [
+  #       'head',
+  #       'image'
+  #    ]
+  # editor.customConfig.uploadHeaders = {
+  #   'Accept' : 'HTML'
+  # }
+  # editor.create()
 
 
-  E = window.wangEditor
-  editor1 = new E("#title-area")
-  # 图片上传地址
-  editor1.customConfig.uploadImgServer = '/upload' 
-  editor1.customConfig.showLinkImg = false
-  editor1.customConfig.menus = [
-        'head'
-     ]
-  editor1.customConfig.uploadHeaders = {
-    'Accept' : 'HTML'
-  }
-  editor1.create()
+  # E = window.wangEditor
+  # editor1 = new E("#title-area")
+  # # 图片上传地址
+  # editor1.customConfig.uploadImgServer = '/upload' 
+  # editor1.customConfig.showLinkImg = false
+  # editor1.customConfig.menus = [
+  #       'head'
+  #    ]
+  # editor1.customConfig.uploadHeaders = {
+  #   'Accept' : 'HTML'
+  # }
+  # editor1.create()
 
   $("#register-message").click ->
     $("#unshelve-btn").hide()

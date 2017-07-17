@@ -9,7 +9,6 @@
     %title
       @yield('title') VOD
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
-    %link{:href => "/css/mobile-notification.css", :rel => "stylesheet"}
     %link{:href => "/css/notification.css", :rel => "stylesheet" }
     %link{:href => "/css/admin-layout.css", :rel => "stylesheet"}
 
@@ -19,6 +18,7 @@
       window.login = "#{route('login')}"
       window.token = "#{csrf_token()}"
       window.teacher = "#{route('users.index')}"
+      window.wangeditor = "#{route('file.upload')}"
   %body
     .wrapper
       .layout-left

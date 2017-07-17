@@ -4,29 +4,85 @@ $(document).ready(function(){
   });
 
   $('#type-tag').tagEditor();
-  $("#teacher-tag").tagEditor({
-    beforeTagSave: function(){
-      alert("123");
-    }
-      // autocomplete: {
 
-      //     delay: 0, // show suggestions immediately
+  var availableTags = [
+       "ActionScript",
+       "AppleScript",
+       "Asp",
+       "BASIC",
+       "C",
+       "C++",
+       "Clojure",
+       "COBOL",
+       "ColdFusion",
+       "Erlang",
+       "Fortran",
+       "Groovy",
+       "Haskell",
+       "Java",
+       "JavaScript",
+       "Lisp",
+       "Perl",
+       "PHP",
+       "Python",
+       "Ruby",
+       "Scala",
+       "Scheme"
+     ];
 
-      //     position: { collision: 'flip' }, // automatic menu position up/down
-
-      //     source: ['ActionScript', 'AppleScript', 'Asp', ... 'Python', 'Ruby']
-
-      // },
-
-      // forceLowercase: false,
-
-      // placeholder: 'Programming languages ...'
-
+  $("#teacher").keyup(function(){
+    var teacher_name = $(this).val();
+    $.getJSON(
+      window.teacher,
+      {
+        name: teacher_name
+      },
+      function(data){
+        availableTags = JSON.parse(data);
+      }
+      );
   });
-   // $("#finish-btn").click(function(){
-   //   alert( $('#type-tag').tagEditor('getTags')[0].tags );
-   //  })
-  
+
+  $( "#teacher" ).autocomplete({
+      source: availableTags,
+      select: function( event, ui ) {
+              $( "#teacher" ).val("");
+              $(".unadd").hide();
+              var teacher_tag = $("<span class='add-tag'><span class='teacher-name'></span><img class='delete-tag' src='/icon/admin/delete.png'></span>");
+              teacher_tag.find(".teacher-name").text( ui.item.label);
+              $(".teacher-tag").append(teacher_tag);
+              return false;
+            }
+    });
+
+  $(document).on('mouseover', '.add-tag', function(){
+    $(this).addClass("add-tag-hover").find(".delete-tag").show();
+  });
+
+  $(document).on('mouseout', '.add-tag', function(){
+    $(this).removeClass("add-tag-hover").find(".delete-tag").hide();
+  });
+
+  $(document).on('click', '.delete-tag', function(){
+    $(this).closest(".add-tag").remove();
+    if($(".delete-tag").length === 0){
+      $(".unadd").show();
+    }
+  });
+
+  $("#teacher").keydown(function(ev){
+    var ev = ev || window.event;
+    var code = ev.which;
+    var teacher_input = $(this).val();
+    if(code == 13 && teacher_input != ""){
+      $( "#teacher" ).val("");
+      $(".unadd").hide();
+      var teacher_tag = $("<span class='add-tag'><span class='teacher-name'></span><img class='delete-tag' src='/icon/admin/delete.png'></span>");
+      teacher_tag.find(".teacher-name").text(teacher_input);
+      $(".teacher-tag").append(teacher_tag);
+    }
+  });
+
   var E = window.wangEditor;
   var editor = new E('#edit-area');
   editor.customConfig.uploadImgServer = '/upload' ;
