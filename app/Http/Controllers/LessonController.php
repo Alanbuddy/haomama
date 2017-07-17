@@ -96,7 +96,9 @@ class LessonController extends Controller
             $item->cover = $cover->path;
         }
         $item->save();
-
+        if ($request->json()) {
+            return ['success' => true, 'id' => $item->id];
+        }
         return redirect()->route('lessons.index');
     }
 

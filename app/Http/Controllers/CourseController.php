@@ -79,9 +79,13 @@ class CourseController extends Controller
         $item->fill($request->only([
             'name',
             'description',
+            'category_id',
             'price',
         ]));
         $item->save();
+        $this->updateLessons($request, $item);
+        $this->updateTags($request, $item);
+        $this->updateTeachers($request, $item);
 
         if ($request->file('cover')) {
             $folderPath = public_path('storage/course/' . $item->id);
@@ -283,7 +287,6 @@ class CourseController extends Controller
 
     public function updateLessons(Request $request, Course $course)
     {
-        $students = $course->students()->get();
         $lessons = $request->lessons;
         $arr = explode(',', $lessons);
 //        $arr = array_map('intval', $arr);
@@ -298,6 +301,7 @@ class CourseController extends Controller
         try {
             $changes = $course->lessons()->sync($tmp);
             if ($changes['attached']) {//如果有新课时添加,给所属课程的学员发送站内通知
+                $students = $course->students()->get();
                 foreach ($students as $student) {
                     MessageFacade::send([
                         'to' => $student->id,
@@ -306,6 +310,7 @@ class CourseController extends Controller
                         'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
                         'content' => 'Some Update',
                     ], $student->id);
+                    MessageFacade::sendCourseUpdateReminder($student, $course);
                 }
             }
         } catch (Exception $e) {
@@ -326,8 +331,8 @@ class CourseController extends Controller
 
     public function updateTags(Request $request, Course $course)
     {
-        $lessons = $request->lessons;
-        $arr = explode(',', $lessons);
+        $tags = $request->tags;
+        $arr = explode(',', $tags);
         $arr = array_map('intval', $arr);
         $array = [];
         foreach ($arr as $id) {
@@ -558,5 +563,15 @@ class CourseController extends Controller
             $hasNewest = !$hasAttended;
         }
         return array($tmp, $hasNewest);
+    }
+
+    public function updateTeachers($request, Course $course)
+    {
+        $this->validate($request, [
+            'teachers' => 'required'
+        ]);
+        $arr = explode(',', $request->teachers);
+        $course->teachers()->sync($arr);
+        return ['success' => true];
     }
 }

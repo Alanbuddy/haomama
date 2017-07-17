@@ -14,7 +14,7 @@ class AlterLessonAddColumnDescription extends Migration
     public function up()
     {
         Schema::table('lessons', function ($table) {
-            $table->json('description')->nullable();
+            $table->text('description')->nullable();
         });
 
         Schema::table('course_lesson', function ($table) {

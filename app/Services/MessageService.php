@@ -49,7 +49,7 @@ class MessageService
     //线下课程开课前24小时发送微信模板消息
     public function sendWechatPreClassMessage(User $user, Course $course)
     {
-        Log::info(__FILE__.'sendWechatPreClassMessage');
+        Log::info(__FILE__ . 'sendWechatPreClassMessage');
         $template_id = "YOjEUmaFcJ-27cx82zG6UVz9D23Mvbtv_5NDjhKT-Lw";
         $url = env('APP_URL') . route('courses.show', $course);
         $result = WxApi::accessToken();
@@ -81,7 +81,7 @@ class MessageService
 
 //        dd($result);
             if (json_decode($result['data'])->errcode > 0) {
-                Log::error('error :'.$result['data']);
+                Log::error('error :' . $result['data']);
                 Error::create([
                     'user_id' => 1,
                     'type' => 'wx.send',
@@ -114,6 +114,56 @@ class MessageService
                 ],
                 "remark" => [
                     "value" => "预祝学习愉快！",
+                ]
+            ];
+            $result = WxMessageApi::send($access_token, $user->openid, $template_id, $url, $data);
+//        dd($result);
+            if (json_decode($result['data'])->errcode > 0) {
+                Error::create([
+                    'user_id' => 1,
+                    'type' => 'wx.send',
+                    'message' => 'send message failed',
+                    'data' => json_encode($result),
+                    'context' => json_encode(compact('access_token', 'template_id', 'url'))
+                ]);
+                throw new WxException(json_decode($result['data'])->errmsg);
+            }
+        } else {
+            Error::create([
+                'type' => 'wx.access_token',
+                'message' => 'access_token',
+                'data' => $result['message'],
+            ]);
+        }
+    }
+
+    public function sendCourseUpdateReminder(User $user,Course $course)
+    {
+        $template_id = 'mn7iRfoNxcYRhzA3mPBLQw0ynAWyjluZVvqir2H9uKo';
+        $url = env('APP_URL') . route('courses.show', $course);
+        $result = WxApi::accessToken();
+        if ($result['success']) {
+            $access_token = $result['data']->access_token;
+            $data = [
+                "first" => [
+                    "value" => '课程' . $course->name . "已更新！快来学习吧",
+                    "color" => "#f21212"
+                ],
+                "keyword1" => [
+                    "value" => $course->name,
+                    "color" => "#173177"
+                ],
+                "keyword2" => [
+                    "value" => '已更新',
+                    "color" => "#173177"
+                ],
+                "keyword3" => [
+                    "value" => "上课中",
+                    "color" => "#173177"
+                ],
+                "remark" => [
+                    "value" => "预祝学习愉快！",
+                    "color" => "#173177"
                 ]
             ];
             $result = WxMessageApi::send($access_token, $user->openid, $template_id, $url, $data);
