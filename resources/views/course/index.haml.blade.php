@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/course-index.css') }}">
-<link rel="stylesheet" href="/css/swiper-3.4.2.min.css">
+<link rel="stylesheet" href="{{mix('/css/course-index.css') }}">
+<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
 :javascript
   window.course_item="#{route('courses.index')}"
   window.course_search="#{route('courses.search')}"
@@ -10,27 +10,27 @@
 @section('header')
 .head-div
   .search-div.f12
-    %img.search{src: '/icon/search.png'}
+    %img.search{src: 'icon/search.png'}
     %input.search-input.color5{type: "text", placeholder: "搜索课程名/老师名", readonly: "readonly"}
   .nav-div
     %ul.nav.f14
       // %li 新课速递
       // %li 健康教育
       // %li 心理教育
-      // %li 自我成长   
+      // %li 自我成长
       - foreach ($categories as $category )
         %li= $category['name']
-        
+
 @endsection
 @section('content')
 .swiper-container-banner
   .swiper-wrapper
     .swiper-slide
-      %img.img-size.img_1{src: '/icon/banner.png'}
+      %img.img-size.img_1{src: 'icon/banner.png'}
     .swiper-slide
-      %img.img-size.img_1{src: '/icon/banner.png'}
+      %img.img-size.img_1{src: 'icon/banner.png'}
     .swiper-slide
-      %img.img-size.img_1{src: '/icon/banner.png'}
+      %img.img-size.img_1{src: 'icon/banner.png'}
   .swiper-pagination
 // .main-div
 .swiper-container
@@ -48,8 +48,8 @@
             - foreach ($data[$i]['items'] as $item)
               .course-item{'data-id' => $item['id']}
                 .course-icon-div
-                  %img.course-recommend{src: "/icon/recommend.png"}
-                  %img.course-icon{src: $item['cover'] ? $item['cover'] : "/icon/example.png"}
+                  %img.course-recommend{src: "icon/recommend.png"}
+                  %img.course-icon{src: $item['cover'] ? $item['cover'] : "icon/example.png"}
                 .word-div
                   .course-row-div.clearfix
                     %span.f12.category-class= $item['category']['name']
@@ -71,8 +71,8 @@
             - foreach ($data[$i]['itemsOrderByUserCount'] as $itemOrderByUserCount)
               .course-item{'data-id' => $itemOrderByUserCount['id']}
                 .course-icon-div
-                  %img.course-recommend{src: "/icon/recommend.png"}
-                  %img.course-icon{src: $itemOrderByUserCount['cover'] ? $itemOrderByUserCount['cover'] : "/icon/example.png"}
+                  %img.course-recommend{src: "icon/recommend.png"}
+                  %img.course-icon{src: $itemOrderByUserCount['cover'] ? $itemOrderByUserCount['cover'] : "icon/example.png"}
                 .word-div
                   .course-row-div.clearfix
                     %span.category-class.f12= $itemOrderByUserCount['category']['name']
@@ -94,8 +94,8 @@
             - foreach ($data[$i]['itemsOrderByCommentRating'] as $itemOrderByCommentRating)
               .course-item{'data-id' => $itemOrderByCommentRating['id']}
                 .course-icon-div
-                  %img.course-recommend{src: "/icon/recommend.png"}
-                  %img.course-icon{src: $itemOrderByCommentRating['cover'] ? $itemOrderByCommentRating['cover'] : "/icon/example.png"}
+                  %img.course-recommend{src: "icon/recommend.png"}
+                  %img.course-icon{src: $itemOrderByCommentRating['cover'] ? $itemOrderByCommentRating['cover'] : "icon/example.png"}
                 .word-div
                   .course-row-div.clearfix
                     %span.category-class.f12= $itemOrderByCommentRating['category']['name']
@@ -113,25 +113,25 @@
                       %span.participate= $itemOrderByCommentRating['users_count']."人已学"
                       %span .
                       %span= $itemOrderByCommentRating['comments_count'] ."条评论"
-%img.upper{src: "/icon/top.png"}
+%img.upper{src: "icon/top.png"}
 
 @endsection
 
 @section('foot-div')
 .foot
   .foot-item-div#home
-    %img.home{src: "/icon/home_selected.png"}
+    %img.home{src: "icon/home_selected.png"}
     %p.f10.color8.fb 首页
   .foot-item-div#mine
-    %img.mine{src: "/icon/mine_normal.png"}
+    %img.mine{src: "icon/mine_normal.png"}
     %p.f10.color5 我的
 @endsection
 
 @section('script')
-<script src= "/js/jquery.event.drag.js"></script>
-<script src= "/js/jquery.touchSlider.js"></script>
-<script src= "/js/banner.js"></script>
+<script src= "js/jquery.event.drag.js"></script>
+<script src= "js/jquery.touchSlider.js"></script>
+<script src= "js/banner.js"></script>
 <script src= "{{mix('/js/course-index.js')}}"></script>
-<script src= "/js/swiper-3.4.2.jquery.min.js"></script>
+<script src= "js/swiper-3.4.2.jquery.min.js"></script>
 @endsection
 

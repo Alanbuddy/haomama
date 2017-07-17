@@ -39,7 +39,11 @@ class UserTableSeeder extends Seeder
                     'major' => 'popular disease',
                     'award' => 'blab blab',
                     'book' => '<<asa>>',
-                    'introduction' => str_random(20)
+                    'basicIntroduction' => str_random(20),
+                    'introduction' => str_random(20),
+                    'remark' => str_random(10),
+                    'telephone' => rand(100000,999999),
+                    'qq' => rand(10000000,99999999),
                 ]),
                 'baby' => json_encode([[
                     'name' => str_random(3),

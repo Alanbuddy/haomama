@@ -9,6 +9,7 @@
 namespace app\Http\ViewComposers;
 
 use App\Http\Wechat\JSSDK;
+use Illuminate\Support\Facades\Request;
 use Illuminate\View\View;
 
 class WxComposer
@@ -24,5 +25,7 @@ class WxComposer
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
         $view->with('signPackage', $signPackage);
+        $ip = Request::getClientIp();
+        $view->with('ip', $ip);
     }
 }

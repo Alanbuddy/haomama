@@ -112,7 +112,7 @@
             %p 音频课时
 @section('script')
 <script src= "{{mix('/js/admin_lesson_index.js')}}"></script>
-<script src= "/js/admin-add-lesson.js"></script>
+<script src= "js/admin-add-lesson.js"></script>
 
 
 @endsection

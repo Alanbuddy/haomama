@@ -15,7 +15,7 @@ trait IO
 {
 
     //移动上传的文件到指定位置并保存文件信息到数据库
-    public function moveAndStore(Request $request, $key, $folderPath, $store = true)
+    public function moveAndStore(Request $request, $key, $folderPath='', $store = true)
     {
         $folderPath = $folderPath ?: public_path('storage');
         $file = $request->file($key);

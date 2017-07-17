@@ -90,6 +90,9 @@ class UserController extends Controller
             ]));
         }
         $item->save();
+        if ($request->wantsJson()) {
+            return ['success' => true];
+        }
         return redirect()->route('users.index');
     }
 
@@ -246,5 +249,36 @@ class UserController extends Controller
     {
         $items = User::paginate();
         return view('admin.client.show', compact('items'));
+    }
+
+    //后台人员管理-关闭
+    public function disable(Request $request, User $user)
+    {
+        $user->status = 'disabled';
+        $user->save();
+        return ['success' => true];
+    }
+
+    //后台人员管理-开通
+    public function enable(Request $request, User $user)
+    {
+        $user->status = 'enabled';
+        $user->save();
+        return ['success' => true];
+    }
+
+    //搜索讲师
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+        $name = $request->name;
+        $role = Role::where('name', 'teacher')->first();
+        $items = $role->users()
+            ->where('name', 'like', $name)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return $items;
     }
 }
