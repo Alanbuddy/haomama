@@ -138,12 +138,14 @@ $(document).ready(function(){
       {
         name: lesson_name,
         video_id: lesson_video_id,
-        description: lesson_desc
+        description: lesson_desc,
+        _token: window.token
       },
       function(data){
         if(data.success){
-          console.log(data);
-          // location.href = 
+          window.lesson_id = data.id;
+          console.log(window.lesson_id);
+          location.href = window.video_show;
         }
       }
       );

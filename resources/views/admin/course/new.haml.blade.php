@@ -107,27 +107,6 @@
         .checkbox
           %label
             %input{type: "checkbox", name: "lesson-check", value: "第三课时"} 第三课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check"} 第一课时
         
         .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
         .select-page 

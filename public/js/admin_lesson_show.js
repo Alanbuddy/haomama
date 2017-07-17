@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 82);
+/******/ 	return __webpack_require__(__webpack_require__.s = 85);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,20 +10329,10 @@ return jQuery;
 
 /***/ }),
 
-/***/ 12:
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var E, editor;
-  E = window.wangEditor;
-  editor = new E('#edit-box');
-  editor.customConfig.uploadImgServer = '/upload';
-  editor.customConfig.showLinkImg = false;
-  editor.customConfig.menus = ['head', 'image'];
-  editor.customConfig.uploadHeaders = {
-    'Accept': 'HTML'
-  };
-  editor.create();
   return $("#edit-btn").click(function() {
     $(this).toggle();
     $("#finish-btn").toggle();
@@ -10355,10 +10345,10 @@ return jQuery;
 
 /***/ }),
 
-/***/ 82:
+/***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(13);
 
 
 /***/ })

@@ -153,8 +153,22 @@ $(document).ready(function(){
     $(".teacher-name").each(function(){
       teacher_arr.push($(this).text());
     });
-    var course_img = $("#imghead").attr("src");
-    console.log(course_img);
+
+    //通过formData对象append方法来添加图片
+    var formData = new formData();
+    formData.append('file', $("#previewImg")[0].files[0]);
+    $.ajax({
+      url: window,
+      type: 'post',
+      data: formData,
+      cache: false,
+      processData: false,
+      contentType: false
+      }).done(function(res){
+
+      }).fail(function(res){
+
+      });
 
   });
 });
