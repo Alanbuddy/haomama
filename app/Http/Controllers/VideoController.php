@@ -133,9 +133,9 @@ class VideoController extends Controller
             'video_id' => 'required',
         ]);
         try {
-            $ret = $this->merge($request);
+            $video = Video::find($request->video_id);
+            $ret = $this->merge($request,$video->description);
             if ($ret['success']) {
-                $video = Video::find($request->video_id);
                 $video->path = $ret['path'];
                 $video->save();
 //        $video->fill($this->getFileBaseInfo($file));

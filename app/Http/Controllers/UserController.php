@@ -82,9 +82,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $item = new User();
-        $item->fill($request->only([
-            'name',
-        ]));
+        if ('teacher' == $request->get('type')) {
+            $item->fill($request->only([
+                'name',
+                'email',
+                'phone',
+            ]));
+        }
         $item->save();
         return redirect()->route('users.index');
     }

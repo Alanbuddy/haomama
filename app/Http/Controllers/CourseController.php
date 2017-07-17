@@ -305,7 +305,7 @@ class CourseController extends Controller
                         'object_type' => 'course',
                         'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
                         'content' => 'Some Update',
-                    ],$student->id);
+                    ], $student->id);
                 }
             }
         } catch (Exception $e) {
