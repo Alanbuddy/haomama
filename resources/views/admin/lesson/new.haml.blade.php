@@ -58,10 +58,10 @@
 
 @section('script')
 <script src= "{{mix('/js/admin-lesson-new.js')}}"></script>
-<script src="/js/plugin/wangEditor.min.js"></script>
-<script src="/js/plugin/jquery-ui.min.js"></script>
-<script src="/js/plugin/webuploader.js"></script>
+<script src="js/plugin/wangEditor.min.js"></script>
+<script src="js/plugin/jquery-ui.min.js"></script>
+<script src="js/plugin/webuploader.js"></script>
 
-<script src="/js/fileupload.js"></script>
+<script src="js/fileupload.js"></script>
 
 @endsection

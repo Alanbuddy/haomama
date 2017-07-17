@@ -596,7 +596,8 @@ if (! function_exists('mix')) {
             );
         }
 
-        return new HtmlString($manifestDirectory.$manifest[$path]);
+        $prefix=env('APP_URL')=='http://baby.fumubidu.com.cn'?'/haomama':'';
+        return new HtmlString($prefix.$manifestDirectory.$manifest[$path]);
     }
 }
 

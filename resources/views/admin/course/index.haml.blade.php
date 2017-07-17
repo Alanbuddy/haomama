@@ -158,7 +158,7 @@
             %p 线下课程
 @section('script')
 <script src= "{{mix('/js/admin_c_index.js')}}"></script>
-<script src= "/js/admin-add-course.js"></script>
+<script src= "js/admin-add-course.js"></script>
 
 
 @endsection

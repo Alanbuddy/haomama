@@ -1,6 +1,7 @@
 !!!
 %html
   %head
+    %base{:href => $ip=='127.0.0.1'?"/":"/haomama/"}
     %meta{:charset => "utf-8"}
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %meta{:content => "width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0", :name => "viewport"}
@@ -22,36 +23,36 @@
   %body
     .wrapper
       .layout-left
-        %img.logo2{src: "/icon/admin/logo2.png"}
+        %img.logo2{src: "icon/admin/logo2.png"}
         .avatar-div.f16
-          %img.layout-avatar{ src: empty($user['avatar']) ?  "/icon/avatar.png" : $user['avatar'] }
+          %img.layout-avatar{ src: empty($user['avatar']) ?  "icon/avatar.png" : $user['avatar'] }
           %p.layout-name= empty($user['name']) ? "欢迎您" : $user['name']
         .main
           .sidebar
             %ul
               %li
                 %a{href: route('courses.index')}
-                  %img.mini-icon{src: "/icon/admin/1class.png"}
+                  %img.mini-icon{src: "icon/admin/1class.png"}
                   %span.f18.sidebar-title 课程管理
               %li
                 %a{:href => route("lessons.index")}
-                  %img.mini-icon{src: "/icon/admin/2single.png"}
+                  %img.mini-icon{src: "icon/admin/2single.png"}
                   %span.f18.sidebar-title 课时管理
               %li.teacher_li
                 %a{:href => route('users.index')."?type=teacher"}
-                  %img.mini-icon{src: "/icon/admin/3teacher.png"}
+                  %img.mini-icon{src: "icon/admin/3teacher.png"}
                   %span.f18.sidebar-title 讲师管理
               %li
                 %a{:href => route('settings.index')}
-                  %img.mini-icon{src: "/icon/admin/4announcement.png"}
+                  %img.mini-icon{src: "icon/admin/4announcement.png"}
                   %span.f18.sidebar-title 宣传管理
               %li
                 %a{:href => route('users.index')}
-                  %img.mini-icon{src: "/icon/admin/5user.png"}
+                  %img.mini-icon{src: "icon/admin/5user.png"}
                   %span.f18.sidebar-title 用户管理
               %li
                 %a{:href => "#"}
-                  %img.mini-icon{src: "/icon/admin/6statistic.png"}
+                  %img.mini-icon{src: "icon/admin/6statistic.png"}
                   %span.f18.sidebar-title 统计数据
       @yield('content')
     <script src="/js/jquery-3.2.1.min.js"></script>
@@ -59,8 +60,7 @@
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
     <script src = "/js/mobile-notification.js"></script>
-
     <script src= "{{mix('/js/admin-layout.js')}}"></script>
 
-    
+
     @yield('script')

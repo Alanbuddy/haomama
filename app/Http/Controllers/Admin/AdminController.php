@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Util\IO;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    use IO;
+
     /**
      * Display a listing of the resource.
      *
@@ -92,19 +95,18 @@ class AdminController extends Controller
     public function profile(Request $request)
     {
         if ($request->isMethod('POST')) {
-
+            $user = auth()->user();
             //修改头像
-            if ($request->get('avatar')) {
-                $folderPath = public_path('storage/admin/');
-                $this->moveAndStore($request, 'avatar', $folderPath);
+            if ($request->hasFile('avatar')) {
+                $avatar = $this->moveAndStore($request, 'avatar');
+                $user->$avatar = $avatar;
             }
 
             //修改名字
             if ($request->get('name')) {
-                $user = auth()->user();
                 $user->name = $request->get('name');
-                $user->save();
             }
+            $user->save();
         }
         return view('admin.user.profile');
     }

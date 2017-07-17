@@ -90,7 +90,10 @@ Route::group([
 
     Route::any('/profile', 'UserController@profile')->name('user.profile');
     Route::get('/admin/users/{user}', 'UserController@showAdmin')->name('admin.user.show');
+    Route::get('/admin/users/{user}/enable', 'UserController@enable')->name('admin.user.enable');
+    Route::get('/admin/users/{user}/disable', 'UserController@disable')->name('admin.user.disable');
     Route::get('/users/{user}/vote', 'UserController@vote')->name('users.vote');
+    Route::get('/users/search', 'UserController@search')->name('users.search');
     Route::resource('users', 'UserController');
 
     Route::resource('roles', 'RoleController');
@@ -132,4 +135,3 @@ Route::group([
 Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');
 
 Route::get('/3rd/map/render', 'TestController@renderReverse')->name('api.map.render.reverse');
-

@@ -1,6 +1,6 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(mix('/css/course-index.css')); ?>">
-<link rel="stylesheet" href="/css/swiper-3.4.2.min.css">
+<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
 <script type="text/javascript">
 //<![CDATA[
    window.course_item="<?php echo htmlspecialchars(route('courses.index'),ENT_QUOTES,'UTF-8'); ?>"
@@ -12,7 +12,7 @@
 <?php $__env->startSection('header'); ?>
 <div class="head-div">
   <div class="search-div f12">
-    <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'search'), array('src', ('/icon/search.png'))), 'html5', 'UTF-8'); ?>>
+    <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'search'), array('src', ('icon/search.png'))), 'html5', 'UTF-8'); ?>>
     <input class="search-input color5" type="text" placeholder="搜索课程名/老师名" readonly="readonly">
   </div>
   <div class="nav-div">
@@ -32,13 +32,13 @@
 <div class="swiper-container-banner">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', ('img-size' . ' ' . 'img_1')), array('src', ('/icon/banner.png'))), 'html5', 'UTF-8'); ?>>
+      <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', ('img-size' . ' ' . 'img_1')), array('src', ('icon/banner.png'))), 'html5', 'UTF-8'); ?>>
     </div>
     <div class="swiper-slide">
-      <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', ('img-size' . ' ' . 'img_1')), array('src', ('/icon/banner.png'))), 'html5', 'UTF-8'); ?>>
+      <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', ('img-size' . ' ' . 'img_1')), array('src', ('icon/banner.png'))), 'html5', 'UTF-8'); ?>>
     </div>
     <div class="swiper-slide">
-      <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', ('img-size' . ' ' . 'img_1')), array('src', ('/icon/banner.png'))), 'html5', 'UTF-8'); ?>>
+      <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', ('img-size' . ' ' . 'img_1')), array('src', ('icon/banner.png'))), 'html5', 'UTF-8'); ?>>
     </div>
   </div>
   <div class="swiper-pagination"></div>
@@ -61,8 +61,8 @@
             <?php foreach ($data[$i]['items'] as $item) { ?>
               <div <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-item'), array(('data-id'), ($item['id']))), 'html5', 'UTF-8'); ?>>
                 <div class="course-icon-div">
-                  <img class="course-recommend" src="/icon/recommend.png">
-                  <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-icon'), array('src', ($item['cover'] ? $item['cover'] : "/icon/example.png"))), 'html5', 'UTF-8'); ?>>
+                  <img class="course-recommend" src="icon/recommend.png">
+                  <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-icon'), array('src', ($item['cover'] ? $item['cover'] : "icon/example.png"))), 'html5', 'UTF-8'); ?>>
                 </div>
                 <div class="word-div">
                   <div class="course-row-div clearfix">
@@ -94,8 +94,8 @@
             <?php foreach ($data[$i]['itemsOrderByUserCount'] as $itemOrderByUserCount) { ?>
               <div <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-item'), array(('data-id'), ($itemOrderByUserCount['id']))), 'html5', 'UTF-8'); ?>>
                 <div class="course-icon-div">
-                  <img class="course-recommend" src="/icon/recommend.png">
-                  <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-icon'), array('src', ($itemOrderByUserCount['cover'] ? $itemOrderByUserCount['cover'] : "/icon/example.png"))), 'html5', 'UTF-8'); ?>>
+                  <img class="course-recommend" src="icon/recommend.png">
+                  <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-icon'), array('src', ($itemOrderByUserCount['cover'] ? $itemOrderByUserCount['cover'] : "icon/example.png"))), 'html5', 'UTF-8'); ?>>
                 </div>
                 <div class="word-div">
                   <div class="course-row-div clearfix">
@@ -127,8 +127,8 @@
             <?php foreach ($data[$i]['itemsOrderByCommentRating'] as $itemOrderByCommentRating) { ?>
               <div <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-item'), array(('data-id'), ($itemOrderByCommentRating['id']))), 'html5', 'UTF-8'); ?>>
                 <div class="course-icon-div">
-                  <img class="course-recommend" src="/icon/recommend.png">
-                  <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-icon'), array('src', ($itemOrderByCommentRating['cover'] ? $itemOrderByCommentRating['cover'] : "/icon/example.png"))), 'html5', 'UTF-8'); ?>>
+                  <img class="course-recommend" src="icon/recommend.png">
+                  <img <?php echo MtHaml\Runtime::renderAttributes(array(array('class', 'course-icon'), array('src', ($itemOrderByCommentRating['cover'] ? $itemOrderByCommentRating['cover'] : "icon/example.png"))), 'html5', 'UTF-8'); ?>>
                 </div>
                 <div class="word-div">
                   <div class="course-row-div clearfix">
@@ -161,26 +161,26 @@
     <?php } ?>
   </div>
 </div>
-<img class="upper" src="/icon/top.png">
+<img class="upper" src="icon/top.png">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('foot-div'); ?>
 <div class="foot">
   <div class="foot-item-div" id="home">
-    <img class="home" src="/icon/home_selected.png">
+    <img class="home" src="icon/home_selected.png">
     <p class="f10 color8 fb">首页</p>
   </div>
   <div class="foot-item-div" id="mine">
-    <img class="mine" src="/icon/mine_normal.png">
+    <img class="mine" src="icon/mine_normal.png">
     <p class="f10 color5">我的</p>
   </div>
 </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-<script src= "/js/jquery.event.drag.js"></script>
-<script src= "/js/jquery.touchSlider.js"></script>
-<script src= "/js/banner.js"></script>
+<script src= "js/jquery.event.drag.js"></script>
+<script src= "js/jquery.touchSlider.js"></script>
+<script src= "js/banner.js"></script>
 <script src= "<?php echo e(mix('/js/course-index.js')); ?>"></script>
-<script src= "/js/swiper-3.4.2.jquery.min.js"></script>
+<script src= "js/swiper-3.4.2.jquery.min.js"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layout.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
