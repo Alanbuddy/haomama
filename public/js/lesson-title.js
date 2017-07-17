@@ -5,46 +5,25 @@ $(document).ready(function(){
 
   $('#type-tag').tagEditor();
 
-  var availableTags = [
-       "ActionScript",
-       "AppleScript",
-       "Asp",
-       "BASIC",
-       "C",
-       "C++",
-       "Clojure",
-       "COBOL",
-       "ColdFusion",
-       "Erlang",
-       "Fortran",
-       "Groovy",
-       "Haskell",
-       "Java",
-       "JavaScript",
-       "Lisp",
-       "Perl",
-       "PHP",
-       "Python",
-       "Ruby",
-       "Scala",
-       "Scheme"
-     ];
-
-  $("#teacher").keyup(function(){
-    var teacher_name = $(this).val();
-    $.getJSON(
-      window.teacher,
-      {
-        name: teacher_name
-      },
-      function(data){
-        availableTags = JSON.parse(data);
-      }
-      );
-  });
-
   $( "#teacher" ).autocomplete({
-      source: availableTags,
+      source: function(request, response){
+        $.ajax({
+          url: window.add_teacher,
+          type: 'get',
+          data: {
+            name: request.term
+          },
+          success: function( data ) {  
+            response( $.map( data.data, function( item ) {  
+                return {
+                    value: item.name
+                };  
+            }));  
+          }  
+        });
+      
+      },
+      minLength: 2,
       select: function( event, ui ) {
               $( "#teacher" ).val("");
               $(".unadd").hide();
@@ -164,15 +143,18 @@ $(document).ready(function(){
     var price = $("#course-price").val().trim();
     var pay_price = $("#pay-price").val().trim();
     var tags = $('#type-tag').tagEditor('getTags')[0].tags;
-    var teacher = $('#teacher-tag').tagEditor('getTags')[0].tags;
     var desc = editor.txt.html();
     var lesson_list = [];
     $(".example li").each(function(){
       lesson_list.push($(this).text());
     });
     var lesson_title = editor_lesson.txt.html();
-
-    console.log(teacher);
+    var teacher_arr = [];
+    $(".teacher-name").each(function(){
+      teacher_arr.push($(this).text());
+    });
+    var course_img = $("#imghead").attr("src");
+    console.log(course_img);
 
   });
 });

@@ -7,7 +7,8 @@
 :javascript
   window.course_index = "#{route('courses.index')}"
   window.token = "#{csrf_token()}"
-  window.teacher = "#{route('users.search')}"
+  window.add_teacher = "#{route('users.search')}"
+  window.course = "#{route('courses.store')}"
 @endsection
 
 @section('content')
