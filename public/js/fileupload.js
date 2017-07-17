@@ -115,10 +115,6 @@ $(document).ready(function(){
     $(this).closest(".item").remove();   //从上传列表dom中删除  
   }); 
 
-  $("#finish-btn").click(function(){
-
-  });
-
   var E = window.wangEditor;
   var editor = new E('#edit-box');
   
@@ -132,5 +128,25 @@ $(document).ready(function(){
     'Accept' : 'HTML'
   };
   editor.create();
+
+  $("#finish-btn").click(function(){
+    var lesson_name = $("#input-caption").val().trim();
+    var lesson_video_id = $(".video-id").text();
+    var lesson_desc = editor.txt.html();
+    $.postJSON(
+      window.lesson_store + "?type=video",
+      {
+        name: lesson_name,
+        video_id: lesson_video_id,
+        description: lesson_desc
+      },
+      function(data){
+        if(data.success){
+          console.log(data);
+          // location.href = 
+        }
+      }
+      );
+  });
 
 });

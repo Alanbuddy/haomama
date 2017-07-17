@@ -23,7 +23,7 @@ $(document).ready(function(){
         });
       
       },
-      minLength: 2,
+      // minLength: 2,    //搜索字符的长度
       select: function( event, ui ) {
               $( "#teacher" ).val("");
               $(".unadd").hide();
