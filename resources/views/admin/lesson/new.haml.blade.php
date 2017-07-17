@@ -10,6 +10,7 @@
     window.token = "#{csrf_token()}"
     window.merge = "#{route('videos.merge')}"
     window.init = "#{route('videos.upload.init')}"
+    
 @endsection
 
 @section('content')

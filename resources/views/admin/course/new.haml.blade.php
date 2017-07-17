@@ -1,11 +1,13 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_course_new.css') }}">
+<link href="/css/plugin/jquery-ui.css" rel="stylesheet" type="text/css">
 <link href="/css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
 
 :javascript
   window.course_index = "#{route('courses.index')}"
   window.token = "#{csrf_token()}"
+  window.teacher = "#{route('users.search')}"
 @endsection
 
 @section('content')
@@ -64,14 +66,10 @@
                   %span 标签二
                   %span 标签十分大
               .controls.controls-row.no-mb
-                %label.input-caption 授课老师:
-                %span 未添加
+                %label.input-caption.teacher-tag 授课老师:
+                %span.unadd 未添加
               .teacher-div
-                #teacher-tag
-                .hot-tag-hide
-                  %p.tag-word 热词一 
-                  %p.tag-word 热词一 
-                  %p.tag-word 热词一 
+                %input#teacher{type: "text"}
 
               .course-introduce
                 %span.introduce 课程介绍:
