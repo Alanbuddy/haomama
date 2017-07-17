@@ -10,6 +10,7 @@
       @yield('title') VOD
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "/css/mobile-notification.css", :rel => "stylesheet"}
+    %link{:href => "/css/notification.css", :rel => "stylesheet" }
     %link{:href => "/css/admin-layout.css", :rel => "stylesheet"}
 
     @yield('css')
@@ -57,6 +58,8 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
+    <script src = "/js/mobile-notification.js"></script>
+
     <script src= "{{mix('/js/admin-layout.js')}}"></script>
 
     

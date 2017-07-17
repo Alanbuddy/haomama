@@ -28,7 +28,6 @@ $(document).ready(function(){
     };
 
   var name = null;
-
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
         '<img class="edit-img-item">' +
@@ -67,6 +66,7 @@ $(document).ready(function(){
 
   uploader.on( 'uploadSuccess', function( file ) {
     $( '#'+file.id ).find('p.state').text('已上传');
+    showMsg("上传成功","center");
     // var video_file = uploader.getFiles();
     // var video_size = video_file[0].size;
     // var chunksize = 0.5*1024*1024;
