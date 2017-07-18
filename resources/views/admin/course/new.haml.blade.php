@@ -9,6 +9,7 @@
   window.token = "#{csrf_token()}"
   window.add_teacher = "#{route('users.search')}"
   window.course = "#{route('courses.store')}"
+  window.tag_store = "#{route('terms.store')}"
 @endsection
 
 @section('content')
@@ -44,7 +45,7 @@
                   %select.form-control.input-width#course-type
                     %option 请选择类型
                     - foreach ($categories as $category )
-                      %option{value: $category['id']}= $category['name']
+                      %option{value: $category->id}= $category->name
                    
                   %label.input-caption 课程节数:
                   %input.form-control.input-width#course-length{:type => "text"}

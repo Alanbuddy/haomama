@@ -3,7 +3,29 @@ $(document).ready(function(){
     $("#lessonModal").modal("show");
   });
 
-  $('#type-tag').tagEditor();
+  var tag_item = $("#type-tag").tagEditor('getTags')[0].tags;
+
+  $('#type-tag').tagEditor({
+
+    beforeTagSave: function(){
+      $.postJSON(
+        window.tag_store,
+        {
+          name: tag_item,
+          type: category
+        },
+        function(data){
+          console.log(data);
+        }
+        );
+    }
+  });
+
+  $(".hot-tag-div span").each(function(){
+    $(this).click(function(){
+      $('#type-tag').tagEditor('addTag', $(this).text());
+    });
+  });
 
   $( "#teacher" ).autocomplete({
       source: function(request, response){
@@ -134,11 +156,6 @@ $(document).ready(function(){
     $("#shelfModal").modal("hide");
   });
   
-  $(".hot-tag-div span").each(function(){
-    $(this).click(function(){
-      $('#type-tag').tagEditor('addTag', $(this).text());
-    });
-  });
 
   $(document).on('click',"#finish-btn", function(){
     var name = $("#course-name").val().trim();
