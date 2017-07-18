@@ -43,9 +43,9 @@
                   %label.input-caption 课程类型:
                   %select.form-control.input-width#course-type
                     %option 请选择类型
-                    %option{value: "类型一"} 类型一
-                    %option{value: "类型二"} 类型二
-                    %option{value: "类型三"} 类型三
+                    - foreach ($categories as $category )
+                      %option{value: $category[category_id]}= $category[category_name]
+                   
                   %label.input-caption 课程节数:
                   %input.form-control.input-width#course-length{:type => "text"}
                 .controls.controls-row
