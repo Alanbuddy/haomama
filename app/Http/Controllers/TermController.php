@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\Search;
 use App\Models\Term;
 use Illuminate\Http\Request;
 
@@ -51,6 +50,9 @@ class TermController extends Controller
             'type',
         ]));
         $item->save();
+        if ($request->isJson()) {
+            return ['success' => true, 'data' => $item];
+        }
         return redirect()->route('terms.index');
     }
 
