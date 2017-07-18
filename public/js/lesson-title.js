@@ -29,7 +29,7 @@ $(document).ready(function(){
       select: function( event, ui ) {
               $( "#teacher" ).val("");
               $(".unadd").hide();
-              var teacher_tag = $("<span class='add-tag'><span class='teacher-name'></span><span class='teacher-id'></span><img class='delete-tag' src='/icon/admin/delete.png'></span>");
+              var teacher_tag = $("<span class='add-tag'><span class='teacher-name'></span><span class='teacher-id'></span><img class='delete-tag' src='icon/admin/delete.png'></span>");
               teacher_tag.find(".teacher-name").text( ui.item.label);
               teacher_tag.find(".teacher-id").text( ui.item.object_id);
               $(".teacher-tag").append(teacher_tag);
@@ -59,7 +59,7 @@ $(document).ready(function(){
     if(code == 13 && teacher_input != ""){
       $( "#teacher" ).val("");
       $(".unadd").hide();
-      var teacher_tag = $("<span class='add-tag'><span class='teacher-name'><span class='teacher-id'></span></span><img class='delete-tag' src='/icon/admin/delete.png'></span>");
+      var teacher_tag = $("<span class='add-tag'><span class='teacher-name'><span class='teacher-id'></span></span><img class='delete-tag' src='icon/admin/delete.png'></span>");
       teacher_tag.find(".teacher-name").text(teacher_input);
 
       $(".teacher-tag").append(teacher_tag);
@@ -68,7 +68,7 @@ $(document).ready(function(){
 
   var E = window.wangEditor;
   var editor = new E('#edit-area');
-  editor.customConfig.uploadImgServer = '/upload' ;
+  editor.customConfig.uploadImgServer = window.wangeditor;
   editor.customConfig.showLinkImg = false;
   editor.customConfig.menus = [
         'head',
@@ -82,7 +82,7 @@ $(document).ready(function(){
   // E = window.wangEditor;
   var editor_lesson = new E('#title-area');
 
-  editor_lesson.customConfig.uploadImgServer = '/upload' ;
+  editor_lesson.customConfig.uploadImgServer = window.wangeditor;
   editor_lesson.customConfig.showLinkImg = false;
   editor_lesson.customConfig.menus = [
         'head'
