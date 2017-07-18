@@ -570,8 +570,15 @@ class CourseController extends Controller
         $this->validate($request, [
             'teachers' => 'required'
         ]);
+        //TODO
         $arr = explode(',', $request->teachers);
-        $course->teachers()->sync($arr);
-        return ['success' => true];
+        $tmp = [];
+        foreach ($arr as $id) {
+            $tmp[$id] = [
+                'user_type' => 'teacher',
+                'type'=>'teach'
+            ];
+        }
+        $course->teachers()->sync($tmp);
     }
 }
