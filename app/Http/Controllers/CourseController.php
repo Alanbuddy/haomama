@@ -194,7 +194,7 @@ class CourseController extends Controller
 
         $teachers = $course->teachers()->get();
 
-        return view('admin.course.show',//'admin.course.show',
+        return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
                 'hasFavorited',//是否已经收藏课程
@@ -207,6 +207,17 @@ class CourseController extends Controller
                 'teachers'//老师信息
             )
         );
+    }
+
+    //后台课程详情页面
+    public function adminShow(Request $request,Course $course)
+    {
+        $teachers = $course->teachers()->get();
+        $lessons = $course->lessons()
+            ->withPivot('created_at')
+            ->orderBy('no', 'desc')
+            ->get();
+        return view('admin.course.show',compact('course','teachers','lessons'));
     }
 
     /**

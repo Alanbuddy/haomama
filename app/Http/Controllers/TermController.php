@@ -44,14 +44,14 @@ class TermController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['name'=>'required','type'=>'required']);
+        $this->validate($request, ['name' => 'required', 'type' => 'required']);
         $item = new Term();
         $item->fill($request->only([
             'name',
             'type',
         ]));
         $item->save();
-        if ($request->isJson()) {
+        if ($request->ajax()) {
             return ['success' => true, 'data' => $item];
         }
         return redirect()->route('terms.index');
@@ -109,9 +109,12 @@ class TermController extends Controller
      * @param  \App\Models\Term $term
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Term $term)
+    public function destroy(Request $request, Term $term)
     {
         $term->delete();
+        if ($request->ajax()) {
+            return ['success' => true];
+        }
         return redirect()->route('terms.index');
     }
 }
