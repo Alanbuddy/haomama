@@ -44,6 +44,7 @@ class TermController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,['name'=>'required','type'=>'required']);
         $item = new Term();
         $item->fill($request->only([
             'name',
