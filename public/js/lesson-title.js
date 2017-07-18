@@ -208,6 +208,7 @@ $(document).ready(function(){
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
     });
+    var path = $(".cover-path").text();
     $.postJSON(
       window.course_store,
       {
@@ -220,7 +221,7 @@ $(document).ready(function(){
         teachers: teacher_arr,
         description: desc,
         lessons: lesson_list,
-        cover: id,
+        cover: path,
         _token: window.token
       },
       function(data){

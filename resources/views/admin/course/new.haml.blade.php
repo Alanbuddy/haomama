@@ -58,7 +58,7 @@
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
                 %img.edit-photo#imghead{src: "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
-              %span.cover-path
+              %span.cover-path{style: "display:none;"}
                 
             .controls-div.font-color3.f14
               .controls.controls-row
