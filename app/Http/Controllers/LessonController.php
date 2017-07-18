@@ -86,10 +86,8 @@ class LessonController extends Controller
             'video_id',
             'begin',
             'end',
+            'description',
         ]));
-//        $item->teacher_id = auth()->user()->id;
-        $item->save();
-
         if ($request->file('cover')) {
             $folderPath = public_path('storage/lesson/' . $item->id);
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
@@ -126,6 +124,13 @@ class LessonController extends Controller
             'lesson',
             'comments'
         ));
+    }
+
+    //后台课时详情管理页
+    public function adminShow(Request $request, Lesson $lesson)
+    {
+        $type = $request->get('type', 'video');
+        return view('video' == $type ? 'admin.lesson.show' : 'admin.lesson.audio_show');
     }
 
     //课程下的某一个课时详情
@@ -177,12 +182,6 @@ class LessonController extends Controller
             'latestComments',
             'video'
         ));
-    }
-
-    //后台课时详情管理页
-    public function detailAdmin(Request $request, Lesson $lesson)
-    {
-        return view('admin.lesson.show', compact($lesson));
     }
 
     /**

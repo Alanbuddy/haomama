@@ -75,7 +75,7 @@ Route::group([
     Route::get('/courses/{course}/lessons/{lesson}/comments', 'CommentController@commentsOfLesson')->name('courses.lesson.comments');//课时评论
 
     Route::get('/courses/{course}/lessons/{lesson}', 'LessonController@detail')->name('courses.lessons.show');//课时详情
-    Route::get('/admin/lessons/{lesson}/', 'LessonController@detailAdmin')->name('lesson.admin');//课时详情管理
+    Route::get('/admin/lessons/{lesson}/', 'LessonController@adminShow')->name('admin.lesson.show');//课时详情管理
     Route::resource('lessons', 'LessonController');
 
     Route::get('/comments/{comment}/vote', 'CommentController@vote')->name('comments.vote');
