@@ -27,7 +27,10 @@ function previewImage(file){
         processData: false,
         contentType: false
         }).done(function(res){
-
+          if (res.success){
+            $(".cover-id").text(res.path);
+            console.log(res.path);
+          }
         }).fail(function(res){
 
         });

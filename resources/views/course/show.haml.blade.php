@@ -128,7 +128,7 @@
 %hr.div-line
 .course-desc
   %span.f14.color7.fb 课程介绍
-  .desc-box.f12.color7= $course['description']
+  .desc-box.f12.color7= strip_tags(htmlspecialchars_decode($course['description']))
 %hr.div-line
 .recommend-div
   %span.recommend-title.f14.color7.fb 推荐课程
