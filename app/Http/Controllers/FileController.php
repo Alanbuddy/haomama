@@ -10,7 +10,7 @@ class FileController extends Controller
     {
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $path = $file->move(public_path('app/'), $fileName);
-        return ['success' => true, 'path' => $path->getPathName()];
+        $path = $file->move(public_path('app'), $fileName);
+        return ['success' => true, 'path' =>substr($path->getPathName(),strlen(public_path()))];
     }
 }
