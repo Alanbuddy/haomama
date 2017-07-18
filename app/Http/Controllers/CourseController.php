@@ -210,14 +210,14 @@ class CourseController extends Controller
     }
 
     //后台课程详情页面
-    public function adminShow(Request $request,Course $course)
+    public function adminShow(Request $request, Course $course)
     {
         $teachers = $course->teachers()->get();
         $lessons = $course->lessons()
             ->withPivot('created_at')
             ->orderBy('no', 'desc')
             ->get();
-        return view('admin.course.show',compact('course','teachers','lessons'));
+        return view('admin.course.show', compact('course', 'teachers', 'lessons'));
     }
 
     /**
@@ -586,7 +586,8 @@ class CourseController extends Controller
             'teachers' => 'required'
         ]);
         //TODO
-        $arr = explode(',', $request->teachers);
+//        $arr = explode(',', $request->teachers);
+        $arr = $request->teachers;
         $tmp = [];
         foreach ($arr as $id) {
             $tmp[$id] = [
