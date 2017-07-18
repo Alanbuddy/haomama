@@ -13,10 +13,12 @@ $(document).ready(function(){
           data: {
             name: request.term
           },
-          success: function( data ) {  
+          success: function( data ) {
+            console.log(data.data);  
             response( $.map( data.data, function( item ) {  
                 return {
-                    value: item.name
+                    value: item.name,
+                    object_id: item.id
                 };  
             }));  
           }  
@@ -27,8 +29,9 @@ $(document).ready(function(){
       select: function( event, ui ) {
               $( "#teacher" ).val("");
               $(".unadd").hide();
-              var teacher_tag = $("<span class='add-tag'><span class='teacher-name'></span><img class='delete-tag' src='/icon/admin/delete.png'></span>");
+              var teacher_tag = $("<span class='add-tag'><span class='teacher-name'></span><span class='teacher-id'></span><img class='delete-tag' src='/icon/admin/delete.png'></span>");
               teacher_tag.find(".teacher-name").text( ui.item.label);
+              teacher_tag.find(".teacher-id").text( ui.item.object_id);
               $(".teacher-tag").append(teacher_tag);
               return false;
             }
@@ -56,8 +59,9 @@ $(document).ready(function(){
     if(code == 13 && teacher_input != ""){
       $( "#teacher" ).val("");
       $(".unadd").hide();
-      var teacher_tag = $("<span class='add-tag'><span class='teacher-name'></span><img class='delete-tag' src='/icon/admin/delete.png'></span>");
+      var teacher_tag = $("<span class='add-tag'><span class='teacher-name'><span class='teacher-id'></span></span><img class='delete-tag' src='/icon/admin/delete.png'></span>");
       teacher_tag.find(".teacher-name").text(teacher_input);
+
       $(".teacher-tag").append(teacher_tag);
     }
   });

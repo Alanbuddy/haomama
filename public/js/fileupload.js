@@ -145,7 +145,7 @@ $(document).ready(function(){
         if(data.success){
           window.lesson_id = data.id;
           console.log(window.lesson_id);
-          location.href = window.video_show;
+          location.href = window.admin_lesson_show + "?type=video";
         }
       }
       );
