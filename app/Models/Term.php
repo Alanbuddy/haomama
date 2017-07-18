@@ -20,4 +20,10 @@ class Term extends Model
 //            ->withPivot('type')
 //            ->where('term_object.type', 'tag');
     }
+
+    public function hotCourseByCategory()
+    {
+        return $this->hasMany(Course::class, 'category_id')
+            ->where('courses.hot', true);
+    }
 }

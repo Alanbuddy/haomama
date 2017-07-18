@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Setting;
+use App\Models\Term;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -28,8 +30,14 @@ class SettingController extends Controller
             ]);
         } else {
             $setting = Setting::where('key', 'recommendedCourse')->first();
+            $categories = Term::where('type', 'category')->with('hotCourseByCategory')->get();
+            $arr = ['新课速递' => Course::find($setting->value)];
+            foreach ($categories as $category) {
+                $arr[$category->name] = $category->hotCourseByCategory->first()?: null;
+            }
+//            dd($arr);
             return view('admin.setting.index', [
-                'item' => $setting
+                'items' => $arr
             ]);
         }
     }
