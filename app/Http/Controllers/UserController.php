@@ -105,10 +105,8 @@ class UserController extends Controller
     public function show(Request $request, User $user)
     {
         if ('teacher' == $request->get('type')) {
-            return view('admin.teacher.teacher_show', ['user' => $user]);
-        }
-        if ($user->hasRole('teacher')) {
             return $this->showTeacher($user);
+//            return view('admin.teacher.teacher_show', ['user' => $user]);
         }
         $userId = $user->id;
         $enrolledCourses = Search::enrolledCourses($userId)->get();
@@ -133,6 +131,7 @@ class UserController extends Controller
 
     public function showTeacher(User $user)
     {
+        $user->description = json_decode($user->description);
         $courses = $user->coachingCourse()
             ->withCount('comments')
             ->withCount(['users' => function ($query) {
@@ -141,17 +140,12 @@ class UserController extends Controller
             ->with('category')//预加载课程所属分类的信息
             ->orderBy('id', 'desc')
             ->get();
-        $user->description = json_decode($user->description);
-
-        $votes = $user->votes()->get();
-        $hasVoted = false;
-        foreach ($votes as $vote) {
-            if ($vote->user_id == auth()->user()->id)
-                $hasVoted = true;
+        foreach ($courses as $course){
+            $course->sale=$course->orders()->sum('wx_total_fee');
         }
-
-        return view('setting.teacher',
-            compact('user', 'courses', 'hasVoted', 'votes')
+//        dd($courses);
+        return view('admin.teacher.teacher_show',
+            compact('user', 'courses' )
         );
     }
 
@@ -267,7 +261,7 @@ class UserController extends Controller
         return ['success' => true];
     }
 
-    //搜索讲师
+    //搜索讲师 根据名字或手机号
     public function search(Request $request)
     {
         $this->validate($request, [
@@ -276,7 +270,8 @@ class UserController extends Controller
         $name = $request->name;
         $role = Role::where('name', 'teacher')->first();
         $items = $role->users()
-            ->where('name', 'like', '%'.$name.'%')
+            ->where('name', 'like', '%' . $name . '%')
+            ->orWhere('phone', 'like', '%' . $name . '%')
             ->orderBy('id', 'desc')
             ->paginate(10);
         return $items;
