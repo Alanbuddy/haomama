@@ -3,21 +3,29 @@ $(document).ready(function(){
     $("#lessonModal").modal("show");
   });
 
-  var tag_item = $("#type-tag").tagEditor('getTags')[0].tags;
-
+  var tag = "tag";
   $('#type-tag').tagEditor({
 
-    beforeTagSave: function(){
+    beforeTagSave: function(field, editor, tags, tag, val){
       $.postJSON(
         window.tag_store,
         {
-          name: tag_item,
-          type: category
+          name: val,
+          type: tag,
+          _token: window.token
         },
         function(data){
           console.log(data);
+          var tag_id = $("<span class='tag_id'></span>");
+          tag_id.text(data.data.id);
+          $(".create_tag_id").append(tag_id);
+          // $("#response").attr("data-id", data.data.id);
+          // alert($("#response").attr("data-id"));
         }
         );
+    },
+    beforeTagDelete: function(field, editor, tags, val){
+      $(".create_tag_id").remove();
     }
   });
 
@@ -164,6 +172,8 @@ $(document).ready(function(){
     var price = $("#course-price").val().trim();
     var pay_price = $("#pay-price").val().trim();
     var tags = $('#type-tag').tagEditor('getTags')[0].tags;
+
+    console.log(tags);
     var desc = editor.txt.html();
     var lesson_list = [];
     $(".example li").each(function(){
