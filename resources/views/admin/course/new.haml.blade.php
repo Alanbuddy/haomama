@@ -104,28 +104,19 @@
           .checkbox
             %label
               %input{type: "checkbox", id: "all-no"} 全选/全不选
-        
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check", value: "1"} 第一课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check", value: "2"} 第二课时
-        .checkbox
-          %label
-            %input{type: "checkbox", name: "lesson-check", value: "3"} 第三课时
+        .checkbox-items
         
         .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
-        .select-page 
-          %span.totalitems 共2页，总计18条
-          %span.choice-page
-            %ul.pagination.pagination-sm
-              %li
-                %a{href: "#"} «
-              %li
-                %a{href: "#"} 1
-              %li
-                %a{href: "#"} »
+        // .select-page 
+        //   %span.totalitems
+        //   %span.choice-page
+        //     %ul.pagination.pagination-sm
+        //       %li
+        //         %a{href: "#"} «
+        //       %li
+        //         %a{href: "#"} 1
+        //       %li
+        //         %a{href: "#"} »
 
 @section('script')
 <script src= "{{mix('/js/admin_course_new.js')}}"></script>

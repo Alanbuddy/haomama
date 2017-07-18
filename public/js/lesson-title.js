@@ -1,11 +1,22 @@
 $(document).ready(function(){
   $(".addlesson").click(function(){
-    alert("aa");
     $.getJSON(
       window.lessons_index,
       {},
       function(data){
-        console.log(data);
+        console.log(data.per_page);
+        for(var i=0;i<data.total;i++){
+          var check_item = $('<div class="checkbox">' +
+                              '<label>' +
+                                '<input type="checkbox" name="lesson-check" value=' + data.data[i].id + '>' + data.data[i].name +
+                              '</label>' +
+                            '</div>');
+          $(".checkbox-items").append(check_item);
+        }
+        var select_page = $('<div class="select-page">' +
+                              '<span class="totalitems">' + "共" + data.total/data.per_page + "页,总计" + data.total + "条" + '</span>' +
+                            '</div>');
+        $(".checkbox-items").append(select_page);
       }
       );
     $("#lessonModal").modal("show");
