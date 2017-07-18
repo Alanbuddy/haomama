@@ -8,7 +8,7 @@
 .content-area
   .main-top.direction
     %a{href: route('users.index')."?type=user"}
-      %img.back{src: "/icon/admin/back.png"}
+      %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -31,7 +31,7 @@
             .desc-div
               // - if @users[:data].length == 0
               //   .undiscover.f14
-              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
+              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
               .table-box.f14
                 %table.table.table-hover.table-height
@@ -77,7 +77,7 @@
             .desc-div
               // - if @participates[:data].blank?
               //   .undiscover.f14
-              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
+              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
               .table-box.f14
                 %table.table.table-hover.table-height.border-btm
