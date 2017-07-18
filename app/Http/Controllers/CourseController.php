@@ -65,8 +65,8 @@ class CourseController extends Controller
         if ($request->get('type') == 'offline') {
             return view('admin.course.offline');
         }
-        $categories=Term::where('type','category')->get();
-        return view('admin.course.new',compact($categories));
+        $categories = Term::where('type', 'category')->get();
+        return view('admin.course.new', compact('categories'));
     }
 
     /**
@@ -578,7 +578,7 @@ class CourseController extends Controller
         foreach ($arr as $id) {
             $tmp[$id] = [
                 'user_type' => 'teacher',
-                'type'=>'teach'
+                'type' => 'teach'
             ];
         }
         $course->teachers()->sync($tmp);
