@@ -15,6 +15,7 @@ class AlterLessonAddColumnDescription extends Migration
     {
         Schema::table('lessons', function ($table) {
             $table->text('description')->nullable();
+            $table->json('extra')->nullable();
         });
 
         Schema::table('course_lesson', function ($table) {
@@ -31,6 +32,7 @@ class AlterLessonAddColumnDescription extends Migration
     {
         Schema::table('lessons', function ($table) {
             $table->dropColumn('description');
+            $table->dropColumn('extra');
         });
         Schema::table('course_lesson', function ($table) {
             $table->dropColumn('no');
