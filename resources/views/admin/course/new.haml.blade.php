@@ -1,21 +1,22 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_course_new.css') }}">
-<link href="/css/plugin/jquery-ui.css" rel="stylesheet" type="text/css">
-<link href="/css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/jquery-ui.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
 
 :javascript
   window.course_index = "#{route('courses.index')}"
   window.token = "#{csrf_token()}"
   window.add_teacher = "#{route('users.search')}"
   window.course = "#{route('courses.store')}"
+  window.tag_store = "#{route('terms.store')}"
 @endsection
 
 @section('content')
 .content-area
   .main-top.direction
     %a{href: route('courses.index')}
-      %img.back{src: "/icon/admin/back.png"}
+      %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -44,7 +45,7 @@
                   %select.form-control.input-width#course-type
                     %option 请选择类型
                     - foreach ($categories as $category )
-                      %option{value: $category[category_id]}= $category[category_name]
+                      %option{value: $category->id}= $category->name
                    
                   %label.input-caption 课程节数:
                   %input.form-control.input-width#course-length{:type => "text"}
@@ -55,7 +56,7 @@
                   %input.form-control.input-width#pay-price{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
-                %img.edit-photo#imghead{src: "/icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
+                %img.edit-photo#imghead{src: "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
                 
             .controls-div.font-color3.f14
               .controls.controls-row
@@ -92,7 +93,7 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/delete1.png"}
       .modal-body.f14
         .all-div
           .checkbox
@@ -122,11 +123,11 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_course_new.js')}}"></script>
-<script src="/js/plugin/jquery-ui.min.js"></script>
-<script src="/js/plugin/wangEditor.min.js"></script>
-<script src="/js/plugin/jquery.tag-editor.min.js"></script>
-<script src="/js/plugin/jquery-sortable.js"></script>
-<script src="/js/preview.js"></script>
-<script src="/js/lesson-title.js"></script>
+<script src="js/plugin/jquery-ui.min.js"></script>
+<script src="js/plugin/wangEditor.min.js"></script>
+<script src="js/plugin/jquery.tag-editor.min.js"></script>
+<script src="js/plugin/jquery-sortable.js"></script>
+<script src="js/preview.js"></script>
+<script src="js/lesson-title.js"></script>
 
 @endsection
