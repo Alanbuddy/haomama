@@ -8,8 +8,9 @@
   window.course_index = "#{route('courses.index')}"
   window.token = "#{csrf_token()}"
   window.add_teacher = "#{route('users.search')}"
-  window.course = "#{route('courses.store')}"
+  window.course_store = "#{route('courses.store')}"
   window.tag_store = "#{route('terms.store')}"
+  window.tag_destroy = "#{route('terms.destroy',-1)}"
 @endsection
 
 @section('content')
@@ -67,8 +68,7 @@
                   %span 标签一
                   %span 标签二
                   %span 标签十分大
-                .create_tag_id
-
+              .create-tag-div{style: "display:none"}
 
               .controls.controls-row.no-mb
                 %label.input-caption.teacher-tag 授课老师:
