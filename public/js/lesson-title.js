@@ -4,7 +4,7 @@ $(document).ready(function(){
   });
 
   var tag_item = $("#type-tag").tagEditor('getTags')[0].tags;
-
+  var category = "category";
   $('#type-tag').tagEditor({
 
     beforeTagSave: function(){
@@ -12,7 +12,8 @@ $(document).ready(function(){
         window.tag_store,
         {
           name: tag_item,
-          type: category
+          type: category,
+          _token: window.token
         },
         function(data){
           console.log(data);
