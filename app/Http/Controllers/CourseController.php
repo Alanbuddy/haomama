@@ -300,8 +300,9 @@ class CourseController extends Controller
 
     public function updateLessons(Request $request, Course $course)
     {
-        $lessons = $request->lessons;
-        $arr = explode(',', $lessons);
+//        $lessons = $request->lessons;
+//        $arr = explode(',', $lessons);
+        $arr = $request->lessons;
 //        $arr = array_map('intval', $arr);
         $arr = array_map('intval', $arr);
         $tmp = [];
@@ -344,8 +345,9 @@ class CourseController extends Controller
 
     public function updateTags(Request $request, Course $course)
     {
-        $tags = $request->tags;
-        $arr = explode(',', $tags);
+//        $tags = $request->tags;
+//        $arr = explode(',', $tags);
+        $arr = $request->tags;
         $arr = array_map('intval', $arr);
         $array = [];
         foreach ($arr as $id) {
