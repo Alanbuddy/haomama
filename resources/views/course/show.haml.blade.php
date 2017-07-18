@@ -14,12 +14,12 @@
 @endsection
 @section('content')
 .head-div
-  %img.course-photo{src: $course['cover'] ? $course['cover'] : "/icon/course.png"}
-  %img.back{src: "/icon/back2.png"}
+  %img.course-photo{src: $course['cover'] ? $course['cover'] : "icon/course.png"}
+  %img.back{src: "icon/back2.png"}
   - if ($hasFavorited == true)
-    %img.favorite{src: "/icon/like_selected.png", 'data-fav'=> "true"}
+    %img.favorite{src: "icon/like_selected.png", 'data-fav'=> "true"}
   - else
-    %img.favorite{src: "/icon/like_normal.png", 'data-fav'=> "false"}
+    %img.favorite{src: "icon/like_normal.png", 'data-fav'=> "false"}
   .course-title-div
     .course-row-div.clearfix
       %span.f12.category-class= $course['category_id']
@@ -28,7 +28,7 @@
       - if ($course['type'] == "offline")
         %span.course-status.f8 线下
     .btn#test-btn{type: "button"}
-      %img.play{src: "/icon/play.png"}
+      %img.play{src: "icon/play.png"}
       - if ($hasEnrolled == true)
         %span 立即听课
       - else    
@@ -74,13 +74,13 @@
               %span.min= date_format(date_create($lessons[$i]['begin']),"Y/m/d")
               %span= date_format(date_create($lessons[$i]['begin']),"H:i")."~".date_format(date_create($lessons[$i]['end']),"H:i")
           - if ($lessons[$i]['hasAttended'])
-            %img.sign-icon{src: "/icon/arrive.png"}
+            %img.sign-icon{src: "icon/arrive.png"}
           - else
-            %img.sign-icon{src: "/icon/absent.png"}
+            %img.sign-icon{src: "icon/absent.png"}
       - if (count($lessons) > 3)
         .view-more
           %span.f12.color5 查看更多
-          %img.more-icon{src: "/icon/more.png"}
+          %img.more-icon{src: "icon/more.png"}
   %hr.div-line
 - else 
   .course-content
@@ -97,9 +97,9 @@
               .item-row.f12.color5
                 %span.min.course-time{"time-end" => $lessons[$i]['end']}= $lessons[$i]['begin']
                 %span= $lessons[$i]->learnedCount."人已学"
-            %img.go{src: "/icon/go.png"}
+            %img.go{src: "icon/go.png"}
             - if ($lessons[$i]['id'] == 1)
-              %img.free{src: "/icon/free.png"}
+              %img.free{src: "icon/free.png"}
           - else
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
@@ -108,7 +108,7 @@
       - if (count($lessons) > 3)
         .view-more
           %span.f12.color5 查看更多
-          %img.more-icon{src: "/icon/more.png"}
+          %img.more-icon{src: "icon/more.png"}
   %hr.div-line
 .course-content
   %span.title.f14.color7.fb 授课老师
@@ -117,14 +117,14 @@
   .items-div
     - foreach ($teachers as $teacher)
       %a.teacher-item{href: route('users.show', $teacher['id'])}
-        %img.avatar{src: $teacher['avatar'] ? $teacher['avatar'] : "/icon/avatar.png"}
+        %img.avatar{src: $teacher['avatar'] ? $teacher['avatar'] : "icon/avatar.png"}
         .item-desc
           %p.f14.color7.teacher-name= $teacher['name']."老师"
           %p.f12.color6= json_decode($teacher['description'])->introduction
     - if (count($teachers) > 3)
       .view-more
         %span.f12.color5 查看更多
-        %img.more-icon{src: "/icon/more.png"}
+        %img.more-icon{src: "icon/more.png"}
 %hr.div-line
 .course-desc
   %span.f14.color7.fb 课程介绍
@@ -135,7 +135,7 @@
   - foreach ($recommendedCourses as $recommendedCourse)
     .course-item{"data-id" => $recommendedCourse['id']}
       .course-icon-div
-        %img.course-icon{src: $recommendedCourse['cover'] ? $recommendedCourse['cover'] : "/icon/example.png"}
+        %img.course-icon{src: $recommendedCourse['cover'] ? $recommendedCourse['cover'] : "icon/example.png"}
       .word-div
         .course-row-div.clearfix
           %span.f12.category-class= $recommendedCourse['category']['name']
@@ -166,7 +166,7 @@
       .review-items-div
         - foreach ($comments as $comment)
           .review-item{"data-url" => route("comments.vote", $comment['id'])}
-            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
+            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
               %p.f12.color5.time= $comment['created_at']
@@ -176,14 +176,14 @@
               .admire-div
                 %span.f12.color5.admire-num= $comment['voteCount']
                 - if ($comment['hasVoted'] == false)
-                  %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+                  %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
                 - else
-                  %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
+                  %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
     %p.f12.color6.feed-review 最新评论
     .feed-review-items-div
       - foreach ($latestComments as $latestComment)
         .review-item{"data-url" => route("comments.vote", $latestComment['id'])}
-          %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "/icon/avatar.png"}
+          %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "icon/avatar.png"}
           .item-desc
             %p.f12.color7.review-name= $latestComment->user->name
             %p.f12.color5.time= $latestComment['created_at']
@@ -193,9 +193,9 @@
             .admire-div
               %span.f12.color5.admire-num= $latestComment['voteCount']
               - if ($latestComment['hasVoted'] == false)
-                %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+                %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
               - else
-                %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
+                %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
   - else
     .course-content
       .review-title
@@ -205,7 +205,7 @@
       .review-items-div
         - foreach ($comments as $comment)
           .review-item{"data-url" => route("comments.vote", $comment['id'])}
-            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
+            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
               %p.f12.color5.time= $comment['created_at']
@@ -215,11 +215,11 @@
               .admire-div
                 %span.f12.color5.admire-num= $comment['voteCount']
                 - if ($comment['hasVoted'] == false)
-                  %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+                  %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
                 - else
-                  %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
+                  %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
 
-%img.upper{src: "/icon/top.png"}
+%img.upper{src: "icon/top.png"}
 - if ($hasEnrolled == true)
   - if ($course['type'] == "online")
     .btn#review-btn{type: "button"} 评价课程
@@ -262,11 +262,11 @@
       .modal-body
         .head-div
           %p.fb.tc.fb.color7.f18 个人资料
-          %img.profile-close{src: "/icon/close.png"}
+          %img.profile-close{src: "icon/close.png"}
         .item-div 
           .item
             .left-div
-              %img.avatar{src: "/icon/avatar.png"}
+              %img.avatar{src: "icon/avatar.png"}
             .right-div
               .row-div
                 %label.f14.color7.fn 家长身份
@@ -284,7 +284,7 @@
                 %input.input-div.f12.color6#mobile-code
           .baby-item.item-baby-div
             .left-div
-              %img.avatar{src: "/icon/baby_female.png"}
+              %img.avatar{src: "icon/baby_female.png"}
             .right-div
               .row-div
                 %label.f14.color7.fn 宝宝姓名
@@ -300,9 +300,9 @@
                 %input.input-div#baby-birthday.birthday{type: "date"}
 
           .baby-item.add-baby-div
-            %img.close-add-item{src: "/icon/close.png"}
+            %img.close-add-item{src: "icon/close.png"}
             .left-div
-              %img.avatar{src: "/icon/baby_female.png"}
+              %img.avatar{src: "icon/baby_female.png"}
             .right-div
               .row-div
                 %label.f14.color7.fn 宝宝姓名
@@ -321,5 +321,5 @@
 
 @section('script')
 <script src= "{{ mix('/js/course-show.js') }}"></script>
-<script src= "/js/review-modal.js"></script>
+<script src= "js/review-modal.js"></script>
 @endsection

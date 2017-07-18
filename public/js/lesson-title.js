@@ -216,6 +216,7 @@ $(document).ready(function(){
         teachers: teacher_arr,
         description: desc,
         lessons: lesson_list,
+        
         _token: window.token
       },
       function(data){
