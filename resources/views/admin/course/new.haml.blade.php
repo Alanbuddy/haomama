@@ -67,6 +67,9 @@
                   %span 标签一
                   %span 标签二
                   %span 标签十分大
+                .create_tag_id
+
+
               .controls.controls-row.no-mb
                 %label.input-caption.teacher-tag 授课老师:
                 %span.unadd 未添加
