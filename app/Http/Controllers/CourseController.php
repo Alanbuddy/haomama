@@ -87,6 +87,8 @@ class CourseController extends Controller
             'description',
             'category_id',
             'price',
+            'original_price',
+            'cover'
         ]));
         $item->save();
         $this->updateLessons($request, $item);
@@ -304,10 +306,7 @@ class CourseController extends Controller
 
     public function updateLessons(Request $request, Course $course)
     {
-//        $lessons = $request->lessons;
-//        $arr = explode(',', $lessons);
         $arr = $request->lessons;
-//        $arr = array_map('intval', $arr);
         $arr = array_map('intval', $arr);
         $tmp = [];
         foreach ($arr as $id) {
