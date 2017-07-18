@@ -19,7 +19,7 @@
       window.login = "#{route('login')}"
       window.token = "#{csrf_token()}"
       window.teacher = "#{route('users.index')}"
-      window.wangeditor = "#{route('file.upload')}"
+      window.fileupload = "#{route('file.upload')}"
   %body
     .wrapper
       .layout-left

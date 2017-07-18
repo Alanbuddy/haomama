@@ -3,29 +3,52 @@ $(document).ready(function(){
     $("#lessonModal").modal("show");
   });
 
-  var tag = "tag";
+  var type = "tag";
   $('#type-tag').tagEditor({
-
+    
     beforeTagSave: function(field, editor, tags, tag, val){
+      $(".create-tag-div").find(".tag_id").each(function(){
+        if($(this).text() == val ){
+          showMsg("标签不可重复","center");
+          return false;
+        }
+      });
       $.postJSON(
         window.tag_store,
         {
           name: val,
-          type: tag,
+          type: type,
           _token: window.token
         },
         function(data){
-          console.log(data);
-          var tag_id = $("<span class='tag_id'></span>");
-          tag_id.text(data.data.id);
-          $(".create_tag_id").append(tag_id);
-          // $("#response").attr("data-id", data.data.id);
-          // alert($("#response").attr("data-id"));
+          var tag_id = $("<div class='tag_id'></div>");
+          tag_id.text(val);
+          tag_id.attr("data-id", data.data.id);
+          $(".create-tag-div").append(tag_id);
         }
         );
     },
     beforeTagDelete: function(field, editor, tags, val){
-      $(".create_tag_id").remove();
+      var delete_id = null;
+      var del = "DELETE";
+      $(".create-tag-div").find(".tag_id").each(function(){
+        _this = $(this);
+        if($(this).text() == val ){
+          delete_id = $(this).attr("data-id");
+          $.ajax({
+            url: window.tag_destroy.substring(0, window.tag_destroy.length - 2) + delete_id,
+            type: 'post',
+            data: {
+              id: delete_id,
+              _method: del,
+              _token: window.token
+            },
+            success: function(){
+              _this.remove();
+            }
+          });
+        }
+      });
     }
   });
 
@@ -44,7 +67,7 @@ $(document).ready(function(){
             name: request.term
           },
           success: function( data ) {
-            console.log(data.data);  
+            // console.log(data.data);  
             response( $.map( data.data, function( item ) {  
                 return {
                     value: item.name,
@@ -85,20 +108,16 @@ $(document).ready(function(){
   $("#teacher").keydown(function(ev){
     var ev = ev || window.event;
     var code = ev.which;
-    var teacher_input = $(this).val();
-    if(code == 13 && teacher_input != ""){
-      $( "#teacher" ).val("");
-      $(".unadd").hide();
-      var teacher_tag = $("<span class='add-tag'><span class='teacher-name'><span class='teacher-id'></span></span><img class='delete-tag' src='icon/admin/delete.png'></span>");
-      teacher_tag.find(".teacher-name").text(teacher_input);
-
-      $(".teacher-tag").append(teacher_tag);
+    if(code == 13){
+      $(this).val("");
+      showMsg("老师只可以从列表中点击选择,如无需在讲师管理中添加", "center");
+      return false;
     }
   });
 
   var E = window.wangEditor;
   var editor = new E('#edit-area');
-  editor.customConfig.uploadImgServer = window.wangeditor;
+  editor.customConfig.uploadImgServer = window.fileupload;
   editor.customConfig.showLinkImg = false;
   editor.customConfig.menus = [
         'head',
@@ -112,7 +131,7 @@ $(document).ready(function(){
   // E = window.wangEditor;
   var editor_lesson = new E('#title-area');
 
-  editor_lesson.customConfig.uploadImgServer = window.wangeditor;
+  editor_lesson.customConfig.uploadImgServer = window.fileupload;
   editor_lesson.customConfig.showLinkImg = false;
   editor_lesson.customConfig.menus = [
         'head'
@@ -167,13 +186,14 @@ $(document).ready(function(){
 
   $(document).on('click',"#finish-btn", function(){
     var name = $("#course-name").val().trim();
-    var type = $("#course-type").val();
+    var category_id = $("#course-type").val();
     var length = $("#course-length").val().trim();
-    var price = $("#course-price").val().trim();
-    var pay_price = $("#pay-price").val().trim();
-    var tags = $('#type-tag').tagEditor('getTags')[0].tags;
-
-    console.log(tags);
+    var original_price = $("#course-price").val().trim();
+    var price = $("#pay-price").val().trim();
+    var tags = [];
+    $(".create-tag-div").find(".tag_id").each(function(){
+      tags.push($(this).attr("data-id"));
+    });
     var desc = editor.txt.html();
     var lesson_list = [];
     $(".example li").each(function(){
@@ -181,15 +201,32 @@ $(document).ready(function(){
     });
     var lesson_title = editor_lesson.txt.html();
     var teacher_arr = [];
-    $(".teacher-name").each(function(){
+    $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
     });
-
+    $.postJSON(
+      window.course_store,
+      {
+        name: name,
+        category_id: category_id,
+        lessonsCount: length,
+        original_price: original_price,
+        price: price,
+        tags: tags,
+        teachers: teacher_arr,
+        description: desc,
+        lessons: lesson_list,
+        _token: window.token
+      },
+      function(data){
+        console.log(data);
+      }
+      );
     //通过formData对象append方法来添加图片
-    var formData = new formData();
+    var formData = new FormData();
     formData.append('file', $("#previewImg")[0].files[0]);
     $.ajax({
-      url: window,
+      url: window.fileupload,
       type: 'post',
       data: formData,
       cache: false,
@@ -200,7 +237,7 @@ $(document).ready(function(){
       }).fail(function(res){
 
       });
-
+    console.log();
   });
 });
 
