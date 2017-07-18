@@ -87,6 +87,7 @@ class CourseController extends Controller
             'description',
             'category_id',
             'price',
+            'original_price',
             'cover'
         ]));
         $item->save();
