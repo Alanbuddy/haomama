@@ -87,6 +87,7 @@ class CourseController extends Controller
             'description',
             'category_id',
             'price',
+            'cover'
         ]));
         $item->save();
         $this->updateLessons($request, $item);
