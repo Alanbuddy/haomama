@@ -117,6 +117,10 @@ $(document).ready(function(){
 
   var E = window.wangEditor;
   var editor = new E('#edit-area');
+  editor.customConfig.uploadImgParams = {
+      _token: window.token
+  };
+  editor.customConfig.uploadFileName = 'file';
   editor.customConfig.uploadImgServer = window.fileupload;
   editor.customConfig.showLinkImg = false;
   editor.customConfig.menus = [
@@ -216,7 +220,7 @@ $(document).ready(function(){
         teachers: teacher_arr,
         description: desc,
         lessons: lesson_list,
-        
+        cover: id,
         _token: window.token
       },
       function(data){
