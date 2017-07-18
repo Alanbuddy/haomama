@@ -28,7 +28,7 @@ function previewImage(file){
         contentType: false
         }).done(function(res){
           if (res.success){
-            $(".cover-id").text(res.path);
+            $(".cover-path").text(res.path);
             console.log(res.path);
           }
         }).fail(function(res){
