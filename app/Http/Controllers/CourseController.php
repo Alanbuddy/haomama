@@ -8,6 +8,7 @@ use App\Http\Util\IO;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Lesson;
+use App\Models\Term;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -64,7 +65,8 @@ class CourseController extends Controller
         if ($request->get('type') == 'offline') {
             return view('admin.course.offline');
         }
-        return view('admin.course.new');
+        $categories=Term::where('type','category')->get();
+        return view('admin.course.new',compact($categories));
     }
 
     /**
