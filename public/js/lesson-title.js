@@ -1,5 +1,13 @@
 $(document).ready(function(){
   $(".addlesson").click(function(){
+    alert("aa");
+    $.getJSON(
+      window.lessons_index,
+      {},
+      function(data){
+        console.log(data);
+      }
+      );
     $("#lessonModal").modal("show");
   });
 
@@ -147,14 +155,17 @@ $(document).ready(function(){
 
   $("#confirm-btn").click(function(){
     var title_arr = [];
+    var title_text = [];
     $("[name='lesson-check']:input:checked").each(function(){
         var value = $(this).val();
+        var text = $(this).text();
         title_arr.push(value);
+        title_text.push(text);
     });
     var len = title_arr.length;
 
     for(var i=0;i<len;i++){
-      var oLi = $("<li>" + title_arr[i] + "</li>");
+      var oLi = $("<li 'data-id'=title_arr[i]>" + title_text[i] + "</li>");
       $(".example").append(oLi);
     }
 
@@ -228,22 +239,6 @@ $(document).ready(function(){
         console.log(data);
       }
       );
-    //通过formData对象append方法来添加图片
-    var formData = new FormData();
-    formData.append('file', $("#previewImg")[0].files[0]);
-    $.ajax({
-      url: window.fileupload,
-      type: 'post',
-      data: formData,
-      cache: false,
-      processData: false,
-      contentType: false
-      }).done(function(res){
-
-      }).fail(function(res){
-
-      });
-    console.log();
   });
 });
 

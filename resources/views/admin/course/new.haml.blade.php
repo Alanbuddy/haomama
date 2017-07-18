@@ -11,6 +11,7 @@
   window.course_store = "#{route('courses.store')}"
   window.tag_store = "#{route('terms.store')}"
   window.tag_destroy = "#{route('terms.destroy',-1)}"
+  window.lessons_index = "#{route('lessons.index')}"
 @endsection
 
 @section('content')
@@ -103,15 +104,16 @@
           .checkbox
             %label
               %input{type: "checkbox", id: "all-no"} 全选/全不选
+        
         .checkbox
           %label
-            %input{type: "checkbox", name: "lesson-check", value: "第一课时"} 第一课时
+            %input{type: "checkbox", name: "lesson-check", value: "1"} 第一课时
         .checkbox
           %label
-            %input{type: "checkbox", name: "lesson-check", value: "第二课时"} 第二课时
+            %input{type: "checkbox", name: "lesson-check", value: "2"} 第二课时
         .checkbox
           %label
-            %input{type: "checkbox", name: "lesson-check", value: "第三课时"} 第三课时
+            %input{type: "checkbox", name: "lesson-check", value: "3"} 第三课时
         
         .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
         .select-page 
