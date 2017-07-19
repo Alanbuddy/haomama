@@ -1,5 +1,24 @@
 $(document).ready(function(){
   $(".addlesson").click(function(){
+    $.getJSON(
+      window.lessons_index,
+      {},
+      function(data){
+        console.log(data.per_page);
+        for(var i=0;i<data.total;i++){
+          var check_item = $('<div class="checkbox">' +
+                              '<label>' +
+                                '<input type="checkbox" name="lesson-check" value=' + data.data[i].id + '>' + data.data[i].name +
+                              '</label>' +
+                            '</div>');
+          $(".checkbox-items").append(check_item);
+        }
+        var select_page = $('<div class="select-page">' +
+                              '<span class="totalitems">' + "共" + data.total/data.per_page + "页,总计" + data.total + "条" + '</span>' +
+                            '</div>');
+        $(".checkbox-items").append(select_page);
+      }
+      );
     $("#lessonModal").modal("show");
   });
 
@@ -147,14 +166,17 @@ $(document).ready(function(){
 
   $("#confirm-btn").click(function(){
     var title_arr = [];
+    var title_text = [];
     $("[name='lesson-check']:input:checked").each(function(){
         var value = $(this).val();
+        var text = $(this).text();
         title_arr.push(value);
+        title_text.push(text);
     });
     var len = title_arr.length;
 
     for(var i=0;i<len;i++){
-      var oLi = $("<li>" + title_arr[i] + "</li>");
+      var oLi = $("<li 'data-id'=title_arr[i]>" + title_text[i] + "</li>");
       $(".example").append(oLi);
     }
 
@@ -228,22 +250,6 @@ $(document).ready(function(){
         console.log(data);
       }
       );
-    //通过formData对象append方法来添加图片
-    var formData = new FormData();
-    formData.append('file', $("#previewImg")[0].files[0]);
-    $.ajax({
-      url: window.fileupload,
-      type: 'post',
-      data: formData,
-      cache: false,
-      processData: false,
-      contentType: false
-      }).done(function(res){
-
-      }).fail(function(res){
-
-      });
-    console.log();
   });
 });
 
