@@ -105,8 +105,8 @@ class CourseController extends Controller
             $item->cover = $cover->path;
         }
         $item->save();
-        if($request->ajax()){
-            return ['success'=>true];
+        if ($request->ajax()) {
+            return ['success' => true, 'data' => $item];
         }
         return redirect()->route('courses.index');
     }
