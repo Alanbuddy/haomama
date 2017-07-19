@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/admin_course_new.css') }}">
 <link href="css/plugin/jquery-ui.css" rel="stylesheet" type="text/css">
 <link href="css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/pagination.css" rel="stylesheet" type="text/css">
 
 :javascript
   window.course_index = "#{route('courses.index')}"
@@ -103,27 +104,21 @@
         .all-div
           .checkbox
             %label
-              %input{type: "checkbox", id: "all-no"} 全选/全不选
+              %input.all{type: "checkbox", id: "all-no"} 全选/全不选
         .checkbox-items
         
         .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
-        // .select-page 
-        //   %span.totalitems
-        //   %span.choice-page
-        //     %ul.pagination.pagination-sm
-        //       %li
-        //         %a{href: "#"} «
-        //       %li
-        //         %a{href: "#"} 1
-        //       %li
-        //         %a{href: "#"} »
-
+        .select-page
+          %span.totalitems
+          .quotes#Pagination
+          
 @section('script')
 <script src= "{{mix('/js/admin_course_new.js')}}"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery.tag-editor.min.js"></script>
 <script src="js/plugin/jquery-sortable.js"></script>
+<script src="js/plugin/jquery.pagination.js"></script>
 <script src="js/preview.js"></script>
 <script src="js/lesson-title.js"></script>
 
