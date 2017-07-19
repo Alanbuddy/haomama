@@ -22,7 +22,6 @@ Route::group([
     Route::auth();
     Route::get('/', 'HomeController@index')->name('index');
     Route::get('/logout', 'Auth\LoginController@logout');
-    Route::post('/upload', 'FileController@upload')->name('file.upload');
 
     Route::get('/validate/phone', 'SmsController@isOccupied')->name('validate.phone');
     Route::any('/sms/send', 'SmsController@send')->name('sms.send');
@@ -73,6 +72,7 @@ Route::group([
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');//收藏课程
     Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');//获取推荐的课程
     Route::get('/courses/{course}/lessons/{lesson}/sign-in', 'CourseController@signIn')->name('courses.signIn');//签到
+//    Route::get('/courses/{course}/lessons/{lesson}/order', 'CourseController@updateLessonOrder')->name('courses.lessons.order');//调整课时顺序
     Route::get('/courses/{course}/lessons/{lesson}/comments', 'CommentController@commentsOfLesson')->name('courses.lesson.comments');//课时评论
 
     Route::get('/courses/{course}/lessons/{lesson}', 'LessonController@detail')->name('courses.lessons.show');//课时详情
@@ -81,7 +81,6 @@ Route::group([
 
     Route::get('/comments/{comment}/vote', 'CommentController@vote')->name('comments.vote');
     Route::resource('comments', 'CommentController');
-//    Route::resource('comments', 'CommentController',['except'=>'store']);
 
     Route::post('/orders/pay', 'OrderController@pay')->name('orders.pay');
     Route::get('/orders/{uuid}/refund', 'OrderController@refund')->name('orders.refund');
@@ -108,6 +107,10 @@ Route::group([
     Route::get('/videos/upload/init', 'VideoController@initUpload')->name('videos.upload.init');
     Route::post('/videos/merge', 'VideoController@mergeVideo')->name('videos.merge');
     Route::resource('videos', 'VideoController');
+
+    Route::get('/files/upload/init', 'FileController@initChunkUpload')->name('files.upload.init');
+    Route::post('/upload', 'FileController@upload')->name('file.upload');
+    Route::post('/files/merge', 'FileController@mergeFile')->name('files.merge');
 
     Route::resource('settings', 'SettingController');//系统设置
 

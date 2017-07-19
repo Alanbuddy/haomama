@@ -17,7 +17,7 @@ use Lib\Vod\VodApi;
 
 class VideoController extends Controller
 {
-    use Parse, IO, ChunkedUpload;
+    use Parse, IO;
 
     /**
      * Display a listing of the resource.
@@ -219,7 +219,9 @@ class VideoController extends Controller
             $video->caption = json_encode($ret);
             $video->save();
         }
-
+        if($request->ajax()){
+            return ['success'=>true];
+        }
         return redirect()->route('videos.edit', $video);
     }
 
