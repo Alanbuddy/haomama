@@ -27,7 +27,7 @@ class LessonController extends Controller
     public function index(Request $request)
     {
 //        $type = $request->get('type');
-        $items = Lesson::where('id', '>', '0')
+        $items = Lesson::orderBy('id', 'desc')
             ->paginate(10);
         if($request->ajax()){
             return $items;
