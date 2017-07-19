@@ -2,14 +2,15 @@
 !!!
 %html
   %head
+    %base{:href => $ip=='127.0.0.1'?"/":"/haomama/"}
     %meta{:charset => "utf-8"}
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %meta{:content => "width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0", :name => "viewport"}
     %meta{"content:" => "telephone=no", :name => "format-detection"}
     %meta{"content:" => "email=no", :name => "format-detection"}
     %title 好妈妈微学院
-    %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
-    %link{:href => "/css/sign-layout.css", :rel => "stylesheet"}
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
+    %link{:href => "css/sign-layout.css", :rel => "stylesheet"}
     <link rel="stylesheet" href="{{ mix('/css/signup.css') }}">    
     :javascript
       window.sms_send = "#{route('sms.send')}"
@@ -44,12 +45,12 @@
           .footer-div.clearfix
             %span.right.f16.fr.pointer#jump_to_signin 已有账号?立即登录
 
-    <script src="/js/jquery-3.2.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src = "/js/ajax.js"></script>
-    <script src = "/js/regex.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src = "js/ajax.js"></script>
+    <script src = "js/regex.js"></script>
     <script src= "{{mix('/js/signup.js')}}"></script>
-    <script src= "/js/admin-signup.js"></script>
+    <script src= "js/admin-signup.js"></script>
 
 
 

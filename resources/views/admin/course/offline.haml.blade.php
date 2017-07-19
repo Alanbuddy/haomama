@@ -1,21 +1,25 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_course_offline.css') }}">
-<link href="/css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
-<link href="/css/plugin/fullcalendar.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="/css/plugin/selector.css">
+<link href="css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/fullcalendar.min.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/jquery.timepicker.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/plugin/jquery-ui.css">
 
 
 :javascript
   window.course_index = "#{route('courses.index')}"
   window.token = "#{csrf_token()}"
+  window.add_teacher = "#{route('users.search')}"
+  window.tag_store = "#{route('terms.store')}"
+  window.tag_destroy = "#{route('terms.destroy',-1)}"
 @endsection
 
 @section('content')
 .content-area
   .main-top.direction
     %a{href: route('courses.index')}
-      %img.back{src: "/icon/admin/back.png"}
+      %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -43,37 +47,31 @@
                   %label.input-caption 课程类型:
                   %select.form-control.input-width#course-type
                     %option 请选择类型
-                    %option{value: "类型一"} 类型一
-                    %option{value: "类型二"} 类型二
-                    %option{value: "类型三"} 类型三
+                    // - foreach ($categories as $category )
+                    //   %option{value: $category->id}= $category->name
                   %label.input-caption 课程节数:
-                  %input.form-control.input-width{:type => "text"}
+                  %input.form-control.input-width#course-length{:type => "text"}
                 .controls.controls-row
                   %label.input-caption 课程价格:
                   %input.form-control.input-width#course-price{:type => "text"}
                   %label.input-caption 促销价格:
-                  %input.form-control.input-width{:type => "text"}
+                  %input.form-control.input-width#pay-price{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
-                %img.edit-photo#imghead{src: "/icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
+                %img.edit-photo#imghead{src: "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
+              %span.cover-path{style: "display:none;"}
 
             .controls-div.font-color3.f14
               .controls.controls-row
                 %label.input-caption 上课时间:
                 %input.form-control.input-width#lesson-date{:type => "text"}
                 %label.input-caption 最少人数:
-                %input.form-control.input-width{:type => "text"}
+                %input.form-control.input-width#min-num{:type => "text"}
               .controls.controls-row
                 %label.input-caption 上课地点:
-                %dl#AreaSelector.m-select
-                  %dt
-                  %dd.region{:style => "height:210px;"}
-                    %input{:name => "", :type => "hidden", :value => ""}
-                    %ul.tab
-                    .tab-con.clearfix
                 %input.form-control.input-width#lesson-address{:type => "text"}
                 %label.input-caption 最多人数:
-                %input.form-control.input-width{:type => "text"}
+                %input.form-control.input-width#max-num{:type => "text"}
               .controls.controls-row
                 %label.input-caption 课程标签:  
                 %span.tag-div
@@ -82,15 +80,14 @@
                   %span 标签一
                   %span 标签一
                   %span 标签十分大
+              .create-tag-div{style: "display:none"}
+
               .controls.controls-row.no-mb
-                %label.input-caption 授课老师:
-                %span 未添加
+                %label.input-caption.teacher-tag 授课老师:
+                %span.unadd 未添加
               .teacher-div
-                #teacher-tag
-                .hot-tag-hide
-                  %p.tag-word 热词一 
-                  %p.tag-word 热词一 
-                  %p.tag-word 热词一 
+                %input#teacher{type: "text"}
+
               .calendar-wrapper.clearfix
                 .calendar-operation-wrapper
                   %p.title 课程日历
@@ -118,32 +115,18 @@
                 %span.wangedit-area
                   #edit-title
 @endsection
-#lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modal-dialog
-    .modal-content
-      .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
-      .modal-body
-        .courses-div
-          .item.course-video
-            %img{src: "/icon/admin/media.png"}
-            %p 音/视频课程
-          .item.offline
-            %img{src: "/icon/admin/class.png"}
-            %p 线下课程
 
 @section('script')
-<script src= "{{mix('/js/admin_course_offline.js')}}"></script>
-<script src="/js/plugin/jquery-ui.min.js"></script>
-<script src="/js/plugin/wangEditor.min.js"></script>
-<script src="/js/plugin/jquery.tag-editor.min.js"></script>
-<script src="/js/plugin/moment.min.js"></script>
-<script src="/js/plugin/fullcalendar.min.js"></script>
-<script src="/js/plugin/locale-all.js"></script>
-<script src="/js/plugin/Selector.js"></script>
-<script src="/js/plugin/address.js"></script>
+<script src="js/plugin/jquery-ui.min.js"></script>
+<script src="js/plugin/wangEditor.min.js"></script>
+<script src="js/plugin/jquery.tag-editor.min.js"></script>
+<script src="js/plugin/moment.min.js"></script>
+<script src="js/plugin/fullcalendar.min.js"></script>
+<script src="js/plugin/locale-all.js"></script>
+<script src="js/plugin/datepicker-zh-TW.js"></script>
+<script src="js/plugin/jquery.timepicker.js"></script>
 
-<script src="/js/preview.js"></script>
-<script src="/js/calendar.js"></script>
+<script src="js/preview.js"></script>
+<script src="js/calendar.js"></script>
 
 @endsection

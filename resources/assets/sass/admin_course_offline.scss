@@ -89,19 +89,23 @@
 .ui-helper-hidden-accessible {
   display: none;
 }
-#teacher-tag {
+#teacher {
   display: inline-block;
-  vertical-align: middle;
-  width: 75.2%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 12px;
+  width: 100%;
+  font-size: 14px;
   font-family: "微软雅黑";
   margin-left: 2px;
+  outline: none;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
 }
 .teacher-div {
-  width: 71%;
-  margin-left: 62px;
+  width: 70.5%;
+  margin-left: 64px;
+  margin-top: 10px;
 }
 .no-mb {
   margin-bottom: 0;
@@ -277,4 +281,36 @@ h2 {
 }
 .form-inline {
   margin-bottom: 20px;
+}
+
+
+.ui-draggable, .ui-droppable {
+  background-position: top;
+}
+.add-tag {
+  display: inline-block;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 10px;
+  border-radius: 4px;
+  margin-left: 4px;
+  margin-right: 8px;
+  .delete-tag {
+    width: 12px;
+    height: 12px;
+    display: none;
+    margin-left: 4px;
+    margin-top: -4px;
+  }
+}
+.add-tag-hover {
+  border: 1px solid #ccc;
+  background: #f3f3fc;
+}
+.unadd {
+  display: inline-block;
+  margin-left: 4px;
+}
+.teacher-id {
+  display: none;
 }

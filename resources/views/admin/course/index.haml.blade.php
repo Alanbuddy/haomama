@@ -147,14 +147,14 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/delete1.png"}
       .modal-body
         .courses-div
           .item.course-video
-            %img{src: "/icon/admin/media.png"}
+            %img{src: "icon/admin/media.png"}
             %p 音/视频课程
           .item.offline
-            %img{src: "/icon/admin/class.png"}
+            %img{src: "icon/admin/class.png"}
             %p 线下课程
 @section('script')
 <script src= "{{mix('/js/admin_c_index.js')}}"></script>

@@ -114,7 +114,6 @@
           .quotes#Pagination
           
 @section('script')
-<script src= "{{mix('/js/admin_course_new.js')}}"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery.tag-editor.min.js"></script>

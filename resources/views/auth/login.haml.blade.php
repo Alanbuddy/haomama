@@ -1,14 +1,15 @@
 !!!
 %html
   %head
+    %base{:href => $ip=='127.0.0.1'?"/":"/haomama/"}
     %meta{:charset => "utf-8"}
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %meta{:content => "width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0", :name => "viewport"}
     %meta{"content:" => "telephone=no", :name => "format-detection"}
     %meta{"content:" => "email=no", :name => "format-detection"}
     %title 好妈妈微学院
-    %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
-    %link{:href => "/css/sign-layout.css", :rel => "stylesheet"}
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
+    %link{:href => "css/sign-layout.css", :rel => "stylesheet"}
     :javascript
       window.register = "#{route('register')}"
       window.forget = "#{route('password.request')}"
@@ -19,7 +20,7 @@
     .wrapper
       .content-area
         .input-div
-          %img.logo{src: "/icon/admin/logo.png"}
+          %img.logo{src: "icon/admin/logo.png"}
           .input-group
             %span.input-group-addon.miniphoto
             %input.form-box.f16#mobile{placeholder: "请输入您的手机号", type: "text"} 
@@ -31,11 +32,11 @@
           .footer-div.clearfix
             %span.left.f16.fl.pointer#to_signup 立即注册
             %span.right.f16.fr.pointer#to_forget_password 忘记密码? 
-    <script src="/js/jquery-3.2.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src = "/js/ajax.js"></script>
-    <script src = "/js/regex.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src = "js/ajax.js"></script>
+    <script src = "js/regex.js"></script>
     <script src= "{{mix('/js/signin.js')}}"></script>
-    <script src= "/js/admin-signin.js"></script>
+    <script src= "js/admin-signin.js"></script>
 
     

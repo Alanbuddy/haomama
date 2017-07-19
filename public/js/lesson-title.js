@@ -285,7 +285,7 @@ $(document).ready(function(){
         console.log(data);
         if(data.success){
           var str = window.admin_course_show.substring(0, window.admin_course_show.length - 2);
-          var cid = data.id;
+          var cid = data.data.id;
           location.href = str + cid;
         }
       }

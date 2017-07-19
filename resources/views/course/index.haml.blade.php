@@ -14,10 +14,6 @@
     %input.search-input.color5{type: "text", placeholder: "搜索课程名/老师名", readonly: "readonly"}
   .nav-div
     %ul.nav.f14
-      // %li 新课速递
-      // %li 健康教育
-      // %li 心理教育
-      // %li 自我成长
       - foreach ($categories as $category )
         %li= $category['name']
 

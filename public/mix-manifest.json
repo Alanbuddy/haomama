@@ -63,8 +63,6 @@
   "/js/admin_lesson_audio.js": "/js/admin_lesson_audio.js",
   "/js/admin_imgset_index.js": "/js/admin_imgset_index.js",
   "/js/admin_course_show.js": "/js/admin_course_show.js",
-  "/js/admin_course_offline.js": "/js/admin_course_offline.js",
-  "/js/admin_course_new.js": "/js/admin_course_new.js",
   "/js/admin_client_show.js": "/js/admin_client_show.js",
   "/js/admin_client_index.js": "/js/admin_client_index.js",
   "/js/admin_c_index.js": "/js/admin_c_index.js",
