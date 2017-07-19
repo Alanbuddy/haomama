@@ -260,6 +260,7 @@ $(document).ready(function(){
       teacher_arr.push($(this).text());
     });
     var path = $(".cover-path").text();
+    var online = "online";
     var ret = check_input(name, length, original_price, price);
     if(ret == false) {
       return false;
@@ -277,10 +278,16 @@ $(document).ready(function(){
         description: desc,
         lessons: lesson_list,
         cover: path,
+        type: online,
         _token: window.token
       },
       function(data){
         console.log(data);
+        if(data.success){
+          var str = window.admin_course_show.substring(0, window.admin_course_show.length - 2);
+          var cid = data.id;
+          location.href = str + cid;
+        }
       }
       );
   });

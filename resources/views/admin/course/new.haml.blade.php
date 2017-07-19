@@ -13,6 +13,7 @@
   window.tag_store = "#{route('terms.store')}"
   window.tag_destroy = "#{route('terms.destroy',-1)}"
   window.lessons_index = "#{route('lessons.index')}"
+  window.admin_course_show = "#{route('admin.courses.show', -1)}"
 @endsection
 
 @section('content')
