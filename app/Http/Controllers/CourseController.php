@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class CourseController extends Controller
@@ -77,9 +78,10 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'category_id'=>'required',
-            'name'=>'required',
+        $this->validate($request, [
+            'category_id' => 'required',
+            'name' => 'required',
+            'type' => 'required',
         ]);
         $item = new Course();
         $item->fill($request->only([
@@ -88,7 +90,9 @@ class CourseController extends Controller
             'category_id',
             'price',
             'original_price',
-            'cover'
+            'cover',
+            'minimum',
+            'type',
         ]));
         $item->save();
         $this->updateLessons($request, $item);
@@ -101,7 +105,9 @@ class CourseController extends Controller
             $item->cover = $cover->path;
         }
         $item->save();
-
+        if($request->ajax()){
+            return ['success'=>true];
+        }
         return redirect()->route('courses.index');
     }
 
@@ -309,12 +315,15 @@ class CourseController extends Controller
         $arr = $request->lessons;
         $arr = array_map('intval', $arr);
         $tmp = [];
-        foreach ($arr as $id) {
+        foreach ($arr as $k => $id) {
             $tmp[$id] = [
                 'created_at' => '' . Carbon::now(),
                 'updated_at' => '' . Carbon::now(),
+                'no' => $k,
             ];
         }
+        Log::info(__FILE__ . json_encode($tmp));
+
         try {
             $changes = $course->lessons()->sync($tmp);
             if ($changes['attached']) {//如果有新课时添加,给所属课程的学员发送站内通知

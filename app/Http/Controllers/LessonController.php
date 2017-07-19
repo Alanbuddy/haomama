@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Util\ChunkedUpload;
+use App\Http\Util\IO;
 use App\Models\Course;
+use App\Models\File;
 use App\Models\Lession;
 use App\Models\Lesson;
 use App\Models\Video;
@@ -12,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
-    use SignInTrait, CommentTrait, ChunkedUpload;
+    use SignInTrait, CommentTrait, IO;
 
     function __construct()
     {
@@ -27,9 +29,9 @@ class LessonController extends Controller
     public function index(Request $request)
     {
 //        $type = $request->get('type');
-        $items = Lesson::where('id', '>', '0')
+        $items = Lesson::orderBy('id', 'desc')
             ->paginate(10);
-        if($request->ajax()){
+        if ($request->ajax()) {
             return $items;
         }
         return view('admin.lesson.index', [
@@ -82,25 +84,59 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        $type = $request->get('type', 'video');
+        $this->validate($request, ['video_id' => 'required']);
         $item = new Lesson();
-        $item->fill($request->only([
-            'name',
-            'video_id',
-            'begin',
-            'end',
-            'description',
-        ]));
+        $item->fill($request->only(['name', 'type', 'video_id', 'begin', 'end', 'description',]));
         if ($request->file('cover')) {
             $folderPath = public_path('storage/lesson/' . $item->id);
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
             $item->cover = $cover->path;
+        }
+        $type = $request->get('type', 'video');
+        if ('audio' == $type) {
+            $this->storeAttachments($request, $item);
         }
         $item->save();
         if ($request->json()) {
             return ['success' => true, 'id' => $item->id];
         }
         return redirect()->route('lessons.index');
+    }
+
+    public function storeAttachments(Request $request, Lesson $lesson)
+    {
+        $video = Video::find($request->video_id);
+        if ($request->has('pictures')) {
+            //TODO sort
+            $arr = $video->attachments()
+                ->where('mime', 'like', 'image%')
+                ->select('id')->get();
+            $video->detach(array_map(function ($v) {
+                return $v->id;
+            }, $arr));
+            $tmp = [];
+            $arr = $request->pictures;
+            foreach ($arr as $k => $v) {
+                $tmp[$v] = ['no' => $k];
+            }
+            $video->attachments()->attach($tmp);
+        }
+        if ($request->has('audio')) {
+            $arr = $video->attachments()
+                ->where('mime', 'like', 'audio%')
+                ->select('id')->get();
+            $video->detach(array_map(function ($v) {
+                return $v->id;
+            }, $arr));
+            $audio = File::find($request->audio);
+            $video->attachments()->attach($audio->id);
+        }
+        if ($request->file('timeline')) {
+            $file = $request->file('timeline');
+            $ret = $this->parseTimeline(file_get_contents($file));
+            $video->caption = json_encode($ret);
+            $video->save();
+        }
     }
 
     /**
