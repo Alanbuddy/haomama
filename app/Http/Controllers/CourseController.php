@@ -63,11 +63,10 @@ class CourseController extends Controller
     public function create(Request $request)
     {
 //        return view('admin.course.create');
-        if ($request->get('type') == 'offline') {
-            return view('admin.course.offline');
-        }
         $categories = Term::where('type', 'category')->get();
-        return view('admin.course.new', compact('categories'));
+        return view($request->get('type') == 'offline'
+            ? 'admin.course.offline'
+            : 'admin.course.new', compact('categories'));
     }
 
     /**
@@ -79,7 +78,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category_id' => 'required',
+            'category_id' => 'required|numeric',
             'name' => 'required',
             'type' => 'required',
         ]);
@@ -95,10 +94,12 @@ class CourseController extends Controller
             'type',
         ]));
         $item->save();
-        $this->updateLessons($request, $item);
-        $this->updateTags($request, $item);
-        $this->updateTeachers($request, $item);
-
+        if ($request->has('lessons'))
+            $this->updateLessons($request, $item);
+        if ($request->has('tags'))
+            $this->updateTags($request, $item);
+        if ($request->has('teachers'))
+            $this->updateTeachers($request, $item);
         if ($request->file('cover')) {
             $folderPath = public_path('storage/course/' . $item->id);
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
