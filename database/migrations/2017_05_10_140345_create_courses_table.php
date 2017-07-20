@@ -28,6 +28,8 @@ class CreateCoursesTable extends Migration
             $table->timestamp('end')->nullable();
             $table->text('description')->nullable();
             $table->json('extra')->nullable();
+            $table->json('schedule')->nullable();
+            $table->json('outline')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
