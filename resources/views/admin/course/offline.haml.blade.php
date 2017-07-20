@@ -9,6 +9,8 @@
 
 :javascript
   window.course_index = "#{route('courses.index')}"
+  window.course_store = "#{route('courses.store')}"
+  window.admin_course_show = "#{route('admin.courses.show', -1)}"
   window.token = "#{csrf_token()}"
   window.add_teacher = "#{route('users.search')}"
   window.tag_store = "#{route('terms.store')}"
@@ -47,8 +49,8 @@
                   %label.input-caption 课程类型:
                   %select.form-control.input-width#course-type
                     %option 请选择类型
-                    // - foreach ($categories as $category )
-                    //   %option{value: $category->id}= $category->name
+                    - foreach ($categories as $category )
+                      %option{value: $category->id}= $category->name
                   %label.input-caption 课程节数:
                   %input.form-control.input-width#course-length{:type => "text"}
                 .controls.controls-row

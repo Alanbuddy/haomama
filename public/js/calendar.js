@@ -29,6 +29,13 @@ $(document).ready(function(){
   };
   editor_lesson.create();
 
+  function guid(){
+    function s4(){
+      return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
+    return (s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4());
+  }
+
   var initialLocaleCode = "zh-cn";
   $('#calendar').fullCalendar({
     header: {
@@ -47,7 +54,7 @@ $(document).ready(function(){
     eventClick: function(calEvent, jsEvent, view){
       $("#calendar").fullCalendar('removeEvents', calEvent.id);
     }
-    });
+  });
 
   var type = "tag";
   $('#type-tag').tagEditor({
@@ -161,7 +168,7 @@ $(document).ready(function(){
     }
   });
 
-  function check_input(name, length, ori_price, price, mix_num, max_num){
+  function check_input(name, length, ori_price, price, min_num, max_num){
     if(name == ""){
       showMsg("课程名称必须填写", "center");
       return false;
@@ -206,17 +213,10 @@ $(document).ready(function(){
     $(".week-btn").removeClass("active-btn");
   }
 
-  function guid(){
-    function s4(){
-      Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-  }
-
   function add_event(){
     var date = $("#datepicker").val().match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/);
     if(date == null){
-      $.page_notification("请输入合法的日期", 3000);
+      showMsg("请输入合法的日期", "center");
       return false;
     }
     date = date[0];
@@ -224,7 +224,7 @@ $(document).ready(function(){
     var start_time = $("#start-time").val().match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/);
     var end_time = $("#end-time").val().match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/);
     if(start_time == null || end_time == null){
-      $.page_notification("请输入合法的时间", 3000);
+      showMsg("请输入合法的时间", "center");
       return false;
     }
     start_time = start_time[0];
@@ -235,15 +235,15 @@ $(document).ready(function(){
     var start_seconds = parseInt(start_ary[0]) * 3600 + parseInt(start_ary[1]) * 60 +parseInt(start_ary[2]);
     var  end_seconds = parseInt(end_ary[0]) * 3600 + parseInt(end_ary[1]) * 60 +parseInt(end_ary[2]);
     if(start_seconds >= end_seconds){
-      $.page_notification("结束时间必须在开始时间之后", 3000);
+      showMsg("结束时间必须在开始时间之后", "center");
       return false;
     }
     var e = {
       id: guid(),
       title: "",
       allDay: false,
-      start: date + "T" + start_time,
-      end: date + "T" + end_time,
+      start: date + " " + start_time,
+      end: date + " " + end_time,
     };
     $("#calendar").fullCalendar('renderEvent', e, true);
     $("#calendar").fullCalendar("gotoDate", Date.parse(date));
@@ -305,17 +305,58 @@ $(document).ready(function(){
       tags.push($(this).attr("data-id"));
     });
     var desc = editor.txt.html();
-    // var lesson_title = editor_lesson.txt.html();   //课时标题添加
+    var lesson_title = editor_lesson.txt.text().split("。");
     var teacher_arr = [];
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
     });
     var path = $(".cover-path").text();
     var offline = "offline";
+
+    var fc_events = $('#calendar').fullCalendar('clientEvents');
+    var date_in_calendar = [];
+
+    $.each(
+      fc_events,
+      function(index, fc_event){
+        date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i);
+      }
+    );
+
     var ret = check_input(name, length, original_price, price, min_num, max_num);
     if(ret == false) {
       return false;
     }
+    $.postJSON(
+      window.course_store,
+      {
+        name: name,
+        category_id: category_id,
+        lessonsCount: length,
+        original_price: original_price,
+        price: price,
+        tags: tags,
+        teachers: teacher_arr,
+        description: desc,
+        cover: path,
+        type: offline,
+        mininum: min_num,
+        quota: max_num,
+        address: address,
+        begin: time,
+        schedule: date_in_calendar,
+        titles: lesson_title,
+        _token: window.token
+      },
+      function(data){
+        console.log(data);
+        if(data.success){
+          var str = window.admin_course_show.substring(0, window.admin_course_show.length - 2);
+          var cid = data.data.id;
+          location.href = str + cid;
+        }
+      }
+      );
   });
 
 

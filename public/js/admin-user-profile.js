@@ -29,9 +29,11 @@ $(document).ready(function(){
       );
   });
 
+  var click_url = null;
 	function account_set_remind(event){
     var name = $("#user_name").val().trim();
     if(name != ""){
+      click_url = event.currentTarget.href;
       event.preventDefault();
       $("#setModal").modal("show");
     }
@@ -45,6 +47,9 @@ $(document).ready(function(){
   for(var i=0;i<len;i++){
     if(unset){
       arr_a[i].addEventListener("click", account_set_remind);
+      $("#set-confirm").click(function(){
+        location.href = click_url;
+      });
     }else{
       arr_a[i].removeEventListener("click", account_set_remind);
     }
