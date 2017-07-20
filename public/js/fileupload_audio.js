@@ -109,27 +109,18 @@ $(document).ready(function(){
   }); 
 
 
+
+
   var $list_img = $("#imglist");
   var $imgdiv = $(".img-div");
   var uploader_img = WebUploader.create({
-
-      // swf文件路径
     swf: '/js/plugin/Uploader.swf',
-
-    // 文件接收服务端。
     server: window.fileupload,
-
-    // 选择文件的按钮。可选。
-    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
     pick: '#picker_img',
-
-    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
     resize: false,
     auto: false,
     dnd: ".img-div",
     disableGlobalDnd: true,
-    // fileNumLimit: 1,   //限制只能上传一个文件
-
     // chunked: true,     //是否要分片处理大文件上传
     // chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
