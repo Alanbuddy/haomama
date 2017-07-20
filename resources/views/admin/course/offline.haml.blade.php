@@ -9,6 +9,8 @@
 
 :javascript
   window.course_index = "#{route('courses.index')}"
+  window.course_store = "#{route('courses.store')}"
+  window.admin_course_show = "#{route('admin.courses.show', -1)}"
   window.token = "#{csrf_token()}"
   window.add_teacher = "#{route('users.search')}"
   window.tag_store = "#{route('terms.store')}"

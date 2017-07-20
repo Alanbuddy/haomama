@@ -254,13 +254,14 @@ $(document).ready(function(){
     $(".example li").each(function(){
       lesson_list.push($(this).attr("data-id"));
     });
-    var lesson_title = editor_lesson.txt.html();
+    // var lesson_title = editor_lesson.txt.html();   正在考虑中
     var teacher_arr = [];
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
     });
     var path = $(".cover-path").text();
     var online = "online";
+    
     var ret = check_input(name, length, original_price, price);
     if(ret == false) {
       return false;
