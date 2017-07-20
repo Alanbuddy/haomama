@@ -81,6 +81,9 @@ class CourseController extends Controller
             'category_id' => 'required|numeric',
             'name' => 'required',
             'type' => 'required',
+            'minimum' => 'sometimes|required|numeric',
+            'quota' => 'sometimes|numeric',
+            'address' => 'sometimes',
         ]);
         $item = new Course();
         $item->fill($request->only([
@@ -91,15 +94,20 @@ class CourseController extends Controller
             'original_price',
             'cover',
             'minimum',
+            'quota',
+            'address',
             'type',
         ]));
-        $item->save();
+        if ($request->has('titles'))
+            $item->titles = json_encode($request->titles);
         if ($request->has('lessons'))
             $this->updateLessons($request, $item);
         if ($request->has('tags'))
             $this->updateTags($request, $item);
         if ($request->has('teachers'))
             $this->updateTeachers($request, $item);
+        if ($request->has('schedule'))
+            $item->schedule = json_encode($request->schedule);
         if ($request->file('cover')) {
             $folderPath = public_path('storage/course/' . $item->id);
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
@@ -241,9 +249,10 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        return view('admin.course.edit', [
-            'item' => $course,
-        ]);
+        $lessons = $course->lessons;
+        $teachers = $course->teachers;
+        $tags = $course->tags;
+        return view('admin.course.edit', compact('course', 'lessons', 'teachers', 'tags'));
     }
 
     /**
