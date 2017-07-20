@@ -57,12 +57,11 @@
                   .btns
                     #picker_img 选择文件
                     %button#imgBtn.btn.btn-default 开始上传
-              #imglist.uploader-list.img-div.margin20      
+              #imglist.uploader-list.img-div.margin20  
 
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/admin_lesson_audio.js')}}"></script>
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>

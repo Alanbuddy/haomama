@@ -83,8 +83,6 @@ $(document).ready(function(){
     $( '#'+file.id ).find('.progress').fadeOut();
   });
 
-  var title = $("#input-caption").val();
-
   $btn.click(function(){
     $.getJSON(
       window.audio_init,
@@ -120,6 +118,7 @@ $(document).ready(function(){
     resize: false,
     auto: false,
     dnd: ".img-div",
+    multiple: true,
     disableGlobalDnd: true,
     // chunked: true,     //是否要分片处理大文件上传
     // chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
@@ -131,6 +130,7 @@ $(document).ready(function(){
         '<h4 class="info_img">' + file.name + '</h4>' +
         '<p class="state_img">等待上传...</p>' +
         '<img src="/icon/admin/rubbish.png" class="delete_img">' +
+        '<span class="data-id"></span>' +
         '<input class="img_time" placeholder="请输入时间">' +
     '</div>' );
     $img = $("#"+ file.id).find('.img_wrap').find("img");
@@ -160,34 +160,26 @@ $(document).ready(function(){
       '</div>').appendTo( $li ).find('.progress-bar');
     }
 
-    $li.find('p.state').text('上传中');
+    $li.find('p.state_img').text('上传中');
 
     $percent.css( 'width', percentage * 100 + '%' );
   });
 
-  uploader_img.on( 'uploadSuccess', function( file ) {
-    $( '#'+file.id ).find('p.state').text('已上传');
+  uploader_img.on( 'uploadSuccess', function( file, response) {
+    $( '#'+file.id ).find('p.state_img').text('已上传').hide(2000);
+
+    $('#'+file.id).find('.data-id').text(response.data.id);
   });
 
   uploader_img.on( 'uploadError', function( file ) {
-    $( '#'+file.id ).find('p.state').text('上传失败');
+    $( '#'+file.id ).find('p.state_img').text('上传失败');
   });
 
   uploader_img.on( 'uploadComplete', function( file ) {
     $( '#'+file.id ).find('.progress').fadeOut();
   });
 
-  var img_time = [];
-  var img_name = [];
   $("#imgBtn").click(function(){
-    $(".img_time").each(function(){
-      img_time.push($(this).val());
-    });
-    $(".info_img").each(function(){
-      img_name.push($(this).text());
-    });
-    console.log(img_name);
-    console.log(img_time);
     uploader_img.upload();
   });
 
@@ -203,5 +195,35 @@ $(document).ready(function(){
     $(this).find(".delete_img").hide();
   });
 
+  var E = window.wangEditor;
+  var editor = new E('#edit-box');
+  editor.customConfig.uploadImgServer = '/upload' ;
+  editor.customConfig.showLinkImg = false;
+  editor.customConfig.menus = [
+        'head',
+        'image'
+     ];
+  editor.customConfig.uploadHeaders = {
+    'Accept' : 'HTML'
+  };
+  editor.create();
+
+  $(document).on('click', '#finish-btn', function(){
+    var img_data = [];
+    var img_item = {};
+    $(".pre_img").each(function(){
+      var id = $(this).find('.data-id').text();
+      var time = $(this).find('.img_time').val();
+      img_item = {
+        file: id,
+        time: time
+      };
+      img_data.push(img_item);
+    });
+    console.log(img_data);
+    var title = $("#input-caption").val();
+    var desc = editor.txt.html();
+    console.log(title);
+  });
 
 });

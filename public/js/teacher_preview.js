@@ -16,6 +16,24 @@ function previewImage(file){
       var reader = new FileReader();
       reader.onload = function(evt){img.src = evt.target.result;};
       reader.readAsDataURL(file.files[0]);
+      var formData = new FormData();
+      formData.append('file', $("#previewImg")[0].files[0]);
+      formData.append('_token', window.token);
+      $.ajax({
+        url: window.fileupload,
+        type: 'post',
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false
+        }).done(function(res){
+          if (res.success){
+            $(".cover-path").text(res.path);
+            console.log(res.path);
+          }
+        }).fail(function(res){
+
+        });
   }
   else //兼容IE
   {

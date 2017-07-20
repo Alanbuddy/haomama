@@ -45,6 +45,7 @@
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
                 %img.edit-photo#imghead{src: "/icon/admin/add3.png", onclick: "$('#previewImg').click()"}
+              %span.cover-path{style: "display:none;"}
                 
             .controls-div.font-color3.f14
               .controls.controls-row
@@ -75,8 +76,8 @@
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/admin_teacher_new.js')}}"></script>
-<script src="/js/plugin/wangEditor.min.js"></script>
-<script src="/js/teacher_preview.js"></script>
+<script src="js/plugin/wangEditor.min.js"></script>
+<script src="js/teacher_preview.js"></script>
+<script src="js/admin_teacher_create.js"></script>
 
 @endsection
