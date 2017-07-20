@@ -46,7 +46,8 @@ class FileController extends Controller
 
     public function mergeFile(Request $request)
     {
-        $ret = $this->merge($request);
+        $file=File::find($request->file_id);
+        $ret = $this->merge($request,$file->description);
         return $ret;
     }
 }
