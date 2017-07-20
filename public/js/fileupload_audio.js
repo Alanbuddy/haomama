@@ -7,7 +7,7 @@ $(document).ready(function(){
     swf: '/js/plugin/Uploader.swf',
 
     // 文件接收服务端。
-    server: "/haml?m=upload",
+    server: window.fileupload,
 
     // 选择文件的按钮。可选。
     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -24,15 +24,14 @@ $(document).ready(function(){
     chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
 
-  uploader.options.formData = {
-      _token: window.token,
-    };
+  var file_name = null;
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
         '<h4 class="info">' + file.name + '</h4>' +
         '<p class="state">等待上传...</p>' +
         '<button class="delete_btn">删除</button>' +
     '</div>' );
+    file_name = file.name;
   });
 
   uploader.on( 'uploadProgress', function( file, percentage ) {
@@ -54,6 +53,26 @@ $(document).ready(function(){
 
   uploader.on( 'uploadSuccess', function( file ) {
     $( '#'+file.id ).find('p.state').text('已上传');
+    var audio_file = uploader.getFiles();
+    var audio_size = audio_file[0].size;
+    var chunksize = 0.5*1024*1024;
+    var chunks = Math.ceil(audio_size / chunksize);
+    var audio_id = $(".audio-id").text();
+    console.log(audio_id);
+    $.postJSON(
+      window.files_merge,
+      {
+        _token: window.token,
+        name: file_name,
+        count: chunks,
+        file_id: audio_id
+      },
+      function(data){
+        console.log(data);
+        if(data.success){
+        }
+      }
+      );
   });
 
   uploader.on( 'uploadError', function( file ) {
@@ -67,7 +86,20 @@ $(document).ready(function(){
   var title = $("#input-caption").val();
 
   $btn.click(function(){
-    uploader.upload();
+    $.getJSON(
+      window.audio_init,
+      {},
+      function(data){
+        if(data.success){
+          $(".audio-id").text(data.data.id);
+          uploader.options.formData = {
+              audio_id: data.data.id,
+              _token: window.token
+            };
+          uploader.upload();
+        }
+      }
+      );
   });
 
   $("#thelist").on("click", ".delete_btn", function(){  
@@ -77,27 +109,18 @@ $(document).ready(function(){
   }); 
 
 
+
+
   var $list_img = $("#imglist");
   var $imgdiv = $(".img-div");
   var uploader_img = WebUploader.create({
-
-      // swf文件路径
     swf: '/js/plugin/Uploader.swf',
-
-    // 文件接收服务端。
-    server: "/haml?m=upload",
-
-    // 选择文件的按钮。可选。
-    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    server: window.fileupload,
     pick: '#picker_img',
-
-    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
     resize: false,
     auto: false,
     dnd: ".img-div",
     disableGlobalDnd: true,
-    // fileNumLimit: 1,   //限制只能上传一个文件
-
     // chunked: true,     //是否要分片处理大文件上传
     // chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });

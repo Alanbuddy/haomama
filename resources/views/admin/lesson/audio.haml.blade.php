@@ -6,7 +6,8 @@
 :javascript
     window.lesson_index = "#{route('lessons.index')}"
     window.lesson_store = "#{route('lessons.store')}"
-    window.video = "#{route('videos.store')}"
+    window.audio_init = "#{route('file.upload.init')}"
+    window.files_merge = "#{route('files.merge')}"
     window.token = "#{csrf_token()}"
 @endsection
 
@@ -44,6 +45,7 @@
                   .btns
                     #picker 选择文件
                     %button#ctlBtn.btn.btn-default 开始上传
+                %span.audio-id{style: "display:none;"}
               .notice-introduce.clearfix
                 %span.introduce 内容介绍:
                 %span.wangedit-area
