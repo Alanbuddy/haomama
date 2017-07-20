@@ -18,7 +18,12 @@ class FileController extends Controller
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
         $path = $file->move(public_path('app'), $fileName);
-        return ['success' => true, 'path' => substr($path->getPathName(), strlen(public_path()))];
+        $item = new File();
+        $item->path = substr($path->getPathname(), strlen(public_path()));
+        $item->user_id = auth()->user()->id;
+        $item->fill($this->getFileBaseInfo($file));
+        $item->save();
+        return ['success' => true, 'path' => substr($path->getPathName(), strlen(public_path())), 'data' => $item];
     }
 
     public function initChunkUpload(Request $request)
@@ -46,8 +51,8 @@ class FileController extends Controller
 
     public function mergeFile(Request $request)
     {
-        $file=File::find($request->file_id);
-        $ret = $this->merge($request,$file->description);
+        $file = File::find($request->file_id);
+        $ret = $this->merge($request, $file->description);
         return $ret;
     }
 }
