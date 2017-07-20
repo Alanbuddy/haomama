@@ -11,9 +11,10 @@ class LessonSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             DB::table('lessons')->insert([
                 'name' => str_random('7'),
+                'type' => 'video',
                 'video_id' => '3',
                 'created_at' => date('Y-m-d H:i:s',strtotime('-'.$i.' days')),
                 'updated_at' => date('Y-m-d H:i:s'),

@@ -98,7 +98,7 @@ class LessonController extends Controller
         }
         $item->save();
         if ($request->json()) {
-            return ['success' => true, 'id' => $item->id];
+            return ['success' => true, 'data' => $item->id];
         }
         return redirect()->route('lessons.index');
     }
@@ -169,7 +169,9 @@ class LessonController extends Controller
     public function adminShow(Request $request, Lesson $lesson)
     {
         $type = $request->get('type', 'video');
-        return view('video' == $type ? 'admin.lesson.show' : 'admin.lesson.audio_show');
+        return view('video' == $type
+            ? 'admin.lesson.show'
+            : 'admin.lesson.audio_show', compact('lesson'));
     }
 
     //课程下的某一个课时详情

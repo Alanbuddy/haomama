@@ -108,7 +108,7 @@ Route::group([
     Route::post('/videos/merge', 'VideoController@mergeVideo')->name('videos.merge');
     Route::resource('videos', 'VideoController');
 
-    Route::get('/files/upload/init', 'FileController@initChunkUpload')->name('files.upload.init');
+    Route::get('/files/upload/init', 'FileController@initChunkUpload')->name('file.upload.init');
     Route::post('/upload', 'FileController@upload')->name('file.upload');
     Route::post('/files/merge', 'FileController@mergeFile')->name('files.merge');
 
