@@ -63,11 +63,10 @@ class CourseController extends Controller
     public function create(Request $request)
     {
 //        return view('admin.course.create');
-        if ($request->get('type') == 'offline') {
-            return view('admin.course.offline');
-        }
         $categories = Term::where('type', 'category')->get();
-        return view('admin.course.new', compact('categories'));
+        return view($request->get('type') == 'offline'
+            ? 'admin.course.offline'
+            : 'admin.course.new', compact('categories'));
     }
 
     /**
