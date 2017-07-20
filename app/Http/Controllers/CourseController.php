@@ -94,10 +94,12 @@ class CourseController extends Controller
             'type',
         ]));
         $item->save();
-        $this->updateLessons($request, $item);
-        $this->updateTags($request, $item);
-        $this->updateTeachers($request, $item);
-
+        if ($request->has('lessons'))
+            $this->updateLessons($request, $item);
+        if ($request->has('tags'))
+            $this->updateTags($request, $item);
+        if ($request->has('teachers'))
+            $this->updateTeachers($request, $item);
         if ($request->file('cover')) {
             $folderPath = public_path('storage/course/' . $item->id);
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
