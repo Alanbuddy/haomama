@@ -305,7 +305,7 @@ $(document).ready(function(){
       tags.push($(this).attr("data-id"));
     });
     var desc = editor.txt.html();
-    // var lesson_title = editor_lesson.txt.html();   //课时标题添加
+    var lesson_title = editor_lesson.txt.text().split("。");
     var teacher_arr = [];
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
@@ -322,7 +322,7 @@ $(document).ready(function(){
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i);
       }
     );
-    console.log(date_in_calendar);
+
     var ret = check_input(name, length, original_price, price, min_num, max_num);
     if(ret == false) {
       return false;
@@ -345,6 +345,7 @@ $(document).ready(function(){
         address: address,
         begin: time,
         schedule: date_in_calendar,
+        titles: lesson_title,
         _token: window.token
       },
       function(data){

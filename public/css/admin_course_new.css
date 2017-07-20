@@ -1,1 +1,374 @@
-@charset "UTF-8";#teacher,.tag-div{font-family:"微软雅黑"}.direction{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.finish-btn-position{position:absolute;right:20px;top:24px;z-index:10}#finish-btn{width:100px;color:#fff;outline:0}.input-area,.input-width{height:30px;color:#6f6f7e;display:inline-block}.modal-body,label{margin:0;padding:0;max-height:600px}.text-message{width:50%;float:left}.margin20{margin:16px 0 24px}.controls-row:nth-of-type(3){margin-bottom:0}#course-type{margin:0 40px 0 0;padding:0 0 0 8px}.input-width{width:154px}.input-area{width:17.2%}.controls-row{margin-bottom:20px}#course-price{margin-right:40px}#imghead{width:200px;height:138px;-o-object-fit:contain;object-fit:contain}.photo{width:17.25%;display:inline-block;margin-left:7.5%;margin-top:1%}.controls-div{padding:0 3.24%}.tag-div{display:inline-block;vertical-align:middle;width:70.7%;border-radius:4px;font-size:12px}.hot-tag-div{margin-top:8px;margin-left:62px}.hot-tag-div span{display:inline-block;border:1px solid #ccc;background:#f3f3fc;height:28px;line-height:28px;padding:0 5px;border-radius:4px}.ui-helper-hidden-accessible{display:none}#teacher{display:inline-block;border:1px solid #ccc;border-radius:4px;width:100%;font-size:14px;margin-left:2px;outline:0;height:30px;line-height:30px;padding-left:10px}.teacher-div{width:70.5%;margin-left:64px;margin-top:10px}.no-mb{margin-bottom:0}.hot-tag-hide{display:none}.add-tag,.addlesson,.wangedit-area{display:inline-block}.course-introduce{margin:20px 0}.course-lesson,.lesson-div,.lesson-title{margin-bottom:20px}.introduce{margin-right:2px;vertical-align:top}.wangedit-area{width:70.5%;font-size:14px}.w-e-text-container{height:200px!important}.w-e-menu{z-index:10!important}.addlesson{padding:0 20px;background:#10c078;color:#fff;border-radius:6px;cursor:pointer}.input-caption{font-weight:400}#course-name{width:80%}.lesson-title{width:70.5%;border:1px solid #ccc;border-radius:4px;margin-top:20px;margin-left:66px;padding:10px}#lessonModal .modal-dialog{position:absolute;left:50%;top:50%;margin-left:-400px;margin-top:-210px;width:800px;height:420px}#lessonModal .modal-backdrop{background-color:#999}#lessonModal .modal-content{border-radius:12px}#lessonModal .modal-body{margin:0;padding:20px 40px}#lessonModal .close{position:absolute;right:0;top:0;opacity:1;z-index:15}#lessonModal .confirm-btn-position{position:absolute;right:350px;bottom:60px}#lessonModal #confirm-btn{width:100px;color:#fff;outline:0;background:#10c078}#lessonModal .all-div{margin:0 auto;text-align:center}.add-tag,.unadd{margin-left:4px}#lessonModal .select-page{margin-top:60px}ol.example li.placeholder{position:relative}ol.example li.placeholder:before{position:absolute}.ui-draggable,.ui-droppable{background-position:top}.add-tag{height:28px;line-height:28px;padding:0 10px;border-radius:4px;margin-right:8px}.add-tag .delete-tag{width:12px;height:12px;display:none;margin-left:4px;margin-top:-4px}.add-tag-hover{border:1px solid #ccc;background:#f3f3fc}.unadd{display:inline-block}.teacher-id{display:none}
+@charset "UTF-8";
+
+.direction {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.finish-btn-position {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  z-index: 10;
+}
+
+#finish-btn {
+  width: 100px;
+  color: #fff;
+  outline: none;
+}
+
+.modal-body,
+label {
+  margin: 0;
+  padding: 0;
+  max-height: 600px;
+}
+
+.text-message {
+  width: 50%;
+  float: left;
+}
+
+.margin20 {
+  margin: 16px 0 24px 0;
+}
+
+.controls-row:nth-of-type(3) {
+  margin-bottom: 0;
+}
+
+#course-type {
+  margin: 0;
+  padding: 0;
+  padding-left: 8px;
+  margin-right: 40px;
+}
+
+.input-width {
+  width: 154px;
+  height: 30px;
+  display: inline-block;
+  color: #6f6f7e;
+}
+
+.input-area {
+  display: inline-block;
+  width: 17.2%;
+  height: 30px;
+  color: #6f6f7e;
+}
+
+.controls-row {
+  margin-bottom: 20px;
+}
+
+#course-price {
+  margin-right: 40px;
+}
+
+#imghead {
+  width: 200px;
+  height: 138px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.photo {
+  width: 17.25%;
+  display: inline-block;
+  margin-left: 7.5%;
+  margin-top: 1%;
+}
+
+.controls-div {
+  padding: 0 3.24%;
+}
+
+.tag-div {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70.7%;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+}
+
+.hot-tag-div {
+  margin-top: 8px;
+  margin-left: 62px;
+}
+
+.hot-tag-div span {
+  display: inline-block;
+  border: 1px solid #ccc;
+  background: #f3f3fc;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 5px;
+  border-radius: 4px;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+#teacher {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 14px;
+  font-family: "微软雅黑";
+  margin-left: 2px;
+  outline: none;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+.teacher-div {
+  width: 70.5%;
+  margin-left: 64px;
+  margin-top: 10px;
+}
+
+.no-mb {
+  margin-bottom: 0;
+}
+
+.hot-tag-hide {
+  display: none;
+}
+
+.course-introduce {
+  margin: 20px 0;
+}
+
+.introduce {
+  margin-right: 2px;
+  vertical-align: top;
+}
+
+.wangedit-area {
+  display: inline-block;
+  width: 70.5%;
+  font-size: 14px;
+}
+
+.w-e-text-container {
+  height: 200px !important;
+}
+
+.w-e-menu {
+  z-index: 10 !important;
+}
+
+.addlesson {
+  display: inline-block;
+  padding: 0 20px;
+  background: #10c078;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.input-caption {
+  font-weight: normal;
+}
+
+#course-name {
+  width: 80%;
+}
+
+.course-lesson {
+  margin-bottom: 20px;
+}
+
+.lesson-div {
+  margin-bottom: 20px;
+}
+
+.lesson-title {
+  width: 70.5%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 66px;
+  padding: 10px;
+}
+
+#lessonModal .modal-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -400px;
+  margin-top: -210px;
+  width: 800px;
+  height: 420px;
+}
+
+#lessonModal .modal-backdrop {
+  background-color: #999;
+}
+
+#lessonModal .modal-content {
+  border-radius: 12px;
+}
+
+#lessonModal .modal-body {
+  margin: 0;
+  padding: 20px 40px;
+}
+
+#lessonModal .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 1;
+  z-index: 15;
+}
+
+#lessonModal .confirm-btn-position {
+  position: absolute;
+  right: 350px;
+  bottom: 60px;
+}
+
+#lessonModal #confirm-btn {
+  width: 100px;
+  color: #fff;
+  outline: none;
+  background: #10c078;
+}
+
+#lessonModal .all-div {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#lessonModal .select-page {
+  margin-top: 60px;
+}
+
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
+
+.ui-draggable,
+.ui-droppable {
+  background-position: top;
+}
+
+.add-tag {
+  display: inline-block;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 10px;
+  border-radius: 4px;
+  margin-left: 4px;
+  margin-right: 8px;
+}
+
+.add-tag .delete-tag {
+  width: 12px;
+  height: 12px;
+  display: none;
+  margin-left: 4px;
+  margin-top: -4px;
+}
+
+.add-tag-hover {
+  border: 1px solid #ccc;
+  background: #f3f3fc;
+}
+
+.unadd {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.teacher-id {
+  display: none;
+}
+
+#remindModal .modal-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -220px;
+  margin-top: -113px;
+  width: 438px;
+  height: 226px;
+  border-radius: 6px;
+}
+
+#remindModal .modal-body {
+  padding: 40px;
+}
+
+.modal-backdrop {
+  background-color: #999;
+}
+
+.close {
+  position: absolute;
+  right: -14px;
+  top: -14px;
+  opacity: 0.7;
+  z-index: 10;
+}
+
+.close:hover {
+  opacity: 1;
+}
+
+.message {
+  margin: 20px 0;
+  font-size: 16px;
+  color: #323232;
+  text-align: center;
+}
+
+.btn-div {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.btn-div .btn {
+  width: 45%;
+  font-size: 16px;
+  color: white;
+  border: 0;
+  height: 40px;
+}
+
+#set-cancel {
+  background: #10c078;
+  outline: none;
+}
+
+#set-confirm {
+  background: #f7873d;
+  outline: none;
+}
+
