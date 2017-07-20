@@ -113,6 +113,16 @@
           %span.totalitems
           .quotes#Pagination
           
+#remindModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/close.png"}
+      .modal-body
+        %p.message 您尚未保存账号设置，是否确定离开？
+        .btn-div
+          %button.btn#set-cancel{type: "button"} 取&nbsp消
+          %button.btn#set-confirm{type: "button"} 确&nbsp定
 @section('script')
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/wangEditor.min.js"></script>
