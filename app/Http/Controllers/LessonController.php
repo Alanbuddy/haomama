@@ -28,8 +28,9 @@ class LessonController extends Controller
      */
     public function index(Request $request)
     {
-//        $type = $request->get('type');
+        $type = $request->get('type','video');
         $items = Lesson::orderBy('id', 'desc')
+            ->where('type',$type)
             ->paginate(10);
         if ($request->ajax()) {
             return $items;
