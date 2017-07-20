@@ -494,3 +494,19 @@ a:hover {
   margin: 0;
   padding: 0;
 }
+
+.ui-datepicker .ui-datepicker-title {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: flex;
+}
+.ui-datepicker .ui-datepicker-title select {
+  vertical-align: middle;
+}
+#ui-datepicker-div {
+  width: 195px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+}
