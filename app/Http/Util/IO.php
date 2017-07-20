@@ -4,6 +4,7 @@ namespace App\Http\Util;
 
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Created by PhpStorm.
