@@ -142,10 +142,11 @@ $(document).ready(function(){
         _token: window.token
       },
       function(data){
+        console.log(data);
         if(data.success){
-          window.lesson_id = data.id;
-          console.log(window.lesson_id);
-          location.href = window.admin_lesson_show + "?type=video";
+          var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
+          var lid = data.data.id;
+          location.href = str + lid + "?type=video";
         }
       }
       );
