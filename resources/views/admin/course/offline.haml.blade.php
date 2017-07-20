@@ -1,10 +1,10 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_course_offline.css') }}">
+<link rel="stylesheet" href="css/plugin/jquery-ui.css">
 <link href="css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
 <link href="css/plugin/fullcalendar.min.css" rel="stylesheet" type="text/css">
 <link href="css/plugin/jquery.timepicker.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="css/plugin/jquery-ui.css">
 
 
 :javascript

@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_lesson_audio.css') }}">
-<link href="/css/plugin/webuploader.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/webuploader.css" rel="stylesheet" type="text/css">
 
 :javascript
     window.lesson_index = "#{route('lessons.index')}"
@@ -14,7 +14,7 @@
 .content-area
   .main-top.direction
     %a{href: route('lessons.index')}
-      %img.back{src: "/icon/admin/back.png"}
+      %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -61,10 +61,10 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_lesson_audio.js')}}"></script>
-<script src="/js/plugin/wangEditor.min.js"></script>
-<script src="/js/plugin/jquery-ui.min.js"></script>
-<script src="/js/plugin/webuploader.js"></script>
+<script src="js/plugin/wangEditor.min.js"></script>
+<script src="js/plugin/jquery-ui.min.js"></script>
+<script src="js/plugin/webuploader.js"></script>
 
-<script src="/js/fileupload_audio.js"></script>
+<script src="js/fileupload_audio.js"></script>
 
 @endsection
