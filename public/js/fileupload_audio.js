@@ -91,7 +91,7 @@ $(document).ready(function(){
         if(data.success){
           $(".audio-id").text(data.data.id);
           uploader.options.formData = {
-              audio_id: data.data.id,
+              file_id: data.data.id,
               _token: window.token
             };
           uploader.upload();
