@@ -16,7 +16,7 @@ $(document).ready(function(){
           success: function(data) {
             total = data.total;
             $(".checkbox-items .checkbox").remove();
-            for(var i=0;i<data.per_page;i++){
+            for(var i=0;i<data.data.length;i++){
               var check_item = $('<div class="checkbox">' +
                                     '<label>' +
                                       '<input type="checkbox" name="lesson-check" value=' + data.data[i].id + ' data-text=' + data.data[i].name + '>' + data.data[i].name +
@@ -195,7 +195,7 @@ $(document).ready(function(){
     var len = title_arr.length;
 
     for(var i=0;i<len;i++){
-      var oLi = $("<li 'data-id'=title_arr[i]>" + title_text[i] + "</li>");
+      var oLi = $("<li data-id="+title_arr[i]+">" + title_text[i] + "</li>");
       $(".example").append(oLi);
     }
 
