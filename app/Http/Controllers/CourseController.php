@@ -36,19 +36,24 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $recommendedCourses = Course::where('hot', true)->get();
-        $page = $request->get('page', 1);
+//        $page = $request->get('page', 1);
 //            $pageSize = 10 - count($recommendedCourses);
-        $pageSize = $page == 1 ? 3 : 10;
+//        $pageSize = $page == 1 ? 3 : 10;
+
+//        $items = Course::with('category')
+//            ->paginate($pageSize);
+//        if ($page > 1) {
+//            $remainOfLastPage = Course::with('category')
+//                ->offset($pageSize * ($page - 1))
+//                ->limit($pageSize)
+//                ->get();
+//        }
 
         $items = Course::with('category')
-            ->paginate($pageSize);
-        if ($page > 1) {
-            $remainOfLastPage = Course::with('category')
-                ->offset($pageSize * ($page - 1))
-                ->limit($pageSize)
-                ->get();
-        }
-
+            ->with('teachers')
+            ->with('tags')
+            ->orderBy('id','desc')
+            ->paginate(10);
 //        dd($items);
         return view('admin.course.index', [
             'items' => $items
