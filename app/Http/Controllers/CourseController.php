@@ -269,10 +269,12 @@ class CourseController extends Controller
             ->withPivot('created_at')
             ->orderBy('no', 'desc')
             ->get();
+
+        $categories = Term::where('type', 'category')->get();
         // dd($course);
         return view($course->type == 'online'
             ? 'admin.course.show'
-            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons'));
+            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons','categories'));
     }
 
     /**
