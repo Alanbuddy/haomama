@@ -87,11 +87,11 @@ class UserController extends Controller
             'name',
             'email',
             'phone',
+            'avatar',
+            'description',
         ]));
         if ('teacher' == $request->get('type')) {
             $item->fill($request->only([
-                'avatar',
-                'description',
             ]));
         }
         $item->save();
