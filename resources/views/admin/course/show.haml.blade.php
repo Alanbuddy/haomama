@@ -46,8 +46,8 @@
                 .controls.controls-row
                   %label.input-caption 课程名称:
                   %span.unedit-box= $course->name
-                  - if($hasRecommendedCourse)
-                    %span.font-color-red.unedit-box= ($hasRecommendedCourse->name)
+                  // - if($hasRecommendedCourse)
+                  //   %span.font-color-red.unedit-box= ($hasRecommendedCourse->name)
                   %span.edit-box
                     %input.input-area.form-control#course-name{:type => "text", placeholder: "必填"}
                 .controls.controls-row
@@ -59,7 +59,7 @@
                       - foreach ($categories as $category )
                         %option{value: $category->id}= $category->name
                   %label.input-caption 课程节数:
-                  %span.unedit-box.short-span= count($course->titles)
+                  %span.unedit-box.short-span= count(json_decode($course->titles))
                   %span.edit-box
                     %input.form-control.input-width{:type => "text"}
                 .controls.controls-row
@@ -90,7 +90,7 @@
                   -foreach($course->teachers as $teacher)
                     %span.tag-span=$teacher->name
                 %span.edit-box.teacher-div
-                  #teacher-tag 
+                  %input#teacher{type: "text"}
 
               .course-introduce.introduce-flex
                 %span.introduce 课程介绍:
@@ -117,8 +117,8 @@
               .course-lesson.introduce-flex
                 %span.introduce 课时标题:
                 .unedit-box.ml4
-                  // - foreach($course->titles as $title)
-                  //   %p= $title->name
+                  - foreach(json_decode($course->titles) as $title)
+                    %p= $title
                 %span.edit-box.wangedit-area
                   #title-area 
           #tab2.tab-pane

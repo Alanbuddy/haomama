@@ -44,7 +44,8 @@
             - foreach ($data[$i]['items'] as $item)
               .course-item{'data-id' => $item['id']}
                 .course-icon-div
-                  %img.course-recommend{src: "icon/recommend.png"}
+                  - if($data[$i]['hasRecommendedCourse']&&$item['id']==$data[$i]['recommendedCourse']->id)
+                    %img.course-recommend{src: "icon/recommend.png"}
                   %img.course-icon{src: $item['cover'] ? $item['cover'] : "icon/example.png"}
                 .word-div
                   .course-row-div.clearfix

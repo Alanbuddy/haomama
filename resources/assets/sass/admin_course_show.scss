@@ -108,21 +108,25 @@
 .ui-helper-hidden-accessible {
   display: none;
 }
-#teacher-tag {
+#teacher {
   display: inline-block;
-  vertical-align: middle;
-  width: 75.2%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  height: 30px;
-  font-size: 12px;
+  width: 100%;
+  font-size: 14px;
   font-family: "微软雅黑";
   margin-left: 2px;
+  outline: none;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
 }
 .teacher-div {
-  width: 70.7%;
+  width: 70.5%;
   margin-left: 4px;
+  margin-top: 10px;
 }
+
 .no-mb {
   margin-bottom: 0;
 }
