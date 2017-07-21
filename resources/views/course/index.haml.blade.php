@@ -44,7 +44,7 @@
             - foreach ($data[$i]['items'] as $item)
               .course-item{'data-id' => $item['id']}
                 .course-icon-div
-                  - if($data[$i]['hasRecommendedCourse']&&$item['id']==$data[$i]['recommendedCourse']->id)
+                  - if($data[$i]['hasRecommendedCourse']&&$item['id']==$data[$i]['recommendedCourse']->first()->id)
                     %img.course-recommend{src: "icon/recommend.png"}
                   %img.course-icon{src: $item['cover'] ? $item['cover'] : "icon/example.png"}
                 .word-div
@@ -68,7 +68,8 @@
             - foreach ($data[$i]['itemsOrderByUserCount'] as $itemOrderByUserCount)
               .course-item{'data-id' => $itemOrderByUserCount['id']}
                 .course-icon-div
-                  %img.course-recommend{src: "icon/recommend.png"}
+                  - if($data[$i]['hasRecommendedCourse']&&$itemOrderByUserCount['id']==$data[$i]['recommendedCourse']->first()->id)
+                    %img.course-recommend{src: "icon/recommend.png"}
                   %img.course-icon{src: $itemOrderByUserCount['cover'] ? $itemOrderByUserCount['cover'] : "icon/example.png"}
                 .word-div
                   .course-row-div.clearfix
@@ -91,7 +92,8 @@
             - foreach ($data[$i]['itemsOrderByCommentRating'] as $itemOrderByCommentRating)
               .course-item{'data-id' => $itemOrderByCommentRating['id']}
                 .course-icon-div
-                  %img.course-recommend{src: "icon/recommend.png"}
+                  - if($data[$i]['hasRecommendedCourse']&&$itemOrderByCommentRating['id']==$data[$i]['recommendedCourse']->first()->id)
+                    %img.course-recommend{src: "icon/recommend.png"}
                   %img.course-icon{src: $itemOrderByCommentRating['cover'] ? $itemOrderByCommentRating['cover'] : "icon/example.png"}
                 .word-div
                   .course-row-div.clearfix

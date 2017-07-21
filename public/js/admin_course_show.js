@@ -10333,17 +10333,6 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var is_edit;
-  is_edit = false;
-  $("#edit-btn").click(function() {
-    is_edit = true;
-    $(".unedit-box").toggle();
-    $(".edit-box").toggle();
-    $(".text-message").removeClass("unedit");
-    $(".lesson-title").toggle();
-    $(this).toggle();
-    return $("#finish-btn").toggle();
-  });
   $("#register-message").click(function() {
     $("#unshelve-btn").hide();
     $("#edit-btn").hide();

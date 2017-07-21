@@ -10478,7 +10478,7 @@ $(".course-item").click(function() {
 });
 
 $(".back").click(function() {
-  return location.href = history.back();
+  return location.href = window.course_item;
 });
 
 $(".time").each(function() {

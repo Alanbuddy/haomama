@@ -38,7 +38,7 @@ $(document).ready(function($){
       var file_id = $(".file-id").text();
       var option = {
           "auto_play": "1",
-          "file_id": "9031868222953457775",    // file_id替换
+          "file_id": file_id,
           "app_id": "1253793695",
           "width": 750,
           "height": 422,

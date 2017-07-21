@@ -34,7 +34,7 @@
   .div-line
   .desc-div.f14.color7
     %span.fb 本课内容
-    .desc= $lesson['description']
+    .desc= strip_tags(htmlspecialchars_decode($lesson['description']))
 
 .main-div
   - if (count($comments) > 3)
