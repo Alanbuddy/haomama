@@ -239,7 +239,10 @@ class CourseController extends Controller
             ->withPivot('created_at')
             ->orderBy('no', 'desc')
             ->get();
-        return view('admin.course.show', compact('course', 'teachers', 'lessons'));
+
+        return view($course->type=='online'
+            ?'admin.course.show'
+            :'', compact('course', 'teachers', 'lessons'));
     }
 
     /**
