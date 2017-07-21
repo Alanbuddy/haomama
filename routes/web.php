@@ -68,6 +68,7 @@ Route::group([
     Route::put('/courses/{course}/tag/update', 'CourseController@updateTags')->name('courses.tags.update');
     Route::get('/courses/{course}/comments', 'CourseController@commentsIndex')->name('courses.comments.index');//课程评论
     Route::get('/courses/{course}/hot', 'CourseController@toggleHot')->name('courses.hot');//置顶与取消置顶
+    Route::get('/courses/{course}/publish', 'CourseController@togglePublish')->name('courses.publish');//发布与取消发布课程
     Route::get('/courses/{course}/enroll', 'CourseController@enrollHandle')->name('courses.enroll');//加入课程
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');//收藏课程
     Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');//获取推荐的课程

@@ -52,7 +52,7 @@ class CourseController extends Controller
         $items = Course::with('category')
             ->with('teachers')
             ->with('tags')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate(10);
 //        dd($items);
         return view('admin.course.index', [
@@ -245,9 +245,9 @@ class CourseController extends Controller
             ->orderBy('no', 'desc')
             ->get();
 
-        return view($course->type=='online'
-            ?'admin.course.show'
-            :'admin.course.offline_show', compact('course', 'teachers', 'lessons'));
+        return view($course->type == 'online'
+            ? 'admin.course.show'
+            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons'));
     }
 
     /**
@@ -274,32 +274,47 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        $course->fill($request->only([
+        $this->validate($request, [
+            'category_id' => 'required|numeric',
+            'name' => 'required',
+            'type' => 'required',
+            'minimum' => 'sometimes|required|numeric',
+            'quota' => 'sometimes|numeric',
+            'address' => 'sometimes',
+        ]);
+        $item =$course;
+        $item->fill($request->only([
             'name',
             'description',
-            'price',
-            'begin',
-            'end',
             'category_id',
+            'price',
+            'original_price',
+            'cover',
+            'minimum',
+            'quota',
+            'address',
+            'type',
         ]));
-        $ids = $request->teacherId;
-        $arr = explode(',', $ids);
-        $arr = array_map('intval', $arr);
-        dd($arr);
-        try {
-            $course->teachers()->sync($arr);
-        } catch (Exception $e) {
-            return back()->withErrors('数据错误' . $e->getMessage());
-
-        }
-
+        if ($request->has('titles'))
+            $item->titles = json_encode($request->titles);
+        if ($request->has('schedule'))
+            $item->schedule = json_encode($request->schedule);
         if ($request->file('cover')) {
-            $folderPath = public_path('storage/course/' . $course->id);
+            $folderPath = public_path('storage/course/' . $item->id);
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
-            $course->cover = $cover->path;
+            $item->cover = $cover->path;
         }
-        $course->update();
-
+        $item->status = 'draft';
+        $item->save();
+        if ($request->has('lessons'))
+            $this->updateLessons($request, $item);
+        if ($request->has('tags'))
+            $this->updateTags($request, $item);
+        if ($request->has('teachers'))
+            $this->updateTeachers($request, $item);
+        if ($request->ajax()) {
+            return ['success' => true, 'data' => $item];
+        }
         return redirect()->route('courses.edit', $course->id);
     }
 
@@ -510,6 +525,14 @@ class CourseController extends Controller
         $course->hot = !$course->hot;
         $course->save();
         return ['success' => true];
+    }
+
+    //发布与取消发布课程
+    public function togglePublish(Request $request, Course $course)
+    {
+        $course->status = $course->status == 'publish' ? 'draft' : 'publish';
+        $course->save();
+        return ['success' => true, 'data' => $course->status];
     }
 
     public function statistics(Request $request)

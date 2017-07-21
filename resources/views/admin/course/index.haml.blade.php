@@ -67,7 +67,7 @@
                           %td
 
               .select-page 
-                %span.totalitems 共2页，总计18条
+                %span.totalitems 共#{$items->lastPage()}页，总计 #{$items->total()}条
                 %span.choice-page
                   %ul.pagination.pagination-sm
                     %li
@@ -135,7 +135,7 @@
                       %td 80
 
               .select-page 
-                %span.totalitems 共2页，总计18条
+                %span.totalitems 共$items->lastPage页，总计$items->total条
                 %span.choice-page
                   %ul.pagination.pagination-sm
                     %li
