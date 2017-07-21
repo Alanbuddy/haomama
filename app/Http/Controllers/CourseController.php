@@ -247,7 +247,7 @@ class CourseController extends Controller
 
         return view($course->type=='online'
             ?'admin.course.show'
-            :'', compact('course', 'teachers', 'lessons'));
+            :'admin.course.offline_show', compact('course', 'teachers', 'lessons'));
     }
 
     /**
