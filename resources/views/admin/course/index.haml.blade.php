@@ -69,7 +69,10 @@
                           %a{href: route('admin.courses.show',$course->id)}=$course->name
                         %td=$course->type
                         %td=$course->category->name
-                        %td 李老师、王老师
+
+                        %td
+                          -foreach($course->teachers as $teacher)
+                            %span=$teacher->nameb 
                         %td=$course->price
                         %td
 
