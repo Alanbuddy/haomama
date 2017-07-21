@@ -53,7 +53,13 @@
                       %td.teacher-show 张老师
                       %td 132344324535
                       %td xx医院xx科室主治医师
-              .select-page 
+                    - foreach ($items as $item)
+                    %tr
+                      %td
+                        %a{href: route('admin.user.show',$item->id).'?type=teacher'}=$item->name
+                      %td=$item->phone
+                      %td=json_decode($item->description)->title
+              .select-page
                 %span.totalitems 共2页，总计18条
                 %span.choice-page
                   %ul.pagination.pagination-sm

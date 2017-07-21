@@ -108,10 +108,11 @@ class LessonController extends Controller
             $video->detach(array_map(function ($v) {
                 return $v->id;
             }, $arr));
+
             $tmp = [];
-            $arr = $request->pictures;
-            foreach ($arr as $k => $v) {
-                $tmp[$v] = ['no' => $k];
+            $arr = json_decode($request->pictures);
+            foreach ($arr as $p) {
+                $tmp[$p->file] = ['no' => $p->time];
             }
             $video->attachments()->attach($tmp);
         }

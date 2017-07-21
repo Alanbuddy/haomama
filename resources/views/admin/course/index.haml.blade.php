@@ -63,7 +63,16 @@
                       %td 李老师、王老师
                       %td 80
                       %td 新课速递推荐、健康教育推荐
-                      
+                    - foreach ($items as $course)
+                      %tr
+                        %td
+                          %a{href: route('admin.courses.show',$course->id)}=$course->name
+                        %td=$course->type
+                        %td=$course->category->name
+                        %td 李老师、王老师
+                        %td=$course->price
+                        %td
+
               .select-page 
                 %span.totalitems 共2页，总计18条
                 %span.choice-page
@@ -97,13 +106,6 @@
                       %td 自我成长
                       %td 李老师、王老师
                       %td 80
-                    - foreach ($items as $course)
-                      %tr
-                        %td $course->name
-                        %td $course->type
-                        %td $course->category->name
-                        %td 李老师、王老师
-                        %td $course->price
 
               .select-page 
                 %span.totalitems 共2页，总计18条

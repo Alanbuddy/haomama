@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -81,13 +82,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['name' => 'required']);
         $item = new User();
+        $item->fill($request->only([
+            'name',
+            'email',
+            'phone',
+            'avatar',
+            'description',
+        ]));
         if ('teacher' == $request->get('type')) {
-            $item->fill($request->only([
-                'name',
-                'email',
-                'phone',
-            ]));
+            $item->password=bcrypt('123');
         }
         $item->save();
         if ($request->wantsJson()) {
@@ -140,12 +145,12 @@ class UserController extends Controller
             ->with('category')//预加载课程所属分类的信息
             ->orderBy('id', 'desc')
             ->get();
-        foreach ($courses as $course){
-            $course->sale=$course->orders()->sum('wx_total_fee');
+        foreach ($courses as $course) {
+            $course->sale = $course->orders()->sum('wx_total_fee');
         }
 //        dd($courses);
         return view('admin.teacher.teacher_show',
-            compact('user', 'courses' )
+            compact('user', 'courses')
         );
     }
 
