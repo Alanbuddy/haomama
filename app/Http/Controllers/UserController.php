@@ -94,6 +94,8 @@ class UserController extends Controller
             'avatar',
             'description',
         ]));
+        var_dump($item);
+
         if ('teacher' == $request->get('type')) {
             $item->password=bcrypt('123');
         }
