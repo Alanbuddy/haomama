@@ -83,11 +83,15 @@ class UserController extends Controller
     {
         $this->validate($request, ['name' => 'required']);
         $item = new User();
+        $item->fill($request->only([
+            'name',
+            'email',
+            'phone',
+        ]));
         if ('teacher' == $request->get('type')) {
             $item->fill($request->only([
-                'name',
-                'email',
-                'phone',
+                'avatar',
+                'description',
             ]));
         }
         $item->save();
