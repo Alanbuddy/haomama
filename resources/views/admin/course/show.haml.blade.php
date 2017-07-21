@@ -1,10 +1,11 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_course_show.css') }}">
-<link href="/css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/jquery.tag-editor.css" rel="stylesheet" type="text/css">
 
 :javascript
   window.course_index = "#{route('courses.index')}"
+  window.course_publish = "#{route('courses.publish')}"
   window.token = "#{csrf_token()}"
 @endsection
 
@@ -12,7 +13,7 @@
 .content-area
   .main-top.direction
     %a{href: route('courses.index')}
-      %img.back{src: "/icon/admin/back.png"}
+      %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -70,8 +71,8 @@
                     %input.form-control.input-width{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
-                %img.unedit-box{src: "/icon/admin/photo-course.png"}
-                %img.edit-box.edit-photo#imghead{src: "/icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
+                %img.unedit-box{src: "icon/admin/photo-course.png"}
+                %img.edit-box.edit-photo#imghead{src: "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
                 
             .controls-div.font-color3.f14
               .controls.controls-row.tag-flex
@@ -105,10 +106,10 @@
                 %span.edit-box 选择课时:
                 %span.unedit-box.ml4.lesson-position
                   .caption-item
-                    %img{src: "/icon/admin/music-small.png"}
+                    %img{src: "icon/admin/music-small.png"}
                     %span 第一课时标题
                   .caption-item
-                    %img{src: "/icon/admin/video-small.png"}
+                    %img{src: "icon/admin/video-small.png"}
                     %span 第一课时标题
                 %span.edit-box.addlesson 添加
                 .lesson-title
@@ -129,7 +130,7 @@
             .desc-div
               // - if @courses[:data].length == 0
               //   .undiscover.f14
-              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
+              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
               .table-box
                 %table.table.table-hover.table-height.f14
@@ -172,7 +173,7 @@
             .desc-div
               // - if @reviews[:data].blank?
               //   .undiscover
-              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
+              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
               .user-review-box
                 .user-search-box.f14.bg2
@@ -180,7 +181,7 @@
                   .search#search-btn
                 .review-items
                   .img-div
-                    %img.avatar-icon{src: "/icon/admin/avatar-icon.png"}
+                    %img.avatar-icon{src: "icon/admin/avatar-icon.png"}
                   .review-div
                     .head-div.clearfix
                       %p.user-name.fl.font-color2 夏天的雪
@@ -269,10 +270,11 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_course_show.js')}}"></script>
-<script src="/js/plugin/jquery-ui.min.js"></script>
-<script src="/js/plugin/wangEditor.min.js"></script>
-<script src="/js/plugin/jquery.tag-editor.min.js"></script>
-<script src="/js/preview.js"></script>
-<script src="/js/lesson-title.js"></script>
+<script src="js/plugin/jquery-ui.min.js"></script>
+<script src="js/plugin/wangEditor.min.js"></script>
+<script src="js/plugin/jquery.tag-editor.min.js"></script>
+<script src="js/preview.js"></script>
+<script src="js/lesson-title.js"></script>
+<script src="js/admin_course_online_show.js"></script>
 
 @endsection
