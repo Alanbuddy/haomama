@@ -8,6 +8,7 @@ use App\Http\Util\IO;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Lesson;
+use App\Models\Setting;
 use App\Models\Term;
 use Carbon\Carbon;
 use Exception;
@@ -35,29 +36,53 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
+        $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
+        $globalRecommendedCourses = $recommendedCourseSetting
+            ? Course::where('id', ($recommendedCourseSetting->value))->get()
+            : null;
         $recommendedCourses = Course::where('hot', true)->get();
-//        $page = $request->get('page', 1);
-//            $pageSize = 10 - count($recommendedCourses);
-//        $pageSize = $page == 1 ? 3 : 10;
-
-//        $items = Course::with('category')
-//            ->paginate($pageSize);
-//        if ($page > 1) {
-//            $remainOfLastPage = Course::with('category')
-//                ->offset($pageSize * ($page - 1))
-//                ->limit($pageSize)
-//                ->get();
-//        }
+        $recommendedCourses = $recommendedCourses->union($globalRecommendedCourses);
+        $page = $request->get('page', 1);
 
         $items = Course::with('category')
             ->with('teachers')
             ->with('tags')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+            ->orderBy('id', 'desc');
 //        dd($items);
+        $items = $this->processPage($page, $items, 10, $recommendedCourses);
+        foreach ($items as $item) {
+            $recommendation = '';
+            if (count($globalRecommendedCourses)) {
+                if ($item->id == $globalRecommendedCourses->first()->id)
+                    $recommendation .= 'index';
+            }
+            if ($item->hot) {
+                $recommendation .= $item->category ? $item->category->name : '';
+            }
+            $item->recommendation = $recommendation;
+        }
         return view('admin.course.index', [
             'items' => $items
         ]);
+    }
+
+    public function processPage($page, $items, $pageSize, $recommendedCourse)
+    {
+        if ($page > 1) {
+            $count = $items->count();
+            $prevPageItems = $items
+                ->offset(($page - 2) * $pageSize)->limit($pageSize)
+                ->get()->slice($pageSize - count($recommendedCourse));
+            $currPageItems = $items->paginate($pageSize);//->forPage(1, $pageSize - count($recommendedCourse));
+//                dd($currPageItems);
+            $items = $prevPageItems->merge($currPageItems);
+            $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
+        } else {
+            $items = $items->paginate($pageSize)->splice(0, $pageSize - 1);
+            $items = $recommendedCourse->merge($items);
+//                dd($recommendedCourse);
+        }
+        return $items;
     }
 
     /**
@@ -282,7 +307,7 @@ class CourseController extends Controller
             'quota' => 'sometimes|numeric',
             'address' => 'sometimes',
         ]);
-        $item =$course;
+        $item = $course;
         $item->fill($request->only([
             'name',
             'description',
