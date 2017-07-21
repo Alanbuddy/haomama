@@ -16,12 +16,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 //        Auth::loginUsingId(1, true);
-
         $pageSize = 10;
-        $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
-        $recommendedCourse = $recommendedCourseSetting
-            ? Course::where('id', ($recommendedCourseSetting->value))->get()
-            : null;
         $index = new Term();
         $index->id = '0';
         $index->name = '新课速递';
@@ -34,28 +29,27 @@ class HomeController extends Controller
         $data = [];
         $page = $request->get('page', 1);
         foreach ($categories as $category) {
+            if($category->id==0){
+                $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
+                $recommendedCourse = $recommendedCourseSetting
+                    ? Course::where('id', ($recommendedCourseSetting->value))->get()
+                    : null;
+            }else{
+                $recommendedCourse = Course::where('hot',true)
+                    ->where('category_id',$category->id)
+                    ->get();
+            }
+
             $items = Search::basicStat()
                 ->orderBy('id', 'desc');
 //            dd($items->toSql());
-
             $itemsOrderByUserCount = Search::basicStat()
                 ->orderBy('users_count', 'desc');
-
-//            $itemsOrderByCommentRating = Course:: leftJoin('comments', 'comments.course_id', 'courses.id')
-//                ->leftJoin('course_user', 'course_user.course_id', 'courses.id')
-//                ->select(DB::raw('courses.*'))
-//                ->addSelect(DB::raw('count(comments.id) as comments_count'))
-//                ->addSelect(DB::raw('count(course_user.user_id) as users_count'))
-//                ->addSelect(DB::raw('sum(comments.star) as star'))
-//                ->groupBy('courses.id')
-//                ->orderBy('star', 'desc');
-
             $itemsOrderByCommentRating = Course::select(DB::raw('courses.*'))
                 ->addSelect(DB::raw('(select count(*) from `users` inner join `course_user` on `users`.`id` = `course_user`.`user_id` where `courses`.`id` = `course_user`.`course_id` and `type` = ' . '\'student\'' . ') as `users_count`'))
                 ->addSelect(DB::raw('(select count(*) from `comments` where `comments`.`course_id` = `courses`.`id`) as `comments_count`'))
                 ->addSelect(DB::raw('(select sum(comments.star) from `comments` where `comments`.`course_id` = `courses`.`id`) as `star`'))
                 ->orderBy('star', 'desc');
-
 //            dd($itemsOrderByCommentRating->toSql());
             //Dev
             foreach ([$items, $itemsOrderByUserCount, $itemsOrderByCommentRating] as $builder) {
@@ -71,9 +65,13 @@ class HomeController extends Controller
             $itemsOrderByUserCount = $this->processPage($page, $itemsOrderByUserCount, $pageSize, $recommendedCourse);
             $itemsOrderByCommentRating = $this->processPage($page, $itemsOrderByCommentRating, $pageSize, $recommendedCourse);
 //            dd($items);
-//            $itemsOrderByUserCount = $itemsOrderByUserCount->paginate(10);
-//            $itemsOrderByCommentRating = $itemsOrderByCommentRating->paginate(10);
-            $data[] = compact('items', 'itemsOrderByUserCount', 'itemsOrderByCommentRating');
+            $hasRecommendedCourse=(bool)count($recommendedCourse);
+            $data[] = compact('items',
+                'itemsOrderByUserCount',
+                'itemsOrderByCommentRating',
+                'hasRecommendedCourse',
+                'recommendedCourse'
+            );
         }
 
 //        dd($data[0]);
