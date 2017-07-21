@@ -39,42 +39,32 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              // - if @course_insts[:data].length == 0
-              //   .undiscover.f14
-              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
-              // - else
-              .table-box
-                %table.table.table-hover.table-height.f14
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 课程名称
-                      %th 上课方式
-                      %th 课程类型
-                      %th 授课老师
-                      %th 当前价格
-                      %th 推荐设置
-                  %tbody.font-color3
-                    // - @course_insts[:data].each do |ci|
-                    %tr{class: ""}
-                      // %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
-                      %td.show-name 课程的名字
-                      %td 线上视频or线下课程
-                      %td 健康教育
-                      %td 李老师、王老师
-                      %td 80
-                      %td 新课速递推荐、健康教育推荐
-                    - foreach ($items as $course)
+              - if(count($items) == 0) 
+                .undiscover.f14
+                  %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+              - else
+                .table-box
+                  %table.table.table-hover.table-height.f14
+                    %thead.th-bg.font-color2
                       %tr
-                        %td
-                          %a{href: route('admin.courses.show',$course->id)}=$course->name
-                        %td=$course->type
-                        %td=$course->category->name
-
-                        %td
-                          -foreach($course->teachers as $teacher)
-                            %span=$teacher->nameb 
-                        %td=$course->price
-                        %td
+                        %th 课程名称
+                        %th 上课方式
+                        %th 课程类型
+                        %th 授课老师
+                        %th 当前价格
+                        %th 推荐设置
+                    %tbody.font-color3
+                      - foreach ($items as $course)
+                        %tr
+                          %td
+                            %a{href: route('admin.courses.show',$course->id)}=$course->name
+                          %td=$course->type
+                          %td=$course->category->name
+                          %td
+                            -foreach($course->teachers as $teacher)
+                              %span=$teacher->name 
+                          %td=$course->price
+                          %td
 
               .select-page 
                 %span.totalitems 共2页，总计18条

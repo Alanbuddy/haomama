@@ -13,7 +13,7 @@
 .content-area
   .main-top.direction
     %a{href: route('users.index')."?type=teacher"}
-      %img.back{src: "/icon/admin/back.png"}
+      %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -46,7 +46,7 @@
                   %input.form-control.input-width#mail{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
-                %img.edit-photo#imghead{src: "/icon/admin/add3.png", onclick: "$('#previewImg').click()"}
+                %img.edit-photo#imghead{src: "icon/admin/add3.png", onclick: "$('#previewImg').click()"}
               %span.cover-path{style: "display:none;"}
                 
             .controls-div.font-color3.f14
