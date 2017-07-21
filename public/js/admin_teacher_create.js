@@ -61,10 +61,8 @@ $(document).ready(function(){
       introduction: desc,
       basicIntroduction: introduce,
       telephone: tel,
-      avatar: avatar
     };
     description = JSON.stringify(description);
-    console.log(description);
     $.postJSON(
       window.teacher_store + "?type=teacher",
       {
@@ -72,6 +70,7 @@ $(document).ready(function(){
         name: name,
         phone: mobile,
         email: mail,
+        avatar: avatar,
         _token: window.token
       },
       function(data){
