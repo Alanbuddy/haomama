@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -91,8 +92,7 @@ class UserController extends Controller
             'description',
         ]));
         if ('teacher' == $request->get('type')) {
-            $item->fill($request->only([
-            ]));
+            $item->password=bcrypt('123');
         }
         $item->save();
         if ($request->wantsJson()) {
