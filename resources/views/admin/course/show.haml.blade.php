@@ -5,7 +5,7 @@
 
 :javascript
   window.course_index = "#{route('courses.index')}"
-  window.course_publish = "#{route('courses.publish')}"
+  window.course_publish = "#{route('courses.publish',$course->id)}"
   window.token = "#{csrf_token()}"
 @endsection
 
