@@ -24,8 +24,10 @@
         %a.f16.set-left-border#exit{href: "#"} 退出登录
 
   .main-content.bg2
-    // %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation.available{type: "button"} 下架课程
-    %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation.unavailable{type: "button"} 上线课程
+    - if($course->status == "draft")
+      %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 下架课程
+    - else
+      %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 上线课程
     %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
     .table-div
@@ -43,74 +45,71 @@
               .text-message.unedit
                 .controls.controls-row
                   %label.input-caption 课程名称:
-                  %span.unedit-box 课程的名字很长
-                  %span.font-color-red.unedit-box (新课速递推荐)
+                  %span.unedit-box= $course->name
+                  - if($hasRecommendedCourse)
+                    %span.font-color-red.unedit-box= ($hasRecommendedCourse->name)
                   %span.edit-box
                     %input.input-area.form-control#course-name{:type => "text", placeholder: "必填"}
                 .controls.controls-row
                   %label.input-caption 课程类型:
-                  %span.unedit-box.short-span.mr40 自我成长
+                  %span.unedit-box.short-span.mr40=$course->category->name
                   %span.edit-box
                     %select.form-control.input-width#course-type
                       %option 请选择类型
-                      %option{value: "类型一"} 类型一
-                      %option{value: "类型二"} 类型二
-                      %option{value: "类型三"} 类型三
+                      - foreach ($categories as $category )
+                        %option{value: $category->id}= $category->name
                   %label.input-caption 课程节数:
-                  %span.unedit-box.short-span 8
+                  %span.unedit-box.short-span= count($course->titles)
                   %span.edit-box
                     %input.form-control.input-width{:type => "text"}
                 .controls.controls-row
                   %label.input-caption 课程价格:
-                  %span.unedit-box.short-span.mr40 80
+                  %span.unedit-box.short-span.mr40= $course->original_price
                   %span.edit-box
                     %input.form-control.input-width#course-price{:type => "text"}
                   %label.input-caption 促销价格:
-                  %span.unedit-box.short-span.font-color-red 50/无促销价格时显示无
+                  %span.unedit-box.short-span.font-color-red= $course->price ? $course->price : "无"
                   %span.edit-box
                     %input.form-control.input-width{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
-                %img.unedit-box{src: "icon/admin/photo-course.png"}
+                %img.unedit-box.unedit-photo{src: $course->cover ? $course->cover : "icon/admin/photo-course.png"}
                 %img.edit-box.edit-photo#imghead{src: "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
                 
             .controls-div.font-color3.f14
               .controls.controls-row.tag-flex
                 %label.input-caption 课程标签: 
                 %span.unedit-box.ml4
-                  %span 育儿 
-                  %span 育儿 
-                  %span 育儿 
-                  %span 育儿 
-                  %span 育儿 
+                  - foreach($course->tags as $tag)
+                    %span.tag-span= $tag->name
                 %span.edit-box.tag-div
                   #type-tag
               .controls.controls-row.no-mb.tag-flex
                 %label.input-caption 授课老师:
                 %span.unedit-box.ml4
-                  %span 育儿 
-                  %span 育儿 
-                  %span 育儿 
-                  %span 育儿 
-                  %span 育儿
+                  -foreach($course->teachers as $teacher)
+                    %span.tag-span=$teacher->name
                 %span.edit-box.teacher-div
                   #teacher-tag 
 
               .course-introduce.introduce-flex
                 %span.introduce 课程介绍:
-                %span.unedit-box.ml4 该课程是少儿类视频第一名
+                %span.unedit-box.ml4= strip_tags(htmlspecialchars_decode($course->description))
                 %span.edit-box.wangedit-area
                   #edit-area 
               .lesson-div
                 %span.unedit-box.introduce 课程课时:
                 %span.edit-box 选择课时:
                 %span.unedit-box.ml4.lesson-position
-                  .caption-item
-                    %img{src: "icon/admin/music-small.png"}
-                    %span 第一课时标题
-                  .caption-item
-                    %img{src: "icon/admin/video-small.png"}
-                    %span 第一课时标题
+                  - foreach($course->lessons as $lesson)
+                    - if($lesson->type=='audio')
+                      .caption-item
+                        %img{src: "icon/admin/music-small.png"}
+                        %span= $lesson->name
+                    - if($lesson->type =='video')
+                      .caption-item
+                        %img{src: "icon/admin/video-small.png"}
+                        %span= $lesson->name
                 %span.edit-box.addlesson 添加
                 .lesson-title
                   %ol.example
@@ -118,12 +117,8 @@
               .course-lesson.introduce-flex
                 %span.introduce 课时标题:
                 .unedit-box.ml4
-                  %p 第一课时标题
-                  %p 第一课时标题
-                  %p 第一课时标题
-                  %p 第一课时标题
-                  %p 第一课时标题
-                  %p 第一课时标题
+                  // - foreach($course->titles as $title)
+                  //   %p= $title->name
                 %span.edit-box.wangedit-area
                   #title-area 
           #tab2.tab-pane
@@ -263,7 +258,10 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/close.png"}
       .modal-body
-        %p.message 是否确认下架当前课程？
+        - if($course->status == "draft")
+          %p.message 是否确认上线当前课程？
+        - else
+          %p.message 是否确认下架当前课程？
         .btn-div
           %button.btn#shelf-cancel{type: "button"} 取&nbsp消
           %button.btn#shelf-confirm{type: "button"} 确&nbsp定

@@ -58,7 +58,7 @@
                         %tr
                           %td
                             %a{href: route('admin.courses.show',$course->id)}=$course->name
-                          %td=$course->type
+                          %td.course-type=$course->type
                           %td=$course->category->name
                           %td
                             -foreach($course->teachers as $teacher)
@@ -95,7 +95,7 @@
                   %tbody.font-color3
                     %tr
                       %td 课程的名字很长
-                      %td 线上视频
+                      %td.course-type 线上视频
                       %td 自我成长
                       %td 李老师、王老师
                       %td 80
@@ -129,7 +129,7 @@
                   %tbody.font-color3
                     %tr
                       %td 课程的名字很长
-                      %td 线上视频
+                      %td.course-type 线上视频
                       %td 自我成长
                       %td 李老师、王老师
                       %td 80

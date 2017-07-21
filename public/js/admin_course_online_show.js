@@ -1,19 +1,21 @@
 $(document).ready(function(){
   $(".operation").click(function(){
+    $("#shelfModal").modal("show");
+  });
 
-    $("#shelfModal").show();
-    var btn = $(this);
-    $.postJSON(
+  $("#shelf-confirm").click(function(){
+    $.getJSON(
       window.course_publish,
       {},
       function(data){
         console.log(data);
         if(data.success){
+          $("#shelfModal").modal("hide");
           if(data.data == "publish"){
-            btn.text("下架课程");
+            $(".operation").text("下架课程");
           }else{
             if(data.data == "draft")
-            btn.text("上线课程");
+            $(".operation").text("上线课程");
           }
         }
       }
