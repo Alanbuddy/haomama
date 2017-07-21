@@ -1,5 +1,7 @@
 $(document).ready(function(){
   $(".operation").click(function(){
+
+    $("#shelfModal").show();
     var btn = $(this);
     $.postJSON(
       window.course_publish,
