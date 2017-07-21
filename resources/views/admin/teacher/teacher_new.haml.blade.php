@@ -4,6 +4,7 @@
 
 :javascript
   window.teacher_index = "#{route('users.index')}"
+  window.teacher_store = "#{route('users.store')}"
   window.token = "#{csrf_token()}"
 @endsection
 

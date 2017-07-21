@@ -46,6 +46,7 @@
                     #picker 选择文件
                     %button#ctlBtn.btn.btn-default 开始上传
                 %span.audio-id{style: "display:none;"}
+                %span.video-id{style: "display:none;"}= $item['id']
               .notice-introduce.clearfix
                 %span.introduce 内容介绍:
                 %span.wangedit-area

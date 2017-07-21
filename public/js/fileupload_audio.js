@@ -223,7 +223,29 @@ $(document).ready(function(){
     console.log(img_data);
     var title = $("#input-caption").val();
     var desc = editor.txt.html();
+    var video_id = $(".video-id").text();
+    var audio_id = $(".audio-id").text(); 
     console.log(title);
+
+    $.postJSON(
+      window.lesson_store + "?type=audio",
+      {
+        video_id: video_id,
+        name: title,
+        audio: audio_id,
+        description: desc,
+        pictures: img_data,
+        _token: window.token
+      },
+      function(data){
+        console.log(data);
+        if(data.success){
+          var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
+          var lid = data.data.id;
+          location.href = str + lid + "?type=audio";
+        }
+      }
+      );
   });
 
 });
