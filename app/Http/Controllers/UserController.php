@@ -94,8 +94,12 @@ class UserController extends Controller
             'avatar',
             'description',
         ]));
+
         if ('teacher' == $request->get('type')) {
             $item->password=bcrypt('123');
+            $item->save();
+            $role=Role::where('name','teacher')->first();
+            $item->attachRole($role);
         }
         $item->save();
         if ($request->wantsJson()) {
