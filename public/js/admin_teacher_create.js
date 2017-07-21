@@ -63,6 +63,8 @@ $(document).ready(function(){
       telephone: tel,
       avatar: avatar
     };
+    description = JSON.stringify(description);
+    console.log(description);
     $.postJSON(
       window.teacher_store + "?type=teacher",
       {
