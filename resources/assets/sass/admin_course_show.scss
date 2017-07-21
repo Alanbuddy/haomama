@@ -18,6 +18,10 @@
 .unedit {
   margin-top: 30px;
 }
+.unedit-photo {
+  width: 200px;
+  height: 138px;
+}
 .text-message {
 	width: 50%;
 	float: left;
@@ -177,7 +181,10 @@
 .lesson-position {
   display: inline-block;
 }
-
+.tag-span {
+  display: inline-block;
+  margin-right: 8px;
+}
 
 #lessonModal {
   .modal-dialog {

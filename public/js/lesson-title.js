@@ -254,7 +254,8 @@ $(document).ready(function(){
     $(".example li").each(function(){
       lesson_list.push($(this).attr("data-id"));
     });
-    // var lesson_title = editor_lesson.txt.html();   正在考虑中
+    var lesson_title = editor_lesson.txt.text();
+    var titles = lesson_title.split("。");
     var teacher_arr = [];
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
@@ -280,6 +281,7 @@ $(document).ready(function(){
         lessons: lesson_list,
         cover: path,
         type: online,
+        titles: titles,
         _token: window.token
       },
       function(data){
