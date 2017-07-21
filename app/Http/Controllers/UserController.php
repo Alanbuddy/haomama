@@ -96,7 +96,7 @@ class UserController extends Controller
         }
         $item->save();
         if ($request->wantsJson()) {
-            return ['success' => true];
+            return ['success' => true,'data'=>$item];
         }
         return redirect()->route('users.index');
     }
