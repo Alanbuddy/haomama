@@ -5,6 +5,7 @@
 :javascript
   window.teacher_index = "#{route('users.index')}"
   window.teacher_store = "#{route('users.store')}"
+  window.teacher_show = "#{route('users.show', -1)}"
   window.token = "#{csrf_token()}"
 @endsection
 
@@ -56,18 +57,18 @@
                 %input.form-control.input-width#tel{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label 专长:
-                %input.input-area.form-control.middle#prefer{:type => "text"}
+                %input.input-area.form-control.middle#major{:type => "text"}
                 %label.input-caption 备注:
                 %input.form-control.input-width#remark{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label 获奖:
-                %input.input-area.form-control.longinput#reward{:type => "text"}
+                %input.input-area.form-control.longinput#award{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label 出书:
                 %input.input-area.form-control.longinput#book{:type => "text"}
               .controls.controls-row
                 %label.input-caption 基础简介:
-                %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内"}
+                %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内", maxlength:20}
               .course-introduce
                 %span.introduce 讲师介绍:
                 %span.wangedit-area
