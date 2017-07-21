@@ -270,9 +270,10 @@ class CourseController extends Controller
             ->orderBy('no', 'desc')
             ->get();
 
+        $categories = Term::where('type', 'category')->get();
         return view($course->type == 'online'
             ? 'admin.course.show'
-            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons'));
+            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons','categories'));
     }
 
     /**
