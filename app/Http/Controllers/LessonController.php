@@ -69,14 +69,6 @@ class LessonController extends Controller
         //TODO
     }
 
-    public function storeAudioLessonPictures(Request $request)
-    {
-        $ret = $this->uploadChunkedFile($request);
-        if ($ret) {
-
-        }
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -95,6 +87,7 @@ class LessonController extends Controller
         }
         $type = $request->get('type', 'video');
         if ('audio' == $type) {
+            $item->titles=json_encode($request->titles);
             $this->storeAttachments($request, $item);
         }
         $item->save();
