@@ -46,7 +46,7 @@ class FileController extends Controller
             'chunk' => 'required',
             'file_id' => 'required',
         ]);
-        if ($request->chunk == 0 || !$request->has('chunk')) {
+        if ($request->chunk == 0) {
             $file = File::find($request->file_id);
             $file->fill($this->getFileBaseInfo($file));
             $file->description = $request->chunks;
