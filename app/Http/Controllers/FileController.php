@@ -10,6 +10,12 @@ class FileController extends Controller
 {
     use IO;
 
+    /**
+     * 返回值中的path属性表示上传到服务器的文件相对web根目录的地址
+     * 返回值中的data属性表示文件在数据库中对应的一条记录
+     * @param Request $request
+     * @return array|bool
+     */
     public function upload(Request $request)
     {
         if ($request->has('chunks')) {
