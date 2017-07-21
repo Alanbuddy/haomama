@@ -164,6 +164,7 @@
   height: 120px;
   margin-right: 15px;
   margin-bottom: 15px;
+  border: 1px solid #ccc;
 }
 .info_img {
   position: absolute;
@@ -194,10 +195,10 @@
   display: inline-block;
 }
 .img_wrap {
-  width: 100px;
+  width: 98px;
   height: 100px;
   img {
-    width: 100px;
+    width: 98px;
     height: 100px;
   }
 }
@@ -226,6 +227,8 @@
   margin-right: 30px;
   margin-bottom: 15px;
   display: inline-block;
+  outline: none;
+  border: 0;
 }
 .img-index, .img-time {
   text-align: center;
