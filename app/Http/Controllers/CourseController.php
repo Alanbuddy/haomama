@@ -100,12 +100,6 @@ class CourseController extends Controller
         ]));
         if ($request->has('titles'))
             $item->titles = json_encode($request->titles);
-        if ($request->has('lessons'))
-            $this->updateLessons($request, $item);
-        if ($request->has('tags'))
-            $this->updateTags($request, $item);
-        if ($request->has('teachers'))
-            $this->updateTeachers($request, $item);
         if ($request->has('schedule'))
             $item->schedule = json_encode($request->schedule);
         if ($request->file('cover')) {
@@ -113,7 +107,14 @@ class CourseController extends Controller
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
             $item->cover = $cover->path;
         }
+        $item->status = 'draft';
         $item->save();
+        if ($request->has('lessons'))
+            $this->updateLessons($request, $item);
+        if ($request->has('tags'))
+            $this->updateTags($request, $item);
+        if ($request->has('teachers'))
+            $this->updateTeachers($request, $item);
         if ($request->ajax()) {
             return ['success' => true, 'data' => $item];
         }
@@ -322,8 +323,7 @@ class CourseController extends Controller
 
     public function updateLessons(Request $request, Course $course)
     {
-        $arr = $request->lessons;
-        $arr = array_map('intval', $arr);
+        $arr = $request->lessons;// $arr = array_map('intval', $arr);
         $tmp = [];
         foreach ($arr as $k => $id) {
             $tmp[$id] = [
@@ -613,6 +613,7 @@ class CourseController extends Controller
         $tmp = [];
         foreach ($arr as $id) {
             $tmp[$id] = [
+                'course_id' => $course->id,
                 'user_type' => 'teacher',
                 'type' => 'teach'
             ];
