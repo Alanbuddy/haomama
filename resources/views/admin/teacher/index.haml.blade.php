@@ -38,7 +38,7 @@
             .desc-div
               // - if @users[:data].length == 0
               //   .undiscover.f14
-              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
+              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
               .table-box.f14
                 %table.table.table-hover.table-height

@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_imgset_index.css') }}">
-<link href="/css/plugin/webuploader.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/webuploader.css" rel="stylesheet" type="text/css">
 
 :javascript
   window.token = "#{csrf_token()}"
@@ -39,16 +39,16 @@
             .desc-div
               // - if @users[:data].length == 0
               //   .undiscover.f14
-              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
+              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
               #uploader.wu-example.f14.font-color3
                 .btns
                   #picker 添加图片
                   %span 请上传尺寸为750*320的图片文件
               .img-div.tab1-unedit-box
-                %img.img-item{src: "/icon/banner.png"}
-                %img.img-item{src: "/icon/banner.png"}
-                %img.img-item{src: "/icon/banner.png"}
+                %img.img-item{src: "icon/banner.png"}
+                %img.img-item{src: "icon/banner.png"}
+                %img.img-item{src: "icon/banner.png"}
               .edit-img-div.tab1-edit-box.f14.font-color3
                 // #uploader.wu-example
                 //   .btns
@@ -57,11 +57,11 @@
                     
                 .img-edit-div
                   .item
-                    %img.edit-img-item{src: "/icon/banner.png"}
-                    %img.delete{src: "/icon/admin/delete2.png"}
+                    %img.edit-img-item{src: "icon/banner.png"}
+                    %img.delete{src: "icon/admin/delete2.png"}
                   .item
-                    %img.edit-img-item{src: "/icon/banner.png"}
-                    %img.delete{src: "/icon/admin/delete2.png"}
+                    %img.edit-img-item{src: "icon/banner.png"}
+                    %img.delete{src: "icon/admin/delete2.png"}
                   #thelist.uploader-list
 
           #tab2.tab-pane
@@ -92,8 +92,8 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_imgset_index.js')}}"></script>
-<script src="/js/plugin/webuploader.js"></script>
+<script src="js/plugin/webuploader.js"></script>
 
-<script src="/js/set_banner.js"></script>
+<script src="js/set_banner.js"></script>
 
 @endsection

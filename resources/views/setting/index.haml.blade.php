@@ -12,11 +12,11 @@
 @section('content')
 .head-div
   %p.fb.tc.fb.color7.f18 个人资料
-  %img.back{src: "/icon/back.png"}
+  %img.back{src: "icon/back.png"}
 .item-div 
   .item.parent-div
     .left-div
-      %img.avatar{src: $user['avatar'] ? $user['avatar'] : "/icon/avatar.png"}
+      %img.avatar{src: $user['avatar'] ? $user['avatar'] : "icon/avatar.png"}
     .right-div
       .row-div
         %label.f14.color7.fn 微信名称
@@ -37,7 +37,7 @@
   - foreach ($user->baby as $baby)
     .baby-item.baby-div
       .left-div
-        %img.avatar{src: "/icon/baby_female.png"}
+        %img.avatar{src: "icon/baby_female.png"}
       .right-div
         .row-div
           %label.f14.color7.fn 宝宝姓名
@@ -59,9 +59,9 @@
 .btn#edit-end 编辑完成
 
 .baby-item.add-baby-div
-  %img.close-add-item{src: "/icon/close.png"}
+  %img.close-add-item{src: "icon/close.png"}
   .left-div
-    %img.avatar{src: "/icon/baby_female.png"}
+    %img.avatar{src: "icon/baby_female.png"}
   .right-div
     .row-div
       %label.f14.color7.fn 宝宝姓名
@@ -92,5 +92,5 @@
 
 @section('script')
 <script src= "{{ mix('/js/setting-index.js') }}"></script>
-<script src= "/js/profile.js"></script>
+<script src= "js/profile.js"></script>
 @endsection

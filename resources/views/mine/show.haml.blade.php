@@ -8,18 +8,18 @@
 @section('content')
 .head-div
   %p.fb.tc.fb.color7.f18 我的收藏
-  %img.back{src: "/icon/back.png"}
+  %img.back{src: "icon/back.png"}
   %hr.div-line
 - if (count($items) == 0)
   .empty-div
-    %img.empty-icon{src: "/icon/empty.png"}
+    %img.empty-icon{src: "icon/empty.png"}
     %p.empty-message.f12.color5 您还没有相关课程信息......
 - else
   .course-item-div
     - foreach ($items as $item)
       .course-item
         .course-icon-div
-          %img.course-icon{src: $item['cover'] ? $item['cover'] : "/icon/example.png"}
+          %img.course-icon{src: $item['cover'] ? $item['cover'] : "icon/example.png"}
         .word-div
           .course-row-div.clearfix
             %span.f12.category-class= $item['category']['name']
@@ -44,5 +44,5 @@
 
 @section('script')
 <script src= "{{ mix('/js/mine-show.js') }}"></script>
-<script src= "/js/profile.js"></script>
+<script src= "js/profile.js"></script>
 @endsection

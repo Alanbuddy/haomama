@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_lesson_audio_show.css') }}">
-<link href="/css/plugin/webuploader.css" rel="stylesheet" type="text/css">
+<link href="css/plugin/webuploader.css" rel="stylesheet" type="text/css">
 
 :javascript
     window.lesson_index = "#{route('lessons.index')}"
@@ -16,7 +16,7 @@
 .content-area
   .main-top.direction
     %a{href: route('lessons.index')}
-      %img.back{src: "/icon/admin/back.png"}
+      %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -46,7 +46,7 @@
                 %span 音频文件:
                 %span.unedit-box
                   .caption-item
-                    %img{src: "/icon/admin/music-small.png"}
+                    %img{src: "icon/admin/music-small.png"}
                     %span 这里是视频课时的标题
                 #uploader.wu-example.edit-box
                   #thelist.uploader-list
@@ -62,31 +62,31 @@
                 %span 图片文件:
                 %span.unedit-box.unedit-img-box
                   .img-item
-                    %img.show-img{src: "/icon/example.png"}
+                    %img.show-img{src: "icon/example.png"}
                     %p.img-index 01
                     %p.img-time 00:01:23
                   .img-item
-                    %img.show-img{src: "/icon/example.png"}
+                    %img.show-img{src: "icon/example.png"}
                     %p.img-index 01
                     %p.img-time 00:01:23
                   .img-item
-                    %img.show-img{src: "/icon/example.png"}
+                    %img.show-img{src: "icon/example.png"}
                     %p.img-index 01
                     %p.img-time 00:01:23
                   .img-item
-                    %img.show-img{src: "/icon/example.png"}
+                    %img.show-img{src: "icon/example.png"}
                     %p.img-index 01
                     %p.img-time 00:01:23
                   .img-item
-                    %img.show-img{src: "/icon/example.png"}
+                    %img.show-img{src: "icon/example.png"}
                     %p.img-index 01
                     %p.img-time 00:01:23
                   .img-item
-                    %img.show-img{src: "/icon/example.png"}
+                    %img.show-img{src: "icon/example.png"}
                     %p.img-index 01
                     %p.img-time 00:01:23
                   .img-item
-                    %img.show-img{src: "/icon/example.png"}
+                    %img.show-img{src: "icon/example.png"}
                     %p.img-index 01
                     %p.img-time 00:01:23
                 #uploader_img.wu-example.edit-box
@@ -102,10 +102,10 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_lesson_audio_show.js')}}"></script>
-<script src="/js/plugin/wangEditor.min.js"></script>
-<script src="/js/plugin/jquery-ui.min.js"></script>
-<script src="/js/plugin/webuploader.js"></script>
+<script src="js/plugin/wangEditor.min.js"></script>
+<script src="js/plugin/jquery-ui.min.js"></script>
+<script src="js/plugin/webuploader.js"></script>
 
-<script src="/js/fileupload_audio.js"></script>
+<script src="js/fileupload_audio.js"></script>
 
 @endsection

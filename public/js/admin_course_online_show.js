@@ -26,6 +26,8 @@ $(document).ready(function(){
     $("#teacher-show").text(teacher_arr);
     var desc = $("#desc-span").text();
     editor.txt.html(desc);
+    var title_desc = $("#title-desc").text();
+    editor_lesson.html(title_desc);
 
   });
    
@@ -239,16 +241,25 @@ $(document).ready(function(){
 
 
   $(document).on('click', '#confirm-btn', function(){
+
     var title_arr = [];
     var title_text = [];
+    $(".example li").each(function(){
+      title_arr.push($(this).attr("data-id"));
+      title_text.push($(this).text());
+    });
+    $(".example li").remove();
     $("[name='lesson-check']:input:checked").each(function(){
-        var value = $(this).val();
-        var text = $(this).attr("data-text");
+      var value = $(this).val();
+      var text = $(this).attr("data-text");
+      if(title_arr.indexOf(value) == -1){
         title_arr.push(value);
-        title_text.push(text);
+      }
+      if(title_text.indexOf(text) == -1){
+      title_text.push(text);
+      }
     });
     var len = title_arr.length;
-
     for(var i=0;i<len;i++){
       var oLi = $("<li data-id="+title_arr[i]+">" + title_text[i] + "</li>");
       $(".example").append(oLi);
@@ -298,6 +309,10 @@ $(document).ready(function(){
     $(".create-tag-div").find(".tag_id").each(function(){
       tags.push($(this).attr("data-id"));
     });
+    $(".tag-hide-id").each(function(){
+      tags.push($(this).text());
+    });
+    console.log(tags);
     var desc = editor.txt.html();
     var lesson_list = [];
     $(".example li").each(function(){
@@ -309,6 +324,7 @@ $(document).ready(function(){
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
     });
+    console.log(teacher_arr);
     var path = $(".cover-path").text();
     var online = "online";
     

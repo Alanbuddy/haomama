@@ -15,18 +15,18 @@
 .head-div
   .avatar-div
     - if ($user)
-      %img.avatar-icon{src: "/icon/avatar.png"}
+      %img.avatar-icon{src: "icon/avatar.png"}
       %p.name.f16.color7= $user['name']
     .right-div
       %a.f12.color5{href: "#"} 个人资料
-      %img.arrow{src: "/icon/go.png"}
-  %img.message-icon{src: "/icon/message.png"}
+      %img.arrow{src: "icon/go.png"}
+  %img.message-icon{src: "icon/message.png"}
   - if ($messagesCount)
     %img.small-circle{src: "/icon/small-dot.png"}
 %hr.div-line
 - if (count($onGoingCourses) == 0 && count($enrolledCourses) == 0 && count($favoritedCourses) == 0)
   .empty-div
-    %img.empty-icon{src: "/icon/empty.png"}
+    %img.empty-icon{src: "icon/empty.png"}
     %p.empty-message.f12.color5 您还没有相关课程信息......
 - else
   - if (count($onGoingCourses) > 0)
@@ -44,7 +44,7 @@
               %span.address-span 地址：
               %span.address= $onGoingCourse['name']
           .item-right
-            %img.signin{src: "/icon/signin.png"}
+            %img.signin{src: "icon/signin.png"}
     %hr.div-line
   - if (count($enrolledCourses) > 0)
     .course-div.enrolled-course
@@ -54,7 +54,7 @@
       - foreach ($enrolledCourses as $enrolledCourse)
         .favorite-item{'data-id' => $enrolledCourse['id']}
           .icon-div
-            %img.icon{src: $enrolledCourse['cover'] ? $enrolledCourse['cover'] :"/icon/example.png"}
+            %img.icon{src: $enrolledCourse['cover'] ? $enrolledCourse['cover'] :"icon/example.png"}
           .word-div
             .favorite-row-div.clearfix
               %span.category-class.f12= $enrolledCourse['category']['name']
@@ -81,7 +81,7 @@
       - foreach ($favoritedCourses as $favoritedCourse)
         .favorite-item{'data-id' => $favoritedCourse['id']}
           .icon-div
-            %img.icon{src: $favoritedCourse['cover'] ? $favoritedCourse['cover'] :"/icon/example.png"}
+            %img.icon{src: $favoritedCourse['cover'] ? $favoritedCourse['cover'] :"icon/example.png"}
           .word-div
             .favorite-row-div.clearfix
               %span.category-class.f12= $favoritedCourse['category']['name']
@@ -101,10 +101,10 @@
                 %span= $favoritedCourse['comments_count'] ."条评论"
 .foot
   .foot-item-div#home
-    %img.home{src: "/icon/home_normal.png"}
+    %img.home{src: "icon/home_normal.png"}
     %p.f10.color5 首页
   .foot-item-div#mine
-    %img.mine{src: "/icon/mine_selected.png"}
+    %img.mine{src: "icon/mine_selected.png"}
     %p.f10.color8.fb 我的
 
 @endsection

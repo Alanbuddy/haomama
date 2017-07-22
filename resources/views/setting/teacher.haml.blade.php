@@ -8,7 +8,7 @@
 @endsection
 @section('content')
 .head-div
-  %img.back{src: "/icon/back2.png"}
+  %img.back{src: "icon/back2.png"}
 .profile-div
   %p.name.f16.fb.color1 张老师
   .row-div.f12.color6
@@ -27,14 +27,14 @@
     %label 简介：
     %span= $user->description->introduction
   .avatar-div
-    %img.teacher-avatar{src: $user['avatar'] ? $user['avatar'] : "/icon/teacher_avatar.png"}
+    %img.teacher-avatar{src: $user['avatar'] ? $user['avatar'] : "icon/teacher_avatar.png"}
   - if ($hasVoted == false)
     .admire-div
-      %img.admire-icon{src: "/icon/like2_normal.png"}
+      %img.admire-icon{src: "icon/like2_normal.png"}
       %span.f14.color8= count($votes)
   - else
     .admire-div.bc
-      %img.admire-icon{src: "/icon/like2_selected.png"}
+      %img.admire-icon{src: "icon/like2_selected.png"}
       %span.f14.color12= count($votes)
     
 .div-line
@@ -42,7 +42,7 @@
   - foreach ($courses as $course)
     .course-item{"data-id" => $course['id']}
       .course-icon-div
-        %img.course-icon{src: $course['cover'] ? $course['cover'] : "/icon/example.png"}
+        %img.course-icon{src: $course['cover'] ? $course['cover'] : "icon/example.png"}
       .word-div
         .course-row-div.clearfix
           %span.f12.category-class= $course['category']['name']

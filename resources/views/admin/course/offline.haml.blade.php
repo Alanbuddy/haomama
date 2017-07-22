@@ -32,6 +32,7 @@
         %a.f16.set-left-border#exit{href: "#"} 退出登录
 
   .main-content.bg2
+  
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
     .table-div
       .tabbable

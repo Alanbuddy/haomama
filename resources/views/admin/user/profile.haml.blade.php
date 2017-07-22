@@ -31,8 +31,8 @@
               .person-div
                 %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
                 .photo-div#preview
-                  %img.bg2.photo#imghead{src: "/icon/admin/default.png", onclick: "$('#previewImg').click()"}
-                  %img.figure{src: "/icon/admin/photo.png"}
+                  %img.bg2.photo#imghead{src: "icon/admin/default.png", onclick: "$('#previewImg').click()"}
+                  %img.figure{src: "icon/admin/photo.png"}
                 %p.mobile
                   %span.f20.font-color3.mobile-num 手机号:
                   %span.f20.font-color3 13232344345
@@ -44,15 +44,15 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/close.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/close.png"}
       .modal-body
         %p.message 您尚未保存账号设置，是否确定离开？
         .btn-div
           %button.btn#set-cancel{type: "button"} 取&nbsp消
           %button.btn#set-confirm{type: "button"} 确&nbsp定
 @section('script')
-<script src="/js/profile-preview.js"></script>
-<script src= "/js/admin-user-profile.js"></script>
+<script src="js/profile-preview.js"></script>
+<script src= "js/admin-user-profile.js"></script>
 
 
 @endsection

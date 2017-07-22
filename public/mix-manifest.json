@@ -23,6 +23,7 @@
   "/css/admin_course_new.css": "/css/admin_course_new.css",
   "/css/admin_course_offline.css": "/css/admin_course_offline.css",
   "/css/admin_course_show.css": "/css/admin_course_show.css",
+  "/css/offline_show.css": "/css/offline_show.css",
   "/css/admin_lesson_index.css": "/css/admin_lesson_index.css",
   "/css/admin_lesson_audio.css": "/css/admin_lesson_audio.css",
   "/css/admin-lesson-new.css": "/css/admin-lesson-new.css",

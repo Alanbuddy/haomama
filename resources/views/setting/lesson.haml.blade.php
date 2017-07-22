@@ -12,7 +12,7 @@
 @endsection
 @section('content')
 .head-div
-  %img.back{src: "/icon/back2.png"}
+  %img.back{src: "icon/back2.png"}
   %p.file-id= empty($video) ? -1 : $video->cloud_file_id
   .video-div#id_video_container{style: "width:100%;height:auto;"}
 %ul.nav
@@ -45,7 +45,7 @@
       .review-items-div
         - foreach ($comments as $comment)
           .review-item{"data-url" => route("comments.vote", $comment['id'])}
-            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
+            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
               %p.f12.color5.time= $comment['created_at']
@@ -55,9 +55,9 @@
               .admire-div
                 %span.f12.color5.admire-num= $comment['voteCount']
                 - if ($comment['hasVoted'] == false)
-                  %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+                  %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
                 - else
-                  %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
+                  %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
     %p.f12.color6.feed-review 最新评论
     .feed-review-items-div
       - foreach ($latestComments as $latestComment)
@@ -72,9 +72,9 @@
             .admire-div
               %span.f12.color5.admire-num= $latestComment['voteCount']
               - if ($latestComment['hasVoted'] == false)
-                %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+                %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
               - else
-                %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
+                %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
   - else
     .hot-review-div
       .review-title
@@ -83,7 +83,7 @@
       .review-items-div
         - foreach ($comments as $comment)
           .review-item{"data-url" => route("comments.vote", $comment['id'])}
-            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "/icon/avatar.png"}
+            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
               %p.f12.color5.time= $comment['created_at']
@@ -93,9 +93,9 @@
               .admire-div
                 %span.f12.color5.admire-num= $comment['voteCount']
                 - if ($comment['hasVoted'] == false)
-                  %img.admire-icon{src: "/icon/like1_normal.png", 'data-ad'=> 'false'}
+                  %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
                 - else
-                  %img.admire-icon{src: "/icon/like1_selected.png", 'data-ad'=> 'true'}
+                  %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
 @endsection
 @section('foot-div')
 - if ($hasEnrolled)
@@ -118,5 +118,5 @@
 @section('script')
 <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
 <script src= "{{ mix('/js/creview.js') }}"></script>
-<script src= "/js/prompt.js"></script>
+<script src= "js/prompt.js"></script>
 @endsection

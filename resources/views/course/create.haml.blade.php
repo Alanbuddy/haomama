@@ -9,10 +9,10 @@
 
 @section('content')
 .search-box.clearfix
-  %img.back.fl{src: "/icon/back.png"}
+  %img.back.fl{src: "icon/back.png"}
   .input-div
     %input.input-box.f14.color7
-    %img.search-icon{src: "/icon/search.png"}
+    %img.search-icon{src: "icon/search.png"}
   .search-auto
     %span.f12.color5 热搜推荐
     - foreach ($popularTags as $popularTag)

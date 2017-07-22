@@ -6,7 +6,7 @@
 @section('content')
 .head-div
   %p.fb.tc.fb.color7.f18 消息
-  %img.back{src: "/icon/back.png"}
+  %img.back{src: "icon/back.png"}
   %hr.div-line
 - if (count($messages) > 0)
   .message-item-div
@@ -14,7 +14,7 @@
       - if ($message['from'])
         .item-review
           .avatar-div
-            %img.avatar{src: $message->comment->user['avatar'] ? $message->comment->user['avatar'] : "/icon/avatar.png"}
+            %img.avatar{src: $message->comment->user['avatar'] ? $message->comment->user['avatar'] : "icon/avatar.png"}
           .desc-div
             %p.name.f12.color7= $message->comment->user['name']
             %p.time.f12.color5= $message->comment['created_at']
@@ -23,14 +23,14 @@
       - else
         .item-notice
           .avatar-div
-            %img.avatar{src: "/icon/ma_icon.png"}
+            %img.avatar{src: "icon/ma_icon.png"}
           .desc-div
             %p.name.f12.color7 课程小助手
             %p.time.f12.color5= $message['created_at']
             %p.num.f14.color7= $message['content']
 - else
   .empty-div
-    %img.empty-icon{src: "/icon/empty.png"}
+    %img.empty-icon{src: "icon/empty.png"}
     %p.empty-message.f12.color5 您还没有相关消息......
 
 @endsection

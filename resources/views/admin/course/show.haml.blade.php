@@ -32,9 +32,9 @@
 
   .main-content.bg2
     - if($course->status == "draft")
-      %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 下架课程
+      %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 上线课程
     - else
-      %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 上线课程
+      %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 下架课程
     %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
     .table-div
@@ -90,6 +90,7 @@
                 %span.unedit-box.ml4
                   - foreach($course->tags as $tag)
                     %span.tag-span= $tag->name
+                    %span.tag-hide-id= $tag->id
                 %span.edit-box.tag-div
                   #type-tag
               .hot-tag-div.edit-box
@@ -102,7 +103,13 @@
                 %span.unedit-box.ml4
                   -foreach($course->teachers as $teacher)
                     %span.teacher-tag-span=$teacher->name
-                %span.edit-box#teacher-show
+                %span.edit-box
+                  - foreach($course->teachers as $teacher)
+                    %span.add-tag
+                      %span.teacher-name= $teacher->name
+                      %span.teacher-id= $teacher->id
+                      %img.delete-tag{src: "icon/admin/delete.png"}
+              
               .edit-box.teacher-div
                 %input#teacher{type: "text"}
 
@@ -127,12 +134,18 @@
                 %span.edit-box.addlesson 添加
                 .lesson-title
                   %ol.example
+                    - foreach($course->lessons as $lesson)
+                      - if($lesson->type == 'audio')
+                        %li{"data-id" => $lesson->id}=$lesson->name
+                      - if($lesson->type == "video")
+                        %li{"data-id" => $lesson->id}=$lesson->name
 
               .course-lesson.introduce-flex
                 %span.introduce 课时标题:
                 .unedit-box.ml4
-                  - foreach(json_decode($course->titles) as $title)
-                    %p= $title
+                  - if ($course->titles)
+                    - foreach(json_decode($course->titles) as $title)
+                      %p#title-desc= $title
                 %span.edit-box.wangedit-area
                   #title-area 
           #tab2.tab-pane
@@ -251,7 +264,6 @@
 <script src="js/plugin/jquery.tag-editor.min.js"></script>
 <script src="js/plugin/jquery-sortable.js"></script>
 <script src="js/preview.js"></script>
-// <script src="js/lesson-title.js"></script>
 <script src="js/admin_course_online_show.js"></script>
 
 @endsection

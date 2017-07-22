@@ -11,7 +11,7 @@
 .content-area
   .main-top.direction
     %a{href: route('users.index')."?type=teacher"}
-      %img.back{src: "/icon/admin/back.png"}
+      %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
         %a.f16{href: route('users.index')} 人员管理
@@ -55,8 +55,8 @@
                     %input.form-control.input-width#mail{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
-                %img.unedit-box.teacher-avatar{src: "/icon/teacher_avatar.png"}
-                %img.edit-box.edit-photo#imghead{src: "/icon/admin/add3.png", onclick: "$('#previewImg').click()"}
+                %img.unedit-box.teacher-avatar{src: "icon/teacher_avatar.png"}
+                %img.edit-box.edit-photo#imghead{src: "icon/admin/add3.png", onclick: "$('#previewImg').click()"}
                 
             .controls-div.font-color3.f14
               .controls.controls-row
@@ -102,7 +102,7 @@
             .desc-div
               // - if @courses[:data].length == 0
               //   .undiscover.f14
-              //     %img.undiscover-icon{src: "/icon/admin/undiscover.png"}
+              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
               .table-box
                 %table.table.table-hover.table-height.f14
@@ -144,7 +144,7 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_teacher_show.js')}}"></script>
-<script src="/js/plugin/wangEditor.min.js"></script>
-<script src="/js/teacher_preview.js"></script>
+<script src="js/plugin/wangEditor.min.js"></script>
+<script src="js/teacher_preview.js"></script>
 
 @endsection

@@ -9,13 +9,13 @@
 @section('content')
 - if (!$hasEnrolled)
   .sign-div
-    %img.fail-icon{src: "/icon/fail.png"}
+    %img.fail-icon{src: "icon/fail.png"}
     %p.f16.color7 签到失败
     %p.reason.f12.color6 您尚未报名该课程!
   .btn#scan 重新扫描
 - else 
   .sign-div
-    %img.success-icon{src: "/icon/success.png"}
+    %img.success-icon{src: "icon/success.png"}
     %p.f16.color7 签到成功
     .name-div.f12.color6
       %span 课程

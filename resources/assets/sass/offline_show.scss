@@ -3,33 +3,47 @@
 }
 .finish-btn-position {
   position: absolute;
-  right: 2.07%;
+  right: 20px;
   top: 24px;
   z-index: 10;
+}
+#finish-btn, #edit-btn, #unshelve-btn, #shelve-btn {
+  width: 100px;
+  color: #fff;
+  outline: none;
 }
 #finish-btn {
   display: none;
 }
+.unshelve-btn-position {
+  position: absolute;
+  right: 140px;
+  top: 24px;
+  z-index: 10;
+}
+.create-btn-position {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  z-index: 10;
+}
 .modal-body, label {
-	margin: 0;
-	padding: 0;
-	max-height: 600px;
-}
-.unedit {
-  margin-top: 30px;
-}
-.unedit-photo {
-  width: 200px;
-  height: 138px;
+  margin: 0;
+  padding: 0;
+  max-height: 600px;
 }
 .text-message {
-	width: 50%;
-	float: left;
-  .controls-row {
-    margin-bottom: 22px;
-  }
+  width: 50%;
+  float: left;
 }
-.controls-row:nth-of-type(3) {
+.tag-span {
+  display: inline-block;
+  margin-right: 4px;
+}
+.margin20 {
+  margin: 16px 0 24px 0;
+}
+.text-message .controls-row:nth-of-type(3) {
   margin-bottom: 0;
 }
 #course-type {
@@ -39,7 +53,7 @@
   margin-right: 40px;
 }
 .input-width {
-  width: 157px;
+  width: 154px;
   height: 30px;
   display: inline-block;
   color: #6f6f7e;
@@ -51,10 +65,16 @@
   color: #6f6f7e;
 }
 .controls-row {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 #course-price {
   margin-right: 40px;
+}
+.tag-hide-id {
+  display: none;
+}
+.ml4 {
+  margin-left: 4px;
 }
 #imghead {
   width: 200px;
@@ -65,7 +85,7 @@
   width: 17.25%;
   display: inline-block;
   margin-left: 7.5%;
-  // margin-top: 1%;
+  margin-top: 1%;
 }
 .controls-div {
   padding: 0 3.24%;
@@ -92,10 +112,11 @@
   font-family: "微软雅黑";
   margin-left: 4px;
 }
+
 .hot-tag-div {
   margin-top: 8px;
   margin-bottom: 20px;
-  margin-left: 64px;
+  margin-left: 62px;
   span {
     display: inline-block;
     border: 1px solid #ccc;
@@ -107,7 +128,220 @@
   }
 }
 
+.unedit-photo {
+  width: 200px;
+  height: 138px;
+}
 .ui-helper-hidden-accessible {
+  display: none;
+}
+.mb8 {
+  margin-bottom: 8px;
+}
+.no-mb {
+  margin-bottom: 0;
+}
+.hot-tag-hide {
+  display: none;
+}
+.course-introduce {
+  margin:20px 0;
+}
+.introduce {
+  margin-right: 2px;
+  vertical-align: top;
+}
+.wangedit-area {
+  display: inline-block;
+  width: 70.5%;
+  font-size: 14px;
+  margin-left: 4px;
+}
+.w-e-text-container {
+  height: 200px !important;
+}
+.addlesson {
+  display: inline-block;
+  padding: 0 20px;
+  background: #10c078;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.input-caption {
+  font-weight: normal;
+}
+#course-name {
+  width: 80%;
+}
+.course-lesson {
+  margin-bottom: 20px;
+}
+.lesson-title {
+  display: inline-block;
+  width: 70.5%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+.lesson-div {
+  margin-bottom: 20px;
+}
+
+
+
+#lessonModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -400px;
+    margin-top: -183px;
+    width: 800px;
+    height: 366px;
+  }
+  .modal-backdrop {
+    background-color: #999;
+  }
+  .modal-content {
+    border-radius: 12px;
+  }
+  .modal-body {
+    margin: 0;
+    padding: 20px 40px;
+  }
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 15;
+  }
+  .confirm-btn-position {
+    position: absolute;
+    right: 350px;
+    bottom: 20px;
+  }
+  #confirm-btn {
+    width: 100px;
+    color: #fff;
+    outline: none;
+    background: #10c078;
+  }
+  .all-div {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+#lesson-date, #lesson-address {
+  width: 40%;
+  margin-right: 98px;
+}
+
+
+.calendar-wrapper {
+  width: 77%;
+  border-radius: 6px;
+  margin-top: 2%;
+}
+.title {
+  text-align: center;
+  margin: 6.3% 0 3.2% 0;
+}
+.small-tips {
+  text-align: center;
+  color: #c8c8c8;
+  margin-bottom: 6.3%;
+}
+.input-date {
+  display: inline-block;
+  margin-right: 1%;
+  vertical-align: middle;
+  font-weight: normal;
+}
+#add-event {
+  width: 75%;
+  background: #10c078;
+  color: white;
+}
+.add-btn:hover {
+  color: white;
+}
+.repeat {
+  width: 75%;
+  margin: 3.2% auto;
+}
+.date-btn {
+  float: left;
+  width: 46%;
+  background: #c8c8c8;
+  color: white;
+}
+#date-btn, #week-btn {
+  color: white;
+  outline: none;
+}
+.date-btn:hover {
+  color: white;
+}
+.week-btn {
+  @extend .date-btn;
+  float: right;
+}
+h2 {
+  padding-top: 10px;
+}
+
+.active-btn {
+  background: #f7873d;
+}
+.no-margin-right {
+  margin-right: 0;
+}
+.form-inline {
+  margin-bottom: 20px;
+}
+
+
+.ui-draggable, .ui-droppable {
+  background-position: top;
+}
+.teacher-edit-box {
+  height: 28px;
+  height: 28px;
+}
+.add-tag {
+  display: inline-block;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 10px;
+  border-radius: 4px;
+  margin-left: 6px;
+  margin-right: 8px;
+  .delete-tag {
+    width: 12px;
+    height: 12px;
+    display: none;
+    margin-left: 4px;
+    margin-top: -4px;
+  }
+}
+.add-tag-hover {
+  border: 1px solid #ccc;
+  background: #f3f3fc;
+}
+.unadd {
+  display: inline-block;
+  margin-left: 4px;
+}
+.teacher-id {
+  display: none;
+}
+
+
+.edit-box {
   display: none;
 }
 #teacher {
@@ -158,158 +392,6 @@
 .teacher-id {
   display: none;
 }
-.mb8 {
-  margin-bottom: 8px;
-}
-
-.no-mb {
-  margin-bottom: 0;
-}
-.hot-tag-hide {
-  display: none;
-}
-.course-introduce {
-  margin:20px 0;
-}
-.introduce {
-  margin-right: 2px;
-  vertical-align: top;
-}
-.wangedit-area {
-  display: inline-block;
-  width: 70.5%;
-  font-size: 14px;
-  margin-left: 4px;
-}
-.w-e-text-container {
-  height: 200px !important;
-}
-.addlesson {
-  display: none;
-  padding: 5px 20px;
-  background: #10c078;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.input-caption {
-  font-weight: normal;
-}
-#course-name {
-  width: 80%;
-}
-.course-lesson {
-  margin-bottom: 20px;
-}
-.lesson-div {
-  margin-bottom: 20px;
-}
-.lesson-title {
-  display: none;
-  width: 70.5%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 66px;
-  padding: 10px;
-}
-.ml4 {
-  margin-left: 4px;
-}
-.lesson-position {
-  display: inline-block;
-}
-.tag-span, .teacher-tag-span {
-  display: inline-block;
-  margin-right: 8px;
-}
-.tag-hide-id {
-  display: none;
-}
-#lessonModal {
-  .modal-dialog {
-    position:absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -400px;
-    margin-top: -210px;
-    width: 800px;
-    height: 420px;
-  }
-  .modal-backdrop {
-    background-color: #999;
-  }
-  .modal-content {
-    border-radius: 12px;
-  }
-  .modal-body {
-    margin: 0;
-    padding: 20px 40px;
-  }
-  .close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    opacity: 1;
-    z-index: 15;
-  }
-  .confirm-btn-position {
-    position: absolute;
-    right: 350px;
-    bottom: 60px;
-  }
-  #confirm-btn {
-    width: 100px;
-    color: #fff;
-    outline: none;
-    background: #10c078;
-  }
-  .all-div {
-    margin: 0 auto;
-    text-align: center;
-  }
-  .select-page {
-    margin-top: 60px;
-  }
-}
-
-ol.example li.placeholder {
-  position: relative;
-  /** More li styles **/
-}
-ol.example li.placeholder:before {
-  position: absolute;
-  /** Define arrowhead **/
-}
-
-.edit-box {
-  display: none;
-}
-.short-span {
-  display: inline-block;
-  width: 154px;
-}
-.mr40 {
-  margin-right: 40px;
-}
-.unshelve-btn-position {
-  position: absolute;
-  right: 12%;
-  top: 24px;
-  z-index: 10;
-}
-.create-btn-position {
-  position: absolute;
-  right: 2.07%;
-  top: 24px;
-  z-index: 10;
-}
-#edit-btn, #unshelve-btn, #shelve-btn, #finish-btn {
-  width: 8.63%;
-  color: #fff;
-  outline: none;
-}
 .introduce-flex {
   display: -webkit-flex;
   display: -moz-flex;
@@ -317,82 +399,36 @@ ol.example li.placeholder:before {
   display: -o-felx;
   display: flex;
 }
-
-//tab2
-.mr30 {
-  margin-right: 50px;
-}
-.tag2-page {
-  float: right;
-  width: 50%;
-}
-
-//tab3
-.review-items {
-  padding: 2.4% 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #eaebf2;
-}
-.avatar-icon {
-  border-radius: 4px;
+.show-calendar {
+  float: left;
   width: 100%;
-  max-width: 60px;
-  height: 4.2588em;
-  object-fit: contain;
-}
-.img-div {
-  width: 6%;
-  height: 4.2588em;
-}
-.review-div {
-  width: 92%;
-}
-.head-div, .reviews {
-  margin-bottom: 1%;
-}
-.show-review, .hide-review {
-  color: #fff;
-  width: 7.65%;
-  outline: none;
-  padding: 0;
+  border: 1px solid #c8c8c8;
   border-radius: 4px;
+  font-size: 14px;
 }
-.show-review:link {
-  color: #fff;
+.calendar-operation-wrapper {
+  width: 40%;
+  float: left;
+  text-align: center;
+  display: none;
 }
-.show-review:visited {
-  color: #fff;
+.edit-calendar {
+  width: 59%;
+  float: right;
+  font-size: 14px;
 }
-.show-review:hover {
-  color: #fff;
+.short-span {
+  display: inline-block;
+  width: 194px;
 }
-.show-review:active {
-  color: #fff;
+.mid-span {
+  display: inline-block;
+  width: 40%;
+  margin-right: 98px;
 }
-.hide-review:link {
-  color: #fff;
+.mt30 {
+  margin-top: 46px;
 }
-.hide-review:visited {
-  color: #fff;
-}
-.hide-review:hover {
-  color: #fff;
-}
-.hide-review:active {
-  color: #fff;
-}
-
-.user-name {
-  font-size: 16px;
-}
-.mt20 {
-  margin-top: 20px;
-}
-.user-search-box {
-  margin: 10px;
-}
-
 
 
 #shelfModal {
@@ -456,4 +492,3 @@ ol.example li.placeholder:before {
   background: #f7873d;
   outline: none;
 }
-

@@ -340,7 +340,7 @@ $(document).ready(function(){
         description: desc,
         cover: path,
         type: offline,
-        mininum: min_num,
+        minimum: min_num,
         quota: max_num,
         address: address,
         begin: time,

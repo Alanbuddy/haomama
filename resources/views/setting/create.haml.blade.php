@@ -6,11 +6,11 @@
 @section('content')
 .head-div
   %p.fb.tc.fb.color7.f18 个人资料
-  %img.profile-close{src: "/icon/close.png"}
+  %img.profile-close{src: "icon/close.png"}
 .item-div 
   .item
     .left-div
-      %img.avatar{src: "/icon/avatar.png"}
+      %img.avatar{src: "icon/avatar.png"}
     .right-div
       .row-div
         %label.f14.color7.fn 家长身份
@@ -28,7 +28,7 @@
         %input.input-div.f12.color6
   .item-baby-div
     .left-div
-      %img.avatar{src: "/icon/baby_female.png"}
+      %img.avatar{src: "icon/baby_female.png"}
     .right-div
       .row-div
         %label.f14.color7.fn 宝宝姓名
@@ -43,9 +43,9 @@
         %input.input-div#baby-birthday.birthday{type: "date"}
 
   .add-baby-div
-    %img.close-add-item{src: "/icon/close.png"}
+    %img.close-add-item{src: "icon/close.png"}
     .left-div
-      %img.avatar{src: "/icon/baby_female.png"}
+      %img.avatar{src: "icon/baby_female.png"}
     .right-div
       .row-div
         %label.f14.color7.fn 宝宝姓名
@@ -64,5 +64,5 @@
 
 @section('script')
 <script src= "{{ mix('/js/setting-create.js') }}"></script>
-<script src= "/js/timer.js"></script>
+<script src= "js/timer.js"></script>
 @endsection
