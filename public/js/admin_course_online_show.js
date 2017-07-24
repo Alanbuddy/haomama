@@ -28,6 +28,7 @@ $(document).ready(function(){
     $(this).toggle();
     $("#edit-tag").addClass('mb8');
     $("#finish-btn").toggle();
+    $(".operation").attr("disabled", true);
 
     $("#course-name").val($("#name-span").text());
     var category_id = $("#type-span").attr("data-type-id");
@@ -330,8 +331,12 @@ $(document).ready(function(){
     $(".example li").each(function(){
       lesson_list.push($(this).attr("data-id"));
     });
-    var lesson_title = editor_lesson.txt.text();
-    var titles = lesson_title.split("。");
+    var lesson_title = [];
+    $(".w-e-text p").each(function(){
+      lesson_title.push($(this).text());
+    });
+    lesson_title.shift(lesson_title[0]);
+    console.log(lesson_title);
     var teacher_arr = [];
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
@@ -359,7 +364,7 @@ $(document).ready(function(){
         lessons: lesson_list,
         cover: path,
         type: online,
-        titles: titles,
+        titles: lesson_title,
         _token: window.token
       },
       function(data){
