@@ -30,8 +30,19 @@ $(document).ready(function(){
 		$("#teacher-show").text(teacher_arr);
 		var desc = $("#desc-span").text();
 		editor.txt.html(desc);
-		var title_desc = $("#title-desc").text();
-		editor_lesson.txt.html(title_desc);
+
+		var E = window.wangEditor;
+		editor_lesson = new E('#unedit-title');
+		$("#unedit-title").addClass('wangedit-area').toggle();
+		editor_lesson.customConfig.uploadImgServer = window.fileupload;
+		editor_lesson.customConfig.showLinkImg = false;
+		editor_lesson.customConfig.menus = [
+		      'head'
+		   ];
+		editor_lesson.customConfig.uploadHeaders = {
+		  'Accept' : 'HTML'
+		};
+		editor_lesson.create();
 
 	});
 
@@ -52,19 +63,6 @@ $(document).ready(function(){
 	};
 	editor.create();
 
-	// var E = window.wangEditor;
-	var editor_lesson = new E('#edit-title');
-
-	editor_lesson.customConfig.uploadImgServer = window.fileupload;
-	editor_lesson.customConfig.showLinkImg = false;
-	editor_lesson.customConfig.menus = [
-	      'head'
-	   ];
-	editor_lesson.customConfig.uploadHeaders = {
-	  'Accept' : 'HTML'
-	};
-	editor_lesson.create();
-
 
 	var tag_arr = [];
 	$(".tag-span").each(function(){
@@ -80,6 +78,12 @@ $(document).ready(function(){
 	        return false;
 	      }
 	    });
+      $(".hot-tag-div").find("span").each(function(){
+        if($(this).text() == val ){
+          showMsg("标签不可重复","center");
+          return false;
+        }
+      });
 	    $.postJSON(
 	      window.tag_store,
 	      {
@@ -397,7 +401,6 @@ $(document).ready(function(){
 	  $(".tag-hide-id").each(function(){
 	    tags.push($(this).text());
 	  });
-	  console.log(tags);
 	  var desc = editor.txt.html();
 	  var lesson_title = editor_lesson.txt.text();
     var titles = lesson_title.split("。");
@@ -405,7 +408,6 @@ $(document).ready(function(){
 	  $(".teacher-id").each(function(){
 	    teacher_arr.push($(this).text());
 	  });
-	  console.log(teacher_arr);
 	  var path = $(".cover-path").text();
 	  var offline = "offline";
 	  
@@ -423,7 +425,7 @@ $(document).ready(function(){
     if(ret == false) {
       return false;
     }
-	  $.postJSON(
+	  $.putJSON(
 	    window.course_update,
 	    {
 	      name: name,
@@ -445,9 +447,8 @@ $(document).ready(function(){
 	      _token: window.token
 	    },
 	    function(data){
-	      console.log(data);
 	      if(data.success){
-	        
+	        location.href = window.course_show;
 	      }
 	    }
 	    );
