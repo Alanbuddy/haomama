@@ -114,7 +114,6 @@ class SearchService
         return $sorted;
     }
 
-    //根据标签相似程度推荐课程,返回包含其他课程ID的数组
     public function popularTags()
     {
         $tags = DB::table('term_object')

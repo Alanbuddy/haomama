@@ -143,6 +143,7 @@ class HomeController extends Controller
         $page = $request->get('page', 1);
         $recommendedCourse = $recommendedCourse ?: $this->recommendedCourses($categoryId);
         $items = Search::basicStat()
+            ->where('status','publish')
             ->orderBy('id', 'desc');
         if ($categoryId > 0) {
             $items->where('category_id', $categoryId);
@@ -150,6 +151,7 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $items->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
+        //处理分页
         $items = $this->processPage($page, $items, $pageSize, $recommendedCourse);
         return [$items, $recommendedCourse];
     }
@@ -160,6 +162,7 @@ class HomeController extends Controller
         $page = $request->get('page', 1);
         $recommendedCourse = $recommendedCourse ?: $this->recommendedCourses($categoryId);
         $itemsOrderByUserCount = Search::basicStat()
+            ->where('status','publish')
             ->orderBy('users_count', 'desc');
         if ($categoryId > 0) {
             $itemsOrderByUserCount->where('category_id', $categoryId);
@@ -177,6 +180,7 @@ class HomeController extends Controller
         $page = $request->get('page', 1);
         $recommendedCourse = $recommendedCourse ?: $this->recommendedCourses($categoryId);
         $itemsOrderByCommentRating = Course::select(DB::raw('courses.*'))
+            ->where('status','publish')
             ->addSelect(DB::raw('(select count(*) from `users` inner join `course_user` on `users`.`id` = `course_user`.`user_id` where `courses`.`id` = `course_user`.`course_id` and `type` = ' . '\'student\'' . ') as `users_count`'))
             ->addSelect(DB::raw('(select count(*) from `comments` where `comments`.`course_id` = `courses`.`id`) as `comments_count`'))
             ->addSelect(DB::raw('(select sum(comments.star) from `comments` where `comments`.`course_id` = `courses`.`id`) as `star`'))
