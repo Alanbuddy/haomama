@@ -127,6 +127,7 @@ class CourseController extends Controller
             'minimum',
             'quota',
             'address',
+            'begin',
             'type',
         ]));
         if ($request->has('titles'))
@@ -322,6 +323,7 @@ class CourseController extends Controller
             'minimum',
             'quota',
             'address',
+            'begin',
             'type',
         ]));
         if ($request->has('titles'))
