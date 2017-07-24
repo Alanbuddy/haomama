@@ -65,8 +65,9 @@
 <script src="js/bootstrap.min.js"></script>
 <script src ="js/ajax.js"></script>
 <script src = "js/regex.js"></script>
+<script src= "http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src = "js/mobile-notification.js"></script>
-<script src = "js/layout.js"></script>
+<script src= "{{mix('/js/layout.js')}}"></script>
 
 @yield('script')
 </body>

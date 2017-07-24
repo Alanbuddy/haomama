@@ -7,6 +7,7 @@
 :javascript
   window.course_index = "#{route('courses.index')}"
   window.course_publish = "#{route('courses.publish',$course->id)}"
+  window.course_show = "#{route('admin.courses.show',$course->id)}"
   window.token = "#{csrf_token()}"
   window.add_teacher = "#{route('users.search')}"
   window.course_update = "#{route('courses.update', $course->id)}"
@@ -94,9 +95,8 @@
                 %span.edit-box.tag-div
                   #type-tag
               .hot-tag-div.edit-box
-                %span 标签一
-                %span 标签二
-                %span 标签十分大
+                - foreach($popularTags as $tag)
+                  %span{value: $tag->id}= $tag->name
               .create-tag-div{style: "display:none"}
               .controls.controls-row.no-mb.tag-flex
                 %label.input-caption.teacher-tag 授课老师:
@@ -142,12 +142,11 @@
 
               .course-lesson.introduce-flex
                 %span.introduce 课时标题:
-                .unedit-box.ml4
+                .unedit-box.ml4#unedit-title
                   - if ($course->titles)
                     - foreach(json_decode($course->titles) as $title)
-                      %p#title-desc= $title
-                %span.edit-box.wangedit-area
-                  #title-area 
+                      %span.title-desc= $title
+                
           #tab2.tab-pane
             .desc-div
               // - if @courses[:data].length == 0

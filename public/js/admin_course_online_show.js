@@ -1,8 +1,24 @@
 $(document).ready(function(){
+  var E = window.wangEditor;
+  var editor = new E('#edit-area');
+  editor.customConfig.uploadImgParams = {
+      _token: window.token
+  };
+  editor.customConfig.uploadFileName = 'file';
+  editor.customConfig.uploadImgServer = window.fileupload;
+  editor.customConfig.showLinkImg = false;
+  editor.customConfig.menus = [
+        'head',
+        'image'
+     ];
+  editor.customConfig.uploadHeaders = {
+    'Accept' : 'HTML'
+  };
+  editor.create();
+
   $(".operation").click(function(){
     $("#shelfModal").modal("show");
   });
-
 
   $("#edit-btn").click(function(){
     $(".unedit-box").toggle();
@@ -26,8 +42,19 @@ $(document).ready(function(){
     $("#teacher-show").text(teacher_arr);
     var desc = $("#desc-span").text();
     editor.txt.html(desc);
-    var title_desc = $("#title-desc").text();
-    editor_lesson.html(title_desc);
+   
+    var E = window.wangEditor;
+    editor_lesson = new E('#unedit-title');
+    $("#unedit-title").addClass('wangedit-area').toggle();
+    editor_lesson.customConfig.uploadImgServer = window.fileupload;
+    editor_lesson.customConfig.showLinkImg = false;
+    editor_lesson.customConfig.menus = [
+          'head'
+       ];
+    editor_lesson.customConfig.uploadHeaders = {
+      'Accept' : 'HTML'
+    };
+    editor_lesson.create();
 
   });
    
@@ -101,6 +128,12 @@ $(document).ready(function(){
     initialTags: tag_arr,
     beforeTagSave: function(field, editor, tags, tag, val){
       $(".create-tag-div").find(".tag_id").each(function(){
+        if($(this).text() == val ){
+          showMsg("标签不可重复","center");
+          return false;
+        }
+      });
+      $(".hot-tag-div").find("span").each(function(){
         if($(this).text() == val ){
           showMsg("标签不可重复","center");
           return false;
@@ -209,37 +242,6 @@ $(document).ready(function(){
   });
 
 
-  var E = window.wangEditor;
-  var editor = new E('#edit-area');
-  editor.customConfig.uploadImgParams = {
-      _token: window.token
-  };
-  editor.customConfig.uploadFileName = 'file';
-  editor.customConfig.uploadImgServer = window.fileupload;
-  editor.customConfig.showLinkImg = false;
-  editor.customConfig.menus = [
-        'head',
-        'image'
-     ];
-  editor.customConfig.uploadHeaders = {
-    'Accept' : 'HTML'
-  };
-  editor.create();
-
-  // E = window.wangEditor;
-  var editor_lesson = new E('#title-area');
-
-  editor_lesson.customConfig.uploadImgServer = window.fileupload;
-  editor_lesson.customConfig.showLinkImg = false;
-  editor_lesson.customConfig.menus = [
-        'head'
-     ];
-  editor_lesson.customConfig.uploadHeaders = {
-    'Accept' : 'HTML'
-  };
-  editor_lesson.create();
-
-
   $(document).on('click', '#confirm-btn', function(){
 
     var title_arr = [];
@@ -326,13 +328,14 @@ $(document).ready(function(){
     });
     console.log(teacher_arr);
     var path = $(".cover-path").text();
+    console.log(path);
     var online = "online";
     
     var ret = check_input(name, length, original_price, price);
     if(ret == false) {
       return false;
     }
-    $.postJSON(
+    $.putJSON(
       window.course_update,
       {
         name: name,
@@ -352,7 +355,7 @@ $(document).ready(function(){
       function(data){
         console.log(data);
         if(data.success){
-          
+          location.href = window.course_show;
         }
       }
       );

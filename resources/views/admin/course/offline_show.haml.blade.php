@@ -16,6 +16,8 @@
   window.tag_destroy = "#{route('terms.destroy',-1)}"
   window.lessons_index = "#{route('lessons.index')}"
   window.course_publish = "#{route('courses.publish',$course->id)}"
+  window.course_show = "#{route('admin.courses.show',$course->id)}"
+
 @endsection
 
 @section('content')
@@ -108,9 +110,8 @@
                 %span.edit-box.tag-div
                   #type-tag
               .hot-tag-div.edit-box
-                %span 标签一
-                %span 标签二
-                %span 标签十分大
+                - foreach($popularTags as $tag)
+                  %span{value: $tag->id}= $tag->name
               .create-tag-div{style: "display:none"}
 
               .controls.controls-row.no-mb.tag-flex
@@ -156,12 +157,11 @@
                   #edit-area
               .lesson-div.introduce-flex
                 %span.introduce 课时标题:
-                .unedit-box.ml4
+                .unedit-box.ml4#unedit-title
                   - if ($course->titles)
                     - foreach(json_decode($course->titles) as $title)
-                      %p#title-desc= $title
-                %span.edit-box.wangedit-area
-                  #edit-title
+                      %span.title-desc= $title
+                
 @endsection
 #shelfModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
