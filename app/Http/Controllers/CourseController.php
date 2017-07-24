@@ -94,9 +94,10 @@ class CourseController extends Controller
     {
 //        return view('admin.course.create');
         $categories = Term::where('type', 'category')->get();
+        $popularTags = Search::popularTags();
         return view($request->get('type') == 'offline'
             ? 'admin.course.offline'
-            : 'admin.course.new', compact('categories'));
+            : 'admin.course.new', compact('categories','popularTags'));
     }
 
     /**

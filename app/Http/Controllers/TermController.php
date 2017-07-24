@@ -45,6 +45,11 @@ class TermController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required', 'type' => 'required']);
+        $existing=Term::where('type','tag')
+            ->where('name',$request->name)
+            ->where('type',$request->type)->first();
+        if($existing)
+            return ['success' => true, 'data' => $existing];
         $item = new Term();
         $item->fill($request->only([
             'name',
