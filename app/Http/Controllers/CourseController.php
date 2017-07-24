@@ -272,10 +272,11 @@ class CourseController extends Controller
             ->get();
 
         $categories = Term::where('type', 'category')->get();
+        $popularTags = Search::popularTags();
         // dd($course);
         return view($course->type == 'online'
             ? 'admin.course.show'
-            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons','categories'));
+            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons','categories','popularTags'));
     }
 
     /**
