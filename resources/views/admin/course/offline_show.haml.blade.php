@@ -105,8 +105,7 @@
                 %label.input-caption 课程标签:
                 %span.unedit-box.ml4
                   - foreach($course->tags as $tag)
-                    %span.tag-span= $tag->name
-                    %span.tag-hide-id= $tag->id
+                    %span.tag-span{"data-id" => $tag->id}= $tag->name
                 %span.edit-box.tag-div
                   #type-tag
               .hot-tag-div.edit-box

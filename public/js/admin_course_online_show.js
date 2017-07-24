@@ -133,12 +133,6 @@ $(document).ready(function(){
           return false;
         }
       });
-      $(".hot-tag-div").find("span").each(function(){
-        if($(this).text() == val ){
-          showMsg("标签不可重复","center");
-          return false;
-        }
-      });
       $.postJSON(
         window.tag_store,
         {
@@ -155,6 +149,11 @@ $(document).ready(function(){
         );
     },
     beforeTagDelete: function(field, editor, tags, val){
+      $(".tag-span").each(function(){
+        if($(this).text() == val){
+          $(this).remove();
+        }
+      });
       var delete_id = null;
       var del = "DELETE";
       $(".create-tag-div").find(".tag_id").each(function(){
@@ -171,16 +170,27 @@ $(document).ready(function(){
             },
             success: function(){
               _this.remove();
+              
             }
           });
         }
       });
     }
   });
+  
 
+  var tag_name = [];
+  $("tag-editor-tag").each(function(){
+    tag_name.push($(this).text());
+  });
   $(".hot-tag-div span").each(function(){
     $(this).click(function(){
-      $('#type-tag').tagEditor('addTag', $(this).text());
+      if(tag_name.indexOf($(this).text()) == -1){
+        $('#type-tag').tagEditor('addTag', $(this).text());
+      }else{
+        showMsg("该标签已存在", "center");
+        return false;
+      }
     });
   });
 
@@ -311,8 +321,8 @@ $(document).ready(function(){
     $(".create-tag-div").find(".tag_id").each(function(){
       tags.push($(this).attr("data-id"));
     });
-    $(".tag-hide-id").each(function(){
-      tags.push($(this).text());
+    $(".tag-span").each(function(){
+      tags.push($(this).attr("data-id"));
     });
     console.log(tags);
     var desc = editor.txt.html();

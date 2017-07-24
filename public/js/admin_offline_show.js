@@ -100,6 +100,11 @@ $(document).ready(function(){
 	      );
 	  },
 	  beforeTagDelete: function(field, editor, tags, val){
+      $(".tag-span").each(function(){
+        if($(this).text() == val){
+          $(this).remove();
+        }
+      });
 	    var delete_id = null;
 	    var del = "DELETE";
 	    $(".create-tag-div").find(".tag_id").each(function(){
@@ -123,11 +128,20 @@ $(document).ready(function(){
 	  }
 	});
 
-	$(".hot-tag-div span").each(function(){
-	  $(this).click(function(){
-	    $('#type-tag').tagEditor('addTag', $(this).text());
-	  });
-	});
+	var tag_name = [];
+  $("tag-editor-tag").each(function(){
+    tag_name.push($(this).text());
+  });
+  $(".hot-tag-div span").each(function(){
+    $(this).click(function(){
+      if(tag_name.indexOf($(this).text()) == -1){
+        $('#type-tag').tagEditor('addTag', $(this).text());
+      }else{
+        showMsg("该标签已存在", "center");
+        return false;
+      }
+    });
+  });
 
 	$( "#teacher" ).autocomplete({
 	    source: function(request, response){
@@ -398,8 +412,8 @@ $(document).ready(function(){
 	  $(".create-tag-div").find(".tag_id").each(function(){
 	    tags.push($(this).attr("data-id"));
 	  });
-	  $(".tag-hide-id").each(function(){
-	    tags.push($(this).text());
+	  $(".tag-span").each(function(){
+	    tags.push($(this).attr("data-id"));
 	  });
 	  var desc = editor.txt.html();
 	  var lesson_title = editor_lesson.txt.text();
