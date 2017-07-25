@@ -24,6 +24,7 @@ $(document).ready(function(){
                     for(var i=0;i<data[0].length;i++){
                       node=render(data[0][i]);
                       node.appendTo('.course-item-div');
+                      me.resetload();
                     }
                     // callbackHandle(data[0]);
 
@@ -41,7 +42,7 @@ $(document).ready(function(){
                   // //     // 插入数据到页面，放到最后面
                       // node.appendTo('.course-item-div');
                   // //     // 每次数据插入，必须重置
-                      me.resetload();
+                      // me.resetload();
                   // },1000);
               },
               error: function(xhr, type){
