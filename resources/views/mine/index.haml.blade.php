@@ -18,7 +18,7 @@
       %img.avatar-icon{src: "icon/avatar.png"}
       %p.name.f16.color7= $user['name']
     .right-div
-      %a.f12.color5{href: "#"} 个人资料
+      %span.f12.color5 个人资料
       %img.arrow{src: "icon/go.png"}
   %img.message-icon{src: "icon/message.png"}
   - if ($messagesCount)

@@ -86,7 +86,7 @@
             .controls-div.font-color3.f14
               .controls.controls-row
                 %label.input-caption 上课时间:
-                %span.unedit-box.mid-span#date-span= $course->begin
+                %span.unedit-box.mid-span#date-span= $course->time
                 %span.edit-box
                   %input.form-control.input-width#lesson-date{:type => "text"}
                 %label.input-caption 最少人数:

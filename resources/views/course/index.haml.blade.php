@@ -6,6 +6,7 @@
   window.course_item="#{route('courses.index')}"
   window.course_search="#{route('courses.search')}"
   window.userid = "#{route('users.show',auth()->user())}"
+  window.load_bottom = "#{route('category',-1)}"
 @endsection
 @section('header')
 .head-div
@@ -36,6 +37,7 @@
         .course-title-div
           .title-row-div
             %p.color7.fb.f14= $categories[$i]['name']
+            %p.category_id{style: "display:none;"}= $categories[$i]['id']
             .course-nav.f12.color5
               %span.course-active 最新
               %span 最热
@@ -133,5 +135,7 @@
 
 <script src= "{{mix('/js/course-index.js')}}"></script>
 <script src= "js/swiper-3.4.2.jquery.min.js"></script>
+<script src = "js/dropload_bottom.js"></script>
+
 @endsection
 
