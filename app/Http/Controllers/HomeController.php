@@ -143,7 +143,7 @@ class HomeController extends Controller
         $page = $request->get('page', 1);
         $recommendedCourse = $recommendedCourse ?: $this->recommendedCourses($categoryId);
         $items = Search::basicStat()
-            ->where('status','publish')
+            ->where('status', 'publish')
             ->orderBy('id', 'desc');
         if ($categoryId > 0) {
             $items->where('category_id', $categoryId);
@@ -162,7 +162,7 @@ class HomeController extends Controller
         $page = $request->get('page', 1);
         $recommendedCourse = $recommendedCourse ?: $this->recommendedCourses($categoryId);
         $itemsOrderByUserCount = Search::basicStat()
-            ->where('status','publish')
+            ->where('status', 'publish')
             ->orderBy('users_count', 'desc');
         if ($categoryId > 0) {
             $itemsOrderByUserCount->where('category_id', $categoryId);
@@ -180,7 +180,7 @@ class HomeController extends Controller
         $page = $request->get('page', 1);
         $recommendedCourse = $recommendedCourse ?: $this->recommendedCourses($categoryId);
         $itemsOrderByCommentRating = Course::select(DB::raw('courses.*'))
-            ->where('status','publish')
+            ->where('status', 'publish')
             ->addSelect(DB::raw('(select count(*) from `users` inner join `course_user` on `users`.`id` = `course_user`.`user_id` where `courses`.`id` = `course_user`.`course_id` and `type` = ' . '\'student\'' . ') as `users_count`'))
             ->addSelect(DB::raw('(select count(*) from `comments` where `comments`.`course_id` = `courses`.`id`) as `comments_count`'))
             ->addSelect(DB::raw('(select sum(comments.star) from `comments` where `comments`.`course_id` = `courses`.`id`) as `star`'))
@@ -237,14 +237,12 @@ class HomeController extends Controller
                 ->offset(($page - 2) * $pageSize)->limit($pageSize)
                 ->get()->slice($pageSize - count($recommendedCourse));
             $currPageItems = $items->paginate($pageSize);//->forPage(1, $pageSize - count($recommendedCourse));
-//                dd($currPageItems);
             $items = $prevPageItems->merge($currPageItems)->splice(0, $pageSize);
-            $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
         } else {
-            $items = $items->paginate($pageSize)->splice(0, $pageSize - 1);
+            $items = $items->paginate($pageSize)->splice(0, $pageSize - count($recommendedCourse));
             $items = $recommendedCourse->merge($items);
-//                dd($recommendedCourse);
         }
+        $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
         return $items;
     }
 
