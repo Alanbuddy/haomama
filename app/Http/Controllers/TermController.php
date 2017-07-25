@@ -117,9 +117,15 @@ class TermController extends Controller
     public function destroy(Request $request, Term $term)
     {
         $term->delete();
+        dd($this->isInUse($term));
         if ($request->ajax()) {
             return ['success' => true];
         }
         return redirect()->route('terms.index');
+    }
+
+    public function isInUse($term)
+    {
+        return $term->coursesByTag()->count();
     }
 }
