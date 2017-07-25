@@ -305,7 +305,12 @@ $(document).ready(function(){
       tags.push($(this).attr("data-id"));
     });
     var desc = editor.txt.html();
-    var lesson_title = editor_lesson.txt.text().split("。");
+    
+    var lesson_title = [];
+    $(".w-e-text p").each(function(){
+      lesson_title.push($(this).text());
+    });
+    lesson_title.shift(lesson_title[0]);
     var teacher_arr = [];
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
@@ -343,7 +348,7 @@ $(document).ready(function(){
         minimum: min_num,
         quota: max_num,
         address: address,
-        begin: time,
+        time: time,
         schedule: date_in_calendar,
         titles: lesson_title,
         _token: window.token

@@ -10,6 +10,7 @@ $(document).ready(function(){
 		$(".calendar-operation-wrapper").show();
 		$(".calendar-wrapper").css("border", "1px solid #c8c8c8");
 		$("#calendar").removeClass("show-calendar").addClass("edit-calendar");
+    $(".operation").attr("disabled", true);
 
 		$("#lesson-date").val($("#date-span").text());
 		$("#min-num").val($("#min-span").text());
@@ -100,6 +101,11 @@ $(document).ready(function(){
 	      );
 	  },
 	  beforeTagDelete: function(field, editor, tags, val){
+      $(".tag-span").each(function(){
+        if($(this).text() == val){
+          $(this).remove();
+        }
+      });
 	    var delete_id = null;
 	    var del = "DELETE";
 	    $(".create-tag-div").find(".tag_id").each(function(){
@@ -123,11 +129,20 @@ $(document).ready(function(){
 	  }
 	});
 
-	$(".hot-tag-div span").each(function(){
-	  $(this).click(function(){
-	    $('#type-tag').tagEditor('addTag', $(this).text());
-	  });
-	});
+	var tag_name = [];
+  $("tag-editor-tag").each(function(){
+    tag_name.push($(this).text());
+  });
+  $(".hot-tag-div span").each(function(){
+    $(this).click(function(){
+      if(tag_name.indexOf($(this).text()) == -1){
+        $('#type-tag').tagEditor('addTag', $(this).text());
+      }else{
+        showMsg("该标签已存在", "center");
+        return false;
+      }
+    });
+  });
 
 	$( "#teacher" ).autocomplete({
 	    source: function(request, response){
@@ -398,12 +413,16 @@ $(document).ready(function(){
 	  $(".create-tag-div").find(".tag_id").each(function(){
 	    tags.push($(this).attr("data-id"));
 	  });
-	  $(".tag-hide-id").each(function(){
-	    tags.push($(this).text());
+	  $(".tag-span").each(function(){
+	    tags.push($(this).attr("data-id"));
 	  });
 	  var desc = editor.txt.html();
-	  var lesson_title = editor_lesson.txt.text();
-    var titles = lesson_title.split("。");
+    var lesson_title = [];
+    $(".w-e-text p").each(function(){
+      lesson_title.push($(this).text());
+    });
+    lesson_title.shift(lesson_title[0]);
+    console.log(lesson_title);
 	  var teacher_arr = [];
 	  $(".teacher-id").each(function(){
 	    teacher_arr.push($(this).text());
@@ -441,9 +460,9 @@ $(document).ready(function(){
         minimum: min_num,
         quota: max_num,
         address: address,
-        begin: time,
+        time: time,
         schedule: date_in_calendar,
-        titles: titles,
+        titles: lesson_title,
 	      _token: window.token
 	    },
 	    function(data){

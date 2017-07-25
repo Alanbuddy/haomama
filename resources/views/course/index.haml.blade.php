@@ -59,7 +59,8 @@
                     - if ($item['type'] == 'offline')
                       %span.participate= $item['users_count']."人已报名"
                       %span .
-                      %span= date_format(date_create($item['begin']),"m月/d日") ."开课"
+                      - if($item->begin)
+                        %span= date_format(date_create($item['begin']),"m月/d日") ."开课"
                     - else
                       %span.participate= $item['users_count']."人已学"
                       %span .
@@ -83,7 +84,8 @@
                     - if ($itemOrderByUserCount['type'] == 'offline')
                       %span.participate= $itemOrderByUserCount['users_count']."人已报名"
                       %span .
-                      %span= date_format(date_create($itemOrderByUserCount['begin']),"m月/d日") ."开课"
+                      - if($item->begin)
+                        %span= date_format(date_create($itemOrderByUserCount['begin']),"m月/d日") ."开课"
                     - else
                       %span.participate= $itemOrderByUserCount['users_count']."人已学"
                       %span .
@@ -107,7 +109,8 @@
                     - if ($itemOrderByCommentRating['type'] == 'offline')
                       %span.participate= $itemOrderByCommentRating['users_count']."人已报名"
                       %span .
-                      %span= date_format(date_create($itemOrderByCommentRating['begin']),"m月/d日") ."开课"
+                      - if($item->begin)
+                        %span= date_format(date_create($itemOrderByCommentRating['begin']),"m月/d日") ."开课"
                     - else
                       %span.participate= $itemOrderByCommentRating['users_count']."人已学"
                       %span .
@@ -127,9 +130,7 @@
 @endsection
 
 @section('script')
-<script src= "js/jquery.event.drag.js"></script>
-<script src= "js/jquery.touchSlider.js"></script>
-<script src= "js/banner.js"></script>
+
 <script src= "{{mix('/js/course-index.js')}}"></script>
 <script src= "js/swiper-3.4.2.jquery.min.js"></script>
 @endsection

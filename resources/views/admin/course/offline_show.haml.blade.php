@@ -35,10 +35,11 @@
         %a.f16.set-left-border#exit{href: "#"} 退出登录
 
   .main-content.bg2
-    - if($course->status == "draft")
-      %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 上线课程
-    - else
-      %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 下架课程
+    - if(auth()->user()->hasRole('admin'))
+      - if($course->status == "draft")
+        %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 上线课程
+      - else
+        %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 下架课程
     %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
     .table-div
@@ -105,8 +106,7 @@
                 %label.input-caption 课程标签:
                 %span.unedit-box.ml4
                   - foreach($course->tags as $tag)
-                    %span.tag-span= $tag->name
-                    %span.tag-hide-id= $tag->id
+                    %span.tag-span{"data-id" => $tag->id}= $tag->name
                 %span.edit-box.tag-div
                   #type-tag
               .hot-tag-div.edit-box
@@ -160,7 +160,7 @@
                 .unedit-box.ml4#unedit-title
                   - if ($course->titles)
                     - foreach(json_decode($course->titles) as $title)
-                      %span.title-desc= $title
+                      %p.title-desc= $title
                 
 @endsection
 #shelfModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 

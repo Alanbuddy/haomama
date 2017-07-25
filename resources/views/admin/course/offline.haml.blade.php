@@ -80,9 +80,8 @@
                 %span.tag-div
                   #type-tag
                 .hot-tag-div
-                  %span 标签一
-                  %span 标签一
-                  %span 标签十分大
+                  - foreach($popularTags as $tag)
+                    %span{value: $tag->id}= $tag->name
               .create-tag-div{style: "display:none"}
 
               .controls.controls-row.no-mb

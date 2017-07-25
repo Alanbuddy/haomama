@@ -106,7 +106,7 @@
             + "&redirect_uri=http%3a%2f%2f"
             + "baby.fumubidu.com.cn/haomama/wechat/openid&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
         var node = document.getElementById('wechatbase');
-        node.setAttribute('href', snsapi_base_url );
+        node.setAttribute('href', snsapi_base_url ); 
     </script>
 @endsection
 

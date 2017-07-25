@@ -28,6 +28,7 @@ $(document).ready(function(){
     $(this).toggle();
     $("#edit-tag").addClass('mb8');
     $("#finish-btn").toggle();
+    $(".operation").attr("disabled", true);
 
     $("#course-name").val($("#name-span").text());
     var category_id = $("#type-span").attr("data-type-id");
@@ -133,12 +134,6 @@ $(document).ready(function(){
           return false;
         }
       });
-      $(".hot-tag-div").find("span").each(function(){
-        if($(this).text() == val ){
-          showMsg("标签不可重复","center");
-          return false;
-        }
-      });
       $.postJSON(
         window.tag_store,
         {
@@ -155,6 +150,11 @@ $(document).ready(function(){
         );
     },
     beforeTagDelete: function(field, editor, tags, val){
+      $(".tag-span").each(function(){
+        if($(this).text() == val){
+          $(this).remove();
+        }
+      });
       var delete_id = null;
       var del = "DELETE";
       $(".create-tag-div").find(".tag_id").each(function(){
@@ -171,16 +171,27 @@ $(document).ready(function(){
             },
             success: function(){
               _this.remove();
+              
             }
           });
         }
       });
     }
   });
+  
 
+  var tag_name = [];
+  $("tag-editor-tag").each(function(){
+    tag_name.push($(this).text());
+  });
   $(".hot-tag-div span").each(function(){
     $(this).click(function(){
-      $('#type-tag').tagEditor('addTag', $(this).text());
+      if(tag_name.indexOf($(this).text()) == -1){
+        $('#type-tag').tagEditor('addTag', $(this).text());
+      }else{
+        showMsg("该标签已存在", "center");
+        return false;
+      }
     });
   });
 
@@ -311,8 +322,8 @@ $(document).ready(function(){
     $(".create-tag-div").find(".tag_id").each(function(){
       tags.push($(this).attr("data-id"));
     });
-    $(".tag-hide-id").each(function(){
-      tags.push($(this).text());
+    $(".tag-span").each(function(){
+      tags.push($(this).attr("data-id"));
     });
     console.log(tags);
     var desc = editor.txt.html();
@@ -320,8 +331,12 @@ $(document).ready(function(){
     $(".example li").each(function(){
       lesson_list.push($(this).attr("data-id"));
     });
-    var lesson_title = editor_lesson.txt.text();
-    var titles = lesson_title.split("。");
+    var lesson_title = [];
+    $(".w-e-text p").each(function(){
+      lesson_title.push($(this).text());
+    });
+    lesson_title.shift(lesson_title[0]);
+    console.log(lesson_title);
     var teacher_arr = [];
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
@@ -349,7 +364,7 @@ $(document).ready(function(){
         lessons: lesson_list,
         cover: path,
         type: online,
-        titles: titles,
+        titles: lesson_title,
         _token: window.token
       },
       function(data){

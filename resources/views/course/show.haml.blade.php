@@ -53,7 +53,7 @@
     .unonline-div
       .unonline-row.f14.color7
         %span 时间：
-        %span= date_format(date_create($course['begin']),"Y/m/d")."~".date_format(date_create($course['end']),"Y/m/d")
+        %span= $course['time']
       .unonline-row.f14.color7
         %span.address-span 地址：
         %span.address= $course['address']
