@@ -132,7 +132,6 @@
 @section('script')
 
 <script src= "{{mix('/js/course-index.js')}}"></script>
-<script src= "js/banner.js"></script>
 <script src= "js/swiper-3.4.2.jquery.min.js"></script>
 @endsection
 
