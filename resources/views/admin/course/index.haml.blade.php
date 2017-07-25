@@ -64,11 +64,12 @@
                             -foreach($course->teachers as $teacher)
                               %span=$teacher->name 
                           %td=$course->price
-                          %td
+                          %td=$course->recommendation
 
               .select-page 
-                // %span.totalitems 共#{$items->lastPage()}页，总计 #{$items->total()}条
+                %span.totalitems 共#{$items->lastPage()}页，总计 #{$items->total()}条
                 %span.choice-page
+                  != $items->links()
                   %ul.pagination.pagination-sm
                     %li
                       %a{href: "#"} «

@@ -24,6 +24,7 @@ class CreateCoursesTable extends Migration
             $table->string('address')->nullable()->comment('线下课程授课地址');
             $table->enum('type', ['online', 'offline'])->comment('课程种类:线上和线下');;
             $table->enum('status', ['publish', 'draft'])->comment('课程状态:发布，未发布');;
+            $table->string('time')->nullable();
             $table->timestamp('begin')->nullable();
             $table->timestamp('end')->nullable();
             $table->text('description')->nullable();

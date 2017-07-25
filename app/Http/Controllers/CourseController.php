@@ -13,6 +13,7 @@ use App\Models\Term;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -42,25 +43,30 @@ class CourseController extends Controller
             : null;
         $recommendedCourses = Course::where('hot', true)->get();
         $recommendedCourses = $recommendedCourses->union($globalRecommendedCourses);
-        $page = $request->get('page', 1);
 
+        $arr=array_map(function($v){
+            return $v->id;
+        },$recommendedCourses->all());
         $items = Course::with('category')
             ->with('teachers')
             ->with('tags')
+            ->whereNotIn('id',$arr)
             ->orderBy('id', 'desc');
 //        dd($items);
+        $page = $request->get('page', 1);
         $items = $this->processPage($page, $items, 10, $recommendedCourses);
         foreach ($items as $item) {
             $recommendation = '';
             if (count($globalRecommendedCourses)) {
                 if ($item->id == $globalRecommendedCourses->first()->id)
-                    $recommendation .= 'index';
+                    $recommendation .= '新课速递、';
             }
             if ($item->hot) {
                 $recommendation .= $item->category ? $item->category->name : '';
             }
             $item->recommendation = $recommendation;
         }
+        $items->withPath('/courses');
         return view('admin.course.index', [
             'items' => $items
         ]);
@@ -68,20 +74,18 @@ class CourseController extends Controller
 
     public function processPage($page, $items, $pageSize, $recommendedCourse)
     {
+        $count = $items->count();
         if ($page > 1) {
-            $count = $items->count();
             $prevPageItems = $items
                 ->offset(($page - 2) * $pageSize)->limit($pageSize)
                 ->get()->slice($pageSize - count($recommendedCourse));
             $currPageItems = $items->paginate($pageSize);//->forPage(1, $pageSize - count($recommendedCourse));
-//                dd($currPageItems);
-            $items = $prevPageItems->merge($currPageItems);
-            $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
+            $items = $prevPageItems->merge($currPageItems)->splice(0,$pageSize);
         } else {
-            $items = $items->paginate($pageSize)->splice(0, $pageSize - 1);
+            $items = $items->paginate($pageSize)->splice(0, $pageSize - count($recommendedCourse));
             $items = $recommendedCourse->merge($items);
-//                dd($recommendedCourse);
         }
+        $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
         return $items;
     }
 
@@ -97,7 +101,7 @@ class CourseController extends Controller
         $popularTags = Search::popularTags();
         return view($request->get('type') == 'offline'
             ? 'admin.course.offline'
-            : 'admin.course.new', compact('categories','popularTags'));
+            : 'admin.course.new', compact('categories', 'popularTags'));
     }
 
     /**
@@ -127,7 +131,7 @@ class CourseController extends Controller
             'minimum',
             'quota',
             'address',
-            'begin',
+            'time',
             'type',
         ]));
         if ($request->has('titles'))
@@ -277,7 +281,7 @@ class CourseController extends Controller
         // dd($course);
         return view($course->type == 'online'
             ? 'admin.course.show'
-            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons','categories','popularTags'));
+            : 'admin.course.offline_show', compact('course', 'teachers', 'lessons', 'categories', 'popularTags'));
     }
 
     /**
@@ -323,7 +327,7 @@ class CourseController extends Controller
             'minimum',
             'quota',
             'address',
-            'begin',
+            'time',
             'type',
         ]));
         if ($request->has('titles'))
