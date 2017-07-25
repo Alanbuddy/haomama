@@ -67,16 +67,9 @@
                           %td=$course->recommendation
 
               .select-page 
-                %span.totalitems 共#{$items->lastPage()}页，总计 #{$items->total()}条
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
                   != $items->links()
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
           #tab2.tab-pane
             .desc-div
               // - if @courses[:data].length == 0

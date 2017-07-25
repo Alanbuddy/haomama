@@ -9,11 +9,12 @@
     <meta name="format-detection", content: "email=no">
 
     <title>
-        @yield('title') VOD
+        @yield('title') 好妈妈微课
     </title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mobile-notification.css">
     <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/plugin/dropload.css">
 
     @yield('css')
 </head>
@@ -67,6 +68,8 @@
 <script src = "js/regex.js"></script>
 <script src= "http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src = "js/mobile-notification.js"></script>
+<script src = "js/plugin/dropload.min.js"></script>
+
 <script src= "{{mix('/js/layout.js')}}"></script>
 <script>
   wx.config({
@@ -123,7 +126,6 @@
 
 
   var appId = "{{config('wechat.mp.app_id')}}";
-  var node = document.getElementById('wechat');
   var app_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
       + appId
       + "&redirect_uri=http%3a%2f%2f"
@@ -138,6 +140,8 @@
   //     if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
   //         node.setAttribute('href', app_url);
   //     }
+  // if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
+  //     location.href =  app_url;
   // }
 
   // var snsapi_base_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="

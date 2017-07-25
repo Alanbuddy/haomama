@@ -8,7 +8,7 @@
     %meta{"content:" => "telephone=no", :name => "format-detection"}
     %meta{"content:" => "email=no", :name => "format-detection"}
     %title
-      @yield('title') VOD
+      @yield('title') 好妈妈微课
     %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "css/notification.css", :rel => "stylesheet" }
     %link{:href => "css/admin-layout.css", :rel => "stylesheet"}
