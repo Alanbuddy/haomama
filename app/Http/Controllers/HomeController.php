@@ -237,13 +237,11 @@ class HomeController extends Controller
                 ->offset(($page - 2) * $pageSize)->limit($pageSize)
                 ->get()->slice($pageSize - count($recommendedCourse));
             $currPageItems = $items->paginate($pageSize);//->forPage(1, $pageSize - count($recommendedCourse));
-//                dd($currPageItems);
             $items = $prevPageItems->merge($currPageItems)->splice(0, $pageSize);
             $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
         } else {
-            $items = $items->paginate($pageSize)->splice(0, $pageSize - 1);
+            $items = $items->paginate($pageSize)->splice(0, $pageSize - count($recommendedCourse));
             $items = $recommendedCourse->merge($items);
-//                dd($recommendedCourse);
         }
         return $items;
     }
