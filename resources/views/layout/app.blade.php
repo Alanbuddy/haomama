@@ -129,9 +129,11 @@
       + "&redirect_uri=http%3a%2f%2f"
       + "baby.fumubidu.com.cn/haomama/wechat/login&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
 
+  @if(!Auth::check())
   if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
       location.href =  app_url;
   }
+  @endif
   // if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|SymbianOS)/i))) {
   //     if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
   //         node.setAttribute('href', app_url);

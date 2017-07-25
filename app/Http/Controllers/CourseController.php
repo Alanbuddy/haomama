@@ -119,6 +119,7 @@ class CourseController extends Controller
             'minimum' => 'sometimes|required|numeric',
             'quota' => 'sometimes|numeric',
             'address' => 'sometimes',
+            'titles' => 'sometimes|array',
         ]);
         $item = new Course();
         $item->fill($request->only([
