@@ -46,7 +46,7 @@
                 .course-icon-div
                   - if($data[$i]['hasRecommendedCourse']&&$item['id']==$data[$i]['recommendedCourse']->first()->id)
                     %img.course-recommend{src: "icon/recommend.png"}
-                  %img.course-icon{src: $item['cover'] ? $item['cover'] : "icon/example.png"}
+                  %img.course-icon{src: $item['cover'] ? substr($item['cover'],1) : "icon/example.png"}
                 .word-div
                   .course-row-div.clearfix
                     %span.f12.category-class= $item['category']['name']

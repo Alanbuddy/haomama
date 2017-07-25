@@ -44,13 +44,13 @@ class CourseController extends Controller
         $recommendedCourses = Course::where('hot', true)->get();
         $recommendedCourses = $recommendedCourses->union($globalRecommendedCourses);
 
-        $arr=array_map(function($v){
+        $arr = array_map(function ($v) {
             return $v->id;
-        },$recommendedCourses->all());
+        }, $recommendedCourses->all());
         $items = Course::with('category')
             ->with('teachers')
             ->with('tags')
-            ->whereNotIn('id',$arr)
+            ->whereNotIn('id', $arr)
             ->orderBy('id', 'desc');
 //        dd($items);
         $page = $request->get('page', 1);
@@ -66,7 +66,7 @@ class CourseController extends Controller
             }
             $item->recommendation = $recommendation;
         }
-        $items->withPath('/courses');
+        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/courses');
         return view('admin.course.index', [
             'items' => $items
         ]);
@@ -80,7 +80,7 @@ class CourseController extends Controller
                 ->offset(($page - 2) * $pageSize)->limit($pageSize)
                 ->get()->slice($pageSize - count($recommendedCourse));
             $currPageItems = $items->paginate($pageSize);//->forPage(1, $pageSize - count($recommendedCourse));
-            $items = $prevPageItems->merge($currPageItems)->splice(0,$pageSize);
+            $items = $prevPageItems->merge($currPageItems)->splice(0, $pageSize);
         } else {
             $items = $items->paginate($pageSize)->splice(0, $pageSize - count($recommendedCourse));
             $items = $recommendedCourse->merge($items);
@@ -276,6 +276,8 @@ class CourseController extends Controller
             ->withPivot('created_at')
             ->orderBy('no', 'desc')
             ->get();
+        if($course->cover&&strpos($course->cover,'/')==0)
+            $course->cover=substr($course->cover,1);
 
         $categories = Term::where('type', 'category')->get();
         $popularTags = Search::popularTags();

@@ -36,7 +36,7 @@ class CourseSeeder extends Seeder
                 'type' => $i % 2 == 0 ? 'online' : 'offline',
                 'status' => 'publish',
                 'description' => 'some description',
-                'cover' => '/storage/a.png',
+                'cover' => '/icon/course.png',
                 'begin' => date('Y-m-d H:i:s', time()),
                 'end' => date('Y-m-d H:i:s', strtotime("+1 week")),
                 'created_at' => date('Y-m-d H:i:s', strtotime("+" . $i . " week")),

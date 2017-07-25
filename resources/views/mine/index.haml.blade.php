@@ -54,7 +54,7 @@
       - foreach ($enrolledCourses as $enrolledCourse)
         .favorite-item{'data-id' => $enrolledCourse['id']}
           .icon-div
-            %img.icon{src: $enrolledCourse['cover'] ? $enrolledCourse['cover'] :"icon/example.png"}
+            %img.icon{src: $enrolledCourse['cover'] ? substr($enrolledCourse['cover'],1) :"icon/example.png"}
           .word-div
             .favorite-row-div.clearfix
               %span.category-class.f12= $enrolledCourse['category']['name']
