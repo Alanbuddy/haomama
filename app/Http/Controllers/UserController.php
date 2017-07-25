@@ -135,7 +135,6 @@ class UserController extends Controller
 
         //unread messages count;
         $messagesCount = $user->messages()->where('has_read', false)->count();
-
         return view('mine.index',
             compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses', 'messagesCount')
         );
