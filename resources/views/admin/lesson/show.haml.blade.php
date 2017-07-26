@@ -11,6 +11,7 @@
   window.merge = "#{route('videos.merge')}"
   window.init = "#{route('videos.upload.init')}"
   window.admin_lesson_show = "#{route('admin.lesson.show', -1)}" 
+  window.lesson_update = "#{route('lessons.update',$lesson->id)}"
 
 @endsection
 
@@ -40,7 +41,7 @@
             .desc-div.font-color3.f14
               .form-group
                 %label.input-name.fn 课时标题:
-                %span.unedit-box= $lesson->name
+                %span.unedit-box#caption-span= $lesson->name
                 %span.edit-box
                   %input.form-control#input-caption{:type => "text"}
               .video-file.introduce-flex
@@ -48,8 +49,10 @@
                 %span.unedit-box
                   .caption-item
                     %img{src: "icon/admin/video-small.png"}
-                    %span 这里是视频课时的标题
-                #uploader.wu-example.edit-box
+                    %span#name-span= $video->file_name
+                .item
+                
+                #uploader.wu-example.edit-box-uploader
                   #thelist.uploader-list
                   .btns
                     #picker 选择文件
@@ -58,7 +61,7 @@
              
               .notice-introduce.introduce-flex
                 %span.introduce 内容介绍:
-                %span.unedit-box.ml4.introduce-span= $lesson->description
+                %span.unedit-box.ml4.introduce-span#desc-span= strip_tags(htmlspecialchars_decode($lesson->description))
                 %span.edit-box.wangedit-area
                   #edit-box
 
@@ -69,8 +72,9 @@
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>
+<script src="js/lesson_edit.js"></script> 
 
-<script src="js/fileupload.js"></script> 
+// <script src="js/fileupload.js"></script> 
 
 
 @endsection

@@ -19,13 +19,13 @@ $ ->
   change_avatar = (gender, birthday, object) ->
     today = new Date()
     if gender == "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png')
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/kid_male.png')
     if gender == "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png')
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/baby_male.png')
     if gender == "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png')
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/kid_female.png')
     if gender == "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png')
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/baby_female.png')
 
   $(document).on 'change', '.birthday', ->
     birthday = $(this).val()
@@ -48,11 +48,11 @@ $ ->
         console.log(data)
         if data.success
           if fav == "false"
-            $('.favorite').attr('src', '/icon/like_selected.png')
+            $('.favorite').attr('src', 'icon/like_selected.png')
             $('.favorite').attr('data-fav', 'true')
             showMsg('成功收藏该课程', 'center')
           else
-            $('.favorite').attr('src', '/icon/like_normal.png')
+            $('.favorite').attr('src', 'icon/like_normal.png')
             $('.favorite').attr('data-fav', 'false')
             showMsg('收藏已取消', 'center')
         else
@@ -70,11 +70,11 @@ $ ->
         console.log(data)
         if data.success
           if data.message == 'yes'
-            ad.attr('src', '/icon/like1_selected.png')
+            ad.attr('src', 'icon/like1_selected.png')
             ad.siblings(".admire-num").text(parseInt(num) + 1)
             showMsg('点赞完成', 'center')
           else
-            ad.attr('src', '/icon/like1_normal.png')
+            ad.attr('src', 'icon/like1_normal.png')
             ad.siblings(".admire-num").text(parseInt(num) - 1)
             showMsg('取消点赞', 'center')
         else

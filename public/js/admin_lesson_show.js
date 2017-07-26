@@ -10332,14 +10332,7 @@ return jQuery;
 /***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $("#edit-btn").click(function() {
-    $(this).toggle();
-    $("#finish-btn").toggle();
-    $(".unedit-box").toggle();
-    return $(".edit-box").toggle();
-  });
-});
+/* WEBPACK VAR INJECTION */(function($) {$(function() {});
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
