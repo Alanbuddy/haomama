@@ -86,6 +86,7 @@
 - else
   .course-content
     %span.title.f14.color7.fb 课程目录
+    %span.course-id{style: "display:none;"}= $course['id']
     - if (count($lessons) > 3)
       %span.f12.color7= "(共".count($lessons)."节)"
     .items-div.online-course
