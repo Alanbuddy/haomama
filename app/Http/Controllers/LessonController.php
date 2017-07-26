@@ -32,6 +32,7 @@ class LessonController extends Controller
         $items = Lesson::orderBy('id', 'desc')
             ->where('type',$type)
             ->paginate(10);
+        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/courses');
         if ($request->ajax()) {
             return $items;
         }
@@ -69,12 +70,6 @@ class LessonController extends Controller
         //TODO
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, ['video_id' => 'required']);
@@ -231,9 +226,8 @@ class LessonController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-        return view('admin.lesson.edit', [
-            'item' => $lesson,
-        ]);
+        $video=$lesson->video();
+        return view('admin.lesson.edit', compact('video','lesson'));
     }
 
     /**
