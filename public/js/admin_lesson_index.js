@@ -10344,11 +10344,8 @@ module.exports = __webpack_require__(9);
   $(".lesson-video").click(function() {
     return location.href = window.lesson_create + "?/type=video";
   });
-  $(".lesson-audio").click(function() {
+  return $(".lesson-audio").click(function() {
     return location.href = window.lesson_create + "?type=audio";
-  });
-  return $(".show-name").click(function() {
-    return location.href = "/admin/lessons/1";
   });
 });
 

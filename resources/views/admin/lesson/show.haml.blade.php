@@ -21,7 +21,7 @@
       %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
-        %a.f16{href: route('users.index')} 人员管理
+        %a.f16{href: route('users.index')."?type=operator"} 人员管理
         .dot
       %li
         %a.f16.left-border{href: route('admin.profile')} 账号设置
@@ -40,7 +40,7 @@
             .desc-div.font-color3.f14
               .form-group
                 %label.input-name.fn 课时标题:
-                %span.unedit-box 这里是视频课时的标题
+                %span.unedit-box= $lesson->name
                 %span.edit-box
                   %input.form-control#input-caption{:type => "text"}
               .video-file.introduce-flex
@@ -58,7 +58,7 @@
              
               .notice-introduce.introduce-flex
                 %span.introduce 内容介绍:
-                %span.unedit-box.ml4.introduce-span 该课程是少儿类视频第一名该课程是少儿类视频第一名该课程是少儿类视频第一名该课程是少儿类视频第一名该课程是少儿类视频第一名该课程是少儿类视频第一名该课程是少儿类视频第一名
+                %span.unedit-box.ml4.introduce-span= $lesson->description
                 %span.edit-box.wangedit-area
                   #edit-box
 

@@ -35,10 +35,6 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              // - if @course_insts[:data].length == 0
-              //   .undiscover.f14
-              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-              // - else
               .table-box
                 %table.table.table-hover.table-height.f14
                   %thead.th-bg.font-color2
@@ -47,23 +43,17 @@
                       %th 上传时间
                       %th 上线时间
                   %tbody.font-color3
-                    // - @course_insts[:data].each do |ci|
-                    %tr{class: ""}
-                      // %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
-                      %td.show-name 某一课时的名字
-                      %td 2017/06/23
-                      %td 2017/06/23
+                    -foreach ($items as $lesson) 
+                      %tr{class: ""}
+                        %td.show-name
+                          %a{href:route('admin.lesson.show',$lesson->id)}=$lesson->name
+                        %td =$lesson->created_at
+                        %td =$lesson->updated_at
                       
               .select-page 
-                %span.totalitems 共2页，总计18条
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
+                  != $items->links() 
           #tab2.tab-pane
             .desc-div
               // - if @courses[:data].length == 0

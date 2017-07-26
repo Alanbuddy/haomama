@@ -162,6 +162,7 @@ class LessonController extends Controller
     public function adminShow(Request $request, Lesson $lesson)
     {
         $type = $request->get('type', 'video');
+        // dd($lesson);
         return view('video' == $type
             ? 'admin.lesson.show'
             : 'admin.lesson.audio_show', compact('lesson'));

@@ -325,6 +325,5 @@
 @section('script')
 <script src= "{{ mix('/js/course-show.js') }}"></script>
 <script src= "js/review-modal.js"></script>
-// <script src= "js/pay.js"></script>
 
 @endsection
