@@ -195,6 +195,7 @@ class OrderController extends Controller
         $input = new WxPayRefund();
         $input->SetOut_trade_no($order->uuid);
         $input->SetOut_refund_no($order->uuid);
+        //如果SetRefund_fee(0)，$result会是签名错误
         $input->SetRefund_fee($order->wx_total_fee);//单位为分 //$input->SetRefund_fee(1);
         $input->SetTotal_fee($order->wx_total_fee);//单位为分
         $input->SetOp_user_id(config('wechat.mch.mch_id'));
