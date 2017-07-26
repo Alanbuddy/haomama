@@ -60,9 +60,9 @@ $ ->
     location.href = window.course_item + "/" +cid
 
   $('.category-class').each ->
-    if $(this).text() == "分类N"
+    if $(this).text() == "·ÖÀàN"
       $(this).addClass('health-title')
-    else if $(this).text() == "分类t"
+    else if $(this).text() == "·ÖÀàt"
       $(this).addClass('psychology-title')
     else
       $(this).addClass('grow-title')

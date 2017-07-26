@@ -4,15 +4,16 @@ $(document).ready(function(){
   // 每页展示5个
   var size = 10;
   // dropload
-  $('.wrapper').dropload({
+  $('.swiper-slide').dropload({
       scrollArea : window,
-      autoLoad: false,
+      // autoLoad: false,
       loadDownFn : function(me){
           page++;
           console.log(1111111111111111111111);
           // 拼接HTML
           var result = '';
-          var category_id = $(".swiper-slide-active .category_id").text();
+          var category_id = $(".swiper-slide-active>.category_id").text();
+          console.log(category_id);
           var node = "";
           $.ajax({
               type: 'GET',
@@ -20,11 +21,12 @@ $(document).ready(function(){
               dataType: 'json',
               success: function(data){
                   console.log(data);
-                  var arrLen = data[0].length;
+                  var arrLen = data[0].data.length;
                   if(arrLen > 0){
                     for(var i=0;i<data[0].length;i++){
                       node=render(data[0][i]);
                       node.appendTo($('.swiper-slide-active .course-item-div'));
+                      me.resetload();
                       
                     }
                     // callbackHandle(data[0]);
@@ -35,7 +37,7 @@ $(document).ready(function(){
                       // 无数据
                       me.noData();
                   }
-                  me.resetload();
+                  
               },
               error: function(xhr, type){
                   alert('Ajax error!');
@@ -86,7 +88,7 @@ $(document).ready(function(){
     template.find('.course-icon').attr('src', item['cover'] ? substr(item['cover'],1) : "icon/example.png");
     template.find('.category-class').text(item['category']['name']);
     template.find('.course-item-value').text(item['price']);
-    template.find('.course-name').text(item['name']);
+    template.find('.we-course-name').text(item['name']);
     return template;
   }
 
