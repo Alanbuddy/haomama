@@ -7,7 +7,7 @@
 @section('content')
 .sign-div
   %img.success-icon{src: "icon/success.png"}
-  %p.f16.color7 完成报名
+  %p.f16.color7 退款成功
   .name-div.f12.color6
     %span 课程
     %span 课程名称很长很长
