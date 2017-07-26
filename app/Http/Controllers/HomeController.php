@@ -123,7 +123,6 @@ class HomeController extends Controller
     //某分类下的置顶推荐课程
     private function recommendedCourses($categoryId)
     {
-
         if ($categoryId == 0) {
             $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
             $recommendedCourse = $recommendedCourseSetting
