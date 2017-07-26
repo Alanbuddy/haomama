@@ -1,6 +1,8 @@
 @extends('layout.app')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/pay-success.css') }}">
+:javascript
+  window.course_item="#{route('courses.index')}"
 
 @endsection
 
@@ -10,7 +12,8 @@
   %p.f16.color7 完成报名
   .name-div.f12.color6
     %span 课程
-    %span 课程名称很长很长
+    %span= $course->name
+    %span.course-id{style: "display:none;"}= $course->id
 .btn#view.mt80 查看详情
 
 @endsection
