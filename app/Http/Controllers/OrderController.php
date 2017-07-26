@@ -154,11 +154,13 @@ class OrderController extends Controller
 
     public function pay(Request $request)
     {
+        Log::info(__FILE__.__LINE__);
         $order = $this->store($request);
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
 //            dd($ret);
+            Log::info(__FILE__.__LINE__);
             $appId = $ret['appid'];
             $timeStamp = time();
             $nonceStr = WxApi::getNonceStr();
@@ -170,11 +172,17 @@ class OrderController extends Controller
             );
             $sign = WxApi::makeSign($values);
             $data = array_merge($values, compact('sign', 'prepayId', 'order'));
+            if($request->ajax()){
+                return ['success'=>true,'data'=>$data];
+            }
             return view('admin.order.pay', $data);
         } catch (\Exception $e) {
             print($e->getMessage());
             $this->logError('wxpay.unifiedOrder', $e->getMessage(), '', '');
 //            return ['success' => false];
+            if($request->ajax()){
+                return ['success'=>false,'message'=>$e->getMessage()];
+            }
             return view('admin.order.pay');
         }
     }
