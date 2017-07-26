@@ -202,10 +202,11 @@ class OrderController extends Controller
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             $order->status = 'refunded';
             $order->save();
-            if ($request->ajax()){
-                return ['success' => true];
+            if($request->has('course_id')){
+                $course=Course::findOrFail($request->course_id);
+                return view('setting.refund',compact('course'));
             }
-            return view('setting.refund');
+            return ['success' => true];
         } else {
             return [
                 'success' => false,

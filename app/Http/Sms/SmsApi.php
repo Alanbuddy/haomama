@@ -28,7 +28,7 @@ class SmsApi
 //        session(['code'=>$code]);
         session(['code' => 111111]);
 
-        $content = 'haha你好吗' . $code;
+        $content = '验证码:' . $code.' 【好妈妈微课】';
         return static::sendSms(['18911209450'], $content);
     }
 
