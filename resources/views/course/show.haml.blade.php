@@ -9,6 +9,7 @@
   window.course_item="#{route('courses.index')}"
   window.favorite = "#{route('courses.favorite',$course['id'])}"
   window.review = "#{route('comments.store')}"
+  window.order = "#{route('orders.pay')}"
 
 
 @endsection
