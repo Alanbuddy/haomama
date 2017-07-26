@@ -210,7 +210,7 @@ class OrderController extends Controller
                     ? $result['err_code']
                     : $result['return_msg']
             ];
+            dd($result);
         }
-        dd($result);
     }
 }

@@ -41,13 +41,15 @@ class WxApi
 
     /**
      * 获取普通access_token
+     * @param bool $forceRefresh
+     * @return array
      */
-    public static function accessToken($timeOut = 1000)
+    public static function accessToken($forceRefresh = false)
     {
         $accessToken = Setting::where('key', 'access_token')->first();
         $data = json_decode($accessToken->value);
 //        dd(time().' '.$data->expire_time);
-        if ($data->expire_time < time()) {
+        if ($data->expire_time < time()||$forceRefresh) {
             Log::info("access token expired  !!!");
             $url = "https://api.weixin.qq.com/cgi-bin/token";
             $queryData = [

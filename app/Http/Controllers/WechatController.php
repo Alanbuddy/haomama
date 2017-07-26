@@ -23,7 +23,7 @@ class WechatController extends Controller
     {
 //        DB::table('settings')->where('key', 'access_token')->update(['key' => 'access_token',
 //            'value' => '{"access_token":"example","expire_time":1497937039}']);
-        $result = WxApi::accessToken();
+        $result = WxApi::accessToken(true);
         dd($result);
     }
 
