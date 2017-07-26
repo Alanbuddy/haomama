@@ -32,8 +32,8 @@
       %img.play{src: "icon/play.png"}
       - if ($hasEnrolled == true)
         %span 立即听课
-      - else    
-        %span 立即试课    
+      - else
+        %span 立即试课
 .desc-div
   .common-div
     - if ($hasEnrolled == false)
@@ -83,7 +83,7 @@
           %span.f12.color5 查看更多
           %img.more-icon{src: "icon/more.png"}
   %hr.div-line
-- else 
+- else
   .course-content
     %span.title.f14.color7.fb 课程目录
     - if (count($lessons) > 3)
@@ -105,7 +105,7 @@
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
               .item-row.f12.color5
-                %span 未上线     
+                %span 未上线
       - if (count($lessons) > 3)
         .view-more
           %span.f12.color5 查看更多
@@ -232,7 +232,7 @@
 
 
 @endsection
-#confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+#confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modal-body
@@ -242,7 +242,7 @@
           %a#register 报名
           %a{"data-dismiss" => "modal"} 取消
 
-#reviewModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+#reviewModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modal-body
@@ -257,14 +257,14 @@
             %input{:name => "a", :type => "radio", :value => "5"}
         %button#review-submit{type: "button"} 提交评价
 
-#profileModal.modal.fade.bottom{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+#profileModal.modal.fade.bottom{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modal-body
         .head-div
           %p.fb.tc.fb.color7.f18 个人资料
           %img.profile-close{src: "icon/close.png"}
-        .item-div 
+        .item-div
           .item
             .left-div
               %img.avatar{src: "icon/avatar.png"}
@@ -323,4 +323,7 @@
 @section('script')
 <script src= "{{ mix('/js/course-show.js') }}"></script>
 <script src= "js/review-modal.js"></script>
+<script src= "js/pay.js"></script>
+:javascript
+  $('#add-btn').on('click tap',function(){ pay(); });
 @endsection

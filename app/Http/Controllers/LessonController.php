@@ -170,7 +170,6 @@ class LessonController extends Controller
     //课程下的某一个课时详情
     public function detail(Course $course, Lesson $lesson)
     {
-        $this->recordAttendance($course, $lesson);
 
         $comments = $this->hottestComments($course, $lesson, 3);
         $latestComments = $this->latestComments($course, $lesson);
@@ -193,13 +192,18 @@ class LessonController extends Controller
         $learnedCount = $lesson->attendances($course->id)->count();
 
         $lessons = $course->lessons()->get();//TODO  orderBy no.
-        $index = 0;
+        $index = 0;//表示第几节课时
         $i = 0;
         foreach ($lessons as $item) {
             if ($item->id == $lesson->id) {
                 $index = $i;
             }
             $i++;
+        }
+        if(!$hasEnrolled&&$index>0){
+            return back()->with('message','请加入课程后观看');
+        }else{
+            $this->recordAttendance($course, $lesson);
         }
 
         $video = $lesson->video;
