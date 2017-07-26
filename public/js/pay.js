@@ -49,6 +49,7 @@ function onBridgeReady() {
 
     });
 }
+
 function checkPayment() {
     alert('call checkPayment');
     $.ajax({
