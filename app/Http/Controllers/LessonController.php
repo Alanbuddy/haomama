@@ -158,6 +158,7 @@ class LessonController extends Controller
     {
         $type = $request->get('type', 'video');
         $video=$lesson->video();
+        // dd($video);
         return view('video' == $type
             ? 'admin.lesson.show'
             : 'admin.lesson.audio_show', compact('lesson','video'));
