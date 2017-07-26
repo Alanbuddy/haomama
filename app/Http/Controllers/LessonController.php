@@ -157,9 +157,10 @@ class LessonController extends Controller
     public function adminShow(Request $request, Lesson $lesson)
     {
         $type = $request->get('type', 'video');
+        $video=$lesson->video();
         return view('video' == $type
             ? 'admin.lesson.show'
-            : 'admin.lesson.audio_show', compact('lesson'));
+            : 'admin.lesson.audio_show', compact('lesson','video'));
     }
 
     //课程下的某一个课时详情
