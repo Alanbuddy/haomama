@@ -165,16 +165,56 @@ $(document).ready(function($) {
     // }
   });
 
+  var order = null;
+  var signPackage = null;
   $("#add-btn").click(function(){
     var cid = $(".course-id").text();
     $.ajax({
-      type: post,
       url: window.order,
+      type: 'post',
       data: {
-        course_id: cid
+          course_id: cid,
+          _token: window.token,
+      },
+      success: function (resp) {
+          console.log(resp);
+          alert(JSON.stringify(resp));
+          signPackage = resp.data;
+          order=resp.data.order;
+          jsBrage();
       }
-      
     });
   });
+
+  function jsBrage() {
+      if (typeof WeixinJSBridge == 'undefined') {
+          if (document.addEventListener) {
+              document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+          } else if (document.attachEvent) {
+              document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+              document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+          }
+      } else {
+          onBridgeReady();
+      }
+  }
+  function onBridgeReady() {
+      alert('signPackage.timeStamp='+signPackage.timeStamp);
+      WeixinJSBridge.invoke('getBrandWCPayRequest', {
+          'appId': ''+signPackage.appId,
+          'timeStamp': ''+signPackage.timeStamp,
+          'nonceStr': ''+signPackage.nonceStr,
+          'package': ''+signPackage.package,
+          'signType': 'MD5', //微信签名方式：
+          'paySign': ''+signPackage.sign,
+      }, function (res) {
+          if (res.err_msg == 'get_brand_wcpay_request:ok') {
+              alert(res.err_msg);
+              alert(3);
+              location.href = window.pay_finish;
+          } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+
+      });
+  }
     
 });

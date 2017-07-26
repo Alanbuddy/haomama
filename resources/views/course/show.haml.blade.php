@@ -10,6 +10,7 @@
   window.favorite = "#{route('courses.favorite',$course['id'])}"
   window.review = "#{route('comments.store')}"
   window.order = "#{route('orders.pay')}"
+  window.pay_finish = "#{route('orders.finish')}"
 
 
 @endsection
@@ -324,7 +325,6 @@
 @section('script')
 <script src= "{{ mix('/js/course-show.js') }}"></script>
 <script src= "js/review-modal.js"></script>
-<script src= "js/pay.js"></script>
-:javascript
-  $('#add-btn').on('click tap',function(){ pay(); });
+// <script src= "js/pay.js"></script>
+
 @endsection
