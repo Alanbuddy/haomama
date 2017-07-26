@@ -54,7 +54,7 @@
                     %span.f12.category-class= $item['category']['name']
                     %span.course-item-value.f14.color5= "￥". $item['price']
                   .course-row-div.color7.unstart
-                    %span.coures-name.f16= $item['name']
+                    %span.course-name.f16= $item['name']
                     - if ($item['type'] == 'offline')
                       %span.course-status.f8 线下
                   .course-row-div.f12.color6
@@ -79,7 +79,7 @@
                     %span.category-class.f12= $itemOrderByUserCount['category']['name']
                     %span.course-item-value.f14.color5= "￥". $itemOrderByUserCount['price']
                   .course-row-div.color7.unstart
-                    %span.coures-name.f16= $itemOrderByUserCount['name']
+                    %span.course-name.f16= $itemOrderByUserCount['name']
                     - if ($itemOrderByUserCount['type'] == 'offline')
                       %span.course-status.f8 线下
                   .course-row-div.f12.color6
@@ -104,7 +104,7 @@
                     %span.category-class.f12= $itemOrderByCommentRating['category']['name']
                     %span.course-item-value.f14.color5= "￥". $itemOrderByCommentRating['price']
                   .course-row-div.color7.unstart
-                    %span.coures-name.f16= $itemOrderByCommentRating['name']
+                    %span.course-name.f16= $itemOrderByCommentRating['name']
                     - if ($itemOrderByCommentRating['type'] == 'offline')
                       %span.course-status.f8 线下
                   .course-row-div.f12.color6
