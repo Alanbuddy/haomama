@@ -32,7 +32,6 @@ class HomeController extends Controller
             return $items;
         }
 
-        $pageSize = 10;
         $index = new Term();
         $index->id = '0';
         $index->name = '新课速递';
@@ -60,8 +59,8 @@ class HomeController extends Controller
             );
         }
 //        ////
-        ///
 //        $page = $request->get('page', 1);
+//        $pageSize = 10;
 //        foreach ($categories as $category) {
 //            if ($category->id == 0) {
 //                $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
@@ -202,23 +201,13 @@ class HomeController extends Controller
 //            $items = Search::coursesByTag($request->route('tag'));
 //            $hasFilter = true;
 //        }
-
 //        if ($route->hasParameter('category')) {
 //            $items = Search::coursesByCategory($request->route('category'));
 //            $hasFilter = true;
 //        }
-
-//        if (!$hasFilter) {
-//            $items = Search::basicStat();
-//        }
-//        Log::info('------');
-
-
+//        if (!$hasFilter) { $items = Search::basicStat(); //        }
         //retrieve data needed by index page
-//        foreach ($items as $i) {
-//            echo($i->id);
-//            echo($i->category->name);
-//        }
+//        foreach ($items as $i) { echo($i->id); echo($i->category->name); }
     }
 
     /**
@@ -230,8 +219,8 @@ class HomeController extends Controller
      */
     public function processPage($page, $items, $pageSize, $recommendedCourse)
     {
+        $count = $items->count();
         if ($page > 1) {
-            $count = $items->count();
             $prevPageItems = $items
                 ->offset(($page - 2) * $pageSize)->limit($pageSize)
                 ->get()->slice($pageSize - count($recommendedCourse));

@@ -152,8 +152,6 @@ class LessonController extends Controller
 //        $item->video->id
 //        $item->video->file_name
 //        $item->video->video_type
-//        dd($comments);
-
         return view('setting.lesson', compact(
             'lesson',
             'comments'
