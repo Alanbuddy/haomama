@@ -164,5 +164,17 @@ $(document).ready(function($) {
     //   });
     // }
   });
+
+  $("#add-btn").click(function(){
+    var cid = $(".course-id").text();
+    $.ajax({
+      type: post,
+      url: window.order,
+      data: {
+        course_id: cid
+      }
+      
+    });
+  });
     
 });
