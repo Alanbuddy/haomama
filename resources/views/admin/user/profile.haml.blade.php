@@ -11,7 +11,7 @@
   .main-top.direction
     %ul.set
       %li
-        %a.f16{href: route('users.index')} 人员管理
+        %a.f16{href: route('users.index')."?type=operator"} 人员管理
         .dot
       %li
         %a.f16.left-border{href: route('admin.profile')} 账号设置
@@ -39,7 +39,7 @@
                 %p
                   %span.f20.font-color3.name 姓名:
                   %input.form-control.font-color3#user_name{placeholder: "请输入姓名", value: ""}
-@endsection
+
 #setModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
@@ -50,6 +50,8 @@
         .btn-div
           %button.btn#set-cancel{type: "button"} 取&nbsp消
           %button.btn#set-confirm{type: "button"} 确&nbsp定
+@endsection
+
 @section('script')
 <script src="js/profile-preview.js"></script>
 <script src= "js/admin-user-profile.js"></script>

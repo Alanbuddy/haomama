@@ -15,7 +15,7 @@
       .search#search-btn
     %ul.set
       %li
-        %a.f16{href: route('users.index')} 人员管理
+        %a.f16{href: route('users.index')."?type=operator"} 人员管理
         .dot
       %li
         %a.f16.left-border{href: route('admin.profile')} 账号设置
@@ -56,10 +56,6 @@
                   != $items->links() 
           #tab2.tab-pane
             .desc-div
-              // - if @courses[:data].length == 0
-              //   .undiscover.f14
-              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-              // - else
               .table-box
                 %table.table.table-hover.table-height.f14
                   %thead.th-bg.font-color2
@@ -68,38 +64,32 @@
                       %th 上传时间
                       %th 上线时间
                   %tbody.font-color3
-                    // - @course_insts[:data].each do |ci|
                     %tr{class: ""}
-                      // %td= link_to ci[:name], "/staff/courses/#{ci[:id]}"
-                      %td.show-name 某一课时的名字
-                      %td 2017/06/23
-                      %td 2017/06/23
+                      %td.show-name
+                        %a{href: route('admin.lesson.show',$lesson->id)}= $lesson->name 
+                      %td =$lesson->created_at
+                      %td =$lesson->updated_at
 
               .select-page 
-                %span.totalitems 共2页，总计18条
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
-          
-@endsection
+                  != $items->links() 
+
 #add_lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/delete1.png"}
       .modal-body
         .courses-div
           .item.lesson-video
-            %img{src: "/icon/admin/video.png"}
+            %img{src: "icon/admin/video.png"}
             %p 视频课时
           .item.lesson-audio
-            %img{src: "/icon/admin/music.png"}
-            %p 音频课时
+            %img{src: "icon/admin/music.png"}
+            %p 音频课时                          
+@endsection
+
 @section('script')
 <script src= "{{mix('/js/admin_lesson_index.js')}}"></script>
 <script src= "js/admin-add-lesson.js"></script>

@@ -23,7 +23,7 @@
       %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
-        %a.f16{href: route('users.index')} 人员管理
+        %a.f16{href: route('users.index')."?type=operator"} 人员管理
         .dot
       %li
         %a.f16.left-border{href: route('admin.profile')} 账号设置
@@ -93,13 +93,11 @@
                 %span.introduce 课时标题:
                 %span.wangedit-area
                   #title-area
-              
-@endsection
 #lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/delete1.png"}
       .modal-body.f14
         .all-div
           .checkbox
@@ -110,18 +108,10 @@
         .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
         .select-page
           %span.totalitems
-          .quotes#Pagination
+          .quotes#Pagination              
+@endsection
+
           
-#remindModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modal-dialog
-    .modal-content
-      .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/close.png"}
-      .modal-body
-        %p.message 您尚未保存账号设置，是否确定离开？
-        .btn-div
-          %button.btn#set-cancel{type: "button"} 取&nbsp消
-          %button.btn#set-confirm{type: "button"} 确&nbsp定
 @section('script')
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/wangEditor.min.js"></script>

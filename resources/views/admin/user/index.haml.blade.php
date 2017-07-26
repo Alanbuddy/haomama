@@ -14,7 +14,7 @@
   .main-top.direction
     %ul.set
       %li
-        %a.f16{href: route('users.index')} 人员管理
+        %a.f16{href: route('users.index')."?type=operator"} 人员管理
         .dot
       %li
         %a.f16.left-border{href: route('admin.profile')} 账号设置

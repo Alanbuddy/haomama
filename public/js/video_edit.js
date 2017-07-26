@@ -32,6 +32,7 @@ $(document).ready(function(){
   var name = null;
 
   uploader.on( 'fileQueued', function( file ) {
+    $("#old-video").remove();
     $list.append( '<div id="' + file.id + '" class="item">' +
         '<h4 class="info">' + file.name + '</h4>' +
         '<p class="state">等待上传...</p>' +
@@ -116,6 +117,10 @@ $(document).ready(function(){
     $(this).closest(".item").remove();   //从上传列表dom中删除  
   }); 
 
+  $(".delete_btn").click(function(){
+    $(this).closest('.item').remove();
+  });
+
   var E = window.wangEditor;
   var editor = new E('#edit-box');
   
@@ -144,16 +149,20 @@ $(document).ready(function(){
   $("#finish-btn").click(function(){
     var lesson_name = $("#input-caption").val().trim();
     var lesson_video_id = $(".video-id").text();
+    console.log(lesson_video_id);
     var lesson_desc = editor.txt.html();
-    $.postJSON(
-      window.lesson_update,
-      {
+    var put = "PUT";
+    $.ajax({
+      type: "post",
+      url: window.lesson_update,
+      data: {
         name: lesson_name,
         video_id: lesson_video_id,
         description: lesson_desc,
-        _token: window.token
+        _token: window.token,
+        _method: put
       },
-      function(data){
+      success: function(){
         console.log(data);
         if(data.success){
           var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
@@ -161,6 +170,6 @@ $(document).ready(function(){
           location.href = str + lid + "?type=video";
         }
       }
-      );
+    });
   });
 });

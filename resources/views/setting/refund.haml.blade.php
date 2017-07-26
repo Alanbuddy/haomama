@@ -13,7 +13,7 @@
     %span= $course->name
     %span.course-id{style: "display:none;"}= $course->id
 
-.btn#view-desc.mt80 查看详情
+.btn#view.mt80 查看详情
 
 @endsection
 

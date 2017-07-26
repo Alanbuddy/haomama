@@ -224,12 +224,12 @@
                       %a{href: "#"} 1
                     %li
                       %a{href: "#"} »
-@endsection
+
 #lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/delete1.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/delete1.png"}
       .modal-body.f14
         .all-div
           .checkbox
@@ -247,7 +247,7 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/close.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/close.png"}
       .modal-body
         - if($course->status == "draft")
           %p.message 是否确认上线当前课程？
@@ -256,6 +256,8 @@
         .btn-div
           %button.btn#shelf-cancel{type: "button"} 取&nbsp消
           %button.btn#shelf-confirm{type: "button"} 确&nbsp定
+@endsection
+
 
 @section('script')
 <script src= "{{mix('/js/admin_course_show.js')}}"></script>

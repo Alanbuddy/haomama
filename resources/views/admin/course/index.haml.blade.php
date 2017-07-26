@@ -138,7 +138,6 @@
                       %a{href: "#"} 1
                     %li
                       %a{href: "#"} »
-@endsection
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
@@ -152,6 +151,8 @@
           .item.offline
             %img{src: "icon/admin/class.png"}
             %p 线下课程
+@endsection
+
 @section('script')
 <script src= "{{mix('/js/admin_c_index.js')}}"></script>
 <script src= "js/admin-add-course.js"></script>

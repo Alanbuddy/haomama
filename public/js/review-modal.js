@@ -165,6 +165,10 @@ $(document).ready(function($) {
     // }
   });
 
+  $(".refund").click(function(){
+    
+  });
+
   var order = null;
   var signPackage = null;
   var cid = $(".course-id").text();

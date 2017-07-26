@@ -11,6 +11,7 @@
   window.review = "#{route('comments.store')}"
   window.order = "#{route('orders.pay')}"
   window.pay_finish = "#{route('orders.finish')}"
+  window.refund = "#{route('orders.refund')}"
 
 
 @endsection

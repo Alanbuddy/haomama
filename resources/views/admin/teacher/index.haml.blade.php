@@ -19,7 +19,7 @@
       .search#search-btn
     %ul.set
       %li
-        %a.f16{href: route('users.index')} 人员管理
+        %a.f16{href: route('users.index')."?type=operator"} 人员管理
         .dot
       %li
         %a.f16.left-border{href: route('admin.profile')} 账号设置
@@ -48,11 +48,6 @@
                       %th 手机号
                       %th 职称
                   %tbody.font-color3
-                    // - @users[:data].each do |u|
-                    %tr
-                      %td.teacher-show 张老师
-                      %td 132344324535
-                      %td xx医院xx科室主治医师
                     - foreach ($items as $item)
                     %tr
                       %td

@@ -225,7 +225,7 @@ abbr, acronym {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background: url('/icon/admin/bg.png') no-repeat;
+  background: url('/haomama/icon/admin/bg.png') no-repeat;
   background-size: 100% 100%;
 }
 .input-div {
@@ -248,7 +248,7 @@ abbr, acronym {
   margin-bottom: 12.15%;
 }
 .miniphoto {
-  background: url("/icon/admin/cellphone.png") no-repeat;
+  background: url("/haomama/icon/admin/cellphone.png") no-repeat;
   background-size: 100% 100%;
   width: 4.6em;
   border: 0;
@@ -267,13 +267,13 @@ abbr, acronym {
   width: 50%;
 }
 .password-photo {
-  background: url("/icon/admin/password.png") no-repeat;
+  background: url("/haomama/icon/admin/password.png") no-repeat;
   background-size: 100% 100%;
   width: 4.6em;
   border: 0;
 }
 .verify-photo {
-  background: url("/icon/admin/number.png") no-repeat;
+  background: url("/haomama/icon/admin/number.png") no-repeat;
   background-size: 100% 100%;
   width: 4.6em;
   border: 0;

@@ -50,9 +50,13 @@
                   .caption-item
                     %img{src: "icon/admin/video-small.png"}
                     %span#name-span= $video->file_name
-                .item
                 
                 #uploader.wu-example.edit-box-uploader
+                  .item#old-video
+                    %h4.info= $video->file_name
+                    %p.video-id= $video->id
+                    %p.state 已上传...
+                    %button.delete_btn 删除
                   #thelist.uploader-list
                   .btns
                     #picker 选择文件
@@ -72,9 +76,6 @@
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>
-<script src="js/lesson_edit.js"></script> 
-
-// <script src="js/fileupload.js"></script> 
-
+<script src="js/video_edit.js"></script> 
 
 @endsection

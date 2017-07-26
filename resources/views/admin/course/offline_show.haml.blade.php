@@ -27,7 +27,7 @@
       %img.back{src: "icon/admin/back.png"}
     %ul.set
       %li
-        %a.f16{href: route('users.index')} 人员管理
+        %a.f16{href: route('users.index')."?type=operator"} 人员管理
         .dot
       %li
         %a.f16.left-border{href: route('admin.profile')} 账号设置
@@ -161,13 +161,11 @@
                   - if ($course->titles)
                     - foreach(json_decode($course->titles) as $title)
                       %p.title-desc= $title
-                
-@endsection
 #shelfModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/admin/close.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/close.png"}
       .modal-body
         - if($course->status == "draft")
           %p.message 是否确认上线当前课程？
@@ -175,7 +173,9 @@
           %p.message 是否确认下架当前课程？
         .btn-div
           %button.btn#shelf-cancel{type: "button"} 取&nbsp消
-          %button.btn#shelf-confirm{type: "button"} 确&nbsp定
+          %button.btn#shelf-confirm{type: "button"} 确&nbsp定                
+@endsection
+
 @section('script')
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/wangEditor.min.js"></script>
