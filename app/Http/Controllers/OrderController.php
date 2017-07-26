@@ -213,4 +213,9 @@ class OrderController extends Controller
             dd($result);
         }
     }
+
+    public function tmp(Request $request)
+    {
+        return view('setting.show');
+    }
 }
