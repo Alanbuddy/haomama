@@ -216,6 +216,7 @@ class OrderController extends Controller
 
     public function tmp(Request $request)
     {
-        return view('setting.show');
+        $course=Course::find($request->course_id);
+        return view('setting.show',compact('course'));
     }
 }
