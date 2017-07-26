@@ -231,9 +231,6 @@
 - else
   .btn#add-btn{type: "button"} 立即报名
 
-
-
-@endsection
 #confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
@@ -321,6 +318,9 @@
                 %input.add-input-div.birthday#add-baby-birthday{type: "date"}
           %p.f12.color10.pt16#another-baby 还有一个宝宝?
         .btn#edit-end 编辑完成
+
+@endsection
+
 
 @section('script')
 <script src= "{{ mix('/js/course-show.js') }}"></script>
