@@ -154,13 +154,13 @@ class OrderController extends Controller
 
     public function pay(Request $request)
     {
-        Log::info(__FILE__.__LINE__);
+        Log::info(__FILE__ . __LINE__);
         $order = $this->store($request);
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
 //            dd($ret);
-            Log::info(__FILE__.__LINE__);
+            Log::info(__FILE__ . __LINE__);
             $appId = $ret['appid'];
             $timeStamp = time();
             $nonceStr = WxApi::getNonceStr();
@@ -172,16 +172,16 @@ class OrderController extends Controller
             );
             $sign = WxApi::makeSign($values);
             $data = array_merge($values, compact('sign', 'prepayId', 'order'));
-            if($request->ajax()){
-                return ['success'=>true,'data'=>$data];
+            if ($request->ajax()) {
+                return ['success' => true, 'data' => $data];
             }
             return view('admin.order.pay', $data);
         } catch (\Exception $e) {
             print($e->getMessage());
             $this->logError('wxpay.unifiedOrder', $e->getMessage(), '', '');
 //            return ['success' => false];
-            if($request->ajax()){
-                return ['success'=>false,'message'=>$e->getMessage()];
+            if ($request->ajax()) {
+                return ['success' => false, 'message' => $e->getMessage()];
             }
             return view('admin.order.pay');
         }
@@ -195,13 +195,17 @@ class OrderController extends Controller
         $input = new WxPayRefund();
         $input->SetOut_trade_no($order->uuid);
         $input->SetOut_refund_no($order->uuid);
-        $input->SetRefund_fee($order->amount * 100 );//单位为分 //$input->SetRefund_fee(1);
+        $input->SetRefund_fee($order->wx_total_fee);//单位为分 //$input->SetRefund_fee(1);
         $input->SetTotal_fee($order->wx_total_fee);//单位为分
         $input->SetOp_user_id(config('wechat.mch.mch_id'));
         $result = WxPayApi::refund($input);
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             $order->status = 'refunded';
             $order->save();
+            if($request->has('course_id')){
+                $course=Course::findOrFail($request->course_id);
+                return view('setting.refund',compact('course'));
+            }
             return ['success' => true];
         } else {
             return [
@@ -210,13 +214,13 @@ class OrderController extends Controller
                     ? $result['err_code']
                     : $result['return_msg']
             ];
-            dd($result);
         }
     }
 
+
     public function tmp(Request $request)
     {
-        $course=Course::find($request->course_id);
-        return view('setting.show',compact('course'));
+        $course = Course::find($request->course_id);
+        return view('setting.show', compact('course'));
     }
 }

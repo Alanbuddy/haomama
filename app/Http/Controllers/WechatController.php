@@ -23,7 +23,7 @@ class WechatController extends Controller
     {
 //        DB::table('settings')->where('key', 'access_token')->update(['key' => 'access_token',
 //            'value' => '{"access_token":"example","expire_time":1497937039}']);
-        $result = WxApi::accessToken(true);
+        $result = WxApi::accessToken(true); //true: 强制刷新
         dd($result);
     }
 
@@ -123,7 +123,6 @@ class WechatController extends Controller
             ];
             $result = WxMessageApi::send($access_token, null, $template_id, $url, $data);
         }
-
 //        dd($result);
         if (json_decode($result['data'])->errcode > 0) {
             Error::create([
