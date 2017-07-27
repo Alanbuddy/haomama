@@ -5,7 +5,7 @@
 :javascript
   window.teacher_index = "#{route('users.index')}"
   window.teacher_store = "#{route('users.store')}"
-  window.teacher_show = "#{route('users.show', -1)}"
+  window.teacher_show = "#{route('admin.user.show', -1)}"
   window.token = "#{csrf_token()}"
 @endsection
 

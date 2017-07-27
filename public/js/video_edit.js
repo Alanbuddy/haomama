@@ -140,7 +140,7 @@ $(document).ready(function(){
     $("#finish-btn").toggle();
     $(".unedit-box").toggle();
     $(".edit-box").toggle();
-    $(".edit-box-uploader").css({"opacity":1, "filter": "Alpha(opacity=0)", "position": "relative"});
+    $(".edit-box-uploader").css({"opacity":1, "filter": "Alpha(opacity=100)", "position": "relative"});
     $("#input-caption").val($("#caption-span").text());
     var desc = $("#desc-span").text();
     editor.txt.html(desc);

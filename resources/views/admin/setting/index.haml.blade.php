@@ -23,10 +23,7 @@
     
   .main-content.bg2
     %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
-    %button.btn.edit-normal.font-color1.create-btn-position#tab2-edit-btn{type: "button"} 编辑
-
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
-    %button.btn.finish-normal.font-color1.finish-btn-position#tab2-finish-btn{type: "button"} 保存
     .table-div
       .tabbable
         %ul.nav.nav-tabs
@@ -41,20 +38,17 @@
               //   .undiscover.f14
               //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
-              #uploader.wu-example.f14.font-color3
-                .btns
-                  #picker 添加图片
-                  %span 请上传尺寸为750*320的图片文件
-              .img-div.tab1-unedit-box
+              .img-div.unedit-box
                 %img.img-item{src: "icon/banner.png"}
                 %img.img-item{src: "icon/banner.png"}
                 %img.img-item{src: "icon/banner.png"}
-              .edit-img-div.tab1-edit-box.f14.font-color3
-                // #uploader.wu-example
-                //   .btns
-                //     #picker 添加图片
-                //     %span 请上传尺寸为750*320的图片文件
-                    
+
+              .edit-img-div.edit-box.f14.font-color3
+                #uploader.wu-example
+                  .btns
+                    #picker 添加图片
+                    %button#ctlBtn.btn.btn-default 开始上传
+                    %span.remind 请上传尺寸为750*320的图片文件
                 .img-edit-div
                   .item
                     %img.edit-img-item{src: "icon/banner.png"}
@@ -91,7 +85,6 @@
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/admin_imgset_index.js')}}"></script>
 <script src="js/plugin/webuploader.js"></script>
 
 <script src="js/set_banner.js"></script>

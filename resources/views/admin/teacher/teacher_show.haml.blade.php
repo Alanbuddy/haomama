@@ -6,6 +6,8 @@
   window.teacher_index = "#{route('users.index')}"
   window.token = "#{csrf_token()}"
   window.teacher_update = "#{route('users.update',$user->id)}"
+  window.teacher_show = "#{route('admin.user.show', -1)}"
+
 @endsection
 
 @section('content')
@@ -58,7 +60,7 @@
               .photo#preview
                 %img.unedit-box.teacher-avatar{src: $user->avatar ? $user->avatar : "icon/teacher_avatar.png"}
                 %img.edit-box.edit-photo#imghead{src: $user->avatar ? $user->avatar : "icon/admin/add3.png", onclick: "$('#previewImg').click()"}
-              %span.cover-path{style: "display:none;"}
+              %span.cover-path{style: "display:none;"}= $user->avatar
                 
             .controls-div.font-color3.f14
               .controls.controls-row
@@ -144,8 +146,8 @@
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/admin_teacher_show.js')}}"></script>
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/teacher_preview.js"></script>
+<script src="js/teacher_update.js"></script>
 
 @endsection

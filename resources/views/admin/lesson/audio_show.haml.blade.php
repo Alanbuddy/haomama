@@ -27,7 +27,7 @@
         %a.f16.left-border{href: route('admin.profile')} 账号设置
       %li
         %a.f16.set-left-border#exit{href: "#"} 退出登录
- 
+               
   .main-content.bg2
     %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
@@ -41,7 +41,7 @@
             .desc-div.font-color3.f14
               .form-group
                 %label.input-name.fn 课时标题:
-                %span.unedit-box= $lesson['name']
+                %span.unedit-box#name-span= $lesson['name']
                 %span.edit-box
                   %input.form-control#input-caption{:type => "text"}
               .video-file.introduce-flex
@@ -51,41 +51,50 @@
                     %img{src: "icon/admin/music-small.png"}
                     %span= $audio['file_name']
                 #uploader.wu-example.edit-box
+                  .item#old-video
+                    %h4.info= $audio->file_name
+                    %p.state 原视频
+                    %button.delete_btn 删除
                   #thelist.uploader-list
                   .btns
                     #picker 选择文件
                     %button#ctlBtn.btn.btn-default 开始上传
+              %span.audio-id= $audio->id
               .notice-introduce.introduce-flex
                 %span.introduce 内容介绍:
-                %span.unedit-box.introduce-span= strip_tags(htmlspecialchars_decode($lesson['description']))
+                %span.unedit-box.introduce-span#desc-span= strip_tags(htmlspecialchars_decode($lesson['description']))
                 %span.wangedit-area.edit-box
                   #edit-box
-              .video-file.margin20
+              .img-file.margin20
                 %span 图片文件:
                 %span.unedit-box.unedit-img-box
                   - foreach($pictures as $picture)
                     .img-item
                       %img.show-img{src: $picture->path}
                       // %p.img-index 01
-                      %p.img-time= $picture->no
+                      %p.img-time= $picture->pivot->no
+
                 #uploader_img.wu-example.edit-box
-                  
+                  - foreach($pictures as $picture)
+                    .old_pre_img
+                      %p.img_wrap
+                        %img{:src => $picture->path}
+                      %h4.info_img= $picture->file_name
+                      %img.old_delete_img{:src => "/icon/admin/rubbish.png"}
+                      %span.old-data-id= $picture->id
+                      %input.old_img_time{:placeholder => "请输入时间", value: $picture->pivot->no}
                   .btns
                     #picker_img 选择文件
                     %button#imgBtn.btn.btn-default 开始上传
-              #imglist.uploader-list.img-div.margin20.edit-box 
-
-
+              #imglist.uploader-list.img-div.margin20.edit-box
+                
 
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/admin_lesson_audio_show.js')}}"></script>
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>
 <script src="js/audio_edit.js"></script>
-
-// <script src="js/fileupload_audio.js"></script>
 
 @endsection

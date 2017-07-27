@@ -6,7 +6,7 @@ $(document).ready(function(){
     swf: '/js/plugin/Uploader.swf',
 
     // 文件接收服务端。
-    server: window.video,
+    server: window.fileupload,
 
     // 选择文件的按钮。可选。
     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -14,7 +14,7 @@ $(document).ready(function(){
 
     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
     resize: false,
-    auto: true,
+    auto: false,
     dnd: "#thelist",
     disableGlobalDnd: true,
     // fileNumLimit: 1,   //限制只能上传一个文件
@@ -98,7 +98,6 @@ $(document).ready(function(){
     $( '#'+file.id ).find('.progress').fadeOut();
   });
 
-  // var title = $("#input-caption").val();
 
   // $btn.click(function(){
   //   $.getJSON(
@@ -124,8 +123,22 @@ $(document).ready(function(){
     $(this).closest(".item").remove();   //从上传列表dom中删除  
   }); 
 
-  $("#finish-btn").click(function(){
+ 
+
+  $("#edit-btn").click(function(){
+    $(this).toggle();
+    $("#finish-btn").toggle();
+    $(".unedit-box").toggle();
+    $(".edit-box").toggle();
+    uploader.refresh();
+  });
+  
+  $(".delete").click(function(){
+    $(this).closest(".item").remove();
 
   });
 
+  $("#finish-btn").click(function(){
+
+  });
 });
