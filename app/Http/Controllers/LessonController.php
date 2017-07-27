@@ -115,7 +115,7 @@ class LessonController extends Controller
         }
         if ($request->has('audio')) {
             $arr = $video->attachments()
-                ->where('mime', 'like', 'application%')
+                ->where('mime', 'like', 'audio%')
                 ->select('id')->get()->all();
             $video->attachments()->detach(array_map(function ($v) {
                 return $v->id;
