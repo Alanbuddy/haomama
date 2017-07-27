@@ -28,32 +28,14 @@
       .tabbable
         %ul.nav.nav-tabs
           %li
-            %a.f16.font-color1#video{"data-toggle" => "tab", :href => "#tab1"} 视频课时
+            %a.f16.font-color1#video 视频课时
           %li.active
-            %a.f16.font-color1#audio{"data-toggle" => "tab", :href => "#tab2"} 音频课时
+            %a.f16.font-color1#audio 音频课时
 
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              // .table-box
-              //   %table.table.table-hover.table-height.f14
-              //     %thead.th-bg.font-color2
-              //       %tr
-              //         %th 课时标题
-              //         %th 上传时间
-              //         %th 上线时间
-              //     %tbody.font-color3
-              //       -foreach ($items as $lesson) 
-              //         %tr{class: ""}
-              //           %td.show-name
-              //             %a{href:route('admin.lesson.show',$lesson->id)}=$lesson->name
-              //           %td =$lesson->created_at
-              //           %td =$lesson->updated_at
-                      
-              // .select-page 
-              //   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
-              //   %span.choice-page
-              //     != $items->links() 
+              
           #tab2.tab-pane
             .desc-div
               .table-box
@@ -64,11 +46,12 @@
                       %th 上传时间
                       %th 上线时间
                   %tbody.font-color3
-                    %tr{class: ""}
-                      %td.show-name
-                        %a{href: route('admin.lesson.show',$lesson->id)}= $lesson->name 
-                      %td =$lesson->created_at
-                      %td =$lesson->updated_at
+                    -foreach ($items as $lesson) 
+                      %tr{class: ""}
+                        %td.show-name
+                          %a{href: route('admin.lesson.show',$lesson->id)}= $lesson->name 
+                        %td =$lesson->created_at
+                        %td =$lesson->updated_at
 
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"

@@ -10347,10 +10347,12 @@ module.exports = __webpack_require__(9);
   $(".lesson-audio").click(function() {
     return location.href = window.lesson_create + "?type=audio";
   });
-  $("#video").click(function() {
+  $("#video").click(function(e) {
+    e.preventDefault();
     return location.href = window.lesson_index + "?type=video";
   });
-  return $("#audio").click(function() {
+  return $("#audio").click(function(e) {
+    e.preventDefault();
     return location.href = window.lesson_index + "?type=audio";
   });
 });

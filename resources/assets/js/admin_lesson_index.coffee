@@ -5,8 +5,10 @@ $ ->
   $(".lesson-audio").click ->
     location.href = window.lesson_create + "?type=audio"
 
-  $("#video").click ->
+  $("#video").click (e) ->
+  	e.preventDefault()
   	location.href = window.lesson_index + "?type=video"
 
-  $("#audio").click ->
+  $("#audio").click (e) ->
+  	e.preventDefault()
   	location.href = window.lesson_index + "?type=audio"
