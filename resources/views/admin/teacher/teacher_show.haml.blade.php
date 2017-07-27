@@ -37,67 +37,67 @@
               .text-message.mt15
                 .controls.controls-row
                   %label.input-caption 讲师姓名:
-                  %span.unedit-box.unedit-span 课程的名字很长
+                  %span.unedit-box.unedit-span#name-span 课程的名字很长
                   %span.edit-box
                     %input.form-control.input-width#teacher-name{:type => "text", placeholder: "必填"}
                   %label.input-caption#mobile-label 手机号:
-                  %span.unedit-box.unedit-span 课程的名字很长
+                  %span.unedit-box.unedit-span#mobile-span 课程的名字很长
                   %span.edit-box
                     %input.form-control.input-width#mobile{:type => "text", placeholder: "必填"}
                 .controls.controls-row.mt25#second-row
                   %label.input-caption#tencent-label QQ号:
-                  %span.unedit-box.unedit-span 课程的名字很长
+                  %span.unedit-box.unedit-span#tencent-span 课程的名字很长
                   %span.edit-box
                     %input.form-control.input-width#tencent{:type => "text"}
                   %label.input-caption#Email-label 邮箱:
-                  %span.unedit-box.unedit-span 课程的名字很长
+                  %span.unedit-box.unedit-span#mail-span 课程的名字很长
                   %span.edit-box
                     %input.form-control.input-width#mail{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
                 %img.unedit-box.teacher-avatar{src: "icon/teacher_avatar.png"}
                 %img.edit-box.edit-photo#imghead{src: "icon/admin/add3.png", onclick: "$('#previewImg').click()"}
+              %span.cover-path{style: "display:none;"}
                 
             .controls-div.font-color3.f14
               .controls.controls-row
                 %label.input-caption 讲师职称:
-                %span.unedit-box.middle-span 课程的名字很长
+                %span.unedit-box.middle-span#title-span 课程的名字很长
                 %span.edit-box
                   %input.input-area.form-control.middle#title{:type => "text"}
                 %label.input-caption 座机:
-                %span.unedit-box 课程的名字很长
+                %span.unedit-box#tel-span 课程的名字很长
                 %span.edit-box
                   %input.form-control.input-width#tel{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label 专长:
-                %span.unedit-box.middle-span 课程的名字很长
+                %span.unedit-box.middle-span#major-span 课程的名字很长
                 %span.edit-box
-                  %input.input-area.form-control.middle#prefer{:type => "text"}
+                  %input.input-area.form-control.middle#major{:type => "text"}
                 %label.input-caption 备注:
-                %span.unedit-box 课程的名字很长
+                %span.unedit-box#remark-span 课程的名字很长
                 %span.edit-box
                   %input.form-control.input-width#remark{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label.vt#reward-label 获奖:
-                %span.unedit-box.longspan 课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长
+                %span.unedit-box.longspan#reward-span 课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长
                 %span.edit-box
                   %input.input-area.form-control.longinput#reward{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label.vt#book-label 出书:
-                %span.unedit-box.longspan 课程的名字很长
+                %span.unedit-box.longspan#book-span 课程的名字很长
                 %span.edit-box
                   %input.input-area.form-control.longinput#book{:type => "text"}
               .controls.controls-row
                 %label.input-caption 基础简介:
-                %span.unedit-box 课程的名字很长
+                %span.unedit-box#base-span 课程的名字很长
                 %span.edit-box
                   %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内"}
               .course-introduce.introduce-flex
                 %span.introduce 讲师介绍:
-                %span.unedit-box.longspan 该课程是少儿类视频第一名
+                %span.unedit-box.longspan#desc-span 该课程是少儿类视频第一名
                 %span.edit-box.wangedit-area
                   #edit-area
-                    %p 必填,限100字内
           #tab2.tab-pane
             .desc-div
               // - if @courses[:data].length == 0
