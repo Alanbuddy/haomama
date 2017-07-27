@@ -35,8 +35,6 @@ class FileController extends Controller
     public function initChunkUpload(Request $request)
     {
         $file = new File();
-        if ($request->has('mime'))
-            $file->mime = $request->mime;
         auth()->user()->files()->save($file);
         return ['success' => true, 'data' => $file];
     }
@@ -52,9 +50,10 @@ class FileController extends Controller
             $file = File::find($request->file_id);
             $file->description = $request->chunks;
             $attr=$this->getFileBaseInfo($request->file('file'));
-            if($file->mime)
-                $attr['mime']=$file->mime;
             $file->fill($attr);
+            if ($request->has('mime')){
+                $file->mime = $request->mime;
+            }
             $file->save();
         }
         return $this->uploadChunkedFile($request);
