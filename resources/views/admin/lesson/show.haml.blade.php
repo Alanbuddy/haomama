@@ -42,6 +42,7 @@
               .form-group
                 %label.input-name.fn 课时标题:
                 %span.unedit-box#caption-span= $lesson->name
+                %span.lesson-id{style: "display: none;"}= $lesson->id
                 %span.edit-box
                   %input.form-control#input-caption{:type => "text"}
               .video-file.introduce-flex

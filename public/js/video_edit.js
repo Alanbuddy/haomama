@@ -151,6 +151,8 @@ $(document).ready(function(){
     var lesson_video_id = $(".video-id").text();
     console.log(lesson_video_id);
     var lesson_desc = editor.txt.html();
+    var lesson_id = $(".lesson-id").text();
+    console.log(lesson_id);
     var put = "PUT";
     $.ajax({
       type: "post",
@@ -165,7 +167,7 @@ $(document).ready(function(){
       success: function(data){
         if(data.success){
           var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
-          location.href = str + lesson_video_id + "?type=video";
+          location.href = str + lesson_id + "?type=video";
         }
       }
     });
