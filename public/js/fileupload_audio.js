@@ -216,7 +216,7 @@ $(document).ready(function(){
     var img_item = {};
     $(".pre_img").each(function(){
       var id = $(this).find('.data-id').text();
-      var time = $(this).find('.img_time').val();
+      var time = parseInt($(this).find('.img_time').val());
       img_item = {
         file: id,
         time: time

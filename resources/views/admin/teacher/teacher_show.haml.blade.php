@@ -5,6 +5,7 @@
 :javascript
   window.teacher_index = "#{route('users.index')}"
   window.token = "#{csrf_token()}"
+  window.teacher_update = "#{route('users.update',$user->id)}"
 @endsection
 
 @section('content')
@@ -37,65 +38,65 @@
               .text-message.mt15
                 .controls.controls-row
                   %label.input-caption 讲师姓名:
-                  %span.unedit-box.unedit-span#name-span 课程的名字很长
+                  %span.unedit-box.unedit-span#name-span= $user->name
                   %span.edit-box
                     %input.form-control.input-width#teacher-name{:type => "text", placeholder: "必填"}
                   %label.input-caption#mobile-label 手机号:
-                  %span.unedit-box.unedit-span#mobile-span 课程的名字很长
+                  %span.unedit-box.unedit-span#mobile-span= $user->phone
                   %span.edit-box
                     %input.form-control.input-width#mobile{:type => "text", placeholder: "必填"}
                 .controls.controls-row.mt25#second-row
                   %label.input-caption#tencent-label QQ号:
-                  %span.unedit-box.unedit-span#tencent-span 课程的名字很长
+                  %span.unedit-box.unedit-span#tencent-span= $user->description->qq
                   %span.edit-box
                     %input.form-control.input-width#tencent{:type => "text"}
                   %label.input-caption#Email-label 邮箱:
-                  %span.unedit-box.unedit-span#mail-span 课程的名字很长
+                  %span.unedit-box.unedit-span#mail-span= $user->email
                   %span.edit-box
                     %input.form-control.input-width#mail{:type => "text"}
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo#preview
-                %img.unedit-box.teacher-avatar{src: "icon/teacher_avatar.png"}
-                %img.edit-box.edit-photo#imghead{src: "icon/admin/add3.png", onclick: "$('#previewImg').click()"}
+                %img.unedit-box.teacher-avatar{src: $user->avatar ? $user->avatar : "icon/teacher_avatar.png"}
+                %img.edit-box.edit-photo#imghead{src: $user->avatar ? $user->avatar : "icon/admin/add3.png", onclick: "$('#previewImg').click()"}
               %span.cover-path{style: "display:none;"}
                 
             .controls-div.font-color3.f14
               .controls.controls-row
                 %label.input-caption 讲师职称:
-                %span.unedit-box.middle-span#title-span 课程的名字很长
+                %span.unedit-box.middle-span#title-span= $user->description->title
                 %span.edit-box
                   %input.input-area.form-control.middle#title{:type => "text"}
                 %label.input-caption 座机:
-                %span.unedit-box#tel-span 课程的名字很长
+                %span.unedit-box#tel-span= $user->description->telephone
                 %span.edit-box
                   %input.form-control.input-width#tel{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label 专长:
-                %span.unedit-box.middle-span#major-span 课程的名字很长
+                %span.unedit-box.middle-span#major-span= $user->description->major
                 %span.edit-box
                   %input.input-area.form-control.middle#major{:type => "text"}
                 %label.input-caption 备注:
-                %span.unedit-box#remark-span 课程的名字很长
+                %span.unedit-box#remark-span= $user->description->remark
                 %span.edit-box
                   %input.form-control.input-width#remark{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label.vt#reward-label 获奖:
-                %span.unedit-box.longspan#reward-span 课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长课程的名字很长
+                %span.unedit-box.longspan#reward-span= $user->description->award
                 %span.edit-box
                   %input.input-area.form-control.longinput#reward{:type => "text"}
               .controls.controls-row
                 %label.input-caption.double-label.vt#book-label 出书:
-                %span.unedit-box.longspan#book-span 课程的名字很长
+                %span.unedit-box.longspan#book-span= $user->description->book
                 %span.edit-box
                   %input.input-area.form-control.longinput#book{:type => "text"}
               .controls.controls-row
                 %label.input-caption 基础简介:
-                %span.unedit-box#base-span 课程的名字很长
+                %span.unedit-box#base-span= $user->description->basicIntroduction
                 %span.edit-box
                   %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内"}
               .course-introduce.introduce-flex
                 %span.introduce 讲师介绍:
-                %span.unedit-box.longspan#desc-span 该课程是少儿类视频第一名
+                %span.unedit-box.longspan#desc-span= strip_tags(htmlspecialchars_decode($user->description->introduction))
                 %span.edit-box.wangedit-area
                   #edit-area
           #tab2.tab-pane
