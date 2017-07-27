@@ -23,7 +23,7 @@ $(document).ready(function(){
     chunked: true,     //是否要分片处理大文件上传
     chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
-
+  window.uploader=uploader;
   var file_name = null;
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
@@ -83,6 +83,7 @@ $(document).ready(function(){
     $( '#'+file.id ).find('.progress').fadeOut();
   });
 
+  var MIME = uploader.getFiles()[0].type;
   $btn.click(function(){
     $.getJSON(
       window.audio_init,
@@ -92,7 +93,8 @@ $(document).ready(function(){
           $(".audio-id").text(data.data.id);
           uploader.options.formData = {
               file_id: data.data.id,
-              _token: window.token
+              _token: window.token,
+              mime: MIME
             };
           uploader.upload();
         }
