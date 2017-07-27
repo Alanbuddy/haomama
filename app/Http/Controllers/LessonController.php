@@ -228,6 +228,17 @@ class LessonController extends Controller
     public function edit(Lesson $lesson)
     {
         $video = $lesson->video();
+        $data=compact('video','lesson');
+        if ($lesson->type == 'audio') {
+            $pictures = $video->pictures()
+                ->orderBy('no')
+                ->get();
+            $audio = $video->attachments()
+                ->where('mime', 'like', 'audio%')
+                ->first();
+            $data->merge(compact('pictures','audio'));
+        }
+        dd($data);
         return view('admin.lesson.edit', compact('video', 'lesson'));
     }
 
