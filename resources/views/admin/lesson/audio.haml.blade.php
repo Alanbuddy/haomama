@@ -9,6 +9,7 @@
     window.audio_init = "#{route('file.upload.init')}"
     window.files_merge = "#{route('files.merge')}"
     window.token = "#{csrf_token()}"
+    window.admin_lesson_show = "#{route('admin.lesson.show', -1)}"
 @endsection
 
 @section('content')

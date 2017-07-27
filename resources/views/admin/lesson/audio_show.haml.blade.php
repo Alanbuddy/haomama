@@ -10,6 +10,8 @@
     window.token = "#{csrf_token()}"
     window.merge = "#{route('videos.merge')}"
     window.init = "#{route('videos.upload.init')}"
+    window.admin_lesson_show = "#{route('admin.lesson.show', -1)."?type=audio"}" 
+    window.lesson_update = "#{route('lessons.update',$lesson->id)}"
 @endsection
 
 @section('content')
@@ -39,7 +41,7 @@
             .desc-div.font-color3.f14
               .form-group
                 %label.input-name.fn 课时标题:
-                %span.unedit-box 这里是视频课时的标题
+                %span.unedit-box= $lesson->name
                 %span.edit-box
                   %input.form-control#input-caption{:type => "text"}
               .video-file.introduce-flex
@@ -47,7 +49,7 @@
                 %span.unedit-box
                   .caption-item
                     %img{src: "icon/admin/music-small.png"}
-                    %span 这里是视频课时的标题
+                    %span= $audio->file_name
                 #uploader.wu-example.edit-box
                   #thelist.uploader-list
                   .btns
@@ -55,7 +57,7 @@
                     %button#ctlBtn.btn.btn-default 开始上传
               .notice-introduce.introduce-flex
                 %span.introduce 内容介绍:
-                %span.unedit-box.introduce-span 该课程是少儿类视频第一名该课程是少儿类视频第一名该课程是少儿类视频第一名该课程是少儿类视频第一名该课程是少儿类视频第一名该课程
+                %span.unedit-box.introduce-span= strip_tags(htmlspecialchars_decode($lesson->description))
                 %span.wangedit-area.edit-box
                   #edit-box
               .video-file.margin20

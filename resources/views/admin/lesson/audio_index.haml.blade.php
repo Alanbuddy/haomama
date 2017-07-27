@@ -33,10 +33,8 @@
             %a.f16.font-color1#audio 音频课时
 
         .tab-content.bg3
-          #tab1.tab-pane.active
-            .desc-div
               
-          #tab2.tab-pane
+          #tab2.tab-pane.active
             .desc-div
               .table-box
                 %table.table.table-hover.table-height.f14
@@ -49,14 +47,14 @@
                     -foreach ($items as $lesson) 
                       %tr{class: ""}
                         %td.show-name
-                          %a{href: route('admin.lesson.show',$lesson->id)}= $lesson->name 
+                          %a{href: route('admin.lesson.show',$lesson->id)."?type=audio"}= $lesson->name 
                         %td =$lesson->created_at
                         %td =$lesson->updated_at
 
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
-                  != $items->links() 
+                  != $items->appends(['type' => 'audio'])->links() 
 
 #add_lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
