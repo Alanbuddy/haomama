@@ -41,7 +41,7 @@
             .desc-div.font-color3.f14
               .form-group
                 %label.input-name.fn 课时标题:
-                %span.unedit-box= $lesson->name
+                %span.unedit-box= $lesson['name']
                 %span.edit-box
                   %input.form-control#input-caption{:type => "text"}
               .video-file.introduce-flex
@@ -49,7 +49,7 @@
                 %span.unedit-box
                   .caption-item
                     %img{src: "icon/admin/music-small.png"}
-                    %span= $audio->file_name
+                    %span= $audio['file_name']
                 #uploader.wu-example.edit-box
                   #thelist.uploader-list
                   .btns
@@ -57,40 +57,17 @@
                     %button#ctlBtn.btn.btn-default 开始上传
               .notice-introduce.introduce-flex
                 %span.introduce 内容介绍:
-                %span.unedit-box.introduce-span= strip_tags(htmlspecialchars_decode($lesson->description))
+                %span.unedit-box.introduce-span= strip_tags(htmlspecialchars_decode($lesson['description']))
                 %span.wangedit-area.edit-box
                   #edit-box
               .video-file.margin20
                 %span 图片文件:
                 %span.unedit-box.unedit-img-box
-                  .img-item
-                    %img.show-img{src: "icon/example.png"}
-                    %p.img-index 01
-                    %p.img-time 00:01:23
-                  .img-item
-                    %img.show-img{src: "icon/example.png"}
-                    %p.img-index 01
-                    %p.img-time 00:01:23
-                  .img-item
-                    %img.show-img{src: "icon/example.png"}
-                    %p.img-index 01
-                    %p.img-time 00:01:23
-                  .img-item
-                    %img.show-img{src: "icon/example.png"}
-                    %p.img-index 01
-                    %p.img-time 00:01:23
-                  .img-item
-                    %img.show-img{src: "icon/example.png"}
-                    %p.img-index 01
-                    %p.img-time 00:01:23
-                  .img-item
-                    %img.show-img{src: "icon/example.png"}
-                    %p.img-index 01
-                    %p.img-time 00:01:23
-                  .img-item
-                    %img.show-img{src: "icon/example.png"}
-                    %p.img-index 01
-                    %p.img-time 00:01:23
+                  - foreach($pictures as $picture)
+                    .img-item
+                      %img.show-img{src: $picture->path}
+                      // %p.img-index 01
+                      %p.img-time= $picture->no
                 #uploader_img.wu-example.edit-box
                   
                   .btns
@@ -107,7 +84,8 @@
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>
+<script src="js/audio_edit.js"></script>
 
-<script src="js/fileupload_audio.js"></script>
+// <script src="js/fileupload_audio.js"></script>
 
 @endsection

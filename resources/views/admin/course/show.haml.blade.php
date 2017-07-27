@@ -55,8 +55,7 @@
                 .controls.controls-row
                   %label.input-caption 课程名称:
                   %span.unedit-box#name-span= $course->name
-                  - if($hasRecommendedCourse)
-                    %span.font-color-red.unedit-box= ($hasRecommendedCourse->name)
+                  %span.font-color-red.unedit-box= ($course->recommendation)
                   %span.edit-box
                     %input.input-area.form-control#course-name{:type => "text", placeholder: "必填"}
                 .controls.controls-row
