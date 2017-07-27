@@ -162,12 +162,10 @@ $(document).ready(function(){
         _token: window.token,
         _method: put
       },
-      success: function(){
-        console.log(data);
+      success: function(data){
         if(data.success){
           var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
-          var lid = data.data.id;
-          location.href = str + lid + "?type=video";
+          location.href = str + lesson_video_id + "?type=video";
         }
       }
     });
