@@ -32,7 +32,7 @@ class LessonController extends Controller
         $items = Lesson::orderBy('id', 'desc')
             ->where('type', $type)
             ->paginate(10);
-        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/courses');
+        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/lessons');
         if ($request->ajax()) {
             return $items;
         }
