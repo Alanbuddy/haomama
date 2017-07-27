@@ -28,9 +28,9 @@
       .tabbable
         %ul.nav.nav-tabs
           %li
-            %a.f16.font-color1#video{"data-toggle" => "tab", :href => "#tab1"} 视频课时(345)
+            %a.f16.font-color1#video{"data-toggle" => "tab", :href => "#tab1"} 视频课时
           %li.active
-            %a.f16.font-color1#audio{"data-toggle" => "tab", :href => "#tab2"} 音频课时(123)
+            %a.f16.font-color1#audio{"data-toggle" => "tab", :href => "#tab2"} 音频课时
 
         .tab-content.bg3
           #tab1.tab-pane.active

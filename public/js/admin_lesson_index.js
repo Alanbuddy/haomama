@@ -10342,16 +10342,16 @@ module.exports = __webpack_require__(9);
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   $(".lesson-video").click(function() {
-    return location.href = window.lesson_create + "?/type=video";
+    return location.href = window.lesson_create + "?type=video";
   });
   $(".lesson-audio").click(function() {
     return location.href = window.lesson_create + "?type=audio";
   });
   $("#video").click(function() {
-    return location.href = window.lesson_index + "?/type=video";
+    return location.href = window.lesson_index + "?type=video";
   });
   return $("#audio").click(function() {
-    return location.href = window.lesson_index + "?/type=audio";
+    return location.href = window.lesson_index + "?type=audio";
   });
 });
 
