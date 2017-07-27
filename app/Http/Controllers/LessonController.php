@@ -91,6 +91,7 @@ class LessonController extends Controller
         if ($request->json()) {
             return ['success' => true, 'data' => $item->id];
         }
+        dd($item);
         return redirect()->route('lessons.index');
     }
 
@@ -109,7 +110,7 @@ class LessonController extends Controller
             $tmp = [];
             $arr = $request->pictures;
             foreach ($arr as $p) {
-                $tmp[$p['file']] = ['no' => intval($p['time'])];
+                $tmp[$p['file']] = ['no' => $p['time']];
             }
             $video->attachments()->attach($tmp);
         }
@@ -171,6 +172,9 @@ class LessonController extends Controller
             $pictures = $video->pictures()
                 ->orderBy('no')
                 ->get();
+//            foreach ($pictures as $picture){
+//                dd($picture->no);
+//            }
             $audio = $video->attachments()
                 ->where('mime', 'like', 'audio%')
                 ->first();
