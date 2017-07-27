@@ -23,8 +23,9 @@ $(document).ready(function(){
     chunked: true,     //是否要分片处理大文件上传
     chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
-  window.uploader=uploader;
+  // window.uploader=uploader;
   var file_name = null;
+  var MIME = null;
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
         '<h4 class="info">' + file.name + '</h4>' +
@@ -32,6 +33,7 @@ $(document).ready(function(){
         '<button class="delete_btn">删除</button>' +
     '</div>' );
     file_name = file.name;
+    MIME = uploader.getFiles()[0].type;
   });
 
   uploader.on( 'uploadProgress', function( file, percentage ) {
@@ -83,7 +85,6 @@ $(document).ready(function(){
     $( '#'+file.id ).find('.progress').fadeOut();
   });
 
-  var MIME = uploader.getFiles()[0].type;
   $btn.click(function(){
     $.getJSON(
       window.audio_init,
