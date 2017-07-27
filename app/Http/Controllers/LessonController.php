@@ -146,21 +146,9 @@ class LessonController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
         $this->addVoteStatisticsOfComment($comments);
-//        $item->video->id
-//        $item->video->file_name
-//        $item->video->video_type
-        return view('setting.lesson', compact(
-            'lesson',
-            'comments'
-        ));
-    }
 
-    //后台课时详情管理页
-    public function adminShow(Request $request, Lesson $lesson)
-    {
-        $type = $request->get('type', 'video');
         $video = $lesson->video;
-        $data=compact('video','lesson');
+        $data = compact('video', 'lesson', 'comments');
         if ($lesson->type == 'audio') {
             $pictures = $video->pictures()
                 ->orderBy('no')
@@ -168,7 +156,25 @@ class LessonController extends Controller
             $audio = $video->attachments()
                 ->where('mime', 'like', 'audio%')
                 ->first();
-            $data=array_merge($data,compact('pictures','audio'));
+            $data = array_merge($data, compact('pictures', 'audio'));
+        }
+        return view('setting.lesson', $data);
+    }
+
+    //后台课时详情管理页
+    public function adminShow(Request $request, Lesson $lesson)
+    {
+        $type = $request->get('type', 'video');
+        $video = $lesson->video;
+        $data = compact('video', 'lesson');
+        if ($lesson->type == 'audio') {
+            $pictures = $video->pictures()
+                ->orderBy('no')
+                ->get();
+            $audio = $video->attachments()
+                ->where('mime', 'like', 'audio%')
+                ->first();
+            $data = array_merge($data, compact('pictures', 'audio'));
         }
         return view('video' == $type
             ? 'admin.lesson.show'

@@ -282,6 +282,19 @@ class CourseController extends Controller
         $categories = Term::where('type', 'category')->get();
         $popularTags = Search::popularTags();
         // dd($course);
+        $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
+        $globalRecommendedCourses = $recommendedCourseSetting
+            ? Course::where('id', ($recommendedCourseSetting->value))->get()
+            : null;
+        $recommendation ='';
+        if (count($globalRecommendedCourses)) {
+            if ($course->id == $globalRecommendedCourses->first()->id)
+                $recommendation .= '新课速递 ';
+        }
+        if ($course->hot) {
+            $recommendation .= $course->category ? $course->category->name : '';
+        }
+        $course->recommendation = $recommendation;
         return view($course->type == 'online'
             ? 'admin.course.show'
             : 'admin.course.offline_show', compact('course', 'teachers', 'lessons', 'categories', 'popularTags'));
