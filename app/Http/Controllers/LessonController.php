@@ -160,9 +160,19 @@ class LessonController extends Controller
     {
         $type = $request->get('type', 'video');
         $video = $lesson->video;
+        $data=compact('video','lesson');
+        if ($lesson->type == 'audio') {
+            $pictures = $video->pictures()
+                ->orderBy('no')
+                ->get();
+            $audio = $video->attachments()
+                ->where('mime', 'like', 'audio%')
+                ->first();
+            $data=array_merge($data,compact('pictures','audio'));
+        }
         return view('video' == $type
             ? 'admin.lesson.show'
-            : 'admin.lesson.audio_show', compact('lesson', 'video'));
+            : 'admin.lesson.audio_show', $data);
     }
 
     //课程下的某一个课时详情
@@ -228,17 +238,6 @@ class LessonController extends Controller
     public function edit(Lesson $lesson)
     {
         $video = $lesson->video();
-        $data=compact('video','lesson');
-        if ($lesson->type == 'audio') {
-            $pictures = $video->pictures()
-                ->orderBy('no')
-                ->get();
-            $audio = $video->attachments()
-                ->where('mime', 'like', 'audio%')
-                ->first();
-            $data->merge(compact('pictures','audio'));
-        }
-        dd($data);
         return view('admin.lesson.edit', compact('video', 'lesson'));
     }
 
