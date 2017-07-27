@@ -39,9 +39,7 @@ class LessonController extends Controller
         }
         return view($type == 'video'
             ? 'admin.lesson.index'
-            : 'admin.lesson.audio_index', [
-            'items' => $items
-        ]);
+            : 'admin.lesson.audio_index', compact('items'));
     }
 
     /**
@@ -68,10 +66,6 @@ class LessonController extends Controller
         );
     }
 
-    public function storeAudioLessonAudio(Request $request)
-    {
-        //TODO
-    }
 
     public function store(Request $request)
     {
@@ -98,7 +92,6 @@ class LessonController extends Controller
     {
         $video = Video::find($request->video_id);
         if ($request->has('pictures')) {
-            //TODO sort
             $arr = $video->attachments()
                 ->where('mime', 'like', 'image%')
                 ->select('id')->get()->all();
@@ -109,7 +102,7 @@ class LessonController extends Controller
             $tmp = [];
             $arr = $request->pictures;
             foreach ($arr as $p) {
-                $tmp[$p['file']] = ['no' => intval($p['time'])];
+                $tmp[$p['file']] = ['no' => $p['time']];
             }
             $video->attachments()->attach($tmp);
         }

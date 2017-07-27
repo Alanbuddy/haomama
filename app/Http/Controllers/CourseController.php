@@ -8,6 +8,7 @@ use App\Http\Util\IO;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Lesson;
+use App\Models\Order;
 use App\Models\Setting;
 use App\Models\Term;
 use Carbon\Carbon;
@@ -169,6 +170,9 @@ class CourseController extends Controller
     {
         $count = $this->hasEnrolled($course);
         $hasEnrolled = $count == 1 ? true : false;
+        if ($hasEnrolled && $course->type == 'offline') {
+            $order = Order::where('user_id', auth()->user()->id)->where('product_id', $course->id);
+        }
 
         $count = $this->hasFavorited($course);
         $hasFavorited = $count == 1 ? true : false;
@@ -263,7 +267,8 @@ class CourseController extends Controller
                 'latestComments',//评论 按时间倒序排序
                 'recommendedCourses',//按标签推荐相关课程
                 'avgRate',//平均评分
-                'teachers'//老师信息
+                'teachers',//老师信息
+                'order'
             )
         );
     }
@@ -276,8 +281,8 @@ class CourseController extends Controller
             ->withPivot('created_at')
             ->orderBy('no', 'desc')
             ->get();
-        if($course->cover&&strpos($course->cover,'/')==0)
-            $course->cover=substr($course->cover,1);
+        if ($course->cover && strpos($course->cover, '/') == 0)
+            $course->cover = substr($course->cover, 1);
 
         $categories = Term::where('type', 'category')->get();
         $popularTags = Search::popularTags();
@@ -286,7 +291,7 @@ class CourseController extends Controller
         $globalRecommendedCourses = $recommendedCourseSetting
             ? Course::where('id', ($recommendedCourseSetting->value))->get()
             : null;
-        $recommendation ='';
+        $recommendation = '';
         if (count($globalRecommendedCourses)) {
             if ($course->id == $globalRecommendedCourses->first()->id)
                 $recommendation .= '新课速递 ';

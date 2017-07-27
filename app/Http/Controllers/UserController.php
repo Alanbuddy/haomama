@@ -105,7 +105,7 @@ class UserController extends Controller
         if ($request->wantsJson()) {
             return ['success' => true,'data'=>$item];
         }
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
