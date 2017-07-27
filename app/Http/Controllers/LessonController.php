@@ -237,7 +237,6 @@ class LessonController extends Controller
             'video_id',
             'description',
         ]));
-//        $item->teacher_id = auth()->user()->id;
         $lesson->save();
         if($request->ajax()){
             return ['success'=>true];
