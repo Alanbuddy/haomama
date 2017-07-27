@@ -145,7 +145,7 @@ $(document).ready(function(){
         console.log(data);
         if(data.success){
           var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
-          var lid = data.data.id;
+          var lid = data.data;
           location.href = str + lid + "?type=video";
         }
       }
