@@ -32,7 +32,8 @@ class LessonController extends Controller
         $items = Lesson::orderBy('id', 'desc')
             ->where('type', $type)
             ->paginate(10);
-        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/lessons');
+//        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/lessons');
+        $items->withPath(route('lessons.index'));
         if ($request->ajax()) {
             return $items;
         }
@@ -84,7 +85,6 @@ class LessonController extends Controller
         }
         $type = $request->get('type', 'video');
         if ('audio' == $type) {
-            $item->titles = json_encode($request->titles);
             $this->storeAttachments($request, $item);
         }
         $item->save();
@@ -101,23 +101,23 @@ class LessonController extends Controller
             //TODO sort
             $arr = $video->attachments()
                 ->where('mime', 'like', 'image%')
-                ->select('id')->get();
-            $video->detach(array_map(function ($v) {
+                ->select('id')->get()->all();
+            $video->attachments()->detach(array_map(function ($v) {
                 return $v->id;
             }, $arr));
 
             $tmp = [];
-            $arr = json_decode($request->pictures);
+            $arr = $request->pictures;
             foreach ($arr as $p) {
-                $tmp[$p->file] = ['no' => $p->time];
+                $tmp[$p['file']] = ['no' => intval($p['time'])];
             }
             $video->attachments()->attach($tmp);
         }
         if ($request->has('audio')) {
             $arr = $video->attachments()
-                ->where('mime', 'like', 'audio%')
-                ->select('id')->get();
-            $video->detach(array_map(function ($v) {
+                ->where('mime', 'like', 'application%')
+                ->select('id')->get()->all();
+            $video->attachments()->detach(array_map(function ($v) {
                 return $v->id;
             }, $arr));
             $audio = File::find($request->audio);
