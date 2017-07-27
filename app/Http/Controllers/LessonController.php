@@ -28,15 +28,17 @@ class LessonController extends Controller
      */
     public function index(Request $request)
     {
-        $type = $request->get('type','video');
+        $type = $request->get('type', 'video');
         $items = Lesson::orderBy('id', 'desc')
-            ->where('type',$type)
+            ->where('type', $type)
             ->paginate(10);
         $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/courses');
         if ($request->ajax()) {
             return $items;
         }
-        return view('admin.lesson.index', [
+        return view($type == 'video'
+            ? 'admin.lesson.index'
+            : 'admin.lesson.audio_index', [
             'items' => $items
         ]);
     }
@@ -82,7 +84,7 @@ class LessonController extends Controller
         }
         $type = $request->get('type', 'video');
         if ('audio' == $type) {
-            $item->titles=json_encode($request->titles);
+            $item->titles = json_encode($request->titles);
             $this->storeAttachments($request, $item);
         }
         $item->save();
@@ -157,16 +159,15 @@ class LessonController extends Controller
     public function adminShow(Request $request, Lesson $lesson)
     {
         $type = $request->get('type', 'video');
-        $video=$lesson->video;
+        $video = $lesson->video;
         return view('video' == $type
             ? 'admin.lesson.show'
-            : 'admin.lesson.audio_show', compact('lesson','video'));
+            : 'admin.lesson.audio_show', compact('lesson', 'video'));
     }
 
     //课程下的某一个课时详情
     public function detail(Course $course, Lesson $lesson)
     {
-
         $comments = $this->hottestComments($course, $lesson, 3);
         $latestComments = $this->latestComments($course, $lesson);
 
@@ -196,9 +197,9 @@ class LessonController extends Controller
             }
             $i++;
         }
-        if(!$hasEnrolled&&$index>0){
-            return back()->with('message','请加入课程后观看');
-        }else{
+        if (!$hasEnrolled && $index > 0) {
+            return back()->with('message', '请加入课程后观看');
+        } else {
             $this->recordAttendance($course, $lesson);
         }
 
@@ -226,8 +227,8 @@ class LessonController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-        $video=$lesson->video();
-        return view('admin.lesson.edit', compact('video','lesson'));
+        $video = $lesson->video();
+        return view('admin.lesson.edit', compact('video', 'lesson'));
     }
 
     public function update(Request $request, Lesson $lesson)
@@ -238,8 +239,8 @@ class LessonController extends Controller
             'description',
         ]));
         $lesson->save();
-        if($request->ajax()){
-            return ['success'=>true];
+        if ($request->ajax()) {
+            return ['success' => true];
         }
         return redirect()->route('lessons.index');
     }
