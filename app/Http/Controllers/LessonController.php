@@ -230,22 +230,18 @@ class LessonController extends Controller
         return view('admin.lesson.edit', compact('video','lesson'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Lesson $lesson)
     {
         $lesson->fill($request->only([
             'name',
             'video_id',
+            'description',
         ]));
 //        $item->teacher_id = auth()->user()->id;
         $lesson->save();
-
+        if($request->ajax()){
+            return ['success'=>true];
+        }
         return redirect()->route('lessons.index');
     }
 
