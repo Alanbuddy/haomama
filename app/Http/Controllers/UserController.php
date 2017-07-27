@@ -116,10 +116,6 @@ class UserController extends Controller
      */
     public function show(Request $request, User $user)
     {
-        if ('teacher' == $request->get('type')) {
-            return $this->showTeacher($user);
-//            return view('admin.teacher.teacher_show', ['user' => $user]);
-        }
         $userId = $user->id;
         $enrolledCourses = Search::enrolledCourses($userId)->get();
         $favoritedCourses = Search::favoritedCourses($userId)->get();
@@ -139,6 +135,17 @@ class UserController extends Controller
             compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses', 'messagesCount')
         );
     }
+    //后台用户管理
+    public function showAdmin(Request $request,User $user)
+    {
+        if ('teacher' == $request->get('type')) {
+            return $this->showTeacher($user);
+//            return view('admin.teacher.teacher_show', ['user' => $user]);
+        }
+        $items = User::paginate();
+        return view('admin.client.show', compact('items'));
+    }
+
 
     public function showTeacher(User $user)
     {
@@ -154,7 +161,6 @@ class UserController extends Controller
         foreach ($courses as $course) {
             $course->sale = $course->orders()->sum('wx_total_fee');
         }
-//        dd($courses);
         return view('admin.teacher.teacher_show',
             compact('user', 'courses')
         );
@@ -247,13 +253,6 @@ class UserController extends Controller
         }
 
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
-    }
-
-    //后台用户管理
-    public function showAdmin(Request $request)
-    {
-        $items = User::paginate();
-        return view('admin.client.show', compact('items'));
     }
 
     //后台人员管理-关闭
