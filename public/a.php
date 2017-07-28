@@ -9,7 +9,7 @@ echo $cmd;
 
 echo 'Executing: git commit -m "merge" -a'."\n";
 echo shell_exec('git commit -m "merge" -a');
-echo 'Executing: git pull';
+echo 'Executing: git pull'."\n";
 echo shell_exec('git pull');
-echo 'Executing: git push';
+echo 'Executing: git push'."\n";
 echo shell_exec('git push');
