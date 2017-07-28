@@ -7,6 +7,7 @@
   window.token = "#{csrf_token()}"
   window.teacher_update = "#{route('users.update',$user->id)}"
   window.teacher_show = "#{route('admin.user.show', -1)}"
+  window.teacher_course = "#{route('admin.teacher.course', -1)}"
 
 @endsection
 
@@ -31,7 +32,7 @@
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a.f16.font-color1 讲师详情
+            %a.f16.font-color1#teacher-desc 讲师详情
           %li
             %a.f16.font-color1#course 开设课程
         .tab-content.bg3

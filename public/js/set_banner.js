@@ -105,6 +105,14 @@ $(document).ready(function(){
     $(this).closest(".item").remove();
   });
 
+  $("#course").click(function(){
+    location.href = window.set_recommend;
+  });
+
+  $("#announce").click(function(){
+    location.href = window.img_index;
+  });
+
   $(document).on('click', '#finish-btn', function(){
     var name = "carousel";
     var value = [];
