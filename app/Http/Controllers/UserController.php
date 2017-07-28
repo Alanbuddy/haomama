@@ -331,7 +331,7 @@ class UserController extends Controller
             ->where('course_user.type', 'enroll')
             ->count();
 
-        dd($items->all(), $totalIncome,$studentsCount,$courseIdArr);
+        // dd($items->all(), $totalIncome,$studentsCount,$courseIdArr);
         return view('admin.teacher.teacher_course', compact('items', 'totalIncome','studentsCount'));
     }
 
