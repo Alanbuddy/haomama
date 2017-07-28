@@ -26,6 +26,6 @@ class WxComposer
         $signPackage = $jsSdk->getSignPackage();
         $view->with('signPackage', $signPackage);
         $ip = Request::getClientIp();
-        $view->with('ip', $ip);
+        $view->with('base_href', $ip=='127.0.0.1'?"/":"/haomama/");
     }
 }
