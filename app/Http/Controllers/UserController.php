@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Search;
+use App\Models\Course;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
@@ -312,9 +313,25 @@ class UserController extends Controller
         $items = $user->coachingCourse()->withCount('orders')
             ->addSelect(DB::raw('(select sum(orders.wx_total_fee) from `orders` where `orders`.`product_id` = `courses`.`id`) as `total_income`'))
 //            ->orderBy('star', 'desc')
-            ->get();
-//        dd($items);
-        return view('admin.teacher.teacher_course', compact('items'));
+            ->paginate(10);
+
+        $totalIncome = $user->coachingCourse()
+            ->join('orders', 'orders.product_id', 'courses.id')
+            ->sum('orders.wx_total_fee');
+
+        $coachingCourse= $user->coachingCourse;
+        $courseIdArr = array_map(function ($v) {
+            return $v->id;
+        }, $coachingCourse->all());
+
+        $studentsCount = Course::whereIn('id', $courseIdArr)
+            ->join('course_user', 'course_user.course_id', 'courses.id')
+            ->where('course_user.user_type', 'student')
+            ->where('course_user.type', 'enroll')
+            ->count();
+
+        dd($items->all(), $totalIncome,$studentsCount,$courseIdArr);
+        return view('admin.teacher.teacher_course', compact('items', 'totalIncome','studentsCount'));
     }
 
 }
