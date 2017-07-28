@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -176,9 +177,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if(!$request->has('roles')){
-            $this->teacherUpdate($request,$user);
-            return ['success'=>true];
+        if (!$request->has('roles')) {
+            $this->teacherUpdate($request, $user);
+            return ['success' => true];
         }
         $roles = $request->roles;
         $arr = explode(',', $roles);
@@ -304,4 +305,16 @@ class UserController extends Controller
         }
         $item->save();
     }
+
+    //老师的课程
+    public function coursesOfTeacher(Request $request, User $user)
+    {
+        $items = $user->coachingCourse()->withCount('orders')
+            ->addSelect(DB::raw('(select sum(orders.wx_total_fee) from `orders` where `orders`.`product_id` = `courses`.`id`) as `total_income`'))
+//            ->orderBy('star', 'desc')
+            ->get();
+        dd($items);
+        return view('aa', compact('items'));
+    }
+
 }
