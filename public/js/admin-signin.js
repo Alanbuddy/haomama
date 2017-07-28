@@ -23,31 +23,13 @@ $(document).ready(function(){
       success: function(){
         location.href = window.course_index;
       },
-      error: function(){}
+      error: function(data){
+        console.log(data.status);
+        if(data.status == 422){
+          $("#error_notice").css("visibility","visible");
+        }
+      }
     });
-
-    // $.postJSON(
-    //   window.login,
-    //   {
-    //     email: mobile,
-    //     password: password
-    //   },
-    //   function(data){
-    //     if (data.success){
-    //       location.href = window.course_index;
-    //     } else {
-    //       if (data) {
-    //         $("#error_notice").text("帐号不存在").css("visibility","visible");
-    //       }
-    //       if (data) {
-    //         $("#error_notice").text("手机号未验证").css("visibility","visible");
-    //       }
-    //       if (data) {
-    //         $("#error_notice").text("密码错误").css("visibility","visible");
-    //       }
-    //     }
-    //   }
-    //   );
   }
   
   $("#signin_btn").click(function(){

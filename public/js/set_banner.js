@@ -1,5 +1,6 @@
 $(document).ready(function(){
   var $list = $("#thelist");
+  var $btn = $("#ctlBtn");
   var uploader = WebUploader.create({
 
       // swf文件路径
@@ -64,30 +65,10 @@ $(document).ready(function(){
     $percent.css( 'width', percentage * 100 + '%' );
   });
 
-  uploader.on( 'uploadSuccess', function( file ) {
+  uploader.on( 'uploadSuccess', function( file, rseponse ) {
     $( '#'+file.id ).find('p.state').text('已上传');
     showMsg("上传成功","center");
-    // var video_file = uploader.getFiles();
-    // var video_size = video_file[0].size;
-    // var chunksize = 0.5*1024*1024;
-    // var chunks = Math.ceil(video_size / chunksize);
-    // var video_id = $(".video-id").text();
-    // console.log(chunks);
-    // $.postJSON(
-    //   window.merge,
-    //   {
-    //     _token: window.token,
-    //     name: name,
-    //     count: chunks,
-    //     video_id: video_id
-    //   },
-    //   function(data){
-    //     console.log(data);
-    //     if(data.success){
-    //       // $(".video-id").text(data.data.id);
-    //     }
-    //   }
-    //   );
+    console.log(rseponse);
   });
 
   uploader.on( 'uploadError', function( file ) {
@@ -99,23 +80,9 @@ $(document).ready(function(){
   });
 
 
-  // $btn.click(function(){
-  //   $.getJSON(
-  //     window.init,
-  //     {},
-  //     function(data){
-  //       console.log(data);
-  //       if(data.success){
-  //         $(".video-id").text(data.data.id);
-  //         uploader.options.formData = {
-  //             video_id: data.data.id,
-  //             _token: window.token
-  //           };
-  //         uploader.upload();
-  //       }
-  //     }
-  //     );
-  // });
+  $btn.click(function(){
+    uploader.upload();
+  });
 
   $("#thelist").on("click", ".delete", function(){  
     uploader.removeFile($(this).closest(".item").attr("id"));    //从上传文件列表中删除  
