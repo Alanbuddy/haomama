@@ -8,9 +8,9 @@
     window.lesson_store = "#{route('lessons.store')}"
     window.video = "#{route('videos.store')}"
     window.token = "#{csrf_token()}"
-    window.merge = "#{route('videos.merge')}"
-    window.init = "#{route('videos.upload.init')}"
-    window.admin_lesson_show = "#{route('admin.lesson.show', -1)."?type=audio"}" 
+    window.files_merge = "#{route('files.merge')}"
+    window.audio_init = "#{route('file.upload.init')}"
+    window.admin_lesson_show = "#{route('admin.lesson.show', -1)}" 
     window.lesson_update = "#{route('lessons.update',$lesson->id)}"
 @endsection
 
@@ -42,6 +42,7 @@
               .form-group
                 %label.input-name.fn 课时标题:
                 %span.unedit-box#name-span= $lesson['name']
+                %span.lesson-id{style: "display: none;"}= $lesson['id']
                 %span.edit-box
                   %input.form-control#input-caption{:type => "text"}
               .video-file.introduce-flex
@@ -60,6 +61,7 @@
                     #picker 选择文件
                     %button#ctlBtn.btn.btn-default 开始上传
               %span.audio-id= $audio->id
+              %span.video-id= $video->id
               .notice-introduce.introduce-flex
                 %span.introduce 内容介绍:
                 %span.unedit-box.introduce-span#desc-span= strip_tags(htmlspecialchars_decode($lesson['description']))

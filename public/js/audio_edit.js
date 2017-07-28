@@ -87,6 +87,7 @@ $(document).ready(function(){
   });
 
   $btn.click(function(){
+    alert("aaa");
     $.getJSON(
       window.audio_init,
       {},
@@ -242,45 +243,57 @@ $(document).ready(function(){
     $(this).find(".old_delete_img").hide();
   });
     
-  // $(document).on('click', '#finish-btn', function(){
-  //   var img_data = [];
-  //   var img_item = {};
-  //   $(".pre_img").each(function(){
-  //     var id = $(this).find('.data-id').text();
-  //     var time = parseInt($(this).find('.img_time').val());
-  //     img_item = {
-  //       file: id,
-  //       time: time
-  //     };
-  //     img_data.push(img_item);
-  //   });
-  //   console.log(img_data);
-  //   var title = $("#input-caption").val();
-  //   var desc = editor.txt.html();
-  //   var video_id = $(".video-id").text();
-  //   var audio_id = $(".audio-id").text(); 
-  //   console.log(title);
+  $(document).on('click', '#finish-btn', function(){
+    var img_data = [];
+    var img_item = {};
+    var old_img_item = {};
+    $(".pre_img").each(function(){
+      var id = $(this).find('.data-id').text();
+      var time = parseInt($(this).find('.img_time').val());
+      img_item = {
+        file: id,
+        time: time
+      };
+      img_data.push(img_item);
+    });
+    $(".old_pre_img").each(function(){
+      var id = $(this).find('.old-data-id').text();
+      var time = parseInt($(this).find('.old_img_time').val());
+      old_img_item = {
+        file: id,
+        time: time
+      };
+      img_data.push(old_img_item);
+    });
+    console.log(img_data);
+    var title = $("#input-caption").val();
+    var desc = editor.txt.html();
+    var video_id = $(".video-id").text();
+    var audio_id = $(".audio-id").text();
+    var lesson_id = $(".lesson-id").text();
+    var put = "PUT";
+    console.log(title);
 
-  //   $.postJSON(
-  //     window.lesson_store + "?type=audio",
-  //     {
-  //       video_id: video_id,
-  //       name: title,
-  //       audio: audio_id,
-  //       description: desc,
-  //       pictures: img_data,
-  //       _token: window.token
-  //     },
-  //     function(data){
-  //       console.log(data);
-  //       if(data.success){
-          
-  //         var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
-  //         var lid = data.data;
-  //         location.href = str + lid + "?type=audio";
-  //       }
-  //     }
-  //     );
-  // });
+    $.ajax({
+      url: window.lesson_update,
+      type: "post",
+      data: {
+        video_id: video_id,
+        name: title,
+        audio: audio_id,
+        description: desc,
+        pictures: img_data,
+        _token: window.token,
+        _method: put
+      },
+      success: function(data){
+        console.log(data);
+        if(data.success){ 
+          var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
+          location.href = str + lesson_id + "?type=audio";
+        }
+      }
+      });
+  });
 
 });
