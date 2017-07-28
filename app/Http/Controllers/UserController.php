@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Search;
+use App\Models\Course;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
@@ -318,12 +319,19 @@ class UserController extends Controller
             ->join('orders', 'orders.product_id', 'courses.id')
             ->sum('orders.wx_total_fee');
 
-//        $studentsCount=$user->coachingCourse()
-//            ->join('course_user','course_user.course_id','courses.id')
-//            ->where('course_user.user_type','student')
-//            ->count();
-//        dd($items->all(), $totalIncome,$studentsCount);
-        return view('admin.teacher.teacher_course', compact('items', 'totalIncome'));
+        $coachingCourse= $user->coachingCourse;
+        $courseIdArr = array_map(function ($v) {
+            return $v->id;
+        }, $coachingCourse->all());
+
+        $studentsCount = Course::whereIn('id', $courseIdArr)
+            ->join('course_user', 'course_user.course_id', 'courses.id')
+            ->where('course_user.user_type', 'student')
+            ->where('course_user.type', 'enroll')
+            ->count();
+
+        dd($items->all(), $totalIncome,$studentsCount,$courseIdArr);
+        return view('admin.teacher.teacher_course', compact('items', 'totalIncome','studentsCount'));
     }
 
 }
