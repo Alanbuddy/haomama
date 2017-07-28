@@ -10341,11 +10341,8 @@ module.exports = __webpack_require__(9);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  $("#new-client").click(function() {
+  return $("#new-client").click(function() {
     return location.href = window.teacher_new + "?type=teacher";
-  });
-  return $(".teacher-show").click(function() {
-    return location.href = "/users/2" + "?type=teacher";
   });
 });
 

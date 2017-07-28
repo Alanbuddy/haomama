@@ -12,7 +12,6 @@ $ ->
     if currenturl.indexOf("settings") != -1 
       $(this).closest("li.setting_li").addClass("active-li")
 
-
   # 退出登录
   $("#exit").click ->
     $.ajax({
