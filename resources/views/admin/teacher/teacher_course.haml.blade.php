@@ -53,31 +53,25 @@
                       %th 课程总收入
                       
                   %tbody.font-color3
-                    - foreach($courses as $course)
+                    - foreach($items as $course)
                       %tr
-                        %td 课程的名字很长
-                        %td 线上视频
-                        %td 健康养育
-                        %td 12
-                        %td 80
-                        %td 3000
+                        %td= $course->name
+                        %td= $course->type 
+                        %td= $course->
+                        %td= $course->
+                        %td= $course->orders_count
+                        %td= $course->total_income
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 总购买人次:
-                  %span.mr30 123
+                  %span.mr30= $studentsCount
                   %span 总课程收入:
-                  %span 5555555
+                  %span= $courseIdArr
 
                 %span.select-page.tag2-page
-                  %span.totalitems 共2页，总计18条
+                  %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                   %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{href: "#"} «
-                      %li
-                        %a{href: "#"} 1
-                      %li
-                        %a{href: "#"} »            
+                    != $items->links()           
 @endsection
 
 @section('script')
