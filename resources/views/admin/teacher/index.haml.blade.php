@@ -49,21 +49,15 @@
                       %th 职称
                   %tbody.font-color3
                     - foreach ($items as $item)
-                    %tr
-                      %td
-                        %a{href: route('admin.user.show',$item->id).'?type=teacher'}=$item->name
-                      %td=$item->phone
-                      %td=json_decode($item->description)->title
+                      %tr
+                        %td
+                          %a{href: route('admin.user.show',$item->id).'?type=teacher'}=$item->name
+                        %td=$item->phone
+                        %td=json_decode($item->description)->title
               .select-page
-                %span.totalitems 共2页，总计18条
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
+                  != $items->links()
 
 @endsection
 
