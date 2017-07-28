@@ -247,6 +247,9 @@ class LessonController extends Controller
             'video_id',
             'description',
         ]));
+        if ('audio' == $lesson->type) {
+            $this->storeAttachments($request, $lesson);
+        }
         $lesson->save();
         if ($request->ajax()) {
             return ['success' => true];
