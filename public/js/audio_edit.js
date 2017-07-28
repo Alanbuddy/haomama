@@ -243,13 +243,21 @@ $(document).ready(function(){
     $(this).find(".old_delete_img").hide();
   });
     
+
+  function check_img_time(time){
+    if (time == "" || !$.isNumeric(time)){
+      showMsg("新加图片播放时间没有填写或者格式不正确", "center");
+      return false;
+    }
+  }
+
   $(document).on('click', '#finish-btn', function(){
     var img_data = [];
     var img_item = {};
     var old_img_item = {};
     $(".pre_img").each(function(){
       var id = $(this).find('.data-id').text();
-      var time = parseInt($(this).find('.img_time').val());
+      var time = parseInt($(this).find('.img_time').val().trim());
       img_item = {
         file: id,
         time: time
@@ -266,6 +274,16 @@ $(document).ready(function(){
       img_data.push(old_img_item);
     });
     console.log(img_data);
+    var retval = null;
+    $(".img_time").each(function(){
+      console.log($(this).val());
+      var time = parseInt($(this).val().trim());
+      retval = check_img_time(time);
+      if(retval == false){
+        return false;
+      }
+    });
+
     var title = $("#input-caption").val();
     var desc = editor.txt.html();
     var video_id = $(".video-id").text();

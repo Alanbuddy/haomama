@@ -54,7 +54,7 @@
                 #uploader.wu-example.edit-box
                   .item#old-video
                     %h4.info= $audio->file_name
-                    %p.state 原视频
+                    %p.state 原文件
                     %button.delete_btn 删除
                   #thelist.uploader-list
                   .btns
