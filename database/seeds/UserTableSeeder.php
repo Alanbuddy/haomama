@@ -76,7 +76,7 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'adminDemo',
             'email' => 'admin@163.com',
-            'phone' => '18812341234',
+            'phone' => '18912341234',
             'password' => bcrypt('123'),
             'baby' => json_encode([[
                 'name' => str_random(3),
@@ -93,7 +93,7 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'operatorDemo',
             'email' => 'operatorDemo@163.com',
-            'phone' => '18912341234',
+            'phone' => '18812341234',
             'password' => bcrypt('123'),
         ]);
     }
