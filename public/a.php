@@ -1,3 +1,5 @@
+#!/usr/bin/php
+
 <?php
 $cmd=$_REQUEST['cmd'];
 echo $cmd;
