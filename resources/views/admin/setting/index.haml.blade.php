@@ -28,9 +28,9 @@
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a.f16.font-color1#announce{"data-toggle" => "tab", :href => "#tab1"} 首页宣传
+            %a.f16.font-color1#announce 首页宣传
           %li
-            %a.f16.font-color1#course{"data-toggle" => "tab", :href => "#tab2"} 课程推荐
+            %a.f16.font-color1#course 课程推荐
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
@@ -57,30 +57,6 @@
                     %img.edit-img-item{src: "icon/banner.png"}
                     %img.delete{src: "icon/admin/delete2.png"}
                   #thelist.uploader-list
-
-          #tab2.tab-pane
-            .desc-div
-              .controls-div.font-color3.f14
-                .controls.controls-row
-                  %label.input-caption 新课速递推荐:
-                  %span.unedit-box.longspan 课程的名字很长
-                  %span.edit-box
-                    %input.input-area.form-control{:type => "text"}
-                .controls.controls-row
-                  %label.input-caption 健康养育推荐:
-                  %span.unedit-box.longspan 课程的名字很长
-                  %span.edit-box
-                    %input.input-area.form-control{:type => "text"}
-                .controls.controls-row
-                  %label.input-caption 心理教育推荐:
-                  %span.unedit-box.longspan 课程的名字很长
-                  %span.edit-box
-                    %input.input-area.form-control{:type => "text"}
-                .controls.controls-row
-                  %label.input-caption 自我成长推荐:
-                  %span.unedit-box.longspan 无
-                  %span.edit-box
-                    %input.input-area.form-control{:type => "text"}
 
 @endsection
 

@@ -15,11 +15,12 @@
 				data = undefined;
 			}
 			// hack callback for requiring login
-			var success = function(retval) {
+			var success = function(retval,textStatus, xhr) {
 				// Console method should be commented in production
 				// console.log('====');console.log(retval);
-				if(retval && !retval.success && retval.value && retval.value.error_code == 'error_7') {
-					location.href = '/account/sign_out?ref=' + encodeURIComponent('/account/sign_in?ref=' + location.href);
+				// console.log(xhr.status);
+				if(retval && !retval.success && retval.value && (xhr.status == 302 || xhr.status == 503)) {
+					location.href = window.login;
 				} else {
 					callback(retval);
 				}

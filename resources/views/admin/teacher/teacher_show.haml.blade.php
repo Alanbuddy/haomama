@@ -31,9 +31,9 @@
       .tabbable
         %ul.nav.nav-tabs
           %li.active
-            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 讲师详情
+            %a.f16.font-color1 讲师详情
           %li
-            %a.f16.font-color1#course{"data-toggle" => "tab", :href => "#tab2"} 开设课程(120)
+            %a.f16.font-color1#course 开设课程
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div.font-color3.clearfix.f14
@@ -102,48 +102,7 @@
                 %span.unedit-box.longspan#desc-span= strip_tags(htmlspecialchars_decode($user->description->introduction))
                 %span.edit-box.wangedit-area
                   #edit-area
-          #tab2.tab-pane
-            .desc-div
-              // - if @courses[:data].length == 0
-              //   .undiscover.f14
-              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-              // - else
-              .table-box
-                %table.table.table-hover.table-height.f14
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 课程名
-                      %th 上课方式
-                      %th 课程类型
-                      %th 课程节数
-                      %th 购买人数
-                      %th 课程总收入
-                      
-                  %tbody.font-color3
-                    %tr
-                      %td 课程的名字很长
-                      %td 线上视频
-                      %td 健康养育
-                      %td 12
-                      %td 80
-                      %td 3000
-              .tag2-foot.clearfix
-                %span.num-div.font-color3.f16
-                  %span 总购买人次:
-                  %span.mr30 123
-                  %span 总课程收入:
-                  %span 5555555
-
-                %span.select-page.tag2-page
-                  %span.totalitems 共2页，总计18条
-                  %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{href: "#"} «
-                      %li
-                        %a{href: "#"} 1
-                      %li
-                        %a{href: "#"} »            
+                
 @endsection
 
 @section('script')

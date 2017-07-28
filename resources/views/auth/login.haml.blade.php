@@ -9,7 +9,9 @@
     %meta{"content:" => "email=no", :name => "format-detection"}
     %title 好妈妈微学院
     %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
-    %link{:href => "css/sign-layout.css", :rel => "stylesheet"}
+    // %link{:href => "css/sign-layout.css", :rel => "stylesheet"}
+    %link{:href => "css/offline_layout.css", :rel => "stylesheet"}
+    
     :javascript
       window.register = "#{route('register')}"
       window.forget = "#{route('password.request')}"
