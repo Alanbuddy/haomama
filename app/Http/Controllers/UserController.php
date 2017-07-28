@@ -7,7 +7,6 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -87,23 +86,9 @@ class UserController extends Controller
             'email' => 'email|unique:users'
         ]);
         $item = new User();
-        $item->fill($request->only([
-            'name',
-            'email',
-            'phone',
-            'avatar',
-            'description',
-        ]));
-
-        if ('teacher' == $request->get('type')) {
-            $item->password=bcrypt('123');
-            $item->save();
-            $role=Role::where('name','teacher')->first();
-            $item->attachRole($role);
-        }
-        $item->save();
+        $this->storeBase($request, $item);
         if ($request->wantsJson()) {
-            return ['success' => true,'data'=>$item];
+            return ['success' => true, 'data' => $item];
         }
         return redirect()->route('admin.users.index');
     }
@@ -135,8 +120,9 @@ class UserController extends Controller
             compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses', 'messagesCount')
         );
     }
+
     //后台用户管理
-    public function showAdmin(Request $request,User $user)
+    public function showAdmin(Request $request, User $user)
     {
         if ('teacher' == $request->get('type')) {
             return $this->showTeacher($user);
@@ -190,6 +176,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if(!$request->has('roles')){
+            $this->teacherUpdate($request,$user);
+            return ['success'=>true];
+        }
         $roles = $request->roles;
         $arr = explode(',', $roles);
         $arr = array_map('intval', $arr);
@@ -199,6 +189,11 @@ class UserController extends Controller
             return back()->withErrors('数据错误');
         }
         return redirect()->route('users.edit', $user);
+    }
+
+    public function teacherUpdate(Request $request, User $user)
+    {
+        $this->storeBase($request, $user);
     }
 
     /**
@@ -285,5 +280,28 @@ class UserController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
         return $items;
+    }
+
+    /**
+     * @param Request $request
+     * @param $item
+     */
+    public function storeBase(Request $request, User $item)
+    {
+        $item->fill($request->only([
+            'name',
+            'email',
+            'phone',
+            'avatar',
+            'description',
+        ]));
+
+        if ('teacher' == $request->get('type')) {
+            $item->password = bcrypt('123');
+            $item->save();
+            $role = Role::where('name', 'teacher')->first();
+            $item->attachRole($role);
+        }
+        $item->save();
     }
 }
