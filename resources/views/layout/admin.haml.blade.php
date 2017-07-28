@@ -56,6 +56,18 @@
                 %a{:href => "#"}
                   %img.mini-icon{src: "icon/admin/6statistic.png"}
                   %span.f18.sidebar-title 统计数据
+      .content-area
+        .main-top.direction
+          @yield('search-input')
+          %ul.set
+            -if(auth()->user()->hasRole('admin'))
+              %li              
+                %a.f16{href: route('users.index')."?type=operator"} 人员管理
+                .dot
+            %li
+              %a.f16.left-border{href: route('admin.profile')} 账号设置
+            %li
+              %a.f16.set-left-border#exit{href: "javascript:void(0)"} 退出登录
       @yield('content')
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

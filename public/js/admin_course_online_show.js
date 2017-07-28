@@ -20,7 +20,19 @@ $(document).ready(function(){
     $("#shelfModal").modal("show");
   });
 
+  var is_edit = false;
+  $("#course-desc").click(function(){
+    $(".operation").show();
+    if(is_edit){
+      $("#finish-btn").show();
+    }
+    else{
+      $("#edit-btn").show();
+    }
+  });
+
   $("#edit-btn").click(function(){
+    is_edit = true;
     $(".unedit-box").toggle();
     $(".edit-box").toggle();
     $(".text-message").removeClass("unedit");

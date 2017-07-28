@@ -16,106 +16,97 @@
   window.tag_store = "#{route('terms.store')}"
   window.tag_destroy = "#{route('terms.destroy',-1)}"
 @endsection
-
+@section('search-input')
+%a{href: route('courses.index')}
+  %img.back{src: "icon/admin/back.png"}
+@endsection
 @section('content')
-.content-area
-  .main-top.direction
-    %a{href: route('courses.index')}
-      %img.back{src: "icon/admin/back.png"}
-    %ul.set
-      %li
-        %a.f16{href: route('users.index')."?type=operator"} 人员管理
-        .dot
-      %li
-        %a.f16.left-border{href: route('admin.profile')} 账号设置
-      %li
-        %a.f16.set-left-border#exit{href: "javascript:void(0)"} 退出登录
 
-  .main-content.bg2
-  
-    %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
-    .table-div
-      .tabbable
-        %ul.nav.nav-tabs
-          %li.active
-            %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 课程详情
-        .tab-content.bg3
-          #tab1.tab-pane.active
-            .desc-div.font-color3.clearfix.f14
-              .text-message
-                .controls.controls-row.margin20
-                  %label.input-caption 课程名称:
-                  %input.input-area.form-control#course-name{:type => "text", placeholder: "必填"}
-                .controls.controls-row
-                  %label.input-caption 课程类型:
-                  %select.form-control.input-width#course-type
-                    %option 请选择类型
-                    - foreach ($categories as $category )
-                      %option{value: $category->id}= $category->name
-                  %label.input-caption 课程节数:
-                  %input.form-control.input-width#course-length{:type => "text"}
-                .controls.controls-row
-                  %label.input-caption 课程价格:
-                  %input.form-control.input-width#course-price{:type => "text"}
-                  %label.input-caption 促销价格:
-                  %input.form-control.input-width#pay-price{:type => "text"}
-              %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
-              .photo#preview
-                %img.edit-photo#imghead{src: "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
-              %span.cover-path{style: "display:none;"}
+.main-content.bg2
 
-            .controls-div.font-color3.f14
+  %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
+  .table-div
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 课程详情
+      .tab-content.bg3
+        #tab1.tab-pane.active
+          .desc-div.font-color3.clearfix.f14
+            .text-message
+              .controls.controls-row.margin20
+                %label.input-caption 课程名称:
+                %input.input-area.form-control#course-name{:type => "text", placeholder: "必填"}
               .controls.controls-row
-                %label.input-caption 上课时间:
-                %input.form-control.input-width#lesson-date{:type => "text"}
-                %label.input-caption 最少人数:
-                %input.form-control.input-width#min-num{:type => "text"}
+                %label.input-caption 课程类型:
+                %select.form-control.input-width#course-type
+                  %option 请选择类型
+                  - foreach ($categories as $category )
+                    %option{value: $category->id}= $category->name
+                %label.input-caption 课程节数:
+                %input.form-control.input-width#course-length{:type => "text"}
               .controls.controls-row
-                %label.input-caption 上课地点:
-                %input.form-control.input-width#lesson-address{:type => "text"}
-                %label.input-caption 最多人数:
-                %input.form-control.input-width#max-num{:type => "text"}
-              .controls.controls-row
-                %label.input-caption 课程标签:  
-                %span.tag-div
-                  #type-tag
-                .hot-tag-div
-                  - foreach($popularTags as $tag)
-                    %span{value: $tag->id}= $tag->name
-              .create-tag-div{style: "display:none"}
+                %label.input-caption 课程价格:
+                %input.form-control.input-width#course-price{:type => "text"}
+                %label.input-caption 促销价格:
+                %input.form-control.input-width#pay-price{:type => "text"}
+            %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
+            .photo#preview
+              %img.edit-photo#imghead{src: "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
+            %span.cover-path{style: "display:none;"}
 
-              .controls.controls-row.no-mb
-                %label.input-caption.teacher-tag 授课老师:
-                %span.unadd 未添加
-              .teacher-div
-                %input#teacher{type: "text"}
+          .controls-div.font-color3.f14
+            .controls.controls-row
+              %label.input-caption 上课时间:
+              %input.form-control.input-width#lesson-date{:type => "text"}
+              %label.input-caption 最少人数:
+              %input.form-control.input-width#min-num{:type => "text"}
+            .controls.controls-row
+              %label.input-caption 上课地点:
+              %input.form-control.input-width#lesson-address{:type => "text"}
+              %label.input-caption 最多人数:
+              %input.form-control.input-width#max-num{:type => "text"}
+            .controls.controls-row
+              %label.input-caption 课程标签:  
+              %span.tag-div
+                #type-tag
+              .hot-tag-div
+                - foreach($popularTags as $tag)
+                  %span{value: $tag->id}= $tag->name
+            .create-tag-div{style: "display:none"}
 
-              .calendar-wrapper.clearfix
-                .calendar-operation-wrapper
-                  %p.title 课程日历
-                  %p.small-tips （单击日历中的时间进行删除）
-                  .form-inline
-                    %label.input-date 上课日期:
-                    %input.input-area.form-control.no-margin-right#datepicker{:type => "text"}
-                  .form-inline
-                    %label.input-date 开始时间:
-                    %input.input-area.form-control.no-margin-right#start-time{:type => "text"}
-                  .form-inline
-                    %label.input-date 结束时间:
-                    %input.input-area.form-control.no-margin-right#end-time{:type => "text"}
-                  .btn#add-event{:type => "button"} 添加单次
-                  .repeat.clearfix
-                    %button.btn.date-btn#date-btn{:type => "button"} 次日重复
-                    %button.btn.week-btn#week-btn{:type => "button"} 每周重复
-                #calendar
-              .course-introduce
-                %span.introduce 课程介绍:
-                %span.wangedit-area
-                  #edit-area
-              .lesson-div
-                %span.introduce 课时标题:
-                %span.wangedit-area
-                  #edit-title
+            .controls.controls-row.no-mb
+              %label.input-caption.teacher-tag 授课老师:
+              %span.unadd 未添加
+            .teacher-div
+              %input#teacher{type: "text"}
+
+            .calendar-wrapper.clearfix
+              .calendar-operation-wrapper
+                %p.title 课程日历
+                %p.small-tips （单击日历中的时间进行删除）
+                .form-inline
+                  %label.input-date 上课日期:
+                  %input.input-area.form-control.no-margin-right#datepicker{:type => "text"}
+                .form-inline
+                  %label.input-date 开始时间:
+                  %input.input-area.form-control.no-margin-right#start-time{:type => "text"}
+                .form-inline
+                  %label.input-date 结束时间:
+                  %input.input-area.form-control.no-margin-right#end-time{:type => "text"}
+                .btn#add-event{:type => "button"} 添加单次
+                .repeat.clearfix
+                  %button.btn.date-btn#date-btn{:type => "button"} 次日重复
+                  %button.btn.week-btn#week-btn{:type => "button"} 每周重复
+              #calendar
+            .course-introduce
+              %span.introduce 课程介绍:
+              %span.wangedit-area
+                #edit-area
+            .lesson-div
+              %span.introduce 课时标题:
+              %span.wangedit-area
+                #edit-title
 @endsection
 
 @section('script')

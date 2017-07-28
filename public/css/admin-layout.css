@@ -352,6 +352,9 @@ a:hover {
   bottom: 0;
   left: 0;
 }
+.main-content {
+  margin-left: 200px;
+}
 .table-div {
   position: absolute;
   margin: 24px;
@@ -509,4 +512,13 @@ a:hover {
   width: 195px;
   font-size: 12px;
   font-family: "微软雅黑";
+}
+
+
+.direction {
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -os-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
 }
