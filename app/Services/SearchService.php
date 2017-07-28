@@ -88,8 +88,9 @@ class SearchService
 
     /**
      * 根据分类名搜索课程
-     * @param Request $request
      * @param Term $category
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @internal param Request $request
      */
     public function coursesByCategory(Term $category)
     {

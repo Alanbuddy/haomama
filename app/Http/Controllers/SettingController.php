@@ -53,7 +53,7 @@ class SettingController extends Controller
     }
 
     /**
-     * 首页轮播图{"key":"carousel","value","{'/path/to/a.jpb,/path/to/b.jpg}"}
+     * 首页轮播图{"key":"carousel","value","['/path/to/a.jpb,/path/to/b.jpg]"}
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
