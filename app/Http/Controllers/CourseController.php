@@ -28,7 +28,7 @@ class CourseController extends Controller
     function __construct()
     {
         $this->middleware('role:admin')
-            ->except(['index', 'show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn']);
+            ->except(['show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn']);
     }
 
     /**
