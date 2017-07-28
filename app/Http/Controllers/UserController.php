@@ -311,6 +311,7 @@ class UserController extends Controller
     public function coursesOfTeacher(Request $request, User $user)
     {
         $items = $user->coachingCourse()->withCount('orders')
+            ->with('category')
             ->addSelect(DB::raw('(select sum(orders.wx_total_fee) from `orders` where `orders`.`product_id` = `courses`.`id`) as `total_income`'))
 //            ->orderBy('star', 'desc')
             ->paginate(10);
@@ -330,7 +331,7 @@ class UserController extends Controller
             ->where('course_user.type', 'enroll')
             ->count();
 
-//        dd($items->all(), $totalIncome,$studentsCount,$courseIdArr);
+        dd($items->all(), $totalIncome,$studentsCount,$courseIdArr);
         return view('admin.teacher.teacher_course', compact('items', 'totalIncome','studentsCount'));
     }
 
