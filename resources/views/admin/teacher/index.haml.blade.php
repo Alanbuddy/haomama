@@ -36,24 +36,24 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              // - if @users[:data].length == 0
-              //   .undiscover.f14
-              //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-              // - else
-              .table-box.f14
-                %table.table.table-hover.table-height
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 讲师姓名
-                      %th 手机号
-                      %th 职称
-                  %tbody.font-color3
-                    - foreach ($items as $item)
+              - if(count($items) == 0) 
+                .undiscover.f14
+                  %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+              - else
+                .table-box.f14
+                  %table.table.table-hover.table-height
+                    %thead.th-bg.font-color2
                       %tr
-                        %td
-                          %a{href: route('admin.user.show',$item->id).'?type=teacher'}=$item->name
-                        %td=$item->phone
-                        %td=json_decode($item->description)->title
+                        %th 讲师姓名
+                        %th 手机号
+                        %th 职称
+                    %tbody.font-color3
+                      - foreach ($items as $item)
+                        %tr
+                          %td
+                            %a{href: route('admin.user.show',$item->id).'?type=teacher'}=$item->name
+                          %td=$item->phone
+                          %td=json_decode($item->description)->title
               .select-page
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
