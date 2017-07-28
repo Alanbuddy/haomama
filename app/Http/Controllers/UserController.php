@@ -336,7 +336,7 @@ class UserController extends Controller
             ->count();
 
 //         dd($items->all(), $totalIncome,$courseIdArr,$ordersCount);
-        return view('admin.teacher.teacher_course', compact('items', 'totalIncome','ordersCount'));
+        return view('admin.teacher.teacher_course', compact('user','items', 'totalIncome','ordersCount'));
     }
 
 }
