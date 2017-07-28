@@ -320,19 +320,23 @@ class UserController extends Controller
             ->join('orders', 'orders.product_id', 'courses.id')
             ->sum('orders.wx_total_fee');
 
-        $coachingCourse= $user->coachingCourse;
-        $courseIdArr = array_map(function ($v) {
-            return $v->id;
-        }, $coachingCourse->all());
+//        $coachingCourse= $user->coachingCourse;
+//        $courseIdArr = array_map(function ($v) {
+//            return $v->id;
+//        }, $coachingCourse->all());
 
-        $studentsCount = Course::whereIn('id', $courseIdArr)
-            ->join('course_user', 'course_user.course_id', 'courses.id')
-            ->where('course_user.user_type', 'student')
-            ->where('course_user.type', 'enroll')
+//        $studentsCount = Course::whereIn('id', $courseIdArr)
+//            ->join('course_user', 'course_user.course_id', 'courses.id')
+//            ->where('course_user.user_type', 'student')
+//            ->where('course_user.type', 'enroll')
+//            ->count();
+
+        $ordersCount =$user->coachingCourse()
+            ->join('orders','orders.product_id','courses.id')
             ->count();
 
-        // dd($items->all(), $totalIncome,$studentsCount,$courseIdArr);
-        return view('admin.teacher.teacher_course', compact('items', 'totalIncome','studentsCount'));
+//         dd($items->all(), $totalIncome,$courseIdArr,$ordersCount);
+        return view('admin.teacher.teacher_course', compact('items', 'totalIncome','ordersCount'));
     }
 
 }
