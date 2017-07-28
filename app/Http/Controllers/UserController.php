@@ -312,9 +312,18 @@ class UserController extends Controller
         $items = $user->coachingCourse()->withCount('orders')
             ->addSelect(DB::raw('(select sum(orders.wx_total_fee) from `orders` where `orders`.`product_id` = `courses`.`id`) as `total_income`'))
 //            ->orderBy('star', 'desc')
-            ->get();
-//        dd($items);
-        return view('admin.teacher.teacher_course', compact('items'));
+            ->paginate(10);
+
+        $totalIncome = $user->coachingCourse()
+            ->join('orders', 'orders.product_id', 'courses.id')
+            ->sum('orders.wx_total_fee');
+
+        $studentsCount=$user->coachingCourse()
+            ->join('course_user','course_user.course_id','courses.id')
+            ->where('course_user.user_type','student')
+            ->count();
+        dd($items->all(), $totalIncome,$studentsCount);
+        return view('admin.teacher.teacher_course', compact('items', 'totalIncome'));
     }
 
 }
