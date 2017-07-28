@@ -26,8 +26,9 @@
       .layout-left
         %img.logo2{src: "icon/admin/logo2.png"}
         .avatar-div.f16
-          %img.layout-avatar{ src: empty($user['avatar']) ?  "icon/avatar.png" : $user['avatar'] }
-          %p.layout-name= empty($user['name']) ? "欢迎您" : $user['name']
+          - if(auth()->user())
+            %img.layout-avatar{ src: empty(auth()->user()->avatar) ?  "icon/avatar.png" : auth()->user()->avatar }
+            %p.layout-name= empty(auth()->user()->name) ? "欢迎您" : auth()->user()->name
         .main
           .sidebar
             %ul

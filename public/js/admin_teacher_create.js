@@ -13,7 +13,7 @@ $(document).ready(function(){
   editor.create();
 
   function check_input(name, mobile, avatar, introduce, desc){
-    if(name == "" || mobile == "" || avatar == "" || introduce == "" || desc == ""){
+    if(name == "" || mobile == "" || avatar == "" || introduce == "" || desc.length < 30){
       showMsg("有必填项内容没有填写", "center");
       return false;
     }
@@ -33,7 +33,7 @@ $(document).ready(function(){
     var introduce = $("#base").val().trim();
     var desc = editor.txt.html(); 
     var avatar = $(".cover-path").text();
-
+    
     var ret = check_input(name, mobile, avatar, introduce, desc);
     if(ret == false){
       return false;

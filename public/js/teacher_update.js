@@ -91,6 +91,7 @@ $(document).ready(function(){
       telephone: tel,
     };
     description = JSON.stringify(description);
+    var teacher_id = $(".teacher-id").text();
     var put = "PUT";
     $.ajax({
       type: "post",
@@ -108,8 +109,7 @@ $(document).ready(function(){
         console.log(data);
         if(data.success){
           var str = window.teacher_show.substring(0, window.teacher_show.length - 2);
-          var tid = data.data.id;
-          location.href = str + tid + "?type=teacher";
+          location.href = str + teacher_id + "?type=teacher";
         }
       }
       });

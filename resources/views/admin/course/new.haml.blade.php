@@ -28,7 +28,7 @@
       %li
         %a.f16.left-border{href: route('admin.profile')} 账号设置
       %li
-        %a.f16.set-left-border#exit{href: "#"} 退出登录
+        %a.f16.set-left-border#exit{href: "javascript:void(0)"} 退出登录
 
   .main-content.bg2
     %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
