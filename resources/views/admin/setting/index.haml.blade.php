@@ -7,6 +7,7 @@
   window.token = "#{csrf_token()}"
   window.img_store = "#{route('settings.store')}"
   window.img_index = "#{route('settings.index').'?key=carousel'}"
+  window.set_recommend = "#{route('settings.index')}"
     
 @endsection
 
@@ -35,14 +36,13 @@
         .tab-content.bg3
           #tab1.tab-pane.active
             .desc-div
-              // - if @users[:data].length == 0
+              // - if(count($images) == 0) 
               //   .undiscover.f14
               //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               // - else
               .img-div.unedit-box
-                %img.img-item{src: "icon/banner.png"}
-                %img.img-item{src: "icon/banner.png"}
-                %img.img-item{src: "icon/banner.png"}
+                - foreach($images as $item)
+                  %img.img-item{src: $item}
 
               .edit-img-div.edit-box.f14.font-color3
                 #uploader.wu-example
@@ -51,12 +51,9 @@
                     %button#ctlBtn.btn.btn-default 开始上传
                     %span.remind 请上传尺寸为750*320的图片文件
                 .img-edit-div
+                  // - foreach($images as $item)
                   .item
-                    %img.edit-img-item{src: "icon/banner.png"}
-                    %img.delete{src: "icon/admin/delete2.png"}
-                    %span.path{style: "display:none;"}
-                  .item
-                    %img.edit-img-item{src: "icon/banner.png"}
+                    %img.edit-img-item
                     %img.delete{src: "icon/admin/delete2.png"}
                     %span.path{style: "display:none;"}
                   #thelist.uploader-list

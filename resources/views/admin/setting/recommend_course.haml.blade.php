@@ -6,6 +6,8 @@
 :javascript
   window.token = "#{csrf_token()}"
   window.video = "#{route('videos.store')}"
+  window.img_index = "#{route('settings.index').'?key=carousel'}"
+  window.set_recommend = "#{route('settings.index')}"
     
 @endsection
 
@@ -22,8 +24,8 @@
         %a.f16.set-left-border#exit{href: "javascript:void(0)"} 退出登录
     
   .main-content.bg2
-    %button.btn.edit-normal.font-color1.create-btn-position#tab2-edit-btn{type: "button"} 编辑
-    %button.btn.finish-normal.font-color1.finish-btn-position#tab2-finish-btn{type: "button"} 保存
+    %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
+    %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
     .table-div
       .tabbable
         %ul.nav.nav-tabs
@@ -61,7 +63,6 @@
 
 @section('script')
 <script src="js/plugin/webuploader.js"></script>
-
-<script src="js/set_banner.js"></script>
+<script src="js/recommend.js"></script>
 
 @endsection

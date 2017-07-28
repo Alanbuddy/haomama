@@ -5,7 +5,6 @@
 :javascript
   window.teacher_index = "#{route('users.index')}"
   window.token = "#{csrf_token()}"
-  window.teacher_update = "#{route('users.update',$user->id)}"
   window.teacher_show = "#{route('admin.user.show', -1)}"
 
 @endsection
@@ -54,13 +53,14 @@
                       %th 课程总收入
                       
                   %tbody.font-color3
-                    %tr
-                      %td 课程的名字很长
-                      %td 线上视频
-                      %td 健康养育
-                      %td 12
-                      %td 80
-                      %td 3000
+                    - foreach($courses as $course)
+                      %tr
+                        %td 课程的名字很长
+                        %td 线上视频
+                        %td 健康养育
+                        %td 12
+                        %td 80
+                        %td 3000
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 总购买人次:

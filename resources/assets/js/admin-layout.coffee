@@ -9,6 +9,9 @@ $ ->
       $(this).closest("li").not(".teacher_li").addClass("active-li")
     if currenturl.indexOf("users") != -1 && currenturl.indexOf("type=teacher") != -1
       $(this).closest("li.teacher_li").addClass("active-li")
+    if currenturl.indexOf("settings") != -1 
+      $(this).closest("li.setting_li").addClass("active-li")
+
 
   # 退出登录
   $("#exit").click ->

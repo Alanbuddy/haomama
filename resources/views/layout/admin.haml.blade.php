@@ -44,8 +44,8 @@
                 %a{:href => route('users.index')."?type=teacher"}
                   %img.mini-icon{src: "icon/admin/3teacher.png"}
                   %span.f18.sidebar-title 讲师管理
-              %li
-                %a{:href => route('settings.index')}
+              %li.setting_li
+                %a{:href => route('settings.index')."?key=carousel"}
                   %img.mini-icon{src: "icon/admin/4announcement.png"}
                   %span.f18.sidebar-title 宣传管理
               %li

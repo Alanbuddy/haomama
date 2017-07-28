@@ -8,6 +8,7 @@
     window.video = "#{route('videos.store')}"
     window.token = "#{csrf_token()}"
     window.teacher_new = "#{route('users.create')}"
+    
 
 @endsection
 
@@ -63,9 +64,5 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_teacher_index.js')}}"></script>
-// <script src="/js/plugin/wangEditor.min.js"></script>
-// <script src="/js/plugin/jquery-ui.min.js"></script>
-
-// <script src="/js/fileupload.js"></script>
 
 @endsection
