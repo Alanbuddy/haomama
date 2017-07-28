@@ -48,7 +48,7 @@
                 %a{:href => route('settings.index')."?key=carousel"}
                   %img.mini-icon{src: "icon/admin/4announcement.png"}
                   %span.f18.sidebar-title 宣传管理
-              %li
+              %li.user_li
                 %a{:href => route('users.index')}
                   %img.mini-icon{src: "icon/admin/5user.png"}
                   %span.f18.sidebar-title 用户管理

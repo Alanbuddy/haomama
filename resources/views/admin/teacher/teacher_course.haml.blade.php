@@ -5,7 +5,7 @@
 :javascript
   window.teacher_index = "#{route('users.index')}"
   window.token = "#{csrf_token()}"
-  window.teacher_show = "#{route('admin.user.show', -1)}"
+  window.teacher_show = "#{route('admin.user.show', -1)."?type=teacher"}"
 
 @endsection
 
@@ -28,7 +28,7 @@
       .tabbable
         %ul.nav.nav-tabs
           %li
-            %a.f16.font-color1 讲师详情
+            %a.f16.font-color1#teacher-desc 讲师详情
           %li.active
             %a.f16.font-color1#course 开设课程
         .tab-content.bg3
@@ -65,6 +65,7 @@
                     %span.mr30= $studentsCount
                     %span 总课程收入:
                     %span= $totalIncome
+                  %span.teacher-id{style: "display:none;"}
 
                   %span.select-page.tag2-page
                     %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
@@ -73,8 +74,6 @@
 @endsection
 
 @section('script')
-<script src="js/plugin/wangEditor.min.js"></script>
-<script src="js/teacher_preview.js"></script>
-<script src="js/teacher_update.js"></script>
+<script src="js/teacher_course.js"></script>
 
 @endsection
