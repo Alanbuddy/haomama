@@ -80,6 +80,8 @@
   margin-right: 20px;
 }
 .edit-img-item {
+  width: 750px;
+  height: 320px;
   object-fit: contain;
 }
 
@@ -120,4 +122,7 @@
   display: inline-block;
   height: 34px;
   line-height: 34px;
+}
+.path {
+  display: none;
 }
