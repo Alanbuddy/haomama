@@ -33,10 +33,10 @@ class SettingController extends Controller
             $categories = Term::where('type', 'category')->with('hotCourseByCategory')->get();
             $arr = ['新课速递' => Course::find($setting->value)];
             foreach ($categories as $category) {
-                $arr[$category->name] = $category->hotCourseByCategory->first()?: null;
+                $arr[$category->name] = $category->hotCourseByCategory->first() ?: null;
             }
 //            dd($arr);
-            return view('admin.setting.index', [
+            return view('admin.setting.recommend_course', [
                 'items' => $arr
             ]);
         }
@@ -60,6 +60,7 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['key' => 'required', 'value' => 'required']);
         $item = new Setting();
         $item->fill($request->only([
             'key',

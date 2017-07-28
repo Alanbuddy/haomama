@@ -313,8 +313,8 @@ class UserController extends Controller
             ->addSelect(DB::raw('(select sum(orders.wx_total_fee) from `orders` where `orders`.`product_id` = `courses`.`id`) as `total_income`'))
 //            ->orderBy('star', 'desc')
             ->get();
-        dd($items);
-        return view('aa', compact('items'));
+//        dd($items);
+        return view('admin.teacher.teacher_course', compact('items'));
     }
 
 }
