@@ -5,7 +5,8 @@
 
 :javascript
   window.token = "#{csrf_token()}"
-  window.video = "#{route('videos.store')}"
+  window.img_store = "#{route('settings.store')}"
+  window.img_index = "#{route('settings.index').'?key=carousel'}"
     
 @endsection
 
@@ -53,9 +54,11 @@
                   .item
                     %img.edit-img-item{src: "icon/banner.png"}
                     %img.delete{src: "icon/admin/delete2.png"}
+                    %span.path{style: "display:none;"}
                   .item
                     %img.edit-img-item{src: "icon/banner.png"}
                     %img.delete{src: "icon/admin/delete2.png"}
+                    %span.path{style: "display:none;"}
                   #thelist.uploader-list
 
 @endsection

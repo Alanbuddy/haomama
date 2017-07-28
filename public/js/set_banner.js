@@ -34,6 +34,7 @@ $(document).ready(function(){
         '<img class="edit-img-item">' +
         '<img class="delete" src="/icon/admin/delete2.png">' +
         '<h4 class="info">' + file.name + '</h4>' +
+        '<p class="path"></p>' +
         '<p class="state">等待上传...</p>' +
     '</div>' );
     name = file.name;
@@ -68,7 +69,7 @@ $(document).ready(function(){
   uploader.on( 'uploadSuccess', function( file, rseponse ) {
     $( '#'+file.id ).find('p.state').text('已上传');
     showMsg("上传成功","center");
-    console.log(rseponse);
+    $( '#'+file.id ).find('p.path').text(rseponse.data.path);
   });
 
   uploader.on( 'uploadError', function( file ) {
@@ -102,10 +103,28 @@ $(document).ready(function(){
   
   $(".delete").click(function(){
     $(this).closest(".item").remove();
-
   });
 
-  $("#finish-btn").click(function(){
-
+  $(document).on('click', '#finish-btn', function(){
+    var name = "carousel";
+    var value = [];
+    $(".item").each(function(){
+      value.push($(this).find(".path").text());
+    });
+    console.log(value);
+    $.ajax({
+      url: window.img_store,
+      type: 'post',
+      data: {
+        key: name,
+        value: value,
+        _token: window.token
+      },
+      success: function(data){
+        if(data.success){
+          location.href = window.img_index;
+        }
+      }
+    });
   });
 });
