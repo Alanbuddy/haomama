@@ -28,41 +28,41 @@
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div
-            // - if @users[:data].length == 0
-            //   .undiscover.f14
-            //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-            // - else
-            .table-box.f14
-              %table.table.table-hover.table-height
-                %thead.th-bg.font-color2
-                  %tr
-                    %th 微信ID
-                    %th 微信名
-                    %th 手机号码
-                    %th 家长身份
-                    %th 宝宝姓名
-                    %th 宝宝性别
-                    %th 宝宝年龄
-                %tbody.font-color3
-                  - foreach($items as $item)
+            - if(count($items) == 0)
+              .undiscover.f14
+                %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+            - else
+              .table-box.f14
+                %table.table.table-hover.table-height
+                  %thead.th-bg.font-color2
                     %tr
-                      // %td.client-show= $item->wx->openid
-                      // %td= $item->wx->nickname
-                      %td= $item->phone
-                      %td= $item->parenthood
-                      %td= $item->baby['name']
-                      %td= $item->baby['gender']
-                      %td= $item->baby['birthday']
-            .select-page 
-              %span.totalitems 共2页，总计18条
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{href: "#"} «
-                  %li
-                    %a{href: "#"} 1
-                  %li
-                    %a{href: "#"} »
+                      %th 微信ID
+                      %th 微信名
+                      %th 手机号码
+                      %th 家长身份
+                      %th 宝宝姓名
+                      %th 宝宝性别
+                      %th 宝宝年龄
+                  %tbody.font-color3
+                    - foreach($items as $item)
+                      %tr
+                        %td.client-show{rowspan: count($item->baby)}= $item->openid
+                        %td{rowspan: count($item->baby)}= $item->wx
+                        %td{rowspan: count($item->baby)}= $item->phone
+                        %td{rowspan: count($item->baby)}= $item->parenthood
+                        - if(count($item->baby) == 0)
+                          %td= "无"
+                          %td= "无"
+                          %td= "无"
+                        - else
+                          - for($i=0;$i<count($item->baby);$i++)
+                            %td= json_decode($item->baby)[$i]->name
+                            %td= json_decode($item->baby)[$i]->gender
+                            %td= json_decode($item->baby)[$i]->birthday
+              .select-page 
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+                %span.choice-page
+                  != $items->links()
         #tab2.tab-pane
           .desc-div
             // - if @users[:data].length == 0

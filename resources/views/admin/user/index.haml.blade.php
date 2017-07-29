@@ -24,39 +24,33 @@
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div
-            // - if @staffs[:data].length == 0
-            //   .undiscover.f14
-            //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-            // - else
-            .table-box.f14
-              %table.table.table-hover.table-height#admin
-                %thead.th-bg.font-color2
-                  %tr
-                    %th 手机号
-                    %th 姓&nbsp&nbsp名
-                    %th 状&nbsp&nbsp态
-                    %th{colspan: "2"} 操&nbsp&nbsp作
-                %tbody.font-color3
-                  // - @staffs[:data].each do |s|
-                  %tr
-                    %td 1312234434343
-                    %td dadga/没有名字时显示“-” 
-                    %td 新注册账号/正常/关闭
-                    %td
-                      // %a.change_status.available.font-color-brown{:href => "javascript:void(0);"} 关闭
-                      %a.change_status.unavailable.font-color-green{:href => "javascript:void(0);"} 开通
-                    %td
-                      %a.font-color-red{href: "#"} 删除
-              .select-page 
-                %span.totalitems 共2页，总计18条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
+            - if(count($items) == 0)
+              .undiscover.f14
+                %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+            - else
+              .table-box.f14
+                %table.table.table-hover.table-height#admin
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 手机号
+                      %th 姓&nbsp&nbsp名
+                      %th 状&nbsp&nbsp态
+                      %th{colspan: "2"} 操&nbsp&nbsp作
+                  %tbody.font-color3
+                    - foreach($items as $item)
+                      %tr
+                        %td= $item->phone
+                        %td= $item->name
+                        %td 新注册账号/正常/关闭
+                        %td
+                          // %a.change_status.available.font-color-brown{:href => "javascript:void(0);"} 关闭
+                          %a.change_status.unavailable.font-color-green{:href => "javascript:void(0);"} 开通
+                        %td
+                          %a.font-color-red{href: "javascript:void(0)"} 删除
+                .select-page 
+                  %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+                  %span.choice-page
+                    != $items->links()
 @endsection
 
 @section('script')

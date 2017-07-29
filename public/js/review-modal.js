@@ -145,7 +145,6 @@ $(document).ready(function($) {
       );
   });
 
-
   $(".online-course .item").each(function(){
     var status = $(this).attr("data-status");
     var enroll = $(this).attr("data-enrolled");
@@ -157,14 +156,15 @@ $(document).ready(function($) {
         showMsg("这节课还没有上线哦～", "center");
       });
     }
-    // if (!enroll) {
-    //   _this.click(function(e){
-    //     e.preventDefault();
-    //     $("#confirmModal").modal("show");
-    //   });
-    // }
+    if (!enroll) {
+      _this.click(function(e){
+        e.preventDefault();
+        $("#confirmModal").modal("show");
+      });
+    }
   });
 
+  // 还缺少报名和退款的代码
   $(".refund").click(function(){
     
   });

@@ -43,16 +43,11 @@ $(document).ready(function(){
   var sidebar = document.getElementsByClassName("sidebar");
   var arr_a = sidebar[0].getElementsByTagName("a");
   var len = arr_a.length;
-  var unset = true;    //有了数据后从页面数据获得
   for(var i=0;i<len;i++){
-    if(unset){
-      arr_a[i].addEventListener("click", account_set_remind);
-      $("#set-confirm").click(function(){
-        location.href = click_url;
-      });
-    }else{
-      arr_a[i].removeEventListener("click", account_set_remind);
-    }
+    arr_a[i].addEventListener("click", account_set_remind);
+    $("#set-confirm").click(function(){
+      location.href = click_url;
+    });
   }
 
   $("#set-cancel").click(function(){

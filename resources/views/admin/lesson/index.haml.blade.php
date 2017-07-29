@@ -26,25 +26,29 @@
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div
-            .table-box
-              %table.table.table-hover.table-height.f14
-                %thead.th-bg.font-color2
-                  %tr
-                    %th 课时标题
-                    %th 上传时间
-                    %th 上线时间
-                %tbody.font-color3
-                  -foreach ($items as $lesson) 
-                    %tr{class: ""}
-                      %td.show-name
-                        %a{href:route('admin.lesson.show',$lesson->id)}=$lesson->name
-                      %td =$lesson->created_at
-                      %td =$lesson->updated_at
-                    
-            .select-page 
-              %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
-              %span.choice-page
-                != $items->links() 
+            - if(count($items) == 0) 
+              .undiscover.f14
+                %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+            - else
+              .table-box
+                %table.table.table-hover.table-height.f14
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 课时标题
+                      %th 上传时间
+                      %th 上线时间
+                  %tbody.font-color3
+                    -foreach ($items as $lesson) 
+                      %tr{class: ""}
+                        %td.show-name
+                          %a{href:route('admin.lesson.show',$lesson->id)}=$lesson->name
+                        %td =$lesson->created_at
+                        %td =$lesson->updated_at
+                      
+              .select-page 
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+                %span.choice-page
+                  != $items->links() 
 
 #add_lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

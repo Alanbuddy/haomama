@@ -346,13 +346,14 @@
     margin: 0;
     padding: 0;
   }
+  .modal-content {
+    border: 0;
+  }
   .modal-body, input, label {
     margin: 0;
     padding: 0;
   }
   .modal-body {
-    position: relative;
-    min-height: 100%;
     background: #f6f6f6;
   }
   .head-div {

@@ -10335,6 +10335,7 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function($) {var cb, ce, change_avatar, course_begin, course_end, ctime;
 
 $(function() {
+  $(".height-div").css("height", window.screen.availHeight - $("#profileModal .head-div").height());
   $(document).scroll(function() {
     if ($(document).scrollTop() > 100) {
       return $('.upper').fadeIn(1000);
