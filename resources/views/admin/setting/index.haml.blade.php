@@ -30,8 +30,12 @@
         #tab1.tab-pane.active
           .desc-div
             .img-div.unedit-box
-              - foreach($images as $item)
-                %img.img-item{src: $item}
+              - if(count($images) == 0)
+                .undiscover.f14
+                  %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+              - else
+                - foreach($images as $item)
+                  %img.img-item{src: $item}
 
             .edit-img-div.edit-box.f14.font-color3
               #uploader.wu-example
