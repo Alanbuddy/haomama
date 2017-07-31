@@ -67,7 +67,7 @@ class CourseController extends Controller
             }
             $item->recommendation = $recommendation;
         }
-        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/courses');
+        $items->withPath(route('courses.index'));
         return view('admin.course.index', [
             'items' => $items
         ]);
