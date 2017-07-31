@@ -11,8 +11,7 @@ class SmsController extends Controller
     public function send(Request $request)
     {
         $response = SmsApi::send($request);
-        return ['success' => true];
-        if ($response['code'] == 200) {
+        if ($response['success']) {
             $arr = explode('|', $response['data']);
             if ($arr[0] == 1) {
                 return ['success' => true];
