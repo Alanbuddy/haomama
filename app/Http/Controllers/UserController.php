@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Search;
-use App\Models\Course;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
@@ -30,8 +29,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $type = $request->get('type', 'user');
-        if($type=='operator'){
-            if(!auth()->user()->hasRole('admin')){
+        if ($type == 'operator') {
+            if (!auth()->user()->hasRole('admin')) {
                 return back();
             }
         }
@@ -212,7 +211,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return ['success' => true];
     }
 
     public function profile(Request $request)
@@ -263,6 +263,7 @@ class UserController extends Controller
     {
         $user->status = 'disabled';
         $user->save();
+        $user->detachRole(Role::find(2));
         return ['success' => true];
     }
 
@@ -271,6 +272,7 @@ class UserController extends Controller
     {
         $user->status = 'enabled';
         $user->save();
+        $user->attachRole(Role::find(2));
         return ['success' => true];
     }
 
@@ -337,12 +339,12 @@ class UserController extends Controller
 //            ->where('course_user.type', 'enroll')
 //            ->count();
 
-        $ordersCount =$user->coachingCourse()
-            ->join('orders','orders.product_id','courses.id')
+        $ordersCount = $user->coachingCourse()
+            ->join('orders', 'orders.product_id', 'courses.id')
             ->count();
 
 //         dd($items->all(), $totalIncome,$courseIdArr,$ordersCount);
-        return view('admin.teacher.teacher_course', compact('user','items', 'totalIncome','ordersCount'));
+        return view('admin.teacher.teacher_course', compact('user', 'items', 'totalIncome', 'ordersCount'));
     }
 
 }
