@@ -47,7 +47,7 @@
                     - foreach($items as $item)
                       %tr
                         %td.client-show{rowspan: count($item->baby)}= $item->openid
-                        %td{rowspan: count($item->baby)}= $item->wx_nickname ? $item->wx_nickname : "无"  
+                        %td{rowspan: count($item->baby)}= $item->wx ? json_decode($item->wx)->nickname : "无"  
                         %td{rowspan: count($item->baby)}= $item->phone
                         %td{rowspan: count($item->baby)}= $item->parenthood
                         - if(count($item->baby) == 0)
@@ -58,7 +58,7 @@
                           - for($i=0;$i<count($item->baby);$i++)
                             %td= json_decode($item->baby)[$i]->name
                             %td= json_decode($item->baby)[$i]->gender
-                            %td= json_decode($item->baby)[$i]->birthday
+                            %td.age= json_decode($item->baby)[$i]->birthday
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
@@ -108,9 +108,6 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_client_index.js')}}"></script>
-// <script src="/js/plugin/wangEditor.min.js"></script>
-// <script src="/js/plugin/jquery-ui.min.js"></script>
 
-// <script src="/js/fileupload.js"></script>
 
 @endsection

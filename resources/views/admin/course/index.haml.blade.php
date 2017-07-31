@@ -7,6 +7,7 @@
     window.logout = "#{route('logout')}"
     window.login = "#{route('login')}"
     window.token = "#{csrf_token()}"
+    window.course_search = "#{route('admin.courses.search')}"
 @endsection
 
 @section('search-input')
@@ -22,11 +23,11 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 当前课程(345)
+          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 当前课程
         %li
-          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 未开课程(123)
+          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 未开课程
         %li
-          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab3"} 结课课程(221)
+          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab3"} 结课课程
 
       .tab-content.bg3
         #tab1.tab-pane.active

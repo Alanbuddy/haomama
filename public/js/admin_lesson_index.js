@@ -10333,6 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
+  var search;
   $(".lesson-video").click(function() {
     return location.href = window.lesson_create + "?type=video";
   });
@@ -10343,9 +10344,24 @@ return jQuery;
     e.preventDefault();
     return location.href = window.lesson_index + "?type=video";
   });
-  return $("#audio").click(function(e) {
+  $("#audio").click(function(e) {
     e.preventDefault();
     return location.href = window.lesson_index + "?type=audio";
+  });
+  search = function() {
+    var value;
+    value = $("#search-input").val();
+    return location.href = window.lesson_search + "?key=value";
+  };
+  $("#search-btn").click(function() {
+    return search();
+  });
+  return $("#search-input").keydown(function(event) {
+    var code;
+    code = event.which;
+    if (code === 13) {
+      return search();
+    }
   });
 });
 
