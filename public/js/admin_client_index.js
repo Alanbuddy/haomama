@@ -10333,8 +10333,21 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $(".client-show").click(function() {
-    return location.href = "/admin/users/1";
+  return $(".age").each(function() {
+    var age, birthday, t_year, td;
+    birthday = $(this).text();
+    if (birthday !== "无") {
+      birthday = birthday.substring(0, 4);
+      td = new Date();
+      t_year = td.getFullYear();
+      age = t_year - birthday;
+      if (age === 0) {
+        age = "不足一岁";
+      } else {
+        age = age + "岁";
+      }
+      return $(this).text(age);
+    }
   });
 });
 

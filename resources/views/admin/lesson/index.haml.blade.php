@@ -5,6 +5,8 @@
     window.lesson_index = "#{route('lessons.index')}"
     window.lesson_create = "#{route('lessons.create')}"
     window.token = "#{csrf_token()}"
+    window.lesson_search = "#{route('admin.lessons.search')}"
+
 @endsection
 @section('search-input')
 .user-search-box.f14.bg2

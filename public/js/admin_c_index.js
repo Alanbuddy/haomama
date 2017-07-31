@@ -10333,87 +10333,28 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var search, text;
-  if (window.profile === "template") {
-    $('.nav-tabs a[href="#tab2"]').tab('show');
-  }
-  text = $("#search-input").val();
-  if (text === "") {
-    $("#search-btn").addClass("search");
-    $("#search-btn").removeClass("delete");
-  } else {
-    $("#search-btn").addClass("delete");
-    $("#search-btn").removeClass("search");
-  }
+  var search;
   search = function() {
     var value;
     value = $("#search-input").val();
-    return location.href = "/staff/courses?keyword=" + value + "&page=1";
+    return location.href = window.course_search + "?key=value";
   };
   $("#search-btn").click(function() {
-    if ($("#search-btn").hasClass("search")) {
-      search();
-      $("#search-btn").addClass("delete");
-      return $("#search-btn").removeClass("search");
-    } else {
-      back();
-      $("#search-btn").addClass("search");
-      return $("#search-btn").removeClass("delete");
-    }
+    return search();
   });
   $("#search-input").keydown(function(event) {
     var code;
     code = event.which;
     if (code === 13) {
-      search();
-      $("#search-btn").addClass("delete");
-      return $("#search-btn").removeClass("search");
-    } else {
-      $("#search-btn").addClass("search");
-      return $("#search-btn").removeClass("delete");
+      return search();
     }
-  });
-  $(".set-available").click(function() {
-    var cid, current_state, link;
-    current_state = "unavailable";
-    if ($(this).hasClass("font-color-red")) {
-      current_state = "available";
-    }
-    cid = $(this).closest("tr").attr("data-id");
-    link = $(this);
-    console.log(current_state);
-    $.postJSON('/staff/courses/' + cid + '/set_available', {
-      available: current_state === "unavailable"
-    }, function(data) {
-      console.log(data);
-      if (data.success) {
-        $.page_notification("操作完成");
-        if (current_state === "available") {
-          link.removeClass("font-color-red");
-          link.addClass("font-color-green");
-          return link.text("上架");
-        } else {
-          link.addClass("font-color-red");
-          link.removeClass("font-color-green");
-          return link.text("下架");
-        }
-      } else {
-        if (data.code === COURSE_PARTICIPATE_EXIST) {
-          return $.page_notification("该课程有人报名，不能下架");
-        }
-      }
-    });
-    return false;
   });
   $(".course-video").click(function() {
     return location.href = window.course_create;
   });
-  $(".offline").click(function() {
+  return $(".offline").click(function() {
     console.log(window.course_create);
     return location.href = window.course_create + "?type=offline";
-  });
-  return $(".show-name").click(function() {
-    return location.href = "/courses/1";
   });
 });
 
