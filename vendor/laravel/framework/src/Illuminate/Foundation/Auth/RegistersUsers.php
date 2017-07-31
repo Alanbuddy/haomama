@@ -57,6 +57,8 @@ trait RegistersUsers
      */
     protected function registered(Request $request, $user)
     {
-        //
+        if($request->ajax()){
+            return ['success'=>true];
+        }
     }
 }
