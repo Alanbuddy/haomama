@@ -86,7 +86,7 @@ $(document).ready(function() {
         phone: phone,
         password: password,
         password_confirmation: password_again,
-        captcha: verify_code,
+        code: verify_code,
         _token: window.token
       },
       async: true,
