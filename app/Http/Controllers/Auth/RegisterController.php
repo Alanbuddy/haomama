@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
         ]);
-//        $user->attachRole(Role::find(2));
+        $user->attachRole(Role::find(2));
         return $user;
     }
 
