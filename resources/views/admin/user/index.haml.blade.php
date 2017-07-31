@@ -2,11 +2,11 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/user-index.css') }}">
 :javascript
-    // window.course_index = "#{route('courses.index')}"
-    // window.course_create = "#{route('courses.create')}"
-    // window.logout = "#{route('logout')}"
-    // window.login = "#{route('login')}"
-    // window.token = "#{csrf_token()}"
+    window.token = "#{csrf_token()}"
+    window.enable = "#{route('admin.user.enable',-1)}"
+    window.disable = "#{route('admin.user.disable',-1)}"
+    window.delete = "#{route('users.destroy',-1)}"
+
 @endsection
 
 @section('search-input')
@@ -42,11 +42,13 @@
                         %td= $item->phone
                         %td= $item->name
                         %td.status= empty($item->status) ? "新注册账号" : $item->status 
+                        %td.open-close{"data-id" => $item->id}
+                          - if($item->status == "enabled")
+                            %span.change_status.available.operation 关闭
+                          - else
+                            %span.change_status.unavailable.operation 开通
                         %td
-                          // %a.change_status.available.font-color-brown{:href => "javascript:void(0);"} 关闭
-                          %a.change_status.unavailable.font-color-green{:href => "javascript:void(0);"} 开通
-                        %td
-                          %a.font-color-red{href: "javascript:void(0)"} 删除
+                          %span.delete-tr.font-color-red 删除
                 .select-page 
                   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                   %span.choice-page
