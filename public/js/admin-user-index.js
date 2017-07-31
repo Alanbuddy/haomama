@@ -14,7 +14,7 @@ $(document).ready(function(){
     _this = $(this);
     if($(this).text() == "关闭"){
       $.ajax({
-        url: window.enable.replace(/-1/, uid),
+        url: window.disable.replace(/-1/, uid),
         type: "get",
         success: function(data){
           console.log(data);
@@ -29,7 +29,7 @@ $(document).ready(function(){
     }
     if($(this).text() == "开通"){
       $.ajax({
-        url: window.disable.replace(/-1/, uid),
+        url: window.enable.replace(/-1/, uid),
         type: "get",
         success: function(data){
           console.log(data);
@@ -55,7 +55,7 @@ $(document).ready(function(){
       type: 'post',
       data: {
         _method: destroy,
-        token: window.token
+        _token: window.token
       },
       success: function(data){
         console.log(data);
