@@ -30,7 +30,8 @@ trait RegistersUsers
      */
     public function register(Request $request)
     {
-        if(!SmsApi::verify($request)){
+        $verifyResult=SmsApi::verify($request);
+        if(!$verifyResult['success']){
            return ['success'=>false,'message'=>'verification code does not match'];
         }
         $this->validator($request->all())->validate();

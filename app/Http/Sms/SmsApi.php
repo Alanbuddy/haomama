@@ -23,7 +23,7 @@ class SmsApi
 
     public static function send(Request $request)
     {
-        session(['mobile' => $request->mobile]);
+        session(['phone' => $request->mobile]);
         $code = rand(100000, 999999);
         session(['code'=>$code]);
 //        session(['code' => 111111]);
@@ -56,9 +56,9 @@ class SmsApi
 
     public static function verify(Request $request)
     {
-        if ($request->has('code') && $request->has('mobile')) {
+        if ($request->has('code') && $request->has('phone')) {
             $result = ($request->code == session('code')) &&
-                ($request->mobile == session('mobile'));
+                ($request->phone == session('phone'));
             return ['success' => $result];
         }
         return ['success' => false];
