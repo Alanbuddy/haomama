@@ -639,6 +639,19 @@ class CourseController extends Controller
         return view('course.create', compact('popularTags'));
     }
 
+    public function adminSearch(Request $request)
+    {
+        if ($request->has('key')) {
+            $items = Search::search($request->key)
+                ->paginate(10);
+//            dd($items);
+            return view('admin.course.index', [
+                'items' => $items,
+            ]);
+        }
+        return redirect()->route('courses.index');
+    }
+
 
     /**
      * 线下课程签到

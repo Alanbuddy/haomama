@@ -155,4 +155,12 @@ class WechatController extends Controller
         }
     }
 
+    public function userInfo(User $user)
+    {
+        $openid=json_decode($user->wx)->openid;
+        $result=WxApi::accessToken();
+        $accessToken=$result['data']->access_token;
+        $result=WxApi::commonUserInfo($accessToken,$openid);
+        return ['success'=>true,'data'=>$result['data']];
+    }
 }

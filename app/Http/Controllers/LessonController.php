@@ -18,7 +18,7 @@ class LessonController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin|operator')->except('index', 'show', 'detail');
+        $this->middleware('role:admin|operator')->except('show', 'detail');
     }
 
     /**

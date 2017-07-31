@@ -61,6 +61,7 @@ Route::group([
     Route::get('/courses/enrolled', 'CourseController@enrolledCourses')->name('courses.enrolled');//我加入的课程
     Route::get('/courses/favorited', 'CourseController@favoriteCourses')->name('courses.favorited');//我收藏的课程
     Route::get('/admin/courses/{course}', 'CourseController@adminShow')->name('admin.courses.show');//后台课程详情页面
+    Route::get('/admin/courses/search', 'CourseController@adminSearch')->name('admin.courses.search');
     Route::resource('courses', 'CourseController');
     Route::get('/courses/{course}/lessons/edit', 'CourseController@editLessons')->name('courses.lessons.edit');
     Route::put('/courses/{course}/lessons/update', 'CourseController@updateLessons')->name('courses.lessons.update');
@@ -136,6 +137,7 @@ Route::group([
     Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
     Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
     Route::get('/wechat/send', 'WechatController@send')->name('wechat.send');
+    Route::get('/wechat/users/{user}/userinfo', 'WechatController@userInfo')->name('wechat.userinfo');
 });
 
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
