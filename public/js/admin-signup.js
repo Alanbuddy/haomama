@@ -91,9 +91,18 @@ $(document).ready(function() {
       },
       async: true,
       success: function(data){
+        console.log(data);
         if (data.success){
-          location.href = window.login;
-          showMsg("您已注册成功，请通知管理员开通您的账号", "center");
+          $.ajax({
+            type: 'post',
+            url: window.logout,
+            data: {_token: window.token},
+            async: false,
+            success: function(){
+              location.href = window.login;
+              showMsg("您已注册成功，请通知管理员开通您的账号", "center");
+            }
+          });
         }
       }
     }); 
