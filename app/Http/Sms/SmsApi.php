@@ -53,4 +53,14 @@ class SmsApi
         return Curl::request($url);
 
     }
+
+    public static function verify(Request $request)
+    {
+        if ($request->has('code') && $request->has('mobile')) {
+            $result = ($request->code == session('code')) &&
+                ($request->mobile == session('mobile'));
+            return ['success' => $result];
+        }
+        return ['success' => false];
+    }
 }

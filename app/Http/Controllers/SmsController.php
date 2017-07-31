@@ -17,7 +17,7 @@ class SmsController extends Controller
                 return ['success' => true];
             }
         }
-        return ['success' => false, 'message' => $arr[2]];
+        return ['success' => false, 'data' =>isset($arr)?$arr[2]:$response];
     }
 
     public static function residual()
@@ -30,12 +30,7 @@ class SmsController extends Controller
 
     public static function verify(Request $request)
     {
-        if ($request->has('code') && $request->has('mobile')) {
-            $result = ($request->code == session('code')) &&
-                ($request->mobile == session('mobile'));
-            return ['success' => $result];
-        }
-        return ['success' => false];
+        return SmsApi::verify($request);
     }
 
     //判断手机号有没有占用

@@ -2,6 +2,8 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use App\Http\Controllers\SmsController;
+use App\Http\Sms\SmsApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -28,6 +30,9 @@ trait RegistersUsers
      */
     public function register(Request $request)
     {
+        if(!SmsApi::verify($request)){
+           return ['success'=>false,'message'=>'verification code does not match'];
+        }
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
