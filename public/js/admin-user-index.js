@@ -53,6 +53,7 @@ $(document).ready(function(){
       url: window.delete.replace(/-1/, uid),
       type: 'get',
       success: function(data){
+        console.log(data);
         if(data.success){
           _this.closest('tr').remove();
         }
