@@ -103,6 +103,8 @@ $(document).ready(function() {
               location.href = window.login;
             }
           });
+        }else{
+          $("#code_notice").css("visibility", "visible");
         }
       }
     }); 
