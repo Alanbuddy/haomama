@@ -122,7 +122,7 @@ $(document).ready(function(){
 
   $("#teacher-desc").click(function(){
     var teacher_id = $(".teacher-id").text();
-    location.href = window.teacher_show.substring(0, window.teacher_show.length - 2) + "/" +teacher_id;
+    location.href = window.teacher_show.replace(/-1/, teacher_id);
 
   });
 

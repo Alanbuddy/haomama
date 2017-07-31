@@ -1,4 +1,6 @@
 $ ->
+  $(".height-div").css("height", window.screen.availHeight - $("#profileModal .head-div").height())
+
   $(document).scroll ->
     if $(document).scrollTop() > 100
       $('.upper').fadeIn(1000)

@@ -6,35 +6,30 @@
     window.lesson_create = "#{route('lessons.create')}"
     window.token = "#{csrf_token()}"
 @endsection
-
+@section('search-input')
+.user-search-box.f14.bg2
+  %input.input-style#search-input.font-color3{:type => "text", :placeholder => "输入课时标题", value: ""}
+  .search#search-btn
+@endsection
 @section('content')
-.content-area
-  .main-top.direction
-    .user-search-box.f14.bg2
-      %input.input-style#search-input.font-color3{:type => "text", :placeholder => "输入课时标题", value: ""}
-      .search#search-btn
-    %ul.set
-      %li
-        %a.f16{href: route('users.index')."?type=operator"} 人员管理
-        .dot
-      %li
-        %a.f16.left-border{href: route('admin.profile')} 账号设置
-      %li
-        %a.f16.set-left-border#exit{href: "javascript:void(0)"} 退出登录
     
-  .main-content.bg2
-    %button.btn.new-normal.font-color1.btn-position#new-template{type: "button"} 上传课时
-    .table-div
-      .tabbable
-        %ul.nav.nav-tabs
-          %li.active
-            %a.f16.font-color1#video 视频课时
-          %li
-            %a.f16.font-color1#audio 音频课时
+.main-content.bg2
+  %button.btn.new-normal.font-color1.btn-position#new-template{type: "button"} 上传课时
+  .table-div
+    .tabbable
+      %ul.nav.nav-tabs
+        %li.active
+          %a.f16.font-color1#video 视频课时
+        %li
+          %a.f16.font-color1#audio 音频课时
 
-        .tab-content.bg3
-          #tab1.tab-pane.active
-            .desc-div
+      .tab-content.bg3
+        #tab1.tab-pane.active
+          .desc-div
+            - if(count($items) == 0) 
+              .undiscover.f14
+                %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+            - else
               .table-box
                 %table.table.table-hover.table-height.f14
                   %thead.th-bg.font-color2

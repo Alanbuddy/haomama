@@ -59,6 +59,7 @@ class UserController extends Controller
             default:
                 $view = 'admin.user.index';
         }
+        // dd($items);
         return view($view, [
             'items' => $items
         ]);
