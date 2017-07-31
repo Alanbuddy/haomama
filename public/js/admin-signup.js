@@ -89,9 +89,12 @@ $(document).ready(function() {
         captcha: verify_code,
         _token: window.token
       },
-      async: false,
-      success: function(){
-        showMsg("您已注册成功，请通知管理员开通您的账号", "center");
+      async: true,
+      success: function(data){
+        if (data.success){
+          location.href = window.login;
+          showMsg("您已注册成功，请通知管理员开通您的账号", "center");
+        }
       }
     }); 
   }
