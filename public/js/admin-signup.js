@@ -75,6 +75,10 @@ $(document).ready(function() {
     var verify_code = $("#mobilecode").val();
     var password = $("#password").val();
     var password_again = $("#password_again").val();
+    if(password.length < 6 || password_again.length < 6){
+      $("#code_notice").text("密码不能小于６位").css("visibility", "visible");
+      return false;
+    }
     if (password != password_again) {
       toggle_password_tip(true);
       return false;
