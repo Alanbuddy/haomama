@@ -91,31 +91,9 @@ $(document).ready(function() {
       },
       async: false,
       success: function(){
-        location.href = window.home_page;
+        showMsg("您已注册成功，请通知管理员开通您的账号", "center");
       }
-    });
-
-    // $.postJSON(
-    //   window.register,
-    //   {
-    //     phone: phone,
-    //     password: password,
-    //     password_confirmation: password_again,
-    //     captcha: verify_code,
-    //     _token: window.token
-    //   },
-    //   function(data){
-    //     console.log(ajax.status);
-    //     if (ajax.status == 302) {
-    //       location.href = window.home_page;
-    //     }
-    //     // else
-    //     //   if data.code == WRONG_VERIFY_CODE
-    //     //    $("#code_notice").text("验证码错误").css("visibility", "visible")
-    //     //   if data.code == USER_NOT_EXIST
-    //     //     $("#mobile_notice").text("账号不存在").css("visibility", "visible")
-    //   }
-    //   ); 
+    }); 
   }
 
   $("#signup_btn").click(function(){
