@@ -10,6 +10,11 @@ class AdminController extends Controller
 {
     use IO;
 
+    function __construct()
+    {
+        $this->middleware('role:admin')->except('profile');
+    }
+
     /**
      * Display a listing of the resource.
      *
