@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use App\Http\Controllers\OrderController;
 use App\Http\Util\Curl;
 use App\Models\Order;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -50,15 +52,22 @@ class test extends Command
      */
     public function handle()
     {
+        foreach (User::get() as $user){
+            if(!$user->hasRole('admin')&&!$user->hasRole('operator')){
+                $user->attachRole(Role::find(2));
+            }
+        }
 //        MessageFacade::send)BuyCompletedMessage(User::find(1), Course::find(1));
         $str = '/var/www/baby.com/storage/app/video/phpLeB0hE';
 //        $this->info(substr($str,strpos()))
+
 //        Storage::delete('video');
-        $directory = public_path('');
-        $files = Storage::files($directory);
-        var_dump($files);
-        Storage::deleteDirectory('video');
-        $this->info(md5(uniqid(rand(), true)));
+//        $directory = public_path('');
+//        $files = Storage::files($directory);
+//        var_dump($files);
+//        Storage::deleteDirectory('video');
+//        $this->info(md5(uniqid(rand(), true)));
+
 //        $this->refundOrder();
     }
 
