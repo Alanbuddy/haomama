@@ -17,7 +17,7 @@ class SmsController extends Controller
                 return ['success' => true];
             }
         }
-        return ['success' => false, 'data' =>isset($arr)?$arr[2]:$response];
+        return ['success' => false, 'message' =>$response['message']];
     }
 
     public static function residual()
