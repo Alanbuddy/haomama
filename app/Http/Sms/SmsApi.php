@@ -25,11 +25,12 @@ class SmsApi
     {
         session(['mobile' => $request->mobile]);
         $code = rand(100000, 999999);
-//        session(['code'=>$code]);
-        session(['code' => 111111]);
+        session(['code'=>$code]);
+//        session(['code' => 111111]);
 
         $content = '验证码:' . $code.' 【好妈妈微课】';
-        return static::sendSms(['18911209450'], $content);
+//        return static::sendSms(['18911209450'], $content);
+        return static::sendSms([$request->mobile], $content);
     }
 
     //查询余量
