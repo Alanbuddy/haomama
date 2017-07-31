@@ -263,6 +263,7 @@ class UserController extends Controller
     {
         $user->status = 'disabled';
         $user->save();
+        $user->attachRole(Role::find(2));
         return ['success' => true];
     }
 
@@ -271,6 +272,7 @@ class UserController extends Controller
     {
         $user->status = 'enabled';
         $user->save();
+        $user->attachRole(Role::find(2));
         return ['success' => true];
     }
 
