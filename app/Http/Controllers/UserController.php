@@ -30,6 +30,11 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $type = $request->get('type', 'user');
+        if($type=='operator'){
+            if(!auth()->user()->hasRole('admin')){
+                return back();
+            }
+        }
         if ($type != 'user') {
             $roles = array_map(function ($v) {
                 return $v->name;

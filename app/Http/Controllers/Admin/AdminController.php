@@ -94,8 +94,8 @@ class AdminController extends Controller
     //后台的账号设置页面
     public function profile(Request $request)
     {
+        $user = auth()->user();
         if ($request->isMethod('POST')) {
-            $user = auth()->user();
             //修改头像
             if ($request->hasFile('avatar')) {
                 $avatar = $this->moveAndStore($request, 'avatar');
@@ -108,6 +108,6 @@ class AdminController extends Controller
             }
             $user->save();
         }
-        return view('admin.user.profile');
+        return view('admin.user.profile',compact('user'));
     }
 }
