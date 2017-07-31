@@ -10,6 +10,11 @@ class AdminController extends Controller
 {
     use IO;
 
+    function __construct()
+    {
+        $this->middleware('role:admin')->except('profile');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -107,6 +112,9 @@ class AdminController extends Controller
                 $user->name = $request->get('name');
             }
             $user->save();
+        }
+        if($request->ajax()){
+            return ['success'=>true];
         }
         return view('admin.user.profile',compact('user'));
     }
