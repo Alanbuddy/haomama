@@ -14,7 +14,7 @@ class UserController extends Controller
 
     function __construct()
     {
-//        $this->middleware('role:admin')->except(['show', 'vote']);
+        $this->middleware('role:admin')->only(['index']);
     }
 
     /**

@@ -282,4 +282,18 @@ class LessonController extends Controller
             $comment->hasVoted = $hasVoted;
         }
     }
+
+    public function adminSearch(Request $request)
+    {
+        if ($request->has('key')) {
+            $items = Lesson::where('name','like','%'.$request->key.'')
+                ->orderBy('id','desc')
+                ->paginate(10);
+//            dd($items);
+            return view('admin.lesson.index', [
+                'items' => $items,
+            ]);
+        }
+        return redirect()->route('lessons.index');
+    }
 }
