@@ -43,7 +43,8 @@ class UserController extends Controller
                 ? $role->users()->paginate(10)
                 : [];
         } else {
-            $items = User::addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))
+            $items = User::select('users.*')
+                ->addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))
                 ->paginate(10);
         }
         switch ($type) {
