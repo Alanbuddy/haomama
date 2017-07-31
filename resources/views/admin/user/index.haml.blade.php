@@ -41,7 +41,7 @@
                       %tr
                         %td= $item->phone
                         %td= $item->name
-                        %td 新注册账号/正常/关闭
+                        %td.status= empty($item->status) ? "新注册账号" : $item->status 
                         %td
                           // %a.change_status.available.font-color-brown{:href => "javascript:void(0);"} 关闭
                           %a.change_status.unavailable.font-color-green{:href => "javascript:void(0);"} 开通

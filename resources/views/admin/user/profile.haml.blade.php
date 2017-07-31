@@ -26,11 +26,11 @@
             .person-div
               %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
               .photo-div#preview
-                %img.bg2.photo#imghead{src: "icon/admin/default.png", onclick: "$('#previewImg').click()"}
+                %img.bg2.photo#imghead{src: $user->avatar ?  $user->avatar : "icon/admin/default.png", onclick: "$('#previewImg').click()"}
                 %img.figure{src: "icon/admin/photo.png"}
               %p.mobile
                 %span.f20.font-color3.mobile-num 手机号:
-                %span.f20.font-color3 13232344345
+                %span.f20.font-color3= $user->phone
               %p
                 %span.f20.font-color3.name 姓名:
                 %input.form-control.font-color3#user_name{placeholder: "请输入姓名", value: ""}

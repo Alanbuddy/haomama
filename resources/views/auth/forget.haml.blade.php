@@ -14,7 +14,7 @@
     
     <link rel="stylesheet" href="{{ mix('/css/forget.css') }}">  
     :javascript
-      window.sms_send = "#{route('sms.send')}"
+      window.sms_send = "#{route('password.sms.send')}"
       window.sms_verify = "#{route('sms.verify')}"
       window.token = "#{csrf_token()}"
       window.login = "#{route('login')}"
