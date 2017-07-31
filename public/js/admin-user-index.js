@@ -49,9 +49,14 @@ $(document).ready(function(){
     var uid = $(this).closest('td').siblings('.open-close').attr("data-id");
     console.log(uid);
     _this = $(this);
+    var destroy = "DELETE";
     $.ajax({
       url: window.delete.replace(/-1/, uid),
-      type: 'get',
+      type: 'post',
+      data: {
+        _method: destroy,
+        token: window.token
+      },
       success: function(data){
         console.log(data);
         if(data.success){
