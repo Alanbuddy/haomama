@@ -12,6 +12,7 @@
     %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
     // %link{:href => "css/sign-layout.css", :rel => "stylesheet"}
     %link{:href => "css/offline_layout.css", :rel => "stylesheet"}
+    %link{:href => "css/plugin/pagination.css", :rel => "stylesheet"}
     <link rel="stylesheet" href="{{ mix('/css/signup.css') }}"> 
     :javascript
       window.sms_send = "#{route('sms.send')}"
@@ -53,6 +54,8 @@
     <script src = "js/regex.js"></script>
     <script src= "{{mix('/js/signup.js')}}"></script>
     <script src= "js/admin-signup.js"></script>
+    <script src = "js/mobile-notification.js"></script>
+    
 
 
 
