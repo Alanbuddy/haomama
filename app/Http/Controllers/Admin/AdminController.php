@@ -113,6 +113,9 @@ class AdminController extends Controller
             }
             $user->save();
         }
+        if($request->ajax()){
+            return ['success'=>true];
+        }
         return view('admin.user.profile',compact('user'));
     }
 }

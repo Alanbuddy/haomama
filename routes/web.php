@@ -36,7 +36,7 @@ include('test.php');
 Route::any('/haml', 'TestController@index');
 
 Route::group([
-    'middleware' => ['web', 'auth', 'role:admin'],
+    'middleware' => ['web', 'auth'],
     'namespace' => 'Admin',
     'prefix' => 'admin'
 ], function () {
