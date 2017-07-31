@@ -45,7 +45,6 @@ class UserController extends Controller
         } else {
             $items = User::addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))
                 ->paginate(10);
-            dd($items);
         }
         switch ($type) {
             case 'user':
