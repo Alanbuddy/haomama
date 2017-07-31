@@ -49,7 +49,7 @@ class WxApi
         $accessToken = Setting::where('key', 'access_token')->first();
         $data = json_decode($accessToken->value);
 //        dd(time().' '.$data->expire_time);
-        if ($data->expire_time < time()||$forceRefresh) {
+        if ($data->expire_time < time() || $forceRefresh) {
             Log::info("access token expired  !!!");
             $url = "https://api.weixin.qq.com/cgi-bin/token";
             $queryData = [
@@ -83,14 +83,22 @@ class WxApi
         return $response;
     }
 
+    //获取用户基本信息（包括UnionID机制）
+    //https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140839
+    public static function commonUserInfo($accessToken, $openId)
+    {
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $accessToken . '&openid=' . $openId . '&lang=zh_CN';
+        $response = self::request($url);
+        return $response;
+    }
+
     /**
      * copy from app/Http/Wechat/sdk/lib/WxPay.Api.php:435
      * 产生随机字符串，不长于32位
      * @param int $length
      * @return 产生的随机字符串
      */
-    public
-    static function getNonceStr($length = 32)
+    public static function getNonceStr($length = 32)
     {
         $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
         $str = "";
@@ -104,8 +112,7 @@ class WxApi
      * 生成签名
      * @return 签名
      */
-    public
-    static function makeSign($values)
+    public static function makeSign($values)
     {
         //签名步骤一：按字典序排序参数
         ksort($values);
@@ -123,8 +130,7 @@ class WxApi
      * copy from \App\Http\Wechat\sdk\lib\WxPayDataBase::ToUrlParams
      * 格式化参数格式化成url参数
      */
-    public
-    static function toUrlParams($values)
+    public static function toUrlParams($values)
     {
         $buff = "";
         foreach ($values as $k => $v) {

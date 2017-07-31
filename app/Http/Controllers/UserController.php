@@ -44,7 +44,7 @@ class UserController extends Controller
                 : [];
         } else {
             $items = User::select('users.*')
-                ->addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))
+                ->addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))//没有用到
                 ->paginate(10);
         }
         switch ($type) {
