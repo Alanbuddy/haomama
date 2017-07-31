@@ -47,7 +47,7 @@
                     - foreach($items as $item)
                       %tr
                         %td.client-show{rowspan: count($item->baby)}= $item->openid
-                        %td{rowspan: count($item->baby)}= $item->wx
+                        %td{rowspan: count($item->baby)}= $item->wx_nickname ? $item->wx_nickname : "无"  
                         %td{rowspan: count($item->baby)}= $item->phone
                         %td{rowspan: count($item->baby)}= $item->parenthood
                         - if(count($item->baby) == 0)
