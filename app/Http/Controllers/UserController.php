@@ -274,7 +274,8 @@ class UserController extends Controller
     {
         $user->status = 'enabled';
         $user->save();
-        $user->attachRole(Role::find(2));
+        if (!$user->hasRole('operator'))
+            $user->attachRole(Role::find(2));
         return ['success' => true];
     }
 
