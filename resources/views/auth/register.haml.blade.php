@@ -19,6 +19,7 @@
       window.token = "#{csrf_token()}"
       window.register = "#{route('register')}"
       window.login = "#{route('login')}"
+      window.logout = "#{route('logout')}"
       window.validmobile = "#{route('validate.phone')}"
       window.home_page = "#{route('courses.index')}"
   %body
