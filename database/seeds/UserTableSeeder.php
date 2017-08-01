@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder
         $this->seedTeacher();
 
         //user
-        $this->seedUser();
+//        $this->seedUser();
     }
 
     /**

@@ -102,20 +102,25 @@ class AdminController extends Controller
         $user = auth()->user();
         if ($request->isMethod('POST')) {
             //修改头像
-            if ($request->hasFile('avatar')) {
-                $avatar = $this->moveAndStore($request, 'avatar');
-                $user->$avatar = $avatar;
+            if ($request->has('avatar')
+                && preg_match('/^(data:\s*image\/(\w+);base64,)/', $request->get('avatar'), $result)
+            ) {
+                //保存base64字符串为图片 //匹配出图片的格式
+                $suffix = $result[2];
+                $avatar = "images/" . time() . ".{$suffix}";
+                file_put_contents($avatar, base64_decode(str_replace($result[1], '', $request->get('avatar'))));
+                $user->avatar = $avatar;
             }
 
             //修改名字
-            if ($request->get('name')) {
+            if ($request->has('name')) {
                 $user->name = $request->get('name');
             }
             $user->save();
         }
-        if($request->ajax()){
-            return ['success'=>true];
+        if ($request->ajax()) {
+            return ['success' => true];
         }
-        return view('admin.user.profile',compact('user'));
+        return view('admin.user.profile', compact('user'));
     }
 }
