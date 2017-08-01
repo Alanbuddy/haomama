@@ -36,7 +36,7 @@ class SettingController extends Controller
                 $arr[$category->name] = $category->hotCourseByCategory->first()?: null;
             }
 //            dd($arr);
-            return view('setting.recommend_course', [
+            return view('admin.setting.recommend_course', [
                 'items' => $arr
             ]);
         }
