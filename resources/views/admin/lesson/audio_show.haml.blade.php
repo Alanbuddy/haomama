@@ -64,7 +64,7 @@
                 - foreach($pictures as $picture)
                   .img-item
                     %img.show-img{src: $picture->path}
-                    // %p.img-index 01
+                    // %p.img-index 01  //播放顺序，看需求需要添加吗
                     %p.img-time= $picture->pivot->no
 
               #uploader_img.wu-example.edit-box
