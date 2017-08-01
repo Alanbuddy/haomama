@@ -88,7 +88,8 @@ trait ResetsPasswords
     protected function credentials(Request $request)
     {
         return $request->only(
-            'phone', 'password', 'password_confirmation'
+//            'phone', 'password', 'password_confirmation'
+            'phone', 'password', 'password_confirmation', 'token'
 //            'email', 'password', 'password_confirmation', 'token'
         );
     }
