@@ -10,7 +10,6 @@
     %title 好妈妈微学院
     %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "css/sign-layout.css", :rel => "stylesheet"}
-    
     <link rel="stylesheet" href="{{ mix('/css/forget.css') }}">  
     :javascript
       window.sms_send = "#{route('password.sms.send')}"
