@@ -49,7 +49,7 @@
                 %label.input-caption 课程价格:
                 %input.form-control.input-width#course-price{:type => "text"}
                 %label.input-caption 促销价格:
-                %input.form-control.input-width#pay-price{:type => "text"}
+                %input.form-control.input-width#pay-price{:type => "text", placeholder: "选填"}
             %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
             .photo#preview
               %img.edit-photo#imghead{src: "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}

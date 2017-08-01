@@ -32,7 +32,7 @@ $(document).ready(function(){
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
         '<img class="edit-img-item">' +
-        '<img class="delete" src="/icon/admin/delete2.png">' +
+        '<img class="delete" src="icon/admin/delete2.png">' +
         '<h4 class="info">' + file.name + '</h4>' +
         '<p class="path"></p>' +
         '<p class="state">等待上传...</p>' +

@@ -51,9 +51,9 @@
                   %input.form-control.input-width#mail{:type => "text"}
             %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
             .photo#preview
-              %img.unedit-box.teacher-avatar{src: $user->avatar ? $user->avatar : "icon/teacher_avatar.png"}
-              %img.edit-box.edit-photo#imghead{src: $user->avatar ? $user->avatar : "icon/admin/add3.png", onclick: "$('#previewImg').click()"}
-            %span.cover-path{style: "display:none;"}= $user->avatar
+              %img.unedit-box.teacher-avatar{src: $user->avatar ? strpos($user->avatar, '/')==0?substr($user->avatar,1):$user->avatar : "icon/teacher_avatar.png"}
+              %img.edit-box.edit-photo#imghead{src: $user->avatar ? strpos($user->avatar, '/')==0?substr($user->avatar,1):$user->avatar : "icon/admin/add3.png", onclick: "$('#previewImg').click()"}
+            %span.cover-path{style: "display:none;"}= $user->avatar ? strpos($user->avatar, '/')==0?substr($user->avatar,1):$user->avatar : "icon/teacher_avatar.png"
               
           .controls-div.font-color3.f14
             .controls.controls-row

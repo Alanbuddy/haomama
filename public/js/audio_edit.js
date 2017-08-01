@@ -135,7 +135,7 @@ $(document).ready(function(){
         '<p class="img_wrap"><img></p>' +
         '<h4 class="info_img">' + file.name + '</h4>' +
         '<p class="state_img">等待上传...</p>' +
-        '<img src="/icon/admin/rubbish.png" class="delete_img">' +
+        '<img src="icon/admin/rubbish.png" class="delete_img">' +
         '<span class="data-id"></span>' +
         '<input class="img_time" placeholder="请输入时间">' +
     '</div>' );
