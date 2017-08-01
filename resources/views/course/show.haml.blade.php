@@ -28,6 +28,7 @@
       %span.f12.category-class= $course['category_id']
     .course-row-div.color7.status-flex
       %span.name-span.f16.fb.color7= $course['name']
+      %span.course-id{style: "display:none;"}= $course['id']
       - if ($course['type'] == "offline")
         %span.course-status.f8 线下
     .btn#test-btn{type: "button"}
@@ -88,7 +89,6 @@
 - else
   .course-content
     %span.title.f14.color7.fb 课程目录
-    %span.course-id{style: "display:none;"}= $course['id']
     - if (count($lessons) > 3)
       %span.f12.color7= "(共".count($lessons)."节)"
     .items-div.online-course
