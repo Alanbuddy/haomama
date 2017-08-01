@@ -3,7 +3,7 @@
 $(document).ready(function($){
   function check_status(){
     var enroll = window.enroll;
-    var img = $("<img class='free-icon' src= '/icon/free.png'>");
+    var img = $("<img class='free-icon' src= 'icon/free.png'>");
     $(".nums-div a:eq(0)").find("span").before(img);
     if (!enroll) {
       $(".nums-div a:eq(0)").addClass("red-border");
@@ -22,7 +22,7 @@ $(document).ready(function($){
     }
     $(".nums-div a").each(function(){
       var newest = $(this).attr("data-newest");
-      var new_img = $("<img class='new-icon' src= '/icon/new.png'>");
+      var new_img = $("<img class='new-icon' src= 'icon/new.png'>");
       if (newest == true) {
         $(this).find("span").before(new_img);
       }

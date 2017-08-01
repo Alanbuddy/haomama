@@ -73,7 +73,7 @@
                     %p.img_wrap
                       %img{:src => $picture->path}
                     %h4.info_img= $picture->file_name
-                    %img.old_delete_img{:src => "/icon/admin/rubbish.png"}
+                    %img.old_delete_img{:src => "icon/admin/rubbish.png"}
                     %span.old-data-id= $picture->id
                     %input.old_img_time{:placeholder => "请输入时间", value: $picture->pivot->no}
                 .btns

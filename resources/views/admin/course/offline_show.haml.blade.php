@@ -72,7 +72,7 @@
             .photo#preview
               %img.unedit-box.unedit-photo{src: $course->cover ? $course->cover : "icon/admin/photo-course.png"}
               %img.edit-box.edit-photo#imghead{src: $course->cover ? $course->cover : "icon/admin/photo-course.png", onclick: "$('#previewImg').click()"}
-            %span.cover-path{style: "display:none;"}
+            %span.cover-path{style: "display:none;"}= $course->cover ? $course->cover : "icon/admin/photo-course.png"
 
           .controls-div.font-color3.f14
             .controls.controls-row

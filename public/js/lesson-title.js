@@ -228,12 +228,12 @@ $(document).ready(function(){
     $("#shelfModal").modal("hide");
   });
   
-  function check_input(name, length, ori_price, price){
+  function check_input(name, length, ori_price){
     if(name == ""){
       showMsg("课程名称必须填写", "center");
       return false;
     }
-    if(!$.isNumeric(length) || !$.isNumeric(ori_price) || !$.isNumeric(price)){
+    if(!$.isNumeric(length) || !$.isNumeric(ori_price)){
       showMsg("请输入正确的数字", "center");
       return false;
     }
@@ -266,7 +266,7 @@ $(document).ready(function(){
     var path = $(".cover-path").text();
     var online = "online";
     
-    var ret = check_input(name, length, original_price, price);
+    var ret = check_input(name, length, original_price);
     if(ret == false) {
       return false;
     }
