@@ -64,7 +64,6 @@
               %span.introduce 讲师介绍:
               %span.wangedit-area
                 #edit-area
-                  %p 必填,限100字内
               
 @endsection
 
