@@ -190,6 +190,25 @@ $(document).ready(function($) {
     });
   });
 
+  $("#register").click(function(){
+    $.ajax({
+      url: window.order,
+      type: 'post',
+      data: {
+          course_id: cid,
+          _token: window.token,
+      },
+      success: function (resp) {
+          console.log(resp);
+          alert(JSON.stringify(resp));
+          $("#confirmModal").modal("hide");
+          signPackage = resp.data;
+          order=resp.data.order;
+          jsBrage();
+      }
+    });
+  });
+
   function jsBrage() {
       if (typeof WeixinJSBridge == 'undefined') {
           if (document.addEventListener) {
