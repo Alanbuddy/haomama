@@ -13,7 +13,7 @@ $(document).ready(function(){
   editor.create();
 
   function check_input(name, mobile, avatar, introduce, desc){
-    if(name == "" || mobile == "" || avatar == "" || introduce == "" || desc.length < 30){
+    if(name == "" || mobile == "" || avatar == "" || introduce == "" || desc == ""){
       showMsg("有必填项内容没有填写", "center");
       return false;
     }
