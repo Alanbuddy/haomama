@@ -10337,7 +10337,7 @@ return jQuery;
   search = function() {
     var value;
     value = $("#search-input").val();
-    return location.href = window.course_search + "?key=value";
+    return location.href = window.course_search + "?key=" + value;
   };
   $("#search-btn").click(function() {
     return search();
