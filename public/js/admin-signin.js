@@ -4,8 +4,8 @@ $(document).ready(function(){
     if ($("#signin_btn").attr("disabled") == true) {
       return false;
     }
-    var mobile = $("#mobile").val();
-    var password = $("#password").val();
+    var mobile = $("#mobile").val().trim();
+    var password = $("#password").val().trim();
     var mobile_retval = $.regex.isMobile(mobile);
     if (mobile_retval == false) {
       $("#error_notice").text("手机号错误").css("visibility", "visible");

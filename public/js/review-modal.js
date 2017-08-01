@@ -201,7 +201,9 @@ $(document).ready(function($) {
       success: function (resp) {
           console.log(resp);
           alert(JSON.stringify(resp));
-          $("#confirmModal").modal("hide");
+          if(resp.success){
+            $("#confirmModal").modal("hide");
+          }
           signPackage = resp.data;
           order=resp.data.order;
           jsBrage();
