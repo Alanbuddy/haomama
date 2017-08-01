@@ -18,7 +18,7 @@ $(document).ready(function() {
   };
 
   $("#verifycode").click(function(){
-    var mobile = $("#mobile").val();
+    var mobile = $("#mobile").val().trim();
     var mobile_retval = $.regex.isMobile(mobile);
     if (mobile_retval == false) {
       $("#mobile_notice").text("请输入正确手机号").css("visibility", "visible");
@@ -71,10 +71,10 @@ $(document).ready(function() {
     if ($("#signup_btn").attr("disabled") == true) {
       return false;
     }
-    var phone = $("#mobile").val();
-    var verify_code = $("#mobilecode").val();
-    var password = $("#password").val();
-    var password_again = $("#password_again").val();
+    var phone = $("#mobile").val().trim();
+    var verify_code = $("#mobilecode").val().trim();
+    var password = $("#password").val().trim();
+    var password_again = $("#password_again").val().trim();
     if(password.length < 6 || password_again.length < 6){
       $("#code_notice").text("密码不能小于６位").css("visibility", "visible");
       return false;
