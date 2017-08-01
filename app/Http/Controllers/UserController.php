@@ -55,8 +55,6 @@ class UserController extends Controller
                 $view = 'admin.teacher.index';
                 break;
             case 'operator':
-                if(!auth()->user()->hasRole('admin'))
-                    abort(403);
                 $view = 'admin.user.index';
                 break;
             default:
