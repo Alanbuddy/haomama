@@ -125,7 +125,7 @@ $(document).ready(function(){
       type: 'post',
       data: {
         key: name,
-        value: value,
+        value: JSON.stringify(value),
         _token: window.token
       },
       success: function(data){
