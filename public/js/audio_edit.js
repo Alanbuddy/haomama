@@ -264,7 +264,7 @@ $(document).ready(function(){
       };
       img_data.push(img_item);
     });
-    $(".old_pre_img").each(function(){
+    $(".old_pre_img:visible").each(function(){
       var id = $(this).find('.old-data-id').text();
       var time = parseInt($(this).find('.old_img_time').val());
       old_img_item = {
@@ -274,6 +274,10 @@ $(document).ready(function(){
       img_data.push(old_img_item);
     });
     console.log(img_data);
+    if(img_data.length == 0){
+      showMsg("图片没有上传", "center");
+      return false;
+    }
     var retval = null;
     $(".img_time").each(function(){
       console.log($(this).val());
