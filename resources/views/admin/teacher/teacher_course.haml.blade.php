@@ -21,6 +21,7 @@
       %ul.nav.nav-tabs
         %li
           %a.f16.font-color1#teacher-desc 讲师详情
+          %span.teacher-id{style: "display:none;"}= $user->id
         %li.active
           %a.f16.font-color1#course 开设课程
       .tab-content.bg3
@@ -57,7 +58,6 @@
                   %span.mr30= $ordersCount
                   %span 总课程收入:
                   %span= $totalIncome
-                %span.teacher-id{style: "display:none;"}= $user->id
 
                 %span.select-page.tag2-page
                   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
