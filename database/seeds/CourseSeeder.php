@@ -15,8 +15,6 @@ class CourseSeeder extends Seeder
 
         $this->selectLessons();
 
-        $this->setRecommendedCourse();
-
     }
 
     /**
@@ -67,10 +65,4 @@ class CourseSeeder extends Seeder
         }
     }
 
-    public function setRecommendedCourse()
-    {
-        DB::table('settings')->insert(['key' => 'recommendedCourse',
-            'value' => 12,
-        ]);
-    }
 }

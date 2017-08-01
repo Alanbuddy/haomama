@@ -15,5 +15,12 @@ class SettingSeeder extends Seeder
             'value' => '{"access_token":"example","expire_time":1497937039}' ]);
         DB::table('settings')->insert([ 'key' => 'carousel',
             'value' => '[]' ]);
+        $this->setRecommendedCourse();
+    }
+    public function setRecommendedCourse()
+    {
+        DB::table('settings')->insert(['key' => 'recommendedCourse',
+            'value' => '',
+        ]);
     }
 }

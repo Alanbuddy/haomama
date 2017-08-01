@@ -14,7 +14,7 @@ class UserController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin')->only(['index']);
+        $this->middleware('role:admin|operator')->only(['index']);
     }
 
     /**
@@ -55,10 +55,12 @@ class UserController extends Controller
                 $view = 'admin.teacher.index';
                 break;
             case 'operator':
+                if(!auth()->user()->hasRole('admin'))
+                    abort(403);
                 $view = 'admin.user.index';
                 break;
             default:
-                $view = 'admin.user.index';
+                $view = 'admin.client.index';
         }
         // dd($items);
         return view($view, [

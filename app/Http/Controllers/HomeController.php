@@ -228,7 +228,8 @@ class HomeController extends Controller
             $items = $prevPageItems->merge($currPageItems)->splice(0, $pageSize);
         } else {
             $items = $items->paginate($pageSize)->splice(0, $pageSize - count($recommendedCourse));
-            $items = $recommendedCourse->merge($items);
+            if (count($recommendedCourse))
+                $items = $recommendedCourse->merge($items);
         }
         $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
         return $items;
