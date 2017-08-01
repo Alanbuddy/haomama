@@ -15,7 +15,6 @@ class CourseSeeder extends Seeder
 
         $this->selectLessons();
 
-
     }
 
     /**
