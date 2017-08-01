@@ -60,8 +60,8 @@ Route::group([
     Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');
     Route::get('/courses/enrolled', 'CourseController@enrolledCourses')->name('courses.enrolled');//我加入的课程
     Route::get('/courses/favorited', 'CourseController@favoriteCourses')->name('courses.favorited');//我收藏的课程
-    Route::get('/admin/courses/{course}', 'CourseController@adminShow')->name('admin.courses.show');//后台课程详情页面
     Route::get('/admin/courses/search', 'CourseController@adminSearch')->name('admin.courses.search');
+    Route::get('/admin/courses/{course}', 'CourseController@adminShow')->name('admin.courses.show');//后台课程详情页面
     Route::resource('courses', 'CourseController');
     Route::get('/courses/{course}/lessons/edit', 'CourseController@editLessons')->name('courses.lessons.edit');
     Route::put('/courses/{course}/lessons/update', 'CourseController@updateLessons')->name('courses.lessons.update');

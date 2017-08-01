@@ -35,8 +35,8 @@ class SettingController extends Controller
             foreach ($categories as $category) {
                 $arr[$category->name] = $category->hotCourseByCategory->first()?: null;
             }
-//            dd($arr) i;
-            return view('admin.setting.index', [
+//            dd($arr);
+            return view('setting.recommend_course', [
                 'items' => $arr
             ]);
         }
