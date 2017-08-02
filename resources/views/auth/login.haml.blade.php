@@ -29,6 +29,8 @@
             %span.input-group-addon.password-photo
             %input.form-box.f16#password{placeholder: "请输入密码", type: "password"} 
           %p.notice.f14#error_notice 手机号或密码错误
+          - if(!empty($user))
+            %p.notice.f14#lock-notice 请通知管理员开通您的账号
           %button.btn.click-btn.f24#signin_btn{type: "button"} 立即登录
           .footer-div.clearfix
             %span.left.f16.fl.pointer#to_signup 立即注册

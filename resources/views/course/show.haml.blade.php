@@ -68,6 +68,7 @@
     %span.title.f14.color7.fb 课时情况
     - if ($hasEnrolled == true)
       %span.refund.f12.color5 退款
+      %span.uuid{style: "display:none;"}= $order->uuid
     .items-div.offline-lesson
       - for ($i=0;$i<count($lessons);$i++)
         .item.opt55{"data-id" => $lessons[$i]['id']}

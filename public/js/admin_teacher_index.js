@@ -10341,8 +10341,24 @@ module.exports = __webpack_require__(9);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $("#new-client").click(function() {
+  var search;
+  $("#new-client").click(function() {
     return location.href = window.teacher_new + "?type=teacher";
+  });
+  search = function() {
+    var value;
+    value = $("#search-input").val();
+    return location.href = window.teacher_index + "?key=" + value;
+  };
+  $("#search-btn").click(function() {
+    return search();
+  });
+  return $("#search-input").keydown(function(event) {
+    var code;
+    code = event.which;
+    if (code === 13) {
+      return search();
+    }
   });
 });
 

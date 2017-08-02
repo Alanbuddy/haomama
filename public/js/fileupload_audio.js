@@ -128,7 +128,7 @@ $(document).ready(function(){
     // chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
 
-  uploader_img.on( 'filesQueued', function( file ) {
+  uploader_img.on( 'fileQueued', function( file ) {
     $list_img.append( '<div id="' + file.id + '" class="pre_img">' +
         '<p class="img_wrap"><img></p>' +
         '<h4 class="info_img">' + file.name + '</h4>' +
@@ -230,7 +230,10 @@ $(document).ready(function(){
     var video_id = $(".video-id").text();
     var audio_id = $(".audio-id").text(); 
     console.log(title);
-
+    if (title == "" || audio_id == "" || desc == "" || img_data.length == 0){
+      showMsg("每一项都必须填写", "center");
+      return false;
+    }
     $.postJSON(
       window.lesson_store + "?type=audio",
       {
