@@ -4,6 +4,10 @@ $(document).ready(function(){
     $("#finish-btn").toggle();
     $(".unedit-box").toggle();
     $(".edit-box").toggle();
+    $("#new").val($("#new-span").text());
+    $("#health").val($("#health-span").text());
+    $("#mental").val($("#mental-span").text());
+    $("#grow").val($("#grow-span").text());
   });
 
   $("#course").click(function(){
@@ -121,5 +125,15 @@ $(document).ready(function(){
               $(".grow-id").text(ui.item.object_id);
             }
     });
+  
+  $("#finish-btn").click(function(){
+    var new_id = $(".new-id").text();
+    var health_id = $(".health-id").text();
+    var mental_id = $(".mental-id").text();
+    var grow_id = $(".grow-id").text();
+    var recommend = ["新课速递": new_id, "健康养育": health_id, "心理教育": mental_id, "自我成长": grow_id];
+
+
+  });
 
 });
