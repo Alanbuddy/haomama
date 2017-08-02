@@ -88,9 +88,9 @@ Route::group([
 
     Route::get('/orders/tmp', 'OrderController@tmp')->name('orders.finish');//跳转到完成支付提示页
     Route::post('/orders/pay', 'OrderController@pay')->name('orders.pay');//初始化支付
-    Route::get('/orders/{uuid}/refund', 'OrderController@refund')->name('orders.refund');
+    Route::get('/orders/{uuid}/refund', 'OrderController@refund')->name('orders.refund');//退款
     Route::resource('orders', 'OrderController', ['except' => 'store']);
-    Route::get('/orders/{uuid}/query', 'OrderController@queryOrder')->name('orders.payment.query');
+    Route::get('/orders/{uuid}/query', 'OrderController@queryOrder')->name('orders.payment.query');//从微信服务器查询订单
     Route::any('/orders/{uuid}/payment/update', 'OrderController@updatePaymentStatus')->name('orders.payment.update');
 
     Route::any('/profile', 'UserController@profile')->name('user.profile');

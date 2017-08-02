@@ -40,11 +40,6 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
-//            $user = $this->guard()->user();
-//            if ($user->hasRole('operator') && $user->status != 'enabled') {
-//                $this->logout($request);
-//                return ['success' => false, 'message' => '权限不足'];
-//            }
             return $this->sendLoginResponse($request);
         }
 

@@ -61,6 +61,8 @@ class UserController extends Controller
                 $view = 'admin.client.index';
         }
         // dd($items);
+        $items->withPath(route('users.index'));
+
         return view($view, [
             'items' => $items
         ]);
