@@ -10333,7 +10333,8 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $(".age").each(function() {
+  var search;
+  $(".age").each(function() {
     var age, birthday, t_year, td;
     birthday = $(this).text();
     if (birthday !== "无") {
@@ -10347,6 +10348,21 @@ return jQuery;
         age = age + "岁";
       }
       return $(this).text(age);
+    }
+  });
+  search = function() {
+    var value;
+    value = $("#search-input").val();
+    return location.href = window.client_index + "?key=" + value;
+  };
+  $("#search-btn").click(function() {
+    return search();
+  });
+  return $("#search-input").keydown(function(event) {
+    var code;
+    code = event.which;
+    if (code === 13) {
+      return search();
     }
   });
 });

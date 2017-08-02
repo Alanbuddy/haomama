@@ -164,10 +164,6 @@ $(document).ready(function($) {
     }
   });
 
-  // 还缺少报名和退款的代码
-  $(".refund").click(function(){
-    
-  });
 
   var order = null;
   var signPackage = null;
@@ -210,6 +206,23 @@ $(document).ready(function($) {
       }
     });
   });
+
+  $(".refund").click(function(){
+    var uuid = $(".uuid").text();
+    $.ajax({
+      type: 'get',
+      url: window.refund.replace(/-1/, uuid),
+      data: cid,
+      success: function(data){
+        if(data.success){
+          showMsg("退款成功", "center");
+        }else{
+          showMsg("退款失败", "center");
+        }
+      }
+    });
+  });
+
 
   function jsBrage() {
       if (typeof WeixinJSBridge == 'undefined') {

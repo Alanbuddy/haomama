@@ -7,7 +7,6 @@
     window.lesson_store = "#{route('lessons.store')}"
     window.video = "#{route('videos.store')}"
     window.token = "#{csrf_token()}"
-    window.client_index = "#{route('users.index')}"
   
 
 @endsection
@@ -23,9 +22,7 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 关注用户(34343)
-        %li
-          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 未关注用户(2345)
+          %a.f16.font-color1 用户搜索
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div
@@ -41,6 +38,7 @@
                       %th 微信名
                       %th 手机号码
                       %th 家长身份
+                      %th 关注状态
                       %th 宝宝姓名
                       %th 宝宝性别
                       %th 宝宝年龄
@@ -51,6 +49,7 @@
                         %td{rowspan: count($item->baby)}= $item->wx ? json_decode($item->wx)->nickname : "无"  
                         %td{rowspan: count($item->baby)}= $item->phone
                         %td{rowspan: count($item->baby)}= $item->parenthood
+                        %td{rowspan: count($item->baby)} 关注状态
                         - if(count($item->baby) == 0)
                           %td= "无"
                           %td= "无"
@@ -64,47 +63,6 @@
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
                   != $items->links()
-        #tab2.tab-pane
-          .desc-div
-            // - if @users[:data].length == 0
-            //   .undiscover.f14
-            //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-            // - else
-            .table-box.f14
-              %table.table.table-hover.table-height
-                %thead.th-bg.font-color2
-                  %tr
-                    %th 微信ID
-                    %th 微信名
-                    %th 手机号码
-                    %th 家长身份
-                    %th 宝宝姓名
-                    %th 宝宝性别
-                    %th 宝宝年龄
-                    %th 关注状态
-                %tbody.font-color3
-                  // - @users[:data].each do |u|
-                  %tr
-                    %td.client-show adfgafgafd132
-                    %td 风中凌乱
-                    %td 12324543546 
-                    %td 妈妈 
-                    %td 凉粉 
-                    %td 女 
-                    %td 3岁  
-                    %td 取消关注/或者未曾关注  
-                    // %td 未曾关注  
-            .select-page 
-              %span.totalitems 共2页，总计18条
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{href: "#"} «
-                  %li
-                    %a{href: "#"} 1
-                  %li
-                    %a{href: "#"} »
-
 @endsection
 
 @section('script')

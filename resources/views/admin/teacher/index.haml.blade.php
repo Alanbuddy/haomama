@@ -8,6 +8,7 @@
     window.video = "#{route('videos.store')}"
     window.token = "#{csrf_token()}"
     window.teacher_new = "#{route('users.create')}"
+    window.teacher_index = "#{route('users.index')."?type=teacher"}"
     
 
 @endsection
