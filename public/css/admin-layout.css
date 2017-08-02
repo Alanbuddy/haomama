@@ -398,6 +398,9 @@ a:hover {
 .left-border {
   border-left: 1px solid #adadbe;
 }
+.right-border {
+  border-right: 1px solid #adadbe;
+}
 .set li .dot {
   position: absolute;
   right: 3px;
