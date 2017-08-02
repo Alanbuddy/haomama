@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'sms',
     ],
 
     /*
@@ -102,7 +102,7 @@ return [
         'sms' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 5,
+            'expire' => 30,
             'column'=>'phone'
         ],
     ],

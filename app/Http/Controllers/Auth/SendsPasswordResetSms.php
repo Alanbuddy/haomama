@@ -23,7 +23,7 @@ trait SendsPasswordResetSms
     {
         $this->validate($request, ['phone' => 'required|digits:11']);
         $code = rand(100000, 999999);
-        $content = 'verification code ' . $code;
+        $content = '验证码:' . $code;
         $result = self::sendSms([$request->get('phone')], $content);
 //        $result = ['success' => true];
         if ($result['success']) {
