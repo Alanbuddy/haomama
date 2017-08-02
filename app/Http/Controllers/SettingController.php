@@ -122,6 +122,11 @@ class SettingController extends Controller
         return redirect()->route('settings.index');
     }
 
+    public function updateCourseRecommendation(Request $request)
+    {
+        
+    }
+
     /**
      * Remove the specified resource from storage.
      *
