@@ -645,7 +645,7 @@ class CourseController extends Controller
             $items = Search::search($request->key)
                 ->paginate(10);
 //            dd($items);
-            return view('admin.course.index', [
+            return view('admin.course.search', [
                 'items' => $items,
             ]);
         }
