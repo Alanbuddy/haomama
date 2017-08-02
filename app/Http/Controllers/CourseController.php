@@ -633,6 +633,8 @@ class CourseController extends Controller
                 'items' => $items,
             ]);
         }
+        if ($request->has('name'))
+            return $this->searchByName($request);
 
         //搜索页面
         $popularTags = Search::popularTags();
@@ -650,6 +652,16 @@ class CourseController extends Controller
             ]);
         }
         return redirect()->route('courses.index');
+    }
+
+    //后台设置推荐课程
+    public function searchByName(Request $request)
+    {
+        $name = $request->name;
+        $items = Course::where('status', 'publish')
+            ->where('name', 'like', '%' . $name . '%')
+            ->paginate(10);
+        return $items;
     }
 
 
