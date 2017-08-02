@@ -92,7 +92,7 @@ $(document).ready(function(){
       function(data){
         console.log(data);
         if (data.success) {
-          location.href = window.login;
+          location.href = window.course_index;
         }
         else{
           if(data.code == 'passwords.token'){

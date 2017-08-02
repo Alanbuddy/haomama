@@ -17,7 +17,8 @@
       window.token = "#{csrf_token()}"
       window.login = "#{route('login')}"
       window.validmobile = "#{route('validate.phone')}"
-      window.forget = "#{route('password.request')}" 
+      window.forget = "#{route('password.request')}"
+      window.course_index = "#{route('courses.index')}"
 
   %body
     .wrapper

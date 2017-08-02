@@ -23,11 +23,7 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a.f16.font-color1 当前课程
-        %li
-          %a.f16.font-color1 未开课程
-        %li
-          %a.f16.font-color1 结课课程
+          %a.f16.font-color1 课程搜索
 
       .tab-content.bg3
         #tab1.tab-pane.active
@@ -46,6 +42,7 @@
                       %th 授课老师
                       %th 当前价格
                       %th 推荐设置
+                      %th 课程状态
                   %tbody.font-color3
                     - foreach ($items as $course)
                       %tr
@@ -58,6 +55,7 @@
                             %span=$teacher->name 
                         %td=$course->price
                         %td=$course->recommendation
+                        %td 未开/结课
 
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
