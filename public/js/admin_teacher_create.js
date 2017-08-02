@@ -47,10 +47,10 @@ $(document).ready(function(){
       showMsg("邮箱输入不正确", "center");
       return false;
     }
-    if(!$.isNumeric(tel)){
-      showMsg("座机号输入不正确", "center");
-      return false;
-    }
+    // if(!$.regex.isPhone(tel)){
+    //   showMsg("座机号输入不正确", "center");
+    //   return false;
+    // }
     var description = {
       qq: tencent,
       book: book,
