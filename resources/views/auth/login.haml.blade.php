@@ -1,5 +1,5 @@
 !!!
-%html
+%html{user: !empty($user)?$user->id:''}
   %head
     %base{:href => $base_href}
     %meta{:charset => "utf-8"}
@@ -32,7 +32,7 @@
           %button.btn.click-btn.f24#signin_btn{type: "button"} 立即登录
           .footer-div.clearfix
             %span.left.f16.fl.pointer#to_signup 立即注册
-            %span.right.f16.fr.pointer#to_forget_password 忘记密码? 
+            %span.right.f16.fr.pointer#to_forget_password 忘记密码?
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src = "js/ajax.js"></script>

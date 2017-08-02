@@ -16,7 +16,8 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        $user=session('user')?:null;
+        return view('auth.login',compact('user'));
     }
 
     /**
@@ -39,11 +40,11 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
-            $user = $this->guard()->user();
-            if ($user->hasRole('operator') && $user->status != 'enabled') {
-                $this->logout($request);
-                return ['success' => false, 'message' => '权限不足'];
-            }
+//            $user = $this->guard()->user();
+//            if ($user->hasRole('operator') && $user->status != 'enabled') {
+//                $this->logout($request);
+//                return ['success' => false, 'message' => '权限不足'];
+//            }
             return $this->sendLoginResponse($request);
         }
 
