@@ -80,23 +80,6 @@ $(document).ready(function(){
       toggle_password_tip(true);
       return false;
     }
-    // $.ajax({
-    //   type: 'post',
-    //   url: window.forget,
-    //   data: {
-    //     phone: phone,
-    //     password: password,
-    //     password_confirmation: password_again,
-    //     token: verify_code,
-    //     _token: window.token
-    //   },
-    //   async: false,
-    //   success: function(){
-    //     alert("aaa");
-    //     location.href = window.login;
-    //   }
-    // });
-
     $.postJSON(
       window.forget,
       {
@@ -108,16 +91,21 @@ $(document).ready(function(){
       },
       function(data){
         console.log(data);
-        if (ajax.success) {
+        if (data.success) {
           location.href = window.login;
         }
-        // else
-        //   if data.code == WRONG_VERIFY_CODE
-        //    $("#code_notice").text("验证码错误").css("visibility", "visible")
-        //   if data.code == USER_NOT_EXIST
-        //     $("#mobile_notice").text("账号不存在").css("visibility", "visible")
-      }
-      ); 
+        else{
+          if(data.code == 'passwords.token'){
+            $("#code_notice").text("验证码无效").css("visibility", "visible");
+          }
+          if(data.code == 'passwords.password'){
+            $("#code_notice").text("密码无效").css("visibility", "visible");
+          }
+          if(data.code == 'passwords.user'){
+            $("#code_notice").text("用户不存在").css("visibility", "visible");
+          }
+        }
+      }); 
   }
 
   $("#confirm_btn").click(function(){

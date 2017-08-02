@@ -123,11 +123,12 @@ $(document).ready(function(){
     dnd: ".img-div",
     multiple: true,
     disableGlobalDnd: true,
+    duplicate: true,
     // chunked: true,     //是否要分片处理大文件上传
     // chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
 
-  uploader_img.on( 'fileQueued', function( file ) {
+  uploader_img.on( 'filesQueued', function( file ) {
     $list_img.append( '<div id="' + file.id + '" class="pre_img">' +
         '<p class="img_wrap"><img></p>' +
         '<h4 class="info_img">' + file.name + '</h4>' +

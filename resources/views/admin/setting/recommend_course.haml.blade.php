@@ -34,7 +34,7 @@
               // - foreach($arr as $item)
               .controls.controls-row
                 %label.input-caption 新课速递推荐:
-                %span.unedit-box.longspan
+                %span.unedit-box.longspan= $arr[0] ? $arr[0] : "无"
                 %span.edit-box
                   %input.input-area.form-control{:type => "text"}
               .controls.controls-row

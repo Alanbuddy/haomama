@@ -63,7 +63,7 @@
               %span.unedit-box.unedit-img-box
                 - foreach($pictures as $picture)
                   .img-item
-                    %img.show-img{src: $picture->path}
+                    %img.show-img{src: strpos($picture->path, '/')==0 ? substr($picture->path,1) : $picture->path}
                     // %p.img-index 01  //播放顺序，看需求需要添加吗
                     %p.img-time= $picture->pivot->no
 
@@ -71,7 +71,7 @@
                 - foreach($pictures as $picture)
                   .old_pre_img
                     %p.img_wrap
-                      %img{:src => $picture->path}
+                      %img{:src => strpos($picture->path, '/')==0 ? substr($picture->path,1) : $picture->path}
                     %h4.info_img= $picture->file_name
                     %img.old_delete_img{:src => "icon/admin/rubbish.png"}
                     %span.old-data-id= $picture->id
