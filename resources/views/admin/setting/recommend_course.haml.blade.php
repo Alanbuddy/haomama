@@ -31,25 +31,24 @@
         #tab2.tab-pane.active
           .desc-div
             .controls-div.font-color3.f14
-              // - foreach($arr as $item)
               .controls.controls-row
                 %label.input-caption 新课速递推荐:
-                %span.unedit-box.longspan= $arr[0] ? $arr[0] : "无"
+                %span.unedit-box.longspan= array_key_exists(0,$arr) ? $arr[0] : "无"
                 %span.edit-box
                   %input.input-area.form-control{:type => "text"}
               .controls.controls-row
                 %label.input-caption 健康养育推荐:
-                %span.unedit-box.longspan 课程的名字很长
+                %span.unedit-box.longspan= array_key_exists(1,$arr) ? $arr[1] : "无"
                 %span.edit-box
                   %input.input-area.form-control{:type => "text"}
               .controls.controls-row
                 %label.input-caption 心理教育推荐:
-                %span.unedit-box.longspan 课程的名字很长
+                %span.unedit-box.longspan= array_key_exists(2,$arr) ? $arr[2] : "无"
                 %span.edit-box
                   %input.input-area.form-control{:type => "text"}
               .controls.controls-row
                 %label.input-caption 自我成长推荐:
-                %span.unedit-box.longspan 无
+                %span.unedit-box.longspan= array_key_exists(3,$arr) ? $arr[3] : "无"
                 %span.edit-box
                   %input.input-area.form-control{:type => "text"}
 

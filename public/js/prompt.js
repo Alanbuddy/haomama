@@ -1,5 +1,4 @@
 
-
 $(document).ready(function($){
   function check_status(){
     var enroll = window.enroll;
