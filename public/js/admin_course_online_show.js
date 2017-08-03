@@ -14,6 +14,9 @@ $(document).ready(function(){
   editor.customConfig.uploadHeaders = {
     'Accept' : 'HTML'
   };
+  editor.customConfig.uploadParams = {
+    _token: window.token
+  };
   editor.create();
 
   $(".operation").click(function(){
