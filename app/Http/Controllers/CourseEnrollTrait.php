@@ -18,6 +18,8 @@ trait CourseEnrollTrait
     public function enroll(Course $course, $user_id = 0)
     {
         $user = auth()->user() ?: User::find($user_id);
+        if(empty($user))
+            throw new \Exception("User doesn't exist");
 //        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
 //        $course->users()->attach(auth()->user(), ['type' => $type]);
         $count = $course->users()

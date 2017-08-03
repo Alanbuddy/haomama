@@ -209,7 +209,7 @@ class CourseController extends Controller
 
         $lessons = $course->lessons()
             ->withPivot('created_at')
-            ->orderBy('no', 'desc')
+            ->orderBy('no')
             ->get();
 
         if (count($lessons)) {
@@ -280,7 +280,7 @@ class CourseController extends Controller
         $teachers = $course->teachers()->get();
         $lessons = $course->lessons()
             ->withPivot('created_at')
-            ->orderBy('no', 'desc')
+            ->orderBy('no')
             ->get();
         if ($course->cover && strpos($course->cover, '/') == 0)
             $course->cover = substr($course->cover, 1);
@@ -335,6 +335,8 @@ class CourseController extends Controller
             'name' => 'required',
             'type' => 'required',
             'minimum' => 'sometimes|required|numeric',
+            'price' => 'sometimes|numeric',
+            'original_price' => 'sometimes|numeric',
             'quota' => 'sometimes|numeric',
             'address' => 'sometimes',
         ]);
@@ -432,7 +434,6 @@ class CourseController extends Controller
         } catch (Exception $e) {
             return back()->withErrors('数据错误');
         }
-//        dd($changes);
         return redirect()->route('courses.lessons.edit', $course);
     }
 
