@@ -49,9 +49,9 @@ class FileController extends Controller
         if ($request->chunk == 0) {
             $file = File::find($request->file_id);
             $file->description = $request->chunks;
-            $attr=$this->getFileBaseInfo($request->file('file'));
+            $attr = $this->getFileBaseInfo($request->file('file'));
             $file->fill($attr);
-            if ($request->has('mime')){
+            if ($request->has('mime')) {
                 $file->mime = $request->mime;
             }
             $file->save();
@@ -61,6 +61,7 @@ class FileController extends Controller
 
     public function mergeFile(Request $request)
     {
+        $this->validate($request, ['file_id' => 'required']);
         $file = File::find($request->file_id);
         $ret = $this->merge($request, $file->description);
         return $ret;

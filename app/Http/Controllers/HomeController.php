@@ -8,13 +8,14 @@ use App\Models\Setting;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
-//        Auth::loginUsingId(1, true);
+//        Auth::loginUsingId(2, true);
         if ($request->route()->hasParameter('category')) {
             $categoryId = $request->route('category');
             $orderBy = $request->get('sort', 'time');

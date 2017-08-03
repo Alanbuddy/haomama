@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\enroll;
 use App\Console\Commands\test;
 use App\Console\Commands\WechatMessage;
 use Illuminate\Console\Scheduling\Schedule;
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
         //
         test::class,
         WechatMessage::class,
+        enroll::class,
     ];
 
     /**
