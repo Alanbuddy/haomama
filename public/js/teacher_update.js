@@ -35,7 +35,7 @@ $(document).ready(function(){
     $("#reward").val($("#reward-span").text());
     $("#book").val($("#book-span").text());
     $("#base").val($("#base-span").text());
-    desc = $("#desc-span").text();
+    desc = $("#desc-html").text();
     editor.txt.html(desc);
   });
   

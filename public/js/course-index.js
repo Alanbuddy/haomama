@@ -10374,6 +10374,7 @@ return jQuery;
     shortSwipes: false,
     touchAngle: 10,
     longSwipes: false,
+    iOSEdgeSwipeDetection: true,
     onSlideChangeStart: function() {
       $(".nav li").removeClass('active');
       return $(".nav li").eq(mySwiper.activeIndex).addClass('active');

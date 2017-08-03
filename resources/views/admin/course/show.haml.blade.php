@@ -114,7 +114,7 @@
               %span.unedit-box.introduce 课程课时:
               %span.edit-box 选择课时:
               %span.unedit-box.lesson-position
-                - foreach($course->lessons as $lesson)
+                - foreach($lessons as $lesson)
                   - if($lesson->type=='audio')
                     .caption-item
                       %img{src: "icon/admin/music-small.png"}
@@ -126,7 +126,7 @@
               %span.edit-box.addlesson 添加
               .lesson-title
                 %ol.example
-                  - foreach($course->lessons as $lesson)
+                  - foreach($lessons as $lesson)
                     - if($lesson->type == 'audio')
                       %li{"data-id" => $lesson->id}=$lesson->name
                     - if($lesson->type == "video")
