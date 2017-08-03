@@ -10369,10 +10369,7 @@ return jQuery;
   });
   mySwiper = new Swiper('.swiper-container', {
     speed: 300,
-    setWrapperSize: true,
-    followFinger: false,
-    shortSwipes: false,
-    touchAngle: 5,
+    touchAngle: 10,
     longSwipes: false,
     iOSEdgeSwipeDetection: true,
     longSwipes: false,
