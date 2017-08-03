@@ -171,7 +171,9 @@ class CourseController extends Controller
         $count = $this->hasEnrolled($course);
         $hasEnrolled = $count == 1 ? true : false;
         if ($hasEnrolled && $course->type == 'offline') {
-            $order = Order::where('user_id', auth()->user()->id)->where('product_id', $course->id);
+            $order = Order::where('user_id', auth()->user()->id)
+                ->where('product_id', $course->id)
+                ->orderBy('id','desc')->first();
         }
 
         $count = $this->hasFavorited($course);

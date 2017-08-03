@@ -177,8 +177,8 @@ $(document).ready(function($) {
           _token: window.token,
       },
       success: function (resp) {
-          console.log(resp);
-          alert(JSON.stringify(resp));
+          // console.log(resp);
+          // alert(JSON.stringify(resp));
           signPackage = resp.data;
           order=resp.data.order;
           jsBrage();
@@ -195,8 +195,7 @@ $(document).ready(function($) {
           _token: window.token,
       },
       success: function (resp) {
-          console.log(resp);
-          alert(JSON.stringify(resp));
+          // alert(JSON.stringify(resp));
           if(resp.success){
             $("#confirmModal").modal("hide");
           }
@@ -237,7 +236,7 @@ $(document).ready(function($) {
       }
   }
   function onBridgeReady() {
-      alert('signPackage.timeStamp='+signPackage.timeStamp);
+      // alert('signPackage.timeStamp='+signPackage.timeStamp);
       WeixinJSBridge.invoke('getBrandWCPayRequest', {
           'appId': ''+signPackage.appId,
           'timeStamp': ''+signPackage.timeStamp,
@@ -247,8 +246,6 @@ $(document).ready(function($) {
           'paySign': ''+signPackage.sign,
       }, function (res) {
           if (res.err_msg == 'get_brand_wcpay_request:ok') {
-              alert(res.err_msg);
-              alert(3);
               location.href = window.pay_finish + "?course_id=" + cid;
           } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
 
