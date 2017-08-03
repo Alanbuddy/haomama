@@ -33,8 +33,32 @@ $(document).ready(function($){
 		event.preventDefault();
 	});
 
+  //需要与后台商量 决定提交lesson-id 还是course-id
+  var order = null;
+  var signPackage = null;
+  var lid = $(".lesson-id").attr("data-id");
+  $("#register").click(function(){
+    $.ajax({
+      url: window.order,
+      type: 'post',
+      data: {
+          lesson_id: lid,
+          _token: window.token,
+      },
+      success: function (resp) {
+          // alert(JSON.stringify(resp));
+          if(resp.success){
+            $("#confirmModal").modal("hide");
+          }
+          signPackage = resp.data;
+          order=resp.data.order;
+          jsBrage();
+      }
+    });
+  });
+
   (function () {
-      var vodId = "{{config('vod.appId')}}";
+      var vodId = "{{config('vod.appId')}}";   //报错
       var file_id = $(".file-id").text();
       var option = {
           "auto_play": "1",
