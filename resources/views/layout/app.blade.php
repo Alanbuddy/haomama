@@ -73,7 +73,7 @@
 <script src= "{{mix('/js/layout.js')}}"></script>
 <script>
   wx.config({
-      debug: true,
+      debug: false,
       appId: '{{ $signPackage["appId"]}}',
       timestamp: '{{ $signPackage["timestamp"]}}',
       nonceStr: '{{ $signPackage["nonceStr"]}}',

@@ -168,6 +168,7 @@ class MessageService
             ];
             $result = WxMessageApi::send($access_token, $user->openid, $template_id, $url, $data);
 //        dd($result);
+            var_dump($result);
             if (json_decode($result['data'])->errcode > 0) {
                 Error::create([
                     'user_id' => 1,

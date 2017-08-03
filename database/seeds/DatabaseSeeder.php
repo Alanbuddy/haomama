@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EntrustSeeder::class);
         $this->call(SettingSeeder::class);
         $this->call(TagSeeder::class);
-//        $this->call(LessonSeeder::class);
-//        $this->call(CourseSeeder::class);
-//        $this->call(CourseUserSeeder::class);
+        $this->call(LessonSeeder::class);
+        $this->call(CourseSeeder::class);
+        $this->call(CourseUserSeeder::class);
 //        $this->call(CommentSeeder::class);
 //        DB::table('term_object')->insert(['term_id' => 1, 'object_id' => 1, 'type' => 'tag',]);
 //        DB::table('term_object')->insert(['term_id' => 2, 'object_id' => 1, 'type' => 'tag',]);
