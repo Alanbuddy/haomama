@@ -30,7 +30,7 @@ class FileController extends Controller
         $item->fill($this->getFileBaseInfo($file));
         $item->save();
         $path = substr($path->getPathName(), strlen(public_path()));
-        return $path;
+        return env('APP_URL').$path;
         return ['success' => true, 'path' => $path, 'data' => $item];
     }
 
