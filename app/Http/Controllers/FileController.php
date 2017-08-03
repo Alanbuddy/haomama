@@ -31,7 +31,7 @@ class FileController extends Controller
         $item->save();
         $path = substr($path->getPathName(), strlen(public_path()));
         if ($request->has('editor'))
-            return $path;
+            return ['errno' => 0, 'data' =>[ env('APP_URL') . $path]];
         return ['success' => true, 'path' => $path, 'data' => $item];
     }
 
