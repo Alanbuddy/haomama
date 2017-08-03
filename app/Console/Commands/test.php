@@ -52,11 +52,11 @@ class test extends Command
      */
     public function handle()
     {
-        foreach (User::get() as $user){
-            if(!$user->hasRole('admin')&&!$user->hasRole('operator')){
-                $user->attachRole(Role::find(2));
-            }
-        }
+//        foreach (User::get() as $user){
+//            if(!$user->hasRole('admin')&&!$user->hasRole('operator')){
+//                $user->attachRole(Role::find(2));
+//            }
+//        }
 //        MessageFacade::send)BuyCompletedMessage(User::find(1), Course::find(1));
         $str = '/var/www/baby.com/storage/app/video/phpLeB0hE';
 //        $this->info(substr($str,strpos()))
@@ -69,6 +69,7 @@ class test extends Command
 //        $this->info(md5(uniqid(rand(), true)));
 
 //        $this->refundOrder();
+        $this->refundAllOrder();
     }
 
     public function refundOrder()

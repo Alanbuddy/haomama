@@ -68,6 +68,19 @@ class UserController extends Controller
         ]);
     }
 
+    public function newOperatorCount()
+    {
+        $role=Role::where('name','operator')->first();
+        $items=$role->users;
+        $newOperators=[];
+        foreach ($items as $item){
+            if(empty($item->status)){
+                $newOperators[]=$item;
+            }
+        }
+        return count($newOperators);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
