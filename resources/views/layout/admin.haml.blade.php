@@ -21,6 +21,7 @@
       window.token = "#{csrf_token()}"
       window.teacher = "#{route('users.index')}"
       window.fileupload = "#{route('file.upload')}"
+      window.red_dot = "#{route('operator.count')}"
   %body
     .wrapper
       .layout-left
@@ -61,7 +62,7 @@
           @yield('search-input')
           %ul.set
             -if(auth()->user()->hasRole('admin'))
-              %li              
+              %li            
                 %a.f16.right-border{href: route('users.index')."?type=operator"} 人员管理
                 .dot
             %li

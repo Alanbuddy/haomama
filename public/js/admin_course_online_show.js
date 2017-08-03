@@ -53,7 +53,7 @@ $(document).ready(function(){
       teacher_arr.push($(this).text());
     });
     $("#teacher-show").text(teacher_arr);
-    var desc = $("#desc-span").text();
+    var desc = $("#desc-html").text();
     editor.txt.html(desc);
    
     var E = window.wangEditor;
@@ -357,7 +357,13 @@ $(document).ready(function(){
     var path = $(".cover-path").text();
     console.log(path);
     var online = "online";
-    
+    if (!$.isNumeric(price)){
+      price = null;
+    }
+    if(!$.isNumeric(category_id)){
+      showMsg("课程类型没有选择", "center");
+      return false;
+    }
     var ret = check_input(name, length, original_price);
     if(ret == false) {
       return false;

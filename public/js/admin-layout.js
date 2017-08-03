@@ -10356,7 +10356,7 @@ return jQuery;
       return $(this).closest("li.user_li").removeClass("active-li");
     }
   });
-  return $("#exit").click(function() {
+  $("#exit").click(function() {
     return $.ajax({
       type: 'post',
       url: window.logout,
@@ -10368,6 +10368,15 @@ return jQuery;
         return location.href = window.login;
       }
     });
+  });
+  return $.ajax({
+    type: 'get',
+    url: window.red_dot,
+    success: function(data) {
+      if (data > 0) {
+        return $(".dot").show();
+      }
+    }
   });
 });
 

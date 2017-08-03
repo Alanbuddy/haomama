@@ -409,6 +409,7 @@ a:hover {
   height: 6px;
   background: #e9657e;
   border-radius: 3px;
+  display: none;
 }
 
 

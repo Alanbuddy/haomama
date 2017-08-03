@@ -34,11 +34,12 @@ $(document).ready(function($){
 	});
 
   (function () {
+      var vodId = "{{config('vod.appId')}}";
       var file_id = $(".file-id").text();
       var option = {
           "auto_play": "1",
           "file_id": file_id,
-          "app_id": "1253793695",
+          "app_id": vodId,
           "width": 750,
           "height": 422,
           "https": 1

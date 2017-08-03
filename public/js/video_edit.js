@@ -142,7 +142,7 @@ $(document).ready(function(){
     $(".edit-box").toggle();
     $(".edit-box-uploader").css({"opacity":1, "filter": "Alpha(opacity=100)", "position": "relative"});
     $("#input-caption").val($("#caption-span").text());
-    var desc = $("#desc-span").text();
+    var desc = $("#desc-html").text();
     editor.txt.html(desc);
   });
 

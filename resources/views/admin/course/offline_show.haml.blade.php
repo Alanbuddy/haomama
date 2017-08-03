@@ -143,7 +143,8 @@
               
             .course-introduce.introduce-flex
               %span.introduce 课程介绍:
-              %span.unedit-box#desc-span.ml4= strip_tags(htmlspecialchars_decode($course->description))
+              %span.unedit-box#desc-span.ml4!= $course->description
+              %span#desc-html{style: "display:none;"}= $course->description
               %span.edit-box.wangedit-area
                 #edit-area
             .lesson-div.introduce-flex

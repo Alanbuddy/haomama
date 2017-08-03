@@ -55,7 +55,8 @@
             %span.video-id= $video->id
             .notice-introduce.introduce-flex
               %span.introduce 内容介绍:
-              %span.unedit-box.introduce-span#desc-span= strip_tags(htmlspecialchars_decode($lesson['description']))
+              %span.unedit-box.introduce-span#desc-span!= $lesson['description']
+              %span#desc-html{style: "display:none;"}= $lesson['description']
               %span.wangedit-area.edit-box
                 #edit-box
             .img-file.margin20

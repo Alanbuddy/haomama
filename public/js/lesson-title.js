@@ -265,7 +265,13 @@ $(document).ready(function(){
     });
     var path = $(".cover-path").text();
     var online = "online";
-    
+    if (!$.isNumeric(price)){
+      price = null;
+    }
+    if(!$.isNumeric(category_id)){
+      showMsg("课程类型没有选择", "center");
+      return false;
+    }
     var ret = check_input(name, length, original_price);
     if(ret == false) {
       return false;

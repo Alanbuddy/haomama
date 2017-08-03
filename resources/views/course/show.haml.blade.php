@@ -95,7 +95,8 @@
       %span.f12.color7= "(共".count($lessons)."节)"
     .items-div.online-course
       - for ($i=0;$i<count($lessons);$i++)
-        %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], "data-enrolled" => $hasEnrolled, href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
+        %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
+          %span.hasenrolled{style: "display:none;"}= $hasEnrolled
           %p.num-div.f16.color7= ($i + 1)
           - if ($lessons[$i]['status'] == 'publish')
             .item-desc

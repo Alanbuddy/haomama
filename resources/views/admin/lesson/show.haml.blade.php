@@ -58,7 +58,8 @@
            
             .notice-introduce.introduce-flex
               %span.introduce 内容介绍:
-              %span.unedit-box.ml4.introduce-span#desc-span= strip_tags(htmlspecialchars_decode($lesson->description))
+              %span.unedit-box.ml4.introduce-span#desc-span!= $lesson->description
+              %span#desc-html{style: "display:none;"}= $lesson->description
               %span.edit-box.wangedit-area
                 #edit-box
 

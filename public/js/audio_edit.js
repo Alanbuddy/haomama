@@ -221,7 +221,7 @@ $(document).ready(function(){
     $(".edit-box").toggle();
     $(".audio-unedit-box").toggle();
     $("#input-caption").val($("#name-span").text());
-    var desc = $("#desc-span").text();
+    var desc = $("#desc-html").text();
     editor.txt.html(desc);
     uploader.refresh();
 

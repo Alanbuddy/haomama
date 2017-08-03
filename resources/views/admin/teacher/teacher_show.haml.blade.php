@@ -91,7 +91,8 @@
                 %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内"}
             .course-introduce.introduce-flex
               %span.introduce 讲师介绍:
-              %span.unedit-box.longspan#desc-span= strip_tags(htmlspecialchars_decode($user->description->introduction))
+              %span.unedit-box.longspan#desc-span!= $user->description->introduction
+              %span#desc-html{style: "display:none;"}= $user->description->introduction
               %span.edit-box.wangedit-area
                 #edit-area
                 

@@ -10369,6 +10369,11 @@ return jQuery;
   });
   mySwiper = new Swiper('.swiper-container', {
     speed: 300,
+    setWrapperSize: true,
+    followFinger: false,
+    shortSwipes: false,
+    touchAngle: 10,
+    longSwipes: false,
     onSlideChangeStart: function() {
       $(".nav li").removeClass('active');
       return $(".nav li").eq(mySwiper.activeIndex).addClass('active');

@@ -27,5 +27,14 @@ $ ->
       success: ->
         location.href = window.login
     })
+
+
+  $.ajax({
+    type: 'get',
+    url: window.red_dot,
+    success: (data) ->
+      if data > 0
+        $(".dot").show()
+    })
   
 

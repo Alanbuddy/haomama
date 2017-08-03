@@ -147,7 +147,7 @@ $(document).ready(function($) {
 
   $(".online-course .item").each(function(){
     var status = $(this).attr("data-status");
-    var enroll = $(this).attr("data-enrolled");
+    var enroll = $(this).find(".hasenrolled").text();
     var _this = $(this);
     if (status != "publish") {
       _this.addClass("opt55");
@@ -178,7 +178,6 @@ $(document).ready(function($) {
       },
       success: function (resp) {
           // console.log(resp);
-          // alert(JSON.stringify(resp));
           signPackage = resp.data;
           order=resp.data.order;
           jsBrage();
