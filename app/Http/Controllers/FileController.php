@@ -29,7 +29,9 @@ class FileController extends Controller
         $item->user_id = auth()->user()->id;
         $item->fill($this->getFileBaseInfo($file));
         $item->save();
-        return ['success' => true, 'path' => substr($path->getPathName(), strlen(public_path())), 'data' => $item];
+        $path = substr($path->getPathName(), strlen(public_path()));
+        return $path;
+        return ['success' => true, 'path' => $path, 'data' => $item];
     }
 
     public function initChunkUpload(Request $request)
