@@ -39,6 +39,8 @@ $ ->
     touchAngle : 10,
     longSwipes : false,
     iOSEdgeSwipeDetection : true,
+    longSwipes : false,
+    longSwipesMs : 100,
     onSlideChangeStart : ->
       $(".nav li").removeClass('active')
       $(".nav li").eq(mySwiper.activeIndex).addClass('active')
