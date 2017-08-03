@@ -10372,11 +10372,13 @@ return jQuery;
     setWrapperSize: true,
     followFinger: false,
     shortSwipes: false,
-    touchAngle: 10,
+    touchAngle: 5,
     longSwipes: false,
     iOSEdgeSwipeDetection: true,
     longSwipes: false,
-    longSwipesMs: 100,
+    longSwipesMs: 500,
+    simulateTouch: false,
+    threshold: 100,
     onSlideChangeStart: function() {
       $(".nav li").removeClass('active');
       return $(".nav li").eq(mySwiper.activeIndex).addClass('active');
