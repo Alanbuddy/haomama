@@ -124,7 +124,19 @@ class SettingController extends Controller
 
     public function updateCourseRecommendation(Request $request)
     {
-        
+        $arr=$request->settins;
+        if(count($arr)){
+            foreach ($arr as $k=>$v){
+                if($k==0){
+                    updateGlobalRecommendedCourse($v);
+                    continue;
+                }else{
+                    $course=Course::find($v);
+                    $course->where('hot')->true;
+                    $course->save();
+                }
+            }
+        }
     }
 
     /**
