@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LessonSeeder::class);
         $this->call(CourseSeeder::class);
         $this->call(CourseUserSeeder::class);
-//        $this->call(CommentSeeder::class);
+        $this->call(CommentSeeder::class);
 //        DB::table('term_object')->insert(['term_id' => 1, 'object_id' => 1, 'type' => 'tag',]);
 //        DB::table('term_object')->insert(['term_id' => 2, 'object_id' => 1, 'type' => 'tag',]);
 //        DB::table('term_object')->insert(['term_id' => 3, 'object_id' => 1, 'type' => 'tag',]);
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
 //        DB::table('term_object')->insert(['term_id' => 1, 'object_id' => 5, 'type' => 'tag',]);
 //        DB::table('term_object')->insert(['term_id' => 2, 'object_id' => 5, 'type' => 'tag',]);
 //        DB::table('term_object')->insert(['term_id' => 3, 'object_id' => 5, 'type' => 'tag',]);
-//        $this->call(VoteSeeder::class);
+        $this->call(VoteSeeder::class);
 
     }
 }
