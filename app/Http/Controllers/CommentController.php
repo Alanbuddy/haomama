@@ -110,8 +110,6 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $comment->fill($request->only([
-            'content',
-            'star',
             'validity'
         ]));
         $comment->update();
