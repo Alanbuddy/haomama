@@ -10352,9 +10352,18 @@ return jQuery;
   $(".course-video").click(function() {
     return location.href = window.course_create;
   });
-  return $(".offline").click(function() {
+  $(".offline").click(function() {
     console.log(window.course_create);
     return location.href = window.course_create + "?type=offline";
+  });
+  $("#open").click(function() {
+    return location.href = window.course_index;
+  });
+  $("#unopen").click(function() {
+    return location.href = window.unopen;
+  });
+  return $("#end").click(function() {
+    return location.href = window.end;
   });
 });
 

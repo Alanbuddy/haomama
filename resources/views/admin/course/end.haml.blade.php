@@ -8,6 +8,8 @@
     window.login = "#{route('login')}"
     window.token = "#{csrf_token()}"
     window.course_search = "#{route('admin.courses.search')}"
+    window.end = "#{route('courses.index')."?type=finished"}"
+    window.unopen = "#{route('courses.index')."?type=draft"}"
 @endsection
 
 @section('search-input')

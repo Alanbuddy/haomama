@@ -22,6 +22,13 @@ $ ->
     console.log(window.course_create)
     location.href = window.course_create + "?type=offline"
 
+  $("#open").click ->
+    location.href = window.course_index
 
+  $("#unopen").click ->
+    location.href = window.unopen
+
+  $("#end").click ->
+    location.href = window.end
 
 

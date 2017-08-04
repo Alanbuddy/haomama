@@ -8,6 +8,9 @@
     window.login = "#{route('login')}"
     window.token = "#{csrf_token()}"
     window.course_search = "#{route('admin.courses.search')}"
+    window.end = "#{route('courses.index')."?type=finished"}"
+    window.unopen = "#{route('courses.index')."?type=draft"}"
+
 @endsection
 
 @section('search-input')
@@ -23,11 +26,11 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a.f16.font-color1 当前课程
+          %a.f16.font-color1#open 当前课程
         %li
-          %a.f16.font-color1 未开课程
+          %a.f16.font-color1#upopen 未开课程
         %li
-          %a.f16.font-color1 结课课程
+          %a.f16.font-color1#end 结课课程
 
       .tab-content.bg3
         #tab1.tab-pane.active
