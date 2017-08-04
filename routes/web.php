@@ -55,7 +55,6 @@ Route::group([
     Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
     Route::get('/category/{category}', 'HomeController@index')->name('category');
 
-
     Route::get('/courses/search', 'CourseController@search')->name('courses.search');
     Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');
     Route::get('/courses/enrolled', 'CourseController@enrolledCourses')->name('courses.enrolled');//我加入的课程
