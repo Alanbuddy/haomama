@@ -127,7 +127,7 @@
         %img.avatar{src: $teacher['avatar'] ? $teacher['avatar'] : "icon/avatar.png"}
         .item-desc
           %p.f14.color7.teacher-name= $teacher['name']."老师"
-          %p.f12.color6= json_decode($teacher['description'])->introduction
+          .f12.color6!= json_decode($teacher['description'])->introduction
     - if (count($teachers) > 3)
       .view-more
         %span.f12.color5 查看更多
@@ -135,7 +135,7 @@
 %hr.div-line
 .course-desc
   %span.f14.color7.fb 课程介绍
-  .desc-box.f12.color7= strip_tags(htmlspecialchars_decode($course['description']))
+  .desc-box.f12.color7!= $course['description']
 %hr.div-line
 .recommend-div
   %span.recommend-title.f14.color7.fb 推荐课程

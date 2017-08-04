@@ -1,9 +1,10 @@
 $(document).ready(function(){
   var E = window.wangEditor;
   var editor = new E('#edit-area');
-  // editor.customConfig.uploadImgParams = {
-  //     _token: window.token
-  // };
+  editor.customConfig.uploadImgParams = {
+      _token: window.token,
+      editor: "1"
+  };
   editor.customConfig.uploadFileName = 'file';
   editor.customConfig.uploadImgServer = window.fileupload;
   editor.customConfig.showLinkImg = false;
@@ -13,9 +14,6 @@ $(document).ready(function(){
      ];
   editor.customConfig.uploadHeaders = {
     'Accept' : 'HTML'
-  };
-  editor.customConfig.uploadParams = {
-    _token: window.token
   };
   editor.create();
 
