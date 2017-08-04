@@ -66,6 +66,17 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
+        $type = $request->get('type');
+        if ($type) {
+            switch ($type) {
+                case 'draft':
+                    return $this->draftIndex($request);
+                case 'finished':
+                    return $this->finishedIndex($request);
+                default:
+                    break;
+            }
+        }
         $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
         $globalRecommendedCourses = $recommendedCourseSetting
             ? Course::where('id', ($recommendedCourseSetting->value))->get()
