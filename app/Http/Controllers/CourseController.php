@@ -38,6 +38,7 @@ class CourseController extends Controller
             ->with('teachers')
             ->orderBy('id','desc')
             ->paginate(10);
+        $items->withPath(route('courses.index'));
         return view('',compact('items'));
     }
 
@@ -45,10 +46,10 @@ class CourseController extends Controller
     {
         $items = Course::with('category')
             ->where('type','offline')
-            ->where('')
             ->with('teachers')
             ->orderBy('id','desc')
             ->paginate(10);
+        $items->withPath(route('courses.index'));
         return view('',compact('items'));
     }
 
@@ -779,7 +780,7 @@ class CourseController extends Controller
             $items->order = $order;
         }
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.student ', compact('items',$course));
+        return view('admin.course.student ', compact('items','course'));
     }
 
     //课程评论
@@ -790,6 +791,6 @@ class CourseController extends Controller
             ->with('user')
             ->paginate(10);
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.comment', compact('items',$course));
+        return view('admin.course.comment', compact('items','course'));
     }
 }
