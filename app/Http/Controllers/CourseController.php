@@ -790,6 +790,7 @@ class CourseController extends Controller
                 ->first();
             $student->order = $order;
         }
+        dd($items);
         $items->withPath(route('admin.courses.students', $course));
         return view('admin.course.student ', compact('items','course'));
     }
