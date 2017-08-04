@@ -479,5 +479,22 @@ $(document).ready(function(){
 	    }
 	    );
 	});
+  
+  $(".review-operation").click(function(){
+    var put = "PUT";
+    var rid = $(".review-id").text();
+    $.ajax({
+      url: window.review,
+      type: 'post',
+      data: {
+        _token: window.token,
+        id: rid,
+        _method: put
+      },
+      success: function(data){
+        
+      }
+    });
+  });
 
 });
