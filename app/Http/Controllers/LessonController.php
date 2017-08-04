@@ -218,7 +218,7 @@ class LessonController extends Controller
             $pictures = $video->pictures()->orderBy('no')->get();
             $audio = $video->audio()->first();
         }
-
+      
         return view('setting.lesson', compact(
             'lesson',
             'comments',
