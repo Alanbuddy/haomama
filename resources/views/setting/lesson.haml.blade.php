@@ -126,4 +126,6 @@
 <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
 <script src= "{{ mix('/js/creview.js') }}"></script>
 <script src= "js/prompt.js"></script>
+- if ($lesson->type == "video")
+  <script src= "js/video-play.js"></script>
 @endsection
