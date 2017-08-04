@@ -31,6 +31,27 @@ class CourseController extends Controller
             ->except(['show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn']);
     }
 
+    public function draftIndex(Request $request)
+    {
+        $items = Course::with('category')
+            ->where('status','draft')
+            ->with('teachers')
+            ->orderBy('id','desc')
+            ->paginate(10);
+        return view('',compact('items'));
+    }
+
+    public function finishedIndex(Request $request)
+    {
+        $items = Course::with('category')
+            ->where('type','offline')
+            ->where('')
+            ->with('teachers')
+            ->orderBy('id','desc')
+            ->paginate(10);
+        return view('',compact('items'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +59,17 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
+        $type = $request->get('type');
+        if ($type) {
+            switch ($type) {
+                case 'draft':
+                    return $this->draftIndex($request);
+                case 'finished':
+                    return $this->finishedIndex($request);
+                default:
+                    break;
+            }
+        }
         $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
         $globalRecommendedCourses = $recommendedCourseSetting
             ? Course::where('id', ($recommendedCourseSetting->value))->get()
@@ -747,7 +779,7 @@ class CourseController extends Controller
             $items->order = $order;
         }
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.student ', compact('items'));
+        return view('admin.course.student ', compact('items',$course));
     }
 
     //课程评论
@@ -758,6 +790,6 @@ class CourseController extends Controller
             ->with('user')
             ->paginate(10);
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.comment', compact('items'));
+        return view('admin.course.comment', compact('items',$course));
     }
 }
