@@ -31,11 +31,10 @@ class LessonController extends Controller
         $type = $request->get('type');
         $items = Lesson::orderBy('id', 'desc');
         if ($type) {
-            $items->where('type', $type)
-                ->paginate(10);
+            $items->where('type', $type);
         }
-//        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/lessons');
-        $items->withPath(route('lessons.index'));
+        $items=$items->paginate(10);
+        $items->withPath(route('lessons.index')); //$items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/lessons');
         if ($request->ajax()) {
             return $items;
         }
