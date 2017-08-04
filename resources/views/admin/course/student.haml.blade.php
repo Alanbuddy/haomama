@@ -57,12 +57,12 @@
                         %td= $item->openid
                         %td= $item->wx ? json_decode($item->wx)->nickname : "无"
                         %td= $item->phone
-                        %td= $item->order->created_at
-                        %td= $item->order->wx_total_fee
-                        - if($item->order->status == "paid")
-                          %td.font-color-brown 已付款
-                        - else
+                        %td= $item->order ? $item->order->created_at : "无"
+                        %td= $item->order ? $item->order->wx_total_fee : "无"
+                        - if(empty($item->order))
                           %td 未付款
+                        - else if( $item->order->status == "paid")
+                          %td.font-color-brown 已付款
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 总购买人数:
@@ -74,38 +74,6 @@
                   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                   %span.choice-page
                     != $items->links()
-
-#lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
-  .modal-dialog
-    .modal-content
-      .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/delete1.png"}
-      .modal-body.f14
-        .all-div
-          .checkbox
-            %label
-              %input{type: "checkbox", id: "all-no"} 全选/全不选
-        .checkbox-items
-        
-        .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
-        .select-page
-          %span.totalitems
-          .quotes#Pagination
-
-
-#shelfModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
-  .modal-dialog
-    .modal-content
-      .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/close.png"}
-      .modal-body
-        - if($course->status == "draft")
-          %p.message 是否确认上线当前课程？
-        - else
-          %p.message 是否确认下架当前课程？
-        .btn-div
-          %button.btn#shelf-cancel{type: "button"} 取&nbsp消
-          %button.btn#shelf-confirm{type: "button"} 确&nbsp定
 @endsection
 
 
