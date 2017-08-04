@@ -18,10 +18,11 @@
     %p.file-id= empty($video) ? -1 : $video->cloud_file_id
     .video-div#id_video_container{style: "width:100%;height:auto;"}
   - else
-    // %p.file-id= empty($audio) ? -1 $audio->cloud_file_id
+    %p.file-id= empty($audio) ? -1 : $audio->cloud_file_id
     .audio-div
-      %img{src: "icon/banner.png"}
-      // %audio{controls}
+      %img.audio-poster{src: $pictures[0]->path}
+      // %audio.panel{:controls => "", src: "icon/lasia.mp3"}
+      %audio.panel{:controls => "", src: strpos($audio->path, '/') == 0 ? substr($audio->path, 1) : $audio->path}
 %ul.nav
   %li.active 详情
   %li 评论

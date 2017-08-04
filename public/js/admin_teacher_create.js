@@ -48,10 +48,11 @@ $(document).ready(function(){
       showMsg("手机号不正确", "center");
       return false;
     }
-    if(!$.regex.isEmail(mail)){
-      showMsg("邮箱输入不正确", "center");
-      return false;
-    }
+    //需要时再放开
+    // if(!$.regex.isEmail(mail)){
+    //   showMsg("邮箱输入不正确", "center");
+    //   return false;
+    // }
     // if(!$.regex.isPhone(tel)){
     //   showMsg("座机号输入不正确", "center");
     //   return false;

@@ -16,6 +16,9 @@ $ ->
     if(/operator/.test(currenturl))
       $(this).closest("li.user_li").removeClass("active-li")
 
+    if(/lessons/.test(currenturl))
+      $(this).closest("li.lesson-li").addClass("active-li")
+
 
   # 退出登录
   $("#exit").click ->

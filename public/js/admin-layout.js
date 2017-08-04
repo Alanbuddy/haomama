@@ -10353,7 +10353,10 @@ return jQuery;
       $(this).closest("li.teacher_li").addClass("active-li");
     }
     if (/operator/.test(currenturl)) {
-      return $(this).closest("li.user_li").removeClass("active-li");
+      $(this).closest("li.user_li").removeClass("active-li");
+    }
+    if (/lessons/.test(currenturl)) {
+      return $(this).closest("li.lesson-li").addClass("active-li");
     }
   });
   $("#exit").click(function() {

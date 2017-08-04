@@ -51,7 +51,8 @@
                   %tbody.font-color3
                     - foreach($items as $course)
                       %tr
-                        %td=$course->name
+                        %td
+                          %a{href: route('admin.courses.show',$course->id)}=$course->name
                         %td.course-type=$course->type
                         %td=$course->category->name
                         %td
