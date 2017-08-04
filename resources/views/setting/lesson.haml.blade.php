@@ -14,8 +14,14 @@
 @section('content')
 .head-div
   %img.back{src: "icon/back2.png"}
-  %p.file-id= empty($video) ? -1 : $video->cloud_file_id
-  .video-div#id_video_container{style: "width:100%;height:auto;"}
+  - if($lesson->type == "video")
+    %p.file-id= empty($video) ? -1 : $video->cloud_file_id
+    .video-div#id_video_container{style: "width:100%;height:auto;"}
+  - else
+    // %p.file-id= empty($audio) ? -1 $audio->cloud_file_id
+    .audio-div
+      %img{src: "icon/banner.png"}
+      // %audio{controls}
 %ul.nav
   %li.active 详情
   %li 评论
