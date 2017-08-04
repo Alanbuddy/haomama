@@ -67,7 +67,7 @@
                 %label.input-caption 促销价格:
                 %span.unedit-box.font-color-red#price-span= $course->price ? $course->price : "无"
                 %span.edit-box
-                  %input.form-control.input-width#pay-price{:type => "text"}
+                  %input.form-control.input-width#pay-price{:type => "text", placeholder: "选填"}
             %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
             .photo#preview
               %img.unedit-box.unedit-photo{src: $course->cover ? $course->cover : "icon/admin/photo-course.png"}

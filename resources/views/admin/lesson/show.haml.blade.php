@@ -48,7 +48,7 @@
                 .item#old-video
                   %h4.info= $video->file_name
                   %p.video-id= $video->id
-                  %p.state 已上传...
+                  %p.state 原文件
                   %button.delete_btn 删除
                 #thelist.uploader-list
                 .btns

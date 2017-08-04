@@ -16,7 +16,7 @@
   window.lessons_index = "#{route('lessons.index')}"
   window.student = "#{route('admin.courses.students',$course->id)}"
   window.comment = "#{route('admin.courses.comments',$course->id)}"
-  window.review = "#{route('comments.update')}"
+  window.review = "#{route('comments.update', -1)}"
 
 @endsection
 @section('search-input')
@@ -54,6 +54,7 @@
                       .head-div.clearfix
                         %p.user-name.fl.font-color2= $item->user->name
                         %span.review-id{style: "display: none;"}= $item->id
+                        %span.validity{style: "display:none;"}= $item->validity
                         - if(!$item->validity)
                           .btn.fr.finish-normal.font-color1.show-review.review-operation{type: "button"} 显示评论
                         - else
@@ -69,11 +70,6 @@
 
 @section('script')
 <script src= "{{mix('/js/admin_course_show.js')}}"></script>
-<script src="js/plugin/jquery-ui.min.js"></script>
-<script src="js/plugin/wangEditor.min.js"></script>
-<script src="js/plugin/jquery.tag-editor.min.js"></script>
-<script src="js/plugin/jquery-sortable.js"></script>
-<script src="js/preview.js"></script>
-<script src="js/admin_course_online_show.js"></script>
+<script src="js/admin-comment.js"></script>
 
 @endsection
