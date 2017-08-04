@@ -12,4 +12,13 @@ $ ->
     $("#finish-btn").hide()
     $("#shelve-btn").hide()
 
+  $("#course-desc").click ->
+    location.href = window.course_show
+  
+  $("#register-message").click ->
+    location.href = window.student
+
+  $("#course-comment").click ->
+    location.href = window.comment
+
 

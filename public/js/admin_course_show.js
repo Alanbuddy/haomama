@@ -10339,11 +10339,20 @@ return jQuery;
     $("#finish-btn").hide();
     return $("#shelve-btn").hide();
   });
-  return $("#course-comment").click(function() {
+  $("#course-comment").click(function() {
     $("#unshelve-btn").hide();
     $("#edit-btn").hide();
     $("#finish-btn").hide();
     return $("#shelve-btn").hide();
+  });
+  $("#course-desc").click(function() {
+    return location.href = window.course_show;
+  });
+  $("#register-message").click(function() {
+    return location.href = window.student;
+  });
+  return $("#course-comment").click(function() {
+    return location.href = window.comment;
   });
 });
 
