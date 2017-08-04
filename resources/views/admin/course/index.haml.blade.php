@@ -8,8 +8,8 @@
     window.login = "#{route('login')}"
     window.token = "#{csrf_token()}"
     window.course_search = "#{route('admin.courses.search')}"
-    window.end = "#{route('courses.index')."?type=finished"}"
-    window.unopen = "#{route('courses.index')."?type=draft"}"
+    window.end = "#{route('courses.index').'?type=finished'}"
+    window.unopen = "#{route('courses.index').'?type=draft'}"
 
 @endsection
 
@@ -28,7 +28,7 @@
         %li.active
           %a.f16.font-color1#open 当前课程
         %li
-          %a.f16.font-color1#upopen 未开课程
+          %a.f16.font-color1#unopen 未开课程
         %li
           %a.f16.font-color1#end 结课课程
 
