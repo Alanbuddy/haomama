@@ -40,8 +40,9 @@
 .desc-div
   .common-div
     - if ($hasEnrolled == false)
-      %span.price-pay.f16.fb.color11= $course['price'] ? "￥". $course['price'] : "无"
-      %span.price.f12.color6= "￥". $course['original_price']
+      %span.price-pay.f16.fb.color11= $course['price'] ? "￥". $course['price'] : "￥".$course['original_price']
+      - if($course['price'])
+        %span.price.f12.color6= "￥". $course['original_price']
       - if ($course['type'] == "offline")
         %span.f12.color5= $enrolledCount."人已报名"."(限30人)"
       - else
