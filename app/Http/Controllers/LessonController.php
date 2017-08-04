@@ -215,15 +215,8 @@ class LessonController extends Controller
 
         $video = $lesson->video;
         if (!empty($video) && $video->video_type == 'compound') {
-            $pictures = $video->attachments()
-                ->where('mime', 'like', 'image%')
-                ->get();
-            $pictures = $video->pictures()
-                ->orderBy('no')
-                ->get();
-            $audio = $video->attachments()
-                ->where('mime', 'like', 'audio%')
-                ->first();
+            $pictures = $video->pictures()->orderBy('no')->get();
+            $audio = $video->audio()->first();
         }
 
         return view('setting.lesson', compact(
