@@ -138,8 +138,9 @@
                   %button.btn.date-btn#date-btn{:type => "button"} 次日重复
                   %button.btn.week-btn#week-btn{:type => "button"} 每周重复
             .date-div{style: "display:none;"}
-              - foreach(json_decode($course->schedule) as $date)
-                %span= $date
+              - if($course->schedule)
+                - foreach(json_decode($course->schedule) as $date)
+                  %span= $date
               
             .course-introduce.introduce-flex
               %span.introduce 课程介绍:
