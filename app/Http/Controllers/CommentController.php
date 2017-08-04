@@ -28,6 +28,7 @@ class CommentController extends Controller
     public function index()
     {
         $items = Comment::paginate(10);
+        $items->withPath(route('comments.index'));
         return view('admin.comment.index', [
             'items' => $items
         ]);
