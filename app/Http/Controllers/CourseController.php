@@ -148,6 +148,7 @@ class CourseController extends Controller
             'quota' => 'sometimes|numeric',
             'address' => 'sometimes',
             'titles' => 'sometimes|array',
+            'original_price' => 'numeric',
         ]);
         $item = new Course();
         $item->fill($request->only([
@@ -364,7 +365,7 @@ class CourseController extends Controller
             'name' => 'required',
             'type' => 'required',
             'minimum' => 'sometimes|required|numeric',
-            'original_price' => 'sometimes|numeric',
+            'original_price' => 'numeric',
             'quota' => 'sometimes|numeric',
             'address' => 'sometimes',
         ]);
