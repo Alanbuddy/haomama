@@ -67,6 +67,8 @@ class FileController extends Controller
         $this->validate($request, ['file_id' => 'required']);
         $file = File::find($request->file_id);
         $ret = $this->merge($request, $file->description);
+        $file->path=$ret['path'];
+        $file->save();
         return $ret;
     }
 }

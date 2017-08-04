@@ -23,5 +23,11 @@ class Video extends Model
             ->withPivot('no');
     }
 
+    public function audio()
+    {
+        return $this->belongsToMany('App\Models\File', 'video_attachment', 'video_id', 'attachment_id')
+            ->where('mime', 'like', 'audio%')
+            ->withPivot('no');
+    }
 
 }
