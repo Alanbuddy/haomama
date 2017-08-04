@@ -45,8 +45,6 @@ class CourseController extends Controller
     //已结课的线下课程
     public function finishedIndex(Request $request)
     {
-        var_dump(Course::find(26)->schedule);
-
 //        dd(json_decode(Course::find(26)->schedule));
         $items = Course::with('category')
             ->where('type','offline')
@@ -366,7 +364,6 @@ class CourseController extends Controller
             'name' => 'required',
             'type' => 'required',
             'minimum' => 'sometimes|required|numeric',
-            'price' => 'sometimes|numeric',
             'original_price' => 'sometimes|numeric',
             'quota' => 'sometimes|numeric',
             'address' => 'sometimes',

@@ -112,8 +112,12 @@ class CommentController extends Controller
         $comment->fill($request->only([
             'content',
             'star',
+            'validity'
         ]));
         $comment->update();
+        if($request->ajax()){
+            return ['success'=>true];
+        }
         return redirect()->route('comments.edit', $comment->id);
     }
 

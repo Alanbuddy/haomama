@@ -19,6 +19,7 @@ class CreateCommentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('course_id')->unsigned()->nullable();
             $table->integer('star')->unsigned()->nullable();
+            $table->boolean('validity')->nullable()->default(true);
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
