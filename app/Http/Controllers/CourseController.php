@@ -39,7 +39,7 @@ class CourseController extends Controller
             ->orderBy('id','desc')
             ->paginate(10);
         $items->withPath(route('courses.index'));
-        return view('',compact('items'));
+        return view('admin.course.unopen',compact('items'));
     }
 
     //已结课的线下课程
@@ -55,7 +55,7 @@ class CourseController extends Controller
             ->orderBy('id','desc')
             ->paginate(10);
         $items->withPath(route('courses.index'));
-        return view('',compact('items'));
+        return view('admin.course.end',compact('items'));
     }
 
     /**
