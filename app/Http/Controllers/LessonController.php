@@ -28,10 +28,12 @@ class LessonController extends Controller
      */
     public function index(Request $request)
     {
-        $type = $request->get('type', 'video');
-        $items = Lesson::orderBy('id', 'desc')
-            ->where('type', $type)
-            ->paginate(10);
+        $type = $request->get('type');
+        $items = Lesson::orderBy('id', 'desc');
+        if ($type) {
+            $items->where('type', $type)
+                ->paginate(10);
+        }
 //        $items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/lessons');
         $items->withPath(route('lessons.index'));
         if ($request->ajax()) {
@@ -286,8 +288,8 @@ class LessonController extends Controller
     public function adminSearch(Request $request)
     {
         if ($request->has('key')) {
-            $items = Lesson::where('name','like','%'.$request->key.'')
-                ->orderBy('id','desc')
+            $items = Lesson::where('name', 'like', '%' . $request->key . '')
+                ->orderBy('id', 'desc')
                 ->paginate(10);
 //            dd($items);
             return view('admin.lesson.index', [
