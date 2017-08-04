@@ -31,6 +31,33 @@ class CourseController extends Controller
             ->except(['show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn']);
     }
 
+    public function draftIndex(Request $request)
+    {
+        $items = Course::with('category')
+            ->where('status','draft')
+            ->with('teachers')
+            ->orderBy('id','desc')
+            ->paginate(10);
+        $items->withPath(route('courses.index'));
+        return view('',compact('items'));
+    }
+
+    public function finishedIndex(Request $request)
+    {
+        var_dump(Course::find(26)->schedule);
+
+        dd(json_decode(Course::find(26)->schedule));
+        $items = Course::with('category')
+            ->where('type','offline')
+            ->whereNotNull('schedult')
+            ->with('teachers')
+            ->with('lessons')
+            ->orderBy('id','desc')
+            ->paginate(10);
+        $items->withPath(route('courses.index'));
+        return view('',compact('items'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -746,6 +773,7 @@ class CourseController extends Controller
                 ->first();
             $items->order = $order;
         }
+        dd($items);
         $items->withPath(route('admin.courses.students', $course));
         return view('admin.course.student ', compact('items'));
     }
