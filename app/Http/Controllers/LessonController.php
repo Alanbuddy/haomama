@@ -225,7 +225,7 @@ class LessonController extends Controller
                 ->where('mime', 'like', 'audio%')
                 ->first();
         }
-
+      
         return view('setting.lesson', compact(
             'lesson',
             'comments',
