@@ -50,7 +50,6 @@ class CourseController extends Controller
         $items = Course::with('category')
             ->where('type','offline')
             ->whereNotNull('schedule')
-            ->where()
             ->with('teachers')
             ->with('lessons')
             ->orderBy('id','desc')
