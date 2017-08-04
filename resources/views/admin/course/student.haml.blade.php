@@ -37,47 +37,43 @@
       .tab-content.bg3
         #tab2.tab-pane.active
           .desc-div
-            // - if @courses[:data].length == 0
-            //   .undiscover.f14
-            //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-            // - else
-            .table-box
-              %table.table.table-hover.table-height.f14
-                %thead.th-bg.font-color2
-                  %tr
-                    %th 微信ID
-                    %th 微信名
-                    %th 手机号
-                    %th 购买时间
-                    %th 价格
-                    %th 报名状态
-                    
-                %tbody.font-color3
-                  %tr
-                    %td dsagfagafg012
-                    %td 线上视频
-                    %td 132446235654
-                    %td 2017/06/12 22:12:08
-                    %td 80
-                    // %td 未付款
-                    %td.font-color-brown 已付款
-            .tag2-foot.clearfix
-              %span.num-div.font-color3.f16
-                %span 总购买人数:
-                %span.mr30 123
-                %span 总付款人数:
-                %span 70
+            - if(count($items) == 0)
+              .undiscover.f14
+                %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+            - else
+              .table-box
+                %table.table.table-hover.table-height.f14
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 微信ID
+                      %th 微信名
+                      %th 手机号
+                      %th 购买时间
+                      %th 价格
+                      %th 报名状态
+                  %tbody.font-color3
+                    - foreach($items as $item)
+                      %tr
+                        %td= $item->openid
+                        %td= $item->wx ? json_decode($item->wx)->nickname : "无"
+                        %td= $item->phone
+                        %td= $item->order->created_at
+                        %td= $item->order->wx_total_fee
+                        - if($item->order->status == "paid")
+                          %td.font-color-brown 已付款
+                        - else
+                          %td 未付款
+              .tag2-foot.clearfix
+                %span.num-div.font-color3.f16
+                  %span 总购买人数:
+                  %span.mr30 123
+                  %span 总付款人数:
+                  %span 70
 
-              %span.select-page.tag2-page
-                %span.totalitems 共2页，总计18条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
+                %span.select-page.tag2-page
+                  %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+                  %span.choice-page
+                    != $items->links()
 
 #lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog
