@@ -19,7 +19,6 @@ $ ->
     location.href = window.course_create
 
   $(".offline").click ->
-    console.log(window.course_create)
     location.href = window.course_create + "?type=offline"
 
   $("#open").click ->

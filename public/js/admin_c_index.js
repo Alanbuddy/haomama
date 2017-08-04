@@ -10353,7 +10353,6 @@ return jQuery;
     return location.href = window.course_create;
   });
   $(".offline").click(function() {
-    console.log(window.course_create);
     return location.href = window.course_create + "?type=offline";
   });
   $("#open").click(function() {
