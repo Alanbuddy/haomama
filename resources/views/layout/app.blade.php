@@ -126,6 +126,7 @@
 
 
   var appId = "{{config('wechat.mp.app_id')}}";
+  var vodId = "{{config('services.vod.appId')}}";
   var app_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
       + appId
       + "&redirect_uri=http%3a%2f%2f"
