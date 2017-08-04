@@ -758,6 +758,6 @@ class CourseController extends Controller
             ->with('user')
             ->paginate(10);
         $items->withPath(route('admin.courses.students', $course));
-        returnview('admin.course.comment', compact('items'));
+        return view('admin.course.comment', compact('items'));
     }
 }
