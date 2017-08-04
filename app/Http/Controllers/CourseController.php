@@ -46,15 +46,17 @@ class CourseController extends Controller
     {
         var_dump(Course::find(26)->schedule);
 
-        dd(json_decode(Course::find(26)->schedule));
+//        dd(json_decode(Course::find(26)->schedule));
         $items = Course::with('category')
             ->where('type','offline')
-            ->whereNotNull('schedult')
+            ->whereNotNull('schedule')
+            ->where()
             ->with('teachers')
             ->with('lessons')
             ->orderBy('id','desc')
             ->paginate(10);
         $items->withPath(route('courses.index'));
+        dd($items);
         return view('',compact('items'));
     }
 
@@ -784,7 +786,6 @@ class CourseController extends Controller
                 ->first();
             $student->order = $order;
         }
-        dd($items);
         $items->withPath(route('admin.courses.students', $course));
         return view('admin.course.student ', compact('items','course'));
     }
