@@ -42,6 +42,7 @@ class CourseController extends Controller
         return view('',compact('items'));
     }
 
+    //已结课的线下课程
     public function finishedIndex(Request $request)
     {
         var_dump(Course::find(26)->schedule);
@@ -50,12 +51,12 @@ class CourseController extends Controller
         $items = Course::with('category')
             ->where('type','offline')
             ->whereNotNull('schedule')
+            ->where('end','<',Carbon::now())
             ->with('teachers')
             ->with('lessons')
             ->orderBy('id','desc')
             ->paginate(10);
         $items->withPath(route('courses.index'));
-        dd($items);
         return view('',compact('items'));
     }
 
@@ -177,8 +178,10 @@ class CourseController extends Controller
         ]));
         if ($request->has('titles'))
             $item->titles = json_encode($request->titles);
-        if ($request->has('schedule'))
-            $item->schedule = json_encode($request->schedule);
+        if ($request->has('schedule')){
+            $schedule=$request->schedule;//schedule[2] 0"2017-08-11 07:30:00,2017-08-11 08:30:00" 1	"2017-08-12 07:30:00,2017-08-12 08:30:00"
+            $this->saveSchedule($schedule, $item);
+        }
         if ($request->file('cover')) {
             $folderPath = public_path('storage/course/' . $item->id);
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
@@ -395,8 +398,10 @@ class CourseController extends Controller
         ]));
         if ($request->has('titles'))
             $item->titles = json_encode($request->titles);
-        if ($request->has('schedule'))
-            $item->schedule = json_encode($request->schedule);
+        if ($request->has('schedule')){
+            $schedule=$request->schedule;//schedule[2] 0"2017-08-11 07:30:00,2017-08-11 08:30:00" 1	"2017-08-12 07:30:00,2017-08-12 08:30:00"
+            $this->saveSchedule($schedule, $item);
+        }
         if ($request->file('cover')) {
             $folderPath = public_path('storage/course/' . $item->id);
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
@@ -798,5 +803,20 @@ class CourseController extends Controller
             ->paginate(10);
         $items->withPath(route('admin.courses.students', $course));
         return view('admin.course.comment', compact('items','course'));
+    }
+
+    /**
+     * @param $schedule
+     * @param $item
+     */
+    public function saveSchedule($schedule, $item)
+    {
+        $first = array_first($schedule);
+        $last = array_last($schedule);
+        if ($first)
+            $item->begin = explode(',', $first)[0];
+        if ($last)
+            $item->end = explode(',', $last)[1];
+        $item->schedule = json_encode($schedule);
     }
 }
