@@ -38,7 +38,7 @@
                   %img.mini-icon{src: "icon/admin/1class.png"}
                   %span.f18.sidebar-title 课程管理
               %li
-                %a{:href => route("lessons.index")}
+                %a{:href => route("lessons.index")."?type=video"}
                   %img.mini-icon{src: "icon/admin/2single.png"}
                   %span.f18.sidebar-title 课时管理
               %li.teacher_li

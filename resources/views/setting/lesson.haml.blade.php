@@ -10,7 +10,6 @@
   window.comment = "#{route('comments.store')}"
   window.order = "#{route('orders.pay')}"
 
-
 @endsection
 @section('content')
 .head-div

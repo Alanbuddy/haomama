@@ -105,8 +105,7 @@
                 %span.min.course-time{"time-end" => $lessons[$i]['end']}= $lessons[$i]['begin']
                 %span= $lessons[$i]->learnedCount."人已学"
             %img.go{src: "icon/go.png"}
-            - if ($lessons[$i]['id'] == 1)
-              %img.free{src: "icon/free.png"}
+            %img.free{src: "icon/free.png"}
           - else
             .item-desc
               %p.f14.color7= $lessons[$i]['name']

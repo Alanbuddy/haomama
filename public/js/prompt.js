@@ -58,7 +58,6 @@ $(document).ready(function($){
   });
 
   (function () {
-      var vodId = "{{config('vod.appId')}}";   //报错
       var file_id = $(".file-id").text();
       var option = {
           "auto_play": "1",
