@@ -772,7 +772,7 @@ class CourseController extends Controller
                 ->where('user_id', $student->id)
                 ->where('status', 'paid')
                 ->first();
-            $items->order = $order;
+            $student->order = $order;
         }
         $items->withPath(route('admin.courses.students', $course));
         return view('admin.course.student ', compact('items','course'));
