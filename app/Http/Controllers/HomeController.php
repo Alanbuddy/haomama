@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-//        Auth::loginUsingId(2, true);
+        Auth::loginUsingId(1, true);
         if ($request->route()->hasParameter('category')) {
             $categoryId = $request->route('category');
             $orderBy = $request->get('sort', 'time');
