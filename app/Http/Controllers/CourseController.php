@@ -44,9 +44,12 @@ class CourseController extends Controller
 
     public function finishedIndex(Request $request)
     {
-        dd(Course::find(26)->schedule);
+        var_dump(Course::find(26)->schedule);
+
+        dd(json_decode(Course::find(26)->schedule));
         $items = Course::with('category')
             ->where('type','offline')
+            ->whereNotNull('schedult')
             ->with('teachers')
             ->with('lessons')
             ->orderBy('id','desc')
@@ -781,6 +784,7 @@ class CourseController extends Controller
                 ->first();
             $student->order = $order;
         }
+        dd($items);
         $items->withPath(route('admin.courses.students', $course));
         return view('admin.course.student ', compact('items','course'));
     }
