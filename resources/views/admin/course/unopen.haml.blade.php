@@ -8,8 +8,8 @@
     window.login = "#{route('login')}"
     window.token = "#{csrf_token()}"
     window.course_search = "#{route('admin.courses.search')}"
-    window.end = "#{route('courses.index')."?type=finished"}"
-    window.unopen = "#{route('courses.index')."?type=draft"}"
+    window.end = "#{route('courses.index').'?type=finished'}"
+    window.unopen = "#{route('courses.index').'?type=draft'}"
 @endsection
 
 @section('search-input')
@@ -25,11 +25,11 @@
     .tabbable
       %ul.nav.nav-tabs
         %li
-          %a.f16.font-color1 当前课程
+          %a.f16.font-color1#open 当前课程
         %li.active
-          %a.f16.font-color1 未开课程
+          %a.f16.font-color1#unopen 未开课程
         %li
-          %a.f16.font-color1 结课课程
+          %a.f16.font-color1#end 结课课程
 
       .tab-content.bg3
         #tab2.tab-pane.active
@@ -38,37 +38,30 @@
               .undiscover.f14
                 %img.undiscover-icon{src: "icon/admin/undiscover.png"}
             - else
-            .table-box
-              %table.table.table-hover.table-height.f14
-                %thead.th-bg.font-color2
-                  %tr
-                    %th 课程名称
-                    %th 上课方式
-                    %th 课程类型
-                    %th 授课老师
-                    %th 当前价格
-                    
-                %tbody.font-color3
-                  %tr
-                    %td 课程的名字很长
-                    %td.course-type 线上视频
-                    %td 自我成长
-                    %td 李老师、王老师
-                    %td 80
-            // .select-page 
-            //   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
-            //   %span.choice-page
-            //     != $items->links()
-            .select-page 
-              %span.totalitems 共2页，总计18条
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{href: "#"} «
-                  %li
-                    %a{href: "#"} 1
-                  %li
-                    %a{href: "#"} »
+              .table-box
+                %table.table.table-hover.table-height.f14
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 课程名称
+                      %th 上课方式
+                      %th 课程类型
+                      %th 授课老师
+                      %th 当前价格
+                      
+                  %tbody.font-color3
+                    - foreach($items as $course)
+                      %tr
+                        %td=$course->name
+                        %td.course-type=$course->type
+                        %td=$course->category->name
+                        %td
+                          -foreach($course->teachers as $teacher)
+                            %span=$teacher->name 
+                        %td=$course->price
+              .select-page 
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+                %span.choice-page
+                  != $items->links()
         
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
