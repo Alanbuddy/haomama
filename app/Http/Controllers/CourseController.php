@@ -44,9 +44,11 @@ class CourseController extends Controller
 
     public function finishedIndex(Request $request)
     {
+        dd(Course::find(26)->schedule);
         $items = Course::with('category')
             ->where('type','offline')
             ->with('teachers')
+            ->with('lessons')
             ->orderBy('id','desc')
             ->paginate(10);
         $items->withPath(route('courses.index'));
@@ -777,7 +779,7 @@ class CourseController extends Controller
                 ->where('user_id', $student->id)
                 ->where('status', 'paid')
                 ->first();
-            $items->order = $order;
+            $student->order = $order;
         }
         $items->withPath(route('admin.courses.students', $course));
         return view('admin.course.student ', compact('items','course'));
