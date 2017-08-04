@@ -33,7 +33,7 @@ class LessonController extends Controller
         if ($type) {
             $items->where('type', $type);
         }
-        $items=$items->paginate(10);
+        $items = $items->paginate(10);
         $items->withPath(route('lessons.index')); //$items->withPath(($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . '/lessons');
         if ($request->ajax()) {
             return $items;
@@ -214,6 +214,17 @@ class LessonController extends Controller
         }
 
         $video = $lesson->video;
+        if (!empty($video) && $video->video_type == 'compound') {
+            $pictures = $video->attachments()
+                ->where('mime', 'like', 'image%')
+                ->get();
+            $pictures = $video->pictures()
+                ->orderBy('no')
+                ->get();
+            $audio = $video->attachments()
+                ->where('mime', 'like', 'audio%')
+                ->first();
+        }
 
         return view('setting.lesson', compact(
             'lesson',
@@ -225,7 +236,9 @@ class LessonController extends Controller
             'index',
             'learnedCount',
             'latestComments',
-            'video'
+            'video',
+            'pictures',
+            'audio'
         ));
     }
 
