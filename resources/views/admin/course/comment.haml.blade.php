@@ -14,8 +14,8 @@
   window.tag_store = "#{route('terms.store')}"
   window.tag_destroy = "#{route('terms.destroy',-1)}"
   window.lessons_index = "#{route('lessons.index')}"
-  window.student = "#{route('admin.courses.students')}"
-  window.comment = "#{route('admin.courses.comments')}"
+  window.student = "#{route('admin.courses.students',$course->id)}"
+  window.comment = "#{route('admin.courses.comments',$course->id)}"
 
 @endsection
 @section('search-input')
