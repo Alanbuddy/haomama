@@ -67,17 +67,6 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $type = $request->get('type');
-        if ($type) {
-            switch ($type) {
-                case 'draft':
-                    return $this->draftIndex($request);
-                case 'finished':
-                    return $this->finishedIndex($request);
-                default:
-                    break;
-            }
-        }
         $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
         $globalRecommendedCourses = $recommendedCourseSetting
             ? Course::where('id', ($recommendedCourseSetting->value))->get()
@@ -784,10 +773,10 @@ class CourseController extends Controller
                 ->where('user_id', $student->id)
                 ->where('status', 'paid')
                 ->first();
-            $student->order = $order;
+            $items->order = $order;
         }
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.student ', compact('items','course'));
+        return view('admin.course.student ', compact('items'));
     }
 
     //课程评论
@@ -798,6 +787,6 @@ class CourseController extends Controller
             ->with('user')
             ->paginate(10);
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.comment', compact('items','course'));
+        return view('admin.course.comment', compact('items'));
     }
 }
