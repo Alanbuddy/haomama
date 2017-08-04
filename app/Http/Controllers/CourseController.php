@@ -739,26 +739,25 @@ class CourseController extends Controller
     public function adminStudents(Request $request, Course $course)
     {
         $items = $course->students()->paginate(10);
-        foreach ($items as $student){
-            $order=Order::where('product_id',$course->id)
-                ->where('user_id',$student->id)
-                ->where('status','paid')
+        foreach ($items as $student) {
+            $order = Order::where('product_id', $course->id)
+                ->where('user_id', $student->id)
+                ->where('status', 'paid')
                 ->first();
-            $items->order=$order;
+            $items->order = $order;
         }
-        $items->withPath(route('admin.courses.students',$course));
-        return view('',compact('items'));
+        $items->withPath(route('admin.courses.students', $course));
+        return view('admin.course.student ', compact('items'));
     }
 
     //课程评论
-    public function adminComments(Request $request,Course $course)
+    public function adminComments(Request $request, Course $course)
     {
-        $items=$course->comments()
-            ->orderBy('comments.id','desc')
+        $items = $course->comments()
+            ->orderBy('comments.id', 'desc')
             ->with('user')
             ->paginate(10);
-        $items->withPath(route('admin.courses.students',$course));
-        dd($items);
-        return view('',compact('items'));
+        $items->withPath(route('admin.courses.students', $course));
+        returnview('admin.course.comment', compact('items'));
     }
 }
