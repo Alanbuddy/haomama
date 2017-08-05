@@ -11,7 +11,7 @@ $(document).ready(function(){
     pictures.push(pic_item);
   });
   console.log(pictures);
-  
+
   var timer = null;
   var audio = document.querySelector("#audio");
   audio.addEventListener("play", function(){
@@ -24,5 +24,9 @@ $(document).ready(function(){
         }
       }
     }, 1000);
+  });
+
+  audio.addEventListener("pause", function(){
+    clearInterval(timer);
   });
 });

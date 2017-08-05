@@ -10356,7 +10356,7 @@ return jQuery;
     }
   });
   return $(".back").click(function() {
-    return location.href = history.back();
+    return location.href = window.person_show;
   });
 });
 

@@ -49,7 +49,7 @@
     .desc!= $lesson['description']
 
 .main-div
-  - if (count($comments) > 3)
+  - if ((count($comments) + count($latestComments)) > 3)
     .hot-review-div
       .review-title
         %span.title.f14.color7.fb 课程评论
