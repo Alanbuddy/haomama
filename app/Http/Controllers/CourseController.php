@@ -729,7 +729,7 @@ class CourseController extends Controller
 
         $lessons = $course->lessons()->get();//TODO  orderBy no.
         $index = 0;
-        $i = 0;
+        $i = 1;
         foreach ($lessons as $item) {
             if ($item->id == $lesson->id) {
                 $index = $i;
