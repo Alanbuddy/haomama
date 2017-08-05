@@ -21,9 +21,7 @@ use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
-    use IO;
-    use SignInTrait;
-    use CourseEnrollTrait;
+    use IO, SignInTrait, CourseEnrollTrait,CourseTitleTrait;
 
     function __construct()
     {
@@ -34,12 +32,12 @@ class CourseController extends Controller
     public function draftIndex(Request $request)
     {
         $items = Course::with('category')
-            ->where('status','draft')
+            ->where('status', 'draft')
             ->with('teachers')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate(10);
         $items->withPath(route('courses.index'));
-        return view('admin.course.unopen',compact('items'));
+        return view('admin.course.unopen', compact('items'));
     }
 
     //已结课的线下课程
@@ -47,15 +45,15 @@ class CourseController extends Controller
     {
 //        dd(json_decode(Course::find(26)->schedule));
         $items = Course::with('category')
-            ->where('type','offline')
+            ->where('type', 'offline')
             ->whereNotNull('schedule')
-            ->where('end','<',Carbon::now())
+            ->where('end', '<', Carbon::now())
             ->with('teachers')
             ->with('lessons')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate(10);
         $items->withPath(route('courses.index'));
-        return view('admin.course.end',compact('items'));
+        return view('admin.course.end', compact('items'));
     }
 
     /**
@@ -87,7 +85,7 @@ class CourseController extends Controller
             return $v->id;
         }, $recommendedCourses->all());
         $items = Course::with('category')
-            ->where('status','publish')
+            ->where('status', 'publish')
             ->with('teachers')
             ->with('tags')
             ->whereNotIn('id', $arr)
@@ -177,9 +175,9 @@ class CourseController extends Controller
             'type',
         ]));
         if ($request->has('titles'))
-            $item->titles = json_encode($request->titles);
-        if ($request->has('schedule')){
-            $schedule=$request->schedule;//schedule[2] 0"2017-08-11 07:30:00,2017-08-11 08:30:00" 1	"2017-08-12 07:30:00,2017-08-12 08:30:00"
+            $item->titles = json_encode(array_values(array_filter($request->titles)));
+        if ($request->has('schedule')) {
+            $schedule = $request->schedule;//schedule[2] 0"2017-08-11 07:30:00,2017-08-11 08:30:00" 1	"2017-08-12 07:30:00,2017-08-12 08:30:00"
             $this->saveSchedule($schedule, $item);
         }
         if ($request->file('cover')) {
@@ -228,8 +226,7 @@ class CourseController extends Controller
             ->whereNotNull('lesson_id')
             ->orderBy('vote', 'desc')
             ->paginate(3);
-//        dd($comments);
-//        dd($comments->lastPage());
+//        dd($comments,$comments->lastPage());
         foreach ($comments as $comment) {
             $comment->voteCount = count($comment->votes);
             $hasVoted = false;
@@ -270,6 +267,9 @@ class CourseController extends Controller
         }
 
 //        dd($lessons);
+        $titles = json_decode($course->titles);
+        $lessons = $this->processTitles($titles, $lessons);
+
         //学员数
         $enrolledCount = $this->enrolledCount($course);
 
@@ -396,9 +396,9 @@ class CourseController extends Controller
             'type',
         ]));
         if ($request->has('titles'))
-            $item->titles = json_encode($request->titles);
-        if ($request->has('schedule')){
-            $schedule=$request->schedule;//schedule[2] 0"2017-08-11 07:30:00,2017-08-11 08:30:00" 1	"2017-08-12 07:30:00,2017-08-12 08:30:00"
+            $item->titles = json_encode(array_values(array_filter($request->titles)));
+        if ($request->has('schedule')) {
+            $schedule = $request->schedule;//schedule[2] 0"2017-08-11 07:30:00,2017-08-11 08:30:00" 1	"2017-08-12 07:30:00,2017-08-12 08:30:00"
             $this->saveSchedule($schedule, $item);
         }
         if ($request->file('cover')) {
@@ -790,7 +790,7 @@ class CourseController extends Controller
             $items->order = $order;
         }
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.student ', compact('items','course'));
+        return view('admin.course.student ', compact('items', 'course'));
     }
 
     //课程评论
@@ -801,7 +801,7 @@ class CourseController extends Controller
             ->with('user')
             ->paginate(10);
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.comment', compact('items','course'));
+        return view('admin.course.comment', compact('items', 'course'));
     }
 
     /**
@@ -818,4 +818,5 @@ class CourseController extends Controller
             $item->end = explode(',', $last)[1];
         $item->schedule = json_encode($schedule);
     }
+
 }

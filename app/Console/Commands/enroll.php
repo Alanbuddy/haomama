@@ -52,7 +52,7 @@ class enroll extends Command
             'user_id' => $user_id,
             'product_id' => $course->id,
             'status' => 'paid',
-            'amount' => $course->price,
+            'amount' => $course->price?:$course->original_price,
             'uuid'=>'test'
         ]);
         $order->save();

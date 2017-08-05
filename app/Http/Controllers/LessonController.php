@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
-    use SignInTrait, CommentTrait, IO;
+    use SignInTrait, CommentTrait, IO,CourseTitleTrait;
 
     function __construct()
     {
@@ -199,6 +199,8 @@ class LessonController extends Controller
         $learnedCount = $lesson->attendances($course->id)->count();
 
         $lessons = $course->lessons()->get();//TODO  orderBy no.
+        $titles = json_decode($course->titles);
+        $lessons = $this->processTitles($titles, $lessons);
         $index = 0;//表示第几节课时
         $i = 0;
         foreach ($lessons as $item) {
