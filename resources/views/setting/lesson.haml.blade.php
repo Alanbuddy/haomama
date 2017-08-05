@@ -21,8 +21,12 @@
     %p.file-id= empty($audio) ? -1 : $audio->cloud_file_id
     .audio-div
       %img.audio-poster{src: $pictures[0]->path}
-      // %audio.panel{:controls => "", src: "icon/lasia.mp3"}
       %audio.panel{:controls => "", src: strpos($audio->path, '/') == 0 ? substr($audio->path, 1) : $audio->path}
+    .pictures{style: "display:none;"}
+      - foreach($pictures as $picture)
+        .picture-item
+          %img.picture= strpos($picture->path, '/') == 0 ? substr($picture->path, 1) : $picture->path
+          %span.picture-time= $picture->pivot->no
 %ul.nav
   %li.active 详情
   %li 评论
