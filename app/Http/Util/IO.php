@@ -55,7 +55,7 @@ trait IO
             $file = $request->file('file');
             $size = $file->getSize();
 //            $path = storage_path('app/' . md5(uniqid(rand(), true))); //$path = storage_path('/' . date('Ymd-His', time()));
-            $path = storage_path('app/' . md5($name)); //$path = storage_path('/' . date('Ymd-His', time()));
+            $path = public_path('app/' . md5($name)); //$path = storage_path('/' . date('Ymd-His', time()));
             if (!is_dir($path)) {
                 $result = mkdir($path, 0777, true);
                 if (!$result) return false;
@@ -74,7 +74,7 @@ trait IO
             'name' => 'required',
         ]);
         $fileName = $request->get('name');
-        $dir = storage_path('app/' . md5($fileName));
+        $dir = public_path('app/' . md5($fileName));
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
