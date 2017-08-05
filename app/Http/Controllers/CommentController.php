@@ -155,7 +155,7 @@ class CommentController extends Controller
                 'object_id' => $comment->id,
                 'object_type' => 'comment',
                 'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
-            ]);
+            ],$comment->user_id);
         }
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }
