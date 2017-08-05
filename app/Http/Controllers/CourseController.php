@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
-    use IO, SignInTrait, CourseEnrollTrait,CourseTitleTrait;
+    use IO, SignInTrait, CourseEnrollTrait, CourseTitleTrait;
 
     function __construct()
     {
@@ -631,6 +631,10 @@ class CourseController extends Controller
     //发布与取消发布课程
     public function togglePublish(Request $request, Course $course)
     {
+        if ($course->status == 'publish') {//判断这次请求是否是下架课程
+            if (!auth()->user()->hasRole('admin'))//管理员才可以下架课程
+                return back();
+        }
         $course->status = $course->status == 'publish' ? 'draft' : 'publish';
         $course->save();
         return ['success' => true, 'data' => $course->status];
