@@ -17,6 +17,18 @@
       window.login = "#{route('login')}"
       window.course_index = "#{route('courses.index')}"
       window.token = "#{csrf_token()}"
+      var appId = "{{config('wechat.mp.app_id')}}";
+      var vodId = "{{config('services.vod.appId')}}";
+      var app_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
+        + appId
+        + "&redirect_uri=http%3a%2f%2f"
+        + "baby.fumubidu.com.cn/haomama/wechat/login&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
+
+      @if(!Auth::check())
+        if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
+         location.href =  app_url;
+        }
+      @endif
   %body
     .wrapper
       .content-area
