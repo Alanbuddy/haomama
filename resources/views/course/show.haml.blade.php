@@ -31,12 +31,13 @@
       %span.course-id{style: "display:none;"}= $course['id']
       - if ($course['type'] == "offline")
         %span.course-status.f8 线下
-    .btn#test-btn{type: "button"}
-      %img.play{src: "icon/play.png"}
-      - if ($hasEnrolled == true)
-        %span 立即听课
-      - else
-        %span 立即试课
+    - if($course['type'] == "online")
+      .btn#test-btn{type: "button"}
+        %img.play{src: "icon/play.png"}
+        - if ($hasEnrolled == true )
+          %span 立即听课
+        - else
+          %span 立即试课
 .desc-div
   .common-div
     - if ($hasEnrolled == false)
