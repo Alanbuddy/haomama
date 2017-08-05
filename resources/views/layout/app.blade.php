@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mobile-notification.css">
     <link rel="stylesheet" href="css/plugin/dropload.css">
-
+    
     @yield('css')
+    <script src= "{{mix('/js/layout.js')}}"></script>
 </head>
 <body>
 <div>
@@ -70,7 +71,7 @@
 <script src = "js/mobile-notification.js"></script>
 <script src = "js/plugin/dropload.min.js"></script>
 
-<script src= "{{mix('/js/layout.js')}}"></script>
+
 <script>
   wx.config({
       debug: false,

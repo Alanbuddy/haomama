@@ -15,7 +15,7 @@
 .head-div
   .avatar-div
     - if ($user)
-      %img.avatar-icon{src: "icon/avatar.png"}
+      %img.avatar-icon{src: $user->avatar ? strpos($user->avatar, '/') == 0 ? substr($user->avatar, 1) : $user->avatar : "icon/avatar.png"}
       %p.name.f16.color7= $user['name']
     .right-div
       %span.f12.color5 个人资料
