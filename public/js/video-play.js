@@ -81,7 +81,11 @@ $(document).ready(function(){
           }
         }
       };
-      player = new qcVideo.Player("id_video_container", option, listener);
+      if(file_id){
+        player = new qcVideo.Player("id_video_container", option, listener);
+      }else{
+        console.log("file_id不存在");
+      }
   })();
 
 });

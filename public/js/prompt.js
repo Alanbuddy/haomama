@@ -36,13 +36,14 @@ $(document).ready(function($){
   //需要与后台商量 决定提交lesson-id 还是course-id
   var order = null;
   var signPackage = null;
-  var lid = $(".lesson-id").attr("data-id");
+  // var lid = $(".lesson-id").attr("data-id");
+  var cid = $(".course-id").attr("data-id");
   $("#register").click(function(){
     $.ajax({
       url: window.order,
       type: 'post',
       data: {
-          lesson_id: lid,
+          course_id: cid,
           _token: window.token,
       },
       success: function (resp) {
@@ -81,5 +82,56 @@ $(document).ready(function($){
       }
     );
   });
+
+  function jsBrage() {
+      if (typeof WeixinJSBridge == 'undefined') {
+          if (document.addEventListener) {
+              document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+          } else if (document.attachEvent) {
+              document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+              document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+          }
+      } else {
+          onBridgeReady();
+      }
+  }
+  function onBridgeReady() {
+      // alert('signPackage.timeStamp='+signPackage.timeStamp);
+      WeixinJSBridge.invoke('getBrandWCPayRequest', {
+          'appId': ''+signPackage.appId,
+          'timeStamp': ''+signPackage.timeStamp,
+          'nonceStr': ''+signPackage.nonceStr,
+          'package': ''+signPackage.package,
+          'signType': 'MD5', //微信签名方式：
+          'paySign': ''+signPackage.sign,
+      }, function (res) {
+          if (res.err_msg == 'get_brand_wcpay_request:ok') {
+              location.href = window.pay_finish + "?course_id=" + cid;
+          } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+
+      });
+  }
+
+  var pictures = [];
+  var pic_item = {};
+  $(".picture-item").each(function(){
+    var pic = $(this).find(".picture").text();
+    var pic_time = $(this).find(".picture-time").text();
+    pic_item = {
+      src: pic,
+      time: parseInt(pic_time)
+    };
+    pictures.push(pic_item);
+  });
+  
+  var timer = null;
+  var audio = document.querySelector("#audio");
+  audio.addEventListener("play", alert("aaa"));
+  audio.play(function(){
+    timer = setInterval(function(){
+      $(".audio-poster").attr("src", "icon/banner.png");
+    }, 1000);
+  });
+
 
 });
