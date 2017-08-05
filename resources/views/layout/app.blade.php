@@ -11,13 +11,12 @@
     <title>
         @yield('title') 好妈妈微课
     </title>
-    <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/mobile-notification.css">
     <link rel="stylesheet" href="css/plugin/dropload.css">
     
     @yield('css')
-    <script src= "{{mix('/js/layout.js')}}"></script>
 </head>
 <body>
 <div>

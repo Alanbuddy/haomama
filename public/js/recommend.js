@@ -136,7 +136,10 @@ $(document).ready(function(){
     $.ajax({
       type: "post",
       url: window.course_recommend,
-      data: recommend,
+      data: {
+        recommend: recommend,
+        _token: window.token
+      },
       success: function(data){
         if(data.success){
           location.href = window.set_recommend;

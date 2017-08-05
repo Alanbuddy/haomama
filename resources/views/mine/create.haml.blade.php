@@ -23,7 +23,6 @@
     %p.f12.color6= "第".$index."次课已签到成功～"
   .btn#view.mt80{"data-id" => $course['id']} 查看详情
 
-
 @endsection
 
 @section('script')
