@@ -133,4 +133,7 @@
 <script src= "js/prompt.js"></script>
 - if ($lesson->type == "video")
   <script src= "js/video-play.js"></script>
+- else
+  <script src= "js/audio-play.js"></script>
+
 @endsection
