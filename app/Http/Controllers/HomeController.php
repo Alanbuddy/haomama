@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    //前台首页
     public function index(Request $request)
     {
         Auth::loginUsingId(1, true);
