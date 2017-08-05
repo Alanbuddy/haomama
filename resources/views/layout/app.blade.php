@@ -62,6 +62,7 @@
 <div>
     @yield('foot-div')
 </div>
+<script src= "{{mix('/js/layout.js')}}"></script>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src ="js/ajax.js"></script>
@@ -70,7 +71,6 @@
 <script src = "js/mobile-notification.js"></script>
 <script src = "js/plugin/dropload.min.js"></script>
 
-<script src= "{{mix('/js/layout.js')}}"></script>
 <script>
   wx.config({
       debug: false,
