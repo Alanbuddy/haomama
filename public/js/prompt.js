@@ -126,12 +126,12 @@ $(document).ready(function($){
   
   var timer = null;
   var audio = document.querySelector("#audio");
-  audio.addEventListener("play", alert("aaa"));
-  audio.play(function(){
+  audio.addEventListener("play", function(){
     timer = setInterval(function(){
       $(".audio-poster").attr("src", "icon/banner.png");
     }, 1000);
   });
+
 
 
 });
