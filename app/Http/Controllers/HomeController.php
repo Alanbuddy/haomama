@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    //前台首页
     public function index(Request $request)
     {
-        Auth::loginUsingId(1, true);
+//        Auth::loginUsingId(1, true);
         if ($request->route()->hasParameter('category')) {
             $categoryId = $request->route('category');
             $orderBy = $request->get('sort', 'time');
@@ -194,22 +195,6 @@ class HomeController extends Controller
         return [$itemsOrderByCommentRating, $recommendedCourse];
     }
 
-    public function none()
-    {
-//        $items = Course::where('id', '>', 0);
-//        $hasFilter = false;
-//        if ($route->hasParameter('tag')) {
-//            $items = Search::coursesByTag($request->route('tag'));
-//            $hasFilter = true;
-//        }
-//        if ($route->hasParameter('category')) {
-//            $items = Search::coursesByCategory($request->route('category'));
-//            $hasFilter = true;
-//        }
-//        if (!$hasFilter) { $items = Search::basicStat(); //        }
-        //retrieve data needed by index page
-//        foreach ($items as $i) { echo($i->id); echo($i->category->name); }
-    }
 
     /**
      * @param $page
