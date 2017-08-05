@@ -10,12 +10,19 @@ $(document).ready(function(){
     };
     pictures.push(pic_item);
   });
+  console.log(pictures);
   
   var timer = null;
   var audio = document.querySelector("#audio");
   audio.addEventListener("play", function(){
     timer = setInterval(function(){
-      $(".audio-poster").attr("src", "icon/banner.png");
+      var current_time = Math.ceil(audio.currentTime);
+      var len = pictures.length;
+      for(let i=0; i<len;i++){
+        if(current_time == pictures[i].time){
+          $(".audio-poster").attr("src", pictures[i].src);
+        }
+      }
     }, 1000);
   });
 });

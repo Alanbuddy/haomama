@@ -26,11 +26,10 @@
 @section('content')
 
 .main-content.bg2
-  - if(auth()->user()->hasRole('admin'))
-    - if($course->status == "draft")
-      %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 上线课程
-    - else
-      %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 下架课程
+  - if($course->status == "draft")
+    %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 上线课程
+  - if(auth()->user()->hasRole('admin') && $course->status != "draft")
+    %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 下架课程
   %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
   %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
   .table-div
