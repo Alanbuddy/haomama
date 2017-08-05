@@ -87,7 +87,6 @@ $(document).ready(function(){
   });
 
   $btn.click(function(){
-    alert("aaa");
     $.getJSON(
       window.audio_init,
       {},
