@@ -20,4 +20,4 @@ $ ->
       $(this).text(dy + "年" + dm + "月" + dd + "日")
 
   $(".back").click ->
-    location.href = history.back()
+    location.href = window.person_show
