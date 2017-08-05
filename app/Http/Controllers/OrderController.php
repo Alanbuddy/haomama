@@ -52,7 +52,7 @@ class OrderController extends Controller
         $course = Course::findOrFail($request->get('course_id'));
         $order->title = 'buy course ' . $course->name;
         $order->product_id = $course->id;
-        $order->amount = $course->price;
+        $order->amount = $course->price?:$course->original_price;
         $order->uuid = $this->uuid();
         auth()->user()->orders()->save($order);
         return $order;
