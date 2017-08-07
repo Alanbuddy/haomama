@@ -33,7 +33,7 @@ class SettingController extends Controller
             $categories = Term::where('type', 'category')->with('hotCourseByCategory')->get();
             $arr = ['新课速递' => Course::find($setting->value)];
             foreach ($categories as $category) {
-                $arr[$category->name] = $category->hotCourseByCategory->first()?: null;
+                $arr[$category->name] = $category->hotCourseByCategory->first() ?: null;
             }
             return view('admin.setting.recommend_course', [
                 'arr' => $arr
@@ -59,6 +59,9 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->has('recommend')) {
+            return $this->storeCourseRecommendationSetting($request);
+        }
         $item = new Setting();
         $item->fill($request->only([
             'key',
@@ -74,6 +77,14 @@ class SettingController extends Controller
         }
         $item->save();
 
+        return redirect()->route('settings.index');
+    }
+
+    public function storeCourseRecommendationSetting(Request $request)
+    {
+        if ($request->ajax()) {
+            return ['success' => true];
+        }
         return redirect()->route('settings.index');
     }
 
@@ -124,14 +135,14 @@ class SettingController extends Controller
 
     public function updateCourseRecommendation(Request $request)
     {
-        $arr=$request->settins;
-        if(count($arr)){
-            foreach ($arr as $k=>$v){
-                if($k==0){
+        $arr = $request->settins;
+        if (count($arr)) {
+            foreach ($arr as $k => $v) {
+                if ($k == 0) {
                     updateGlobalRecommendedCourse($v);
                     continue;
-                }else{
-                    $course=Course::find($v);
+                } else {
+                    $course = Course::find($v);
                     $course->where('hot')->true;
                     $course->save();
                 }

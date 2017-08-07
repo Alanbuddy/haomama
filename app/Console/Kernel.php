@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\changeCredential;
 use App\Console\Commands\enroll;
 use App\Console\Commands\test;
 use App\Console\Commands\WechatMessage;
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         test::class,
         WechatMessage::class,
         enroll::class,
+        changeCredential::class,
     ];
 
     /**
