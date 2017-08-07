@@ -64,5 +64,4 @@
 
 @section('script')
 <script src= "{{ mix('/js/setting-create.js') }}"></script>
-<script src= "js/timer.js"></script>
 @endsection

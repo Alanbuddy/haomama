@@ -35,7 +35,7 @@ $(document).ready(function() {
             $.getJSON(
               window.sms_send,
               {
-                mobile: mobile
+                phone: mobile
               },
               function(data){
                 console.log(data);

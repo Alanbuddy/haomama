@@ -38,7 +38,7 @@ $(document).ready(function($) {
     $.getJSON(
       window.sms_send,
       {
-        mobile: mobile
+        phone: mobile
       },
       function(data){
         console.log(data);
@@ -68,7 +68,7 @@ $(document).ready(function($) {
     $.getJSON(
       window.sms_verify,
       {
-        mobile: mobile,
+        phone: mobile,
         code: code
       },
       function(data) {

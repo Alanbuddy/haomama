@@ -57,29 +57,41 @@ $(document).ready(function($) {
 	    $("#profileModal").modal("hide");
 	    $('.add-baby-div').hide();
 	});
+
 	$("#code").click(function(){
 	  var mobile = $("#mobile").val();
 	  var mobile_retval = $.regex.isMobile(mobile);
 	  if (mobile_retval === false) {
 	    showMsg("手机号不正确", 'center');
 	    return false;
-	  }
-	  $.getJSON(
-	  	 window.sms_send,  
-	  	{
-	  		mobile: mobile
-	  	},
-	  	function(data){
-	  		console.log(data);
-	  		if (data.success){
-	  			if (timer !== null) {
-	  				clearTimeout(timer);
-	  			}
-	  			time('#code');
-	  		} 
-	  	}
-	  );
-    return false;
+	  }else{
+      $.getJSON(
+        window.validmobile,
+        {
+          phone: mobile
+        },
+        function(data){
+          console.log(data);
+          if(data.isOccupied == false){
+            $.getJSON(
+              window.sms_send,
+              {
+                phone: mobile
+              },
+              function(data){
+                console.log(data);
+                if (data.success){
+                  if (timer !== null) {
+                    clearTimeout(timer);
+                  }
+                  time('#code');
+                }
+              }
+            );
+          } 
+        }
+        );
+    }
 	});
 
   $('#edit-end').click(function(){
@@ -107,7 +119,7 @@ $(document).ready(function($) {
     $.getJSON(
       window.sms_verify,
       {
-        mobile: mobile,
+        phone: mobile,
         code: code
       },
       function(data) {
