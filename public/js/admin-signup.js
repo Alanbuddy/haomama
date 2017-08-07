@@ -97,7 +97,10 @@ $(document).ready(function() {
       success: function(data){
         console.log(data);
         if (data.success){
-          showMsg("您已注册成功，请通知管理员开通您的账号", "center");
+          $("#password_notice").text("您已注册成功，请通知管理员开通账号").css("visibility", "visible");
+          setTimeout(function(){
+            location.href = window.login;
+          }, 2000);
         }else{
           $("#code_notice").css("visibility", "visible");
         }
