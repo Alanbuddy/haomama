@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class SmsController extends Controller
 {
+    function __construct()
+    {
+    }
+
     public function send(Request $request)
     {
         $response = SmsApi::send($request);
