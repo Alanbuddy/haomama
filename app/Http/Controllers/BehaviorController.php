@@ -3,14 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Behavior;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Http\Kernel as HttpKernel;
 
 class BehaviorController extends Controller
 {
-    function __construct()
+    use MakesHttpRequests;
+    private $app;
+
+    function __construct(Application $app)
     {
+        $this->app = $app;
         $this->middleware('role:admin')->except(['index', 'create', 'store']);
+
     }
 
     /**
@@ -38,6 +47,20 @@ class BehaviorController extends Controller
      */
     public function create()
     {
+        $server = $this->transformHeadersToServerVars([]);
+        $uri = '/courses/1';
+        $kernel = $this->app->make(HttpKernel::class);
+        $method = 'GET';
+        $parameters = [];
+        $cookies = [];
+        $files = [];
+        $symfonyRequest = SymfonyRequest::create(
+            $this->prepareUrlForRequest($uri), $method, $parameters,
+            $cookies, $files, array_replace($this->serverVariables, $server), null
+        );
+        $request = Request::createFromBase($symfonyRequest);
+        dd($request);
+        dd($request, $server, $this->call('GET', $uri, [], [], [], $server));
         return view('admin.user_behavior.create');
     }
 
@@ -49,6 +72,9 @@ class BehaviorController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'type' => 'required'
+        ]);
         $item = new Behavior();
         $item->fill($request->only([
             'type',
@@ -58,21 +84,24 @@ class BehaviorController extends Controller
         ]));
 
         $valid = true;
-
         if ($request->get('type') == 'video.watch') {
-            $record = auth()->user()->behaviors()
-                ->where('video_id', $request->video_id)
-                ->orderBy('id', 'desc')
-                ->first();
-            if ($record && (time() - strtotime($record->created_at) < 10 * 60)) {//10分钟内重复看一个视频只算一次观看记录
-                $valid = false;
+            $valid = $this->recordVideoWatch($request);
+        }
+
+        if ($request->get('type') . contains('pv')) {
+            $routeName = $request->route()->getName();
+            switch ($routeName) {
+                case 'courses.show':
+                    $page = '课程页面';
+                    break;
             }
+            $item->data = ['url' => $request->route()];
         }
 
         if ($valid)
             auth()->user()->behaviors()->save($item);
 
-        if ($request->isJson()) {
+        if ($request->ajax()) {
             return ['success' => $valid ? true : false];
         }
 
@@ -133,5 +162,18 @@ class BehaviorController extends Controller
 //            ->where(DB::raw('json_search(data,"one","%2%")'),'like', '%2%')
             ->paginate(10);
         dd($items);
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function recordVideoWatch(Request $request)
+    {
+        $record = auth()->user()->behaviors()
+            ->where('video_id', $request->video_id)
+            ->orderBy('id', 'desc')
+            ->first();
+        return !($record && (time() - strtotime($record->created_at) < 10 * 60)); //10分钟内重复看一个视频只算一次观看记录
     }
 }

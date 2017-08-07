@@ -48,4 +48,28 @@
         <input type="text" name="lesson_id" placeholder="" value=1>
         <button class="btn" type="submit">提交观看视频行为</button>
     </form>
+    <form action="{{route('behaviors.store')}}" method="post">
+        {{csrf_field()}}
+        <label for="name">type</label>
+        <input type="text" name="type" placeholder="" value="pv.begin">
+        <label for="name">data</label>
+        <input type="text" name="data" placeholder="" value={"url":"/","page":"首页","":""}>
+        <label for="name">video_id</label>
+        <input type="text" name="course_id" placeholder="" value=>
+        <label for="name">lesson_id</label>
+        <input type="text" name="lesson_id" placeholder="" value=>
+        <button class="btn" type="submit">PV.begin</button>
+    </form>
+    <form action="{{route('behaviors.store')}}" method="post">
+        {{csrf_field()}}
+        <label for="name">type</label>
+        <input type="text" name="type" placeholder="" value="pv.end">
+        <label for="name">data</label>
+        <input type="text" name="data" placeholder="" value={"url":"/","page":"首页","":""}>
+        <label for="name">video_id</label>
+        <input type="text" name="course_id" placeholder="" value=>
+        <label for="name">lesson_id</label>
+        <input type="text" name="lesson_id" placeholder="" value=>
+        <button class="btn" type="submit">PV.end</button>
+    </form>
 @endsection
