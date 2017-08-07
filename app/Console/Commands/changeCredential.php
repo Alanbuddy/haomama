@@ -39,11 +39,14 @@ class changeCredential extends Command
     public function handle()
     {
         $user_id = $this->ask("user id");
-        $user=User::find($user_id);
+        $user = User::find($user_id);
+        $this->info(json_encode([$user->id, $user->name, $user->phone]));
         $passwd = $this->ask("password");
-        $user->password= bcrypt($passwd);
-//        $phone = $this->ask("phone");
-//        $user->phone= $phone;
+        if ($passwd)
+            $user->password = bcrypt($passwd);
+        $phone = $this->ask("phone",$user->phone);
+        if ($phone)
+            $user->phone = $phone;
         $user->save();
     }
 }
