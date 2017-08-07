@@ -1,20 +1,22 @@
 $ ->
-  $('.swiper-container').scroll ->
-    if $('.swiper-container').scrollTop() > 100
+  $(".list-div").eq(0).css("display", "block")
+  
+  $('.wrapper').scroll ->
+    if $('.wrapper').scrollTop() > 100
       $('.upper').fadeIn(1000)
     else
       $('.upper').fadeOut(1000)
 
   $('.upper').click ->
-    $('.swiper-container').animate({scrollTop: 0})
+    $('.wrapper').animate({scrollTop: 0})
 
   $('.nav li').eq(0).addClass('active')
 
   $(".course-nav span").click ->
-    $(this).closest(".swiper-slide").find(".course-nav span").removeClass('course-active')
+    $(".course-nav span").removeClass('course-active')
     $(this).addClass('course-active')
-    $(this).closest(".swiper-slide").find(".course-item-div").css('display', 'none');
-    $(this).closest(".swiper-slide").find(".course-item-div").eq($(this).index()).css('display', 'block')
+    $(".course-item-div").css('display', 'none');
+    $(".course-item-div").eq($(this).index()).css('display', 'block')
 
   $("#mine").click ->
     # jump to mine_page
@@ -30,31 +32,13 @@ $ ->
 
   $(".search-input").click ->
     location.href = window.course_search
-    
-  mySwiper = new Swiper('.swiper-container',{
-    speed: 300,
-    touchAngle : 10,
-    longSwipes : false,
-    iOSEdgeSwipeDetection : true,
-    longSwipes : false,
-    longSwipesMs : 500,
-    simulateTouch : false,
-    threshold : 100,
-    onSlideChangeStart : ->
-      $(".nav li").removeClass('active')
-      $(".nav li").eq(mySwiper.activeIndex).addClass('active')
-  })
 
-  $(".nav li").on('touchstart mousedown', (e) ->
-    e.preventDefault()
+  $(".nav li").click ->
     $(".nav li").removeClass('active')
     $(this).addClass('active')
-    mySwiper.slideTo($(this).index())
-  )
+    $(".list-div").css("display", "none")
+    $(".list-div").eq($(this).index()).css("display", "block")
   
-  $(".nav li").click( (e) ->
-    e.preventDefault()
-  )
 
   bannerSwiper = new Swiper('.swiper-container-banner',{
     pagination : '.swiper-pagination',
@@ -73,3 +57,7 @@ $ ->
       $(this).addClass('psychology-title')
     else
       $(this).addClass('grow-title')
+
+
+ 
+
