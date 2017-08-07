@@ -114,10 +114,11 @@ class HomeController extends Controller
 //        $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
 //        $signPackage = $jsSdk->getSignPackage();
 //        return view('video.display',
-//            compact('categories', 'data')
-//        );
+//            compact('categories',
+        $setting = Setting::where('key', 'carousel')->first();
+
         return view('course.index',
-            compact('categories', 'data')
+            compact('categories', 'data','setting')
         );
     }
 
