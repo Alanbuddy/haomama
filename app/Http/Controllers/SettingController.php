@@ -82,10 +82,21 @@ class SettingController extends Controller
 
     public function storeCourseRecommendationSetting(Request $request)
     {
+        $arr=$request->get('recommend');
+        foreach ($arr as $k=>$v){
+
+        }
         if ($request->ajax()) {
             return ['success' => true];
         }
         return redirect()->route('settings.index');
+    }
+
+    public function setGlobalRecommendedCourse($course)
+    {
+        $setting=Setting::firstOrCreate(['key'=>'recommendedCourse']);
+        $setting->value=$course->id;
+        $setting->save();
     }
 
     /**

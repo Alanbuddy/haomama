@@ -56,9 +56,9 @@ class SmsApi
 
     public static function verify(Request $request)
     {
-        if ($request->has('code') && $request->has('phone')) {
+        if ($request->has('code') && $request->has('mobile')) {
             $result = ($request->code == session('code')) &&
-                ($request->phone == session('phone'));
+                ($request->mobile == session('phone'));
             return ['success' => $result];
         }
         return ['success' => false];
