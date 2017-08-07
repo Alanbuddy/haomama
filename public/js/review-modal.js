@@ -87,10 +87,13 @@ $(document).ready(function($) {
                   }
                   time('#code');
                 }else{
-                  showMsg("服务器出错，请稍后重试", "center");
+                  showMsg("发送失败，请稍后重试", "center");
                 }
               }
             );
+          }else{
+            showMsg("该手机号已注册", "center");
+            return false;
           } 
         }
         );
@@ -141,20 +144,10 @@ $(document).ready(function($) {
                 $('#profileModal').modal('hide');
                 showMsg("资料已提交", "center");
               }
-              // else {
-              //   if (data.code == WRONG_CODE) {
-              //     showMsg('验证码错误', 'center');
-              //   }
-              // }
             }  
             );
         } else {
-          // 需要修改
           showMsg('验证码错误', 'center');
-
-          // if (data.message == "WRONG_VERIFY_CODE") {
-          //   showMsg('验证码错误', 'center');
-          // }
         }
       }
       );
