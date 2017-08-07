@@ -20,15 +20,15 @@
 
 @endsection
 @section('content')
-.swiper-container-banner
-  .swiper-wrapper
-    .swiper-slide
-      %img.img-size.img_1{src: 'icon/banner.png'}
-    .swiper-slide
-      %img.img-size.img_1{src: 'icon/banner.png'}
-    .swiper-slide
-      %img.img-size.img_1{src: 'icon/banner.png'}
-  .swiper-pagination
+// .swiper-container-banner
+//   .swiper-wrapper
+//     .swiper-slide
+//       %img.img-size.img_1{src: 'icon/banner.png'}
+//     .swiper-slide
+//       %img.img-size.img_1{src: 'icon/banner.png'}
+//     .swiper-slide
+//       %img.img-size.img_1{src: 'icon/banner.png'}
+//   .swiper-pagination
 .list-wraper
   - for ($i=0;$i<4;$i++)
     .list-div
@@ -50,7 +50,7 @@
               .word-div
                 .course-row-div.clearfix
                   %span.f12.category-class= $item['category']['name']
-                  %span.course-item-value.f14.color5= "￥". $item['price']
+                  %span.course-item-value.f14.color5= $item['price'] ? "￥".$item['price'] : "无"
                 .course-row-div.color7.unstart
                   %span.we-course-name.f16= $item['name']
                   - if ($item['type'] == 'offline')
@@ -75,7 +75,7 @@
               .word-div
                 .course-row-div.clearfix
                   %span.category-class.f12= $itemOrderByUserCount['category']['name']
-                  %span.course-item-value.f14.color5= "￥". $itemOrderByUserCount['price']
+                  %span.course-item-value.f14.color5= $itemOrderByUserCount['price'] ? "￥".$itemOrderByUserCount['price'] : "无"
                 .course-row-div.color7.unstart
                   %span.we-course-name.f16= $itemOrderByUserCount['name']
                   - if ($itemOrderByUserCount['type'] == 'offline')
@@ -100,7 +100,7 @@
               .word-div
                 .course-row-div.clearfix
                   %span.category-class.f12= $itemOrderByCommentRating['category']['name']
-                  %span.course-item-value.f14.color5= "￥". $itemOrderByCommentRating['price']
+                  %span.course-item-value.f14.color5= $itemOrderByCommentRating['price'] ? "￥".$itemOrderByCommentRating['price'] : "无"
                 .course-row-div.color7.unstart
                   %span.we-course-name.f16= $itemOrderByCommentRating['name']
                   - if ($itemOrderByCommentRating['type'] == 'offline')
