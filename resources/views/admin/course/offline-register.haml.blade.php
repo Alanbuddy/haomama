@@ -56,7 +56,6 @@
                         - else if( $item->order->status == "paid")
                           %td.font-color-brown 已付款
 
-                      // - if e.is_success
                       %tr.status
                         %td{:colspan => "7"}
                           .course-status

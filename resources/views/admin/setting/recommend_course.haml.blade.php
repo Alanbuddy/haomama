@@ -33,30 +33,13 @@
         #tab2.tab-pane.active
           .desc-div
             .controls-div.font-color3.f14
-              .controls.controls-row
-                %label.input-caption 新课速递推荐:
-                %span.unedit-box.longspan#new-span= array_key_exists(0,$arr) ? $arr[0] : "无"
-                %span.edit-box
-                  %input.input-area.form-control#new{:type => "text"}
-                %span.new-id{style: "display:none;"}
-              .controls.controls-row
-                %label.input-caption 健康养育推荐:
-                %span.unedit-box.longspan#health-span= array_key_exists(1,$arr) ? $arr[1] : "无"
-                %span.edit-box
-                  %input.input-area.form-control#health{:type => "text"}
-                %span.health-id{style: "display:none;"}
-              .controls.controls-row
-                %label.input-caption 心理教育推荐:
-                %span.unedit-box.longspan#mental-span= array_key_exists(2,$arr) ? $arr[2] : "无"
-                %span.edit-box
-                  %input.input-area.form-control#mental{:type => "text"}
-                %span.mental-id{style: "display:none;"}
-              .controls.controls-row
-                %label.input-caption 自我成长推荐:
-                %span.unedit-box.longspan#grow-span= array_key_exists(3,$arr) ? $arr[3] : "无"
-                %span.edit-box
-                  %input.input-area.form-control#grow{:type => "text"}
-                %span.grow-id{style: "display:none;"}
+              - foreach($arr as $k=>$v)
+                .controls.controls-row
+                  %label.input-caption= $k.'推荐:'
+                  %span.unedit-box.longspan#new-span= $v ? $v->name : "无"
+                  %span.edit-box
+                    %input.input-area.form-control#new{:type => "text"}
+                  %span.new-id{style: "display:none;"}
 
 @endsection
 
