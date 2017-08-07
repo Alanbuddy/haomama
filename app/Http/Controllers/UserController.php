@@ -44,6 +44,8 @@ class UserController extends Controller
                 : [];
         } else {
             $items = User::select('users.*')
+                ->leftJoin('role_user','users.id','=','role_user.user_id')
+                ->whereNull('role_id')
                 ->addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))//没有用到
                 ->paginate(10);
         }
