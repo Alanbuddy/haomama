@@ -33,7 +33,7 @@
                 %span.f20.font-color3= $user->phone
               %p
                 %span.f20.font-color3.name 姓名:
-                %input.form-control.font-color3#user_name{placeholder: "请输入姓名", value: ""}
+                %input.form-control.font-color3#user_name{placeholder: "请输入姓名", value: auth()->user()->name ? auth()->user()->name : ""}
 
 #setModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

@@ -494,3 +494,36 @@ h2 {
   background: #f7873d;
   outline: none;
 }
+
+
+//tab2
+.status {
+  display: none;
+}
+.course-status {
+  margin: 10px 0 5px 10px;
+}
+.square {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: #cfcfcf;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.join-square {
+  @extend .square;
+  background: #0fc077;
+}
+.miss-square {
+  @extend .square;
+  background: #d70c19;
+}
+.mr30 {
+  margin-right: 50px;
+}
+.tag2-page {
+  float: right;
+  width: 50%;
+}
