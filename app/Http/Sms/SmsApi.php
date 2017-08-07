@@ -23,14 +23,14 @@ class SmsApi
 
     public static function send(Request $request)
     {
-        session(['phone' => $request->mobile]);
+        session(['phone' => $request->phone]);
         $code = rand(100000, 999999);
         session(['code'=>$code]);
 //        session(['code' => 111111]);
 
         $content = '验证码:' . $code.' 【好妈妈微课】';
 //        return static::sendSms(['18911209450'], $content);
-        return static::sendSms([$request->mobile], $content);
+        return static::sendSms([$request->phone], $content);
     }
 
     //查询余量
@@ -56,9 +56,9 @@ class SmsApi
 
     public static function verify(Request $request)
     {
-        if ($request->has('code') && $request->has('mobile')) {
+        if ($request->has('code') && $request->has('phone')) {
             $result = ($request->code == session('code')) &&
-                ($request->mobile == session('phone'));
+                ($request->phone == session('phone'));
             return ['success' => $result];
         }
         return ['success' => false];
