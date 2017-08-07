@@ -58,6 +58,7 @@ $(document).ready(function($) {
 	    $('.add-baby-div').hide();
 	});
 
+  //个人资料页的验证码和提交
 	$("#code").click(function(){
 	  var mobile = $("#mobile").val();
 	  var mobile_retval = $.regex.isMobile(mobile);
@@ -85,6 +86,8 @@ $(document).ready(function($) {
                     clearTimeout(timer);
                   }
                   time('#code');
+                }else{
+                  showMsg("服务器出错，请稍后重试", "center");
                 }
               }
             );

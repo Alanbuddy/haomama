@@ -12,6 +12,7 @@
   window.order = "#{route('orders.pay')}"
   window.pay_finish = "#{route('orders.finish')}"
   window.refund = "#{route('orders.refund',-1)}"
+  window.validmobile = "#{route('validate.phone')}"
 
 
 @endsection
