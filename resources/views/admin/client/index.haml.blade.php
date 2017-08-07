@@ -23,9 +23,9 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 关注用户(34343)
+          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 关注用户
         // %li
-        //   %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 未关注用户(2345)
+        //   %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab2"} 未关注用户
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div
