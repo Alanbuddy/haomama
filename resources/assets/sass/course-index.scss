@@ -143,16 +143,12 @@
   z-index: 1000;
 }
 
-.swiper-container {
-  width: 100%;
-  max-width: 7.5rem;
-  overflow-x: hidden;
-}
 .swiper-container-banner {
   position: relative;
   width: 100%;
   max-width: 7.5rem;
   height: 3.2rem;
+  overflow-x: hidden;
 }
 .swiper-pagination-bullets {
   position: absolute;
@@ -168,4 +164,7 @@
   -ms-align-items: center;
   -o-align-items: center;
   align-items: center;
+}
+.list-div {
+  display: none;
 }

@@ -131,13 +131,16 @@ $(document).ready(function(){
     var health_id = $(".health-id").text();
     var mental_id = $(".mental-id").text();
     var grow_id = $(".grow-id").text();
-    var recommend = [{"新课速递": new_id}, {"健康养育": health_id}, {"心理教育": mental_id}, {"自我成长": grow_id}];
-    console.log(recommend);
     $.ajax({
       type: "post",
       url: window.course_recommend,
       data: {
-        recommend: recommend,
+        recommend: {
+          "新课速递": new_id,
+          "健康养育": health_id,
+          "心理教育": mental_id,
+          "自我成长": grow_id
+        },
         _token: window.token
       },
       success: function(data){

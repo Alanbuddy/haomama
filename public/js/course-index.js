@@ -10333,25 +10333,26 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var bannerSwiper, mySwiper, search;
-  $('.swiper-container').scroll(function() {
-    if ($('.swiper-container').scrollTop() > 100) {
+  var bannerSwiper, search;
+  $(".list-div").eq(0).css("display", "block");
+  $('.wrapper').scroll(function() {
+    if ($('.wrapper').scrollTop() > 100) {
       return $('.upper').fadeIn(1000);
     } else {
       return $('.upper').fadeOut(1000);
     }
   });
   $('.upper').click(function() {
-    return $('.swiper-container').animate({
+    return $('.wrapper').animate({
       scrollTop: 0
     });
   });
   $('.nav li').eq(0).addClass('active');
   $(".course-nav span").click(function() {
-    $(this).closest(".swiper-slide").find(".course-nav span").removeClass('course-active');
+    $(".course-nav span").removeClass('course-active');
     $(this).addClass('course-active');
-    $(this).closest(".swiper-slide").find(".course-item-div").css('display', 'none');
-    return $(this).closest(".swiper-slide").find(".course-item-div").eq($(this).index()).css('display', 'block');
+    $(".course-item-div").css('display', 'none');
+    return $(".course-item-div").eq($(this).index()).css('display', 'block');
   });
   $("#mine").click(function() {
     return location.href = window.userid;
@@ -10367,28 +10368,11 @@ return jQuery;
   $(".search-input").click(function() {
     return location.href = window.course_search;
   });
-  mySwiper = new Swiper('.swiper-container', {
-    speed: 300,
-    touchAngle: 10,
-    longSwipes: false,
-    iOSEdgeSwipeDetection: true,
-    longSwipes: false,
-    longSwipesMs: 500,
-    simulateTouch: false,
-    threshold: 100,
-    onSlideChangeStart: function() {
-      $(".nav li").removeClass('active');
-      return $(".nav li").eq(mySwiper.activeIndex).addClass('active');
-    }
-  });
-  $(".nav li").on('touchstart mousedown', function(e) {
-    e.preventDefault();
+  $(".nav li").click(function() {
     $(".nav li").removeClass('active');
     $(this).addClass('active');
-    return mySwiper.slideTo($(this).index());
-  });
-  $(".nav li").click(function(e) {
-    return e.preventDefault();
+    $(".list-div").css("display", "none");
+    return $(".list-div").eq($(this).index()).css("display", "block");
   });
   bannerSwiper = new Swiper('.swiper-container-banner', {
     pagination: '.swiper-pagination',
