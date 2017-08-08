@@ -38,8 +38,8 @@
                   %label.input-caption= $k.'推荐:'
                   %span.unedit-box.longspan#new-span= $v ? $v->name : "无"
                   %span.edit-box
-                    %input.input-area.form-control#new{:type => "text"}
-                  %span.new-id{style: "display:none;"}
+                    %input.input-area.form-control.category{:type => "text", value: $v ? $v->name : "无"}
+                  %span.c-id{style: "display:none;"}
 
 @endsection
 
