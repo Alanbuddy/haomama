@@ -57,15 +57,9 @@
                       %td 首页
                       %td 5 s/25 min
               .select-page 
-                %span.totalitems 共2页，总计18条
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
+                  != $items->links()
 @endsection
 
 @section('script')

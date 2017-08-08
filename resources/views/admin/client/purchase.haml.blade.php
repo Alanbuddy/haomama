@@ -43,7 +43,7 @@
                       %tr
                         %td= $item->course->name
                         %td= $item->course->type
-                        %td= $item->course->category->name
+                        %td= $item->course->category ? $item->course->category->name : "无"
                         %td= $item->created_at
                         %td= $item->wx_total_fee
                         - if($item->status == 'paid')
@@ -70,37 +70,15 @@
                               %span.miss-square
                                 // - else
                               %span.square
-                      %tr
-                        %td 课程的名字很长
-                        %td 线上视频/线下课程
-                        %td 自我成长
-                        %td 2017/06/26 22:12:06
-                        %td 80
-                        // %td.font-color-brown 已付款
-                        %td 未付款
-                        %td 
-                          // - if p.is_success  
-                          // %a.details{:href => "javascript:void(0);"} 
-                          //   上课情况
-                          //   %span.triangle-down
-                          // - else
-                          .pay-fail 上课情况
-                        // - if p.is_success
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 关注时间:
                   %span.mr30 2017/06/26 22:12:06
 
                 %span.select-page.tag2-page
-                  %span.totalitems 共2页，总计18条
+                  %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                   %span.choice-page
-                    %ul.pagination.pagination-sm
-                      %li
-                        %a{href: "#"} «
-                      %li
-                        %a{href: "#"} 1
-                      %li
-                        %a{href: "#"} »
+                    != $items->links()
 
 @endsection
 
