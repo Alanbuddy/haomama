@@ -364,4 +364,12 @@ class UserController extends Controller
         return view('admin.teacher.teacher_course', compact('user', 'items', 'totalIncome', 'ordersCount'));
     }
 
+    //用户访问记录
+    public function log(Request $request,User $user)
+    {
+        $user->behaviors()->where('type','pv.begin')
+            ->orWhere('type','pv.end')
+            ->paginate(10);
+    }
+
 }
