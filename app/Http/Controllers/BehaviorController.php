@@ -16,14 +16,12 @@ class BehaviorController extends Controller
     use MakesHttpRequests;
     protected $app;
     protected $router;
-    protected $simpleRouter;
 
 
-    function __construct(Application $app, Router $router,SimpleRouter $simpleRouter)
+    function __construct(Application $app, Router $router)
     {
         $this->app = $app;
         $this->router = $router;
-        $this->simpleRouter = $simpleRouter;
         $this->middleware('role:admin')->except(['index', 'create', 'store']);
 
     }
@@ -53,29 +51,9 @@ class BehaviorController extends Controller
      */
     public function create(Request $request)
     {
-        $server = [];
-        $uri = '/courses/1?a=b';
-        $this->t($uri);
-        $method = 'GET';
-        $parameters = [];
-        $cookies = [];
-        $files = [];
-        $symfonyRequest = SymfonyRequest::create(
-            $this->prepareUrlForRequest($uri), $method, $parameters,
-            $cookies, $files,  $server, null
-        );
-        $request = Request::createFromBase($symfonyRequest);
-        $this->dispatchToRoute($request);
-        dd($request->route('course'), $server, $this->call('GET', $uri, [], [], [], $server));
         return view('admin.user_behavior.create');
     }
 
-    public function t($uri)
-    {
-        $router=$this->simpleRouter;
-        $route = $router->getRoute($uri);
-        return view('admin.user_behavior.create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -102,13 +80,21 @@ class BehaviorController extends Controller
         }
 
         if ($request->get('type') . contains('pv')) {
-            $routeName = $request->route()->getName();
-            switch ($routeName) {
+            $data = json_decode($request->data);
+            $url = $data->url; //$uri = '/courses/1?a=b';
+            $peudoRequest = $this->peudoRequest($url);
+            $route = $peudoRequest->route();
+            $page = '';
+            switch ($route->getName()) {
+                case 'index':
+                    $page = '首页';
+                    break;
                 case 'courses.show':
-                    $page = '课程页面';
+                    $page = '课程' . $route->parameter('course')->name;
                     break;
             }
-            $item->data = ['url' => $request->route()];
+            $data->page=$page;
+            $item->data = json_encode($data);
         }
 
         if ($valid)
@@ -188,5 +174,25 @@ class BehaviorController extends Controller
             ->orderBy('id', 'desc')
             ->first();
         return !($record && (time() - strtotime($record->created_at) < 10 * 60)); //10分钟内重复看一个视频只算一次观看记录
+    }
+
+    /**
+     * @param $uri
+     * @return Request
+     */
+    public function peudoRequest($uri)
+    {
+        $server = [];
+        $method = 'GET';
+        $parameters = [];
+        $cookies = [];
+        $files = [];
+        $symfonyRequest = SymfonyRequest::create(
+            $this->prepareUrlForRequest($uri), $method, $parameters,
+            $cookies, $files, $server, null
+        );
+        $peudoRequest = Request::createFromBase($symfonyRequest);
+        $this->router->dispatchToRoute($peudoRequest);
+        return $peudoRequest;
     }
 }

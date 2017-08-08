@@ -2,7 +2,7 @@
 @section('content')
     @include('admin.user_behavior.menu')
     @include('common.message')
-    <form action="{{route('behaviors.store')}}" method="post">
+    <form action="{{route('behaviors.store')}}" method="post" xmlns:10="http://www.w3.org/1999/xhtml">
         {{csrf_field()}}
         <label for="name">type</label>
         <input type="text" name="type" placeholder="video.drag.begin" value="video.drag.begin">
@@ -53,7 +53,7 @@
         <label for="name">type</label>
         <input type="text" name="type" placeholder="" value="pv.begin">
         <label for="name">data</label>
-        <input type="text" name="data" placeholder="" value={"url":"/","page":"首页","":""}>
+        <input type="text" name="data" placeholder="" value={"url":"/","time":"2017-2-32" }>
         <label for="name">video_id</label>
         <input type="text" name="course_id" placeholder="" value=>
         <label for="name">lesson_id</label>
@@ -65,7 +65,7 @@
         <label for="name">type</label>
         <input type="text" name="type" placeholder="" value="pv.end">
         <label for="name">data</label>
-        <input type="text" name="data" placeholder="" value={"url":"/","page":"首页","":""}>
+        <input type="text" name="data" placeholder="" value={{json_encode(['url'=>'/courses/1','time'=>'2017-8-8']) }}>
         <label for="name">video_id</label>
         <input type="text" name="course_id" placeholder="" value=>
         <label for="name">lesson_id</label>

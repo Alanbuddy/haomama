@@ -109,7 +109,6 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'email|unique:users'
         ]);
         $item = new User();
         $this->storeBase($request, $item);
