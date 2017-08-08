@@ -1,33 +1,28 @@
 $(document).ready(function(){
 
-  var page = 1;
+  var page = 0;
   // 每页展示5个
   var size = 10;
   // dropload
-  $('.swiper-slide').dropload({
+  $('.wrapper').dropload({
       scrollArea : window,
       // autoLoad: false,
       loadDownFn : function(me){
           page++;
-          console.log(1111111111111111111111);
           // 拼接HTML
-          var result = '';
-          var category_id = $(".swiper-slide-active>.category_id").text();
-          console.log(category_id);
           var node = "";
+          var currenturl = location.pathname+'?'+location.search.match(/key=([^&]*)/)[0];
           $.ajax({
               type: 'GET',
-              url: window.load_bottom.substring(0, window.load_bottom.length - 2) + 0+ "?page=" + page ,
+              url: currenturl + "&page=" + page,
               dataType: 'json',
               success: function(data){
                   console.log(data);
-                  var arrLen = data[0].data.length;
+                  var arrLen = data.data.length;
                   if(arrLen > 0){
-                    for(var i=0;i<data[0].length;i++){
-                      node=render(data[0][i]);
-                      node.appendTo($('.swiper-slide-active .course-item-div'));
-                      me.resetload();
-                      
+                    for(var i=0;i<data.data.length;i++){
+                      node = render(data.data[i]);
+                      node.appendTo($('.course-item-div'));
                     }
                     // callbackHandle(data[0]);
 
@@ -37,7 +32,7 @@ $(document).ready(function(){
                       // 无数据
                       me.noData();
                   }
-                  
+                  me.resetload();
               },
               error: function(xhr, type){
                   alert('Ajax error!');
@@ -51,7 +46,7 @@ $(document).ready(function(){
   var temp=`<div class="course-item" data-id="12">
     <div class="course-icon-div">
            <img class="course-recommend" src="icon/recommend.png">
-           <img class="course-icon" src="/storage/a.png">
+           <img class="course-icon" src="storage/a.png">
     </div>
     <div class="word-div">
       <div class="course-row-div clearfix">
@@ -71,8 +66,8 @@ $(document).ready(function(){
   </div>`;
   var template=$(temp);
   // function  callbackHandle(data){
-  //   for(var i=0;i<data.length;i++){
-  //     var node=render(data[i]);
+  //   for(var i=0;i<data.data.length;i++){
+  //     var node=render(data.data[i]);
   //     node.appendTo('.course-item-div');
   //   }
   // }
@@ -85,9 +80,9 @@ $(document).ready(function(){
       template.find('[extra]').text(item['comments_count'] +"开课");
     }
     template.find('.participate').text(item['users_count']+(item['type'] == 'offline' ?'人已报名':'人已学'));
-    template.find('.course-icon').attr('src', item['cover'] ? substr(item['cover'],1) : "icon/example.png");
+    template.find('.course-icon').attr('src', item['cover'] ? item['cover'] : "icon/example.png");
     template.find('.category-class').text(item['category']['name']);
-    template.find('.course-item-value').text(item['price']);
+    template.find('.course-item-value').text("￥" + item['price']);
     template.find('.we-course-name').text(item['name']);
     return template;
   }

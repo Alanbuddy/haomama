@@ -3,6 +3,7 @@ $ ->
     $(".search-auto").show()
 
   search = ->
+    page = 0
     value = $(".input-box").val()
     location.href = window.course_search + "?key=" + value
 
