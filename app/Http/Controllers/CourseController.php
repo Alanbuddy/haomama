@@ -678,6 +678,9 @@ class CourseController extends Controller
             $items = Search::search($request->key)
                 ->paginate(6);
 //            dd($items);
+            if($request->ajax()){
+                return $items;
+            }
             return view('course.edit', [
                 'items' => $items,
             ]);
@@ -706,8 +709,10 @@ class CourseController extends Controller
     //后台设置推荐课程
     public function searchByName(Request $request)
     {
+        $this->validate($request,['name'=>'required','category'=>'required']);
         $name = $request->name;
-        $items = Course::where('status', 'publish')
+        $term=Term::where('name',$request->category)->first();
+        $items=$term->coursesByCategory()->where('status', 'publish')
             ->where('name', 'like', '%' . $name . '%')
             ->paginate(10);
         return $items;
@@ -827,8 +832,7 @@ class CourseController extends Controller
     public function signInAdmin(Request $request, Course $course)
     {
         $lessons = json_decode($course->schedule);
-        $url=env('APP_URL').route('courses.signIn',$course,$le);
-        return view('',compact('lessons'));
+        return view('',compact('course','lessons'));
     }
 
 }

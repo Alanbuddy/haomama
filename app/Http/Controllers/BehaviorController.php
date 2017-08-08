@@ -3,21 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Behavior;
+use App\Services\SimpleRouter;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Http\Kernel as HttpKernel;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 class BehaviorController extends Controller
 {
     use MakesHttpRequests;
-    private $app;
+    protected $app;
+    protected $router;
+    protected $simpleRouter;
 
-    function __construct(Application $app)
+
+    function __construct(Application $app, Router $router,SimpleRouter $simpleRouter)
     {
         $this->app = $app;
+        $this->router = $router;
+        $this->simpleRouter = $simpleRouter;
         $this->middleware('role:admin')->except(['index', 'create', 'store']);
 
     }
@@ -45,21 +51,29 @@ class BehaviorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $server = $this->transformHeadersToServerVars([]);
-        $uri = '/courses/1';
-        $kernel = $this->app->make(HttpKernel::class);
+        $server = [];
+        $uri = '/courses/1?a=b';
+        $this->t($uri);
         $method = 'GET';
         $parameters = [];
         $cookies = [];
         $files = [];
         $symfonyRequest = SymfonyRequest::create(
             $this->prepareUrlForRequest($uri), $method, $parameters,
-            $cookies, $files, array_replace($this->serverVariables, $server), null
+            $cookies, $files,  $server, null
         );
         $request = Request::createFromBase($symfonyRequest);
-//        dd($request, $server, $this->call('GET', $uri, [], [], [], $server));
+        $this->dispatchToRoute($request);
+        dd($request->route('course'), $server, $this->call('GET', $uri, [], [], [], $server));
+        return view('admin.user_behavior.create');
+    }
+
+    public function t($uri)
+    {
+        $router=$this->simpleRouter;
+        $route = $router->getRoute($uri);
         return view('admin.user_behavior.create');
     }
 

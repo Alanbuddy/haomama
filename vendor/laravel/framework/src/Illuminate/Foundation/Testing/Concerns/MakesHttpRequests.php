@@ -233,7 +233,6 @@ trait MakesHttpRequests
         $response = $kernel->handle(
             $request = Request::createFromBase($symfonyRequest)
         );
-
         $kernel->terminate($request, $response);
 
         return $this->createTestResponse($response);

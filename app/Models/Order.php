@@ -10,6 +10,6 @@ class Order extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class,'id','product_id');
+        return $this->belongsTo(Course::class,'product_id');
     }
 }
