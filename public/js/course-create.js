@@ -10338,7 +10338,8 @@ return jQuery;
     return $(".search-auto").show();
   });
   search = function() {
-    var value;
+    var page, value;
+    page = 0;
     value = $(".input-box").val();
     return location.href = window.course_search + "?key=" + value;
   };

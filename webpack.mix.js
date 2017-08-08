@@ -12,6 +12,7 @@ const { mix } = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.coffee', 'public/js')
+
 .webpackConfig({
         module: {
             rules: [
@@ -21,7 +22,7 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
    })
 .sass('resources/assets/sass/layout.scss', 'public/css')
 .sass('resources/assets/sass/register.scss', 'public/css')
-.sass('resources/assets/sass/course-index.scss', 'public/css')
+.sass('resources/assets/sass/course-index.scss', 'public/css').version()
 .sass('resources/assets/sass/setting-index.scss', 'public/css')
 .sass('resources/assets/sass/setting-create.scss', 'public/css')
 .sass('resources/assets/sass/mine-index.scss', 'public/css')
@@ -88,7 +89,7 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/admin_client_index.coffee', 'public/js')
 .js('resources/assets/js/admin_client_show.coffee', 'public/js')
 .js('resources/assets/js/admin-layout.coffee', 'public/js');
-
+ mix.version();
 
 // mix.js('resources/assets/js/app.js', 'public/js')
 //     .sass('resources/assets/sass/app.scss', 'public/css');
