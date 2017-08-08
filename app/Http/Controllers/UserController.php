@@ -373,4 +373,13 @@ class UserController extends Controller
         return view('admin.client.show', compact('user', 'items'));
     }
 
+    public function order(Request $request,User $user)
+    {
+        $items=$user->orders()
+            ->with('course')
+            ->paginate(10);
+        return view('admin.client.purchase',compact('user','items'));
+
+    }
+
 }
