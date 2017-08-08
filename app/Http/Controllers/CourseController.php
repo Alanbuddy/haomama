@@ -823,4 +823,12 @@ class CourseController extends Controller
         $item->schedule = json_encode($schedule);
     }
 
+    //后台签到管理,只针对线下课程
+    public function signInAdmin(Request $request, Course $course)
+    {
+        $lessons = json_decode($course->schedule);
+        $url=env('APP_URL').route('courses.signIn',$course,$le);
+        return view('',compact('lessons'));
+    }
+
 }

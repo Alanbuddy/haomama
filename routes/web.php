@@ -63,7 +63,7 @@ Route::group([
     Route::get('/admin/courses/{course}', 'CourseController@adminShow')->name('admin.courses.show');//后台课程详情页面
     Route::get('/admin/courses/{course}/students', 'CourseController@adminStudents')->name('admin.courses.students');//后台课程学员列表
     Route::get('/admin/courses/{course}/comments', 'CourseController@adminComments')->name('admin.courses.comments');//后台课程评论列表
-    Route::get('/admin/courses/{course}/sign-in', 'CourseController@adminComments')->name('admin.courses.comments');//后台课程评论列表
+    Route::get('/courses/{course}/sign-in', 'CourseController@signInAdmin')->name('admin.courses.signIn');//后台签到管理
     Route::resource('courses', 'CourseController');
     Route::get('/courses/{course}/lessons/edit', 'CourseController@editLessons')->name('courses.lessons.edit');
     Route::put('/courses/{course}/lessons/update', 'CourseController@updateLessons')->name('courses.lessons.update');
