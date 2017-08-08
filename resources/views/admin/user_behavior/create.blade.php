@@ -72,4 +72,20 @@
         <input type="text" name="lesson_id" placeholder="" value=>
         <button class="btn" type="submit">PV.end</button>
     </form>
+    <form action="{{route('behaviors.store')}}" method="post">
+        {{csrf_field()}}
+        <label for="name">type</label>
+        <input type="text" name="type" placeholder="" value="pv.end">
+        <label for="name">data</label>
+        <input type="text" name="data" placeholder="" value={{json_encode(['url'=>'/courses/search?key=a','time'=>'2017-8-8']) }}>
+        <button class="btn" type="submit">PV搜索</button>
+    </form>
+    <form action="{{route('behaviors.store')}}" method="post">
+        {{csrf_field()}}
+        <label for="name">type</label>
+        <input type="text" name="type" placeholder="" value="pv.end">
+        <label for="name">data</label>
+        <input type="text" name="data" placeholder="" value={{json_encode(['url'=>route('user.profile',auth()->user()),'time'=>'2017-8-8']) }}>
+        <button class="btn" type="submit">PV个人资料</button>
+    </form>
 @endsection

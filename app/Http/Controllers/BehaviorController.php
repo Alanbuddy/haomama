@@ -92,6 +92,12 @@ class BehaviorController extends Controller
                 case 'courses.show':
                     $page = '课程' . $route->parameter('course')->name;
                     break;
+                case 'courses.search':
+                    $page = '搜索页(关键词' . $peudoRequest->get('key').')';
+                    break;
+                case 'user.profile':
+                    $page = '个人资料';
+                    break;
             }
             $data->page=$page;
             $item->data = json_encode($data);
