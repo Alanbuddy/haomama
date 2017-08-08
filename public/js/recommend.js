@@ -15,13 +15,15 @@ $(document).ready(function(){
   });
 
   $(".category").each(function(){
+    var category = $(this).attr("data-name");
     $(this).autocomplete({
         source: function(request, response){
           $.ajax({
             url: window.course_search,
             type: 'get',
             data: {
-              name: request.term
+              name: request.term,
+              category: category
             },
             success: function( data ) {
               // console.log(data.data);  
