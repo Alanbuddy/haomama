@@ -36,7 +36,11 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a.f16.font-color1{"data-toggle" => "tab", :href => "#tab1"} 课程详情
+          %a.f16.font-color1#course-show 课程详情
+        %li
+          %a.f16.font-color1#register 报名信息
+        %li
+          %a.f16.font-color1#sign 课程签到
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div.font-color3.clearfix.f14

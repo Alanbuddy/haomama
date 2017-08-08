@@ -53,10 +53,10 @@
                 %a{:href => route('users.index')}
                   %img.mini-icon{src: "icon/admin/5user.png"}
                   %span.f18.sidebar-title 用户管理
-              %li
-                %a{:href => "#"}
-                  %img.mini-icon{src: "icon/admin/6statistic.png"}
-                  %span.f18.sidebar-title 统计数据
+              // %li
+              //   %a{:href => "#"}
+              //     %img.mini-icon{src: "icon/admin/6statistic.png"}
+              //     %span.f18.sidebar-title 统计数据
       .content-area
         .main-top.direction
           @yield('search-input')

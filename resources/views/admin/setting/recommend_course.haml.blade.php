@@ -33,13 +33,13 @@
         #tab2.tab-pane.active
           .desc-div
             .controls-div.font-color3.f14
-            -foreach($arr as $k=>$v)
-              .controls.controls-row
-                %label.input-caption =$k.'推荐:'
-                %span.unedit-box.longspan#new-span= $v ? $v->name : "无"
-                %span.edit-box
-                %input.input-area.form-control#new{:type => "text"}
-                %span.new-id{style: "display:none;"}
+              - foreach($arr as $k=>$v)
+                .controls.controls-row
+                  %label.input-caption= $k.'推荐:'
+                  %span.unedit-box.longspan#new-span= $v ? $v->name : "无"
+                  %span.edit-box
+                    %input.input-area.form-control#new{:type => "text"}
+                  %span.new-id{style: "display:none;"}
 
 @endsection
 
