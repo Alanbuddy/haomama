@@ -35,9 +35,7 @@ class SettingController extends Controller
             foreach ($categories as $category) {
                 $arr[$category->name] = $category->hotCourseByCategory->first() ?: null;
             }
-            return view('admin.setting.recommend_course', [
-                'arr' => $arr
-            ]);
+            return view('admin.setting.recommend_course', compact('arr'));
         }
     }
 
@@ -84,11 +82,16 @@ class SettingController extends Controller
     {
         $arr = $request->get('recommend');
         foreach ($arr as $k => $v) {
-            if ($k == 0) {
-                $course = Course::find($v);
+            $course = Course::find($v);
+            if ($k == '新课速递') {
                 $this->setGlobalRecommendedCourse($course);
-            }else{
-                $category=Term::where('name',$k)->find();
+            } else {
+                $category = Term::where('name', $k)->first();
+                $category->coursesByCategory()->update(['hot' => 0]);
+                if ($course) {
+                    $course->hot = 1;
+                    $course->save();
+                }
             }
 
         }
@@ -98,10 +101,10 @@ class SettingController extends Controller
         return redirect()->route('settings.index');
     }
 
-    public function setGlobalRecommendedCourse(Course $course)
+    public function setGlobalRecommendedCourse($course)
     {
         $setting = Setting::firstOrCreate(['key' => 'recommendedCourse']);
-        $setting->value = $course->id;
+        $setting->value = $course ? $course->id : '';
         $setting->save();
     }
 
