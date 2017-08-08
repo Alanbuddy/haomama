@@ -38,7 +38,7 @@
                   %label.input-caption= $k.'推荐:'
                   %span.unedit-box.longspan#new-span= $v ? $v->name : "无"
                   %span.edit-box
-                    %input.input-area.form-control.category{:type => "text", value: $v ? $v->name : "无"}
+                    %input.input-area.form-control.category{"data-name" => $k, :type => "text", value: $v ? $v->name : "无"}
                     %span.old-id{style: "display:none;"}= $v ? $v->category_id : "无"
                   %span.c-id{style: "display:none;"}
 
