@@ -59,8 +59,7 @@ class BehaviorController extends Controller
             $cookies, $files, array_replace($this->serverVariables, $server), null
         );
         $request = Request::createFromBase($symfonyRequest);
-        dd($request);
-        dd($request, $server, $this->call('GET', $uri, [], [], [], $server));
+//        dd($request, $server, $this->call('GET', $uri, [], [], [], $server));
         return view('admin.user_behavior.create');
     }
 
