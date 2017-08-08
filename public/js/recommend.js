@@ -46,7 +46,7 @@ $(document).ready(function(){
   $("#finish-btn").click(function(){
     var cid = [];
     $('.c-id').each(function(){
-      cid.push($(this).text());
+      cid.push($(this).text() ? $(this).text() : $(this).siblings('.edit-box').find(".old-id").text());
     });
     var re = {
           "新课速递": cid[0],
