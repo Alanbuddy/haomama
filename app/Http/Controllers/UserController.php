@@ -44,7 +44,7 @@ class UserController extends Controller
                 : [];
         } else {
             $items = User::select('users.*')
-                ->leftJoin('role_user','users.id','=','role_user.user_id')
+                ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
                 ->whereNull('role_id')
                 ->addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))//没有用到
                 ->paginate(10);
@@ -72,12 +72,12 @@ class UserController extends Controller
 
     public function newOperatorCount()
     {
-        $role=Role::where('name','operator')->first();
-        $items=$role->users;
-        $newOperators=[];
-        foreach ($items as $item){
-            if(empty($item->status)){
-                $newOperators[]=$item;
+        $role = Role::where('name', 'operator')->first();
+        $items = $role->users;
+        $newOperators = [];
+        foreach ($items as $item) {
+            if (empty($item->status)) {
+                $newOperators[] = $item;
             }
         }
         return count($newOperators);
@@ -365,11 +365,12 @@ class UserController extends Controller
     }
 
     //用户访问记录
-    public function log(Request $request,User $user)
+    public function log(Request $request, User $user)
     {
-        $user->behaviors()->where('type','pv.begin')
-            ->orWhere('type','pv.end')
+        $items = $user->behaviors()->where('type', 'pv.begin')
+            ->orWhere('type', 'pv.end')
             ->paginate(10);
+        return view('admin.client.show', compact('user', 'items'));
     }
 
 }
