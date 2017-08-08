@@ -101,6 +101,7 @@ Route::group([
     Route::get('/admin/teachers/{user}/courses', 'UserController@coursesOfTeacher')->name('admin.teacher.course');//后台讲师开设课程
     Route::get('/admin/users/{user}/enable', 'UserController@enable')->name('admin.user.enable');
     Route::get('/admin/users/{user}/disable', 'UserController@disable')->name('admin.user.disable');
+    Route::get('/users/{user}/log', 'UserController@log')->name('admin.user.log');
     Route::get('/users/{user}/vote', 'UserController@vote')->name('users.vote');
     Route::get('/users/search', 'UserController@search')->name('users.search');
     Route::resource('users', 'UserController');
