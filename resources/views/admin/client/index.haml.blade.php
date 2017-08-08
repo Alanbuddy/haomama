@@ -48,7 +48,7 @@
                     - foreach($items as $item)
                       %tr
                         %td.client-show{rowspan: count($item->baby)}
-                          %a{href: route('admin.user.log',$user->id)}= $item->openid
+                          %a{href: route('admin.user.log',$item->id)}= $item->openid
                         %td{rowspan: count($item->baby)}= $item->wx ? json_decode($item->wx)->nickname : "无"  
                         %td{rowspan: count($item->baby)}= $item->phone
                         %td{rowspan: count($item->baby)}= $item->parenthood
