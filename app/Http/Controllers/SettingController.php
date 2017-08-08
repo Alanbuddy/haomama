@@ -89,6 +89,7 @@ class SettingController extends Controller
                 $category = Term::where('name', $k)->first();
                 $category->coursesByCategory()->update(['hot' => 0]);
                 if ($course) {
+                    var_dump($course->hot);
                     $course->hot = 1;
                     $course->save();
                 }
