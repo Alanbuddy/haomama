@@ -43,6 +43,6 @@
 
 @section('script')
 <script src= "{{ mix('/js/search-result.js') }}"></script>
-<script src = "js/dropload_bottom.js"></script>
+<script src = "js/search_result.js"></script>
 
 @endsection

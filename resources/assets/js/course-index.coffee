@@ -56,9 +56,9 @@ $ ->
     location.href = window.course_item + "/" +cid
 
   $('.category-class').each ->
-    if $(this).text() == "路脰脌脿N"
+    if $(this).text() == "健康养育"
       $(this).addClass('health-title')
-    else if $(this).text() == "路脰脌脿t"
+    else if $(this).text() == "心理教育"
       $(this).addClass('psychology-title')
     else
       $(this).addClass('grow-title')

@@ -11,10 +11,13 @@ $(document).ready(function(){
       loadDownFn: function(me){
           page++;
           // 拼接HTML
-          var currenturl = location.pathname+'?'+location.search.match(/key=([^&]*)/)[0];
+          console.log(location.pathname);
+          
+          var isSearchByInput=location.href.indexOf('key')>0;
+          var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
           $.ajax({
               type: 'GET',
-              url: currenturl + "&page=" + page,
+              url: currenturl + (isSearchByInput?"&":"?"+"page=" + page),
               dataType: 'json',
               success: function(data){
                   console.log(data);
@@ -30,7 +33,7 @@ $(document).ready(function(){
                   me.resetload();
               },
               error: function(xhr, type){
-                  alert('Ajax error!');
+                  // alert('Ajax error!');
                   // 即使加载出错，也得重置
                   me.resetload();
               }
@@ -45,11 +48,11 @@ $(document).ready(function(){
     </div>
     <div class="word-div">
       <div class="course-row-div clearfix">
-        <span class="f12 category-class grow-title">健康养育</span>
+        <span class="f12 category-class">健康养育</span>
         <span class="course-item-value f14 color5">￥32</span>
       </div>
       <div class="course-row-div color7 unstart">
-        <span class="course-name f16">VlAxqQY</span>
+        <span class="we-course-name f16">VlAxqQY</span>
           <span class="course-status f8">线下</span>
        </div>
       <div class="course-row-div f12 color6">
@@ -63,6 +66,13 @@ $(document).ready(function(){
   function  callbackHandle(data){
     for(var i=0;i<data.data.length;i++){
       node=render(data.data[i]);
+      if(node.find('.category-class').text() ==  "健康养育"){
+        node.find('.category-class').addClass('health-title');
+      }else if(node.find('.category-class').text() ==  "心理教育"){
+        node.find('.category-class').addClass('psychology-title');
+      }else{
+        node.find('.category-class').addClass('grow-title');
+      }
       node.appendTo($('.course-item-div'));
     }
   }
@@ -81,7 +91,6 @@ $(document).ready(function(){
     template.find('.we-course-name').text(item['name']);
     return template.clone(true);
   }
-
 });
 
 
