@@ -11,8 +11,6 @@ $(document).ready(function(){
       loadDownFn: function(me){
           page++;
           // 拼接HTML
-          console.log(location.pathname);
-          
           var isSearchByInput=location.href.indexOf('key')>0;
           var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
           $.ajax({
@@ -35,6 +33,7 @@ $(document).ready(function(){
               error: function(xhr, type){
                   // alert('Ajax error!');
                   // 即使加载出错，也得重置
+                  showMsg("服务器返回数据错误", "center");
                   me.resetload();
               }
           });
