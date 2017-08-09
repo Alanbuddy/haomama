@@ -670,20 +670,19 @@ class CourseController extends Controller
         $route = $request->route();
         if ($route->hasParameter('tag')) {
             $items = Search::coursesByTag($request->route('tag'));
-            return view('course.edit', [
-                'items' => $items,
-            ]);
+            if ($request->ajax()) {
+                return $items;
+            }
+            return view('course.edit', compact('items'));
         }
         if ($request->has('key')) {
             $items = Search::search($request->key)
                 ->paginate(6);
 //            dd($items);
-            if($request->ajax()){
+            if ($request->ajax()) {
                 return $items;
             }
-            return view('course.edit', [
-                'items' => $items,
-            ]);
+            return view('course.edit', compact('items'));
         }
         if ($request->has('name'))
             return $this->searchByName($request);
@@ -709,10 +708,10 @@ class CourseController extends Controller
     //后台设置推荐课程
     public function searchByName(Request $request)
     {
-        $this->validate($request,['name'=>'required','category'=>'required']);
+        $this->validate($request, ['name' => 'required', 'category' => 'required']);
         $name = $request->name;
-        $term=Term::where('name',$request->category)->first();
-        $items=$term->coursesByCategory()->where('status', 'publish')
+        $term = Term::where('name', $request->category)->first();
+        $items = $term->coursesByCategory()->where('status', 'publish')
             ->where('name', 'like', '%' . $name . '%')
             ->paginate(10);
         return $items;
@@ -832,7 +831,7 @@ class CourseController extends Controller
     public function signInAdmin(Request $request, Course $course)
     {
         $lessons = json_decode($course->schedule);
-        return view('',compact('course','lessons'));
+        return view('', compact('course', 'lessons'));
     }
 
 }
