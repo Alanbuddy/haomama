@@ -15,7 +15,7 @@ $(document).ready(function(){
           var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
           $.ajax({
               type: 'GET',
-              url: currenturl + (isSearchByInput?"&":"?"+"page=" + page),
+              url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
               dataType: 'json',
               success: function(data){
                   console.log(data);
@@ -75,13 +75,25 @@ $(document).ready(function(){
       node.appendTo($('.course-item-div'));
     }
   }
+  function addZero(num){
+    if(num < 10){
+      num = "0" + num;
+    }else{
+      num = "" + num;
+    }
+  }
   function render(item){
     template.find('.course-recommend').remove();
     if(item['type'] == 'offline'){
-      template.find('[extra]').text(item['comments_count'] +"条评论");
+      var date = new Date(item['begin']);
+      console.log(date);
+      var d = date.getDate();
+      var m = date.getMonth();
+      console.log(addZero(m+1));
+      template.find('[extra]').text(addZero(parseInt(m)+1) + "月" + d +"日开课");
     }else{
       template.find('.course-status').remove();
-      template.find('[extra]').text(item['begin'] +"开课");
+      template.find('[extra]').text(item['comments_count'] +"条评论");
     }
     template.find('.participate').text(item['users_count']+(item['type'] == 'offline' ?'人已报名':'人已学'));
     template.find('.course-icon').attr('src', item['cover'] ? item['cover'] : "icon/example.png");
