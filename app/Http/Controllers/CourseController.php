@@ -669,7 +669,7 @@ class CourseController extends Controller
         //搜索结果页面
         $route = $request->route();
         if ($route->hasParameter('tag')) {
-            $items = Search::coursesByTag($request->route('tag'));
+            $items = Search::coursesByTag($request->route('tag'))->paginate(6);
             if ($request->ajax()) {
                 return $items;
             }
