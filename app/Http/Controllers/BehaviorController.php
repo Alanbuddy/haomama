@@ -74,33 +74,15 @@ class BehaviorController extends Controller
             'video_id'
         ]));
 
-        $valid = true;
+        $valid = true;//是否需要保存到数据库
         if ($request->get('type') == 'video.watch') {
             $valid = $this->recordVideoWatch($request);
         }
 
         if ($request->get('type') . contains('pv')) {
-            $data = json_decode($request->data);
-            $url = $data->url; //$uri = '/courses/1?a=b';
-            $peudoRequest = $this->peudoRequest($url);
-            $route = $peudoRequest->route();
-            $page = '';
-            switch ($route->getName()) {
-                case 'index':
-                    $page = '首页';
-                    break;
-                case 'courses.show':
-                    $page = '课程' . $route->parameter('course')->name;
-                    break;
-                case 'courses.search':
-                    $page = '搜索页(关键词' . $peudoRequest->get('key').')';
-                    break;
-                case 'user.profile':
-                    $page = '个人资料';
-                    break;
-            }
-            $data->page=$page;
-            $item->data = json_encode($data);
+            $this->storePV($request, $item);
+            if ($request->type == 'pv.end') $valid = false;
+            else $item->type = 'pv';
         }
 
         if ($valid)
@@ -200,5 +182,48 @@ class BehaviorController extends Controller
         $peudoRequest = Request::createFromBase($symfonyRequest);
         $this->router->dispatchToRoute($peudoRequest);
         return $peudoRequest;
+    }
+
+    /**
+     * @param Request $request
+     * @param $item
+     */
+    public function storePV(Request $request, $item)
+    {
+        $data = json_decode($request->data);
+        $url = $data->url; //$uri = '/courses/1?a=b';
+        $isEnd = explode('.', $request->type)[1] == 'end';
+        if ($isEnd) {
+            $log = auth()->user()->behaviors()->where('type', 'pv')
+                ->where(DB::raw('data->"$.url"'), $url)
+                ->whereNull(DB::raw('data->"$.duration"'))
+                ->orderBy('id', 'desc')
+                ->firstOrFail();
+            $logData = json_decode($log->data);
+            $logData->timeEnd = $data->time;
+            $logData->duration = strtotime($data->time) - strtotime($logData->time);
+            $log->data = json_encode($logData);
+            $log->save();
+        } else {
+            $peudoRequest = $this->peudoRequest($url);
+            $route = $peudoRequest->route();
+            $page = '';
+            switch ($route->getName()) {
+                case 'index':
+                    $page = '首页';
+                    break;
+                case 'courses.show':
+                    $page = '课程' . $route->parameter('course')->name;
+                    break;
+                case 'courses.search':
+                    $page = '搜索页(关键词' . $peudoRequest->get('key') . ')';
+                    break;
+                case 'user.profile':
+                    $page = '个人资料';
+                    break;
+            }
+            $data->page = $page;
+            $item->data = json_encode($data);
+        }
     }
 }

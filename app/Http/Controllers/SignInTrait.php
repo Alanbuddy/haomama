@@ -15,6 +15,7 @@ use App\Models\Lesson;
 
 trait SignInTrait
 {
+    //记录线上课程到访情况，用来统计课程的学习次数
     public function recordAttendance(Course $course, Lesson $lesson)
     {
         $hasAttended = (bool)Attendance::where('course_id', $course->id)
