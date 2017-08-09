@@ -17,7 +17,7 @@ class CreateAttendancesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('course_id')->unsigned();
-            $table->integer('lesson_id')->unsigned();
+            $table->integer('lesson_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
