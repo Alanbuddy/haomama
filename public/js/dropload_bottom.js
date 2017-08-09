@@ -1,13 +1,13 @@
 $(document).ready(function(){
 
   var page = 0;
-  // 每页展示5个
+  // 每页展示10个
   var size = 10;
   // dropload
   $('.wrapper').dropload({
       scrollArea : window,
       // autoLoad: false,
-      loadDownFn : function(me){
+      loadDownFn: function(me){
           page++;
           // 拼接HTML
           var node = "";
@@ -20,11 +20,10 @@ $(document).ready(function(){
                   console.log(data);
                   var arrLen = data.data.length;
                   if(arrLen > 0){
-                    for(var i=0;i<data.data.length;i++){
+                    for(var i=0;i<arrLen;i++){
                       node = render(data.data[i]);
                       node.appendTo($('.course-item-div'));
                     }
-                    // callbackHandle(data[0]);
 
                   }else{
                       // 锁定
