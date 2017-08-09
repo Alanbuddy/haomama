@@ -669,7 +669,12 @@ class CourseController extends Controller
         //搜索结果页面
         $route = $request->route();
         if ($route->hasParameter('tag')) {
-            $items = Search::coursesByTag($request->route('tag'))->with('category')->paginate(6);
+            $items = Search::coursesByTag($request->route('tag'))
+                ->withCount('comments')
+                ->withCount(['users' => function ($query) {
+                    $query->where('type', 'enroll');
+                }])
+                ->with('category')->paginate(6);
             if ($request->ajax()) {
                 return $items;
             }
