@@ -84,9 +84,9 @@ $ ->
       )
 
   $('.category-class').each ->
-    if $(this).text() == "分类N"
+    if $(this).text() == "健康养育"
       $(this).addClass('health-title-small')
-    else if $(this).text() == "分类t"
+    else if $(this).text() == "心理教育"
       $(this).addClass('psychology-title-small')
     else
       $(this).addClass('grow-title-small')

@@ -10334,6 +10334,18 @@ return jQuery;
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var check_review_input;
+  $(document).scroll(function() {
+    if ($(document).scrollTop() > 200) {
+      return $('.upper').fadeIn(1000);
+    } else {
+      return $('.upper').fadeOut(1000);
+    }
+  });
+  $('.upper').click(function() {
+    return $('body').animate({
+      scrollTop: 0
+    });
+  });
   check_review_input = function() {
     if ($(".review-input").val() === "") {
       return $("#delivery").attr("disabled", true).css("opacity", "0.5");

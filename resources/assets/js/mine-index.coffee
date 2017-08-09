@@ -1,4 +1,5 @@
 $ ->
+
   $(".avatar-div").click ->
   	# jump to profile_page
     location.href = window.profile
@@ -24,13 +25,6 @@ $ ->
   if $('.favorite-div').find('.favorite-item').length >= 3
     $('.favorite-more').show()
 
-  $(".category-class").each ->
-    if $(this).text() == "分类N"
-      $(this).addClass('health-title')
-    else if $(this).text() == "分类t"
-      $(this).addClass('psychology-title')
-    else
-      $(this).addClass('grow-title')
 
   $('.favorite-item').click ->
     cid = $(this).attr('data-id')

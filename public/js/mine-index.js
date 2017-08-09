@@ -10355,15 +10355,6 @@ return jQuery;
   if ($('.favorite-div').find('.favorite-item').length >= 3) {
     $('.favorite-more').show();
   }
-  $(".category-class").each(function() {
-    if ($(this).text() === "分类N") {
-      return $(this).addClass('health-title');
-    } else if ($(this).text() === "分类t") {
-      return $(this).addClass('psychology-title');
-    } else {
-      return $(this).addClass('grow-title');
-    }
-  });
   $('.favorite-item').click(function() {
     var cid;
     cid = $(this).attr('data-id');
