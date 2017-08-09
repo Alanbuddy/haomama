@@ -10393,9 +10393,9 @@ return jQuery;
     return location.href = window.course_item + "/" + cid;
   });
   return $('.category-class').each(function() {
-    if ($(this).text() === "·ÖÀàN") {
+    if ($(this).text() === "��������") {
       return $(this).addClass('health-title');
-    } else if ($(this).text() === "·ÖÀàt") {
+    } else if ($(this).text() === "��������") {
       return $(this).addClass('psychology-title');
     } else {
       return $(this).addClass('grow-title');
