@@ -81,7 +81,7 @@ $(document).ready(function(){
       template.find('[extra]').text(item['comments_count'] +"条评论");
     }else{
       template.find('.course-status').remove();
-      template.find('[extra]').text(item['comments_count'] +"开课");
+      template.find('[extra]').text(item['begin'] +"开课");
     }
     template.find('.participate').text(item['users_count']+(item['type'] == 'offline' ?'人已报名':'人已学'));
     template.find('.course-icon').attr('src', item['cover'] ? item['cover'] : "icon/example.png");
