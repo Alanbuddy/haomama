@@ -132,7 +132,7 @@ class SearchService
         $items = $this->basicStat()
             ->leftJoin('users','users.id','courses.teacher_id')
             ->where('courses.name','like','%'.$key.'%')
-            ->orWhere('courses.name','like','%'.$key.'%')
+            ->orWhere('users.name','like','%'.$key.'%')
             ->orderBy('courses.id','desc');
         return $items;
     }
