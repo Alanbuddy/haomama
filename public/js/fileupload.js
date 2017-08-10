@@ -145,8 +145,12 @@ $(document).ready(function(){
         description: lesson_desc,
         _token: window.token
       },
-      function(data){
+      function(data, textStatus, xhr){
         console.log(data);
+        if(xhr.status == 422){
+          showMsg("课时名称不可以重复", "center");
+          return false;
+        }
         if(data.success){
           var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
           var lid = data.data;

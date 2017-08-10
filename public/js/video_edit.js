@@ -2,6 +2,7 @@ $(document).ready(function(){
 
   var $list = $("#thelist");
   var $btn = $('#ctlBtn');
+  $btn.attr("disabled", true);
   var uploader = WebUploader.create({
 
       // swf文件路径
@@ -39,6 +40,7 @@ $(document).ready(function(){
         '<button class="delete_btn">删除</button>' +
     '</div>' );
     name = file.name;
+    $btn.attr("disabled", false);
   });
 
   uploader.on( 'uploadProgress', function( file, percentage ) {  

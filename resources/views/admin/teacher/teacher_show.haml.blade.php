@@ -90,7 +90,7 @@
               %label.input-caption 基础简介:
               %span.unedit-box#base-span= $user->description->basicIntroduction
               %span.edit-box
-                %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内"}
+                %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内", maxlength: "20"}
             .course-introduce.introduce-flex
               %span.introduce 讲师介绍:
               %span.unedit-box.longspan#desc-span!= $user->description->introduction
