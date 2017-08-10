@@ -89,4 +89,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Message', 'to');
     }
 
+    public function attendances()
+    {
+        return $this->hasMany('App\Models\Attendance');
+    }
 }

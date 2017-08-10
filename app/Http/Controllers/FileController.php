@@ -31,7 +31,7 @@ class FileController extends Controller
         $item->save();
         $path = substr($path->getPathName(), strlen(public_path()));
         if ($request->has('editor'))
-            return ['errno' => 0, 'data' =>[ env('APP_URL') . $path]];
+            return ['errno' => 0, 'data' => [env('APP_URL') . ($request->getClientIp() == '127.0.0.1' ? '' : '/haomama') . $path]];
         return ['success' => true, 'path' => $path, 'data' => $item];
     }
 
@@ -67,7 +67,7 @@ class FileController extends Controller
         $this->validate($request, ['file_id' => 'required']);
         $file = File::find($request->file_id);
         $ret = $this->merge($request, $file->description);
-        $file->path=substr($ret['path'],strlen(public_path()));
+        $file->path = substr($ret['path'], strlen(public_path()));
         $file->save();
         return $ret;
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Search;
+use App\Models\Course;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
@@ -366,19 +367,41 @@ class UserController extends Controller
     //用户访问记录
     public function log(Request $request, User $user)
     {
-        $items = $user->behaviors()->where('type', 'pv.begin')
-            ->orWhere('type', 'pv.end')
+        $items = $user->behaviors()->where('type', 'pv')
             ->paginate(10);
         return view('admin.client.show', compact('user', 'items'));
     }
 
-    public function order(Request $request,User $user)
+    //后台：用户订单记录
+    public function order(Request $request, User $user)
     {
-        $items=$user->orders()
+        $items = $user->orders()
             ->with('course')
             ->paginate(10);
-        return view('admin.client.purchase',compact('user','items'));
+        return view('admin.client.purchase', compact('user', 'items'));
 
     }
 
+    //后台：用户线下课程出勤记录
+    //http://baby.com/users/1/courses/24/attendance
+    //返回值
+    //array:3 [▼
+    //0 => true
+    //1 => false
+    //2 => false
+    //]
+    public function attendance(Request $request, User $user, Course $course)
+    {
+        $lessons = $course->titles ? json_decode($course->titles) : [];
+        $attendances = $user->attendances()
+            ->where('course_id', $course->id)
+            ->get();
+        if ($lessons && $attendances->count()) {
+            foreach ($lessons as $k => $v) {
+                $hasAttended = $attendances->where('lesson_index', $k + 1)->count();
+                $lessons[$k] = $hasAttended ? true : false;
+            }
+        }
+        dd($lessons);
+    }
 }

@@ -28,4 +28,5 @@ class Lesson extends Model
     {
         return $this->hasMany('App\Models\Attendance')->where('course_id',$course_id);
     }
+
 }

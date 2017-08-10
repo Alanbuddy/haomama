@@ -62,5 +62,11 @@ class Course extends Model
     {
         return $this->hasMany('App\Models\Order', 'product_id');
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
 }
 

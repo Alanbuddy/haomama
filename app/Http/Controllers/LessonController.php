@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class LessonController extends Controller
 {
-    use SignInTrait, CommentTrait, IO,CourseTitleTrait;
+    use SignInTrait, CommentTrait, IO, CourseTitleTrait;
 
     function __construct()
     {
@@ -160,7 +160,9 @@ class LessonController extends Controller
     {
         $type = $request->get('type', 'video');
         $video = $lesson->video;
-        $data = compact('video', 'lesson');
+        $coursesCount = $lesson->course()->count();
+        $canDelete = $coursesCount == 0;
+        $data = compact('video', 'lesson', 'coursesCount', 'canDelete');
         if ($lesson->type == 'audio') {
             $pictures = $video->pictures()
                 ->orderBy('no')
@@ -273,9 +275,14 @@ class LessonController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function destroy(Lesson $lesson)
+    public function destroy(Request $request, Lesson $lesson)
     {
-        $lesson->delete();
+        $canDelete = $lesson->course()->count() == 0;
+        if ($canDelete)
+            $lesson->delete();
+        if ($request->ajax()) {
+            return ['success' => $canDelete];
+        }
         return redirect()->route('lessons.index');
     }
 

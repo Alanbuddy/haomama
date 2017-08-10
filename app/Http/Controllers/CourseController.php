@@ -7,10 +7,10 @@ use App\Facades\Search;
 use App\Http\Util\IO;
 use App\Models\Attendance;
 use App\Models\Course;
-use App\Models\Lesson;
 use App\Models\Order;
 use App\Models\Setting;
 use App\Models\Term;
+use App\Services\QR;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -716,35 +716,32 @@ class CourseController extends Controller
         $this->validate($request, ['name' => 'required', 'category' => 'required']);
         $name = $request->name;
         $term = Term::where('name', $request->category)->first();
-        $items = $term->coursesByCategory()->where('status', 'publish')
-            ->where('name', 'like', '%' . $name . '%')
-            ->paginate(10);
+        if($term){
+            $items = $term->coursesByCategory()->where('status', 'publish')
+                ->where('name', 'like', '%' . $name . '%')
+                ->paginate(10);
+        }else{//新课速递
+            $items=Course::where('name', 'like', '%' . $name . '%')
+                ->paginate(10);
+        }
         return $items;
     }
 
 
     /**
      * 线下课程签到
-     * @param Request $request
      * @param Course $course
-     * @param Lesson $lesson
+     * @param $index
      * @return \Illuminate\Http\RedirectResponse|string
      */
-    public function signIn(Request $request, Course $course, Lesson $lesson)
+    public function signIn(Course $course, $index)
     {
         $hasEnrolled = (bool)auth()->user()->enrolledCourses()->where('id', $course->id)->count();
 
-        $this->recordAttendance($course, $lesson);
-
-        $lessons = $course->lessons()->get();//TODO  orderBy no.
-        $index = 0;
-        $i = 1;
-        foreach ($lessons as $item) {
-            if ($item->id == $lesson->id) {
-                $index = $i;
-            }
-            $i++;
+        if ($hasEnrolled) {
+            $this->recordAttendance($course, $index);
         }
+
 
         return view('mine.create', compact('hasEnrolled', 'course', 'index', 'lesson'));
     }
@@ -835,8 +832,19 @@ class CourseController extends Controller
     //后台签到管理,只针对线下课程
     public function signInAdmin(Request $request, Course $course)
     {
-        $lessons = json_decode($course->schedule);
+        $lessons = json_decode($course->titles);
+        $schedules = json_decode($course->schedule);
+        $attendances=$course->attendances()
+            ->where('lesson_index',$request->get('index',1))//index表示第几次课
+            ->paginate(10);
+        dd($lessons,$schedules,$attendances);
         return view('', compact('course', 'lessons'));
+    }
+
+    public function qr(Request $request)
+    {
+        $data=$request->url;
+        QR::qr($data);
     }
 
 }

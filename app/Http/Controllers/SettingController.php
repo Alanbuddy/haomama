@@ -49,16 +49,13 @@ class SettingController extends Controller
         return view('admin.setting.create');
     }
 
-    /**
-     * 首页轮播图{"key":"carousel","value","{'/path/to/a.jpb,/path/to/b.jpg}"}
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if ($request->has('recommend')) {
             return $this->storeCourseRecommendationSetting($request);
+        }
+        if ($request->key == 'carousel') { //设置首页轮播图
+            return $this->storeCarouselSetting($request);
         }
         $item = new Setting();
         $item->fill($request->only([
@@ -75,6 +72,20 @@ class SettingController extends Controller
         }
         $item->save();
 
+        return redirect()->route('settings.index');
+    }
+
+    /**
+     * 首页轮播图{"key":"carousel","value","{'/path/to/a.jpb,/path/to/b.jpg}"}
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeCarouselSetting(Request $request)
+    {
+        $setting = Setting::firstOrCreate(['key' => 'carousel']);
+        $setting->fill($request->only(['value']));
+        $setting->save();
         return redirect()->route('settings.index');
     }
 
