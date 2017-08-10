@@ -129,6 +129,7 @@ $(document).ready(function(){
         _token: window.token
       },
       success: function(data){
+        console.log(data);
         if(data.success){
           location.href = window.img_index;
         }
