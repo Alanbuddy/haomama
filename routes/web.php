@@ -76,6 +76,7 @@ Route::group([
     Route::get('/courses/{course}/favorite', 'CourseController@favorite')->name('courses.favorite');//收藏课程
     Route::get('/courses/{course}/recommend', 'CourseController@recommend')->name('courses.recommend');//获取推荐的课程
     Route::get('/courses/{course}/lessons/{lesson}/sign-in', 'CourseController@signIn')->name('courses.signIn');//签到
+    Route::get('/courses/{course}/lessons/{lesson}/qr', 'CourseController@qr')->name('courses.lesson.qr');//获取签到二维码
 //    Route::get('/courses/{course}/lessons/{lesson}/order', 'CourseController@updateLessonOrder')->name('courses.lessons.order');//调整课时顺序
     Route::get('/courses/{course}/lessons/{lesson}/comments', 'CommentController@commentsOfLesson')->name('courses.lesson.comments');//课时评论
 
@@ -101,8 +102,9 @@ Route::group([
     Route::get('/admin/teachers/{user}/courses', 'UserController@coursesOfTeacher')->name('admin.teacher.course');//后台讲师开设课程
     Route::get('/users/{user}/enable', 'UserController@enable')->name('admin.user.enable');
     Route::get('/users/{user}/disable', 'UserController@disable')->name('admin.user.disable');
-    Route::get('/users/{user}/log', 'UserController@log')->name('admin.user.log');
-    Route::get('/users/{user}/order', 'UserController@order')->name('admin.user.order');
+    Route::get('/users/{user}/log', 'UserController@log')->name('admin.user.log');//用户访问记录
+    Route::get('/users/{user}/order', 'UserController@order')->name('admin.user.order');//用户订单记录
+    Route::get('/users/{user}/courses/{course}/attendance', 'UserController@attendance')->name('admin.user.course.attendance');//用户课程考勤记录
     Route::get('/users/{user}/vote', 'UserController@vote')->name('users.vote');
     Route::get('/users/search', 'UserController@search')->name('users.search');
     Route::resource('users', 'UserController');

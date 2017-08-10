@@ -7,10 +7,10 @@ use App\Facades\Search;
 use App\Http\Util\IO;
 use App\Models\Attendance;
 use App\Models\Course;
-use App\Models\Lesson;
 use App\Models\Order;
 use App\Models\Setting;
 use App\Models\Term;
+use App\Services\QR;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -725,26 +725,18 @@ class CourseController extends Controller
 
     /**
      * 线下课程签到
-     * @param Request $request
      * @param Course $course
-     * @param Lesson $lesson
+     * @param $index
      * @return \Illuminate\Http\RedirectResponse|string
      */
-    public function signIn(Request $request, Course $course, Lesson $lesson)
+    public function signIn(Course $course, $index)
     {
         $hasEnrolled = (bool)auth()->user()->enrolledCourses()->where('id', $course->id)->count();
 
-        $this->recordAttendance($course, $lesson);
-
-        $lessons = $course->lessons()->get();//TODO  orderBy no.
-        $index = 0;
-        $i = 1;
-        foreach ($lessons as $item) {
-            if ($item->id == $lesson->id) {
-                $index = $i;
-            }
-            $i++;
+        if ($hasEnrolled) {
+            $this->recordAttendance($course, $index);
         }
+
 
         return view('mine.create', compact('hasEnrolled', 'course', 'index', 'lesson'));
     }
@@ -835,8 +827,16 @@ class CourseController extends Controller
     //后台签到管理,只针对线下课程
     public function signInAdmin(Request $request, Course $course)
     {
+        $url = 'ab';
+        QR::qr($url);
         $lessons = json_decode($course->schedule);
         return view('', compact('course', 'lessons'));
+    }
+
+    public function qr(Request $request)
+    {
+        $data=$request->url;
+        QR::qr($data);
     }
 
 }

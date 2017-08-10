@@ -127,6 +127,7 @@ class SearchService
         return $tags;
     }
 
+    //根据课程名或讲师名
     public function search($key)
     {
         $items = $this->basicStat()
