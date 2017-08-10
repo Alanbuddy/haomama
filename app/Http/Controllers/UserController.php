@@ -41,7 +41,9 @@ class UserController extends Controller
             }, Role::select('name')->get()->all());
             $role = Role::where('name', $type)->first();
             $items = in_array($type, $roles)
-                ? $role->users()->paginate(10)
+                ? $role->users()
+                    ->orderBy('id','desc')
+                    ->paginate(10)
                 : [];
         } else {
             $items = User::select('users.*')
