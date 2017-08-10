@@ -320,5 +320,23 @@ $(document).ready(function(){
       }
       });
   });
-
+  
+  $("#delete-btn").click(function(){
+    var del = "DELETE";
+    $.ajax({
+      type: "post",
+      url: window.lesson_del,
+      data: {
+        _token: window.token,
+        _method: del
+      },
+      success: function(data){
+        if(data.success){
+          location.href = window.lesson_index;
+        }else{
+          showMsg("该课时不可以删除", "center");
+        }
+      }
+    });
+  });
 });

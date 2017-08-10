@@ -123,10 +123,24 @@ $(document).ready(function(){
     location.href = window.teacher_course.replace(/-1/, teacher_id);
   });
 
-  $("#teacher-desc").click(function(){
-    var teacher_id = $(".teacher-id").text();
-    location.href = window.teacher_show.replace(/-1/, teacher_id);
 
+  $("#delete-btn").click(function(){
+    var del = "DELETE";
+    $.ajax({
+      type: "post",
+      url: window.teacher_del,
+      data: {
+        _token: window.token,
+        _method: del
+      },
+      success: function(data){
+        if(data.success){
+          location.href = window.teacher_index;
+        }else{
+          showMsg("该教师不可以删除", "center");
+        }
+      }
+    });
   });
 
 });
