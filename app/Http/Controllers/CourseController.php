@@ -716,12 +716,12 @@ class CourseController extends Controller
         $this->validate($request, ['name' => 'required', 'category' => 'required']);
         $name = $request->name;
         $term = Term::where('name', $request->category)->first();
-        if($term){
+        if ($term) {
             $items = $term->coursesByCategory()->where('status', 'publish')
                 ->where('name', 'like', '%' . $name . '%')
                 ->paginate(10);
-        }else{//新课速递
-            $items=Course::where('name', 'like', '%' . $name . '%')
+        } else {//新课速递
+            $items = Course::where('name', 'like', '%' . $name . '%')
                 ->paginate(10);
         }
         return $items;
@@ -834,16 +834,22 @@ class CourseController extends Controller
     {
         $lessons = json_decode($course->titles);
         $schedules = json_decode($course->schedule);
-        $attendances=$course->attendances()
-            ->where('lesson_index',$request->get('index',1))//index表示第几次课
-            ->paginate(10);
-        dd($lessons,$schedules,$attendances);
+        $attendances = $this->getAttendances($request,$course);
+        dd($lessons, $schedules, $attendances);
         return view('', compact('course', 'lessons'));
+    }
+
+    public function getAttendances(Request $request, Course $course)
+    {
+        $attendances = $course->attendances()
+            ->where('lesson_index', $request->get('index', 1))//index表示第几次课
+            ->get();
+        return $attendances;
     }
 
     public function qr(Request $request)
     {
-        $data=$request->url;
+        $data = $request->url;
         QR::qr($data);
     }
 

@@ -230,8 +230,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return ['success' => true];
+        $canDelete = $user->coachingCourse()->count() == 0;
+        if ($canDelete)
+            $user->delete();
+        return ['success' => $canDelete];
     }
 
     public function profile(Request $request)

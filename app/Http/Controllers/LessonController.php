@@ -161,7 +161,7 @@ class LessonController extends Controller
         $type = $request->get('type', 'video');
         $video = $lesson->video;
         $coursesCount = $lesson->course()->count();
-        $canDelete = $coursesCount == 0;
+        $canDelete = $coursesCount == 0;//如果有课程中引用到这个lesson，就不允许删除当前lesson
         $data = compact('video', 'lesson', 'coursesCount', 'canDelete');
         if ($lesson->type == 'audio') {
             $pictures = $video->pictures()
