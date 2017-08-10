@@ -277,9 +277,11 @@ class LessonController extends Controller
      */
     public function destroy(Request $request, Lesson $lesson)
     {
-        $lesson->delete();
+        $canDelete = $lesson->course()->count() == 0;
+        if ($canDelete)
+            $lesson->delete();
         if ($request->ajax()) {
-            return ['success' => true];
+            return ['success' => $canDelete];
         }
         return redirect()->route('lessons.index');
     }
