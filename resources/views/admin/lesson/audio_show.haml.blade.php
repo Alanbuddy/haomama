@@ -20,6 +20,7 @@
 @section('content')
                
 .main-content.bg2
+  %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
   %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
   %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
   .table-div
@@ -44,7 +45,7 @@
                   %span= $audio['file_name']
               #uploader.wu-example.edit-box
                 .item#old-video
-                  %h4.info= $audio->file_name
+                  %span.info= $audio->file_name
                   %p.state 原文件
                   %button.delete_btn 删除
                 #thelist.uploader-list

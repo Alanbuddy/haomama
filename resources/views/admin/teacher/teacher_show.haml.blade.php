@@ -1,7 +1,6 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_teacher_show.css') }}">
-
 :javascript
   window.teacher_index = "#{route('users.index')}"
   window.token = "#{csrf_token()}"
@@ -17,6 +16,7 @@
 @section('content')
 
 .main-content.bg2
+  %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
   %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
   %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 完成
   .table-div

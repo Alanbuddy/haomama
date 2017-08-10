@@ -13,6 +13,7 @@
     %link{:href => "css/notification.css", :rel => "stylesheet" }
     %link{:href => "css/admin-layout.css", :rel => "stylesheet"}
     %link{:href => "css/plugin/pagination.css", :rel => "stylesheet"}
+    %link{:href => "css/plugin/wangEditor.min.css", :rel => "stylesheet"}
 
     @yield('css')
     :javascript

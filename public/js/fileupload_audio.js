@@ -28,7 +28,7 @@ $(document).ready(function(){
   var MIME = null;
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
-        '<h4 class="info">' + file.name + '</h4>' +
+        '<span class="info">' + file.name + '</span>' +
         '<p class="state">等待上传...</p>' +
         '<button class="delete_btn">删除</button>' +
     '</div>' );
@@ -36,25 +36,24 @@ $(document).ready(function(){
     MIME = uploader.getFiles()[0].type;
   });
 
-  uploader.on( 'uploadProgress', function( file, percentage ) {
+  uploader.on( 'uploadProgress', function( file, percentage ) {  
+    $('.item').find('p.state').text('上传中 '+Math.round(percentage * 100) + '%');
     var $li = $( '#'+file.id ),
-      $percent = $li.find('.progress .progress-bar');
+      $percent = $("#thelist").find('.progress .progress-bar');
 
     // 避免重复创建
     if ( !$percent.length ) {
       $percent = $('<div class="progress progress-striped active">' +
         '<div class="progress-bar" role="progressbar" style="width: 0%">' +
         '</div>' +
-      '</div>').appendTo( $li ).find('.progress-bar');
+      '</div>').appendTo($("#thelist")).find('.progress-bar');
     }
-
-    $li.find('p.state').text('上传中');
-
     $percent.css( 'width', percentage * 100 + '%' );
   });
 
   uploader.on( 'uploadSuccess', function( file ) {
-    $( '#'+file.id ).find('p.state').text('已上传');
+    $( '#'+file.id ).find('p.state').text('已上传' + '100%');
+    $("#uploader").find(".progress").fadeOut(1000);
     var audio_file = uploader.getFiles();
     var audio_size = audio_file[0].size;
     var chunksize = 0.5*1024*1024;
@@ -105,7 +104,7 @@ $(document).ready(function(){
 
   $("#thelist").on("click", ".delete_btn", function(){  
     uploader.removeFile($(this).closest(".item").attr("id"));    //从上传文件列表中删除  
-
+    $("#uploader").find(".progress").remove();
     $(this).closest(".item").remove();   //从上传列表dom中删除  
   }); 
 

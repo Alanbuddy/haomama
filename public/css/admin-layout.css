@@ -526,3 +526,20 @@ a:hover {
   -o-justify-content: space-between;
   justify-content: space-between;
 }
+
+.wangedit-area, h1 {
+  font-size: 24px;
+}
+.wangedit-area, h2 {
+  font-size: 22px;
+}
+.wangedit-area, h3 {
+  font-size: 20px;
+}
+.wangedit-area, h4 {
+  font-size: 18px;
+}
+.wangedit-area, h5 {
+  font-size: 16px;
+}
+
