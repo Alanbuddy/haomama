@@ -337,7 +337,10 @@ class UserController extends Controller
     //老师的课程
     public function coursesOfTeacher(Request $request, User $user)
     {
-        $items = $user->coachingCourse()->withCount('orders')
+        $items = $user->coachingCourse()
+            ->withCount(['orders' => function ($query) {
+                $query->where('status', 'paid');
+            }])
             ->with('category')
             ->addSelect(DB::raw('(select sum(orders.wx_total_fee) from `orders` where `orders`.`product_id` = `courses`.`id`) as `total_income`'))
 //            ->orderBy('star', 'desc')

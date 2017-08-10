@@ -70,7 +70,10 @@ class LessonController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, ['video_id' => 'required']);
+        $this->validate($request, [
+            'video_id' => 'required',
+            'name' => 'unique:lessons'
+        ]);
         $item = new Lesson();
         $item->fill($request->only(['name', 'type', 'video_id', 'begin', 'end', 'description',]));
         if ($request->file('cover')) {
