@@ -1,6 +1,7 @@
 $(document).ready(function(){
   var $list = $("#thelist");
   var $btn = $('#ctlBtn');
+  $btn.attr("disabled", true);
   var uploader = WebUploader.create({
 
       // swf文件路径
@@ -35,6 +36,7 @@ $(document).ready(function(){
     '</div>' );
     file_name = file.name;
     MIME = uploader.getFiles()[0].type;
+    $btn.attr("disabled", false);
   });
 
   uploader.on( 'uploadProgress', function( file, percentage ) {  
@@ -115,6 +117,8 @@ $(document).ready(function(){
 
   var $list_img = $("#imglist");
   var $imgdiv = $(".img-div");
+  var $img_btn = $("#imgBtn");
+  $img_btn.attr("disabled", true);
   var uploader_img = WebUploader.create({
     swf: '/js/plugin/Uploader.swf',
     server: window.fileupload,
@@ -146,6 +150,7 @@ $(document).ready(function(){
       }
       $img.attr('src', src);
     }, 100, 100);
+    $img_btn.attr("disabled", false);
   });
 
   uploader_img.options.formData = {

@@ -16,7 +16,7 @@
 
 @endsection
 @section('search-input')
-%a{href: route('lessons.index')}
+%a{href: route('lessons.index')."?type=video"}
   %img.back{src: "icon/admin/back.png"}
 @endsection
 @section('content')

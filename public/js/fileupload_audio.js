@@ -228,16 +228,27 @@ $(document).ready(function(){
       };
       img_data.push(img_item);
     });
-    console.log(img_data);
     var title = $("#input-caption").val();
     var desc = editor.txt.html();
     var video_id = $(".video-id").text();
     var audio_id = $(".audio-id").text(); 
-    console.log(title);
     if (title == "" || audio_id == "" || desc == "" || img_data.length == 0){
       showMsg("每一项都必须填写", "center");
       return false;
     }
+
+    var input_time = [];
+    $(".img_time").each(function(){
+      var imgTime = $(this).val().trim();
+      input_time.push(imgTime);
+    });
+    for(var i=0;i<input_time.length;i++){
+      if(input_time[i] == ""){
+        showMsg("每一项播放时间都必须填写", "center");
+        return false;
+      }
+    }
+    
     $.postJSON(
       window.lesson_store + "?type=audio",
       {
