@@ -716,9 +716,14 @@ class CourseController extends Controller
         $this->validate($request, ['name' => 'required', 'category' => 'required']);
         $name = $request->name;
         $term = Term::where('name', $request->category)->first();
-        $items = $term->coursesByCategory()->where('status', 'publish')
-            ->where('name', 'like', '%' . $name . '%')
-            ->paginate(10);
+        if($term){
+            $items = $term->coursesByCategory()->where('status', 'publish')
+                ->where('name', 'like', '%' . $name . '%')
+                ->paginate(10);
+        }else{//新课速递
+            $items=Course::where('name', 'like', '%' . $name . '%')
+                ->paginate(10);
+        }
         return $items;
     }
 
