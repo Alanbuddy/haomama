@@ -10387,19 +10387,10 @@ return jQuery;
     autoplay: 3000,
     loop: true
   });
-  $('.course-item').click(function() {
+  return $('.course-item').click(function() {
     var cid;
     cid = $(this).attr('data-id');
     return location.href = window.course_item + "/" + cid;
-  });
-  return $('.category-class').each(function() {
-    if ($(this).text() === "��������") {
-      return $(this).addClass('health-title');
-    } else if ($(this).text() === "��������") {
-      return $(this).addClass('psychology-title');
-    } else {
-      return $(this).addClass('grow-title');
-    }
   });
 });
 

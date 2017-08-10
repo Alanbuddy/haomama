@@ -35,7 +35,7 @@
       - foreach ($onGoingCourses as $onGoingCourse)
         .item{'data-id' => $onGoingCourse['id']}
           .item-left
-            .category-class.f12.fb.color9= $onGoingCourse['category']['name']
+            .category-class.f12.fb= $onGoingCourse['category']['name']
             %p.course-name.f16.color7= $onGoingCourse['name']
             .row-divf.f12.color6
               %span 时间：
@@ -111,4 +111,5 @@
 
 @section('script')
 <script src= "{{ mix('/js/mine-index.js') }}"></script>
+<script src= "js/course_index.js"></script>
 @endsection

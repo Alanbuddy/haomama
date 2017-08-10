@@ -1,5 +1,13 @@
 
 $ ->
+  $(document).scroll ->
+    if $(document).scrollTop() > 200
+      $('.upper').fadeIn(1000)
+    else
+      $('.upper').fadeOut(1000)
+
+  $('.upper').click ->
+    $('body').animate({scrollTop: 0})
 
   check_review_input = ->
     if $(".review-input").val() == ""

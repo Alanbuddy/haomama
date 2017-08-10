@@ -10439,9 +10439,9 @@ $('.admire-icon').click(function() {
 });
 
 $('.category-class').each(function() {
-  if ($(this).text() === "分类N") {
+  if ($(this).text() === "健康养育") {
     return $(this).addClass('health-title-small');
-  } else if ($(this).text() === "分类t") {
+  } else if ($(this).text() === "心理教育") {
     return $(this).addClass('psychology-title-small');
   } else {
     return $(this).addClass('grow-title-small');

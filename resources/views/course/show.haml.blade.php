@@ -148,7 +148,7 @@
       .word-div
         .course-row-div.clearfix
           %span.f12.category-class= $recommendedCourse['category']['name']
-          %span.course-item-value.f14.color5= "￥". $recommendedCourse['price']
+          %span.course-item-value.f14.color5= $recommendedCourse['price'] ? "￥". $recommendedCourse['price'] :"无"
         .course-row-div.color7.unstart
           %span.name-span.f16= $recommendedCourse['name']
           - if ($recommendedCourse['type'] == 'offline')

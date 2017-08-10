@@ -52,7 +52,7 @@ $(document).ready(function(){
       </div>
       <div class="course-row-div color7 unstart">
         <span class="we-course-name f16">VlAxqQY</span>
-          <span class="course-status f8">线下</span>
+        <span class="course-status f8">线下</span>
        </div>
       <div class="course-row-div f12 color6">
           <span class="participate">人已报名</span>
@@ -75,24 +75,23 @@ $(document).ready(function(){
       node.appendTo($('.course-item-div'));
     }
   }
-  function addZero(num){
-    if(num < 10){
-      num = "0" + num;
-    }else{
-      num = "" + num;
-    }
-  }
+  
   function render(item){
     template.find('.course-recommend').remove();
     if(item['type'] == 'offline'){
       var date = new Date(item['begin']);
-      console.log(date);
       var d = date.getDate();
-      var m = date.getMonth();
-      console.log(addZero(m+1));
-      template.find('[extra]').text(addZero(parseInt(m)+1) + "月" + d +"日开课");
+      if(d<10){
+        d="0" + d;
+      }
+      var m = date.getMonth() +1;
+      if(m<10){
+        m = "0" + m;
+      }
+      template.find('[extra]').text(m + "月" + d +"日开课");
+      template.find('.course-status').show();
     }else{
-      template.find('.course-status').remove();
+      template.find('.course-status').hide();
       template.find('[extra]').text(item['comments_count'] +"条评论");
     }
     template.find('.participate').text(item['users_count']+(item['type'] == 'offline' ?'人已报名':'人已学'));

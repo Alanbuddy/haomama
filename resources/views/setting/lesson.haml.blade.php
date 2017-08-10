@@ -108,6 +108,7 @@
                   %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
                 - else
                   %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
+%img.upper{src: "icon/top.png"}
 @endsection
 @section('foot-div')
 - if ($hasEnrolled)
@@ -125,8 +126,6 @@
           %a#register 报名
           %a{"data-dismiss" => "modal"} 取消
       
-
-
 @section('script')
 <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
 <script src= "{{ mix('/js/creview.js') }}"></script>

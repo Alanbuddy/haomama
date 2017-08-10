@@ -46,7 +46,7 @@
               .course-icon-div
                 - if($data[$i]['hasRecommendedCourse']&&$item['id']==$data[$i]['recommendedCourse']->first()->id)
                   %img.course-recommend{src: "icon/recommend.png"}
-                %img.course-icon{src: $item['cover'] ? substr($item['cover'],1) : "icon/example.png"}
+                %img.course-icon{src: $item['cover'] ? strpos($item['cover'], '/') == 0 ? substr($item['cover'],1) :$item['cover'] : "icon/example.png"}
               .word-div
                 .course-row-div.clearfix
                   %span.f12.category-class= $item['category']['name']
@@ -229,6 +229,7 @@
 <script src= "js/swiper-3.4.2.jquery.min.js"></script>
 <script src= "{{mix('/js/course-index.js')}}"></script>
 // <script src = "js/dropload_bottom.js"></script>
+<script src = "js/course_index.js"></script>
 
 @endsection
 
