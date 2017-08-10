@@ -83,9 +83,11 @@ $(document).ready(function(){
           $("#shelfModal").modal("hide");
           if(data.data == "publish"){
             $(".operation").text("下架课程");
+            $("#shelfModal .message").text("是否确认下架当前课程？");
           }else{
             if(data.data == "draft")
             $(".operation").text("上线课程");
+            $("#shelfModal .message").text("是否确认上线当前课程？");
           }
         }
       }

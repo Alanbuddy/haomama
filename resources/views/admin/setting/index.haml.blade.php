@@ -35,7 +35,7 @@
                   %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               - else
                 - foreach($images as $item)
-                  %img.img-item{src: $item}
+                  %img.img-item{src: strpos($item, '/') == 0 ? substr($item,1) : $item}
 
             .edit-img-div.edit-box.f14.font-color3
               #uploader.wu-example
@@ -46,7 +46,7 @@
               .img-edit-div
                 - foreach($images as $item)
                   .item
-                    %img.edit-img-item{src: "icon/banner.png"}
+                    %img.edit-img-item{src: strpos($item, '/') == 0 ? substr($item,1) : $item}
                     %img.delete{src: "icon/admin/delete2.png"}
                     %span.path{style: "display:none;"}
                 #thelist.uploader-list

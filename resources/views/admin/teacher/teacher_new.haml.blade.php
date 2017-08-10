@@ -59,7 +59,7 @@
               %input.input-area.form-control.longinput#book{:type => "text"}
             .controls.controls-row
               %label.input-caption 基础简介:
-              %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内", maxlength:20}
+              %input.input-area.form-control.longinput#base{:type => "text", placeholder: "必填，显示在课程页中，限20字内", maxlength: "20"}
             .course-introduce
               %span.introduce 讲师介绍:
               %span.wangedit-area

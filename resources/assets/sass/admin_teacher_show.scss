@@ -3,18 +3,24 @@
 }
 .create-btn-position {
   position: absolute;
-  right: 2.07%;
+  right: 20px;
   top: 24px;
   z-index: 10;
 }
-#edit-btn {
+#edit-btn, #delete-btn {
   width: 100px;
   color: #fff;
   outline: none;
 }
 .finish-btn-position {
   position: absolute;
-  right: 2.07%;
+  right: 20px;
+  top: 24px;
+  z-index: 10;
+}
+.delete-btn-position {
+  position: absolute;
+  right: 140px;
   top: 24px;
   z-index: 10;
 }
