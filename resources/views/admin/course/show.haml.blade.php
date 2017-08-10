@@ -28,6 +28,7 @@
   
   - if($course->status == "draft")
     %button.btn.delete-normal.font-color1.unshelve-btn-position#unshelve-btn.operation{type: "button"} 上线课程
+    %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
   - if(auth()->user()->hasRole('admin') && $course->status != "draft")
     %button.btn.delete-normal.font-color1.unshelve-btn-position#shelve-btn.operation{type: "button"} 下架课程
   %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑

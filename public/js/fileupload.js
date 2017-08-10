@@ -149,34 +149,18 @@ $(document).ready(function(){
       success: function(data){
         console.log(data);
         if(data.success){
-          var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
           var lid = data.data;
-          location.href = str + lid + "?type=video";
+          var str = window.admin_lesson_show.replace(/-1/, lid);
+          location.href = str + "?type=video";
+        }
+      },
+      error: function(xhr, status,error){
+        console.log(xhr);
+        if(xhr.status == 422){
+          showMsg("课时名称不可以重复", "center");
+          return false;
         }
       }
     });
-
-    // $.postJSON(
-    //   window.lesson_store + "?type=video",
-    //   {
-    //     name: lesson_name,
-    //     video_id: lesson_video_id,
-    //     description: lesson_desc,
-    //     _token: window.token
-    //   },
-    //   function(data, textStatus, xhr){
-    //     console.log(data);
-    //     console.log(xhr);
-    //     if(xhr.status == 422){
-    //       showMsg("课时名称不可以重复", "center");
-    //       return false;
-    //     }
-    //     if(data.success){
-    //       var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
-    //       var lid = data.data;
-    //       location.href = str + lid + "?type=video";
-    //     }
-    //   }
-    //   );
   });
 });

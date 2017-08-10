@@ -297,9 +297,9 @@ $(document).ready(function(){
       function(data){
         console.log(data);
         if(data.success){
-          var str = window.admin_course_show.substring(0, window.admin_course_show.length - 2);
           var cid = data.data.id;
-          location.href = str + cid;
+          var str = window.admin_course_show.replace(/-1/, cid);
+          location.href = str;
         }
       }
       );

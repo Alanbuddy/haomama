@@ -248,10 +248,10 @@ $(document).ready(function(){
         return false;
       }
     }
-    
-    $.postJSON(
-      window.lesson_store + "?type=audio",
-      {
+    $.ajax({
+      type: 'post',
+      url: window.lesson_store + "?type=audio",
+      data: {
         video_id: video_id,
         name: title,
         audio: audio_id,
@@ -259,16 +259,20 @@ $(document).ready(function(){
         pictures: img_data,
         _token: window.token
       },
-      function(data){
-        console.log(data);
+      success: function(data){
         if(data.success){
-          
-          var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
           var lid = data.data;
-          location.href = str + lid + "?type=audio";
+          var str = window.admin_lesson_show.replace(/-1/, lid);
+          location.href = str + "?type=audio";
+        }
+      },
+      error: function(xhr, status,error){
+        if(xhr.status == 422){
+          showMsg("课时名称不可以重复", "center");
+          return false;
         }
       }
-      );
+    });
   });
 
 });

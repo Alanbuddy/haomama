@@ -3,7 +3,7 @@
 }
 .finish-btn-position {
   position: absolute;
-  right: 2.07%;
+  right: 20px;
   top: 24px;
   z-index: 10;
 }
@@ -295,18 +295,24 @@ ol.example li.placeholder:before {
 }
 .unshelve-btn-position {
   position: absolute;
-  right: 12%;
+  right: 140px;
+  top: 24px;
+  z-index: 10;
+}
+.delete-btn-position {
+  position: absolute;
+  right: 260px;
   top: 24px;
   z-index: 10;
 }
 .create-btn-position {
   position: absolute;
-  right: 2.07%;
+  right: 20px;
   top: 24px;
   z-index: 10;
 }
-#edit-btn, #unshelve-btn, #shelve-btn, #finish-btn {
-  width: 8.63%;
+#edit-btn, #unshelve-btn, #shelve-btn, #finish-btn, #delete-btn {
+  width: 100px;
   color: #fff;
   outline: none;
 }

@@ -40,7 +40,7 @@ $(document).ready(function(){
       }
   });
 
-  var temp=`<div class="course-item" data-id="12">
+  var temp=`<div class="course-item">
     <div class="course-icon-div">
            <img class="course-recommend" src="icon/recommend.png">
            <img class="course-icon" src="storage/a.png">
@@ -77,6 +77,7 @@ $(document).ready(function(){
   }
   
   function render(item){
+    template.find(".course-item").attr("data-id", item['id']);
     template.find('.course-recommend').remove();
     if(item['type'] == 'offline'){
       var date = new Date(item['begin']);

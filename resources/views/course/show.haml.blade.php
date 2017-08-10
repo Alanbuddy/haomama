@@ -227,6 +227,9 @@
                   %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
                 - else
                   %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
+        .load
+          %img.loading{src: "icon/loading.gif"}
+          %span.notice.f12 亲没数据了～
 
 %img.upper{src: "icon/top.png"}
 - if ($hasEnrolled == true)
