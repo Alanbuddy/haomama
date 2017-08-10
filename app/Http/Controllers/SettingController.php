@@ -60,6 +60,9 @@ class SettingController extends Controller
         if ($request->has('recommend')) {
             return $this->storeCourseRecommendationSetting($request);
         }
+        if ($request->key == 'carousel') {
+            return $this->storeCarouselSetting($request);
+        }
         $item = new Setting();
         $item->fill($request->only([
             'key',
@@ -75,6 +78,14 @@ class SettingController extends Controller
         }
         $item->save();
 
+        return redirect()->route('settings.index');
+    }
+
+    public function storeCarouselSetting(Request $request)
+    {
+        $setting = Setting::firstOrCreate(['key' => 'carousel']);
+        $setting->fill($request->only(['value']));
+        $setting->save();
         return redirect()->route('settings.index');
     }
 
