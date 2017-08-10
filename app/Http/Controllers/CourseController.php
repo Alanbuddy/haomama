@@ -832,9 +832,9 @@ class CourseController extends Controller
     //后台签到管理,只针对线下课程
     public function signInAdmin(Request $request, Course $course)
     {
-        $url = 'ab';
-        QR::qr($url);
-        $lessons = json_decode($course->schedule);
+        $lessons = json_decode($course->titles);
+        $schedules = json_decode($course->schedule);
+        dd($lessons,$schedules);
         return view('', compact('course', 'lessons'));
     }
 

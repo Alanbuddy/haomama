@@ -367,8 +367,7 @@ class UserController extends Controller
     //用户访问记录
     public function log(Request $request, User $user)
     {
-        $items = $user->behaviors()->where('type', 'pv.begin')
-            ->orWhere('type', 'pv.end')
+        $items = $user->behaviors()->where('type', 'pv')
             ->paginate(10);
         return view('admin.client.show', compact('user', 'items'));
     }
