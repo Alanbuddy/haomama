@@ -57,7 +57,7 @@ $(document).ready(function(){
 
   uploader.on( 'uploadSuccess', function( file, percentage ) {
     $( '#'+file.id ).find('p.state').text('已上传' + '100%');
-    $(".progress").fadeOut(2000);
+    $(".progress").fadeOut(1000);
     var video_file = uploader.getFiles();
     var video_size = video_file[0].size;
     var chunksize = 0.5*1024*1024;

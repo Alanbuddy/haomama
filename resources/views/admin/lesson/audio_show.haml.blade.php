@@ -4,14 +4,16 @@
 <link href="css/plugin/webuploader.css" rel="stylesheet" type="text/css">
 
 :javascript
-    window.lesson_index = "#{route('lessons.index')}"
-    window.lesson_store = "#{route('lessons.store')}"
-    window.video = "#{route('videos.store')}"
-    window.token = "#{csrf_token()}"
-    window.files_merge = "#{route('files.merge')}"
-    window.audio_init = "#{route('file.upload.init')}"
-    window.admin_lesson_show = "#{route('admin.lesson.show', -1)}" 
-    window.lesson_update = "#{route('lessons.update',$lesson->id)}"
+  window.lesson_index = "#{route('lessons.index')}"
+  window.lesson_store = "#{route('lessons.store')}"
+  window.video = "#{route('videos.store')}"
+  window.token = "#{csrf_token()}"
+  window.files_merge = "#{route('files.merge')}"
+  window.audio_init = "#{route('file.upload.init')}"
+  window.admin_lesson_show = "#{route('admin.lesson.show', -1)}" 
+  window.lesson_update = "#{route('lessons.update',$lesson->id)}"
+  window.lesson_del = "#{route('lessons.destroy',$lesson->id)}"
+
 @endsection
 @section('search-input')
 %a{href: route('lessons.index')}
@@ -20,7 +22,8 @@
 @section('content')
                
 .main-content.bg2
-  %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
+  - if($canDelete)
+    %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
   %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
   %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 保存
   .table-div

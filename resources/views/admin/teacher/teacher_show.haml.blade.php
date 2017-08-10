@@ -2,11 +2,12 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_teacher_show.css') }}">
 :javascript
-  window.teacher_index = "#{route('users.index')}"
+  window.teacher_index = "#{route('users.index')."?type=teacher"}"
   window.token = "#{csrf_token()}"
   window.teacher_update = "#{route('users.update',$user->id)}"
   window.teacher_show = "#{route('admin.user.show', -1)}"
   window.teacher_course = "#{route('admin.teacher.course', -1)}"
+  window.teacher_del = "#{route('users.destroy',$user->id)}"
 
 @endsection
 @section('search-input')
@@ -16,7 +17,8 @@
 @section('content')
 
 .main-content.bg2
-  %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
+  - if(count($courses)== 0)
+    %button.btn.delete-normal.font-color1.delete-btn-position#delete-btn{type: "button"} 删除
   %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
   %button.btn.finish-normal.font-color1.finish-btn-position#finish-btn{type: "button"} 完成
   .table-div
