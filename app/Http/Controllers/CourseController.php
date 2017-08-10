@@ -834,7 +834,10 @@ class CourseController extends Controller
     {
         $lessons = json_decode($course->titles);
         $schedules = json_decode($course->schedule);
-        dd($lessons,$schedules);
+        $attendances=$course->attendances()
+            ->where('lesson_index',$request->get('index',1))//index表示第几次课
+            ->paginate(10);
+        dd($lessons,$schedules,$attendances);
         return view('', compact('course', 'lessons'));
     }
 
