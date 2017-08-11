@@ -10344,9 +10344,10 @@ $(function() {
     }
   });
   return $('.upper').click(function() {
-    return $('body').animate({
+    $('body').animate({
       scrollTop: 0
     });
+    return $(".notice").hide();
   });
 });
 

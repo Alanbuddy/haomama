@@ -307,7 +307,7 @@ $(document).ready(function($) {
     console.log(windowheight);
     if(scrollTop + windowheight >= scrollHeight){
       $(".loading").show();
-      // alert("aaa");
+      alert("aaa");
       $.ajax({
         type: 'get',
         url: window.review + "?page=" + page,
