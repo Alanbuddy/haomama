@@ -14,6 +14,7 @@
   window.refund = "#{route('orders.refund',-1)}"
   window.validmobile = "#{route('validate.phone')}"
   window.review = "#{route('courses.comments.index',$course->id)}"
+  window.comment_id = "#{route('comments.vote', -1)}"
 
 @endsection
 @section('content')

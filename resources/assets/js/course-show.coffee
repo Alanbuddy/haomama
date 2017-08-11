@@ -62,7 +62,7 @@ $ ->
           showMsg('服务器出错，请稍后再试', 'center')
       )
 
-  $('.admire-icon').click ->
+  $(document).on 'click', '.admire-icon', ->
     url = $(this).closest(".review-item").attr("data-url")
     num = $(this).siblings(".admire-num").text()
     ad = $(this)

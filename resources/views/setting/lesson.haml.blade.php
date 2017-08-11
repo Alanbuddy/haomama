@@ -49,7 +49,7 @@
     .desc!= $lesson['description']
 
 .main-div
-  - if ((count($comments) + count($latestComments)) > 3)
+  - if (count($latestComments) > 3)
     .hot-review-div
       .review-title
         %span.title.f14.color7.fb 课程评论
@@ -87,6 +87,9 @@
                 %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
               - else
                 %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
+      .load
+        %img.loading{src: "icon/loading.gif"}
+        %span.notice.f12 亲没数据了～
   - else
     .hot-review-div
       .review-title
