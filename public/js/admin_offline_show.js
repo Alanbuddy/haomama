@@ -253,12 +253,12 @@ $(document).ready(function(){
 	}
 	parse_calendar_events();
 
-	function check_input(name, length, ori_price, price, min_num, max_num){
+	function check_input(name, length, ori_price, min_num, max_num){
 	  if(name == ""){
 	    showMsg("课程名称必须填写", "center");
 	    return false;
 	  }
-	  if(!$.isNumeric(length) || !$.isNumeric(ori_price) || !$.isNumeric(price) || !$.isNumeric(min_num) || !$.isNumeric(max_num)){
+	  if(!$.isNumeric(length) || !$.isNumeric(ori_price) || !$.isNumeric(min_num) || !$.isNumeric(max_num)){
 	    showMsg("请输入正确的数字", "center");
 	    return false;
 	  }
@@ -432,6 +432,10 @@ $(document).ready(function(){
 	  $(".teacher-id").each(function(){
 	    teacher_arr.push($(this).text());
 	  });
+    if(teacher_arr.length == 0){
+      showMsg("授课老师没有添加", "center");
+      return false;
+    }
 	  var path = $(".cover-path").text();
 	  var offline = "offline";
 	  
@@ -451,7 +455,7 @@ $(document).ready(function(){
       showMsg("课程类型没有选择", "center");
       return false;
     }
-	  var ret = check_input(name, length, original_price, price, min_num, max_num);
+	  var ret = check_input(name, length, original_price, min_num, max_num);
     if(ret == false) {
       return false;
     }
@@ -484,5 +488,22 @@ $(document).ready(function(){
 	    );
 	});
   
-
+  $("#delete-btn").click(function(){
+    var del = "DELETE";
+    $.ajax({
+      type: "post",
+      url: window.course_del,
+      data: {
+        _token: window.token,
+        _method: del
+      },
+      success: function(data){
+        if(data.success){
+          location.href = window.course_index;
+        }else{
+          showMsg("该课程不可以删除", "center");
+        }
+      }
+    });
+  });
 });

@@ -16,6 +16,7 @@
   window.lessons_index = "#{route('lessons.index')}"
   window.student = "#{route('admin.courses.students',$course->id)}"
   window.comment = "#{route('admin.courses.comments', $course->id)}"
+  window.course_del = "#{route('courses.destroy',$course->id)}"
 
 @endsection
 @section('search-input')

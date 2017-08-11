@@ -169,12 +169,12 @@ $(document).ready(function(){
     }
   });
 
-  function check_input(name, length, ori_price, price, min_num, max_num){
+  function check_input(name, length, ori_price, min_num, max_num){
     if(name == ""){
       showMsg("课程名称必须填写", "center");
       return false;
     }
-    if(!$.isNumeric(length) || !$.isNumeric(ori_price) || !$.isNumeric(price) || !$.isNumeric(min_num) || !$.isNumeric(max_num)){
+    if(!$.isNumeric(length) || !$.isNumeric(ori_price) || !$.isNumeric(min_num) || !$.isNumeric(max_num)){
       showMsg("请输入正确的数字", "center");
       return false;
     }
@@ -339,7 +339,7 @@ $(document).ready(function(){
       showMsg("课程类型没有选择", "center");
       return false;
     }
-    var ret = check_input(name, length, original_price, price, min_num, max_num);
+    var ret = check_input(name, length, original_price, min_num, max_num);
     if(ret == false) {
       return false;
     }

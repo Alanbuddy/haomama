@@ -35,7 +35,8 @@
                   %img.undiscover-icon{src: "icon/admin/undiscover.png"}
               - else
                 - foreach($images as $item)
-                  %img.img-item{src: strpos($item, '/') == 0 ? substr($item,1) : $item}
+                  .img-item-div
+                    %img.img-item{src: strpos($item, '/') == 0 ? substr($item,1) : $item}
 
             .edit-img-div.edit-box.f14.font-color3
               #uploader.wu-example

@@ -10,6 +10,7 @@
   window.comment = "#{route('comments.store')}"
   window.order = "#{route('orders.pay')}"
   window.comment_id = "#{route('comments.vote', -1)}"
+  window.upload_review = "#{route('courses.lesson.comments',$course->id,$lesson->id)}"
 
 @endsection
 @section('content')

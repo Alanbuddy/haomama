@@ -17,7 +17,8 @@
   window.lessons_index = "#{route('lessons.index')}"
   window.course_publish = "#{route('courses.publish',$course->id)}"
   window.course_show = "#{route('admin.courses.show',$course->id)}"
-
+  window.course_del = "#{route('courses.destroy',$course->id)}"
+  
 @endsection
 @section('search-input')
 %a{href: route('courses.index')}
