@@ -702,7 +702,21 @@ class CourseController extends Controller
         if ($request->has('key')) {
             $items = Search::search($request->key)
                 ->paginate(10);
-//            dd($items);
+            foreach ($items as $item) {
+                if($item->status=='draft'){
+                    $item->status='未开';
+                }else{
+                    if($item->type=='offline'){
+                        if($item->end&&$item->end<Carbon::now()){
+                            $item->status='结课';
+                        }
+                    }else{
+                        $item->status='正常';
+                    }
+                }
+            }
+
+            dd($items->all());
             return view('admin.course.search', [
                 'items' => $items,
             ]);

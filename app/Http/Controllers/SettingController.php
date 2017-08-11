@@ -86,6 +86,9 @@ class SettingController extends Controller
         $setting = Setting::firstOrCreate(['key' => 'carousel']);
         $setting->fill($request->only(['value']));
         $setting->save();
+        if ($request->ajax()) {
+            return ['success' => true];
+        }
         return redirect()->route('settings.index');
     }
 

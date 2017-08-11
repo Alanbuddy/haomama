@@ -59,7 +59,7 @@ Route::group([
     Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');
     Route::get('/courses/enrolled', 'CourseController@enrolledCourses')->name('courses.enrolled');//我加入的课程
     Route::get('/courses/favorited', 'CourseController@favoriteCourses')->name('courses.favorited');//我收藏的课程
-    Route::get('/admin/courses/search', 'CourseController@adminSearch')->name('admin.courses.search');
+    Route::get('/courses/admin/search', 'CourseController@adminSearch')->name('admin.courses.search');
     Route::get('/courses/{course}/admin', 'CourseController@adminShow')->name('admin.courses.show');//后台课程详情页面
     Route::get('/courses/{course}/admin/students', 'CourseController@adminStudents')->name('admin.courses.students');//后台课程学员列表
     Route::get('/courses/{course}/admin/comments', 'CourseController@adminComments')->name('admin.courses.comments');//后台课程评论列表
@@ -81,8 +81,8 @@ Route::group([
     Route::get('/courses/{course}/lessons/{lesson}/comments', 'CommentController@commentsOfLesson')->name('courses.lesson.comments');//课时评论
 
     Route::get('/courses/{course}/lessons/{lesson}', 'LessonController@detail')->name('courses.lessons.show');//课时详情
-    Route::get('/admin/lessons/search', 'LessonController@adminSearch')->name('admin.lessons.search');//课时搜索
-    Route::get('/admin/lessons/{lesson}/', 'LessonController@adminShow')->name('admin.lesson.show');//课时详情管理
+    Route::get('/lessons/admin/search', 'LessonController@adminSearch')->name('admin.lessons.search');//课时搜索
+    Route::get('/lessons/{lesson}/admin', 'LessonController@adminShow')->name('admin.lesson.show');//课时详情管理
 
     Route::resource('lessons', 'LessonController');
 
