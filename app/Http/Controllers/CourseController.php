@@ -510,7 +510,10 @@ class CourseController extends Controller
     //课程的评论
     public function commentsIndex(Request $request, Course $course)
     {
-        return $course->comments()->orderBy('id', 'desc')->paginate(10);
+        return $course->comments()
+            ->with('user')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
     }
 
     public function enrollHandle(Course $course)
@@ -711,6 +714,11 @@ class CourseController extends Controller
                         && $item->end < Carbon::now()
                     ) {
                         $item->status = '结课';
+                    } else if ($item->type == 'offline'
+                        && $item->begin
+                        && $item->begin > Carbon::now()
+                    ) {
+                        $item->status = '未开';
                     } else {
                         $item->status = '正常';
                     }
@@ -719,6 +727,7 @@ class CourseController extends Controller
 
             return view('admin.course.search', [
                 'items' => $items,
+                'key'=>$request->key,
             ]);
         }
         return redirect()->route('courses.index');
