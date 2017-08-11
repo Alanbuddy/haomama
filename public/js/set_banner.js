@@ -122,11 +122,9 @@ $(document).ready(function(){
       if($(this).find(".path").text() != ""){
         value.push($(this).find(".path").text());
       }else{
-        console.log($(this).find(".old_img").attr("src"));
         value.push($(this).find(".old_img").attr("src"));
       }
     });
-    console.log(value);
     $.ajax({
       url: window.img_store,
       type: 'post',
