@@ -12,12 +12,12 @@ $lessons
 ***
 # 页面访问记录 
 路由 POST route('behaviors.store')
-##开始访问某个页面
-###POST参数
+## 开始访问某个页面
+### POST参数
 - type:'pv.begin'
 - data:{"url":"/index","time":"2017-8-9 10:10:10"}
-##结束访问某个页面
-###POST参数
+## 结束访问某个页面
+### POST参数
 - type:'pv.end'
 - data:{"url":"/index","time":"2017-8-9 10:10:10"}
 
