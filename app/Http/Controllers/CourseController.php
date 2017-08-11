@@ -703,20 +703,20 @@ class CourseController extends Controller
             $items = Search::search($request->key)
                 ->paginate(10);
             foreach ($items as $item) {
-                if($item->status=='draft'){
-                    $item->status='未开';
-                }else{
-                    if($item->type=='offline'){
-                        if($item->end&&$item->end<Carbon::now()){
-                            $item->status='结课';
-                        }
-                    }else{
-                        $item->status='正常';
+                if ($item->status == 'draft') {
+                    $item->status = '未开';
+                } else {
+                    if ($item->type == 'offline'
+                        && $item->end
+                        && $item->end < Carbon::now()
+                    ) {
+                        $item->status = '结课';
+                    } else {
+                        $item->status = '正常';
                     }
                 }
             }
 
-            dd($items->all());
             return view('admin.course.search', [
                 'items' => $items,
             ]);
@@ -848,7 +848,7 @@ class CourseController extends Controller
     {
         $lessons = json_decode($course->titles);
         $schedules = json_decode($course->schedule);
-        $attendances = $this->getAttendances($request,$course);
+        $attendances = $this->getAttendances($request, $course);
         dd($lessons, $schedules, $attendances);
         return view('', compact('course', 'lessons'));
     }
