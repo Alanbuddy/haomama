@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $("#finish-btn").attr("disabled", true);
   var $list = $("#thelist");
   var $btn = $("#ctlBtn");
   $btn.attr("disabled", true);
@@ -85,6 +86,7 @@ $(document).ready(function(){
 
   $btn.click(function(){
     uploader.upload();
+    $("#finish-btn").attr("disabled", false);
   });
 
   $("#thelist").on("click", ".delete", function(){  
@@ -114,6 +116,7 @@ $(document).ready(function(){
   $("#announce").click(function(){
     location.href = window.img_index;
   });
+
 
   $(document).on('click', '#finish-btn', function(){
     var name = "carousel";
