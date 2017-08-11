@@ -44,10 +44,10 @@
                   - foreach ($categories as $category )
                     %option{value: $category->id}= $category->name
                 %label.input-caption 课程节数:
-                %input.form-control.input-width#course-length{:type => "text"}
+                %input.form-control.input-width#course-length{:type => "text", placeholder: "必填"}
               .controls.controls-row
                 %label.input-caption 课程价格:
-                %input.form-control.input-width#course-price{:type => "text"}
+                %input.form-control.input-width#course-price{:type => "text", placeholder: "必填"}
                 %label.input-caption 促销价格:
                 %input.form-control.input-width#pay-price{:type => "text"}
             %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
@@ -60,12 +60,12 @@
               %label.input-caption 上课时间:
               %input.form-control.input-width#lesson-date{:type => "text"}
               %label.input-caption 最少人数:
-              %input.form-control.input-width#min-num{:type => "text"}
+              %input.form-control.input-width#min-num{:type => "text", placeholder: "必填"}
             .controls.controls-row
               %label.input-caption 上课地点:
               %input.form-control.input-width#lesson-address{:type => "text"}
               %label.input-caption 最多人数:
-              %input.form-control.input-width#max-num{:type => "text"}
+              %input.form-control.input-width#max-num{:type => "text", placeholder: "必填"}
             .controls.controls-row
               %label.input-caption 课程标签:  
               %span.tag-div
@@ -79,7 +79,7 @@
               %label.input-caption.teacher-tag 授课老师:
               %span.unadd 未添加
             .teacher-div
-              %input#teacher{type: "text"}
+              %input#teacher{type: "text", placeholder: "必填"}
 
             .calendar-wrapper.clearfix
               .calendar-operation-wrapper

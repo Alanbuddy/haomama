@@ -107,6 +107,7 @@ $(document).ready(function(){
   
   $(".delete").click(function(){
     $(this).closest(".item").remove();
+    $("#finish-btn").attr("disabled", false);
   });
 
   $("#course").click(function(){
@@ -128,6 +129,10 @@ $(document).ready(function(){
         value.push($(this).find(".old_img").attr("src"));
       }
     });
+    if(value.length == 0 || !value[0]){
+      showMsg("没有上传图片", "center");
+      return false;
+    }
     console.log(value);
     $.ajax({
       url: window.img_store,

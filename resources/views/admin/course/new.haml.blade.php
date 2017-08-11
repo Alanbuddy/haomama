@@ -44,10 +44,10 @@
                     %option{value: $category->id}= $category->name
                  
                 %label.input-caption 课程节数:
-                %input.form-control.input-width#course-length{:type => "text"}
+                %input.form-control.input-width#course-length{:type => "text", placeholder: "必填"}
               .controls.controls-row
                 %label.input-caption 课程价格:
-                %input.form-control.input-width#course-price{:type => "text"}
+                %input.form-control.input-width#course-price{:type => "text", placeholder: "必填"}
                 %label.input-caption 促销价格:
                 %input.form-control.input-width#pay-price{:type => "text", placeholder: "选填"}
             %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
@@ -69,7 +69,7 @@
               %label.input-caption.teacher-tag 授课老师:
               %span.unadd 未添加
             .teacher-div
-              %input#teacher{type: "text"}
+              %input#teacher{type: "text", placeholder: "必填"}
 
             .course-introduce
               %span.introduce 课程介绍:

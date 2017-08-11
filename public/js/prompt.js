@@ -216,7 +216,7 @@ $(document).ready(function($){
       $(".loading").show();
       $.ajax({
         type: 'get',
-        url: window.review + "?page=" + page,
+        url: window.upload_review + "?page=" + page,
         success: function(data){
           $(".loading").hide();
           var len = data.data.length;

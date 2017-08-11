@@ -264,7 +264,7 @@ $(document).ready(function(){
     var code = ev.which;
     if(code == 13){
       $(this).val("");
-      showMsg("老师只可以从列表中点击选择,如无需在讲师管理中添加", "center");
+      showMsg("老师只可以从列表中点击选择,如不存在需在讲师管理中添加", "center");
       return false;
     }
   });
@@ -358,7 +358,11 @@ $(document).ready(function(){
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
     });
-    console.log(teacher_arr);
+
+    if(teacher_arr.length == 0){
+      showMsg("授课老师没有添加", "center");
+      return false;
+    }
     var path = $(".cover-path").text();
     console.log(path);
     var online = "online";
@@ -398,6 +402,23 @@ $(document).ready(function(){
       }
       );
   });
-
-
+  
+  $("#delete-btn").click(function(){
+    var del = "DELETE";
+    $.ajax({
+      type: "post",
+      url: window.course_del,
+      data: {
+        _token: window.token,
+        _method: del
+      },
+      success: function(data){
+        if(data.success){
+          location.href = window.course_index;
+        }else{
+          showMsg("该课程不可以删除", "center");
+        }
+      }
+    });
+  });
 });
