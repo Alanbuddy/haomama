@@ -137,4 +137,13 @@ class SearchService
             ->orderBy('courses.id','desc');
         return $items;
     }
+
+    //根据课程名
+    public function searchByName($key)
+    {
+        $items = $this->basicStat()
+            ->where('courses.name','like','%'.$key.'%')
+            ->orderBy('courses.id','desc');
+        return $items;
+    }
 }
