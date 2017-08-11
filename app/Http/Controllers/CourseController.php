@@ -711,6 +711,11 @@ class CourseController extends Controller
                         && $item->end < Carbon::now()
                     ) {
                         $item->status = '结课';
+                    } else if ($item->type == 'offline'
+                        && $item->begin
+                        && $item->begin > Carbon::now()
+                    ) {
+                        $item->status = '未开';
                     } else {
                         $item->status = '正常';
                     }
