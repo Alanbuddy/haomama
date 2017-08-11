@@ -125,9 +125,10 @@ $(document).ready(function(){
         value.push($(this).find(".old_img").attr("src"));
       }
     });
+    console.log(value);
     $.ajax({
       url: window.img_store,
-      type: 'post',
+      type: 'POST',
       data: {
         key: name,
         value: JSON.stringify(value),

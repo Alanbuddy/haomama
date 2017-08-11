@@ -9,6 +9,7 @@ $ ->
 
   $('.upper').click ->
     $('body').animate({scrollTop: 0})
+    $(".notice").hide()
 
 	$("#another-baby").click ->
     baby_dom = document.createElement("div")
