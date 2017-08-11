@@ -8,6 +8,7 @@ $ ->
 
   $('.upper').click ->
     $('body').animate({scrollTop: 0})
+    $(".notice").hide()
 
   check_review_input = ->
     if $(".review-input").val() == ""

@@ -82,6 +82,7 @@ $(document).ready(function($){
         if (data.success){
           $(".review-input").val("");
           showMsg("评论完成", "center");
+          
         }
       }
     );
@@ -115,5 +116,84 @@ $(document).ready(function($){
 
       });
   }
+
+  var temp = `<div class="review-item" data-url="/comments/48/vote">
+            <img class="review-avatar" src="icon/avatar.png">
+            <div class="item-desc">
+              <p class="f12 color7 review-name">123</p>
+              <p class="f12 color5 time">5天前</p>
+              <p class="f14 color7 review-content">ggggg</p>
+              <span class="f12 color5">评论来源：</span>
+              <span class="f12 color5 review-source">audio-test</span>
+              <div class="admire-div">
+                <span class="f12 color5 admire-num">1</span>
+                <img class="admire-icon" src="icon/like1_selected.png" data-ad="true">
+              </div>
+            </div>
+          </div>`;
+  var template = $(temp);
+  function render(item){
+    template.find(".review-name").text(item['user']['name']);
+    template.attr("data-url", window.comment_id.replace(/-1/, item['id']));
+    template.find(".review-avatar").attr("src", item['user']['avatar'] ? item['user']['avatar']: "icon/avatar.png");
+    template.find(".review-content").text(item['content']);
+    template.find(".review-source").text(item['lesson']['name']);
+    template.find(".admire-num").text(item['voteCount']);
+    if(item['hasVoted'] == false){
+      template.find(".admire-icon").attr({"src": "icon/like1_normal.png", "data-ad": false});
+    }else{
+      template.find(".admire-icon").attr({"src": "icon/like1_selected.png", "data-ad": true});
+    }
+    var data_time = item['created_at'];
+    var dtime = Date.parse(data_time);
+    var dt = new Date(dtime);
+    var dy = dt.getFullYear();
+    var dm = dt.getMonth() + 1;
+    var dd = dt.getDate();
+    var time_now = Date.parse(Date());
+    var tem_time = (time_now - dtime)/1000;
+    if(tem_time < 60){
+      template.find(".time").text( tem_time + "秒前");
+    }else if (60 < tem_time && tem_time  < 3600){
+      template.find(".time").text(Math.round(tem_time/60) + "分前");
+    }else if (3600 < tem_time && tem_time <  86400){
+      template.find(".time").text(Math.round(tem_time/3600) + "小时前");
+    }else if (86400 < tem_time && tem_time  < 604800){
+      template.find(".time").text(Math.round(tem_time/86400) + "天前");
+    }else{
+      template.find(".time").text(dy + "年" + dm + "月" + dd + "日");
+    }
+    return template.clone(true);
+  }
+
+  function  callbackHandle(data){
+    for(var i=0;i<data.data.length;i++){
+      node=render(data.data[i]);
+      node.insertBefore($(".load"));
+    }
+  }
+  var page = 1;
+  $(window).scroll(function(){
+    var scrollTop = $(this).scrollTop();
+    var scrollHeight = $(document).height();
+    var windowheight = $(this).height();
+    if(scrollTop + windowheight >= scrollHeight){
+      $(".loading").show();
+      $.ajax({
+        type: 'get',
+        url: window.review + "?page=" + page,
+        success: function(data){
+          $(".loading").hide();
+          var len = data.data.length;
+          if(len > 0){
+            page++;
+            callbackHandle(data);
+          }else{
+            $(".notice").show();
+          }
+        }
+      });
+    }
+  });
 
 });

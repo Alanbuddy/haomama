@@ -10342,9 +10342,10 @@ return jQuery;
     }
   });
   $('.upper').click(function() {
-    return $('body').animate({
+    $('body').animate({
       scrollTop: 0
     });
+    return $(".notice").hide();
   });
   check_review_input = function() {
     if ($(".review-input").val() === "") {
