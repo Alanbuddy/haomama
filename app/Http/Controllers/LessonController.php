@@ -315,4 +315,10 @@ class LessonController extends Controller
         }
         return redirect()->route('lessons.index');
     }
+
+    public function comments(Course $course, Lesson $lesson)
+    {
+        $comments = $this->latestComments($course, $lesson);
+        return $comments;
+    }
 }

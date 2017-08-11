@@ -35,7 +35,7 @@ class CommentController extends Controller
     }
 
     //课时下的评论
-    public function commentsOfLesson(Course $course, Lesson $lesson, $pageSize = 10)
+    public function commentsOfLesson(Course $course, Lesson $lesson)
     {
         return $this->latestComments($course, $lesson);
     }
