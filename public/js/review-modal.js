@@ -259,5 +259,77 @@ $(document).ready(function($) {
 
       });
   }
-    
+  
+  var temp = `<div class="review-item" data-url="/comments/48/vote">
+            <img class="review-avatar" src="icon/avatar.png">
+            <div class="item-desc">
+              <p class="f12 color7 review-name">123</p>
+              <p class="f12 color5 time">5天前</p>
+              <p class="f14 color7 review-content">ggggg</p>
+              <span class="f12 color5">评论来源：</span>
+              <span class="f12 color5 review-source">audio-test</span>
+              <div class="admire-div">
+                <span class="f12 color5 admire-num">1</span>
+                <img class="admire-icon" src="icon/like1_selected.png" data-ad="true">
+              </div>
+            </div>
+          </div>`;
+  var template = $(temp);
+  function render(item){
+    template.find(".review-name").text(item['user']['name']);
+    template.find(".review-avatar").attr("src", item['user']['avatar']);
+    template.find(".time").text(item['created_at']);
+    template.find(".review-content").text(item['content']);
+    template.find(".review-source").text(item['lesson']['name']);
+    template.find(".admire-num").text(item['voteCount']);
+    template.find(".review-item").attr("data-url", route("comments.vote", item['id']));
+    if(item['hasVoted'] == false){
+      template.find(".admire-icon").attr({"src": "icon/like1_normal.png", "data-ad": false});
+    }else{
+      template.find(".admire-icon").attr({"src": "icon/like1_selected.png", "data-ad": true});
+    }
+    return template.clone(true);
+  }
+
+  function  callbackHandle(data){
+    for(var i=0;i<data.data.length;i++){
+      node=render(data.data[i]);
+      // if(node.find('.category-class').text() ==  "健康养育"){
+      //   node.find('.category-class').addClass('health-title');
+      // }else if(node.find('.category-class').text() ==  "心理教育"){
+      //   node.find('.category-class').addClass('psychology-title');
+      // }else{
+      //   node.find('.category-class').addClass('grow-title');
+      // }
+      node.appendTo($('.review-items-div'));
+    }
+  }
+  var page = 2;
+  $(window).scroll(function(){
+    var scrollTop = $(this).scrollTop();
+    var scrollHeight = $(document).height();
+    var windowheight = $(this).height();
+    console.log(scrollTop);
+    console.log(scrollHeight);
+    console.log(windowheight);
+    if(scrollTop + windowheight >= scrollHeight){
+      $(".loading").show();
+      // alert("aaa");
+      $.ajax({
+        type: 'get',
+        url: window.review + "?page=" + page,
+        success: function(data){
+          $(".loading").hide();
+          console.log(data);
+          var len = data.data.length;
+          if(len > 0){
+            page++;
+            callbackHandle(data);
+          }else{
+            $(".notice").show();
+          }
+        }
+      });
+    }
+  });
 });

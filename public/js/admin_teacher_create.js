@@ -82,9 +82,9 @@ $(document).ready(function(){
       function(data){
         console.log(data);
         if(data.success){
-          var str = window.teacher_show.substring(0, window.teacher_show.length - 2);
           var tid = data.data.id;
-          location.href = str + tid + "?type=teacher";
+          var str = window.teacher_show.replace(/-1/, tid);
+          location.href = str + "?type=teacher";
         }
       }
       );

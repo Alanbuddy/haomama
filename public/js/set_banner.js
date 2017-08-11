@@ -1,6 +1,7 @@
 $(document).ready(function(){
   var $list = $("#thelist");
   var $btn = $("#ctlBtn");
+  $btn.attr("disabled", true);
   var uploader = WebUploader.create({
 
       // swf文件路径
@@ -46,6 +47,7 @@ $(document).ready(function(){
       }
       $img.attr('src', src);
     }, 750, 320);
+    $btn.attr("disabled", false);
   });
 
 
