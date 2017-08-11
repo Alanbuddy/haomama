@@ -69,7 +69,7 @@ class CommentController extends Controller
 //        $item->teacher_id = auth()->user()->id;
         auth()->user()->comments()->save($item);
         if ($request->ajax()) {
-            return ['success' => true];
+            return ['success' => true,'data'=>$item];
         }
         return redirect()->route('comments.index');
     }

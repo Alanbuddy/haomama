@@ -131,10 +131,14 @@ class SearchService
     public function search($key)
     {
         $items = $this->basicStat()
-            ->leftJoin('users','users.id','courses.teacher_id')
-            ->where('courses.name','like','%'.$key.'%')
-            ->orWhere('users.name','like','%'.$key.'%')
-            ->orderBy('courses.id','desc');
+            ->addSelect(DB::raw('(select users.name from users join 
+course_user on users.id=course_user.user_id where course_user.course_id=courses.id and course_user.user_type="teacher") as u_name'))//学习人数
+//            ->leftJoin('course_user','course_user.course_id','courses.id')
+//            ->leftJoin('users','course_user.user_id','users.id')
+//            ->where('course_user.user_type','teacher')
+//            ->where('courses.name','like','%'.$key.'%')
+//            ->orWhere('users.name','like','%'.$key.'%')
+            ->orderBy('courses.id','asc');
         return $items;
     }
 
