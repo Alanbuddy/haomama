@@ -43,7 +43,6 @@ $(document).ready(function(){
     if(ret == false){
       return false;
     }
-    console.log(desc);
     if(!$.regex.isMobile(mobile)){
       showMsg("手机号不正确", "center");
       return false;
