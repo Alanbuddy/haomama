@@ -297,7 +297,7 @@ $(document).ready(function($) {
       node.appendTo($('.review-items-div'));
     }
   }
-  var page = 2;
+  var page = 1;
   $(window).scroll(function(){
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(document).height();

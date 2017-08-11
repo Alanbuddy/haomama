@@ -45,7 +45,7 @@
                           %a{href:route('admin.lesson.show',$lesson->id)}=$lesson->name
                         %td =$lesson->created_at
                         %td =$lesson->updated_at
-                        %td =$lesson->type
+                        %td =$lesson->type == "video" ? "视频" : "音频" 
                       
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
