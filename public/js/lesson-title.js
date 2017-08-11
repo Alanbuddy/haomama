@@ -264,6 +264,10 @@ $(document).ready(function(){
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
     });
+    if(teacher_arr.length == 0){
+      showMsg("授课老师没有添加", "center");
+      return false;
+    }
     var path = $(".cover-path").text();
     var online = "online";
     if (!$.isNumeric(price)){

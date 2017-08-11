@@ -171,8 +171,8 @@ $(document).ready(function(){
       },
       success: function(data){
         if(data.success){
-          var str = window.admin_lesson_show.substring(0, window.admin_lesson_show.length - 2);
-          location.href = str + lesson_id + "?type=video";
+          var str = window.admin_lesson_show.replace(/-1/, lesson_id);
+          location.href = str + "?type=video";
         }
       }
     });

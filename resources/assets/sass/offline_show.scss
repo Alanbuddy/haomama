@@ -7,7 +7,13 @@
   top: 24px;
   z-index: 10;
 }
-#finish-btn, #edit-btn, #unshelve-btn, #shelve-btn {
+.delete-btn-position {
+  position: absolute;
+  right: 260px;
+  top: 24px;
+  z-index: 10;
+}
+#finish-btn, #edit-btn, #unshelve-btn, #shelve-btn, #delete-btn {
   width: 100px;
   color: #fff;
   outline: none;

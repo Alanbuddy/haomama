@@ -90,7 +90,7 @@ $(document).ready(function(){
         if($(this).text() == val ){
           delete_id = $(this).attr("data-id");
           $.ajax({
-            url: window.tag_destroy.substring(0, window.tag_destroy.length - 2) + delete_id,
+            url: window.tag_destroy.replace(/-1/,delete_id),
             type: 'post',
             data: {
               id: delete_id,
@@ -316,6 +316,10 @@ $(document).ready(function(){
     $(".teacher-id").each(function(){
       teacher_arr.push($(this).text());
     });
+    if(teacher_arr.length == 0){
+      showMsg("授课老师没有添加", "center");
+      return false;
+    }
     var path = $(".cover-path").text();
     var offline = "offline";
 

@@ -84,10 +84,12 @@ $(document).ready(function(){
           if(data.data == "publish"){
             $(".operation").text("下架课程");
             $("#shelfModal .message").text("是否确认下架当前课程？");
+            location.href = window.course_show;
           }else{
             if(data.data == "draft")
             $(".operation").text("上线课程");
             $("#shelfModal .message").text("是否确认上线当前课程？");
+            location.href = window.course_show;
           }
         }
       }
@@ -177,7 +179,7 @@ $(document).ready(function(){
         if($(this).text() == val ){
           delete_id = $(this).attr("data-id");
           $.ajax({
-            url: window.tag_destroy.substring(0, window.tag_destroy.length - 2) + delete_id,
+            url: window.tag_destroy.replace(/-1/, delete_id),
             type: 'post',
             data: {
               id: delete_id,
