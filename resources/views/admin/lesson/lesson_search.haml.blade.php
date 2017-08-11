@@ -50,7 +50,7 @@
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
-                  != $items->links() 
+                  != $items->appends(['key' => $key])->links() 
                       
 @endsection
 

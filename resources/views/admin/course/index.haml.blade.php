@@ -15,7 +15,7 @@
 
 @section('search-input')
 .user-search-box.f14.bg2
-  %input.input-style#search-input.font-color3{:type => "text", :placeholder => "输入课程名称", value: ""}
+  %input.input-style#search-input.font-color3{:type => "text", :placeholder => "输入课程名、老师姓名", value: ""}
   .search#search-btn
 @endsection
 @section('content')
