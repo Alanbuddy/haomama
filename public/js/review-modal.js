@@ -277,7 +277,7 @@ $(document).ready(function($) {
   var template = $(temp);
   function render(item){
     template.find(".review-name").text(item['user']['name']);
-    template.attr("data-url", route("comments.vote", item['id']));
+    // template.attr("data-url", route("comments.vote", item['id']));
     template.find(".review-avatar").attr("src", item['user']['avatar']);
     template.find(".time").text(item['created_at']);
     template.find(".review-content").text(item['content']);
@@ -294,7 +294,7 @@ $(document).ready(function($) {
   function  callbackHandle(data){
     for(var i=0;i<data.data.length;i++){
       node=render(data.data[i]);
-      node.appendTo($('.review-items-div'));
+      node.insertBefore($(".load"));
     }
   }
   var page = 1;
