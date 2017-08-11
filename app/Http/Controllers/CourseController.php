@@ -706,6 +706,7 @@ class CourseController extends Controller
         if ($request->has('key')) {
             $items = Search::search($request->key)
                 ->paginate(10);
+            dd($items);
             foreach ($items as $item) {
                 if ($item->status == 'draft') {
                     $item->status = '未开';
