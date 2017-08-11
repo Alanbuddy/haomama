@@ -727,6 +727,7 @@ class CourseController extends Controller
 
             return view('admin.course.search', [
                 'items' => $items,
+                'key'=>$request->key,
             ]);
         }
         return redirect()->route('courses.index');
