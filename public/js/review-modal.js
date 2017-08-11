@@ -277,12 +277,12 @@ $(document).ready(function($) {
   var template = $(temp);
   function render(item){
     template.find(".review-name").text(item['user']['name']);
+    template.attr("data-url", route("comments.vote", item['id']));
     template.find(".review-avatar").attr("src", item['user']['avatar']);
     template.find(".time").text(item['created_at']);
     template.find(".review-content").text(item['content']);
     template.find(".review-source").text(item['lesson']['name']);
     template.find(".admire-num").text(item['voteCount']);
-    template.find(".review-item").attr("data-url", route("comments.vote", item['id']));
     if(item['hasVoted'] == false){
       template.find(".admire-icon").attr({"src": "icon/like1_normal.png", "data-ad": false});
     }else{
@@ -294,13 +294,6 @@ $(document).ready(function($) {
   function  callbackHandle(data){
     for(var i=0;i<data.data.length;i++){
       node=render(data.data[i]);
-      // if(node.find('.category-class').text() ==  "健康养育"){
-      //   node.find('.category-class').addClass('health-title');
-      // }else if(node.find('.category-class').text() ==  "心理教育"){
-      //   node.find('.category-class').addClass('psychology-title');
-      // }else{
-      //   node.find('.category-class').addClass('grow-title');
-      // }
       node.appendTo($('.review-items-div'));
     }
   }

@@ -46,7 +46,7 @@
               .img-edit-div
                 - foreach($images as $item)
                   .item
-                    %img.edit-img-item{src: strpos($item, '/') == 0 ? substr($item,1) : $item}
+                    %img.edit-img-item.old_img{src: strpos($item, '/') == 0 ? substr($item,1) : $item}
                     %img.delete{src: "icon/admin/delete2.png"}
                     %span.path{style: "display:none;"}
                 #thelist.uploader-list

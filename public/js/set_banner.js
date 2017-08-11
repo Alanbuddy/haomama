@@ -119,7 +119,12 @@ $(document).ready(function(){
     var name = "carousel";
     var value = [];
     $(".item").each(function(){
-      value.push($(this).find(".path").text());
+      if($(this).find(".path").text() != ""){
+        value.push($(this).find(".path").text());
+      }else{
+        console.log($(this).find(".old_img").attr("src"));
+        value.push($(this).find(".old_img").attr("src"));
+      }
     });
     console.log(value);
     $.ajax({

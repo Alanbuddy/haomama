@@ -77,7 +77,7 @@ $(document).ready(function(){
   }
   
   function render(item){
-    template.find(".course-item").attr("data-id", item['id']);
+    template.attr("data-id", item['id']);
     template.find('.course-recommend').remove();
     if(item['type'] == 'offline'){
       var date = new Date(item['begin']);
