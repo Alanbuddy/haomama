@@ -512,6 +512,7 @@ class CourseController extends Controller
     {
         return $course->comments()
             ->with('user')
+            ->with('lesson')
             ->orderBy('id', 'desc')
             ->paginate(10);
     }
