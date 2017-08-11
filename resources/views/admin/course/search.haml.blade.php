@@ -55,7 +55,7 @@
                             %span=$teacher->name 
                         %td=$course->price
                         %td=$course->recommendation
-                        %td 未开/结课
+                        %td= $course->status
 
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
