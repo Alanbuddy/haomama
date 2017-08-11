@@ -62,7 +62,7 @@
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
-                  != $items->links()
+                  != $items->appends(['type' => 'draft'])->links()
         
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
