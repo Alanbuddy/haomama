@@ -8,7 +8,7 @@ $lessons
 路由 GET route('courses.lesson.qr',$course,$lesson);
 
 响应 PNG图片
-直接吧图片标签的src属性设置成这个路由就可以显示二维码
+直接把图片标签的src属性设置成这个路由就可以显示二维码
 ***
 # 页面访问记录 
 路由 POST route('behaviors.store')
