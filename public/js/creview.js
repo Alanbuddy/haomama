@@ -10366,7 +10366,7 @@ return jQuery;
   $(".back").click(function() {
     return location.href = window.course;
   });
-  $('.admire-icon').click(function() {
+  $(document).on('click', '.admire-icon', function() {
     var ad, num, url;
     url = $(this).closest(".review-item").attr("data-url");
     num = $(this).siblings(".admire-num").text();

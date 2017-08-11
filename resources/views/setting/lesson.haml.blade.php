@@ -9,6 +9,7 @@
   window.token = "#{csrf_token()}"
   window.comment = "#{route('comments.store')}"
   window.order = "#{route('orders.pay')}"
+  window.comment_id = "#{route('comments.vote', -1)}"
 
 @endsection
 @section('content')
@@ -111,6 +112,9 @@
                   %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
                 - else
                   %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
+        .load
+          %img.loading{src: "icon/loading.gif"}
+          %span.notice.f12 亲没数据了～
 %img.upper{src: "icon/top.png"}
 @endsection
 @section('foot-div')

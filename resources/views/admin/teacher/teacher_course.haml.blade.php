@@ -47,7 +47,7 @@
                     - foreach($items as $course)
                       %tr
                         %td= $course->name
-                        %td= $course->type 
+                        %td= $course->type == "online" ? "线上课程" : "线下课程"
                         %td= $course->category->name
                         %td= count(json_decode($course->titles))
                         %td= $course->orders_count

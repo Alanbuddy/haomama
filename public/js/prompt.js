@@ -82,7 +82,39 @@ $(document).ready(function($){
         if (data.success){
           $(".review-input").val("");
           showMsg("评论完成", "center");
-          
+
+          template.find(".review-name").text(data.data['user']['name']);
+          template.attr("data-url", window.comment_id.replace(/-1/, data.data['item']['id']));
+          template.find(".review-avatar").attr("src", data.data['user']['avatar'] ? data.data['user']['avatar']: "icon/avatar.png");
+          template.find(".review-content").text(data.data['item']['content']);
+          template.find(".review-source").text($(".name").text());
+          template.find(".admire-num").text("0");
+          template.find(".admire-icon").attr({"src": "icon/like1_normal.png", "data-ad": false});
+          var data_time = data.data['item']['created_at'];
+          var dtime = Date.parse(data_time);
+          var dt = new Date(dtime);
+          var dy = dt.getFullYear();
+          var dm = dt.getMonth() + 1;
+          var dd = dt.getDate();
+          var time_now = Date.parse(Date());
+          var tem_time = (time_now - dtime)/1000;
+          if(tem_time < 60){
+            template.find(".time").text( tem_time + "秒前");
+          }else if (60 < tem_time && tem_time  < 3600){
+            template.find(".time").text(Math.round(tem_time/60) + "分前");
+          }else if (3600 < tem_time && tem_time <  86400){
+            template.find(".time").text(Math.round(tem_time/3600) + "小时前");
+          }else if (86400 < tem_time && tem_time  < 604800){
+            template.find(".time").text(Math.round(tem_time/86400) + "天前");
+          }else{
+            template.find(".time").text(dy + "年" + dm + "月" + dd + "日");
+          }
+
+          if($(".feed-review-items-div")){
+            template.insertBefore($(".feed-review-items-div .review-item").eq(0));
+          }else{
+            template.insertBefore($(".hot-review-div .review-item").eq(0));
+          }
         }
       }
     );

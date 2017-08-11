@@ -28,7 +28,7 @@ $ ->
   $(".back").click ->
     location.href = window.course
 
-  $('.admire-icon').click ->
+  $(document).on 'click', '.admire-icon', ->
     url = $(this).closest(".review-item").attr("data-url")
     num = $(this).siblings(".admire-num").text()
     ad = $(this)
