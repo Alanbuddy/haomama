@@ -703,7 +703,7 @@ class CourseController extends Controller
     public function adminSearch(Request $request)
     {
         if ($request->has('key')) {
-            $items = Search::search($request->key)
+            $items = Search::searchByName($request->key)
                 ->paginate(10);
             foreach ($items as $item) {
                 if ($item->status == 'draft') {
