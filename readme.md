@@ -13,9 +13,7 @@ $lessons
 # 页面访问记录 
 路由 POST route('behaviors.store')
 ###POST参数
-***
-type:'pv'
-***
-data:{"url":"/index","time":"2017-8-9 10:10:10"}
+- type:'pv'
+- data:{"url":"/index","time":"2017-8-9 10:10:10"}
 
 
