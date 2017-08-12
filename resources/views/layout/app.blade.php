@@ -60,6 +60,9 @@
 
 </div>
 <div>
+  @yield('modal-div')
+</div>
+<div>
     @yield('foot-div')
 </div>
 <script src= "{{mix('/js/layout.js')}}"></script>

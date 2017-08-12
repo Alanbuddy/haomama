@@ -153,7 +153,7 @@ $(document).ready(function($) {
       );
   });
 
-  $(".online-course .item").each(function(){
+  $(".online-course .item:gt(0)").each(function(){
     var status = $(this).attr("data-status");
     var enroll = $(this).find(".hasenrolled").text();
     var _this = $(this);
@@ -171,6 +171,7 @@ $(document).ready(function($) {
       });
     }
   });
+
 
   $(".online-course .item:eq(0)").find(".free").show();
 
@@ -315,7 +316,7 @@ $(document).ready(function($) {
       node.insertBefore($(".load"));
     }
   }
-  var page = 1;
+  var page = 2;
   $(window).scroll(function(){
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(document).height();

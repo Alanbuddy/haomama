@@ -107,6 +107,8 @@
               %span.introduce 课时标题:
               %span.wangedit-area
                 #edit-title
+                  %p 必填,并且要与课程节数互相匹配
+                  
 @endsection
 
 @section('script')
