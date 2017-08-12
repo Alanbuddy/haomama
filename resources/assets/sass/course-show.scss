@@ -490,10 +490,15 @@
     padding-top: 0.16rem;
     text-align: center;
   }
-  #edit-end {
-    position: absolute;
-    bottom: 0;
+  .btn-div {
+    text-align: center;
     width: 100%;
+  }
+  #edit-end {
+    display: inline-block;
+    margin-top: 0.4rem;
+    width: 40%;
+    text-align: center;
     height: 0.88rem;
     line-height: 0.88rem;
     padding: 0;
@@ -502,6 +507,7 @@
     font-size: 1.6em;
     font-weight: bold;
     box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    border-radius: 6px;
   }
   #code {
     padding: 0;

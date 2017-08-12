@@ -12,13 +12,13 @@ $ ->
   change_avatar = (gender, birthday, object) ->
     today = new Date()
     if gender == "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png')
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/kid_male.png')
     if gender == "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png')
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/baby_male.png')
     if gender == "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png')
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/kid_female.png')
     if gender == "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png')
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/baby_female.png')
 
   $(document).on 'change', '.birthday', ->
     birthday = $(this).val()

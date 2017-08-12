@@ -22,7 +22,7 @@
       %img.arrow{src: "icon/go.png"}
   %img.message-icon{src: "icon/message.png"}
   - if ($messagesCount)
-    %img.small-circle{src: "/icon/small-dot.png"}
+    %img.small-circle{src: "icon/small-dot.png"}
 %hr.div-line
 - if (count($onGoingCourses) == 0 && count($enrolledCourses) == 0 && count($favoritedCourses) == 0)
   .empty-div
