@@ -11,7 +11,9 @@ use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\User;
 use App\Models\Video;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Storage;
 
 class TestController extends Controller
@@ -25,6 +27,7 @@ class TestController extends Controller
 
     public function index(Request $request)
     {
+//        dd(app(Router::class)->getRoutes()->allRoutes());
         $method = $request->get('m', 'lessons');
         if ($method) {
             $result = call_user_func([$this, $method], $request);

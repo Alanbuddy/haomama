@@ -173,7 +173,6 @@ class LessonController extends Controller
             $audio = $video->attachments()
                 ->where('mime', 'like', 'audio%')
                 ->first();
-            $audio = $audio ?: new File();//Depress error reporting in case of failure to upload audio.this fake audio won't play after this processing,
             $data = array_merge($data, compact('pictures', 'audio'));
         }
         return view('video' == $type
@@ -204,7 +203,9 @@ class LessonController extends Controller
 
         $learnedCount = $lesson->attendances($course->id)->count();
 
-        $lessons = $course->lessons()->get();//TODO  orderBy no.
+        $lessons = $course->lessons()
+            ->orderBy('no')
+            ->get();//TODO  orderBy no.
         $titles = json_decode($course->titles);
         $lessons = $this->processTitles($titles, $lessons);
         $index = 0;//表示第几节课时
