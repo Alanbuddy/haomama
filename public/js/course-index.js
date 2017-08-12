@@ -10368,26 +10368,20 @@ return jQuery;
     $(".nav li").removeClass('active');
     $(this).addClass('active');
     $(".list-div").css("display", "none");
-    $(".list-div").eq(i).css("display", "block");
-    return $(".list-div").eq(i).find(".course-nav span").click(function() {
-      $(".list-div").eq(i).find(".course-nav span").removeClass('course-active');
-      $(this).addClass('course-active');
-      $(".list-div").eq(i).find(".course-item-div").css('display', 'none');
-      return $(".list-div").eq(i).find(".course-item-div").eq($(this).index()).css('display', 'block');
-    });
+    return $(".list-div").eq(i).css("display", "block");
   });
-  $(".list-div").eq(0).find(".course-nav span").click(function() {
-    $(".list-div").eq(0).find(".course-nav span").removeClass('course-active');
+  $(document).on('click', '.course-nav span', function() {
+    $(".list-div:visible").find(".course-nav span").removeClass('course-active');
     $(this).addClass('course-active');
-    $(".list-div").eq(0).find(".course-item-div").css('display', 'none');
-    return $(".list-div").eq(0).find(".course-item-div").eq($(this).index()).css('display', 'block');
+    $(".list-div:visible").find(".course-item-div").css('display', 'none');
+    return $(".list-div:visible").find(".course-item-div").eq($(this).index()).css('display', 'block');
   });
   bannerSwiper = new Swiper('.swiper-container-banner', {
     pagination: '.swiper-pagination',
     autoplay: 3000,
     loop: true
   });
-  return $('.course-item').click(function() {
+  return $(document).on('click', '.course-item', function() {
     var cid;
     cid = $(this).attr('data-id');
     return location.href = window.course_item + "/" + cid;

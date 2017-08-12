@@ -18,7 +18,7 @@ $(document).ready(function($) {
 		return false;
 	};
 
-  $("#review-submit").click(function(){
+  $(document).on("click", "#review-submit", function(){
     var score = $("input:checked").val();
     if (score == 0) {
       showMsg("请评分", "center");

@@ -56,6 +56,8 @@
   .review-avatar {
     width: 0.8rem;
     float: left;
+    height: 0.8rem;
+    border-radius: 0.4rem;
   }
   .item-desc {
     width: 5.66rem;
@@ -68,6 +70,7 @@
   .review-content {
     margin-top: 0.16rem;
     margin-bottom: 0.1rem;
+    word-break: break-all;
   }
   .admire-div {
     position: absolute;
