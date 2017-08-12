@@ -65,6 +65,9 @@
                     %span.participate= $item['users_count']."人已学"
                     %span .
                     %span= $item['comments_count'] ."条评论"
+          .load
+            %img.loading{src: "icon/loading.gif"}
+            %span.notice.f12 亲没数据了～
         .course-item-div
           - foreach ($data[$i]['itemsOrderByUserCount'] as $itemOrderByUserCount)
             .course-item{'data-id' => $itemOrderByUserCount['id']}
@@ -90,6 +93,9 @@
                     %span.participate= $itemOrderByUserCount['users_count']."人已学"
                     %span .
                     %spann= $itemOrderByUserCount['comments_count'] ."条评论"
+          .load
+            %img.loading{src: "icon/loading.gif"}
+            %span.notice.f12 亲没数据了～
         .course-item-div
           - foreach ($data[$i]['itemsOrderByCommentRating'] as $itemOrderByCommentRating)
             .course-item{'data-id' => $itemOrderByCommentRating['id']}
@@ -115,6 +121,9 @@
                     %span.participate= $itemOrderByCommentRating['users_count']."人已学"
                     %span .
                     %span= $itemOrderByCommentRating['comments_count'] ."条评论"
+          .load
+            %img.loading{src: "icon/loading.gif"}
+            %span.notice.f12 亲没数据了～
 %img.upper{src: "icon/top.png"}
 
 
@@ -228,7 +237,6 @@
 @section('script')
 <script src= "js/swiper-3.4.2.jquery.min.js"></script>
 <script src= "{{mix('/js/course-index.js')}}"></script>
-// <script src = "js/dropload_bottom.js"></script>
 <script src = "js/course_index.js"></script>
 
 @endsection

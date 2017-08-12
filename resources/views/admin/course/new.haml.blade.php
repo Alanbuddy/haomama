@@ -85,7 +85,6 @@
               %span.introduce 课时标题:
               %span.wangedit-area
                 #title-area
-                  %p 必填,并且要与课程节数互相匹配
 #lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog
     .modal-content
