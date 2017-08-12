@@ -406,7 +406,7 @@ class CourseController extends Controller
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
             $item->cover = $cover->path;
         }
-        $item->status = 'draft';
+//        $item->status = 'draft';
         $item->save();
         if ($request->has('lessons'))
             $this->updateLessons($request, $item);
@@ -427,9 +427,11 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function destroy(Course $course)
+    public function destroy(Request $request, Course $course)
     {
         $course->delete();
+        if ($request->ajax())
+            return ['success' => true];
         return redirect()->route('courses.index');
     }
 
@@ -729,7 +731,7 @@ class CourseController extends Controller
 
             return view('admin.course.search', [
                 'items' => $items,
-                'key'=>$request->key,
+                'key' => $request->key,
             ]);
         }
         return redirect()->route('courses.index');
