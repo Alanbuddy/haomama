@@ -206,7 +206,7 @@ class OrderController extends Controller
             $order->status = 'refunded';
             $order->save();
             $course = Course::findOrFail($order->product_id);
-            $course->students()->detach($order->user_id);
+            $course->students()->detach($order->user_id);//把学员退出课程
             MessageFacade::sendRefundCompletedMessage(User::find($order->user_id), $course);
 
             if ($_SERVER['SCRIPT_NAME']!= 'artisan') {
