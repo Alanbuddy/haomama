@@ -75,7 +75,7 @@
     .feed-review-items-div
       - foreach ($latestComments as $latestComment)
         .review-item{"data-url" => route("comments.vote", $latestComment['id'])}
-          %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "/icon/avatar.png"}
+          %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "icon/avatar.png"}
           .item-desc
             %p.f12.color7.review-name= $latestComment->user->name
             %p.f12.color5.time= $latestComment['created_at']

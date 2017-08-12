@@ -10359,12 +10359,12 @@ return jQuery;
       console.log(data);
       if (data.success) {
         if (data.message === "yes") {
-          _this.attr("src", "/icon/like2_selected.png");
+          _this.attr("src", "icon/like2_selected.png");
           _this.siblings("span").text(parseInt(num) + 1).css("color", "#ccc");
           _this.closest(".admire-div").css("border-color", "#ccc");
           return showMsg("点赞完成", "center");
         } else {
-          _this.attr('src', '/icon/like2_normal.png');
+          _this.attr('src', 'icon/like2_normal.png');
           _this.siblings("span").text(parseInt(num) - 1).css("color", "#fc90a5");
           _this.closest(".admire-div").css("border-color", "#fc90a5");
           return showMsg("取消点赞", "center");

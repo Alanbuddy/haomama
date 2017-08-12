@@ -10338,32 +10338,32 @@ return jQuery;
     var today;
     today = new Date();
     if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3) {
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_male.png');
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/kid_male.png');
     }
     if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_male.png');
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/baby_male.png');
     }
     if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3) {
-      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/kid_female.png');
+      $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/kid_female.png');
     }
     if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
-      return $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', '/icon/baby_female.png');
+      return $(object).closest('.right-div').siblings('.left-div').find('img').attr('src', 'icon/baby_female.png');
     }
   };
   load_avatar = function(gender, birthday, object) {
     var today;
     today = new Date();
     if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) > 3) {
-      $(object).find('img').attr('src', '/icon/kid_male.png');
+      $(object).find('img').attr('src', 'icon/kid_male.png');
     }
     if (gender === "男子汉" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
-      $(object).find('img').attr('src', '/icon/baby_male.png');
+      $(object).find('img').attr('src', 'icon/baby_male.png');
     }
     if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) > 3) {
-      $(object).find('img').attr('src', '/icon/kid_female.png');
+      $(object).find('img').attr('src', 'icon/kid_female.png');
     }
     if (gender === "小姑娘" && (today.getFullYear() - birthday.getFullYear()) <= 3) {
-      return $(object).find('img').attr('src', '/icon/baby_female.png');
+      return $(object).find('img').attr('src', 'icon/baby_female.png');
     }
   };
   $(document).on('change', '.birthday', function() {
@@ -10385,7 +10385,7 @@ return jQuery;
     gender = $(this).find(".gender-span").text();
     birthday = $(this).find(".birthday-span").text();
     if (gender === "不知道" || birthday === "不知道") {
-      $(this).find("img").attr("src", "/icon/baby_female.png");
+      $(this).find("img").attr("src", "icon/baby_female.png");
     } else {
       if (birthday !== "不知道") {
         birthday = new Date(birthday);

@@ -330,7 +330,8 @@
                   %label.f14.color7.fn 宝宝生日
                   %input.add-input-div.birthday#add-baby-birthday{type: "date"}
             %p.f12.color10.pt16#another-baby 还有一个宝宝?
-          .btn#edit-end 编辑完成
+            .btn-div
+              %a#edit-end 编辑完成
 @endsection
 
 @section('script')
