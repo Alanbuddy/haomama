@@ -12,6 +12,7 @@ use App\Http\Wechat\sdk\lib\WxPayUnifiedOrder;
 use App\Http\Wechat\WxApi;
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
