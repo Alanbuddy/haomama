@@ -219,6 +219,9 @@ class CourseController extends Controller
         $count = $this->hasFavorited($course);
         $hasFavorited = $count == 1 ? true : false;
 
+        $hasCommented = auth()->user()->comments()
+                ->where('course_id', $course->id)
+                ->whereNotNull('star')->count() > 0;
         $comments = $course->comments()
             ->with('user')
             ->with('lesson')
@@ -288,13 +291,8 @@ class CourseController extends Controller
             ->with('category')//预加载课程所属分类的信息
             ->get();
 
-        //平均评分
-        //评分功能只针对课程，不针对课时打分,所以要筛选没有lesson_id的评价记录
-        $avgRate = $course->comments()
-            ->whereNull('lesson_id')
-            ->select(DB::raw('avg(star) as avg'))
-            ->first()
-            ->avg;
+        //平均评分 ,评分功能只针对课程，不针对课时打分,所以要筛选没有lesson_id的评价记录
+        $avgRate = $this->averageCommentRating($course);
         $avgRate = round($avgRate, 1);
 
         $teachers = $course->teachers()->get();
@@ -309,7 +307,8 @@ class CourseController extends Controller
                 'recommendedCourses',//按标签推荐相关课程
                 'avgRate',//平均评分
                 'teachers',//老师信息
-                'order'
+                'order',
+                'hasCommented'//当前用户是否已经给课程评分
             )
         );
     }
@@ -874,6 +873,22 @@ class CourseController extends Controller
     {
         $data = $request->url;
         QR::qr($data);
+    }
+
+    /**
+     * 课程平均评分
+     * 评分功能只针对课程，不针对课时打分,所以要筛选没有lesson_id的评价记录
+     * @param Course $course
+     * @return mixed
+     */
+    public function averageCommentRating(Course $course)
+    {
+        $avgRate = $course->comments()
+            ->whereNull('lesson_id')
+            ->select(DB::raw('avg(star) as avg'))
+            ->first()
+            ->avg;
+        return $avgRate;
     }
 
 }
