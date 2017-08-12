@@ -406,7 +406,7 @@ class CourseController extends Controller
             $cover = $this->moveAndStore($request, 'cover', $folderPath);
             $item->cover = $cover->path;
         }
-        $item->status = 'draft';
+//        $item->status = 'draft';
         $item->save();
         if ($request->has('lessons'))
             $this->updateLessons($request, $item);
