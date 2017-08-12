@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 require_once __DIR__ . "/../Wechat/sdk/lib/WxPay.Data.php";
 require_once __DIR__ . "/../Wechat/sdk/lib/WxPay.Api.php";
+use App\Facades\MessageFacade;
 use App\Http\Wechat\sdk\lib\WxPayApi;
 use App\Http\Wechat\sdk\lib\WxPayOrderQuery;
 use App\Http\Wechat\sdk\lib\WxPayRefund;
