@@ -51,7 +51,7 @@ $(document).ready(function($) {
 	    event.preventDefault();
 	});
 
-  //需要修改
+  //需要修改,用user-info信息来判断是否已经填写过个人信息
 	$("#test-btn").click(function(){
 	    $("#profileModal").modal("show");
 	  });

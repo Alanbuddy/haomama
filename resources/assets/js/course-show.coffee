@@ -138,20 +138,22 @@ $ ->
     else
       $(this).text(dy + "年" + dm + "月" + dd + "日")
 
-  if $(".course-time").text() == "无时间"
-    $(".course-time").text() == "无时间"
-  else
-    course_begin = $(".course-time").text()
-    course_end = $(".course-time").attr("time-end")
-    cb = Date.parse(course_begin)
-    ce = Date.parse(course_end)
-    ctime = (cb - ce)/1000
-    if ctime < 60
-      $(".course-time").text(ctime + "sec")
-    else if 60 <= ctime < 3600
-      $(".course-time").text(Math.round(ctime/60) + "min")
+  $(".course-time").each ->
+    if $(this).text() == "无时间"
+      $(this).text() == "无时间"
     else
-      $(".course-time").text(Math.floor(ctime/3600) + "h" + Math.round((ctime%3600)/60) + "m")
+      course_begin = $(this).text()
+      course_end = $(this).attr("time-end")
+      cb = Date.parse(course_begin)
+      ce = Date.parse(course_end)
+      ctime = (cb - ce)/1000
+      console.log(ctime);
+      if ctime < 60
+        $(this).text(ctime + "sec")
+      else if 60 <= ctime < 3600
+        $(this).text(Math.round(ctime/60) + "min")
+      else
+        $(this).text(Math.floor(ctime/3600) + "h" + Math.round((ctime%3600)/60) + "m")
 
   $(".star-div input").attr("checked", "checked")
 
