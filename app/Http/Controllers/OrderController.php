@@ -52,7 +52,7 @@ class OrderController extends Controller
         $course = Course::findOrFail($request->get('course_id'));
         $order->title = 'buy course ' . $course->name;
         $order->product_id = $course->id;
-        $order->amount = $course->price?:$course->original_price;
+        $order->amount = $course->price ?: $course->original_price;
         $order->uuid = $this->uuid();
         auth()->user()->orders()->save($order);
         return $order;
@@ -203,11 +203,12 @@ class OrderController extends Controller
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             $order->status = 'refunded';
             $order->save();
-            if($request->has('course_id')){
-                $course=Course::findOrFail($request->course_id);
-                $course->students()->detach($order->user_id);
-                MessageFacade::sendRefundCompletedMessage(User::find($order->user_id), $course);
-                return view('setting.refund',compact('course'));
+            $course = Course::findOrFail($order->product_id);
+            $course->students()->detach($order->user_id);
+            MessageFacade::sendRefundCompletedMessage(User::find($order->user_id), $course);
+
+            if ($_SERVER['SCRIPT_NAME']!= 'artisan') {
+                return view('setting.refund', compact('course'));
             }
             return ['success' => true];
         } else {
