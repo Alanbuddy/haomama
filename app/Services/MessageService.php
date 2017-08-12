@@ -137,7 +137,64 @@ class MessageService
         }
     }
 
-    public function sendCourseUpdateReminder(User $user,Course $course)
+//模板IDEfzvbLUYiyAfzgFFEdWV-tXBzHxkICXiMUim75-UU4k
+//开发者调用模板消息接口时需提供模板ID
+//标题退款通知
+//行业IT科技 - 互联网|电子商务
+//详细内容
+//{{first.DATA}}
+//
+//退款原因：{{reason.DATA}}
+//退款金额：{{refund.DATA}}
+//{{remark.DATA}}
+//在发送时，需要将内容中的参数（{{.DATA}}内为参数）赋值替换为需要的信息
+//内容示例
+//您好，您对微信影城影票的抢购未成功，已退款。
+//退款原因：未抢购成功
+//退款金额：70元
+//备注：如有疑问，请致电13912345678联系我们，或回复M来了解详情。
+    public function sendRefundCompletedMessage(User $user, Course $course)
+    {
+        $template_id = 'EfzvbLUYiyAfzgFFEdWV-tXBzHxkICXiMUim75-UU4k';
+        $url = env('APP_URL') . route('courses.show', $course);
+        $result = WxApi::accessToken();
+        if ($result['success']) {
+            $access_token = $result['data']->access_token;
+            $data = [
+                "reason" => [
+                    "value" => '课程:' . $course->name . "已退款",
+                    "color" => "#f21212"
+                ],
+                "refund" => [
+                    "value" => '￥'.($course->price?:$course->original_price),
+                    "color" => "#f21212"
+                ],
+                "remark" => [
+                    "value" => "",
+                ]
+            ];
+            $result = WxMessageApi::send($access_token, $user->openid, $template_id, $url, $data);
+//        dd($result);
+            if (json_decode($result['data'])->errcode > 0) {
+                Error::create([
+                    'user_id' => 1,
+                    'type' => 'wx.send',
+                    'message' => 'send message failed',
+                    'data' => json_encode($result),
+                    'context' => json_encode(compact('access_token', 'template_id', 'url'))
+                ]);
+                throw new WxException(json_decode($result['data'])->errmsg);
+            }
+        } else {
+            Error::create([
+                'type' => 'wx.access_token',
+                'message' => 'access_token',
+                'data' => $result['message'],
+            ]);
+        }
+    }
+
+    public function sendCourseUpdateReminder(User $user, Course $course)
     {
         $template_id = 'mn7iRfoNxcYRhzA3mPBLQw0ynAWyjluZVvqir2H9uKo';
         $url = env('APP_URL') . route('courses.show', $course);

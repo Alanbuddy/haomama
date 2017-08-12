@@ -206,6 +206,7 @@ class OrderController extends Controller
             if($request->has('course_id')){
                 $course=Course::findOrFail($request->course_id);
                 $course->students()->detach($order->user_id);
+                MessageFacade::sendRefundCompletedMessage(User::find($order->user_id), $course);
                 return view('setting.refund',compact('course'));
             }
             return ['success' => true];
