@@ -15,6 +15,7 @@
   window.validmobile = "#{route('validate.phone')}"
   window.review = "#{route('courses.comments.index',$course->id)}"
   window.comment_id = "#{route('comments.vote', -1)}"
+  window.comment_store = "#{route('comments.store')}"
 
 @endsection
 @section('content')
@@ -31,6 +32,7 @@
     .course-row-div.color7.status-flex
       %span.name-span.f16.fb.color7= $course['name']
       %span.course-id{style: "display:none;"}= $course['id']
+      %span.user-info{style:"display:none"}= auth()->user()->phone
       - if ($course['type'] == "offline")
         %span.course-status.f8 线下
     - if($course['type'] == "online")
@@ -235,7 +237,8 @@
 %img.upper{src: "icon/top.png"}
 - if ($hasEnrolled == true)
   - if ($course['type'] == "online")
-    .btn#review-btn{type: "button"} 评价课程
+    - if($hasCommented == false)
+      .btn#review-btn{type: "button"} 评价课程
   - else
     .btn#sign-btn{type: "button"} 课程签到
 - else

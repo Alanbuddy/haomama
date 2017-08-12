@@ -115,7 +115,7 @@ $(document).ready(function($){
             if($(".hot-review-div .review-item").eq(0)){
               template.insertBefore($(".hot-review-div .review-item").eq(0));
             }else{
-              template.appendTo($(".hot-review-div"));
+              template.appendTo($(".hot-review-div .review-items-div"));
             }
           }
         }

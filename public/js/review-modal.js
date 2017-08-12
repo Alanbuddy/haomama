@@ -24,12 +24,12 @@ $(document).ready(function($) {
       showMsg("请评分", "center");
       return false;
     }
-    console.log(window.course_id);
+    var course_id = $(".course-id").text();
     $.postJSON(
-      window.review,
+      window.comment_store,
       {
         star: score,
-        course_id: window.course_id,
+        course_id: course_id,
         _token: window.token
       },
       function(data){
@@ -50,6 +50,8 @@ $(document).ready(function($) {
 	$('#reviewModal').on('touchmove', function(event) {
 	    event.preventDefault();
 	});
+
+  //需要修改
 	$("#test-btn").click(function(){
 	    $("#profileModal").modal("show");
 	  });
