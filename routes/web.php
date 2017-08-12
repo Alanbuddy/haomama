@@ -21,6 +21,8 @@ Route::group([
 ], function () {
     Route::auth();
     Route::get('/', 'HomeController@index')->name('index');
+    Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
+    Route::get('/category/{category}', 'HomeController@index')->name('category');
     Route::get('/logout', 'Auth\LoginController@logout');
 
     Route::get('/validate/phone', 'SmsController@isOccupied')->name('validate.phone');
@@ -52,8 +54,6 @@ Route::group([
     Route::get('/statistics/lessons', 'StatisticsController@lessonsStatistics')->name('statistics.lessons');//视频播放情况统计列表页
     Route::get('/statistics/lessons/{lesson?}/', 'StatisticsController@lessonStatistics')->name('statistics.lesson');//视频播放情况统计详情页
 
-    Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
-    Route::get('/category/{category}', 'HomeController@index')->name('category');
 
     Route::get('/courses/search', 'CourseController@search')->name('courses.search');
     Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');
