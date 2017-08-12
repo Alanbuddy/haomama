@@ -224,6 +224,7 @@ class LessonController extends Controller
         if (!empty($video) && $video->video_type == 'compound') {
             $pictures = $video->pictures()->orderBy('no')->get();
             $audio = $video->audio()->first();
+            $audio=$audio?:new File();
         }
         // dd($pictures);
         return view('setting.lesson', compact(
