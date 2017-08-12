@@ -131,14 +131,15 @@ class SearchService
     public function search($key)
     {
         $items = $this->basicStat()
-            ->addSelect(DB::raw('(select users.name from users join 
-course_user on users.id=course_user.user_id where course_user.course_id=courses.id and course_user.user_type="teacher") as u_name'))//学习人数
-//            ->leftJoin('course_user','course_user.course_id','courses.id')
-//            ->leftJoin('users','course_user.user_id','users.id')
-//            ->where('course_user.user_type','teacher')
-//            ->where('courses.name','like','%'.$key.'%')
-//            ->orWhere('users.name','like','%'.$key.'%')
-            ->orderBy('courses.id','asc');
+            ->addSelect(DB::raw('(select group_concat(users.name) from users join course_user on users.id=course_user.user_id where course_user.course_id=courses.id and course_user.user_type="teacher" ) as teachers_names'))//学习人数
+            ->leftJoin('course_user', 'course_user.course_id', 'courses.id')
+            ->leftJoin(DB::raw('(select users.id,users.name from users join course_user on course_user.user_id=users.id where course_user.user_type="teacher") as users'), 'course_user.user_id', 'users.id')
+            ->where(function ($query) use ($key) {
+                $query->where('courses.name', 'like', '%' . $key . '%')
+                    ->orWhere('users.name', 'like', '%' . $key . '%');
+            })
+            ->groupBy('courses.id')
+            ->orderBy('courses.id', 'asc');
         return $items;
     }
 
@@ -146,8 +147,8 @@ course_user on users.id=course_user.user_id where course_user.course_id=courses.
     public function searchByName($key)
     {
         $items = $this->basicStat()
-            ->where('courses.name','like','%'.$key.'%')
-            ->orderBy('courses.id','desc');
+            ->where('courses.name', 'like', '%' . $key . '%')
+            ->orderBy('courses.id', 'desc');
         return $items;
     }
 }
