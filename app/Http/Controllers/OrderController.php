@@ -205,6 +205,7 @@ class OrderController extends Controller
             $order->save();
             if($request->has('course_id')){
                 $course=Course::findOrFail($request->course_id);
+                $course->students()->detach($order->user_id);
                 return view('setting.refund',compact('course'));
             }
             return ['success' => true];
