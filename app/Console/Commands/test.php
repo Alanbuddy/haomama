@@ -57,7 +57,9 @@ class test extends Command
 //                $user->attachRole(Role::find(2));
 //            }
 //        }
+
 //        MessageFacade::send)BuyCompletedMessage(User::find(1), Course::find(1));
+
         $str = '/var/www/baby.com/storage/app/video/phpLeB0hE';
 //        $this->info(substr($str,strpos()))
 

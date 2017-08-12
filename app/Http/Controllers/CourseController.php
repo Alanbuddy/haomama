@@ -708,7 +708,6 @@ class CourseController extends Controller
         if ($request->has('key')) {
             $items = Search::search($request->key)
                 ->paginate(10);
-            dd($items);
             foreach ($items as $item) {
                 if ($item->status == 'draft') {
                     $item->status = '未开';
@@ -768,7 +767,6 @@ class CourseController extends Controller
         if ($hasEnrolled) {
             $this->recordAttendance($course, $index);
         }
-
 
         return view('mine.create', compact('hasEnrolled', 'course', 'index', 'lesson'));
     }

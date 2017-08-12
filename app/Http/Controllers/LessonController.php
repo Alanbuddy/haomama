@@ -312,9 +312,7 @@ class LessonController extends Controller
                 ->orderBy('id', 'desc')
                 ->paginate(10);
 //            dd($items);
-            return view('admin.lesson.lesson_search', [
-                'items' => $items,
-            ]);
+            return view('admin.lesson.lesson_search', compact('items', 'key'));
         }
         return redirect()->route('lessons.index');
     }

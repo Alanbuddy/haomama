@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 require_once __DIR__ . "/../Wechat/sdk/lib/WxPay.Data.php";
 require_once __DIR__ . "/../Wechat/sdk/lib/WxPay.Api.php";
+use App\Facades\MessageFacade;
 use App\Http\Wechat\sdk\lib\WxPayApi;
 use App\Http\Wechat\sdk\lib\WxPayOrderQuery;
 use App\Http\Wechat\sdk\lib\WxPayRefund;
@@ -11,6 +12,7 @@ use App\Http\Wechat\sdk\lib\WxPayUnifiedOrder;
 use App\Http\Wechat\WxApi;
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -52,7 +54,7 @@ class OrderController extends Controller
         $course = Course::findOrFail($request->get('course_id'));
         $order->title = 'buy course ' . $course->name;
         $order->product_id = $course->id;
-        $order->amount = $course->price?:$course->original_price;
+        $order->amount = $course->price ?: $course->original_price;
         $order->uuid = $this->uuid();
         auth()->user()->orders()->save($order);
         return $order;
@@ -203,9 +205,12 @@ class OrderController extends Controller
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             $order->status = 'refunded';
             $order->save();
-            if($request->has('course_id')){
-                $course=Course::findOrFail($request->course_id);
-                return view('setting.refund',compact('course'));
+            $course = Course::findOrFail($order->product_id);
+            $course->students()->detach($order->user_id);
+            MessageFacade::sendRefundCompletedMessage(User::find($order->user_id), $course);
+
+            if ($_SERVER['SCRIPT_NAME']!= 'artisan') {
+                return view('setting.refund', compact('course'));
             }
             return ['success' => true];
         } else {

