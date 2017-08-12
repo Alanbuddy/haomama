@@ -252,9 +252,7 @@ class CourseController extends Controller
             ->get();
 
         if (count($lessons)) {
-
             list($tmp, $hasNewest) = $this->newestLesson($course, $lessons);
-
             foreach ($lessons as $lesson) {
                 $lesson->hasAttended = (bool)Attendance::where('course_id', $course->id)//线下课程每一个课时是否签到
                 ->where('lesson_id', $lesson->id)
