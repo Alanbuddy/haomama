@@ -123,6 +123,8 @@
     %input.review-input{placeholder: "写评论......"}
     .btn#delivery 发送
 @endsection
+
+@section('modal-div')
 #confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
@@ -132,6 +134,8 @@
         .confirm-div
           %a#register 报名
           %a{"data-dismiss" => "modal"} 取消
+@endsection
+
       
 @section('script')
 <script src="https://qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
