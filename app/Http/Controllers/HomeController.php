@@ -116,9 +116,10 @@ class HomeController extends Controller
 //        return view('video.display',
 //            compact('categories',
         $setting = Setting::where('key', 'carousel')->first();
+        $images = json_decode($setting->value);
 
         return view('course.index',
-            compact('categories', 'data','setting')
+            compact('categories', 'data','images')
         );
     }
 
