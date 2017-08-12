@@ -106,7 +106,7 @@
             .item-desc
               %p.f14.color7= $lessons[$i]['name']
               .item-row.f12.color5
-                %span.min.course-time{"time-end" => $lessons[$i]['end']}= $lessons[$i]['begin']
+                %span.min.course-time{"time-end" => $lessons[$i]['end']}= $lessons[$i]['begin'] ? $lessons[$i]['begin'] : "无时间"
                 %span= $lessons[$i]->learnedCount."人已学"
             %img.go{src: "icon/go.png"}
             %img.free{src: "icon/free.png"}

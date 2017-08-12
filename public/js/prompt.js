@@ -207,7 +207,7 @@ $(document).ready(function($){
       node.insertBefore($(".load"));
     }
   }
-  var page = 1;
+  var page = 2;
   $(window).scroll(function(){
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(document).height();
