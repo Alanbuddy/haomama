@@ -60,7 +60,7 @@ class WechatMessage extends Command
 
     }
 
-    //线下课程开课前３２小时，给收藏课程的用户发送微信消息
+    //线下课程开课前３２小时，给收藏过课程的用户发送微信消息
     public function sendBefore32h()
     {
         $date = date('Y-m-d H', strtotime('+32 hour'));

@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire') ->hourly();
 
 //        $schedule->command('wx:send')->everyTenMinutes();
-        $schedule->command('wx:send')->everyMinute();
+        $schedule->command('wx:send')->hourly();
 //        $schedule->call(function () {
 //            print("every 5 minute\n");
 //            DB::table('recent_users')->delete();
