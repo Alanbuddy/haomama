@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $(".course-item").on('click', function(){
+  $(document).on('click', '.course-item', function(){
     var cid = $(this).attr('data-id');
     location.href = window.course_item + "/" +cid;
   });

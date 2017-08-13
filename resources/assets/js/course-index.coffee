@@ -52,7 +52,7 @@ $ ->
   #   $(this).closest(".list-div:visible").find(".course-item-div").css('display', 'none')
   #   $(this).closest(".list-div:visible").find(".course-item-div").eq($(this).index()).css('display', 'block')
 
-  # $('.course-item').click ->
+  # $(document).on 'click', '.course-item', ->
   #   cid = $(this).attr('data-id')
   #   location.href = window.course_item + "/" +cid
 
