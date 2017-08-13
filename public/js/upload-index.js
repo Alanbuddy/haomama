@@ -1,7 +1,6 @@
 $(document).ready(function(){
-  $(document).on('click', '.course-item', function(){
+  $(".course-item").on('click', function(){
     var cid = $(this).attr('data-id');
-    console.log(cid);
     location.href = window.course_item + "/" +cid;
   });
     

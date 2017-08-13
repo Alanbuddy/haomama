@@ -37,7 +37,7 @@ $ ->
     $(".list-div").eq(i).find(".course-nav span").click ->
       $(".list-div").eq(i).find(".course-nav span").removeClass('course-active')
       $(this).addClass('course-active')
-      $(".list-div").eq(i).find(".course-item-div").css('display', 'none');
+      $(".list-div").eq(i).find(".course-item-div").css('display', 'none')
       $(".list-div").eq(i).find(".course-item-div").eq($(this).index()).css('display', 'block')
   
   $(".list-div").eq(0).find(".course-nav span").click ->
@@ -51,6 +51,10 @@ $ ->
   #   $(this).addClass('course-active')
   #   $(this).closest(".list-div:visible").find(".course-item-div").css('display', 'none')
   #   $(this).closest(".list-div:visible").find(".course-item-div").eq($(this).index()).css('display', 'block')
+
+  # $('.course-item').click ->
+  #   cid = $(this).attr('data-id')
+  #   location.href = window.course_item + "/" +cid
 
   bannerSwiper = new Swiper('.swiper-container-banner',{
     pagination : '.swiper-pagination',
