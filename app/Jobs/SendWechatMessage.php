@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Facades\MessageFacade;
-use App\Http\Wechat\WxException;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -20,16 +19,19 @@ class SendWechatMessage implements ShouldQueue
     //recipient
     protected $user;
 
+    protected $hasEnrolled;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(User $user, Course $course)
+    public function __construct(User $user, Course $course, $hasEnrolled = true)
     {
         //
         $this->user = $user;
         $this->course = $course;
+        $this->hasEnrolled = $hasEnrolled;
     }
 
     /**
@@ -39,7 +41,7 @@ class SendWechatMessage implements ShouldQueue
      */
     public function handle()
     {
-        MessageFacade::sendWechatPreClassMessage($this->user, $this->course);
+        MessageFacade::sendWechatPreClassMessage($this->user, $this->course,$this->hasEnrolled);
 //        try {
 //        MessageFacade::sendBuyCompletedMessage($this->user, $this->course);
 //        } catch (WxException $e) {
