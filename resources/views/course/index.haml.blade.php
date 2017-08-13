@@ -22,12 +22,9 @@
 @section('content')
 .swiper-container-banner
   .swiper-wrapper
-    .swiper-slide
-      %img.img-size.img_1{src: 'icon/banner.png'}
-    .swiper-slide
-      %img.img-size.img_1{src: 'icon/banner.png'}
-    .swiper-slide
-      %img.img-size.img_1{src: 'icon/banner.png'}
+    - foreach($images as $item)
+      .swiper-slide
+        %img.img-size.img_1{src: strpos($item, '/') == 0 ? substr($item,1) : $item}
   .swiper-pagination
 .list-wraper
   - for ($i=0;$i<4;$i++)
