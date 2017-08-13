@@ -34,14 +34,11 @@ class AdminController extends Controller
             }
             $ret=ob_get_contents();
             ob_end_clean();
-            return view('run.index',[
+            return view('admin.debug',[
             ]);
 
         }
-        return view('admin.debug',[
-            'ret'=>$ret,
-            'code'=>$request->get('code')
-        ]);
+        return view('admin.index');
     }
 
     /**

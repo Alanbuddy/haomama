@@ -685,7 +685,7 @@ class CourseController extends Controller
         }
         if ($request->has('key')) {
             $items = Search::search($request->key)
-                ->paginate(6);
+                ->paginate(10);
 //            dd($items);
             if ($request->ajax()) {
                 return $items;

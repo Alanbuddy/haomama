@@ -46,10 +46,17 @@ class MessageService
         }
     }
 
-    //线下课程开课前24小时发送微信模板消息
-    public function sendWechatPreClassMessage(User $user, Course $course)
+
+    /**
+     * 线下课程开课前24小时发送微信模板消息
+     * @param User $user
+     * @param Course $course
+     * @param bool $hasEnrolled  true表示用户已经报名，false表示用户只是收藏了课程
+     * @throws WxException
+     */
+    public function sendWechatPreClassMessage(User $user, Course $course, $hasEnrolled=true)
     {
-        Log::info(__FILE__ . 'sendWechatPreClassMessage');
+        Log::info(__FILE__ . __LINE__.' sendWechatPreClassMessage');
         $template_id = "YOjEUmaFcJ-27cx82zG6UVz9D23Mvbtv_5NDjhKT-Lw";
         $url = env('APP_URL') . route('courses.show', $course);
         $result = WxApi::accessToken();
@@ -73,7 +80,7 @@ class MessageService
                     "color" => "#173177"
                 ],
                 "remark" => [
-                    "value" => "预祝学习愉快！",
+                    "value" => $hasEnrolled?"预祝学习愉快！":"欢迎报名!",
                     "color" => "#173177"
                 ]
             ];
