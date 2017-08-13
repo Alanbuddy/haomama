@@ -37,10 +37,10 @@ class Kernel extends ConsoleKernel
 
 //        $schedule->command('wx:send')->everyTenMinutes();
         $schedule->command('wx:send')->everyMinute();
-        $schedule->call(function () {
+//        $schedule->call(function () {
 //            print("every 5 minute\n");
 //            DB::table('recent_users')->delete();
-        })->everyMinute();
+//        })->everyMinute();
 
     }
 

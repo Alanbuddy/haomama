@@ -58,6 +58,14 @@ class Course extends Model
             ->wherePivot('type', 'enroll');
     }
 
+    //收藏课程的学员
+    public function followers()
+    {
+        return $this->belongsToMany('App\Models\User')
+            ->wherePivot('user_type', 'student')
+            ->wherePivot('type', 'favorite');
+    }
+
     public function orders()
     {
         return $this->hasMany('App\Models\Order', 'product_id');

@@ -3,6 +3,9 @@
     @include('common.message')
     <ul>
         <li>
+            <a href="{{route('wechat.accessToken')}}">refresh wechat access token</a>
+        </li>
+        <li>
             <a href="{{route('videos.index')}}">Video</a>
         </li>
         <li>

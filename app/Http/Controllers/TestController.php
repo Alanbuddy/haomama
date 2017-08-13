@@ -11,6 +11,8 @@ use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\User;
 use App\Models\Video;
+use Carbon\Carbon;
+use Faker\Provider\DateTime;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
@@ -27,7 +29,11 @@ class TestController extends Controller
 
     public function index(Request $request)
     {
+        $date=(date('Y-m-d H',strtotime('-24 hour')));
 //        dd(app(Router::class)->getRoutes()->allRoutes());
+        $s=Carbon::now()->toDateTimeString();
+        $date=new DateTime($s);
+        dd($date->format('Y-m-d H:i'));
         $method = $request->get('m', 'lessons');
         if ($method) {
             $result = call_user_func([$this, $method], $request);
