@@ -58,7 +58,7 @@
           .word-div
             .favorite-row-div.clearfix
               %span.category-class.f12= $enrolledCourse['category']['name']
-              %span.item-value.f14.color5= "￥".$enrolledCourse['price']
+              %span.item-value.f14.color5= "￥".($enrolledCourse['price'] ? $enrolledCourse['price'] : $enrolledCourse['original_price'])
             .favorite-row-div.color7.unstart
               %span.favorite-name.f16= $enrolledCourse['name']
               - if ($enrolledCourse['type'] == 'offline')
@@ -85,7 +85,7 @@
           .word-div
             .favorite-row-div.clearfix
               %span.category-class.f12= $favoritedCourse['category']['name']
-              %span.item-value.f14.color5= "￥".$favoritedCourse['price']
+              %span.item-value.f14.color5= "￥".($favoritedCourse['price'] ? $favoritedCourse['price'] : $favoritedCourse['original_price'])
             .favorite-row-div.color7.unstart
               %span.favorite-name.f16= $favoritedCourse['name']
               - if ($favoritedCourse['type'] == 'offline')

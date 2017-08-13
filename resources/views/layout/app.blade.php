@@ -140,6 +140,43 @@
       location.href =  app_url;
   }
   @endif
+
+  var cur_url =location.href;
+  var cur_time = new Date();
+  var pv_behavior = "{{ route('behaviors.store')}}";
+  var pv_token = "{{ csrf_token() }}";
+  var pv_begin = "pv.begin";
+  var pv_end = "pv.end";
+  var pv_data = JSON.stringify({
+    "url": cur_url,
+    "time": cur_time
+  });
+  console.log(cur_url); 
+  console.log(cur_time); 
+  console.log(pv_token); 
+  console.log(pv_data); 
+  $.ajax({
+    type: 'post',
+    url: pv_behavior,
+    data: {
+      _token: pv_token,
+      type: pv_begin,
+      data: pv_data
+    }
+  })
+
+  window.onbeforeunload = function(event){   
+    alert(333);
+    $.ajax({
+      type: 'post',
+      url: pv_behavior,
+      data: {
+        _token: pv_token,
+        type: pv_end,
+        data: pv_data
+      }
+    })
+  }
   // if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|SymbianOS)/i))) {
   //     if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
   //         node.setAttribute('href', app_url);

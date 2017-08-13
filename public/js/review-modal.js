@@ -51,14 +51,6 @@ $(document).ready(function($) {
 	    event.preventDefault();
 	});
 
-  //需要修改,用user-info信息来判断是否已经填写过个人信息
-	$("#test-btn").click(function(){
-	    $("#profileModal").modal("show");
-	  });
-	$('.profile-close').click(function(){
-	    $("#profileModal").modal("hide");
-	    $('.add-baby-div').hide();
-	});
 
   //个人资料页的验证码和提交
 	$("#code").click(function(){
@@ -174,6 +166,29 @@ $(document).ready(function($) {
     }
   });
 
+  //用user-info来判断是否已经填写过个人信息
+  var user_info = $(".user-info").text();
+  if(window.hasEnroll && !user_info){
+    setTimeout(function(){
+      $("#profileModal").modal("show");
+    },3000);
+  }
+
+  $("#profileModal").on('shown.bs.modal', function(){
+    setTimeout(function(){
+      showMsg("补全个人资料可更好的接收课程提醒哦~", "center");
+    }, 2000);
+  });
+
+  $('.profile-close').click(function(){
+      $("#profileModal").modal("hide");
+      $('.add-baby-div').hide();
+  });
+  //需要记录观看视频时间点
+  $("#test-btn").click(function(){
+
+
+  });
 
   $(".online-course .item:eq(0)").find(".free").show();
 

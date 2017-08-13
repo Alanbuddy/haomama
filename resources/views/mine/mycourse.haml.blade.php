@@ -22,7 +22,7 @@
         .word-div
           .course-row-div.clearfix
             %span.f12.category-class= $item['category']['name']
-            %span.course-item-value.f14.color5= "￥". $item['price']
+            %span.course-item-value.f14.color5= "￥". ($item['price'] ? $item['price'] : $item['original_price'])
           .course-row-div.color7
             - if ($item['type'] == 'offline')
               %span.name-span.f16= $item['name']
