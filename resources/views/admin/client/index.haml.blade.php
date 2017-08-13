@@ -51,7 +51,7 @@
                           %a{href: route('admin.user.log',$item->id)}= $item->openid
                         %td{rowspan: count($item->baby)}
                           %a{href: route('admin.user.log',$item->id)}= $item->wx ? json_decode($item->wx)->nickname : "无"  
-                        %td{rowspan: count($item->baby)}= $item->phone
+                        %td{rowspan: count($item->baby)}= $item->phone ? $item->phone : "无"
                         %td{rowspan: count($item->baby)}= $item->parenthood
                         - if(count($item->baby) == 0)
                           %td= "无"
