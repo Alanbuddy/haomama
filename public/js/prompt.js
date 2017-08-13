@@ -37,30 +37,30 @@ $(document).ready(function($){
 		event.preventDefault();
 	});
 
-  //需要与后台商量 决定提交lesson-id 还是course-id
-  var order = null;
-  var signPackage = null;
-  // var lid = $(".lesson-id").attr("data-id");
-  var cid = $(".course-id").attr("data-id");
-  $("#register").click(function(){
-    $.ajax({
-      url: window.order,
-      type: 'post',
-      data: {
-          course_id: cid,
-          _token: window.token,
-      },
-      success: function (resp) {
-          // alert(JSON.stringify(resp));
-          if(resp.success){
-            $("#confirmModal").modal("hide");
-          }
-          signPackage = resp.data;
-          order=resp.data.order;
-          jsBrage();
-      }
-    });
-  });
+  // //需要与后台商量 决定提交lesson-id 还是course-id
+  // var order = null;
+  // var signPackage = null;
+  // // var lid = $(".lesson-id").attr("data-id");
+  // var cid = $(".course-id").attr("data-id");
+  // $("#register").click(function(){
+  //   $.ajax({
+  //     url: window.order,
+  //     type: 'post',
+  //     data: {
+  //         course_id: cid,
+  //         _token: window.token,
+  //     },
+  //     success: function (resp) {
+  //         // alert(JSON.stringify(resp));
+  //         if(resp.success){
+  //           $("#confirmModal").modal("hide");
+  //         }
+  //         signPackage = resp.data;
+  //         order=resp.data.order;
+  //         jsBrage();
+  //     }
+  //   });
+  // });
 
   $("#delivery").click(function(){
     var content = $(".review-input").val();
@@ -200,7 +200,7 @@ $(document).ready(function($){
     }
     return template.clone(true);
   }
-
+  var node = "";
   function  callbackHandle(data){
     for(var i=0;i<data.data.length;i++){
       node=render(data.data[i]);

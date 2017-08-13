@@ -141,7 +141,7 @@
   }
   @endif
 
-  var cur_url =location.href;
+  var cur_url =location.pathname;
   var cur_time = new Date();
   var pv_behavior = "{{ route('behaviors.store')}}";
   var pv_token = "{{ csrf_token() }}";
@@ -151,10 +151,6 @@
     "url": cur_url,
     "time": cur_time
   });
-  console.log(cur_url); 
-  console.log(cur_time); 
-  console.log(pv_token); 
-  console.log(pv_data); 
   $.ajax({
     type: 'post',
     url: pv_behavior,
@@ -166,7 +162,6 @@
   })
 
   window.onbeforeunload = function(event){   
-    alert(333);
     $.ajax({
       type: 'post',
       url: pv_behavior,

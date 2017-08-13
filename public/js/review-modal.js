@@ -327,6 +327,7 @@ $(document).ready(function($) {
     return template.clone(true);
   }
 
+  var node = "";
   function  callbackHandle(data){
     for(var i=0;i<data.data.length;i++){
       node=render(data.data[i]);
