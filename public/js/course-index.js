@@ -10371,10 +10371,10 @@ return jQuery;
     return $(".list-div").eq(i).css("display", "block");
   });
   $(document).on('click', '.course-nav span', function() {
-    $(".list-div:visible").find(".course-nav span").removeClass('course-active');
+    $(this).closest(".list-div:visible").find(".course-nav span").removeClass('course-active');
     $(this).addClass('course-active');
-    $(".list-div:visible").find(".course-item-div").css('display', 'none');
-    return $(".list-div:visible").find(".course-item-div").eq($(this).index()).css('display', 'block');
+    $(this).closest(".list-div:visible").find(".course-item-div").css('display', 'none');
+    return $(this).closest(".list-div:visible").find(".course-item-div").eq($(this).index()).css('display', 'block');
   });
   bannerSwiper = new Swiper('.swiper-container-banner', {
     pagination: '.swiper-pagination',
