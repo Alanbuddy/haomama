@@ -1,4 +1,5 @@
 $ ->
+
   $(".list-div").eq(0).css("display", "block")
   
   $('.wrapper').scroll ->
@@ -57,7 +58,4 @@ $ ->
     loop: true,
   })
 
-  $(document).on 'click', '.course-item', ->
-    cid = $(this).attr('data-id')
-    location.href = window.course_item + "/" +cid
-
+ 

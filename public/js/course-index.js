@@ -10382,15 +10382,10 @@ return jQuery;
     $(".list-div").eq(0).find(".course-item-div").css('display', 'none');
     return $(".list-div").eq(0).find(".course-item-div").eq($(this).index()).css('display', 'block');
   });
-  bannerSwiper = new Swiper('.swiper-container-banner', {
+  return bannerSwiper = new Swiper('.swiper-container-banner', {
     pagination: '.swiper-pagination',
     autoplay: 3000,
     loop: true
-  });
-  return $(document).on('click', '.course-item', function() {
-    var cid;
-    cid = $(this).attr('data-id');
-    return location.href = window.course_item + "/" + cid;
   });
 });
 

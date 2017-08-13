@@ -1,4 +1,10 @@
 $(document).ready(function(){
+  $(document).on('click', '.course-item', function(){
+    var cid = $(this).attr('data-id');
+    console.log(cid);
+    location.href = window.course_item + "/" +cid;
+  });
+    
  
   var temp=`<div class="course-item">
     <div class="course-icon-div">
