@@ -1,45 +1,43 @@
 $(document).ready(function(){
 
-  var page = 0;
-  // 每页展示10个
-  var size = 10;
-  // dropload
-  var node = "";
-  $('.wrapper').dropload({
-      scrollArea : window,
-      // autoLoad: false,
-      loadDownFn: function(me){
-          page++;
-          // 拼接HTML
-          var isSearchByInput=location.href.indexOf('key')>0;
-          var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
-          $.ajax({
-              type: 'GET',
-              url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
-              dataType: 'json',
-              success: function(data){
-                  console.log(data);
-                  var arrLen = data.data.length;
-                  if(arrLen > 0){
-                    callbackHandle(data);
-                  }else{
-                      // 锁定
-                      me.lock();
-                      // 无数据
-                      me.noData();
-                  }
-                  me.resetload();
-              },
-              error: function(xhr, type){
-                  // alert('Ajax error!');
-                  // 即使加载出错，也得重置
-                  showMsg("服务器返回数据错误", "center");
-                  me.resetload();
-              }
-          });
-      }
-  });
+  
+  //autoload.js自动加载写法
+  // $('.wrapper').dropload({
+  //     scrollArea : window,
+  //     // autoLoad: false,
+  //     loadDownFn: function(me){
+  //         page++;
+  //         // 拼接HTML
+  //         var isSearchByInput=location.href.indexOf('key')>0;
+  //         var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
+  //         $.ajax({
+  //             type: 'GET',
+  //             url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
+  //             dataType: 'json',
+  //             success: function(data){
+  //                 console.log(data);
+  //                 var arrLen = data.data.length;
+  //                 if(arrLen > 0){
+  //                   callbackHandle(data);
+  //                 }else{
+  //                     // 锁定
+  //                     me.lock();
+  //                     // 无数据
+  //                     me.noData();
+  //                 }
+  //                 me.resetload();
+  //             },
+  //             error: function(xhr, type){
+  //                 // alert('Ajax error!');
+  //                 // 即使加载出错，也得重置
+  //                 showMsg("服务器返回数据错误", "center");
+  //                 me.resetload();
+  //             }
+  //         });
+  //     }
+  // });
 
+  var node = "";
   var temp=`<div class="course-item">
     <div class="course-icon-div">
            <img class="course-recommend" src="icon/recommend.png">
@@ -72,7 +70,8 @@ $(document).ready(function(){
       }else{
         node.find('.category-class').addClass('grow-title');
       }
-      node.appendTo($('.course-item-div'));
+      // node.appendTo($('.course-item-div'));
+      node.insertBefore($(".load"));
     }
   }
   
@@ -102,6 +101,32 @@ $(document).ready(function(){
     template.find('.we-course-name').text(item['name']);
     return template.clone(true);
   }
+
+  var page = 2;
+  var isSearchByInput=location.href.indexOf('key')>0;
+  var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
+  $(window).scroll(function(){
+    var scrollTop = $(this).scrollTop();
+    var scrollHeight = $(document).height();
+    var windowheight = $(this).height();
+    if(scrollTop + windowheight >= scrollHeight){
+      $(".loading").show();
+      $.ajax({
+        type: 'get',
+        url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
+        success: function(data){
+          $(".loading").hide();
+          var len = data.data.length;
+          if(len > 0){
+            page++;
+            callbackHandle(data);
+          }else{
+            $(".notice").show();
+          }
+        }
+      });
+    }
+  });
 });
 
 

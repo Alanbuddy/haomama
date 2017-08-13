@@ -133,11 +133,11 @@
   .modal-dialog
     .modal-content
       .modal-body
-        %p.prompt 未报名课程
-        %p.question　确认立即报名当前课程？
-        .confirm-div
-          %a#register 报名
-          %a{"data-dismiss" => "modal"} 取消
+        %p.prompt 您还未报名该课程,请到课程页面进行报名～!
+        // %p.question　
+        // .confirm-div
+        //   %a#register 报名
+        //   %a{"data-dismiss" => "modal"} 取消
 @endsection
 
       
