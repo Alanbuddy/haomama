@@ -47,7 +47,7 @@ class WechatMessage extends Command
             ->get();
         foreach ($courses as $course) {
             foreach ($course->users as $user) {
-                $job = (new SendWechatMessage($user, $course))->onQueue('wechat');
+                $job = (new SendWechatMessage($user, $course))->onQueue('wechat')->attempts(3);
                 dispatch($job);
             }
         }
