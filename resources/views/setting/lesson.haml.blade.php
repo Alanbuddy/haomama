@@ -97,24 +97,28 @@
         %span.title.f14.color7.fb 课程评论
         %span.f12.color7= "(共".$comments->total()."条)"
       .review-items-div
-        - foreach ($comments as $comment)
-          .review-item{"data-url" => route("comments.vote", $comment['id'])}
-            %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "icon/avatar.png"}
-            .item-desc
-              %p.f12.color7.review-name= $comment->user->name
-              %p.f12.color5.time= $comment['created_at']
-              %p.f14.color7.review-content= $comment['content']
-              %span.f12.color5 评论来源：
-              %span.f12.color5= $comment->lesson->name
-              .admire-div
-                %span.f12.color5.admire-num= $comment['voteCount']
-                - if ($comment['hasVoted'] == false)
-                  %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
-                - else
-                  %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
-        .load
-          %img.loading{src: "icon/loading.gif"}
-          %span.notice.f12 亲没数据了～
+        - if(count($comments) == 0)
+          .undiscover
+            %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+        - else
+          - foreach ($comments as $comment)
+            .review-item{"data-url" => route("comments.vote", $comment['id'])}
+              %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "icon/avatar.png"}
+              .item-desc
+                %p.f12.color7.review-name= $comment->user->name
+                %p.f12.color5.time= $comment['created_at']
+                %p.f14.color7.review-content= $comment['content']
+                %span.f12.color5 评论来源：
+                %span.f12.color5= $comment->lesson->name
+                .admire-div
+                  %span.f12.color5.admire-num= $comment['voteCount']
+                  - if ($comment['hasVoted'] == false)
+                    %img.admire-icon{src: "icon/like1_normal.png", 'data-ad'=> 'false'}
+                  - else
+                    %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
+          .load
+            %img.loading{src: "icon/loading.gif"}
+            %span.notice.f12 亲没数据了～
 %img.upper{src: "icon/top.png"}
 @endsection
 @section('foot-div')

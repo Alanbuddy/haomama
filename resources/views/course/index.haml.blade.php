@@ -51,7 +51,7 @@
                 .word-div
                   .course-row-div.clearfix
                     %span.f12.category-class= $item['category']['name']
-                    %span.course-item-value.f14.color5= $item['price'] ? "￥".$item['price'] : "无"
+                    %span.course-item-value.f14.color5= $item['price'] ? "￥".$item['price'] : "￥".$item['original_price']
                   .course-row-div.color7.unstart
                     %span.we-course-name.f16= $item['name']
                     - if ($item['type'] == 'offline')
@@ -83,7 +83,7 @@
                 .word-div
                   .course-row-div.clearfix
                     %span.category-class.f12= $itemOrderByUserCount['category']['name']
-                    %span.course-item-value.f14.color5= $itemOrderByUserCount['price'] ? "￥".$itemOrderByUserCount['price'] : "无"
+                    %span.course-item-value.f14.color5= $itemOrderByUserCount['price'] ? "￥".$itemOrderByUserCount['price'] : "￥".$itemOrderByUserCount['original_price']
                   .course-row-div.color7.unstart
                     %span.we-course-name.f16= $itemOrderByUserCount['name']
                     - if ($itemOrderByUserCount['type'] == 'offline')
@@ -115,7 +115,7 @@
                 .word-div
                   .course-row-div.clearfix
                     %span.category-class.f12= $itemOrderByCommentRating['category']['name']
-                    %span.course-item-value.f14.color5= $itemOrderByCommentRating['price'] ? "￥".$itemOrderByCommentRating['price'] : "无"
+                    %span.course-item-value.f14.color5= $itemOrderByCommentRating['price'] ? "￥".$itemOrderByCommentRating['price'] : "￥".$itemOrderByCommentRating['original_price']
                   .course-row-div.color7.unstart
                     %span.we-course-name.f16= $itemOrderByCommentRating['name']
                     - if ($itemOrderByCommentRating['type'] == 'offline')
