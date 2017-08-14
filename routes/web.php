@@ -15,7 +15,7 @@
 //		$a=DB::table('user')->get();
 //    return view('welcome');
 //});
-Route::post('/videos/cloud-callback', 'VideoController@cloudCallback')->name('videos.upload.callback');
+Route::any('/videos/cloud-callback', 'VideoController@cloudCallback')->name('videos.upload.callback');
 Route::group([
     'middleware' => ['web']
 ], function () {
