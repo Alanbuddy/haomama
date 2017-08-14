@@ -126,7 +126,7 @@ Route::group([
     Route::resource('messages', 'MessageController');//消息
 
 //    Route::get('/video/{video?}', 'VodController@video');
-    Route::get('/videos/cloud-callback', 'VideoController@cloudCallback')->name('videos.upload.callback');
+    Route::post('/videos/cloud-callback', 'VideoController@cloudCallback')->name('videos.upload.callback');
     Route::get('/videos/upload/init', 'VideoController@initUpload')->name('videos.upload.init');
     Route::post('/videos/merge', 'VideoController@mergeVideo')->name('videos.merge');
     Route::resource('videos', 'VideoController');
