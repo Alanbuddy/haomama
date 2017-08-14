@@ -132,9 +132,15 @@
                 %ol.example
                   - foreach($lessons as $lesson)
                     - if($lesson->type == 'audio')
-                      %li{"data-id" => $lesson->id}=$lesson->name
+                      %li{"data-id" => $lesson->id}
+                        %span.sort-span
+                          =$lesson->name
+                          %img.sort-delete{src: "icon/admin/delete.png"}
                     - if($lesson->type == "video")
-                      %li{"data-id" => $lesson->id}=$lesson->name
+                      %li{"data-id" => $lesson->id}
+                        %span.sort-span
+                          =$lesson->name
+                          %img.sort-delete{src: "icon/admin/delete.png"}
 
             .course-lesson.introduce-flex
               %span.introduce 课时标题:

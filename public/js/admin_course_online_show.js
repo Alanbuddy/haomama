@@ -291,7 +291,8 @@ $(document).ready(function(){
     });
     var len = title_arr.length;
     for(var i=0;i<len;i++){
-      var oLi = $("<li data-id="+title_arr[i]+">" + title_text[i] + "</li>");
+      // var oLi = $("<li data-id="+title_arr[i]+">" + title_text[i] + "</li>");
+      var oLi = $("<li data-id="+title_arr[i]+">" + "<span class='sort-span'>" + title_text[i] + "<img class='sort-delete' src='icon/admin/delete.png'>" + "</span>" + "</li>");
       $(".example").append(oLi);
     }
 
@@ -316,6 +317,17 @@ $(document).ready(function(){
 
   $("ol.example").sortable();
 
+  $(document).on('mouseover', '.sort-span', function(){
+    $(this).addClass("add-li-hover").find(".sort-delete").show();
+  });
+
+  $(document).on('mouseout', '.sort-span', function(){
+    $(this).removeClass("add-li-hover").find(".sort-delete").hide();
+  });
+
+  $(document).on('click', '.sort-delete', function(){
+    $(this).closest("li").remove();
+  });
 
   function check_input(name, length, ori_price){
     if(name == ""){

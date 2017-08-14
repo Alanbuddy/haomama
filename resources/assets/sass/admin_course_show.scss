@@ -469,3 +469,29 @@ ol.example li.placeholder:before {
 #teacher {
   z-index: 20000;
 }
+
+.example {
+  li {
+    height: 20px;
+    line-height: 20px;
+  }
+  span {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    padding: 0 6px;
+  }
+  .sort-delete {
+    width: 10px;
+    height: 10px;
+    margin-left: 4px;
+    margin-top: -2px;
+    display: none;
+  }
+  .add-li-hover {
+    background: #f1f1f1;
+    cursor: pointer;
+  }
+}
