@@ -2,7 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Http\Controllers\ErrorTrait;
 use App\Http\Controllers\VideoController;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class TecentVodUpload implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels,ErrorTrait;
 
 
     protected $file;
@@ -56,5 +58,11 @@ class TecentVodUpload implements ShouldQueue
             $this->file->save();
         }
         Log::info(__FILE__ . ':' . __LINE__ . '上传任务' . ($ret == 0 ? '成功' : '失败'));
+    }
+
+    public function failed(Exception $e)
+    {
+        // 给用户发送失败通知，等等...
+        $this->logError('vod.upload','上传任务失败'.$e->getMessage(),$this->file,json_encode($e));
     }
 }
