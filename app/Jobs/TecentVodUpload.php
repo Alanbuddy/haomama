@@ -59,8 +59,4 @@ class TecentVodUpload implements ShouldQueue
         Log::info(__FILE__ . ':' . __LINE__ . '上传任务' . ($ret == 0 ? '成功' : '失败'));
     }
 
-    public function failed(Exception $e)
-    {
-        // 给用户发送失败通知，等等...
-    }
 }
