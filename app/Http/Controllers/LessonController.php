@@ -173,6 +173,7 @@ class LessonController extends Controller
             $audio = $video->attachments()
                 ->where('mime', 'like', 'audio%')
                 ->first();
+            $audio = $audio ?: new File();//Depress error reporting in case of failure to upload audio.this fake audio won't play after this processing,
             $data = array_merge($data, compact('pictures', 'audio'));
         }
         return view('video' == $type
