@@ -335,7 +335,10 @@
 
 
 .video-div {
+  width: 7.5rem;
   height: 4.22rem;
+  overflow: hidden;
+  position:relative;
 }
 .file-id {
   display: none;
@@ -375,12 +378,14 @@
 
 .barrage {
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 100%;
   height: 0.5rem;
-  color: beige;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000,-1px -1px 0 #000;
   font-weight: bold;
   display: inline-block;
-  font-size: 2rem;
+  font-size: 1.6em;
   white-space: nowrap;
+  z-index: 80;
 }
