@@ -66,16 +66,15 @@
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 总购买人数:
-                  %span.mr30 123
+                  %span.mr30= $items->total()
                   %span 总付款人数:
-                  %span 70
+                  %span= $items->total()
 
                 %span.select-page.tag2-page
                   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                   %span.choice-page
                     != $items->links()
 @endsection
-
 
 @section('script')
 <script src= "{{mix('/js/admin_course_show.js')}}"></script>

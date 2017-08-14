@@ -372,3 +372,15 @@
 .undiscover-icon {
   width: 2.98rem;
 }
+
+.barrage {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  height: 0.5rem;
+  color: beige;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 2rem;
+  white-space: nowrap;
+}
