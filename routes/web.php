@@ -116,10 +116,6 @@ Route::group([
     Route::get('/behaviors/latest', 'BehaviorController@latest');
     Route::resource('behaviors', 'BehaviorController');
 
-//    Route::get('/video/{video?}', 'VodController@video');
-    Route::get('/videos/upload/init', 'VideoController@initUpload')->name('videos.upload.init');
-    Route::post('/videos/merge', 'VideoController@mergeVideo')->name('videos.merge');
-    Route::resource('videos', 'VideoController');
 
     Route::get('/files/upload/init', 'FileController@initChunkUpload')->name('file.upload.init');
     Route::post('/upload', 'FileController@upload')->name('file.upload');
@@ -129,6 +125,11 @@ Route::group([
 
     Route::resource('messages', 'MessageController');//消息
 
+//    Route::get('/video/{video?}', 'VodController@video');
+    Route::get('/videos/cloud-callback', 'VideoController@cloudCallback')->name('videos.upload.callback');
+    Route::get('/videos/upload/init', 'VideoController@initUpload')->name('videos.upload.init');
+    Route::post('/videos/merge', 'VideoController@mergeVideo')->name('videos.merge');
+    Route::resource('videos', 'VideoController');
     Route::get('/videos/{video?}/cloud/info', 'VideoController@cloudInfo')->name('video.cloud.info');
     Route::get('/videos/{video?}/cloud/transcode', 'VideoController@cloudTranscode')->name('video.cloud.transcode');
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');

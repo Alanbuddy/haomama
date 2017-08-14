@@ -389,13 +389,14 @@ class VideoController extends Controller
 //        TODO  这个功能只能线上环境测试
         $response = json_decode($request->getContent());
         $status = $response->data->status;
-        if ($status == 2) {
+        if ($status == 0) {
             $fileId = $response->data->fileId;
             $video = Video::where('cloud_file_id', $fileId)->first();
             $video->status = "ok";
             $video->save();
             return 2;
         }
+        Log::info($response);
         return 'error';
     }
 
