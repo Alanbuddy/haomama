@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class TecentVodUpload implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels,ErrorTrait;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, ErrorTrait;
 
 
     protected $file;
@@ -43,10 +43,11 @@ class TecentVodUpload implements ShouldQueue
         list($vod, $ret) = $videoController->callVodUploadApi($this->file->path);
         if ($ret == 0) {
             $this->file->cloud_file_id = $vod->getFileId();
-            list($ret2, $response) = $videoController->callCloudTranscodeApi($vod->getFileId());
-            Log::info(__FILE__ . "\n转码结果：" . $ret2);
-            Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             $this->file->video_status = 'transcoding';
+            list($ret2, $response) = $videoController->callCloudTranscodeApi($vod->getFileId());//转码API
+            Log::info(__FILE__ . "\n转码结果：" . $ret2);
+            $this->file->video_status = $ret2 == 0 ? 'ok' : 'transcoding';
+            Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             $this->file->size = filesize($this->file->path);
             Log::info($this->file->id);
             $this->file->save();
@@ -63,6 +64,6 @@ class TecentVodUpload implements ShouldQueue
     public function failed(Exception $e)
     {
         // 给用户发送失败通知，等等...
-        $this->logError('vod.upload','上传任务失败'.$e->getMessage(),$this->file,json_encode($e));
+        $this->logError('vod.upload', '上传任务失败' . $e->getMessage(), $this->file, json_encode($e));
     }
 }
