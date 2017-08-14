@@ -38,11 +38,11 @@
     .tabbable
       %ul.nav.nav-tabs
         %li.active
-          %a.f16.font-color1#course-desc{"data-toggle" => "tab", :href => "#tab1"} 课程详情
+          %a.f16.font-color1#course-desc 课程详情
         %li
-          %a.f16.font-color1#register-message{"data-toggle" => "tab", :href => "#tab2"} 报名信息
+          %a.f16.font-color1#register-message 报名信息
         %li
-          %a.f16.font-color1#course-comment{"data-toggle" => "tab", :href => "#tab3"} 课程评论
+          %a.f16.font-color1#course-comment 课程评论
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div.font-color3.clearfix.f14
@@ -142,83 +142,6 @@
                 - if ($course->titles)
                   - foreach(json_decode($course->titles) as $title)
                     %p.title-desc= $title
-              
-        #tab2.tab-pane
-          .desc-div
-            // - if @courses[:data].length == 0
-            //   .undiscover.f14
-            //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-            // - else
-            .table-box
-              %table.table.table-hover.table-height.f14
-                %thead.th-bg.font-color2
-                  %tr
-                    %th 微信ID
-                    %th 微信名
-                    %th 手机号
-                    %th 购买时间
-                    %th 价格
-                    %th 报名状态
-                    
-                %tbody.font-color3
-                  %tr
-                    %td dsagfagafg012
-                    %td 线上视频
-                    %td 132446235654
-                    %td 2017/06/12 22:12:08
-                    %td 80
-                    // %td 未付款
-                    %td.font-color-brown 已付款
-            .tag2-foot.clearfix
-              %span.num-div.font-color3.f16
-                %span 总购买人数:
-                %span.mr30 123
-                %span 总付款人数:
-                %span 70
-
-              %span.select-page.tag2-page
-                %span.totalitems 共2页，总计18条
-                %span.choice-page
-                  %ul.pagination.pagination-sm
-                    %li
-                      %a{href: "#"} «
-                    %li
-                      %a{href: "#"} 1
-                    %li
-                      %a{href: "#"} »
-        #tab3.tab-pane
-          .desc-div
-            // - if @reviews[:data].blank?
-            //   .undiscover
-            //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-            // - else
-            .user-review-box
-              .user-search-box.f14.bg2
-                %input.input-style#search-input.font-color3{:type => "text", :placeholder => "输入关键词", value: ""}
-                .search#search-btn
-              .review-items
-                .img-div
-                  %img.avatar-icon{src: "icon/admin/avatar-icon.png"}
-                .review-div
-                  .head-div.clearfix
-                    %p.user-name.fl.font-color2 夏天的雪
-                    
-                    .btn.fr.finish-normal.font-color1.show-review{type: "button"} 显示评论
-                    
-                    // .btn.fr.edit-normal.font-color1.hide-review{type: "button"} 隐藏评论
-                  %p.reviews.font-color3.f14 我很喜欢这门课，老师讲的很nice
-                  .time-div.font-color4
-                    %span.review-date 2017/05/23 13:30
-            .select-page.mt20
-              %span.totalitems 共2页，总计18条
-              %span.choice-page
-                %ul.pagination.pagination-sm
-                  %li
-                    %a{href: "#"} «
-                  %li
-                    %a{href: "#"} 1
-                  %li
-                    %a{href: "#"} »
 
 #lessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
   .modal-dialog

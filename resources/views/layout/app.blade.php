@@ -161,7 +161,7 @@
     }
   })
 
-  window.onbeforeunload = function(event){   
+  window.onbeforeunload = function(){   
     $.ajax({
       type: 'post',
       url: pv_behavior,

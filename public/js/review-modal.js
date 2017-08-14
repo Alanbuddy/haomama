@@ -184,11 +184,11 @@ $(document).ready(function($) {
       $("#profileModal").modal("hide");
       $('.add-baby-div').hide();
   });
+
   //需要记录观看视频时间点
-  $("#test-btn").click(function(){
+  // $("#test-btn").click(function(){
 
-
-  });
+  // });
 
   $(".online-course .item:eq(0)").find(".free").show();
 
