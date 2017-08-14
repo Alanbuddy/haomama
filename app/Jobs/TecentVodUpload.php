@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Http\Controllers\VideoController;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -56,5 +57,10 @@ class TecentVodUpload implements ShouldQueue
             $this->file->save();
         }
         Log::info(__FILE__ . ':' . __LINE__ . '上传任务' . ($ret == 0 ? '成功' : '失败'));
+    }
+
+    public function failed(Exception $e)
+    {
+        // 给用户发送失败通知，等等...
     }
 }
