@@ -387,9 +387,12 @@ class VideoController extends Controller
     public function cloudCallback(Request $request)
     {
 //        TODO  这个功能只能线上环境测试
+        Log::info(__FILE__.__LINE__.'接收点播服务端回调. $request->getContent():');
         $response = json_decode($request->getContent());
+        Log::info($response);
         $status = $response->data->status;
-        if ($status == 2) {
+        $type = $response->data->eventType;
+        if ($status == 0&&$type=='TranscodeComplete') {
             $fileId = $response->data->fileId;
             $video = Video::where('cloud_file_id', $fileId)->first();
             $video->status = "ok";
