@@ -130,11 +130,11 @@ $(document).ready(function(){
   uploader_img.on( 'fileQueued', function( file ) {
     $list_img.append( '<div id="' + file.id + '" class="pre_img">' +
         '<p class="img_wrap"><img></p>' +
-        '<h4 class="info_img">' + file.name + '</h4>' +
+        '<span class="info_img">' + file.name + '</span>' +
         '<p class="state_img">等待上传...</p>' +
         '<img src="icon/admin/rubbish.png" class="delete_img">' +
         '<span class="data-id"></span>' +
-        '<input class="img_time" placeholder="请输入时间">' +
+        '<input class="img_time" placeholder="请输入时间" type="text">' +
     '</div>' );
     $img = $("#"+ file.id).find('.img_wrap').find("img");
 
@@ -222,6 +222,7 @@ $(document).ready(function(){
     $(".pre_img").each(function(){
       var id = $(this).find('.data-id').text();
       var time = parseInt($(this).find('.img_time').val());
+      console.log(time);
       img_item = {
         file: id,
         time: time
@@ -275,4 +276,6 @@ $(document).ready(function(){
     });
   });
 
+  $(".img_time").mask("99:99:99");
+ 
 });

@@ -50,14 +50,14 @@
                 .btns
                   #picker_img 选择文件
                   %button#imgBtn.btn.btn-default 开始上传
-            #imglist.uploader-list.img-div.margin20  
-
+            #imglist.uploader-list.img-div.margin20 
 @endsection
 
 @section('script')
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>
+<script src="js/plugin/jquery.maskedinput.js"></script>
 
 <script src="js/fileupload_audio.js"></script>
 

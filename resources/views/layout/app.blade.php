@@ -184,8 +184,8 @@
     }
   })
 
+  //访问结束不能监听到
   $(document).on('popstate', function(){
-    alert("aaa");
     $.ajax({
       type: 'post',
       url: pv_behavior,
