@@ -17,6 +17,7 @@
   window.student = "#{route('admin.courses.students',$course->id)}"
   window.comment = "#{route('admin.courses.comments',$course->id)}"
   window.review = "#{route('comments.update', -1)}"
+  window.comment_search = "#{route('admin.courses.comments.search',$course)}"
 
 @endsection
 @section('search-input')

@@ -342,14 +342,13 @@ ol.example li.placeholder:before {
 }
 .avatar-icon {
   border-radius: 4px;
-  width: 100%;
-  max-width: 60px;
-  height: 4.2588em;
-  object-fit: contain;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
 }
 .img-div {
-  width: 6%;
-  height: 4.2588em;
+  width: 60px;
+  height: 60px;
 }
 .review-div {
   width: 92%;
