@@ -161,7 +161,7 @@
     }
   })
 
-  window.onbeforeunload = function(){   
+  window.on('unload', function(){
     $.ajax({
       type: 'post',
       url: pv_behavior,
@@ -171,7 +171,13 @@
         data: pv_data
       }
     })
-  }
+  })  
+    
+
+  // window.addEventListener("popstate", function(e) {  
+  //   alert("我监听到了浏览器的返回按钮事件啦");//根据自己的需求实现自己的功能  
+  // }, false)
+  
   // if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|SymbianOS)/i))) {
   //     if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
   //         node.setAttribute('href', app_url);
