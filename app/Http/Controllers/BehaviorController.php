@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 class BehaviorController extends Controller
@@ -191,6 +192,7 @@ class BehaviorController extends Controller
     public function storePV(Request $request, $item)
     {
         $data = json_decode($request->data);
+        Log::info($request->all());
         $url = $data->url; //$uri = '/courses/1?a=b';
         $isEnd = explode('.', $request->type)[1] == 'end';
         if ($isEnd) {
