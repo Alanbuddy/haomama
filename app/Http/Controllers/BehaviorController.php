@@ -11,6 +11,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BehaviorController extends Controller
 {
@@ -86,6 +87,8 @@ class BehaviorController extends Controller
             else $item->type = 'pv';
         }
 
+        Log::info('888888888');
+        Log::info('{$valid}');
         if ($valid)
             auth()->user()->behaviors()->save($item);
 
@@ -181,7 +184,11 @@ class BehaviorController extends Controller
             $cookies, $files, $server, null
         );
         $peudoRequest = Request::createFromBase($symfonyRequest);
-        $this->router->dispatchToRoute($peudoRequest);
+        try {
+            $this->router->dispatchToRoute($peudoRequest);
+        } catch (NotFoundHttpException $e) {
+            Log::error(__FILE__ . __LINE__ . "\n" . $e->getMessage());
+        }
         return $peudoRequest;
     }
 
@@ -209,6 +216,8 @@ class BehaviorController extends Controller
         } else {
             $peudoRequest = $this->peudoRequest($url);
             $route = $peudoRequest->route();
+            //如果url参数错误，忽略这次请求 //throw new \Exception("uri {$url} does not exists");
+            if (empty($route)) return;
             $page = '';
             switch ($route->getName()) {
                 case 'index':
