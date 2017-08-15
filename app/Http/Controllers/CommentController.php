@@ -159,4 +159,15 @@ class CommentController extends Controller
         }
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }
+
+    public function search(Request $request,Course $course)
+    {
+        if ($request->has('key')) {
+            $items = Comment::where('content', 'like', '%' . $request->key . '')
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+            return view('admin.course.comment', compact('items', 'key','course'));
+        }
+        return redirect()->route('admin.courses.comments',$course);
+    }
 }
