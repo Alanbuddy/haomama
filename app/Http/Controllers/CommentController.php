@@ -163,9 +163,10 @@ class CommentController extends Controller
     public function search(Request $request,Course $course)
     {
         if ($request->has('key')) {
-            $items = Comment::where('content', 'like', '%' . $request->key . '')
+            $items = Comment::where('content', 'like', '%' . $request->key . '%')
                 ->orderBy('id', 'desc')
                 ->paginate(10);
+            $items->withPath(route('admin.courses.comments.search',$course));
             return view('admin.course.comment', compact('items', 'key','course'));
         }
         return redirect()->route('admin.courses.comments',$course);
