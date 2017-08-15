@@ -166,7 +166,7 @@ class CommentController extends Controller
             $items = Comment::where('content', 'like', '%' . $request->key . '%')
                 ->orderBy('id', 'desc')
                 ->paginate(10);
-            $items->withPath(route('admin.courses.comments.search',$course));
+            $items->withPath(route('admin.courses.comments.search',$course).'?key='.$request->key);
             return view('admin.course.comment', compact('items', 'key','course'));
         }
         return redirect()->route('admin.courses.comments',$course);

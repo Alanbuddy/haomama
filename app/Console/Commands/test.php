@@ -71,7 +71,45 @@ class test extends Command
 //        $this->info(md5(uniqid(rand(), true)));
 
 //        $this->refundOrder();
-        $this->refundAllOrder();
+//        $this->refundAllOrder();
+        $url='http://baby.fumubidu.com.cn/haomama/';
+        $url='http://baby.com/videos/cloud-callback';
+        $ch = curl_init($url);
+        $MethodLine = "GET {$url} HTTP/1/1";
+
+        $header = array(
+            $MethodLine,
+//            "HOST:{'host']}",
+            "Content-Length:" .'' ,
+            "Content-type:application/octet-stream",
+            "Accept:*/*",
+            "User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36",
+
+        );
+
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+
+        // 证书
+        // curl_setopt($ch,CURLOPT_CAINFO,"ca.crt");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+
+        $response = curl_exec($ch);
+        if (!$response) {
+            $error = curl_errno($ch);
+            $response= "curl出错，错误码:$error";
+        }
+        dd($response);
+
+        curl_close($ch);
+
+        $result = json_decode($response, true);
+        dd($ch,$result);
     }
 
     public function refundOrder()
