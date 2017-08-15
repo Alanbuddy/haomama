@@ -141,8 +141,31 @@
   }
   @endif
 
+  Date.prototype.Format = function(format){ 
+    var o = { 
+      "M+" : this.getMonth()+1, //month 
+      "d+" : this.getDate(), //day 
+      "h+" : this.getHours(), //hour 
+      "m+" : this.getMinutes(), //minute 
+      "s+" : this.getSeconds(), //second 
+      "q+" : Math.floor((this.getMonth()+3)/3), //quarter 
+      "S" : this.getMilliseconds() //millisecond 
+    }
+    if(/(y+)/.test(format)) { 
+      format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+    }
+    for(var k in o) { 
+      if(new RegExp("("+ k +")").test(format)) { 
+        format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
+      } 
+    } 
+    return format; 
+  }  
   var cur_url =location.pathname;
-  var cur_time = new Date();
+  if(cur_url.indexOf("haomama")){
+    cur_url = cur_url.replace(/\/haomama/, "");
+  }
+  var cur_time = new Date().Format("yyyy-MM-dd hh:mm:ss");
   var pv_behavior = "{{ route('behaviors.store')}}";
   var pv_token = "{{ csrf_token() }}";
   var pv_begin = "pv.begin";
@@ -161,24 +184,19 @@
     }
   })
 
-  window.on('visibilitychange', function(){
-    if(document.visibilityState == 'hidden'){
-      $.ajax({
-        type: 'post',
-        url: pv_behavior,
-        data: {
-          _token: pv_token,
-          type: pv_end,
-          data: pv_data
-        }
-      })
-    }
+  $(document).on('popstate', function(){
+    alert("aaa");
+    $.ajax({
+      type: 'post',
+      url: pv_behavior,
+      data: {
+        _token: pv_token,
+        type: pv_end,
+        data: pv_data
+      }
+    })
   })  
     
-
-  // window.addEventListener("popstate", function(e) {  
-  //   alert("我监听到了浏览器的返回按钮事件啦");//根据自己的需求实现自己的功能  
-  // }, false)
 
   // if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|SymbianOS)/i))) {
   //     if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
