@@ -73,6 +73,7 @@
 <script src= "http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src = "js/mobile-notification.js"></script>
 <script src = "js/plugin/dropload.min.js"></script>
+<script src = "js/plugin/jquery.mobile-1.4.5.js"></script>
 
 <script>
   wx.config({
@@ -186,6 +187,7 @@
 
   //访问结束不能监听到
   $(document).on('pagehide', function(){
+    alert("aaa");
     $.ajax({
       type: 'post',
       url: pv_behavior,
