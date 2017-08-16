@@ -63,6 +63,6 @@
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/admin_client_show.js')}}"></script>
+// <script src= "{{mix('/js/admin_client_show.js')}}"></script>
 
 @endsection

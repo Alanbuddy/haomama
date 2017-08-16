@@ -135,7 +135,7 @@ $(document).ready(function(){
   uploader_img.on( 'fileQueued', function( file ) {
     $list_img.append( '<div id="' + file.id + '" class="pre_img">' +
         '<p class="img_wrap"><img></p>' +
-        '<h4 class="info_img">' + file.name + '</h4>' +
+        '<span class="info_img">' + file.name + '</span>' +
         '<p class="state_img">等待上传...</p>' +
         '<img src="icon/admin/rubbish.png" class="delete_img">' +
         '<span class="data-id"></span>' +
@@ -265,7 +265,8 @@ $(document).ready(function(){
     var old_img_item = {};
     $(".pre_img").each(function(){
       var id = $(this).find('.data-id').text();
-      var time = parseInt($(this).find('.img_time').val().trim());
+      var time = $(this).find('.img_time').val().trim().split(":");
+      time = parseInt(time[0]*3600) + parseInt(time[1] * 60) + parseInt(time[2]);
       img_item = {
         file: id,
         time: time
@@ -274,7 +275,8 @@ $(document).ready(function(){
     });
     $(".old_pre_img:visible").each(function(){
       var id = $(this).find('.old-data-id').text();
-      var time = parseInt($(this).find('.old_img_time').val());
+      var time = $(this).find('.old_img_time').val().trim().split(":");
+      time = parseInt(time[0]*3600) + parseInt(time[1] * 60) + parseInt(time[2]);
       old_img_item = {
         file: id,
         time: time

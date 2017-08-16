@@ -57,7 +57,6 @@
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>
-<script src="js/plugin/jquery.maskedinput.js"></script>
 
 <script src="js/fileupload_audio.js"></script>
 

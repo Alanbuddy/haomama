@@ -10333,7 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  return $(".details").click(function() {
+  $(".details").click(function() {
     var row, span, status;
     span = $(this).find("span");
     row = $(this).closest("tr");
@@ -10344,6 +10344,12 @@ return jQuery;
     } else {
       return span.removeClass("triangle-up").addClass("triangle-down");
     }
+  });
+  $("#pay").click(function() {
+    return location.href = window.client_purchase;
+  });
+  return $("#desc").click(function() {
+    return location.href = window.client_desc;
   });
 });
 
