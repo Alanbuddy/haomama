@@ -383,7 +383,7 @@ class VideoController extends Controller
     }
 
 //接收点播服务端回调 假定回调URL为https://www.example.com/path/to/your/service。
-
+//http://baby.fumubidu.com.cn/haomama/videos/cloud-callback
     public function cloudCallback(Request $request)
     {
 //        TODO  这个功能只能线上环境测试
