@@ -46,7 +46,6 @@ class TecentVodUpload implements ShouldQueue
             $this->file->video_status = 'transcoding';
             list($ret2, $response) = $videoController->callCloudTranscodeApi($vod->getFileId());//转码API
             Log::info(__FILE__ .__LINE__. "\n转码结果：" . $ret2);
-            $this->file->video_status = $ret2 == 0 ? 'ok' : 'transcoding';
             Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             $this->file->size = filesize($this->file->path);
             Log::info($this->file->id);

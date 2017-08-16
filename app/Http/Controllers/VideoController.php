@@ -97,8 +97,8 @@ class VideoController extends Controller
             auth()->user()->videos()->save($item);
 
             list($ret, $response) = $this->callCloudTranscodeApi($vod->getFileId());
+            Log::info(__FILE__ . "\n" . json_encode($response));
             Log::info(__FILE__ . "\n转码结果：" . $ret);
-            Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             if ($ret == 0) {
                 $item->video_status = 'transcoding';
                 $item->save();
@@ -388,17 +388,18 @@ class VideoController extends Controller
     {
 //        TODO  这个功能只能线上环境测试
         Log::info(__FILE__.__LINE__.'接收点播服务端回调. $request->getContent():');
-//        $response = json_decode($request->getContent());
-//        Log::info($response);
-//        $status = $response->data->status;
-//        $type = $response->data->eventType;
-//        if ($status == 0&&$type=='TranscodeComplete') {
-//            $fileId = $response->data->fileId;
-//            $video = Video::where('cloud_file_id', $fileId)->first();
-//            $video->status = "ok";
-//            $video->save();
-//            return 2;
-//        }
+        $response = json_decode($request->getContent());
+        Log::info($response);
+        $status = $response->data->status;
+        $type = $response->data->eventType;
+        if ($status == 0&&$type=='TranscodeComplete') {
+            $fileId = $response->data->fileId;
+            $video = Video::where('cloud_file_id', $fileId)->first();
+            $video->status = "ok";
+            $video->save();
+            Log::info('TransCode Completed!');
+            return 2;
+        }
         return 'success';
     }
 
