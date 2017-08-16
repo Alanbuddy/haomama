@@ -10345,9 +10345,6 @@ return jQuery;
       return span.removeClass("triangle-up").addClass("triangle-down");
     }
   });
-  $("#pay").click(function() {
-    return location.href = window.client_purchase;
-  });
   return $("#desc").click(function() {
     return location.href = window.client_desc;
   });
