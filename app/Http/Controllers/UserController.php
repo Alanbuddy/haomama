@@ -390,13 +390,15 @@ class UserController extends Controller
     }
 
     //后台：用户线下课程出勤记录
-    //http://baby.com/users/1/courses/24/attendance
-    //返回值
+    //路由：　route('admin.user.course.attendance',compact('user','course')
+    //示例URL：http://baby.com/users/1/courses/24/attendance
+    //返回值示例
     //array:3 [▼
     //0 => true
     //1 => false
     //2 => false
     //]
+    //true表示上过课， false表示没有上课 ０，１，２表示课时顺序
     public function attendance(Request $request, User $user, Course $course)
     {
         $lessons = $course->titles ? json_decode($course->titles) : [];
@@ -409,6 +411,6 @@ class UserController extends Controller
                 $lessons[$k] = $hasAttended ? true : false;
             }
         }
-        dd($lessons);
+        return $lessons;
     }
 }
