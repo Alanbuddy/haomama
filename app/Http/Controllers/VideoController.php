@@ -97,8 +97,8 @@ class VideoController extends Controller
             auth()->user()->videos()->save($item);
 
             list($ret, $response) = $this->callCloudTranscodeApi($vod->getFileId());
+            Log::info(__FILE__ . "\n" . json_encode($response));
             Log::info(__FILE__ . "\n转码结果：" . $ret);
-            Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             if ($ret == 0) {
                 $item->video_status = 'transcoding';
                 $item->save();
@@ -134,7 +134,7 @@ class VideoController extends Controller
         ]);
         try {
             $video = Video::find($request->video_id);
-            $ret = $this->merge($request,$video->description);
+            $ret = $this->merge($request, $video->description);
             if ($ret['success']) {
                 $video->path = $ret['path'];
                 $video->save();
@@ -143,7 +143,7 @@ class VideoController extends Controller
                 return ['success' => true, 'data' => $file];
             }
         } catch (\Exception $e) {
-            return ['success' => false, 'message' => $e->getMessage(),'e'=>$e];
+            return ['success' => false, 'message' => $e->getMessage(), 'e' => $e];
         }
     }
 
@@ -219,8 +219,8 @@ class VideoController extends Controller
             $video->caption = json_encode($ret);
             $video->save();
         }
-        if($request->ajax()){
-            return ['success'=>true];
+        if ($request->ajax()) {
+            return ['success' => true];
         }
         return redirect()->route('videos.edit', $video);
     }
@@ -383,22 +383,22 @@ class VideoController extends Controller
     }
 
 //接收点播服务端回调 假定回调URL为https://www.example.com/path/to/your/service。
-
+//http://baby.fumubidu.com.cn/haomama/videos/cloud-callback
     public function cloudCallback(Request $request)
     {
 //        TODO  这个功能只能线上环境测试
-        Log::info(__FILE__.__LINE__.'接收点播服务端回调. $request->getContent():');
-//        $response = json_decode($request->getContent());
-//        Log::info($response);
-//        $status = $response->data->status;
-//        $type = $response->data->eventType;
-//        if ($status == 0&&$type=='TranscodeComplete') {
-//            $fileId = $response->data->fileId;
-//            $video = Video::where('cloud_file_id', $fileId)->first();
-//            $video->status = "ok";
-//            $video->save();
-//            return 2;
-//        }
+        Log::info(__FILE__ . __LINE__ . "接收点播服务端回调. $request->getContent():\n");
+        Log::info($request->getContent());
+        $response = json_decode($request->getContent());
+        $status = $response->data->status;
+        $eventType = $response->eventType;
+        if ($status == 0 && $eventType == 'TranscodeComplete') {
+            $fileId = $response->data->fileId;
+            $video = Video::where('cloud_file_id', $fileId)->first();
+            $video->video_status = "ok";
+            $video->save();
+            Log::info(__FILE__ . __LINE__ . 'TransCode Completed!');
+        }
         return 'success';
     }
 
@@ -417,6 +417,5 @@ class VideoController extends Controller
         return compact('dragBegin', 'dragEnd');
 //        dd($items);
     }
-
 
 }

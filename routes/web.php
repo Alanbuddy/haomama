@@ -17,7 +17,6 @@
 //});
 use Illuminate\Support\Facades\Route;
 
-Route::any('/videos/cloud-callback', 'VideoController@cloudCallback')->name('videos.upload.callback');
 Route::group([
     'middleware' => ['web']
 ], function () {
