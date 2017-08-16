@@ -4,6 +4,7 @@
 :javascript
   window.client_desc="#{route('admin.user.log',$user->id)}"
   window.client_purchase="#{route('admin.user.order',$user->id)}"
+  window.attendence = "#{route('admin.user.course.attendance',compact('user','course'))}"
 
 @endsection
 @section('search-input')
@@ -23,7 +24,7 @@
       .tab-content.bg3
         #tab2.tab-pane.active
           .desc-div
-            - if(count($items) == 0) 
+            - if(count($items) != 0) 
               .undiscover.f14
                 %img.undiscover-icon{src: "icon/admin/undiscover.png"}
             - else
@@ -73,7 +74,7 @@
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 关注时间:
-                  %span.mr30 2017/06/26 22:12:06
+                  %span.mr30= $user->created_at
 
                 %span.select-page.tag2-page
                   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
