@@ -134,7 +134,7 @@ class VideoController extends Controller
         ]);
         try {
             $video = Video::find($request->video_id);
-            $ret = $this->merge($request,$video->description);
+            $ret = $this->merge($request, $video->description);
             if ($ret['success']) {
                 $video->path = $ret['path'];
                 $video->save();
@@ -143,7 +143,7 @@ class VideoController extends Controller
                 return ['success' => true, 'data' => $file];
             }
         } catch (\Exception $e) {
-            return ['success' => false, 'message' => $e->getMessage(),'e'=>$e];
+            return ['success' => false, 'message' => $e->getMessage(), 'e' => $e];
         }
     }
 
@@ -219,8 +219,8 @@ class VideoController extends Controller
             $video->caption = json_encode($ret);
             $video->save();
         }
-        if($request->ajax()){
-            return ['success'=>true];
+        if ($request->ajax()) {
+            return ['success' => true];
         }
         return redirect()->route('videos.edit', $video);
     }
@@ -387,18 +387,17 @@ class VideoController extends Controller
     public function cloudCallback(Request $request)
     {
 //        TODO  这个功能只能线上环境测试
-        Log::info(__FILE__.__LINE__.'接收点播服务端回调. $request->getContent():');
+        Log::info(__FILE__ . __LINE__ . "接收点播服务端回调. $request->getContent():\n");
+        Log::info($request->getContent());
         $response = json_decode($request->getContent());
-        Log::info($response);
         $status = $response->data->status;
-        $type = $response->data->eventType;
-        if ($status == 0&&$type=='TranscodeComplete') {
+        $eventType = $response->eventType;
+        if ($status == 0 && $eventType == 'TranscodeComplete') {
             $fileId = $response->data->fileId;
             $video = Video::where('cloud_file_id', $fileId)->first();
-            $video->status = "ok";
+            $video->video_status = "ok";
             $video->save();
-            Log::info('TransCode Completed!');
-            return 2;
+            Log::info(__FILE__ . __LINE__ . 'TransCode Completed!');
         }
         return 'success';
     }
@@ -418,6 +417,5 @@ class VideoController extends Controller
         return compact('dragBegin', 'dragEnd');
 //        dd($items);
     }
-
 
 }

@@ -44,11 +44,11 @@ class TecentVodUpload implements ShouldQueue
         if ($ret == 0) {
             $this->file->cloud_file_id = $vod->getFileId();
             $this->file->video_status = 'transcoding';
+            Log::info(__FILE__ .__LINE__.'$this->file:'.json_encode($this->file));
             list($ret2, $response) = $videoController->callCloudTranscodeApi($vod->getFileId());//转码API
             Log::info(__FILE__ .__LINE__. "\n转码结果：" . $ret2);
             Log::info(__FILE__ . "\n" . json_encode($response) . __FILE__);
             $this->file->size = filesize($this->file->path);
-            Log::info($this->file->id);
             $this->file->save();
             Storage::delete(substr($this->file->path, strpos($this->file->path, 'video')));
             Log::info('has deleted temp video file!');
