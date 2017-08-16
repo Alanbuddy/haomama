@@ -176,6 +176,7 @@ class LessonController extends Controller
             $audio = $audio ?: new File();//Depress error reporting in case of failure to upload audio.this fake audio won't play after this processing,
             $data = array_merge($data, compact('pictures', 'audio'));
         }
+        // dd($pictures);
         return view('video' == $type
             ? 'admin.lesson.show'
             : 'admin.lesson.audio_show', $data);

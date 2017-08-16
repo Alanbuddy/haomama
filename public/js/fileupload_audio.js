@@ -123,6 +123,14 @@ $(document).ready(function(){
     multiple: true,
     disableGlobalDnd: true,
     duplicate: true,
+    thumb: {
+      allowMagnify: false,
+      quality: 70,
+    },
+    compress: {
+      allowMagnify: false,
+      quality: 90,
+    }
     // chunked: true,     //是否要分片处理大文件上传
     // chunkSize: 0.5*1024*1024    //分片上传，每片1M，默认是5M
   });
@@ -144,7 +152,7 @@ $(document).ready(function(){
         return;
       }
       $img.attr('src', src);
-    }, 100, 100);
+    }, 200, 200);
   });
 
   uploader_img.options.formData = {
@@ -221,8 +229,8 @@ $(document).ready(function(){
     var img_item = {};
     $(".pre_img").each(function(){
       var id = $(this).find('.data-id').text();
-      var time = parseInt($(this).find('.img_time').val());
-      console.log(time);
+      var time = $(this).find('.img_time').val().trim().split(":");
+      time = parseInt(time[0]*3600) + parseInt(time[1] * 60) + parseInt(time[2]);
       img_item = {
         file: id,
         time: time
@@ -275,7 +283,5 @@ $(document).ready(function(){
       }
     });
   });
-
-  $(".img_time").mask("99:99:99");
  
 });

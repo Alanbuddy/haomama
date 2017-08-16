@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/mobile-notification.css">
     <link rel="stylesheet" href="css/plugin/dropload.css">
-    
+
     @yield('css')
 </head>
 <body>
@@ -73,7 +73,6 @@
 <script src= "http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src = "js/mobile-notification.js"></script>
 <script src = "js/plugin/dropload.min.js"></script>
-<script src = "js/plugin/jquery.mobile-1.4.5.js"></script>
 
 <script>
   wx.config({

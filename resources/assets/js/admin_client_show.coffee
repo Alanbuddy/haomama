@@ -8,3 +8,6 @@ $ ->
       span.removeClass("triangle-down").addClass("triangle-up")
     else
       span.removeClass("triangle-up").addClass("triangle-down")  
+
+  $("#desc").click ->
+    location.href = window.client_desc

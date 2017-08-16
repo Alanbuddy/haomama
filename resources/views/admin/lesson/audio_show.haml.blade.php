@@ -68,19 +68,19 @@
               %span.unedit-box.unedit-img-box
                 - foreach($pictures as $picture)
                   .img-item
+                    %p.img-name= $picture->file_name
                     %img.show-img{src: strpos($picture->path, '/')==0 ? substr($picture->path,1) : $picture->path}
-                    // %p.img-index 01  //播放顺序，看需求需要添加吗
-                    %p.img-time= $picture->pivot->no
+                    %p.img-time= gmstrftime('%H:%M:%S',$picture->pivot->no)
 
               #uploader_img.wu-example.edit-box
                 - foreach($pictures as $picture)
                   .old_pre_img
                     %p.img_wrap
                       %img{:src => strpos($picture->path, '/')==0 ? substr($picture->path,1) : $picture->path}
-                    %h4.info_img= $picture->file_name
                     %img.old_delete_img{:src => "icon/admin/rubbish.png"}
                     %span.old-data-id= $picture->id
-                    %input.old_img_time{:placeholder => "请输入时间", value: $picture->pivot->no}
+                    %span.info_img= $picture->file_name
+                    %input.old_img_time{:placeholder => "请输入时间", value: gmstrftime('%H:%M:%S',$picture->pivot->no)}
                 .btns
                   #picker_img 选择文件
                   %button#imgBtn.btn.btn-default 开始上传
