@@ -4,7 +4,7 @@
 :javascript
   window.client_desc="#{route('admin.user.log',$user->id)}"
   window.client_purchase="#{route('admin.user.order',$user->id)}"
-  window.attendence = "#{route('admin.user.course.attendance',compact('user','course'))}"
+  window.attendence = "#{route('admin.user.course.attendance',['user'=>$user->id,'course'=>-1])}"
 
 @endsection
 @section('search-input')
@@ -41,7 +41,7 @@
                       %th 操&nbsp作
                   %tbody.font-color3
                     - foreach($items as $item)
-                      %tr
+                      %tr{data-id => $item->course->id}
                         %td= $item->course->name
                         %td= $item->course->type
                         %td= $item->course->category ? $item->course->category->name : "无"
@@ -63,14 +63,9 @@
                           %td{colspan: "7"}
                             .course-status
                               %span.item-status 上课状态：
-                              // - p.course_inst.length.times do |i|
-                              //   - if p.signin_info[i].present?
-                              %span.join-square
-                                // - else
-                                //   - if p.course_inst.is_class_pass?(i)
-                              %span.miss-square
-                                // - else
-                              %span.square
+                              - foreach($item->course->length)
+                                %span.square
+                            
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 关注时间:
