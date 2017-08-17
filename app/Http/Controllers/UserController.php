@@ -7,11 +7,14 @@ use App\Models\Course;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+    use CourseTitleTrait;
 
     function __construct()
     {
@@ -42,7 +45,7 @@ class UserController extends Controller
             $role = Role::where('name', $type)->first();
             $items = in_array($type, $roles)
                 ? $role->users()
-                    ->orderBy('id','desc')
+                    ->orderBy('id', 'desc')
                     ->paginate(10)
                 : [];
         } else {
@@ -401,16 +404,26 @@ class UserController extends Controller
     //true表示上过课， false表示没有上课 ０，１，２表示课时顺序
     public function attendance(Request $request, User $user, Course $course)
     {
-        $lessons = $course->titles ? json_decode($course->titles) : [];
+        $lessons = $course->lessons()
+            ->orderBy('no')
+            ->get();
+        $titles = $course->titles ? json_decode($course->titles) : [];
+        $lessons = $this->processTitles($titles, $lessons);
+
         $attendances = $user->attendances()
             ->where('course_id', $course->id)
             ->get();
         if ($lessons && $attendances->count()) {
             foreach ($lessons as $k => $v) {
-                $hasAttended = $attendances->where('lesson_index', $k + 1)->count();
-                $lessons[$k] = $hasAttended ? true : false;
+                if (empty($v->id) || $v->begin > Carbon::now()) {
+                    $v->hasAttended = null;
+                } else {
+                    $hasAttended = $attendances->where('lesson_index', $k + 1)->count();
+                    $v->hasAttended = (bool)$hasAttended;
+                }
             }
         }
+//        dd($lessons, $course);
         return $lessons;
     }
 }
