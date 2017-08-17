@@ -822,7 +822,9 @@ class CourseController extends Controller
             $items->order = $order;
         }
         $items->withPath(route('admin.courses.students', $course));
-        return view('admin.course.student ', compact('items', 'course'));
+        return view($course->type=='online'
+            ?'admin.course.student '
+            :'admin.course.offline-register', compact('items', 'course'));
     }
 
     //课程评论
