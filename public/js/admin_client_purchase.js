@@ -18,7 +18,6 @@ $(document).ready(function(){
         type: 'get',
         url: window.attendence.replace(/-1/, cid),
         success: function(data){
-          console.log(data);
           for(var i=0;i<data.length;i++){
             node = render(data[i]);
             node.appendTo(status.find(".course-status"));
@@ -30,7 +29,6 @@ $(document).ready(function(){
 
   function render(item){
     var tem = $(`<span class="square"></span>`);
-    console.log(item.hasAttended==false);
     if (item.hasAttended === true){
       tem.addClass("join-square");
     }
