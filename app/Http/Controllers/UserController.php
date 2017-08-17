@@ -415,7 +415,8 @@ class UserController extends Controller
             ->get();
         if ($lessons && $attendances->count()) {
             foreach ($lessons as $k => $v) {
-                if (empty($v->id) || $v->begin > Carbon::now()) {
+                //课时未上架或者未开课
+                if (empty($v->id) || $v->begin > Carbon::now()->toDateTimeString()) {
                     $v->hasAttended = null;
                 } else {
                     $hasAttended = $attendances->where('lesson_index', $k + 1)->count();
