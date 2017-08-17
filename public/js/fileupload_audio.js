@@ -230,7 +230,16 @@ $(document).ready(function(){
     $(".pre_img").each(function(){
       var id = $(this).find('.data-id').text();
       var time = $(this).find('.img_time').val().trim().split(":");
-      time = parseInt(time[0]*3600) + parseInt(time[1] * 60) + parseInt(time[2]);
+      if(time.length == 3){
+        time = parseInt(time[0]*3600) + parseInt(time[1] * 60) + parseInt(time[2]);
+      }else if(time.length == 2){
+        time =parseInt(time[0] * 60) + parseInt(time[1]);
+      }else if(time.length == 1){
+        time =parseInt(time[0]);
+      }else{
+        showMsg("输入格式不正确", "center");
+        return false;
+      }
       img_item = {
         file: id,
         time: time
