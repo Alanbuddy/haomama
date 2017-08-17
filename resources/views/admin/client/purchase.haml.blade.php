@@ -63,8 +63,11 @@
                           %td{colspan: "7"}
                             .course-status
                               %span.item-status 上课状态：
-                              - foreach($item->course->length)
-                                %span.square
+                              // - foreach($item->course->length)
+                              %span.square
+                              %span.join-status
+                              %span.miss-status
+
                             
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16

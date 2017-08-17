@@ -11,6 +11,9 @@
     <title>
         @yield('title') 好妈妈微课
     </title>
+    <script>
+      document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+    </script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/mobile-notification.css">
@@ -65,7 +68,8 @@
 <div>
     @yield('foot-div')
 </div>
-<script src= "{{mix('/js/layout.js')}}"></script>
+
+{{-- <script src= "{{mix('/js/layout.js')}}"></script> --}}
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src ="js/ajax.js"></script>
@@ -75,6 +79,7 @@
 <script src = "js/plugin/dropload.min.js"></script>
 
 <script>
+
   wx.config({
       debug: false,
       appId: '{{ $signPackage["appId"]}}',
