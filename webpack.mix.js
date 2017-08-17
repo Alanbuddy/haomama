@@ -87,7 +87,6 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .js('resources/assets/js/admin-lesson-new.coffee', 'public/js')
 .js('resources/assets/js/admin_teacher_index.coffee', 'public/js')
 .js('resources/assets/js/admin_client_index.coffee', 'public/js')
-.js('resources/assets/js/admin_client_show.coffee', 'public/js')
 .js('resources/assets/js/admin-layout.coffee', 'public/js');
 
 // mix.js('resources/assets/js/app.js', 'public/js')

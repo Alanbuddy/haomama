@@ -24,7 +24,7 @@
       .tab-content.bg3
         #tab2.tab-pane.active
           .desc-div
-            - if(count($items) != 0) 
+            - if(count($items) == 0) 
               .undiscover.f14
                 %img.undiscover-icon{src: "icon/admin/undiscover.png"}
             - else
@@ -41,34 +41,29 @@
                       %th 操&nbsp作
                   %tbody.font-color3
                     - foreach($items as $item)
-                      %tr{data-id => $item->course->id}
-                        %td= $item->course->name
-                        %td= $item->course->type
-                        %td= $item->course->category ? $item->course->category->name : "无"
-                        %td= $item->created_at
-                        %td= $item->wx_total_fee
-                        - if($item->status == 'paid')
-                          %td.font-color-brown 已付款
-                        - else
-                          %td 未付款
-                        %td 
+                      - if($item->course)
+                        %tr{"data-id" => $item->course['id']}
+                          %td= $item->course->name
+                          %td= $item->course->type == "online" ? "线上" : "线下"
+                          %td= $item->course->category ? $item->course->category->name : "无"
+                          %td= $item->created_at
+                          %td= $item->wx_total_fee
                           - if($item->status == 'paid')
-                            %a.details{:href => "javascript:void(0);"} 
-                              上课情况
-                              %span.triangle-down
+                            %td.font-color-brown 已付款
                           - else
-                            .pay-fail
-                      - if($item->status == "paid")
-                        %tr.status
-                          %td{colspan: "7"}
-                            .course-status
-                              %span.item-status 上课状态：
-                              // - foreach($item->course->length)
-                              %span.square
-                              %span.join-status
-                              %span.miss-status
-
-                            
+                            %td 未付款
+                          %td 
+                            - if($item->status == 'paid')
+                              %a.details{:href => "javascript:void(0);"} 
+                                上课情况
+                                %span.triangle-down
+                            - else
+                              .pay-fail
+                        - if($item->status == "paid")
+                          %tr.status
+                            %td{colspan: "7"}
+                              .course-status
+                                %span.item-status 上课状态:
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 关注时间:
@@ -82,6 +77,6 @@
 @endsection
 
 @section('script')
-<script src= "{{mix('/js/admin_client_show.js')}}"></script>
+<script src= "js/admin_client_purchase.js"></script>
 
 @endsection
