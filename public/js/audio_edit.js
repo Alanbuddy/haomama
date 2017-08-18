@@ -264,7 +264,7 @@ $(document).ready(function(){
       return false;
     }
   }
-  
+
   $(document).on('click', '#finish-btn', function(){
     var img_data = [];
     var img_item = {};
@@ -273,7 +273,6 @@ $(document).ready(function(){
     $(".pre_img").each(function(){
       var id = $(this).find('.data-id').text();
       var time = $(this).find('.img_time').val().trim().split(":");
-      time = parseInt(time[0]*3600) + parseInt(time[1] * 60) + parseInt(time[2]);
       for(var i=0;i<time.length;i++){
         valid_time = check_time(time[i]);
         if(valid_time == false){
