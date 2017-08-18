@@ -37,9 +37,9 @@
                   %tbody.font-color3
                     -foreach($items as $item)
                       %tr
-                        %td=$item->time
+                        %td=date('Y-m-d H:i:s',$item->time)
                         %td=$item->page
-                        %td=$item->duration
+                        %td=$item->duration?:'未知'
                     
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
