@@ -139,7 +139,7 @@ $(document).ready(function(){
         '<p class="state_img">等待上传...</p>' +
         '<img src="icon/admin/rubbish.png" class="delete_img">' +
         '<span class="data-id"></span>' +
-        '<input class="img_time" placeholder="请输入时间">' +
+        '<input class="img_time" placeholder="请输入时间hh:mm:ss">' +
     '</div>' );
     $img = $("#"+ file.id).find('.img_wrap').find("img");
 
@@ -259,14 +259,26 @@ $(document).ready(function(){
     }
   }
 
+  function check_time(time){
+    if(time > 60){
+      return false;
+    }
+  }
+
   $(document).on('click', '#finish-btn', function(){
     var img_data = [];
     var img_item = {};
+    var valid_time = null;
     var old_img_item = {};
     $(".pre_img").each(function(){
       var id = $(this).find('.data-id').text();
       var time = $(this).find('.img_time').val().trim().split(":");
-      time = parseInt(time[0]*3600) + parseInt(time[1] * 60) + parseInt(time[2]);
+      for(var i=0;i<time.length;i++){
+        valid_time = check_time(time[i]);
+        if(valid_time == false){
+          break;
+        }
+      }
       if(time.length == 3){
         time = parseInt(time[0]*3600) + parseInt(time[1] * 60) + parseInt(time[2]);
       }else if(time.length == 2){
@@ -283,6 +295,10 @@ $(document).ready(function(){
       };
       img_data.push(img_item);
     });
+    if(valid_time == false){
+      showMsg("输入时间格式不正确", "center");
+      return false;
+    }
     $(".old_pre_img:visible").each(function(){
       var id = $(this).find('.old-data-id').text();
       var time = $(this).find('.old_img_time').val().trim().split(":");
@@ -307,7 +323,6 @@ $(document).ready(function(){
         return false;
       }
     });
-
     var title = $("#input-caption").val();
     var desc = editor.txt.html();
     var video_id = $(".video-id").text();

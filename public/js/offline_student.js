@@ -1,4 +1,8 @@
 $(document).ready(function(){
+  $("#course-show").click(function(){
+    location.href = window.course_show;
+  });
+
   var node = "";
    
   $(".details").click(function(){
@@ -36,8 +40,5 @@ $(document).ready(function(){
       tem.addClass("miss-square");
     }
     return tem;
-  }    
-  $("#desc").click(function(){
-    location.href = window.client_desc;
-  });
+  }   
 });

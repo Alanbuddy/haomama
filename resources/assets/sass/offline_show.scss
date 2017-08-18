@@ -533,3 +533,83 @@ h2 {
   float: right;
   width: 50%;
 }
+
+
+#noticeModal {
+  .modal-body {
+    margin: 0;
+    padding: 0;
+  }
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -220px;
+    margin-top: -150px;
+    width: 440px;
+    height: 300px;
+    border-radius: 6px; 
+  }
+}
+.modal-backdrop {
+  background-color: #999;
+}
+.close {
+  position: absolute;
+  right: -14px;
+  top: -14px;
+  opacity: 0.7;
+  z-index: 10;
+}
+.close:hover {
+  opacity: 1;
+}
+.notice-div {
+  padding: 40px 50px;
+}
+.notice-content {
+  font-size: 16px;
+  color: #323232;
+}
+.vt {
+  vertical-align: top;
+}
+.text-div {
+  width: 78%;
+  height: 65px;
+  font-size: 14px;
+  color: #969696;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border: 1px solid #aaa;
+  outline: none;
+}
+.delivery-btn {
+  width: 100%;
+  background: #f7873d;
+  color: #fff;
+  margin-bottom: 15px;
+}
+.delivery-btn:hover {
+  color: #fff;
+}
+.notice-bottom {
+  margin-bottom: 15px;
+}
+.message-div {
+  font-size: 0;
+}
+.notice-date {
+  font-size: 14px;
+}
+.notice-message {
+  font-size: 14px;
+  color: #173177;
+}
+.display-message {
+  width: 100%;
+  font-size: 14px;
+  padding: 5px;
+  display: none;
+  border: 1px solid #ddd;
+}

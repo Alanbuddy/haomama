@@ -18,6 +18,7 @@
   window.course_publish = "#{route('courses.publish',$course->id)}"
   window.course_show = "#{route('admin.courses.show',$course->id)}"
   window.course_del = "#{route('courses.destroy',$course->id)}"
+  window.offline_student = "#{route('admin.courses.students',$course->id)}"
   
 @endsection
 @section('search-input')

@@ -16,6 +16,7 @@
 @section('content')
 
 .main-content.bg2
+  %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{:type => "button", "data-target" => "#noticeModal", "data-toggle" => "modal"} 编辑通知
   .table-div
     .tabbable
       %ul.nav.nav-tabs
@@ -55,29 +56,56 @@
                           %td 未付款
                         - else if( $item->order->status == "paid")
                           %td.font-color-brown 已付款
+                        %td 
+                          - if($item->status == 'paid')
+                            %a.details{:href => "javascript:void(0);"} 
+                              上课情况
+                              %span.triangle-down
+                          - else
+                            .pay-fail 无
 
-                      %tr.status
-                        %td{:colspan => "7"}
-                          .course-status
-                            %span.item-status 上课状态：
-                            %span.join-square
-                            %span.miss-square
-                            %span.square
+                      - if($item->status == "paid")
+                        %tr.status
+                          %td{colspan: "7"}
+                            .course-status
+                              %span.item-status 上课状态:
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 总购买人数:
-                  %span.mr30 123
+                  %span.mr30= $items->total()
                   %span 总付款人数:
-                  %span 70
+                  %span= $items->total()
 
                 %span.select-page.tag2-page
                   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                   %span.choice-page
                     != $items->links()
+#noticeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/admin/close.png"}
+      .modal-body
+        .notice-div
+          %p.notice-content 请编辑通知的内容:
+          %p.notice-content 您报名的课程有变动！
+          %span.notice-content 课程名称:
+          %span.notice-content= $course->name
+          .notice-textarea
+            %span.notice-content.vt 情况说明:
+            %textarea.text-div{placeholder: "课程变动的原因解释"}
+          %p.notice-content.notice-bottom 好妈妈微学院祝您上课愉快!
+          .btn.delivery-btn{:type => "button"} 发送通知
+          // - if @course_inst.messages.present?
+          //   - @course_inst.messages.each do |m|
+          //     .message-div
+          //       %span.notice-date= m.created_at.strftime("%Y-%m-%d %H:%M") + "已发送"
+          //       %span.notice-message 课程调整通知
+          //       %p.display-message= m.content
 @endsection
 
 
 @section('script')
-<script src="js/admin_offline_show.js"></script>
+<script src="js/offline_student.js"></script>
 
 @endsection

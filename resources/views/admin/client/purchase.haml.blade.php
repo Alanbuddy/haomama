@@ -58,7 +58,7 @@
                                 上课情况
                                 %span.triangle-down
                             - else
-                              .pay-fail
+                              .pay-fail 无
                         - if($item->status == "paid")
                           %tr.status
                             %td{colspan: "7"}

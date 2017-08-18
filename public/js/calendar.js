@@ -51,7 +51,7 @@ $(document).ready(function(){
     eventLimit: true,
     fixedWeekCount: false,
     nowIndicator: true,
-    height: 350,
+    height: 360,
     eventClick: function(calEvent, jsEvent, view){
       $("#calendar").fullCalendar('removeEvents', calEvent.id);
     }
