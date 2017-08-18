@@ -378,6 +378,10 @@ class UserController extends Controller
     public function log(Request $request, User $user)
     {
         $items = $user->behaviors()->where('type', 'pv')
+            ->select('id', 'user_id', 'type')
+            ->addSelect(DB::raw('data->"$.time" as time'))
+            ->addSelect(DB::raw('data->"$.page" as page'))
+            ->addSelect(DB::raw('data->"$.duration" as duration'))
             ->paginate(10);
         return view('admin.client.show', compact('user', 'items'));
     }

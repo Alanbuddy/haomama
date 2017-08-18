@@ -35,27 +35,12 @@
                       %th 访问页面
                       %th 停留时间
                   %tbody.font-color3
-                    // - @users[:data].each do |u|
-                    %tr
-                      %td 2017/06/26 22:12:06
-                      %td 课程名称(第二课时)
-                      %td 5 s/或者25 min
-                    %tr
-                      %td 2017/06/26 22:12:06
-                      %td 课程名称(支付完成)
-                      %td 5 s/25 min
-                    %tr
-                      %td 2017/06/26 22:12:06
-                      %td 课程名称
-                      %td 5 s/25 min
-                    %tr
-                      %td 2017/06/26 22:12:06
-                      %td 搜索结果页(关键词：手工)
-                      %td 5 s/25 min
-                    %tr
-                      %td 2017/06/26 22:12:06
-                      %td 首页
-                      %td 5 s/25 min
+                    -foreach($items as $item)
+                      %tr
+                        %td=$item->time
+                        %td=$item->page
+                        %td=$item->duration
+                    
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page
