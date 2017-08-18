@@ -79,10 +79,8 @@
 @section('script')
 <script src= "{{mix('/js/admin_course_show.js')}}"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
-<script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery.tag-editor.min.js"></script>
 <script src="js/plugin/jquery-sortable.js"></script>
 <script src="js/preview.js"></script>
-<script src="js/admin_course_online_show.js"></script>
 
 @endsection
