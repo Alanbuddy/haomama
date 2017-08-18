@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Behavior;
+use App\Models\Course;
+use App\Models\User;
 use App\Services\SimpleRouter;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
@@ -10,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use MtHaml\Exception;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -82,14 +83,15 @@ class BehaviorController extends Controller
             $valid = $this->recordVideoWatch($request);
         }
 
-        if ($request->get('type') . contains('pv')) {
-            $this->storePV($request, $item);
-            if ($request->type == 'pv.end') $valid = false;
-            else $item->type = 'pv';
+        if ($request->get('type') == 'pv') {
+            $data = json_decode($request->data);
+            //数据中有duration属性表示离开页面
+            $isEnd = property_exists($data, 'duration');
+            $this->storePV($data, $isEnd ? null : $item);
+            $valid = !$isEnd;
         }
 
-        Log::info('888888888');
-        Log::info('{$valid}');
+        Log::info("valid?{$valid}");
         if ($valid)
             auth()->user()->behaviors()->save($item);
 
@@ -186,7 +188,13 @@ class BehaviorController extends Controller
         );
         $peudoRequest = Request::createFromBase($symfonyRequest);
         try {
-            $this->router->dispatchToRoute($peudoRequest);
+//            $this->router->dispatchToRoute($peudoRequest);
+
+            $route = $this->router->findRoute($peudoRequest);
+
+            $peudoRequest->setRouteResolver(function () use ($route) {
+                return $route;
+            });
         } catch (NotFoundHttpException $e) {
             Log::error(__FILE__ . __LINE__ . "\n" . $e->getMessage());
         }
@@ -194,27 +202,16 @@ class BehaviorController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $data
+     *      Example {"url":"\/courses\/1","time":"2017-8-8"}
+     * @param $type
      * @param $item
      */
-    public function storePV(Request $request, $item)
+    public function storePV($data, $item = null)
     {
-        $data = json_decode($request->data);
-        Log::info($request->all());
         $url = $data->url; //$uri = '/courses/1?a=b';
-        $isEnd = explode('.', $request->type)[1] == 'end';
-        if ($isEnd) {
-            $log = auth()->user()->behaviors()->where('type', 'pv')
-                ->where(DB::raw('data->"$.url"'), $url)
-                ->whereNull(DB::raw('data->"$.duration"'))
-                ->orderBy('id', 'desc')
-                ->firstOrFail();
-            $logData = json_decode($log->data);
-            $logData->timeEnd = $data->time;
-            $logData->duration = strtotime($data->time) - strtotime($logData->time);
-            $log->data = json_encode($logData);
-            $log->save();
-        } else {
+        $time = $data->time; //$uri = '/courses/1?a=b';
+        if ($item) {
             $peudoRequest = $this->peudoRequest($url);
             $route = $peudoRequest->route();
             //如果url参数错误，忽略这次请求 //throw new \Exception("uri {$url} does not exists");
@@ -225,7 +222,7 @@ class BehaviorController extends Controller
                     $page = '首页';
                     break;
                 case 'courses.show':
-                    $page = '课程' . $route->parameter('course')->name;
+                    $page = '课程' . Course::findOrFail($route->parameter('course'))->name;
                     break;
                 case 'courses.search':
                     $page = '搜索页(关键词' . $peudoRequest->get('key') . ')';
@@ -236,6 +233,18 @@ class BehaviorController extends Controller
             }
             $data->page = $page;
             $item->data = json_encode($data);
+        } else {
+            $user = User::findOrFail($data->user);
+            $log = $user->behaviors()->where('type', 'pv')
+                ->where(DB::raw('data->"$.url"'), $url)
+                ->where(DB::raw('data->"$.time"'), $time)
+                ->whereNull(DB::raw('data->"$.duration"'))
+                ->orderBy('id', 'desc')
+                ->firstOrFail();
+            $logData = json_decode($log->data);
+            $logData->duration = gmstrftime('%H:%M:%S', time() - $logData->time);
+            $log->data = json_encode($logData);
+            $log->save();
         }
     }
 }

@@ -216,6 +216,22 @@
   //     + appId
   //     + "&redirect_uri=http%3a%2f%2f"
   //     + "baby.fumubidu.com.cn/haomama/wechat/openid&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
+
+  ws = new WebSocket('ws://127.0.0.1:2346');
+  wsdate = new Date();
+  ws.onopen = function () {
+      ws.send(JSON.stringify({
+          'user': '{{auth()->check()?auth()->user()->id:0}}',
+          'url': '/',
+          'time': Math.round(wsdate.getTime() / 1000)
+      }));
+  };
+  ws.onmessage = function (e) {
+      console.log('收到服务端的消息：' + e.data);
+  };
+  ws.onclose = function (e) {
+  };
+
 </script>
 
 @yield('script')

@@ -8,6 +8,7 @@
 /app/Http/Wechat/cert/*.*
 /.idea
 /.sh
+/Workerman
 Homestead.json
 Homestead.yaml
 *.log
