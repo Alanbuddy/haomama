@@ -52,6 +52,7 @@ class WechatMessage extends Command
         $date = date('Y-m-d H', strtotime('+24 hour'));
         $courses = $this->dueCourses($date, 'students');
         foreach ($courses as $course) {
+            Log::info('due course:' . $course->id . $course->name);
             foreach ($course->students as $user) {
                 $job = (new SendWechatMessage($user, $course))->onQueue('wechat');
                 dispatch($job);

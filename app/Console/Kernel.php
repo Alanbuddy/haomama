@@ -6,6 +6,7 @@ use App\Console\Commands\changeCredential;
 use App\Console\Commands\enroll;
 use App\Console\Commands\test;
 use App\Console\Commands\WechatMessage;
+use App\Console\Commands\Ws;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use MtHaml\Exception;
@@ -22,6 +23,7 @@ class Kernel extends ConsoleKernel
         test::class,
         WechatMessage::class,
         enroll::class,
+        Ws::class,
         changeCredential::class,
     ];
 
