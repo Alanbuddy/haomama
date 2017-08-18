@@ -240,11 +240,13 @@ class BehaviorController extends Controller
                 ->where(DB::raw('data->"$.time"'), $time)
                 ->whereNull(DB::raw('data->"$.duration"'))
                 ->orderBy('id', 'desc')
-                ->firstOrFail();
-            $logData = json_decode($log->data);
-            $logData->duration = gmstrftime('%H:%M:%S', time() - $logData->time);
-            $log->data = json_encode($logData);
-            $log->save();
+                ->first();
+            if ($log) {
+                $logData = json_decode($log->data);
+                $logData->duration = gmstrftime('%H:%M:%S', time() - $logData->time);
+                $log->data = json_encode($logData);
+                $log->save();
+            }
         }
     }
 }
