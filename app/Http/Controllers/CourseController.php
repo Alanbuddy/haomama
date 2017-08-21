@@ -819,12 +819,13 @@ class CourseController extends Controller
                 ->where('user_id', $student->id)
                 ->where('status', 'paid')
                 ->first();
-            $items->order = $order;
+            $order->wx_total_fee /= 100;
+            $student->order = $order;
         }
         $items->withPath(route('admin.courses.students', $course));
-        return view($course->type=='online'
-            ?'admin.course.student '
-            :'admin.course.offline-register', compact('items', 'course'));
+        return view($course->type == 'online'
+            ? 'admin.course.student '
+            : 'admin.course.offline-register', compact('items', 'course'));
     }
 
     //课程评论
