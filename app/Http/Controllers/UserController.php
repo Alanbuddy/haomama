@@ -350,10 +350,14 @@ class UserController extends Controller
             ->addSelect(DB::raw('(select sum(orders.wx_total_fee) from `orders` where `orders`.`product_id` = `courses`.`id`) as `total_income`'))
 //            ->orderBy('star', 'desc')
             ->paginate(10);
+        array_map(function ($v) {
+            $v->total_income /= 100;
+            return $v;
+        }, $items->all());
 
         $totalIncome = $user->coachingCourse()
-            ->join('orders', 'orders.product_id', 'courses.id')
-            ->sum('orders.wx_total_fee');
+                ->join('orders', 'orders.product_id', 'courses.id')
+                ->sum('orders.wx_total_fee') / 100;
 
 //        $coachingCourse= $user->coachingCourse;
 //        $courseIdArr = array_map(function ($v) {
@@ -368,6 +372,7 @@ class UserController extends Controller
 
         $ordersCount = $user->coachingCourse()
             ->join('orders', 'orders.product_id', 'courses.id')
+            ->where('orders.status','paid')
             ->count();
 
 //         dd($items->all(), $totalIncome,$courseIdArr,$ordersCount);
