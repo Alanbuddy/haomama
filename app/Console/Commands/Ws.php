@@ -48,7 +48,8 @@ class Ws extends Command
     public function handle()
     {
         global $argv;
-        $argv[1] = $this->ask('Workman command:{start|stop|restart|reload|status|connections} ', 'start');
+//        $argv[1] = $this->ask('Workman command:{start|stop|restart|reload|status|connections} ', 'start');
+        $argv[1] =  'start';
         $this->info($argv[0]);
         // 创建一个Worker监听2346端口，使用websocket协议通讯
         $ws_worker = new Worker("websocket://0.0.0.0:2346");

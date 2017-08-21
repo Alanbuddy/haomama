@@ -222,7 +222,7 @@
     ws.onopen = function () {
         ws.send(JSON.stringify({
             'user': '{{auth()->check()?auth()->user()->id:0}}',
-            'url': '/',
+            'url': '{{$_SERVER['REQUEST_URI']}}',
             'time': Math.round(wsdate.getTime() / 1000)
         }));
     };
