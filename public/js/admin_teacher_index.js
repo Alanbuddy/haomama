@@ -10348,7 +10348,7 @@ module.exports = __webpack_require__(8);
   search = function() {
     var value;
     value = $("#search-input").val();
-    return location.href = window.teacher_index + "?key=" + value;
+    return location.href = window.teacher_index + "&key=" + value;
   };
   $("#search-btn").click(function() {
     return search();

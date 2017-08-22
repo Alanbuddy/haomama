@@ -5,7 +5,7 @@ $ ->
 
   search = ->
     value = $("#search-input").val()
-    location.href = window.teacher_index + "?key=" + value
+    location.href = window.teacher_index + "&key=" + value
 
   $("#search-btn").click ->
     search()
