@@ -312,8 +312,10 @@ class UserController extends Controller
         $name = $key ?: $request->name;
         $role = Role::where('name', 'teacher')->first();
         $items = $role->users()
-            ->where('name', 'like', '%' . $name . '%')
-            ->orWhere('phone', 'like', '%' . $name . '%')
+            ->where(function ($query) use ($name) {
+                $query->where('name', 'like', '%' . $name . '%')
+                    ->orWhere('phone', 'like', '%' . $name . '%');
+            })
             ->orderBy('id', 'desc')
             ->paginate(10);
         return $items;
