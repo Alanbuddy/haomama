@@ -28,9 +28,9 @@ class LessonController extends Controller
      */
     public function index(Request $request)
     {
-        $type = $request->get('type','video');
-        if(session('lesson')){
-            $type=($request->session()->pull('lesson'))->type;
+        $type = $request->get('type', 'video');
+        if (session('lesson')) {
+            $type = ($request->session()->pull('lesson'))->type;
         }
         $items = Lesson::orderBy('id', 'desc');
         if ($type) {
@@ -289,7 +289,7 @@ class LessonController extends Controller
     public function destroy(Request $request, Lesson $lesson)
     {
         $canDelete = $lesson->course()->count() == 0;
-        $request->session()->flash('lesson',$lesson);
+        $request->session()->flash('lesson', $lesson);
         if ($canDelete)
             $lesson->delete();
         if ($request->ajax()) {
@@ -313,8 +313,9 @@ class LessonController extends Controller
 
     public function adminSearch(Request $request)
     {
+        $key = $request->get('key');
         if ($request->has('key')) {
-            $items = Lesson::where('name', 'like', '%' . $request->key . '')
+            $items = Lesson::where('name', 'like', '%' . $key . '')
                 ->orderBy('id', 'desc')
                 ->paginate(10);
 //            dd($items);
