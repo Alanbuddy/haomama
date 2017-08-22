@@ -315,7 +315,7 @@ class LessonController extends Controller
     {
         $key = $request->get('key');
         if ($request->has('key')) {
-            $items = Lesson::where('name', 'like', '%' . $key . '')
+            $items = Lesson::where('name', 'like', '%' . $key . '%')
                 ->orderBy('id', 'desc')
                 ->paginate(10);
 //            dd($items);
