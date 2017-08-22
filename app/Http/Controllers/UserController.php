@@ -33,13 +33,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $type = $request->get('type', 'user');
+        $key = $request->get('key');
         if ($type == 'operator') {
             if (!auth()->user()->hasRole('admin')) {
                 return back();
             }
         }
-        if ($request->has('key')) {
-            $items = $this->search($request, $request->key);
+        if ($key) {
+            $items = $this->search($request, $key);
         } else {
 
             if ($type != 'user') {
@@ -74,7 +75,7 @@ class UserController extends Controller
                 $view = 'admin.client.index';
         }
 //         dd($items);
-        $items->withPath(route('users.index'));
+        $items->withPath(route('users.index') . ($key ? '?key=' . $key : ''));
 
         return view($view, compact('items'));
     }
