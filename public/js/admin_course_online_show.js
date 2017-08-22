@@ -361,10 +361,10 @@ $(document).ready(function(){
       lesson_list.push($(this).attr("data-id"));
     });
     var lesson_title = [];
-    $(".w-e-text p").each(function(){
+    $(".w-e-text").last().find("p").each(function(){
       lesson_title.push($(this).text());
     });
-    lesson_title.shift(lesson_title[0]);
+    // lesson_title.shift(lesson_title[0]);
     console.log(lesson_title);
     var teacher_arr = [];
     $(".teacher-id").each(function(){
