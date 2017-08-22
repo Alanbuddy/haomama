@@ -46,7 +46,7 @@
                         %td
                           %a{href: route('admin.user.show',$item->id).'?type=teacher'}=$item->name
                         %td=$item->phone
-                        %td=json_decode($item->description)->title
+                        %td=json_decode($item->description)?json_decode($item->description)->title:''
             .select-page
               %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
               %span.choice-page

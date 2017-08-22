@@ -38,22 +38,27 @@ class UserController extends Controller
                 return back();
             }
         }
-        if ($type != 'user') {
-            $roles = array_map(function ($v) {
-                return $v->name;
-            }, Role::select('name')->get()->all());
-            $role = Role::where('name', $type)->first();
-            $items = in_array($type, $roles)
-                ? $role->users()
-                    ->orderBy('id', 'desc')
-                    ->paginate(10)
-                : [];
+        if ($request->has('key')) {
+            $items = $this->search($request, $request->key);
         } else {
-            $items = User::select('users.*')
-                ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
-                ->whereNull('role_id')
-                ->addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))//没有用到
-                ->paginate(10);
+
+            if ($type != 'user') {
+                $roles = array_map(function ($v) {
+                    return $v->name;
+                }, Role::select('name')->get()->all());
+                $role = Role::where('name', $type)->first();
+                $items = in_array($type, $roles)
+                    ? $role->users()
+                        ->orderBy('id', 'desc')
+                        ->paginate(10)
+                    : [];
+            } else {
+                $items = User::select('users.*')
+                    ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
+                    ->whereNull('role_id')
+                    ->addSelect(DB::raw('wx->"$.nickname" as wx_nickname'))//没有用到
+                    ->paginate(10);
+            }
         }
         switch ($type) {
             case 'user':
@@ -71,9 +76,7 @@ class UserController extends Controller
 //         dd($items);
         $items->withPath(route('users.index'));
 
-        return view($view, [
-            'items' => $items
-        ]);
+        return view($view, compact('items'));
     }
 
     public function newOperatorCount()
@@ -301,12 +304,11 @@ class UserController extends Controller
     }
 
     //搜索讲师 根据名字或手机号
-    public function search(Request $request)
+    public function search(Request $request, $key = null)
     {
-        $this->validate($request, [
-            'name' => 'required'
-        ]);
-        $name = $request->name;
+        if (empty($key))
+            $this->validate($request, ['name' => 'required']);
+        $name = $key ?: $request->name;
         $role = Role::where('name', 'teacher')->first();
         $items = $role->users()
             ->where('name', 'like', '%' . $name . '%')
@@ -372,7 +374,7 @@ class UserController extends Controller
 
         $ordersCount = $user->coachingCourse()
             ->join('orders', 'orders.product_id', 'courses.id')
-            ->where('orders.status','paid')
+            ->where('orders.status', 'paid')
             ->count();
 
 //         dd($items->all(), $totalIncome,$courseIdArr,$ordersCount);
