@@ -27,7 +27,7 @@ class CourseController extends Controller
     function __construct()
     {
         $this->middleware('role:admin|operator|teacher')
-            ->except(['show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn','favoriteCourses','commentsIndex']);
+            ->except(['show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn', 'favoriteCourses', 'commentsIndex']);
     }
 
     public function draftIndex(Request $request)
@@ -901,10 +901,11 @@ class CourseController extends Controller
 
     public function recordSharing(Request $request, Course $course)
     {
-        $behavior =new Behavior();
-        $behavior->type='share';
-        $behavior->course_id=$course->id;
-
+        $behavior = new Behavior();
+        $behavior->type = 'wx.share';
+        $behavior->user_id = auth()->user()->id;
+        $behavior->course_id = $course->id;
+        $behavior->save();
         return ['success' => true];
     }
 
