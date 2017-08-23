@@ -296,6 +296,9 @@ class CourseController extends Controller
         $avgRate = round($avgRate, 1);
 
         $teachers = $course->teachers()->get();
+        foreach ($teachers as $teacher) {
+            $teacher->avatar = strpos($teacher->avatar, '/') == 0 ? substr($teacher->avatar, 1) : $teacher->avatar;
+        }
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
@@ -895,7 +898,7 @@ class CourseController extends Controller
         return $avgRate;
     }
 
-    public function recordSharing(Request $request,Course $course)
+    public function recordSharing(Request $request, Course $course)
     {
         $course->increment('share_count');
         return ['success' => true];
