@@ -66,6 +66,7 @@ Route::group([
     Route::get('/courses/{course}/admin/comments', 'CourseController@adminComments')->name('admin.courses.comments');//后台课程评论列表
     Route::get('/courses/{course}/admin/comments/search', 'CommentController@search')->name('admin.courses.comments.search');//后台课程评论搜索
     Route::get('/courses/{course}/admin/sign-in', 'CourseController@signInAdmin')->name('admin.courses.signIn');//后台签到管理
+    Route::get('/courses/{course}/share', 'CourseController@recordSharing')->name('courses.recordSharing');//课程分享统计
     Route::resource('courses', 'CourseController');
     Route::get('/courses/{course}/lessons/edit', 'CourseController@editLessons')->name('courses.lessons.edit');
     Route::put('/courses/{course}/lessons/update', 'CourseController@updateLessons')->name('courses.lessons.update');

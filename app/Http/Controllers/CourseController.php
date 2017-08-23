@@ -895,7 +895,7 @@ class CourseController extends Controller
         return $avgRate;
     }
 
-    public function recordSharing(Course $course)
+    public function recordSharing(Request $request,Course $course)
     {
         $course->increment('share_count');
         return ['success' => true];
