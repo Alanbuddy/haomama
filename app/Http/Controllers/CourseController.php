@@ -654,7 +654,7 @@ class CourseController extends Controller
             ->join('orders', 'courses.id', '=', 'orders.product_id')
 //            ->select('courses.id', 'courses.name', 'courses.created_at', 'comment_count', 'users_count', 'favorite_count')
             ->addSelect(DB::raw('sum(amount) as amount'))
-            ->addSelect(DB::raw('count(*) as amount'))
+            ->addSelect(DB::raw('count(*) as orders_count'))
             ->groupBy('courses.id')
             ->paginate();
         dd($items);

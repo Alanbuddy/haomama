@@ -28,7 +28,7 @@ class LessonController extends Controller
      */
     public function index(Request $request)
     {
-        $type = $request->get('type', 'video');
+        $type = $request->get('type');
         if (session('lesson')) {
             $type = ($request->session()->pull('lesson'))->type;
         }

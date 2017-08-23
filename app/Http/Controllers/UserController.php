@@ -393,6 +393,7 @@ class UserController extends Controller
             ->addSelect(DB::raw('data->"$.page" as page'))
             ->addSelect(DB::raw('data->"$.duration" as duration'))
             ->paginate(10);
+        $items->withPath(route('admin.user.log'));
         return view('admin.client.show', compact('user', 'items'));
     }
 
