@@ -6,6 +6,7 @@ use App\Facades\MessageFacade;
 use App\Facades\Search;
 use App\Http\Util\IO;
 use App\Models\Attendance;
+use App\Models\Behavior;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\Setting;
@@ -900,7 +901,10 @@ class CourseController extends Controller
 
     public function recordSharing(Request $request, Course $course)
     {
-        $course->increment('share_count');
+        $behavior =new Behavior();
+        $behavior->type='share';
+        $behavior->course_id=$course->id;
+
         return ['success' => true];
     }
 

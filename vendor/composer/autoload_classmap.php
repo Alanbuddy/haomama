@@ -18,7 +18,7 @@ return array(
     'AlterOrder2' => $baseDir . '/database/migrations/2017_06_08_154710_alter_order2.php',
     'AlterTableCoursesAddHot' => $baseDir . '/database/migrations/2017_05_19_092518_alter_table_courses_add_hot.php',
     'AlterTableUsersAddColumnStatus' => $baseDir . '/database/migrations/2017_07_17_140911_alter_table_users_add_column_status.php',
-    'AlterTalbeCoursesAddShareCount' => $baseDir . '/database/migrations/2017_08_23_133541_alter_talbe_courses_add_share_count.php',
+    'AlterTalbeBehaviorsAddCourseId' => $baseDir . '/database/migrations/2017_08_23_180428_alter_talbe_behaviors_add_course_id.php',
     'AlterUser3' => $baseDir . '/database/migrations/2017_06_13_104433_alterUser3.php',
     'AlterUserAddDescription' => $baseDir . '/database/migrations/2017_06_19_160555_alterUserAddDescription.php',
     'AlterUserAddOpenid' => $baseDir . '/database/migrations/2017_06_07_161930_alter_user_add_openid.php',
