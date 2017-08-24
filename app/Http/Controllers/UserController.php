@@ -331,12 +331,14 @@ class UserController extends Controller
     public function searchUser($key)
     {
         return User::whereNotNull('openid')
+            ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
+            ->whereNull('role_id')//选择没有指派任何角色的用户记录
             ->where(function ($query) use ($key) {
                 $query->where('name', 'like', '%' . $key . '%')
                     ->orWhere('phone', 'like', '%' . $key . '%')
                     ->orWhere('openid', 'like', '%' . $key . '%')
-                    ->orWhere(DB::raw('wx->"$.nickname"'), 'like', '%' . $key . '%')
-                    ->orWhere(DB::raw('baby->"$.name"'), 'like', '%' . $key . '%');
+                    ->orWhere(DB::raw('wx->"$.nickname"'), 'like', '%' . $key . '%');
+//                    ->orWhere(DB::raw('baby->"$.name"'), 'like', '%' . $key . '%');
             })
             ->paginate(10);
     }
