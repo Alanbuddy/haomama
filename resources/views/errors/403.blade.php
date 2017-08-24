@@ -2,7 +2,7 @@
 <html>
 <head>
   <base href={{$base_href}}>
-  <title>404错误</title>
+  <title>权限不足</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   html, body {
