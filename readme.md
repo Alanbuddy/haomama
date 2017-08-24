@@ -18,5 +18,8 @@ POST route('courses.recordSharing',$course)
 /courses/1/share
 ### 响应 
 {success:true}
-#课程相关统计信息
-路由 POST route('courses.statistics');
+# 课程相关统计信息
+### 路由 
+POST route('courses.statistics');
+### URL示例 
+/courses/statistics?left=0
