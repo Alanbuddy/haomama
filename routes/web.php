@@ -17,21 +17,16 @@
 //});
 use Illuminate\Support\Facades\Route;
 
-Route::group([
-    'middleware' => ['web']
-], function () {
-    Route::auth();
-    Route::get('/', 'HomeController@index')->name('index');
-    Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
-    Route::get('/category/{category}', 'HomeController@index')->name('category');
-    Route::get('/logout', 'Auth\LoginController@logout');
+Route::auth();
+Route::get('/', 'HomeController@index')->name('index');
+Route::get('/tag/{tag}', 'CourseController@search')->name('tag');
+Route::get('/category/{category}', 'HomeController@index')->name('category');
+Route::get('/logout', 'Auth\LoginController@logout');
 
-    Route::get('/validate/phone', 'SmsController@isOccupied')->name('validate.phone');
-    Route::any('/sms/send', 'SmsController@send')->name('sms.send');
-    Route::any('/sms/residual', 'SmsController@residual')->name('sms.residual');
-    Route::get('/sms/verify', 'SmsController@verify')->name('sms.verify');
-
-});
+Route::get('/validate/phone', 'SmsController@isOccupied')->name('validate.phone');
+Route::any('/sms/send', 'SmsController@send')->name('sms.send');
+Route::any('/sms/residual', 'SmsController@residual')->name('sms.residual');
+Route::get('/sms/verify', 'SmsController@verify')->name('sms.verify');
 Route::any('/password/sms/send', 'Auth\ResetPasswordController@sendResetSms')->name('password.sms.send');
 
 include('test.php');
@@ -39,7 +34,7 @@ include('test.php');
 Route::any('/haml', 'TestController@index');
 
 Route::group([
-    'middleware' => ['web', 'auth','role:admin|operator'],
+    'middleware' => ['auth', 'role:admin|operator'],
     'namespace' => 'Admin',
     'prefix' => 'admin'
 ], function () {
@@ -50,7 +45,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['auth'],
 ], function () {
     Route::get('/statistics/lessons', 'StatisticsController@lessonsStatistics')->name('statistics.lessons');//视频播放情况统计列表页
     Route::get('/statistics/lessons/{lesson?}/', 'StatisticsController@lessonStatistics')->name('statistics.lesson');//视频播放情况统计详情页
@@ -139,18 +134,14 @@ Route::group([
 
 });
 
-Route::group([
-    'middleware' => ['web'],
-], function () {
-    Route::get('/wechat/message/get-industry', 'WechatController@getIndustry')->name('wechat.getIndustry');
-    Route::get('/wechat/message/get-template', 'WechatController@getTemplate')->name('wechat.getTemplate');
-    Route::get('/wechat/message/template-id', 'WechatController@getTemplateID')->name('wechat.getTemplateID');
-    Route::get('/wechat/access-token', 'WechatController@accessToken')->name('wechat.accessToken');
-    Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
-    Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
-    Route::get('/wechat/send', 'WechatController@send')->name('wechat.send');
-    Route::get('/wechat/users/{user}/userinfo', 'WechatController@userInfo')->name('wechat.userinfo');
-});
+Route::get('/wechat/message/get-industry', 'WechatController@getIndustry')->name('wechat.getIndustry');
+Route::get('/wechat/message/get-template', 'WechatController@getTemplate')->name('wechat.getTemplate');
+Route::get('/wechat/message/template-id', 'WechatController@getTemplateID')->name('wechat.getTemplateID');
+Route::get('/wechat/access-token', 'WechatController@accessToken')->name('wechat.accessToken');
+Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
+Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
+Route::get('/wechat/send', 'WechatController@send')->name('wechat.send');
+Route::get('/wechat/users/{user}/userinfo', 'WechatController@userInfo')->name('wechat.userinfo');
 
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
 Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');
