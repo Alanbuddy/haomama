@@ -75,7 +75,9 @@ class LessonController extends Controller
     {
         $this->validate($request, [
             'video_id' => 'required',
-            'name' => 'unique:lessons'
+            'name' => 'unique:lessons',
+            'audio' => 'sometimes|required',
+            'pictures' => 'sometimes|required',
         ]);
         $item = new Lesson();
         $item->fill($request->only(['name', 'type', 'video_id', 'begin', 'end', 'description',]));
@@ -165,7 +167,7 @@ class LessonController extends Controller
     public function adminShow(Request $request, Lesson $lesson)
     {
         $type = $request->get('type', 'video');
-        $video = $lesson->video?:new File();
+        $video = $lesson->video ?: new File();
         $coursesCount = $lesson->course()->count();
         $canDelete = $coursesCount == 0;//如果有课程中引用到这个lesson，就不允许删除当前lesson
         $data = compact('video', 'lesson', 'coursesCount', 'canDelete');
