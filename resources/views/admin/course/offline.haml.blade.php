@@ -121,6 +121,6 @@
 <script src="js/plugin/jquery.timepicker.js"></script>
 
 <script src="js/preview.js"></script>
-<script src="js/calendar.js"></script>
+<script src="js/calendar.js?v=2"></script>
 
 @endsection
