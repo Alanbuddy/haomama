@@ -362,6 +362,7 @@ $(document).ready(function(){
     });
     var lesson_title = [];
     $(".w-e-text").last().find("p").each(function(){
+        if($(this).text()!='')
       lesson_title.push($(this).text());
     });
     // lesson_title.shift(lesson_title[0]);
