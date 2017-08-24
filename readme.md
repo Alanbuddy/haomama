@@ -14,4 +14,5 @@ $lessons
 #####https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115
 路由 POST route('courses.recordSharing',$course)
 - 响应 {success:true}
-
+#课程相关统计信息
+路由 POST route('courses.statistics');

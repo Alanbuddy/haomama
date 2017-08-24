@@ -52,7 +52,7 @@ Route::group([
 
 
     Route::get('/courses/search', 'CourseController@search')->name('courses.search');
-    Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');
+    Route::get('/courses/statistics', 'CourseController@statistics')->name('courses.statistics');//课程相关统计信息
     Route::get('/courses/enrolled', 'CourseController@enrolledCourses')->name('courses.enrolled');//我加入的课程
     Route::get('/courses/favorited', 'CourseController@favoriteCourses')->name('courses.favorited');//我收藏的课程
     Route::get('/courses/admin/search', 'CourseController@adminSearch')->name('admin.courses.search');
