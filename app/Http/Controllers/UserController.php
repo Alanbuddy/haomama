@@ -321,6 +321,10 @@ class UserController extends Controller
         return $items;
     }
 
+    public function searchUser()
+    {
+
+    }
     /**
      * @param Request $request
      * @param $item

@@ -300,6 +300,7 @@ class CourseController extends Controller
         foreach ($teachers as $teacher) {
             $teacher->avatar = strpos($teacher->avatar, '/') == 0 ? substr($teacher->avatar, 1) : $teacher->avatar;
         }
+        $course->cover = strpos($course->cover, '/') == 0 ? substr($course->cover, 1) : $course->cover;
         return view('course.show',//'admin.course.show',
             compact('course',//课程信息
                 'hasEnrolled',//是否已经加入（购买）课程
