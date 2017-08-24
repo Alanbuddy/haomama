@@ -18,7 +18,7 @@ class UserController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin|operator')->only(['index','store']);
+        $this->middleware('role:admin|operator')->only(['index', 'store']);
     }
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
             }
         }
         if ($key) {
-            $items = $this->search($request, $key);
+            $items = $this->search($request, $key, $type);
         } else {
 
             if ($type != 'user') {
@@ -305,26 +305,41 @@ class UserController extends Controller
     }
 
     //搜索讲师 根据名字或手机号
-    public function search(Request $request, $key = null)
+    public function search(Request $request, $key = null, $type = 'teacher')
     {
         if (empty($key))
             $this->validate($request, ['name' => 'required']);
         $name = $key ?: $request->name;
         $role = Role::where('name', 'teacher')->first();
-        $items = $role->users()
-            ->where(function ($query) use ($name) {
-                $query->where('name', 'like', '%' . $name . '%')
-                    ->orWhere('phone', 'like', '%' . $name . '%');
-            })
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        switch ($type) {
+            case 'user':
+                $items = $this->searchUser($key);
+                break;
+            case 'teacher':
+                $items = $role->users()
+                    ->where(function ($query) use ($name) {
+                        $query->where('name', 'like', '%' . $name . '%')
+                            ->orWhere('phone', 'like', '%' . $name . '%');
+                    })
+                    ->orderBy('id', 'desc')
+                    ->paginate(10);
+                break;
+        }
         return $items;
     }
 
-    public function searchUser()
+    public function searchUser($key)
     {
-
+        return User::whereNotNull('openid')
+            ->where(function ($query) use ($key) {
+                $query->where('name', 'like', '%' . $key . '%')
+                    ->orWhere('phone', 'like', '%' . $key . '%')
+                    ->orWhere('openid', 'like', '%' . $key . '%')
+                    ->orWhere(DB::raw('baby->$.name'), 'like', '%' . $key . '%');
+            })
+            ->paginate(10);
     }
+
     /**
      * @param Request $request
      * @param $item
@@ -397,7 +412,7 @@ class UserController extends Controller
             ->addSelect(DB::raw('data->"$.page" as page'))
             ->addSelect(DB::raw('data->"$.duration" as duration'))
             ->paginate(10);
-        $items->withPath(route('admin.user.log',$user));
+        $items->withPath(route('admin.user.log', $user));
         return view('admin.client.show', compact('user', 'items'));
     }
 
