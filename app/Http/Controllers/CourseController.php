@@ -649,17 +649,19 @@ class CourseController extends Controller
 
     public function statistics(Request $request)
     {
-        $begin = $request->get('begin', '1');
+        $left = $request->get('left', '1');
         $items = Search::coursesStatistics()
 //            ->where('courses.created_at', '>'
-//                , DB::raw('date_sub(`courses`.`created_at`, INTERVAL ' . $begin . ' DAY)'))
+//                , DB::raw('date_sub(`courses`.`created_at`, INTERVAL ' . $left . ' DAY)'))
 
 //            ->where('courses.created_at', '>', date('Y-m-d H:i:s', strtotime("today -" . $begin . " days")))
-            ->join('orders', 'courses.id', '=', 'orders.product_id')
+            ->withCount('shareRecords')
+            ->leftJoin('orders', 'courses.id', '=', 'orders.product_id')
 //            ->select('courses.id', 'courses.name', 'courses.created_at', 'comment_count', 'users_count', 'favorite_count')
             ->addSelect(DB::raw('sum(amount) as amount'))
             ->addSelect(DB::raw('count(*) as orders_count'))
             ->groupBy('courses.id')
+//            ->toSql();
             ->paginate();
         dd($items);
     }

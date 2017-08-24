@@ -12,6 +12,6 @@ $lessons
 ***
 # 记录课程分享次数
 #####https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115
-路由 POST route('courses.recordSharing')
+路由 POST route('courses.recordSharing',$course)
 - 响应 {success:true}
 

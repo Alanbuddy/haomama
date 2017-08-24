@@ -76,5 +76,11 @@ class Course extends Model
         return $this->hasMany(Attendance::class);
     }
 
+    public function shareRecords()
+    {
+        return $this->hasMany(Behavior::class)
+            ->where('behaviors.type', 'wx.share');
+    }
+
 }
 
