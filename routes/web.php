@@ -87,6 +87,7 @@ Route::group([
     Route::get('/comments/{comment}/vote', 'CommentController@vote')->name('comments.vote');
     Route::resource('comments', 'CommentController');
 
+    Route::get('/orders/statistics', 'OrderController@statistics')->name('orders.statistics');//课程相关统计信息
     Route::get('/orders/tmp', 'OrderController@tmp')->name('orders.finish');//跳转到完成支付提示页
     Route::post('/orders/pay', 'OrderController@pay')->name('orders.pay');//初始化支付
     Route::get('/orders/{uuid}/refund', 'OrderController@refund')->name('orders.refund');//退款

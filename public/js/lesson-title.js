@@ -1,18 +1,18 @@
 $(document).ready(function(){
   var total = 0;
-  var pageIndex = 0;     //页面索引初始值   
+  var pageIndex = 0;     //页面索引初始值
   var pageSize = 10;     //每页显示条数初始化，修改显示条数，修改这里即可
   $(".addlesson").click(function(){
-    InitTable(0); 
-    function PageCallback(index, jq) {  
-      InitTable(index);  
+    InitTable(0);
+    function PageCallback(index, jq) {
+      InitTable(index);
       return false;
-    }  
-    function InitTable(pageIndex) {                                  
-      $.ajax({   
-          type: "get",  
-          url: window.lessons_index,      //提交到一般处理程序请求数据   
-          data: "page=" + (pageIndex + 1),          //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)                   
+    }
+    function InitTable(pageIndex) {
+      $.ajax({
+          type: "get",
+          url: window.lessons_index,      //提交到一般处理程序请求数据
+          data: "page=" + (pageIndex + 1),          //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)
           success: function(data) {
             total = data.total;
             $(".checkbox-items .checkbox").remove();
@@ -34,16 +34,16 @@ $(document).ready(function(){
               current_page: pageIndex,   //当前页索引
               link_to: "",
             });
-          } 
+          }
       });
     }
     $("#lessonModal").modal("show");
   });
-  
+
 
   var type = "tag";
   $('#type-tag').tagEditor({
-    
+
     beforeTagSave: function(field, editor, tags, tag, val){
       $(".create-tag-div").find(".tag_id").each(function(){
         if($(this).text() == val ){
@@ -105,16 +105,16 @@ $(document).ready(function(){
             name: request.term
           },
           success: function( data ) {
-            // console.log(data.data);  
-            response( $.map( data.data, function( item ) {  
+            // console.log(data.data);
+            response( $.map( data.data, function( item ) {
                 return {
                     value: item.name,
                     object_id: item.id
-                };  
-            }));  
-          }  
+                };
+            }));
+          }
         });
-      
+
       },
       // minLength: 2,    //搜索字符的长度
       select: function( event, ui ) {
@@ -240,7 +240,7 @@ $(document).ready(function(){
   $("#shelf-cancel").click(function(){
     $("#shelfModal").modal("hide");
   });
-  
+
   function check_input(name, length, ori_price){
     if(name == ""){
       showMsg("课程名称必须填写", "center");
@@ -268,8 +268,9 @@ $(document).ready(function(){
       lesson_list.push($(this).attr("data-id"));
     });
     var lesson_title = [];
-    $(".w-e-text p").each(function(){
-      lesson_title.push($(this).text());
+    $(".w-e-text ").last().find('p').each(function(){
+      if($(this).text()!='')
+          lesson_title.push($(this).text());
     });
     lesson_title.shift(lesson_title[0]);
     if(lesson_title.length != parseInt(length)){

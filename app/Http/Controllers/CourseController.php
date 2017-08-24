@@ -698,12 +698,12 @@ class CourseController extends Controller
             }])
             ->with('orders')
             ->leftJoin('orders', 'courses.id', '=', 'orders.product_id')
-            ->addSelect(DB::raw('sum(wx_total_fee) as amount'))
+            ->addSelect(DB::raw('sum(wx_total_fee) as total_fee'))
             ->addSelect(DB::raw('count(*) as thorough_orders_count'))
             ->groupBy('courses.id')
             ->where('orders.status', 'paid')
 //            ->toSql();
-            ->paginate();
+            ->paginate(10);
         dd($items[0]);
     }
 

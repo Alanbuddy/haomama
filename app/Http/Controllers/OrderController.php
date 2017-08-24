@@ -14,6 +14,7 @@ use App\Models\Course;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
@@ -209,7 +210,7 @@ class OrderController extends Controller
             $course->students()->detach($order->user_id);//把学员退出课程
             MessageFacade::sendRefundCompletedMessage(User::find($order->user_id), $course);
 
-            if ($_SERVER['SCRIPT_NAME']!= 'artisan') {
+            if ($_SERVER['SCRIPT_NAME'] != 'artisan') {
                 return view('setting.refund', compact('course'));
             }
             return ['success' => true];
@@ -228,5 +229,27 @@ class OrderController extends Controller
     {
         $course = Course::find($request->course_id);
         return view('setting.show', compact('course'));
+    }
+
+    public function statistics(Request $request)
+    {
+        $left = $request->get('left');
+        $right = $request->get('right', 'now');
+        $query = Order::where('status', 'paid');
+        if (isset($left)) {
+            $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
+            $query->where('orders.created_at', '>', $left);
+        }
+        if ($right != 'now') {
+            $right = strtotime($right) ? $right : date('Y-m-d H:i:s', strtotime("today -" . $right . " days"));
+            $query->where('orders.created_at', '<', $right);
+        }
+        $query ->select(DB::raw('left(created_at,10) as date'))
+            ->addSelect(DB::raw('count(*) as thorough_orders_count'))
+            ->addSelect(DB::raw('sum(wx_total_fee) as total_fee'))
+            ->addSelect(DB::raw('(select sum(wx_total_fee) from orders where status="paid" and created_at <= left(orders.created_at,10) ) as thorough_total_fee '))
+            ->groupBy(DB::raw('left(created_at,10)'));
+
+        dd($query->paginate(10)->all());
     }
 }
