@@ -185,7 +185,7 @@
 <script src="js/plugin/datepicker-zh-TW.js"></script>
 <script src="js/plugin/jquery.timepicker.js"></script>
 <script src="js/preview.js"></script>
-<script src="js/admin_offline_show.js"></script>
+<script src="js/admin_offline_show.js?v=2"></script>
 
 
 @endsection
