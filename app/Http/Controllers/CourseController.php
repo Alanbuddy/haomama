@@ -546,7 +546,12 @@ class CourseController extends Controller
             ->count();
         if ($count == 0) {
             //收藏课程
-            $course->users()->attach($user, ['type' => 'favorite', 'user_type' => 'student']);
+            $course->users()->attach($user, [
+                'type' => 'favorite',
+                'user_type' => 'student',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
         } else {
             //取消收藏
             DB::table('course_user')
@@ -647,15 +652,31 @@ class CourseController extends Controller
         return ['success' => true, 'data' => $course->status];
     }
 
+    /**
+     * @param Request $request
+     * left  几天前
+     * right 到什么时候
+     * left,right 指定了统计的日期起止范围,可以是天数(整数)，也可以是具体日期(日期)
+     */
     public function statistics(Request $request)
     {
-        $left = $request->get('left', '1');
+        $left = $request->get('left');
+        $right = $request->get('right', 'now');
         $items = Search::coursesStatistics()
 //            ->where('courses.created_at', '>'
 //                , DB::raw('date_sub(`courses`.`created_at`, INTERVAL ' . $left . ' DAY)'))
 
-//            ->where('courses.created_at', '>', date('Y-m-d H:i:s', strtotime("today -" . $begin . " days")))
-            ->withCount('shareRecords')
+            ->withCount(['shareRecords' => function ($query) use ($right, $left) {
+                if (isset($left)) {
+                    $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
+                    $query->where('behaviors.created_at', '>', $left);
+                }
+                if ($right != 'now') {
+                    $right = strtotime($right) ? $right : date('Y-m-d H:i:s', strtotime("today -" . $right . " days"));
+                    $query->where('behaviors.created_at', '<', $right);
+                }
+            }])
+            ->with('shareRecords')
             ->leftJoin('orders', 'courses.id', '=', 'orders.product_id')
 //            ->select('courses.id', 'courses.name', 'courses.created_at', 'comment_count', 'users_count', 'favorite_count')
             ->addSelect(DB::raw('sum(amount) as amount'))
@@ -663,7 +684,7 @@ class CourseController extends Controller
             ->groupBy('courses.id')
 //            ->toSql();
             ->paginate();
-        dd($items);
+        dd($items[0]->share_records_count);
     }
 
     public function recommend(Request $request, Course $course)
