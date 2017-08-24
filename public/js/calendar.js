@@ -59,7 +59,7 @@ $(document).ready(function(){
 
   var type = "tag";
   $('#type-tag').tagEditor({
-    
+
     beforeTagSave: function(field, editor, tags, tag, val){
       $(".create-tag-div").find(".tag_id").each(function(){
         if($(this).text() == val ){
@@ -121,16 +121,16 @@ $(document).ready(function(){
           name: request.term
         },
         success: function( data ) {
-          // console.log(data.data);  
-          response( $.map( data.data, function( item ) {  
+          // console.log(data.data);
+          response( $.map( data.data, function( item ) {
               return {
                   value: item.name,
                   object_id: item.id
-              };  
-          }));  
-        }  
+              };
+          }));
+        }
       });
-    
+
     },
     // minLength: 2,    //搜索字符的长度
     select: function( event, ui ) {
@@ -276,7 +276,7 @@ $(document).ready(function(){
     $("#datepicker").datepicker("setDate", next_week);
     add_event();
   });
-    
+
 
   $(".date-btn").click(function(){
     if(can_repeat == false){
@@ -306,12 +306,13 @@ $(document).ready(function(){
       tags.push($(this).attr("data-id"));
     });
     var desc = editor.txt.html();
-    
+
     var lesson_title = [];
-    $(".w-e-text p").each(function(){
-      lesson_title.push($(this).text());
+    $(".w-e-text ").last().find('p').each(function(){
+          if($(this).text()!='')
+          lesson_title.push($(this).text());
     });
-    lesson_title.shift(lesson_title[0]);
+    // lesson_title.shift(lesson_title[0]);
     if(lesson_title.length != parseInt(length)){
       showMsg("课程节数和课时标题数不匹配", "center");
       return false;

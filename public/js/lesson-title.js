@@ -272,7 +272,7 @@ $(document).ready(function(){
       if($(this).text()!='')
           lesson_title.push($(this).text());
     });
-    lesson_title.shift(lesson_title[0]);
+    // lesson_title.shift(lesson_title[0]);
     if(lesson_title.length != parseInt(length)){
       showMsg("课程节数和课时标题数不匹配", "center");
       return false;
