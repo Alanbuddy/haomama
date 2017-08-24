@@ -423,10 +423,11 @@ $(document).ready(function(){
 	  });
 	  var desc = editor.txt.html();
     var lesson_title = [];
-    $(".w-e-text p").each(function(){
+    $(".w-e-text").last().find("p").each(function(){
+        if($(this).text()!='')
       lesson_title.push($(this).text());
     });
-    lesson_title.shift(lesson_title[0]);
+    // lesson_title.shift(lesson_title[0]);
     console.log(lesson_title);
 	  var teacher_arr = [];
 	  $(".teacher-id").each(function(){
