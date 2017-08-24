@@ -654,9 +654,9 @@ class CourseController extends Controller
 
     /**
      * @param Request $request
-     * left  几天前
-     * right 到什么时候
-     * left,right 指定了统计的日期起止范围,可以是天数(整数)，也可以是具体日期(日期)
+     * left  可以是天数(整数)表示几天前，也可以是具体日期(日期)
+     * right 到什么时候,是具体日期(日期)
+     * left,right 指定了统计的日期起止范围
      */
     public function statistics(Request $request)
     {
@@ -676,15 +676,34 @@ class CourseController extends Controller
                     $query->where('behaviors.created_at', '<', $right);
                 }
             }])
-            ->with('shareRecords')
+            ->withCount(['followers' => function ($query) use ($right, $left) {
+                if (isset($left)) {
+                    $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
+                    $query->where('course_user.created_at', '>', $left);
+                }
+                if ($right != 'now') {
+                    $right = strtotime($right) ? $right : date('Y-m-d H:i:s', strtotime("today +" . $right . " days"));
+                    $query->where('course_user.created_at', '<', $right);
+                }
+            }])
+            ->withCount(['orders' => function ($query) use ($right, $left) {
+                if (isset($left)) {
+                    $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
+                    $query->where('orders.created_at', '>', $left);
+                }
+                if ($right != 'now' && strtotime($right)) {
+                    $query->where('orders.created_at', '<', $right);
+                }
+            }])
+            ->with('orders')
             ->leftJoin('orders', 'courses.id', '=', 'orders.product_id')
-//            ->select('courses.id', 'courses.name', 'courses.created_at', 'comment_count', 'users_count', 'favorite_count')
-            ->addSelect(DB::raw('sum(amount) as amount'))
-            ->addSelect(DB::raw('count(*) as orders_count'))
+            ->addSelect(DB::raw('sum(wx_total_fee) as amount'))
+            ->addSelect(DB::raw('count(*) as thorough_orders_count'))
             ->groupBy('courses.id')
+            ->where('courses.id','47')
 //            ->toSql();
             ->paginate();
-        dd($items[0]->share_records_count);
+        dd($items[0]);
     }
 
     public function recommend(Request $request, Course $course)
