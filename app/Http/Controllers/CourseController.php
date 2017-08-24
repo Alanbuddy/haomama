@@ -687,6 +687,7 @@ class CourseController extends Controller
                 }
             }])
             ->withCount(['orders' => function ($query) use ($right, $left) {
+                $query->where('orders.status', 'paid');
                 if (isset($left)) {
                     $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
                     $query->where('orders.created_at', '>', $left);
@@ -700,7 +701,7 @@ class CourseController extends Controller
             ->addSelect(DB::raw('sum(wx_total_fee) as amount'))
             ->addSelect(DB::raw('count(*) as thorough_orders_count'))
             ->groupBy('courses.id')
-            ->where('courses.id','47')
+            ->where('orders.status', 'paid')
 //            ->toSql();
             ->paginate();
         dd($items[0]);
