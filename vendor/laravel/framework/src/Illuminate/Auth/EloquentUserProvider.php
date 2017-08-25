@@ -107,7 +107,7 @@ class EloquentUserProvider implements UserProvider
 
         foreach ($credentials as $key => $value) {
             if (! Str::contains($key, 'password')) {
-                $query->where($key, $value);
+                $query->where($key, $value)->whereNull('wx');
             }
         }
 
