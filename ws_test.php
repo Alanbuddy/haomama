@@ -17,6 +17,7 @@ $ws_worker->onMessage = function ($connection, $data) {
     $connection->send('hello ' . $data);
 };
 
+//close
 $ws_worker->onClose = function ($connection) {
     \Illuminate\Support\Facades\Log::info('close');
 };
