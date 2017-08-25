@@ -16,6 +16,7 @@ $ws_worker->onMessage = function ($connection, $data) {
     // 向客户端发送hello $data
     $connection->send('hello ' . $data);
 };
+
 $ws_worker->onClose = function ($connection) {
     \Illuminate\Support\Facades\Log::info('close');
 };
