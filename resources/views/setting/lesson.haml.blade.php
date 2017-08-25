@@ -21,7 +21,7 @@
   - else
     %p.file-id= empty($audio) ? -1 : $audio->cloud_file_id
     .audio-div
-      %img.audio-poster{src: strpos($pictures[0]->path, '/') == 0 ? substr($pictures[0]->path, 1) : $pictures[0]->path}
+      %img.audio-poster{src:count($pictures)? strpos($pictures[0]->path, '/') == 0 ? substr($pictures[0]->path, 1) : $pictures[0]->path:''}
       %audio.panel#audio{:controls => "", src: strpos($audio->path, '/') == 0 ? substr($audio->path, 1) : $audio->path}
     .pictures{style: "display:none;"}
       - foreach($pictures as $picture)

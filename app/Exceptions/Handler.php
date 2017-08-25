@@ -47,7 +47,6 @@ class Handler extends ExceptionHandler
                 Log::error($e->getMessage());
             }
         }
-
         parent::report($exception);
     }
 
