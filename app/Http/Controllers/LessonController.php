@@ -151,6 +151,7 @@ class LessonController extends Controller
 
         $video = $lesson->video;
         $data = compact('video', 'lesson', 'comments');
+
         if ($lesson->type == 'audio') {
             $pictures = $video->pictures()
                 ->orderBy('no')
