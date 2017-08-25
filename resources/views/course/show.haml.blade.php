@@ -148,7 +148,7 @@
   - foreach ($recommendedCourses as $recommendedCourse)
     .course-item{"data-id" => $recommendedCourse['id']}
       .course-icon-div
-        %img.course-icon{src: $recommendedCourse['cover'] ?  strpos($recommendedCourse['cover'], '/')==0 ? substr($$recommendedCourse['cover'],1) : $recommendedCourse['cover']  : "icon/example.png"}
+        %img.course-icon{src: $recommendedCourse['cover'] ? $recommendedCourse['cover'] : "icon/example.png"}
       .word-div
         .course-row-div.clearfix
           %span.f12.category-class= $recommendedCourse['category']['name']
