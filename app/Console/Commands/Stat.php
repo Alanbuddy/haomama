@@ -44,8 +44,15 @@ class Stat extends Command
         $subscribers = [];
         DB::table('users')
             ->whereNotNull('openid')
+            ->where('openid','<>','')
             ->orderBy('id')
             ->chunk(100, function ($users) use (&$subscribers) {
+                $arr = [];
+                foreach ($users as $user) {
+                    $arr[] = ['openid' => $user->openid];
+                }
+                $result = WxApi::commonUserInfoBatch($arr);
+                dd($result);
                 foreach ($users as $user) {
                     $result = WxApi::commonUserInfo($user->openid);
 //                    $this->info(property_exists(json_decode($result['data']),'subscribe')?1:0);
@@ -59,7 +66,10 @@ class Stat extends Command
                 }
             });
         User::whereIn('id', $subscribers)->update(['subscribe' => true]);
-        Statistic::create(['type'=>'subscriber','data'=>$subscribers->count()]);
-        $this->info('aa');
+        Statistic::firstOrCreate(['type' => 'subscriber',
+            'data' => count($subscribers),
+            'created_at' => date("Y-m-d")
+        ]);
+        $this->info('done');
     }
 }

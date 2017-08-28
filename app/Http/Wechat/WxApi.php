@@ -10,6 +10,7 @@ namespace App\Http\Wechat;
 
 use App\Http\Util\Curl;
 use App\Models\Setting;
+use Closure;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -83,33 +84,76 @@ class WxApi
         return $response;
     }
 
-    //获取用户基本信息（包括UnionID机制）
-    //https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140839
+    /**
+     * 获取用户基本信息（包括UnionID机制）
+     * https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140839
+     */
     public static function commonUserInfo($openId)
     {
+        return self::callWithAccessToken(function ($accessToken) use ($openId) {
+            $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $accessToken . '&openid=' . $openId . '&lang=zh_CN';
+            return self::request($url);
+        });
+    }
+
+    /***
+     * 批量获取用户基本信息
+     * 开发者可通过该接口来批量获取用户基本信息。最多支持一次拉取100条。
+     * 接口调用请求说明
+     * http请求方式: POST
+     * https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=ACCESS_TOKEN
+     * POST数据示例
+     * {
+     * "user_list": [
+     * {
+     * "openid": "otvxTs4dckWG7imySrJd6jSi0CWE",
+     * "lang": "zh_CN"
+     * },
+     * {
+     * "openid": "otvxTs_JZ6SEiP0imdhpi50fuSZg",
+     * "lang": "zh_CN"
+     * }
+     * ]
+     * }
+     * 列表中某个opnid为空时返回
+     * //"{"errcode":40003,"errmsg":"invalid openid hint: [qLUR0831vr18]"}"
+     *
+     */
+    public static function commonUserInfoBatch($userList)
+    {
+        $data = ['user_list' => $userList];
         $result = WxApi::accessToken();
         if ($result['success']) {
             $accessToken = $result['data']->access_token;
-            $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $accessToken . '&openid=' . $openId . '&lang=zh_CN';
-            $response = self::request($url);
+            $url = 'https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=' . $accessToken;
+            $response = self::request($url, json_encode($data), 2000, 'post');
             return $response;
-        }else{
+        } else {
             return false;
         }
     }
 
-    //获取帐号的关注者列表
-    //https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140840
+    /**
+     * 获取帐号的关注者列表
+     * https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140840
+     */
     public static function subscribers($nextOpenid = null)
+    {
+        return self::callWithAccessToken(function ($accessToken) use ($nextOpenid) {
+
+            $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='
+                . $accessToken
+                . ($nextOpenid ? '&next_openid=' . $nextOpenid : '');
+            return self::request($url);
+        });
+    }
+
+    public static function callWithAccessToken(Closure $closure)
     {
         $result = WxApi::accessToken();
         if ($result['success']) {
             $accessToken = $result['data']->access_token;
-            $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='
-                . $accessToken
-                . ($nextOpenid ? '&next_openid=' . $nextOpenid : '');
-            $response = self::request($url);
-            return $response;
+            return call_user_func($closure, $accessToken);
         } else {
             return false;
         }
