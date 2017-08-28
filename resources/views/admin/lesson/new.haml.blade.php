@@ -54,6 +54,6 @@
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>
 
-<script src="js/fileupload.js"></script>
+<script src="js/fileupload.js?v2"></script>
 
 @endsection

@@ -63,6 +63,7 @@ $(document).ready(function(){
 	editor.customConfig.uploadHeaders = {
 	  'Accept' : 'HTML'
 	};
+    editor.customConfig.uploadImgTimeout = 3600000;
 	editor.create();
 
 
