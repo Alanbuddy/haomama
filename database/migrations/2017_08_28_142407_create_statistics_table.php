@@ -16,7 +16,7 @@ class CreateStatisticsTable extends Migration
         Schema::create('statistics', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
-            $table->string('data');
+            $table->string('data')->nullable();
             $table->timestamps();
         });
     }

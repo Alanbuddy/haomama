@@ -41,10 +41,18 @@ class Stat extends Command
      */
     public function handle()
     {
+        $this->recordSubscriptionDaily();
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubscribers()
+    {
         $subscribers = [];
         DB::table('users')
             ->whereNotNull('openid')
-            ->where('openid','<>','')
+            ->where('openid', '<>', '')
             ->orderBy('id')
             ->chunk(100, function ($users) use (&$subscribers) {
                 $arr = [];
@@ -52,24 +60,39 @@ class Stat extends Command
                     $arr[] = ['openid' => $user->openid];
                 }
                 $result = WxApi::commonUserInfoBatch($arr);
-                dd($result);
-                foreach ($users as $user) {
-                    $result = WxApi::commonUserInfo($user->openid);
-//                    $this->info(property_exists(json_decode($result['data']),'subscribe')?1:0);
-                    if (property_exists(json_decode($result['data']), 'subscribe')) {
-                        $subscribers[] = $user->id;
-                        $this->info('User ' . $user->id . ' 已经关注');
-                        $this->info(json_encode($subscribers));
-                    } else {
-                        $this->info('User ' . $user->id . ' 未关注');
+                $data = json_decode($result['data']);
+                if (property_exists($data, 'user_info_list')) {
+                    foreach ($data->user_info_list as $item) {
+                        if ($item->subscribe)
+                            $subscribers[] = $item->openid;
                     }
                 }
+
+//                foreach ($users as $user) {
+//                    $result = WxApi::commonUserInfo($user->openid);
+////                    $this->info(property_exists(json_decode($result['data']),'subscribe')?1:0);
+//                    if (property_exists(json_decode($result['data']), 'subscribe')) {
+//                        $subscribers[] = $user->id;
+//                        $this->info('User ' . $user->id . ' 已经关注');
+//                        $this->info(json_encode($subscribers));
+//                    } else {
+//                        $this->info('User ' . $user->id . ' 未关注');
+//                    }
+//                }
             });
-        User::whereIn('id', $subscribers)->update(['subscribe' => true]);
-        Statistic::firstOrCreate(['type' => 'subscriber',
-            'data' => count($subscribers),
-            'created_at' => date("Y-m-d")
-        ]);
+        return $subscribers;
+    }
+
+    public function recordSubscriptionDaily()
+    {
+        $subscribers = $this->getSubscribers();
+//        User::whereIn('id', $subscribers)->update(['subscribe' => true]);
+        User::whereIn('openid', $subscribers)->update(['subscribe' => true]);
+        Statistic::updateOrCreate(['type' => 'subscriber',
+            'created_at' => date("Y-m-d")],
+            ['data' => count($subscribers)]
+        );
+
         $this->info('done');
     }
 }
