@@ -100,7 +100,7 @@ class WxApi
 
     //获取帐号的关注者列表
     //https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140840
-    public static function followers($nextOpenid = null)
+    public static function subscribers($nextOpenid = null)
     {
         $result = WxApi::accessToken();
         if ($result['success']) {

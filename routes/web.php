@@ -143,7 +143,7 @@ Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
 Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
 Route::get('/wechat/send', 'WechatController@send')->name('wechat.send');
 Route::get('/wechat/users/{user}/userinfo', 'WechatController@userInfo')->name('wechat.userinfo');
-Route::get('/wechat/users', 'WechatController@followers')->name('wechat.followers');
+Route::get('/wechat/subscribers', 'WechatController@subscribers')->name('wechat.subscribers');
 
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
 Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');
