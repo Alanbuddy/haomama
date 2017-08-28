@@ -163,4 +163,11 @@ class WechatController extends Controller
         $result=WxApi::commonUserInfo($accessToken,$openid);
         return ['success'=>true,'data'=>$result['data']];
     }
+
+    //获取帐号的关注者列表
+    public function followers()
+    {
+        $result=WxApi::followers();
+        dd($result);
+    }
 }

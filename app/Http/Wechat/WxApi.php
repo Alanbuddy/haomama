@@ -92,6 +92,23 @@ class WxApi
         return $response;
     }
 
+    //获取帐号的关注者列表
+    //https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140840
+    public static function followers($nextOpenid = null)
+    {
+        $result = WxApi::accessToken();
+        if ($result['success']) {
+            $accessToken = $result['data']->access_token;
+            $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='
+                . $accessToken
+                . ($nextOpenid ? '&next_openid=' . $nextOpenid : '');
+            $response = self::request($url);
+            return $response;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * copy from app/Http/Wechat/sdk/lib/WxPay.Api.php:435
      * 产生随机字符串，不长于32位
