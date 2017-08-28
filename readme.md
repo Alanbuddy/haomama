@@ -23,3 +23,5 @@ POST route('courses.recordSharing',$course)
 POST route('courses.statistics');
 ### URL示例 
 /courses/statistics?left=0
+
+

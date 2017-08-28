@@ -45,8 +45,12 @@ class Stat extends Command
             ->chunk(100, function ($users) {
                 foreach ($users as $user) {
                     $result=WxApi::commonUserInfo($user->openid);
-                    if($result){
-                        $this->info(json_encode($result));
+//                    $this->info(property_exists(json_decode($result['data']),'subscribe')?1:0);
+                    if(property_exists(json_decode($result['data']),'subscribe')){
+                        $this->info('User '.$user->id.' 已经关注');
+//                        $this->info(json_encode($result));
+                    }else{
+                        $this->info('User '.$user->id.' 未关注');
                     }
                 }
             });
