@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Wechat\WxApi;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -38,11 +39,17 @@ class Stat extends Command
      */
     public function handle()
     {
-        DB::table('users')->orderBy('id')->chunk(100, function ($users) {
-            foreach ($users as $user) {
-                //
-            }
-        });
+        DB::table('users')
+            ->whereNotNull('openid')
+            ->orderBy('id')
+            ->chunk(100, function ($users) {
+                foreach ($users as $user) {
+                    $result=WxApi::commonUserInfo($user->openid);
+                    if($result){
+                        $this->info(json_encode($result));
+                    }
+                }
+            });
         $this->info('aa');
     }
 }

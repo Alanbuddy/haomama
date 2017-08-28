@@ -85,11 +85,17 @@ class WxApi
 
     //获取用户基本信息（包括UnionID机制）
     //https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140839
-    public static function commonUserInfo($accessToken, $openId)
+    public static function commonUserInfo($openId)
     {
-        $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $accessToken . '&openid=' . $openId . '&lang=zh_CN';
-        $response = self::request($url);
-        return $response;
+        $result = WxApi::accessToken();
+        if ($result['success']) {
+            $accessToken = $result['data']->access_token;
+            $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $accessToken . '&openid=' . $openId . '&lang=zh_CN';
+            $response = self::request($url);
+            return $response;
+        }else{
+            return false;
+        }
     }
 
     //获取帐号的关注者列表
