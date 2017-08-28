@@ -190,6 +190,6 @@
 <script src="js/plugin/jquery.tag-editor.min.js"></script>
 <script src="js/plugin/jquery-sortable.js"></script>
 <script src="js/preview.js"></script>
-<script src="js/admin_course_online_show.js?v=3"></script>
+<script src="js/admin_course_online_show.js?v=4"></script>
 
 @endsection

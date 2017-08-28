@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\changeCredential;
 use App\Console\Commands\enroll;
+use App\Console\Commands\Stat;
 use App\Console\Commands\test;
 use App\Console\Commands\WechatMessage;
 use App\Console\Commands\Ws;
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
         enroll::class,
         Ws::class,
         changeCredential::class,
+        Stat::class,
     ];
 
     /**

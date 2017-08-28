@@ -73,6 +73,6 @@
 <script src="js/plugin/wangEditor.min.js"></script>
 <script src="js/plugin/jquery-ui.min.js"></script>
 <script src="js/plugin/webuploader.js"></script>
-<script src="js/video_edit.js"></script> 
+<script src="js/video_edit.js?v=2"></script>
 
 @endsection
