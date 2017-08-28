@@ -12,7 +12,6 @@ use App\Models\Error;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class WechatController extends Controller
@@ -157,17 +156,20 @@ class WechatController extends Controller
 
     public function userInfo(User $user)
     {
-        $openid=json_decode($user->wx)->openid;
-        $result=WxApi::accessToken();
-        $accessToken=$result['data']->access_token;
-        $result=WxApi::commonUserInfo($accessToken,$openid);
-        return ['success'=>true,'data'=>$result['data']];
+        $openid = json_decode($user->wx)->openid;
+        $result = WxApi::accessToken();
+        if ($result['success']) {
+            $accessToken = $result['data']->access_token;
+            $result = WxApi::commonUserInfo($accessToken, $openid);
+            return ['success' => true, 'data' => $result['data']];
+        }
+        return ['success' => false, 'message' => '获取access token失败', 'data' => $result];
     }
 
     //获取帐号的关注者列表
-    public function followers()
+    public function followers(Request $request)
     {
-        $result=WxApi::followers();
-        dd($result);
+        $result = WxApi::followers($request->nextOpenid);
+        dd(json_decode($result['data']));
     }
 }
