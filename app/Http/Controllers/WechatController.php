@@ -10,6 +10,7 @@ use App\Http\Wechat\WxApi;
 use App\Http\Wechat\WxMessageApi;
 use App\Models\Error;
 use App\Models\User;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -79,6 +80,7 @@ class WechatController extends Controller
                 }
                 //Login
                 Auth::loginUsingId($user->id);
+                event(new Login($user, true));
                 return redirect('/');
             }
         }

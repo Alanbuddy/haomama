@@ -217,6 +217,7 @@ class BehaviorController extends Controller
             //如果url参数错误，忽略这次请求 //throw new \Exception("uri {$url} does not exists");
             if (empty($route)) return;
             $page = '';
+            Log::debug(__METHOD__ . $route->getName());
             switch ($route->getName()) {
                 case 'index':
                     $page = '首页';
@@ -229,6 +230,9 @@ class BehaviorController extends Controller
                     break;
                 case 'user.profile':
                     $page = '个人资料';
+                    break;
+                case 'users.show':
+                    $page = '我的';
                     break;
             }
             $data->page = $page;
