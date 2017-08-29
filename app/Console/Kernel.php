@@ -37,9 +37,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire') ->hourly();
-
-//        $schedule->command('wx:send')->everyTenMinutes();
         $schedule->command('wx:send')->hourly();
         $schedule->command('stat:user')->daily();
 //        $schedule->call(function () {

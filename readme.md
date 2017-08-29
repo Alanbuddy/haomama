@@ -25,3 +25,5 @@ POST route('courses.statistics');
 /courses/statistics?left=0
 
 
+#富文本编辑器
+https://www.kancloud.cn/wangfupeng/wangeditor3/335782

@@ -88,7 +88,7 @@ class Stat extends Command
         $subscribers = $this->getSubscribers();
 //        User::whereIn('id', $subscribers)->update(['subscribe' => true]);
         User::whereIn('openid', $subscribers)->update(['subscribe' => true]);
-        Statistic::updateOrCreate(['type' => 'subscriber',
+        Statistic::updateOrCreate(['type' => 'subscribe',
             'created_at' => date("Y-m-d")],
             ['data' => count($subscribers)]
         );

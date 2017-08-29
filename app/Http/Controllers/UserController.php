@@ -253,6 +253,9 @@ class UserController extends Controller
                 $user->parenthood = $request->parenthood;
             }
             if ($request->has('phone')) {
+                $this->validate($request, [
+                    'phone' => 'digits:11|unique:users'
+                ]);
                 $user->phone = $request->phone;
             }
             if ($request->has('baby')) {
