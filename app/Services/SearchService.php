@@ -104,7 +104,7 @@ class SearchService
         $tags = $course->tags;
         $collection = collect([]);
         foreach ($tags as $tag) {
-            $courses = $tag->coursesByTag;
+            $courses = $tag->coursesByTag()->where('status','publish')->get();
             foreach ($courses as $item) {
                 $collection->put($item->id,
                     $collection->get($item->id, 0) + 1);

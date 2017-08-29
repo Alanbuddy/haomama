@@ -22,7 +22,8 @@ class StatisticsController extends Controller
         $subscribersOfLast2Weeks = $this->subscribersPerWeek()->limit(2)->get();
         $subscribersOfLast2Months = $this->subscribersPerMonth()->limit(2)->get();
         $subscribersOfLast2Days = $this->subscribersPerDay()->limit(2)->get();
-        dd($subscribersOfLast2Weeks->all(), $subscribersOfLast2Months->all(),$subscribersOfLast2Days->all());
+        $subscribersOfLastDay = $subscribersOfLast2Days->last();
+        dd($subscribersOfLast2Weeks->all(), $subscribersOfLast2Months->all(),$subscribersOfLast2Days->all(),$subscribersOfLastDay);
         return view('statistics.index', compact('subscribers'));
     }
 
@@ -33,33 +34,27 @@ class StatisticsController extends Controller
         return $count;
     }
 
-    public function subscribersPerDay()
-    {
+    public function subscribersPerSpan($date_format){
         return Statistic::where('type', 'subscribe')
-            ->select(DB::raw('DATE_FORMAT(created_at,\'%Y%m%d\') as day'))
+            ->select(DB::raw('DATE_FORMAT(created_at,\''.$date_format.'\') as time_span'))
             ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
             ->addSelect(DB::raw('sum(data)'))
-            ->orderBy('day', 'desc')
-            ->groupBy('day');
+            ->orderBy('time_span', 'desc')
+            ->groupBy('time_span');
+    }
+    public function subscribersPerDay()
+    {
+//        ->select(DB::raw('DATE_FORMAT(created_at,\'%Y%m%d\') as time_span'))
+        return $this->subscribersPerSpan('%Y%m%d');
     }
     public function subscribersPerWeek()
     {
-        return Statistic::where('type', 'subscribe')
-            ->select(DB::raw('DATE_FORMAT(created_at,\'%Y%u\') as week'))
-            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
-            ->addSelect(DB::raw('sum(data)'))
-            ->orderBy('week', 'desc')
-            ->groupBy('week');
+        return $this->subscribersPerSpan('%Y%u');
     }
 
     public function subscribersPerMonth()
     {
-        return Statistic::where('type', 'subscribe')
-            ->select(DB::raw('DATE_FORMAT(created_at,\'%Y%m\') as month'))
-            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
-            ->addSelect(DB::raw('sum(data)'))
-            ->orderBy('month', 'desc')
-            ->groupBy('month');
+        return $this->subscribersPerSpan('%Y%m');
     }
 
     public function watchStatistics(Request $request)
@@ -80,6 +75,14 @@ class StatisticsController extends Controller
             ->groupBy('lessons.id')
             ->get();
         dd($data->all());
+    }
+    public function registrationPerSpan($date_format){
+        return Statistic::where('type', 'registration')
+            ->select(DB::raw('DATE_FORMAT(created_at,\''.$date_format.'\') as time_span'))
+            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
+            ->addSelect(DB::raw('sum(data)'))
+            ->orderBy('time_span', 'desc')
+            ->groupBy('time_span');
     }
 
 //    统计课时观看情况详情页

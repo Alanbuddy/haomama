@@ -84,27 +84,39 @@ class Stat extends Command
         return $subscribers;
     }
 
+    /**
+     * 记录截止昨天关注号关注人数
+     */
     public function recordSubscriptionDaily()
     {
         $subscribers = $this->getSubscribers();
 //        User::whereIn('id', $subscribers)->update(['subscribe' => true]);
         User::whereIn('openid', $subscribers)->update(['subscribe' => true]);
-        Statistic::updateOrCreate(['type' => 'subscribe',
-            'created_at' => date("Y-m-d")],
-            ['data' => count($subscribers)]
-        );
+        Statistic::updateOrCreate([
+            'type' => 'subscribe',
+            'created_at' => date("Y-m-d", strtotime('today -1 day'))
+        ], [
+            'data' => count($subscribers)
+        ]);
 
-        $this->info(__METHOD__.' done');
+        $this->info(__METHOD__ . ' done');
     }
 
+    /**
+     * 记录昨天的用户注册数
+     */
     public function recordRegistrationDaily()
     {
-        $count = User::where('created_at', '>', date('Y-m-d'))->count();
+        $date = date('Y-m-d', strtotime('today -1 day'));
+        $count = User::where('created_at', '>', $date)
+            ->where('created_at', '<=', date('Y-m-d'))
+            ->count();
         Statistic::updateOrCreate([
             'type' => 'registration',
+            'created_at' => $date
         ], [
             'data' => $count
         ]);
-        $this->info(__METHOD__.' done');
+        $this->info(__METHOD__ . ' done');
     }
 }
