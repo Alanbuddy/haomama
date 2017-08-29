@@ -42,6 +42,7 @@ class Stat extends Command
     public function handle()
     {
         $this->recordSubscriptionDaily();
+        $this->recordRegistrationDaily();
     }
 
     /**
@@ -93,6 +94,17 @@ class Stat extends Command
             ['data' => count($subscribers)]
         );
 
-        $this->info('done');
+        $this->info(__METHOD__.' done');
+    }
+
+    public function recordRegistrationDaily()
+    {
+        $count = User::where('created_at', '>', date('Y-m-d'))->count();
+        Statistic::updateOrCreate([
+            'type' => 'registration',
+        ], [
+            'data' => $count
+        ]);
+        $this->info(__METHOD__.' done');
     }
 }
