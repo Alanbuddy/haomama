@@ -22,7 +22,7 @@
 @endsection
 @section('content')
 .head-div
-  %img.course-photo{src: $course['cover'] ? $course['cover'] : "icon/course.png"}
+  %img.course-photo{src: $course['cover'] ? strpos($course['cover'], '/') == 0 ? substr($course['cover'],1) :$course['cover'] : "icon/course.png"}
   %img.back{src: "icon/back2.png"}
   - if ($hasFavorited == true)
     %img.favorite{src: "icon/like_selected.png", 'data-fav'=> "true"}
@@ -30,7 +30,7 @@
     %img.favorite{src: "icon/like_normal.png", 'data-fav'=> "false"}
   .course-title-div
     .course-row-div.clearfix
-      %span.f12.category-class= $course['category_id']
+      %span.f12.category-class= $course->category?$course->category->name:$course['category_id']
     .course-row-div.color7.status-flex
       %span.name-span.f16.fb.color7= $course['name']
       %span.course-id{style: "display:none;"}= $course['id']
@@ -51,13 +51,13 @@
       - if($course['price'])
         %span.price.f12.color6= "￥". $course['original_price']
       - if ($course['type'] == "offline")
-        %span.f12.color5= $enrolledCount."人已报名"."(限30人)"
+        %span.f12.color5= $enrolledCount."人已报名".($course['quota']? "(限".$course['quota']."人)":'')
       - else
         %span.f12.color5= $enrolledCount."人已报名"
     - else
       %span.f12.color6.mr40 已报名
       - if ($course['type'] == "offline")
-        %span.f12.color5= $enrolledCount."人已报名"."(限30人)"
+        %span.f12.color5= $enrolledCount."人已报名".($course['quota']? "(限".$course['quota']."人)":'')
       - else
         %span.f12.color5= $enrolledCount."人已报名"
   // underline course
@@ -131,7 +131,7 @@
   .items-div
     - foreach ($teachers as $teacher)
       %a.teacher-item{href: route('users.show', $teacher['id'])}
-        %img.avatar{src: $teacher['avatar'] ? $teacher['avatar'] : "icon/avatar.png"}
+        %img.avatar{src: $teacher['avatar'] ? strpos($teacher['avatar'], '/') == 0 ? substr($teacher['avatar'],1) :$teacher['avatar'] : "icon/avatar.png"}
         .item-desc
           %p.f14.color7.teacher-name= $teacher['name']."老师"
           .f12.color6{style: "word-break: break-all;"}!= json_decode($teacher['description'])->basicIntroduction

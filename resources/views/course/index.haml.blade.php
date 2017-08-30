@@ -61,7 +61,7 @@
                       %span.participate= $item['users_count']."人已报名"
                       %span .
                       - if($item->begin)
-                        %span= date_format(date_create($item['begin']),"m月/d日") ."开课"
+                        %span= date_format(date_create($item['begin']),"m月d日") ."开课"
                     - else
                       %span.participate= $item['users_count']."人已学"
                       %span .
@@ -93,7 +93,7 @@
                       %span.participate= $itemOrderByUserCount['users_count']."人已报名"
                       %span .
                       - if($item->begin)
-                        %span= date_format(date_create($itemOrderByUserCount['begin']),"m月/d日") ."开课"
+                        %span= date_format(date_create($itemOrderByUserCount['begin']),"m月d日") ."开课"
                     - else
                       %span.participate= $itemOrderByUserCount['users_count']."人已学"
                       %span .
@@ -125,7 +125,7 @@
                       %span.participate= $itemOrderByCommentRating['users_count']."人已报名"
                       %span .
                       - if($item->begin)
-                        %span= date_format(date_create($itemOrderByCommentRating['begin']),"m月/d日") ."开课"
+                        %span= date_format(date_create($itemOrderByCommentRating['begin']),"m月d日") ."开课"
                     - else
                       %span.participate= $itemOrderByCommentRating['users_count']."人已学"
                       %span .

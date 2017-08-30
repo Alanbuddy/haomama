@@ -27,7 +27,7 @@
     %label 简介：
     %span= $user->description->introduction
   .avatar-div
-    %img.teacher-avatar{src: $user['avatar'] ? $user['avatar'] : "icon/teacher_avatar.png"}
+    %img.teacher-avatar{src: $user['avatar'] ? strpos($user['avatar'], '/') == 0 ? substr($user['avatar'],1) :$user['avatar'] : "icon/teacher_avatar.png"}
   - if ($hasVoted == false)
     .admire-div
       %img.admire-icon{src: "icon/like2_normal.png"}
@@ -42,7 +42,7 @@
   - foreach ($courses as $course)
     .course-item{"data-id" => $course['id']}
       .course-icon-div
-        %img.course-icon{src: $course['cover'] ? $course['cover'] : "icon/example.png"}
+        %img.course-icon{src: $course['cover'] ? strpos($course['cover'], '/') == 0 ? substr($course['cover'],1) :$course['cover'] : "icon/example.png"}
       .word-div
         .course-row-div.clearfix
           %span.f12.category-class= $course['category']['name']
