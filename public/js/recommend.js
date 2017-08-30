@@ -41,6 +41,7 @@ $(document).ready(function(){
         select: function( event, ui ) {
                 $(this).val(ui.item.label);
                 $(this).closest('.edit-box').siblings('.c-id').text(ui.item.object_id);
+                console.log($(this).closest('.edit-box').siblings('.c-id').text());
               }
       });
   });
@@ -48,7 +49,11 @@ $(document).ready(function(){
   $("#finish-btn").click(function(){
     var cid = [];
     $('.c-id').each(function(){
-      cid.push($(this).text() ? $(this).text() : $(this).siblings('.edit-box').find(".old-id").text());
+      if($(this).siblings('.edit-box').find(".category").val() != ""){
+        cid.push($(this).text() ? $(this).text() : $(this).siblings('.edit-box').find(".old-id").text());
+      }else{
+        cid.push("无");
+      }
     });
     var re = {
           "新课速递": cid[0],

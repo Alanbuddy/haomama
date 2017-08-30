@@ -10342,8 +10342,13 @@ return jQuery;
       return $(this).addClass('grow-title');
     }
   });
-  return $(".back").click(function() {
+  $(".back").click(function() {
     return location.href = window.userid;
+  });
+  return $('.course-item').click(function() {
+    var cid;
+    cid = $(this).attr('data-id');
+    return location.href = window.course + "/" + cid;
   });
 });
 

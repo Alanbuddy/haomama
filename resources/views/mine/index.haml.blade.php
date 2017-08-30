@@ -54,7 +54,7 @@
       - foreach ($enrolledCourses as $enrolledCourse)
         .favorite-item{'data-id' => $enrolledCourse['id']}
           .icon-div
-            %img.icon{src: $enrolledCourse['cover'] ? substr($enrolledCourse['cover'],1) :"icon/example.png"}
+            %img.icon{src: $enrolledCourse['cover'] ? strpos($enrolledCourse['cover'], '/') == 0 ? substr($enrolledCourse['cover'],1) :$enrolledCourse['cover'] : "icon/example.png"}
           .word-div
             .favorite-row-div.clearfix
               %span.category-class.f12= $enrolledCourse['category']['name']
@@ -81,7 +81,7 @@
       - foreach ($favoritedCourses as $favoritedCourse)
         .favorite-item{'data-id' => $favoritedCourse['id']}
           .icon-div
-            %img.icon{src: $favoritedCourse['cover'] ? $favoritedCourse['cover'] :"icon/example.png"}
+            %img.icon{src: $favoritedCourse['cover'] ? strpos($favoritedCourse['cover'], '/') == 0 ? substr($favoritedCourse['cover'],1) :$favoritedCourse['cover'] : "icon/example.png"}
           .word-div
             .favorite-row-div.clearfix
               %span.category-class.f12= $favoritedCourse['category']['name']
