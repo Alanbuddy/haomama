@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Wechat\WxApi;
+use App\Models\Behavior;
 use App\Models\User;
 use App\Statistic;
 use Illuminate\Console\Command;
@@ -43,6 +44,7 @@ class Stat extends Command
     {
         $this->recordSubscriptionDaily();
         $this->recordRegistrationDaily();
+        $this->recordActiveUsersDaily();
     }
 
     /**
@@ -113,6 +115,25 @@ class Stat extends Command
             ->count();
         Statistic::updateOrCreate([
             'type' => 'registration',
+            'created_at' => $date
+        ], [
+            'data' => $count
+        ]);
+        $this->info(__METHOD__ . ' done');
+    }
+
+    /**
+     * 记录昨天的活跃用户
+     */
+    public function recordActiveUsersDaily()
+    {
+        $date = date('Y-m-d', strtotime('today -1 day'));
+        $count = Behavior:: where('type', 'login')
+            ->where('created_at', '>', $date)
+            ->where('created_at', '<', date('Y-m-d'))
+            ->count();
+        Statistic::updateOrCreate([
+            'type' => 'activeUser',
             'created_at' => $date
         ], [
             'data' => $count

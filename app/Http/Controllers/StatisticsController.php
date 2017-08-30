@@ -40,8 +40,24 @@ class StatisticsController extends Controller
         $compareMonth = count($registrationsOfLast2Months) == 2 ? $registrationsOfLast2Months[1] / $registrationsOfLast2Months[0] * 100 : 0;
         $compareDay = count($registrationsOfLast2Days) == 2 ? $registrationsOfLast2Days[1] / $registrationsOfLast2Days[0] * 100 : 0;
         $registrationStat=compact('registrationsOfLastDay','compareDay','compareWeek','compareMonth');
-        dd($registrationsOfLast2Weeks->all(), $registrationsOfLast2Months->all(), $registrationsOfLast2Days->all(), $registrationsOfLastDay);
+//        dd($registrationsOfLast2Weeks->all(), $registrationsOfLast2Months->all(), $registrationsOfLast2Days->all(), $registrationsOfLastDay);
+
+        //活跃用户统计
+        $activeUsersOfLast2Weeks = $this->activeUsersPerSpan('%Y%u')->limit(2)->get();
+        $activeUsersOfLast2Months = $this->activeUsersPerSpan('%Y%m')->limit(2)->get();
+        $activeUsersOfLast2Days = $this->activeUsersPerSpan('%Y%m%d')->limit(2)->get();
+        $activeUsersOfLastDay = $activeUsersOfLast2Days->last();
         return view('statistics.index', compact('subscribers'));
+    }
+
+    public function activeUsersPerSpan($date_format)
+    {
+        return Statistic::where('type', 'subscribe')
+            ->select(DB::raw('DATE_FORMAT(created_at,\'' . $date_format . '\') as time_span'))
+            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
+            ->addSelect(DB::raw('sum(data)'))
+            ->orderBy('time_span', 'desc')
+            ->groupBy('time_span');
     }
 
     public function subscribers()
