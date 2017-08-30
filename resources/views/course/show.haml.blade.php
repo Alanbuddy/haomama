@@ -6,6 +6,7 @@
   window.sms_verify = "#{route('sms.verify')}"
   window.user_profile = "#{route('user.profile')}"
   window.token = "#{csrf_token()}"
+  window.course="#{route('index')}"
   window.course_item="#{route('courses.index')}"
   window.favorite = "#{route('courses.favorite',$course['id'])}"
   window.review = "#{route('comments.store')}"

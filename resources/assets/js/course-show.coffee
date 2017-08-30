@@ -116,7 +116,7 @@ $ ->
     location.href = window.course_item + "/" +cid
 
   $(".back").click ->
-    location.href = window.course_item
+    location.href = window.course
 
   $(".time").each ->
     data_time = $(this).text()

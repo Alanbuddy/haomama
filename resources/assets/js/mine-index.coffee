@@ -30,6 +30,10 @@ $ ->
     cid = $(this).attr('data-id')
     location.href = window.course + "/" +cid 
 
+  $('.item').click ->
+    c_id = $(this).attr('data-id')
+    location.href = window.course + "/" +c_id 
+
   $('.enrolled-course').find(".favorite-item:gt(2)").hide()
 
   $('.favorite-div').find(".favorite-item:gt(2)").hide()

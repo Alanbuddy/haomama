@@ -2,7 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/mine-show.css') }}">
 :javascript
-  window.userid = "#{route('users.show',auth()->user())}"
+  window.userid = "#{route('user.account')}"
   window.course = "#{route('courses.index')}"
 
 @endsection

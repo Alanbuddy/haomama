@@ -10360,6 +10360,11 @@ return jQuery;
     cid = $(this).attr('data-id');
     return location.href = window.course + "/" + cid;
   });
+  $('.item').click(function() {
+    var c_id;
+    c_id = $(this).attr('data-id');
+    return location.href = window.course + "/" + c_id;
+  });
   $('.enrolled-course').find(".favorite-item:gt(2)").hide();
   $('.favorite-div').find(".favorite-item:gt(2)").hide();
   sign_in = function() {

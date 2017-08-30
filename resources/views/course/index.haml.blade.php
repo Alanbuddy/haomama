@@ -5,7 +5,7 @@
 :javascript
   window.course_item="#{route('courses.index')}"
   window.course_search="#{route('courses.search')}"
-  window.userid = "#{route('users.show',auth()->user())}"
+  window.userid = "#{route('user.account')}"
   window.load_bottom = "#{route('category',-1)}"
 @endsection
 @section('header')

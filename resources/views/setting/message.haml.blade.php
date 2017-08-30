@@ -2,7 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/message.css') }}">
 :javascript
-  window.person_show = "#{route('users.show',auth()->user()->id)}"
+  window.person_show = "#{route('user.account')}"
 
 @endsection
 @section('content')
