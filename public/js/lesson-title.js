@@ -263,11 +263,24 @@ $(document).ready(function(){
     $(".create-tag-div").find(".tag_id").each(function(){
       tags.push($(this).attr("data-id"));
     });
+    if(tags.length == 0){
+      showMsg("课程标签没有填写", "center");
+      return false;
+    }
     var desc = editor.txt.html();
+    var course_info = editor.txt.text();
+    if(course_info == ""){
+      showMsg("课程介绍没有填写", "center");
+      return false;
+    }
     var lesson_list = [];
     $(".example li").each(function(){
       lesson_list.push($(this).attr("data-id"));
     });
+    if(lesson_list.length == 0){
+      showMsg("没有添加课时", "center");
+      return false;
+    }
     var lesson_title = [];
     $(".w-e-text ").last().find('p').each(function(){
       if($(this).text()!='')
@@ -287,6 +300,10 @@ $(document).ready(function(){
       return false;
     }
     var path = $(".cover-path").text();
+    if(path == ""){
+      showMsg("图片没有上传", "center");
+      return false;
+    }
     var online = "online";
     if (!$.isNumeric(price)){
       price = null;

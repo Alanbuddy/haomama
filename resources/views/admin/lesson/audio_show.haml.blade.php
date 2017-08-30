@@ -49,13 +49,13 @@
               #uploader.wu-example.edit-box
                 .item#old-video
                   %span.info= $audio->file_name
+                  %span.audio-id= $audio->id
                   %p.state 原文件
                   %button.delete_btn 删除
                 #thelist.uploader-list
                 .btns
                   #picker 选择文件
                   %button#ctlBtn.btn.btn-default 开始上传
-            %span.audio-id= $audio->id
             %span.video-id= $video->id
             .notice-introduce.introduce-flex
               %span.introduce 内容介绍:

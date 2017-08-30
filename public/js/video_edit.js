@@ -156,6 +156,10 @@ $(document).ready(function(){
     var lesson_name = $("#input-caption").val().trim();
     var lesson_video_id = $(".video-id").text();
     console.log(lesson_video_id);
+    if(lesson_video_id == ""){
+      showMsg("没有添加视频", "center");
+      return false;
+    }
     var lesson_desc = editor.txt.html();
     var lesson_id = $(".lesson-id").text();
     console.log(lesson_id);

@@ -301,13 +301,28 @@ $(document).ready(function(){
     var min_num = $("#min-num").val().trim();
     var max_num = $("#max-num").val().trim();
     var address = $("#lesson-address").val().trim();
-
+    if(time == ""){
+      showMsg("上课时间没有填写", "center");
+      return false;
+    }
+    if(address == ""){
+      showMsg("上课地点没有填写", "center");
+      return false;
+    }
     var tags = [];
     $(".create-tag-div").find(".tag_id").each(function(){
       tags.push($(this).attr("data-id"));
     });
+    if(tags.length == 0){
+      showMsg("课程标签没有填写", "center");
+      return false;
+    }
     var desc = editor.txt.html();
-
+    var course_info = editor.txt.text();
+    if(course_info == ""){
+      showMsg("课程介绍没有填写", "center");
+      return false;
+    }
     var lesson_title = [];
     $(".w-e-text ").last().find('p').each(function(){
           if($(this).text()!='')
@@ -327,6 +342,10 @@ $(document).ready(function(){
       return false;
     }
     var path = $(".cover-path").text();
+    if(path == ""){
+      showMsg("图片没有上传", "center");
+      return false;
+    }
     var offline = "offline";
 
     var fc_events = $('#calendar').fullCalendar('clientEvents');
@@ -338,6 +357,10 @@ $(document).ready(function(){
         date_in_calendar.push(fc_event.start._i + "," + fc_event.end._i);
       }
     );
+    if(date_in_calendar.length == 0){
+      showMsg("课程日历没有添加", "center");
+      return false;
+    }
     if (!$.isNumeric(price)){
       price = null;
     }

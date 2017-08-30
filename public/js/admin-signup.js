@@ -1,12 +1,12 @@
 $(document).ready(function() {
   var timer = null;
-  var wait = 60;
+  var wait = 120;
   var time = function(o) {
     $(o).attr("disabled", true);
     if (wait == 0) {
       $(o).attr("disabled", false);
       $(o).text('获取验证码');
-      wait = 60;
+      wait = 120;
     } else {
       $(o).text('重发(' + wait + ')');
       wait--;

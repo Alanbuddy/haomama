@@ -9,3 +9,7 @@ $ ->
 
   $(".back").click ->
     location.href = window.userid
+
+  $('.course-item').click ->
+    cid = $(this).attr('data-id')
+    location.href = window.course + "/" +cid 

@@ -10480,7 +10480,7 @@ $(".course-item").click(function() {
 });
 
 $(".back").click(function() {
-  return location.href = window.course_item;
+  return location.href = window.course;
 });
 
 $(".time").each(function() {

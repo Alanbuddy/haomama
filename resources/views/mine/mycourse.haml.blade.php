@@ -2,7 +2,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/mycourse.css') }}">
 :javascript
-  window.userid = "#{route('users.show',auth()->user())}"
+  window.userid = "#{route('user.account')}"
+  window.course = "#{route('courses.index')}"
 @endsection
 @section('content')
 .head-div
@@ -16,9 +17,9 @@
 - else
   .course-item-div
     - foreach ($items as $item)
-      .course-item
+      .course-item{"data-id" => $item->id}
         .course-icon-div
-          %img.course-icon{src: $item['cover'] ? $item['cover'] : "icon/example.png"}
+          %img.course-icon{src: $item['cover'] ? strpos($item['cover'], '/') == 0 ? substr($item['cover'],1) :$item['cover'] : "icon/example.png"}
         .word-div
           .course-row-div.clearfix
             %span.f12.category-class= $item['category']['name']

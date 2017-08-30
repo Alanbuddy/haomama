@@ -266,10 +266,11 @@ $(document).ready(function(){
     }
     var title = $("#input-caption").val();
     var desc = editor.txt.html();
+    var audio_info = editor.txt.text();
     var video_id = $(".video-id").text();
     var audio_id = $(".audio-id").text(); 
-    if (title == "" || audio_id == "" || desc == "" || img_data.length == 0){
-      showMsg("每一项都必须填写", "center");
+    if (title == "" || audio_id == "" || audio_info == "" || img_data.length == 0){
+      showMsg("课时标题、音频文件、内容介绍、图片文件每一项都必须填写", "center");
       return false;
     }
 

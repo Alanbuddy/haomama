@@ -112,7 +112,9 @@ $(document).ready(function(){
     $(this).closest(".item").remove();   //从上传列表dom中删除  
   }); 
 
-
+  $(".delete_btn").click(function(){
+    $(this).closest('.item').remove();
+  });
 
 
   var $list_img = $("#imglist");
@@ -328,6 +330,10 @@ $(document).ready(function(){
     var desc = editor.txt.html();
     var video_id = $(".video-id").text();
     var audio_id = $(".audio-id").text();
+    if(audio_id == ""){
+      showMsg("没有添加音频", "center");
+      return false;
+    }
     var lesson_id = $(".lesson-id").text();
     var put = "PUT";
     console.log(title);
