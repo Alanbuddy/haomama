@@ -617,7 +617,8 @@ class CourseController extends Controller
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
             }])
-            ->paginate(10);
+            ->orderBy('courses.id','desc')
+            ->get();
         return view('mine.show', ['items' => $items]);
     }
 
@@ -629,7 +630,8 @@ class CourseController extends Controller
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
             }])
-            ->paginate(10);
+            ->orderBy('courses.id','desc')
+            ->get();
         return view('mine.mycourse', ['items' => $items]);
     }
 
@@ -787,7 +789,7 @@ class CourseController extends Controller
     {
         $this->validate($request, ['name' => 'required', 'category' => 'required']);
         $name = $request->name;
-        $term = Term::where('name', $request->category)->first();
+        $term = Term::where('type', 'category')->where('name', $request->category)->first();
         if ($term) {
             $items = $term->coursesByCategory()->where('status', 'publish')
                 ->where('name', 'like', '%' . $name . '%')

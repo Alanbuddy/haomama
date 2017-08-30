@@ -61,6 +61,7 @@ class WechatController extends Controller
 
     public function login(Request $request)
     {
+        Log::debug(__METHOD__);
         $code = $request->get('code');
         $response = WxApi::oauthAccessToken($code);
         if ($response["code"] == 200) {
@@ -79,8 +80,8 @@ class WechatController extends Controller
                     $user->save();
                 }
                 //Login
-                Auth::loginUsingId($user->id);
-                event(new Login($user, true));
+                Auth::loginUsingId($user->id,true);
+                event(new Login($user, false));
                 return redirect('/');
             }
         }

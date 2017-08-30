@@ -267,6 +267,7 @@ class LessonController extends Controller
 
     public function update(Request $request, Lesson $lesson)
     {
+        $this->validate($request, ['video_id' => 'required']);
         $lesson->fill($request->only([
             'name',
             'video_id',
