@@ -97,6 +97,7 @@ Route::group([
     Route::any('/orders/{uuid}/payment/update', 'OrderController@updatePaymentStatus')->name('orders.payment.update');
 
     Route::any('/profile', 'UserController@profile')->name('user.profile');
+    Route::any('/account', 'UserController@account')->name('user.account');
     Route::get('/operators/new/count', 'UserController@newOperatorCount')->name('operator.count');
     Route::get('/admin/users/{user}', 'UserController@showAdmin')->name('admin.user.show');
     Route::get('/admin/teachers/{user}/courses', 'UserController@coursesOfTeacher')->name('admin.teacher.course');//后台讲师开设课程

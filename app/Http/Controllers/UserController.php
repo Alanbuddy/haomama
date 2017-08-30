@@ -156,6 +156,29 @@ class UserController extends Controller
         );
     }
 
+    public function account(Request $request)
+    {
+        $user=auth()->user();
+        $userId = $user->id;
+        $enrolledCourses = Search::enrolledCourses($userId)->get();
+        $favoritedCourses = Search::favoritedCourses($userId)->get();
+//        dd($favoritedCourses);
+        $onGoingCourses = Search::onGoingCourses($userId)->get(); //on going offline courses that I've enrolled
+        foreach ($onGoingCourses as $c) {
+            $timeInfo = "";
+            foreach ($c->onGoingLessons as $lesson) {
+                $timeInfo .= date('m/d', strtotime($lesson->begin)) . ' ';
+            }
+            $c->time = $timeInfo;
+        }
+
+        //unread messages count;
+        $messagesCount = $user->messages()->where('has_read', false)->count();
+        return view('mine.index',
+            compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses', 'messagesCount')
+        );
+    }
+
     //后台用户管理
     public function showAdmin(Request $request, User $user)
     {
@@ -253,8 +276,8 @@ class UserController extends Controller
                 $user->parenthood = $request->parenthood;
             }
             if ($request->has('phone')) {
-                $this->validate($request, [
-                    'phone' => 'digits:11|unique:users'
+                $this->validate($request,[
+                    'phone'=>'digits:11|unique:users'
                 ]);
                 $user->phone = $request->phone;
             }

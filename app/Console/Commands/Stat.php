@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Http\Wechat\WxApi;
 use App\Models\Behavior;
+use App\Models\Order;
 use App\Models\User;
 use App\Statistic;
 use Illuminate\Console\Command;
@@ -45,6 +46,8 @@ class Stat extends Command
         $this->recordSubscriptionDaily();
         $this->recordRegistrationDaily();
         $this->recordActiveUsersDaily();
+        $this->recordOrdersDaily();
+        $this->recordIncomeDaily();
     }
 
     /**
@@ -134,6 +137,44 @@ class Stat extends Command
             ->count();
         Statistic::updateOrCreate([
             'type' => 'activeUser',
+            'created_at' => $date
+        ], [
+            'data' => $count
+        ]);
+        $this->info(__METHOD__ . ' done');
+    }
+
+    /**
+     * 记录昨天的成交次数
+     */
+    public function recordOrdersDaily()
+    {
+        $date = date('Y-m-d', strtotime('today -1 day'));
+        $count = Order:: where('status', 'paid')
+            ->where('created_at', '>', $date)
+            ->where('created_at', '<', date('Y-m-d'))
+            ->count();
+        Statistic::updateOrCreate([
+            'type' => 'order',
+            'created_at' => $date
+        ], [
+            'data' => $count
+        ]);
+        $this->info(__METHOD__ . ' done');
+    }
+
+    /**
+     * 记录昨天的收入
+     */
+    public function recordIncomeDaily()
+    {
+        $date = date('Y-m-d', strtotime('today -1 day'));
+        $count = Order:: where('status', 'paid')
+            ->where('created_at', '>', $date)
+            ->where('created_at', '<', date('Y-m-d'))
+            ->sum('wx_total_fee');
+        Statistic::updateOrCreate([
+            'type' => 'income',
             'created_at' => $date
         ], [
             'data' => $count
