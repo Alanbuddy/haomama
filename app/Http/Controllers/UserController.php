@@ -136,6 +136,7 @@ class UserController extends Controller
      */
     public function show(Request $request, User $user)
     {
+        $user->description = json_decode($user->description);
         $userId = $user->id;
         $enrolledCourses = Search::enrolledCourses($userId)->get();
         $favoritedCourses = Search::favoritedCourses($userId)->get();
@@ -151,7 +152,7 @@ class UserController extends Controller
 
         //unread messages count;
         $messagesCount = $user->messages()->where('has_read', false)->count();
-        return view('mine.index',
+        return view('setting.teacher',
             compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses', 'messagesCount')
         );
     }
