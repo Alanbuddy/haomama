@@ -130,36 +130,27 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * 讲师主页
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, User $user)
     {
         $user->description = json_decode($user->description);
-        $userId = $user->id;
-        $enrolledCourses = Search::enrolledCourses($userId)->get();
-        $favoritedCourses = Search::favoritedCourses($userId)->get();
-//        dd($favoritedCourses);
-        $onGoingCourses = Search::onGoingCourses($userId)->get(); //on going offline courses that I've enrolled
-        foreach ($onGoingCourses as $c) {
-            $timeInfo = "";
-            foreach ($c->onGoingLessons as $lesson) {
-                $timeInfo .= date('m/d', strtotime($lesson->begin)) . ' ';
-            }
-            $c->time = $timeInfo;
-        }
-
-        //unread messages count;
-        $messagesCount = $user->messages()->where('has_read', false)->count();
+        $vote = Vote::where('teacher_id', $user->id)
+            ->where('user_id', auth()->user()->id)
+            ->first();
+        $hasVoted = (bool)$vote;
+        $votes = Vote::where('teacher_id', $user->id)->get();
+        $courses = $this->coachingCourses($user);
         return view('setting.teacher',
-            compact('user', 'enrolledCourses', 'favoritedCourses', 'onGoingCourses', 'messagesCount')
+            compact('user', 'hasVoted', 'votes', 'courses')
         );
     }
 
     public function account(Request $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
         $userId = $user->id;
         $enrolledCourses = Search::enrolledCourses($userId)->get();
         $favoritedCourses = Search::favoritedCourses($userId)->get();
@@ -191,11 +182,9 @@ class UserController extends Controller
         return view('admin.client.show', compact('items'));
     }
 
-
-    public function showTeacher(User $user)
+    public function coachingCourses(User $user)
     {
-        $user->description = json_decode($user->description);
-        $courses = $user->coachingCourse()
+        return $user->coachingCourse()
             ->withCount('comments')
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
@@ -203,6 +192,12 @@ class UserController extends Controller
             ->with('category')//预加载课程所属分类的信息
             ->orderBy('id', 'desc')
             ->get();
+    }
+
+    public function showTeacher(User $user)
+    {
+        $user->description = json_decode($user->description);
+        $courses = $this->coachingCourses($user);
         foreach ($courses as $course) {
             $course->sale = $course->orders()->sum('wx_total_fee');
         }
@@ -277,8 +272,8 @@ class UserController extends Controller
                 $user->parenthood = $request->parenthood;
             }
             if ($request->has('phone')) {
-                $this->validate($request,[
-                    'phone'=>'digits:11|unique:users'
+                $this->validate($request, [
+                    'phone' => 'digits:11|unique:users'
                 ]);
                 $user->phone = $request->phone;
             }
