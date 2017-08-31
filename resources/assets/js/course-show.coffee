@@ -99,6 +99,13 @@ $ ->
     if hasEnrolled == false
       $(this).addClass("opt55")
 
+  $(".offline-lesson .item:eq(0)").attr("data-status", "publish")
+
+  $(".offline-lesson .item").each ->
+    offline_hasEnrolled = $(this).attr("data-enrolled")
+    if offline_hasEnrolled == false
+      $(this).addClass("opt55")
+
   $(".items-div > .item:gt(2)").hide()
 
   $(".view-more").click ->
