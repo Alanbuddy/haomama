@@ -10335,12 +10335,12 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var ref, ref1, votes;
   $(".back").click(function() {
-    return location.href = history.back();
+    return location.href = window.history.back();
   });
   $('.category-class').each(function() {
-    if ($(this).text() === "·ÖÀàN") {
+    if ($(this).text() === "健康养育") {
       return $(this).addClass('health-title');
-    } else if ($(this).text() === "·ÖÀàt") {
+    } else if ($(this).text() === "心理教育") {
       return $(this).addClass('psychology-title');
     } else {
       return $(this).addClass('grow-title');

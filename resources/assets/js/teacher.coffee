@@ -1,12 +1,12 @@
 
 $ ->
   $(".back").click ->
-    location.href = history.back()
+    location.href = window.history.back()
 
   $('.category-class').each ->
-    if $(this).text() == "·ÖÀàN"
+    if $(this).text() == "健康养育"
       $(this).addClass('health-title')
-    else if $(this).text() == "·ÖÀàt"
+    else if $(this).text() == "心理教育"
       $(this).addClass('psychology-title')
     else
       $(this).addClass('grow-title')
