@@ -20,12 +20,12 @@ class AppServiceProvider extends ServiceProvider
     {
 //        监听查询事件
         DB::listen(function ($query) {
-            Log::info($query->sql);
+            Log::debug($query->sql);
 //            Log::info($query->time);
-            Log::info( $query->bindings);
+            Log::debug( $query->bindings);
         });
         $this->app->resolving(SearchService::class, function ($api, $app) {
-            Log::info(' 解析「SearchSearvice」类型的对象时调用');
+            Log::debug(' 解析「SearchSearvice」类型的对象时调用');
         });
     }
 
