@@ -268,9 +268,17 @@ class CourseController extends Controller
             }
         }
 
-//        dd($lessons);
         $titles = json_decode($course->titles);
         $lessons = $this->processTitles($titles, $lessons);
+        //获取线下课时开始、结束时间
+        if($course->type=='offline'){
+            $schedule=json_decode($course->schedule);
+            foreach ($lessons as $k=>$v){
+                $v->begin=explode(',',$schedule[$k])[0];
+                $v->end=explode(',',$schedule[$k])[1];
+            }
+        }
+//        dd($lessons,$schedule);
 
         //学员数
         $enrolledCount = $this->enrolledCount($course);
@@ -720,7 +728,6 @@ class CourseController extends Controller
     //搜索页面
     public function search(Request $request)
     {
-        //搜索结果页面
         $route = $request->route();
         if ($route->hasParameter('tag')) {
             $items = Search::coursesByTag($request->route('tag'))

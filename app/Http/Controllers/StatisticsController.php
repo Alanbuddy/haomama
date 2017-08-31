@@ -6,12 +6,13 @@ use App\Models\Behavior;
 use App\Models\Lesson;
 use App\Models\Order;
 use App\Models\User;
-use App\Statistic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class StatisticsController extends Controller
 {
+    use StatisticTrait;
+
     function __construct()
     {
         $this->middleware(['auth', 'role:admin|operator|teacher']);
@@ -42,7 +43,7 @@ class StatisticsController extends Controller
         $compareMonth = (count($registrationsOfLast2Months) == 2 && $registrationsOfLast2Months[1]->total != 0) ? $registrationsOfLast2Months[0]->total / $registrationsOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($registrationsOfLast2Days) == 2 && $registrationsOfLast2Days[1]->total != 0) ? $registrationsOfLast2Days[0]->total / $registrationsOfLast2Days[1]->total * 100 : 0;
         $registrationStat = compact('registrationsOfLastDay', 'compareDay', 'compareWeek', 'compareMonth');
-//        dd($registrationsOfLast2Weeks->all(), $registrationsOfLast2Months->all(), $registrationsOfLast2Days->all(), $registrationsOfLastDay,$registrationStat);
+        dd($registrationsOfLast2Weeks->all(), $registrationsOfLast2Months->all(), $registrationsOfLast2Days->all(), $registrationsOfLastDay, $registrationStat);
 
         //活跃用户统计
         $activeUsersOfLast2Weeks = $this->activeUsersPerSpan('%Y%u')->limit(2)->get();
@@ -102,36 +103,21 @@ class StatisticsController extends Controller
 
         //用户地区分布
         $userLocationDistribution = $this->userLocationDistribution();
-        dd($userLocationDistribution);
+//        dd($userLocationDistribution->toArray());
+
+        //用户身份
+        $userParenthoodDistribution = $this->userParenthoodDistribution();
+//        dd($userParenthoodDistribution->toArray());
+
+        //儿童数量分布
+        $kidsCountDistribution = $this->kidsCountDistribution();
+//        dd($kidsCountDistribution->toArray());
+
+        //儿童年龄分布
+        $kidsAgeDistribution = $this->kidsAgeDistribution();
+        dd($kidsAgeDistribution->toArray());
 
         return view('statistics.index', compact('subscribers'));
-    }
-
-    public function activeUsersPerSpan($date_format)
-    {
-        return Statistic::where('type', 'login')
-            ->select(DB::raw('DATE_FORMAT(created_at,\'' . $date_format . '\') as time_span'))
-            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
-            ->addSelect(DB::raw('sum(data)'))
-            ->orderBy('time_span', 'desc')
-            ->groupBy('time_span');
-    }
-
-    public function subscribers()
-    {
-        $record = Statistic::where('type', 'subscribe')->where('created_at', date('Y-m-d'))->first();
-        $count = $record ? $record->data : 0;
-        return $count;
-    }
-
-    public function subscribersPerSpan($date_format)
-    {
-        return Statistic::where('type', 'subscribe')
-            ->select(DB::raw('DATE_FORMAT(created_at,\'' . $date_format . '\') as time_span'))
-            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
-            ->addSelect(DB::raw('sum(data)'))
-            ->orderBy('time_span', 'desc')
-            ->groupBy('time_span');
     }
 
     public function subscribersPerDay()
@@ -170,16 +156,6 @@ class StatisticsController extends Controller
         dd($data->all());
     }
 
-    public function registrationPerSpan($date_format)
-    {
-        return Statistic::where('type', 'registration')
-            ->select(DB::raw('DATE_FORMAT(created_at,\'' . $date_format . '\') as time_span'))
-            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
-            ->addSelect(DB::raw('sum(data)'))
-            ->orderBy('time_span', 'desc')
-            ->groupBy('time_span');
-    }
-
 //    统计课时观看情况详情页
     public function lessonStatistics(Request $request, Lesson $lesson)
     {
@@ -198,13 +174,6 @@ class StatisticsController extends Controller
         dd($data->all());
     }
 
-    //总用户
-    public function usersCount($offset = null)
-    {
-        $query = User::whereNotNull('openid');
-        if ($offset) $query->where('created_at', '<', date('Y-m-d H:i:s', strtotime('today ' . $offset)));
-        return $query->count();
-    }
 
     //总收入
     public function income($offset = null)
@@ -214,29 +183,12 @@ class StatisticsController extends Controller
         return $query->sum('wx_total_fee');
     }
 
-    public function orderPerSpan($date_format)
-    {
-        return Statistic::where('type', 'order')
-            ->select(DB::raw('DATE_FORMAT(created_at,\'' . $date_format . '\') as time_span'))
-            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
-            ->orderBy('time_span', 'desc')
-            ->groupBy('time_span');
-    }
-
-    public function incomePerSpan($date_format)
-    {
-        return Statistic::where('type', 'income')
-            ->select(DB::raw('DATE_FORMAT(created_at,\'' . $date_format . '\') as time_span'))
-            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
-            ->orderBy('time_span', 'desc')
-            ->groupBy('time_span');
-    }
 
     public function userLocationDistribution()
     {
         return User::whereNotNull('wx')
             ->select(DB::raw('wx->"$.province" as province'))
-            ->addSelect(DB::raw('count(\'id\')'))
+            ->addSelect(DB::raw('count(\'id\') as total'))
             ->groupBy('province')
             ->get();
     }
@@ -245,9 +197,38 @@ class StatisticsController extends Controller
     {
         return User::whereNotNull('wx')
             ->select(DB::raw('wx->"$.province" as province'))
-            ->addSelect('province')
-            ->addSelect(DB::raw('count(\'id\')'))
+            ->addSelect(DB::raw('count(\'id\') total'))
             ->groupBy('province')
+            ->get();
+    }
+
+    public function userParenthoodDistribution()
+    {
+        return User::whereNotNull('wx')
+            ->select('parenthood')
+            ->addSelect(DB::raw('count(\'id\') as total'))
+            ->groupBy('parenthood')
+            ->get();
+    }
+
+    public function kidsCountDistribution()
+    {
+        return User::whereNotNull('wx')
+            ->select(DB::raw('json_length(baby) as kids_count'))
+            ->where(DB::raw('json_valid(baby)'), 1)//exclude rows where baby column is null
+            ->addSelect(DB::raw('count(\'id\') as total'))
+            ->groupBy('kids_count')
+            ->get();
+    }
+
+    public function kidsAgeDistribution()
+    {
+        //TODO suport more than one kid
+        return User::whereNotNull('wx')
+            ->select(DB::raw('left(baby->\'$[0].birthday\',5) as age'))
+            ->where(DB::raw('json_valid(baby)'), 1)//exclude rows where baby column is null
+            ->addSelect(DB::raw('count(\'id\') as total'))
+            ->groupBy('age')
             ->get();
     }
 }

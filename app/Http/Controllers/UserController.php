@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
+use App\Statistic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
 
-    use CourseTitleTrait;
+    use CourseTitleTrait,StatisticTrait;
 
     function __construct()
     {
@@ -434,9 +435,11 @@ class UserController extends Controller
         $items = $user->behaviors()->where('type', 'pv')
             ->select('id', 'user_id', 'type')
             ->addSelect(DB::raw('data->"$.time" as time'))
-            ->addSelect(DB::raw('data->"$.page" as page'))
-            ->addSelect(DB::raw('data->"$.duration" as duration'))
-            ->orderBy('id','desc')
+            ->addSelect(DB::raw('json_unquote(json_extract(data,"$.page")) as page'))
+//            ->addSelect(DB::raw('data->"$.page" as page'))
+            ->addSelect(DB::raw('json_unquote(json_extract(data,"$.duration")) as duration'))
+//            ->addSelect(DB::raw('data->"$.duration" as duration'))
+            ->orderBy('id', 'desc')
             ->paginate(10);
         $items->withPath(route('admin.user.log', $user));
         return view('admin.client.show', compact('user', 'items'));
@@ -486,5 +489,24 @@ class UserController extends Controller
         }
 //        dd($lessons, $course);
         return $lessons;
+    }
+
+    public function statistics(Request $request)
+    {
+        $items = Statistic::select('created_at')
+            ->addSelect(DB::raw('created_at as date'))
+            ->addSelect(DB::raw('(select data from statistics where created_at = date and type=\'registration\') as registration'))
+            ->addSelect(DB::raw('(select data from statistics where created_at = date and type=\'activeUser\') as activeUser'))
+            ->addSelect(DB::raw('(select data from statistics where created_at = date and type=\'subscribe\') as subscribe'))
+            ->addSelect(DB::raw('(select count("id") from users where created_at < date and wx is not null) as total'))
+            ->groupBy('created_at')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $registration= $this->registrationPerSpan('%Y%u')->limit(12)->get();
+        $activeUser= $this->activeUsersPerSpan('%Y%u')->limit(12)->get();
+        $subscribe= $this->subscribersPerSpan('%Y%u')->limit(12)->get();
+        $usersCount= $this->usersCountPerSpan('%Y%u')->limit(12)->get();
+        dd($items->toArray(),$usersCount);
     }
 }
