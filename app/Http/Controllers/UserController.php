@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
 
-    use CourseTitleTrait;
+    use CourseTitleTrait,StatisticTrait;
 
     function __construct()
     {
@@ -502,6 +502,11 @@ class UserController extends Controller
             ->groupBy('created_at')
             ->orderBy('created_at', 'desc')
             ->get();
-        dd($items->toArray());
+
+        $registration= $this->registrationPerSpan('%Y%u')->limit(12)->get();
+        $activeUser= $this->activeUsersPerSpan('%Y%u')->limit(12)->get();
+        $subscribe= $this->subscribersPerSpan('%Y%u')->limit(12)->get();
+        $usersCount= $this->usersCountPerSpan('%Y%u')->limit(12)->get();
+        dd($items->toArray(),$usersCount);
     }
 }

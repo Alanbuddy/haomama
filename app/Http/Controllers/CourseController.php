@@ -270,6 +270,7 @@ class CourseController extends Controller
 
         $titles = json_decode($course->titles);
         $lessons = $this->processTitles($titles, $lessons);
+        //获取线下课时开始、结束时间
         if($course->type=='offline'){
             $schedule=json_decode($course->schedule);
             foreach ($lessons as $k=>$v){

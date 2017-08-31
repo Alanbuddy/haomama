@@ -174,13 +174,6 @@ class StatisticsController extends Controller
         dd($data->all());
     }
 
-    //总用户
-    public function usersCount($offset = null)
-    {
-        $query = User::whereNotNull('openid');
-        if ($offset) $query->where('created_at', '<', date('Y-m-d H:i:s', strtotime('today ' . $offset)));
-        return $query->count();
-    }
 
     //总收入
     public function income($offset = null)

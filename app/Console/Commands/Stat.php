@@ -43,11 +43,12 @@ class Stat extends Command
      */
     public function handle()
     {
-        $this->recordSubscriptionDaily();
         $this->recordRegistrationDaily();
         $this->recordActiveUsersDaily();
         $this->recordOrdersDaily();
         $this->recordIncomeDaily();
+        $this->recordSubscriptionDaily();
+        $this->recordUsersCountDaily();
     }
 
     /**
@@ -175,6 +176,24 @@ class Stat extends Command
             ->sum('wx_total_fee');
         Statistic::updateOrCreate([
             'type' => 'income',
+            'created_at' => $date
+        ], [
+            'data' => $count
+        ]);
+        $this->info(__METHOD__ . ' done');
+    }
+
+    /**
+     * 记录截止昨天午夜的用户总数
+     */
+    public function recordUsersCountDaily()
+    {
+        $date = date('Y-m-d', strtotime('today -1 day'));
+        $count = User::whereNotNull('wx')
+            ->where('created_at', '<=', $date)
+            ->count();
+        Statistic::updateOrCreate([
+            'type' => 'userCount',
             'created_at' => $date
         ], [
             'data' => $count
