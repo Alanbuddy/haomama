@@ -268,9 +268,16 @@ class CourseController extends Controller
             }
         }
 
-//        dd($lessons);
         $titles = json_decode($course->titles);
         $lessons = $this->processTitles($titles, $lessons);
+        if($course->type=='offline'){
+            $schedule=json_decode($course->schedule);
+            foreach ($lessons as $k=>$v){
+                $v->begin=explode(',',$schedule[$k])[0];
+                $v->end=explode(',',$schedule[$k])[1];
+            }
+        }
+//        dd($lessons,$schedule);
 
         //学员数
         $enrolledCount = $this->enrolledCount($course);
