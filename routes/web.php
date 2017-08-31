@@ -50,6 +50,7 @@ Route::group([
     Route::get('/statistics', 'StatisticsController@index')->name('statistics.index');//统计概况
     Route::get('/statistics/lessons', 'StatisticsController@lessonsStatistics')->name('statistics.lessons');//视频播放情况统计列表页
     Route::get('/statistics/lessons/{lesson?}/', 'StatisticsController@lessonStatistics')->name('statistics.lesson');//视频播放情况统计详情页
+    Route::get('/statistics/users', 'UserController@statistics')->name('statistics.user');//统计用户相关
 
 
     Route::get('/courses/search', 'CourseController@search')->name('courses.search');

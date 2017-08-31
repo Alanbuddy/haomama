@@ -720,7 +720,6 @@ class CourseController extends Controller
     //搜索页面
     public function search(Request $request)
     {
-        //搜索结果页面
         $route = $request->route();
         if ($route->hasParameter('tag')) {
             $items = Search::coursesByTag($request->route('tag'))
