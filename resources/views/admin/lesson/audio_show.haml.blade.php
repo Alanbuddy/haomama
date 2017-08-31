@@ -49,6 +49,7 @@
               #uploader.wu-example.edit-box
                 .item#old-video
                   %span.info= $audio->file_name
+                  %span.audio-id= $audio->id
                   %p.state 原文件
                   %button.delete_btn 删除
                 #thelist.uploader-list
@@ -56,7 +57,7 @@
                   #picker 选择文件
                   %button#ctlBtn.btn.btn-default 开始上传
             %span.video-id= $video->id
-            %span.audio-id= $audio->id
+            %span.audio-id
             .notice-introduce.introduce-flex
               %span.introduce 内容介绍:
               %span.unedit-box.introduce-span#desc-span!= $lesson['description']
