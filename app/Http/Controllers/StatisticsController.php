@@ -102,7 +102,15 @@ class StatisticsController extends Controller
 
         //用户地区分布
         $userLocationDistribution = $this->userLocationDistribution();
-        dd($userLocationDistribution);
+//        dd($userLocationDistribution->toArray());
+
+        //用户身份
+        $userParenthoodDistribution = $this->userParenthoodDistribution();
+//        dd($userParenthoodDistribution->toArray());
+
+        //儿童数量分布
+        $kidsCountDistribution = $this->kidsCountDistribution();
+        dd($kidsCountDistribution->toArray());
 
         return view('statistics.index', compact('subscribers'));
     }
@@ -236,7 +244,7 @@ class StatisticsController extends Controller
     {
         return User::whereNotNull('wx')
             ->select(DB::raw('wx->"$.province" as province'))
-            ->addSelect(DB::raw('count(\'id\')'))
+            ->addSelect(DB::raw('count(\'id\') as total'))
             ->groupBy('province')
             ->get();
     }
@@ -245,9 +253,27 @@ class StatisticsController extends Controller
     {
         return User::whereNotNull('wx')
             ->select(DB::raw('wx->"$.province" as province'))
-            ->addSelect('province')
-            ->addSelect(DB::raw('count(\'id\')'))
+            ->addSelect(DB::raw('count(\'id\') total'))
             ->groupBy('province')
+            ->get();
+    }
+
+    public function userParenthoodDistribution()
+    {
+        return User::whereNotNull('wx')
+            ->select('parenthood')
+            ->addSelect(DB::raw('count(\'id\') as total'))
+            ->groupBy('parenthood')
+            ->get();
+    }
+
+    public function kidsCountDistribution()
+    {
+        return User::whereNotNull('wx')
+            ->select(DB::raw('json_length(baby) as kids_count'))
+            ->where(DB::raw('json_valid(baby)'),1) //exclude record where baby column is null
+            ->addSelect(DB::raw('count(\'id\') as total'))
+            ->groupBy('kids_count')
             ->get();
     }
 }

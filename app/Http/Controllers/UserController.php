@@ -434,8 +434,10 @@ class UserController extends Controller
         $items = $user->behaviors()->where('type', 'pv')
             ->select('id', 'user_id', 'type')
             ->addSelect(DB::raw('data->"$.time" as time'))
-            ->addSelect(DB::raw('data->"$.page" as page'))
-            ->addSelect(DB::raw('data->"$.duration" as duration'))
+            ->addSelect(DB::raw('json_unquote(json_extract(data,"$.page")) as page'))
+//            ->addSelect(DB::raw('data->"$.page" as page'))
+            ->addSelect(DB::raw('json_unquote(json_extract(data,"$.duration")) as duration'))
+//            ->addSelect(DB::raw('data->"$.duration" as duration'))
             ->orderBy('id','desc')
             ->paginate(10);
         $items->withPath(route('admin.user.log', $user));
