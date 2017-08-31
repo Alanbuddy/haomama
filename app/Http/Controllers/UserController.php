@@ -436,6 +436,7 @@ class UserController extends Controller
             ->addSelect(DB::raw('data->"$.time" as time'))
             ->addSelect(DB::raw('data->"$.page" as page'))
             ->addSelect(DB::raw('data->"$.duration" as duration'))
+            ->orderBy('id','desc')
             ->paginate(10);
         $items->withPath(route('admin.user.log', $user));
         return view('admin.client.show', compact('user', 'items'));

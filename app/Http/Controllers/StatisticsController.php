@@ -48,7 +48,7 @@ class StatisticsController extends Controller
         $activeUsersOfLast2Weeks = $this->activeUsersPerSpan('%Y%u')->limit(2)->get();
         $activeUsersOfLast2Months = $this->activeUsersPerSpan('%Y%m')->limit(2)->get();
         $activeUsersOfLast2Days = $this->activeUsersPerSpan('%Y%m%d')->limit(2)->get();
-        $activeUsersOfLastDay = $activeUsersOfLast2Days->first();
+        $activeUsersOfLastDay = count($activeUsersOfLast2Weeks) > 0 ? $activeUsersOfLast2Days->first() : 0;
         $compareWeek = (count($activeUsersOfLast2Weeks) == 2 && $activeUsersOfLast2Weeks[1]->total != 0) ? $activeUsersOfLast2Weeks[0]->total / $activeUsersOfLast2Weeks[1]->total * 100 : 0;
         $compareMonth = (count($activeUsersOfLast2Months) == 2 && $activeUsersOfLast2Months[1]->total != 0) ? $activeUsersOfLast2Months[0]->total / $activeUsersOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($activeUsersOfLast2Days) == 2 && $activeUsersOfLast2Days[1]->total) ? $activeUsersOfLast2Days[0]->total / $activeUsersOfLast2Days[1]->total * 100 : 0;
@@ -81,7 +81,7 @@ class StatisticsController extends Controller
         $incomeOfLast2Weeks = $this->incomePerSpan('%Y%u')->limit(2)->get();
         $incomeOfLast2Months = $this->incomePerSpan('%Y%m')->limit(2)->get();
         $incomeOfLast2Days = $this->incomePerSpan('%Y%m%d')->limit(2)->get();
-        $incomeOfLastDay = $incomeOfLast2Days->first()->total;
+        $incomeOfLastDay = count($incomeOfLast2Weeks) > 0 ? $incomeOfLast2Days->first()->total : 0;
         $compareWeek = (count($incomeOfLast2Weeks) == 2 && $incomeOfLast2Weeks[1]->total != 0) ? $incomeOfLast2Weeks[0]->total / $incomeOfLast2Weeks[1]->total * 100 : 0;
         $compareMonth = (count($incomeOfLast2Months) == 2 && $incomeOfLast2Months[1]->total != 0) ? $incomeOfLast2Months[0]->total / $incomeOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($incomeOfLast2Days) == 2 && $incomeOfLast2Days[1]->total != 0) ? $incomeOfLast2Days[0]->total / $incomeOfLast2Days[1]->total * 100 : 0;
@@ -92,7 +92,7 @@ class StatisticsController extends Controller
         $ordersOfLast2Weeks = $this->orderPerSpan('%Y%u')->limit(2)->get();
         $ordersOfLast2Months = $this->orderPerSpan('%Y%m')->limit(2)->get();
         $ordersOfLast2Days = $this->orderPerSpan('%Y%m%d')->limit(2)->get();
-        $ordersOfLastDay = $ordersOfLast2Days->first()->total;
+        $ordersOfLastDay = count($ordersOfLast2Weeks) > 0 ? $ordersOfLast2Days->first()->total : 0;
         $compareWeek = (count($ordersOfLast2Weeks) == 2 && $ordersOfLast2Weeks[1]->total != 0) ? $ordersOfLast2Weeks[0]->total / $ordersOfLast2Weeks[1]->total * 100 : 0;
         $compareMonth = (count($ordersOfLast2Months) == 2 && $ordersOfLast2Months[1]->total != 0) ? $ordersOfLast2Months[0]->total / $ordersOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($ordersOfLast2Days) == 2 && $ordersOfLast2Days[1]->total != 0) ? $ordersOfLast2Days[0]->total / $ordersOfLast2Days[1]->total * 100 : 0;
@@ -101,8 +101,8 @@ class StatisticsController extends Controller
 
 
         //用户地区分布
-        $userLocationDistrubution=$this->userLocationDistrubution();
-        dd($userLocationDistrubution);
+        $userLocationDistribution = $this->userLocationDistribution();
+        dd($userLocationDistribution);
 
         return view('statistics.index', compact('subscribers'));
     }
@@ -232,7 +232,16 @@ class StatisticsController extends Controller
             ->groupBy('time_span');
     }
 
-    public function userLocationDistrubution()
+    public function userLocationDistribution()
+    {
+        return User::whereNotNull('wx')
+            ->select(DB::raw('wx->"$.province" as province'))
+            ->addSelect(DB::raw('count(\'id\')'))
+            ->groupBy('province')
+            ->get();
+    }
+
+    public function userGenderDistribution()
     {
         return User::whereNotNull('wx')
             ->select(DB::raw('wx->"$.province" as province'))

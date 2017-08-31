@@ -218,6 +218,7 @@ class BehaviorController extends Controller
             if (empty($route)) return;
             $page = '';
             Log::debug(__METHOD__ . $route->getName());
+            Log::debug($route->getName()=='user.account'?'yes':'no');
             switch ($route->getName()) {
                 case 'index':
                     $page = '首页';
@@ -231,7 +232,7 @@ class BehaviorController extends Controller
                 case 'user.profile':
                     $page = '个人资料';
                     break;
-                case 'users.show':
+                case 'user.account':
                     $page = '我的';
                     break;
             }
