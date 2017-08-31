@@ -185,8 +185,21 @@ $(document).ready(function($) {
     }
   });
   //用user-info来判断是否已经填写过个人信息
+  function getCookie(cname){
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+      var c = ca[i].trim();
+      if (c.indexOf(name)==0){
+        return c.substring(name.length,c.length);
+      } 
+    }
+    return "false";
+  }
+  var pop = getCookie('popup');
+  console.log(pop);
   var user_info = $(".user-info").text();
-  if(window.hasEnroll && !user_info){
+  if(window.hasEnroll && !user_info && pop == "false"){
     setTimeout(function(){
       $("#profileModal").modal("show");
     },3000);
@@ -198,9 +211,11 @@ $(document).ready(function($) {
     }, 2000);
   });
 
+  var cid = $(".course-id").text();
   $('.profile-close').click(function(){
       $("#profileModal").modal("hide");
       $('.add-baby-div').hide();
+      document.cookie = "popup = true; expires = Fri, 31 Dec 9999 23:59:59 GMT; path = /courses/" + cid;
   });
 
   //需要记录观看视频时间点
@@ -212,7 +227,7 @@ $(document).ready(function($) {
 
   var order = null;
   var signPackage = null;
-  var cid = $(".course-id").text();
+  
   $("#add-btn").click(function(){
     $.ajax({
       url: window.order,

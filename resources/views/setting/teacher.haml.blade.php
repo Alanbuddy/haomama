@@ -25,7 +25,7 @@
     %span= $user->description->book
   .row-div.f12.color6
     %label 简介：
-    %span= $user->description->introduction
+    %span.teacher-info!= $user->description->introduction
   .avatar-div
     %img.teacher-avatar{src: $user['avatar'] ? strpos($user['avatar'], '/') == 0 ? substr($user['avatar'],1) :$user['avatar'] : "icon/teacher_avatar.png"}
   - if ($hasVoted == false)
@@ -46,7 +46,7 @@
       .word-div
         .course-row-div.clearfix
           %span.f12.category-class= $course['category']['name']
-          %span.course-item-value.f14.color5= "￥". $course['price']
+          %span.course-item-value.f14.color5= $course['price'] ? "￥". $course['price'] : "￥".$course['original_price']
         .course-row-div.color7.unstart
           %span.name-span.f16= $course['name']
           - if ($course['type'] == 'offline')

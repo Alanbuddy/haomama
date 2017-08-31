@@ -15,7 +15,7 @@ $(document).ready(function($){
         var status = $(this).attr("data-status");
         var  an = $(this);
         if (status != "publish") {
-          an.addClass('unopen');
+          an.removeClass('common').addClass('unopen');
           an.click(function(e){
             e.preventDefault();
             showMsg("这节课还没有上线哦～", "center");

@@ -57,7 +57,7 @@
           .row-div
             %a.edit.f12.color10#baby-edit 编辑
   %p.f12.color10.pt16#another-baby 还有一个宝宝?
-.btn#edit-end 编辑完成
+.btn#edit-end 确认
 
 .baby-item.add-baby-div
   %img.close-add-item{src: "icon/close.png"}

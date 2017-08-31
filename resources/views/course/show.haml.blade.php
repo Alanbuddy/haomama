@@ -87,10 +87,11 @@
             .item-row.f12.color5
               %span.min= date_format(date_create($lessons[$i]['begin']),"Y/m/d")
               %span= date_format(date_create($lessons[$i]['begin']),"H:i")."~".date_format(date_create($lessons[$i]['end']),"H:i")
-          - if ($lessons[$i]['hasAttended'])
-            %img.sign-icon{src: "icon/arrive.png"}
-          - else
-            %img.sign-icon{src: "icon/absent.png"}
+          - if ($hasEnrolled == true)
+            - if ($lessons[$i]['hasAttended'])
+              %img.sign-icon{src: "icon/arrive.png"}
+            - else
+              %img.sign-icon{src: "icon/absent.png"}
       - if (count($lessons) > 3)
         .view-more
           %span.f12.color5 查看更多
