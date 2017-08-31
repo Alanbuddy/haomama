@@ -331,7 +331,7 @@ $(document).ready(function(){
     var video_id = $(".video-id").text();
     var audio_id = $(".audio-id").text();
     if(audio_id == ""){
-      showMsg("没有添加音频", "center");
+      showMsg("没有添加视频", "center");
       return false;
     }
     var lesson_id = $(".lesson-id").text();

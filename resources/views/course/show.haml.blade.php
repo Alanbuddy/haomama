@@ -80,7 +80,7 @@
         %span.uuid{style: "display:none;"}= $order->uuid
     .items-div.offline-lesson
       - for ($i=0;$i<count($lessons);$i++)
-        .item.opt55{"data-id" => $lessons[$i]['id']}
+        %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
           %p.num-div.f16.color7= ($i + 1)
           .item-desc
             %p.f14.color7= $lessons[$i]['name']

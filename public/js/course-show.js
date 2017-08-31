@@ -10459,6 +10459,16 @@ $(".online-course .item").each(function() {
   }
 });
 
+$(".offline-lesson .item:eq(0)").attr("data-status", "publish");
+
+$(".offline-lesson .item").each(function() {
+  var offline_hasEnrolled;
+  offline_hasEnrolled = $(this).attr("data-enrolled");
+  if (offline_hasEnrolled === false) {
+    return $(this).addClass("opt55");
+  }
+});
+
 $(".items-div > .item:gt(2)").hide();
 
 $(".view-more").click(function() {
