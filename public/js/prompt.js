@@ -225,6 +225,7 @@ $(document).ready(function($){
             page++;
             callbackHandle(data);
           }else{
+            $(".loading").hide();
             $(".notice").show();
           }
         }

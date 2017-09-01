@@ -11,13 +11,13 @@ $(document).ready(function($) {
   //   }
   // });
 	var timer = null;
-	var wait = 60;
+	var wait = 120;
 	var time = function(o) {
 		$(o).attr("disabled", true);
 		if (wait == 0) {
 			$(o).attr("disabled", false);
 			$(o).text('发送验证码');
-		  wait = 60;
+		  wait = 120;
 		} else {
 			$(o).text('重发(' + wait + ')');
 			wait--;
@@ -76,13 +76,11 @@ $(document).ready(function($) {
         if (data.success) {
           $("#mobileModal").modal("hide");
           $('#mobile-span').text(mobile);
+          if($(".replace").text() == "添加"){
+            $(".replace").text("更换");
+          }
         } else {
-          // 需要修改
-            showMsg('验证码错误', 'center');
-
-          // if (data.message == "WRONG_VERIFY_CODE") {
-          //   showMsg('验证码错误', 'center');
-          // }
+          showMsg('验证码错误', 'center');
         }
       }
       );

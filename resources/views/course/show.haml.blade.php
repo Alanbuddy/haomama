@@ -32,7 +32,7 @@
     .course-row-div.clearfix
       %span.f12.category-class= $course->category?$course->category->name:$course['category_id']
     .course-row-div.color7.status-flex
-      %span.name-span.f16.fb.color7= $course['name']
+      %span.name-span.f16.fb.color7= str_limit($course['name'], $limit = 24, $end = '...')
       %span.course-id{style: "display:none;"}= $course['id']
       %span.user-info{style:"display:none"}= auth()->user()->phone
       - if ($course['type'] == "offline")
@@ -157,14 +157,14 @@
           %span.f12.category-class= $recommendedCourse['category']['name']
           %span.course-item-value.f14.color5= $recommendedCourse['price'] ? "￥". $recommendedCourse['price'] : "￥". $recommendedCourse['original_price']
         .course-row-div.color7.unstart
-          %span.name-span.f16= $recommendedCourse['name']
+          %span.name-span.f16= str_limit($recommendedCourse['name'], $limit = 24, $end = '...')
           - if ($recommendedCourse['type'] == 'offline')
             %span.course-status.f8 线下
         .course-row-div.f12.color6
           - if ($recommendedCourse['type'] == 'offline')
             %span.participate= $recommendedCourse['users_count']."人已报名"
             %span .
-            %span= date_format(date_create($recommendedCourse['begin']),"m月/d日") ."开课"
+            %span= date_format(date_create($recommendedCourse['begin']),"m月d日") ."开课"
           - else
             %span.participate= $recommendedCourse['users_count']."人已学"
             %span .

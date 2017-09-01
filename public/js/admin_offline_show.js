@@ -1,5 +1,7 @@
 $(document).ready(function(){
+	var is_edit = false;
 	$("#edit-btn").click(function(){
+		is_edit = true;
 		$(this).toggle();
 		$(".unedit-box").toggle();
 		$(".edit-box").toggle();
@@ -226,6 +228,9 @@ $(document).ready(function(){
 	  nowIndicator: true,
 	  height: 360,
 	  eventClick: function(calEvent, jsEvent, view){
+	  	if(is_edit == false){
+	  		return false;
+	  	}
 	    $("#calendar").fullCalendar('removeEvents', calEvent.id);
 	  }
 	});
@@ -414,7 +419,14 @@ $(document).ready(function(){
 	  var min_num = $("#min-num").val().trim();
 	  var max_num = $("#max-num").val().trim();
 	  var address = $("#lesson-address").val().trim();
-
+	  if(time == ""){
+	    showMsg("上课时间没有填写", "center");
+	    return false;
+	  }
+	  if(address == ""){
+	    showMsg("上课地点没有填写", "center");
+	    return false;
+	  }
 	  var tags = [];
 	  $(".create-tag-div").find(".tag_id").each(function(){
 	    tags.push($(this).attr("data-id"));
@@ -422,7 +434,16 @@ $(document).ready(function(){
 	  $(".tag-span").each(function(){
 	    tags.push($(this).attr("data-id"));
 	  });
+	  if(tags.length == 0){
+	    showMsg("课程标签没有填写", "center");
+	    return false;
+	  }
 	  var desc = editor.txt.html();
+	  var course_info = editor.txt.text();
+	  if(course_info == ""){
+	    showMsg("课程介绍没有填写", "center");
+	    return false;
+	  }
     var lesson_title = [];
     $(".w-e-text").last().find("p").each(function(){
         if($(this).text()!='')
@@ -430,6 +451,10 @@ $(document).ready(function(){
     });
     // lesson_title.shift(lesson_title[0]);
     console.log(lesson_title);
+    if(lesson_title.length != parseInt(length)){
+      showMsg("课程节数和课时标题数不匹配", "center");
+      return false;
+    }
 	  var teacher_arr = [];
 	  $(".teacher-id").each(function(){
 	    teacher_arr.push($(this).text());
@@ -484,6 +509,7 @@ $(document).ready(function(){
 	    },
 	    function(data){
 	      if(data.success){
+	      	is_edit = false;
 	        location.href = window.course_show;
 	      }
 	    }

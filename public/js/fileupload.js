@@ -139,16 +139,8 @@ $(document).ready(function(){
     var lesson_video_id = $(".video-id").text();
     var lesson_desc = editor.txt.html();
     var lesson_info = editor.txt.text();
-    if(lesson_name == ""){
-      showMsg("课时标题没有填写", "center");
-      return false;
-    }
-    if(lesson_video_id == ""){
-      showMsg("视频文件没有上传", "center");
-      return false;
-    }
-    if(lesson_info == ""){
-      showMsg("内容介绍没有填写", "center");
+    if(lesson_name == "" || lesson_video_id == "" || lesson_info == ""){
+      showMsg("课时标题、视频文件、内容介绍每一项都必须填写", "center");
       return false;
     }
     $.ajax({

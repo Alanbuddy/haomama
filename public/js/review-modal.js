@@ -390,4 +390,20 @@ $(document).ready(function($) {
       });
     }
   });
+
+  //签到
+  function sign_in(){
+    wx.scanQRCode({
+      needResult: 1, 
+      scanType: ["qrCode"],
+      success: function (res) {
+       var result = res.resultStr;
+       window.location.href = result;
+      }
+    });
+  }
+
+  $("#sign-btn").click(function(){
+    sign_in();
+  });
 });

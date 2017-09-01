@@ -63,8 +63,8 @@
               %p.f12.color7.review-name= $comment->user->name
               %p.f12.color5.time= $comment['created_at']
               %p.f14.color7.review-content= $comment['content']
-              %span.f12.color5 评论来源：
-              %span.f12.color5= $comment->lesson->name
+              // %span.f12.color5 评论来源：
+              // %span.f12.color5= $comment->lesson->name
               .admire-div
                 %span.f12.color5.admire-num= $comment['voteCount']
                 - if ($comment['hasVoted'] == false)
@@ -80,8 +80,8 @@
             %p.f12.color7.review-name= $latestComment->user->name
             %p.f12.color5.time= $latestComment['created_at']
             %p.f14.color7.review-content= $latestComment['content']
-            %span.f12.color5 评论来源：
-            %span.f12.color5= $latestComment->lesson->name
+            // %span.f12.color5 评论来源：
+            // %span.f12.color5= $latestComment->lesson->name
             .admire-div
               %span.f12.color5.admire-num= $latestComment['voteCount']
               - if ($latestComment['hasVoted'] == false)
@@ -108,8 +108,8 @@
                 %p.f12.color7.review-name= $comment->user->name
                 %p.f12.color5.time= $comment['created_at']
                 %p.f14.color7.review-content= $comment['content']
-                %span.f12.color5 评论来源：
-                %span.f12.color5= $comment->lesson->name
+                // %span.f12.color5 评论来源：
+                // %span.f12.color5= $comment->lesson->name
                 .admire-div
                   %span.f12.color5.admire-num= $comment['voteCount']
                   - if ($comment['hasVoted'] == false)
