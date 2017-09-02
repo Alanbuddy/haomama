@@ -57,10 +57,15 @@
                           %td= "无"
                           %td= "无"
                         - else
-                          - for($i=0;$i<count($item->baby);$i++)
-                            %td= json_decode($item->baby)[$i]->name
-                            %td= json_decode($item->baby)[$i]->gender
-                            %td.age= json_decode($item->baby)[$i]->birthday
+                          %td= json_decode($item->baby)[0]->name
+                          %td= json_decode($item->baby)[0]->name
+                          %td.age= json_decode($item->baby)[0]->birthday
+                      - if(count($item->baby) != 0)
+                        - for($i=1;$i<count($item->baby);$i++)
+                          %tr
+                            %td.no-border-top= json_decode($item->baby)[$i]->name
+                            %td.no-border-top= json_decode($item->baby)[$i]->name
+                            %td.no-border-top.age= json_decode($item->baby)[$i]->birthday
               .select-page 
                 %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
                 %span.choice-page

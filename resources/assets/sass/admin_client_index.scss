@@ -8,3 +8,12 @@
 .desc-div {
   padding-bottom: 0;
 }
+.table-height tbody tr:last-child {
+  border-bottom: 0;
+}
+.table-height tbody {
+  border-bottom: 4px solid #eaebf2;
+}
+.no-border-top {
+	border-top: 0 !important;
+}

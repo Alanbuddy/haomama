@@ -73,7 +73,10 @@
 // underline course
 - if ($course['type'] == "offline")
   .course-content.clearfix
-    %span.title.f14.color7.fb 课时情况
+    %span.title.f14.color7.fb 课程目录
+    - if (count($lessons) > 3)
+      %span.f12.color7= "(共".count($lessons)."节)"
+    %span.begin-time{style: "display:none;"}= $course->begin
     - if ($hasEnrolled == true)
       %span.refund.f12.color5 退款
       - if(!empty($order))

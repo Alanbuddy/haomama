@@ -265,6 +265,12 @@ $(document).ready(function($) {
     });
   });
 
+  var begin_time = new Date($(".begin-time").text()).getTime();
+  var time_now = new Date().getTime();
+  if(time_now - 24*60*60*1000 > begin_time){
+    $(".refund").hide();
+  }
+
   $(".refund").click(function(){
     var uuid = $(".uuid").text();
     $.ajax({

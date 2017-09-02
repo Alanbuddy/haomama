@@ -16,7 +16,7 @@
   .avatar-div
     - if ($user)
       %img.avatar-icon{src: $user->wx ? json_decode($user->wx)->headimgurl : "icon/avatar.png"}
-      %p.name.f16.color7= $user['name']
+      %p.name.f16.color7= str_limit($user['name'], $limit = 24, $end = '...')
     .right-div
       %span.f12.color5 个人资料
       %img.arrow{src: "icon/go.png"}
