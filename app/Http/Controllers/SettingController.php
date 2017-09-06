@@ -102,9 +102,9 @@ class SettingController extends Controller
             } else {
                 $category = Term::where('name', $k)->first();
                 $category->coursesByCategory()->update(['hot' => 0]);
+                $course = Course::find($v);//in case of dirty read
                 if ($course) {
-                    $course->hot = 1;
-                    $course->save();
+                    $course->update(['hot'=>1]);
                 }
             }
 
