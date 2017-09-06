@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Behavior;
 use App\Models\Course;
+use App\Models\Lesson;
 use App\Models\User;
 use App\Services\SimpleRouter;
 use Illuminate\Foundation\Application;
@@ -238,6 +239,12 @@ class BehaviorController extends Controller
                     break;
                 case 'user.account':
                     $page = '我的';
+                    break;
+                case 'messages.index':
+                    $page = '消息';
+                    break;
+                case 'courses.lessons.show':
+                    $page = '课时:'. Lesson::findOrFail($route->parameter('lesson'))->name;
                     break;
             }
             $data->page = $page;

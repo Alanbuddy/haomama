@@ -19,7 +19,7 @@ class UserController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin|operator')->only(['index', 'store']);
+        $this->middleware('role:admin|operator')->only(['index', 'store', 'log', 'order']);
     }
 
     /**

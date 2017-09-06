@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
-    use ErrorTrait;
+    use ErrorTrait, CourseEnrollTrait;
 
     /**
      *
@@ -157,6 +157,8 @@ class OrderController extends Controller
 
     public function pay(Request $request)
     {
+        $course = Course::findOrFail($request->get('course_id'));
+        if ($this->hasEnrolled($course, auth()->user()->id)) return;
         Log::info(__FILE__ . __LINE__);
         $order = $this->store($request);
         try {
@@ -244,7 +246,7 @@ class OrderController extends Controller
             $right = strtotime($right) ? $right : date('Y-m-d H:i:s', strtotime("today -" . $right . " days"));
             $query->where('orders.created_at', '<', $right);
         }
-        $query ->select(DB::raw('left(created_at,10) as date'))
+        $query->select(DB::raw('left(created_at,10) as date'))
             ->addSelect(DB::raw('count(*) as thorough_orders_count'))
             ->addSelect(DB::raw('sum(wx_total_fee) as total_fee'))
             ->addSelect(DB::raw('(select sum(wx_total_fee) from orders where status="paid" and created_at <= left(orders.created_at,10) ) as thorough_total_fee '))
