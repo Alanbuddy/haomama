@@ -27,7 +27,7 @@ class CourseController extends Controller
     function __construct()
     {
         $this->middleware('role:admin|operator|teacher')
-            ->except(['show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn', 'favoriteCourses', 'commentsIndex']);
+            ->only(['draftIndex','finishedIndex','index','create','store','destroy','update']);
     }
 
     public function draftIndex(Request $request)
