@@ -3,6 +3,9 @@ $(document).ready(function(){
     location.href = window.course_show;
   });
 
+  $("#sign").click(function(){
+    location.href = window.course_signin;
+  });
   var node = "";
    
   $(".details").click(function(){

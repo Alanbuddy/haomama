@@ -7,6 +7,7 @@
   window.course_publish = "#{route('courses.publish',$course->id)}"
   window.course_show = "#{route('admin.courses.show',$course->id)}"
   window.token = "#{csrf_token()}"
+  window.course_signin = "#{route('admin.courses.signIn',$course)}"
 
 @endsection
 @section('search-input')

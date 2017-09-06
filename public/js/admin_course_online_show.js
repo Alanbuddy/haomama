@@ -225,7 +225,7 @@ $(document).ready(function(){
             // console.log(data.data);  
             response( $.map( data.data, function( item ) {  
                 return {
-                    value: item.name,
+                    value: item.name+ (item.remark? '('+item.remark+')':''),
                     object_id: item.id
                 };  
             }));  
