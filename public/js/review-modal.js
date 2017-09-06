@@ -218,10 +218,11 @@ $(document).ready(function($) {
       document.cookie = "popup = true; expires = Fri, 31 Dec 9999 23:59:59 GMT; path = /courses/" + cid;
   });
 
-  //需要记录观看视频时间点
-  // $("#test-btn").click(function(){
-
-  // });
+  
+  $("#test-btn").click(function(){
+    var view_item = $(".items-div .item:eq(0)").attr("href");
+    location.href = view_item;
+  });
 
   $(".online-course .item:eq(0)").find(".free").show();
 
