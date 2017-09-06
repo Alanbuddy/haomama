@@ -10,19 +10,23 @@
 .head-div
   %img.back{src: "icon/back2.png"}
 .profile-div
-  %p.name.f16.fb.color1 张老师
-  .row-div.f12.color6
-    %label 职称：
-    %span= $user->description->title
-  .row-div.f12.color6
-    %label 专长：
-    %span= $user->description->major
-  .row-div.f12.color6
-    %label 获奖：
-    %span= $user->description->award
-  .row-div.f12.color6
-    %label 出书：
-    %span= $user->description->book
+  %p.name.f16.fb.color1= $user->name."老师"
+  - if($user->description->title)
+    .row-div.f12.color6
+      %label 职称：
+      %span= $user->description->title
+  - if($user->description->major)
+    .row-div.f12.color6
+      %label 专长：
+      %span= $user->description->major
+  - if($user->description->award)
+    .row-div.f12.color6
+      %label 获奖：
+      %span= $user->description->award
+  - if($user->description->book)
+    .row-div.f12.color6
+      %label 出书：
+      %span= $user->description->book
   .row-div.f12.color6
     %label 简介：
     %span.teacher-info!= $user->description->introduction

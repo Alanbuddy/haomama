@@ -123,10 +123,5 @@ $(document).ready(function(){
         console.log("file_id不存在");
       }
   })();
-  //播放退出监听
-  window.onunload = function(){
-    var video_time = player.getCurrentTime();
-    alert(video_time);
-  };
   
 });
