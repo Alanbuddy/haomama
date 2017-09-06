@@ -224,6 +224,7 @@ class CourseController extends Controller
                 ->where('course_id', $course->id)
                 ->whereNotNull('star')->count() > 0;
         $comments = $course->comments()
+            ->whereNull('comments.star')
             ->with('user')
             ->with('lesson')
             ->with('votes')
