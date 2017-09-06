@@ -160,7 +160,7 @@ $(document).ready(function(){
 	          // console.log(data.data);  
 	          response( $.map( data.data, function( item ) {  
 	              return {
-	                  value: item.name,
+	                  value: item.name+ (item.remark? '('+item.remark+')':''),
 	                  object_id: item.id
 	              };  
 	          }));  
@@ -537,6 +537,10 @@ $(document).ready(function(){
 
   $("#register").click(function(){
   	location.href = window.offline_student;
+  });
+
+  $("#sign").click(function(){
+  	location.href = window.course_signin;
   });
 
 });

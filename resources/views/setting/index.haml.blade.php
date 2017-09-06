@@ -7,6 +7,7 @@
   window.user_profile = "#{route('user.profile')}"
   window.mine_page = "#{route('user.account')}"
   window.token = "#{csrf_token()}"
+  window.validmobile = "#{route('validate.phone')}"
 
 @endsection
 @section('content')

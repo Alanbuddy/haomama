@@ -613,3 +613,112 @@ h2 {
   display: none;
   border: 1px solid #ddd;
 }
+
+//tab3
+.sign-box {
+  margin: 20px 20px 0 20px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  display: -ms-flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -o-flex;
+  display: flex;
+}
+.sign-method {
+  -webkit-flex: 1;
+          flex: 1;
+  border-right: 1px solid #ddd;
+}
+.form-horizontal {
+  padding: 40px 0;
+  border-bottom: 1px dashed #ddd;
+  .form-group {
+    margin: 0;
+  }
+}
+.control-label {
+  font-weight: normal;
+}
+.mask {
+  visibility: hidden;    //隐藏mask
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgb(221, 221, 221);
+  background: rgba(221, 221, 221,0.8);
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  .notice {
+    padding: 0 34%;
+    font-size: 16px;
+    color: #323232;
+  }
+}
+
+.method {
+  position: relative;
+  padding: 0 28.5%;
+}
+.caption {
+  padding: 20px 0;
+  font-size: 14px;
+  color: #323232;
+}
+#qr-code {
+  margin-bottom: 40px;
+}
+.code-figure {
+  width: 100%;
+  max-width: 200px;
+}
+
+.sign-status-box {
+  -ms-flex: 2;
+  -webkit-flex: 2;
+  flex: 2;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -o-flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.sign-status {
+  width: 60%;
+  h5 {
+    font-size: 24px;
+    color: #323232;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
+#sign-table {
+  width: auto;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 20px;
+  color: #323232;
+  .sign-data {
+    width: 100px;
+    height:45px;
+    // line-height: 45px;
+    text-align: center;
+    // padding: 0;
+    padding: 8px 0;
+  }
+  .check-in {
+    background: rgb(16, 192, 120);
+    background: rgba(16, 192, 120,0.3);
+  }
+}

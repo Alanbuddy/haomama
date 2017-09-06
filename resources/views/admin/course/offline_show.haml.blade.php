@@ -19,6 +19,7 @@
   window.course_show = "#{route('admin.courses.show',$course->id)}"
   window.course_del = "#{route('courses.destroy',$course->id)}"
   window.offline_student = "#{route('admin.courses.students',$course->id)}"
+  window.course_signin = "#{route('admin.courses.signIn',$course)}"
   
 @endsection
 @section('search-input')

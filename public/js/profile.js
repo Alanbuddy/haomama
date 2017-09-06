@@ -31,25 +31,38 @@ $(document).ready(function($) {
 	$("#code").click(function(){
 	  var mobile = $("#mobile").val();
 	  var mobile_retval = $.regex.isMobile(mobile);
-	  if (mobile_retval === false) {
-	    showMsg("手机号不正确", 'center');
-	    return false;
-	  }
-    $.getJSON(
-      window.sms_send,
-      {
-        phone: mobile
-      },
-      function(data){
-        console.log(data);
-        if (data.success){
-          if (timer !== null) {
-            clearTimeout(timer);
+    if (mobile_retval === false) {
+      showMsg("手机号不正确", 'center');
+      return false;
+    }else{
+      $.getJSON(
+        window.validmobile,
+        {
+          phone: mobile
+        },
+        function(data){
+          if(data.isOccupied == false){
+            $.getJSON(
+              window.sms_send,
+              {
+                phone: mobile
+              },
+              function(data){
+                console.log(data);
+                if (data.success){
+                  if (timer !== null) {
+                    clearTimeout(timer);
+                  }
+                  time('#code');
+                }
+              }
+            );
+          }else{
+            showMsg("该手机号已经被占用，请更换号码", "center");
           }
-          time('#code');
         }
-      }
-    );
+        );
+    }
     return false;
 	});
 
