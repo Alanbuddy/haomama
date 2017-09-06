@@ -23,12 +23,7 @@ trait CourseEnrollTrait
             throw new \Exception("User doesn't exist");
 //        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
 //        $course->users()->attach(auth()->user(), ['type' => $type]);
-        $count = $course->users()
-            ->withPivot('type')
-            ->where('type', 'enroll')
-            ->where('user_type', 'student')
-            ->where('user_id', $user->id)
-            ->count();
+        $count = $this->hasEnrolled($course, $user->id);
         if ($count == 0) {
             $changed = $course->users()->attach($user, [
                 'user_type' => 'student',
@@ -38,5 +33,15 @@ trait CourseEnrollTrait
         }
         $changed = $course->users()->syncWithoutDetaching($user, ['user_type' => 'student']);
         return ['success' => 'true', 'changed' => $changed];
+    }
+
+    public function hasEnrolled($course, $userId)
+    {
+        return $course->users()
+            ->withPivot('type')
+            ->where('type', 'enroll')
+            ->where('user_type', 'student')
+            ->where('user_id', $userId)
+            ->count();
     }
 }

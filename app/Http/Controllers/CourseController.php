@@ -927,7 +927,7 @@ class CourseController extends Controller
         $schedules = json_decode($course->schedule);
         $attendances = $this->getAttendances($request, $course);
 //        dd($lessons, $schedules, $attendances);
-        return view('admin.course.offline_sign', compact('course', 'lessons'));
+        return view('admin.course.offline_sign', compact('course', 'lessons', 'attendances'));
     }
 
     public function getAttendances(Request $request, Course $course)
