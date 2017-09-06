@@ -104,7 +104,7 @@ class SearchService
         $tags = $course->tags;
         $collection = collect([]);
         foreach ($tags as $tag) {
-            $courses = $tag->coursesByTag()->where('status','publish')->get();
+            $courses = $tag->coursesByTag()->where('status', 'publish')->get();
             foreach ($courses as $item) {
                 $collection->put($item->id,
                     $collection->get($item->id, 0) + 1);
@@ -138,6 +138,7 @@ class SearchService
                 $query->where('courses.name', 'like', '%' . $key . '%')
                     ->orWhere('users.name', 'like', '%' . $key . '%');
             })
+            ->where('courses.status', 'publish')
             ->groupBy('courses.id')
             ->orderBy('courses.id', 'asc');
         return $items;

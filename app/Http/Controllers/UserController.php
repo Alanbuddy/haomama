@@ -340,6 +340,7 @@ class UserController extends Controller
                 break;
             case 'teacher':
                 $items = $role->users()
+                    ->addSelect(DB::raw('description->"$.remark" as remark'))
                     ->where(function ($query) use ($name) {
                         $query->where('name', 'like', '%' . $name . '%')
                             ->orWhere('phone', 'like', '%' . $name . '%');

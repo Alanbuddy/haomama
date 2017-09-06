@@ -23,7 +23,7 @@ trait StatisticTrait
     {
         return Statistic::where('type', 'subscribe')
             ->select(DB::raw('DATE_FORMAT(created_at,\'' . $date_format . '\') as time_span'))
-            ->addSelect(DB::raw('sum(cast(data as unsigned)) as total'))
+            ->addSelect(DB::raw('max(cast(data as unsigned)) as total'))
 //            ->addSelect(DB::raw('sum(data)'))
             ->orderBy('time_span', 'desc')
             ->groupBy('time_span');
