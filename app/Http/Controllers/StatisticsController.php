@@ -32,7 +32,7 @@ class StatisticsController extends Controller
         $compareDay = (count($subscribersOfLast2Days) == 2 && $subscribersOfLast2Days[1]->total != 0) ? $subscribersOfLast2Days[0]->total / $subscribersOfLast2Days[1]->total * 100 : 0;
         $subscriberStat = compact('subscribersOfLastDay', 'compareDay', 'compareWeek', 'compareMonth');
 
-//        dd($subscribersOfLast2Weeks->all(), $subscribersOfLast2Months->all(), $subscribersOfLast2Days->all(),$subscriberStat);
+        dd($subscribersOfLast2Weeks->all(), $subscribersOfLast2Months->all(), $subscribersOfLast2Days->all(),$subscriberStat);
 
         //注册人数相关
         $registrationsOfLast2Weeks = $this->registrationPerSpan('%Y%u')->limit(2)->get();
@@ -43,7 +43,7 @@ class StatisticsController extends Controller
         $compareMonth = (count($registrationsOfLast2Months) == 2 && $registrationsOfLast2Months[1]->total != 0) ? $registrationsOfLast2Months[0]->total / $registrationsOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($registrationsOfLast2Days) == 2 && $registrationsOfLast2Days[1]->total != 0) ? $registrationsOfLast2Days[0]->total / $registrationsOfLast2Days[1]->total * 100 : 0;
         $registrationStat = compact('registrationsOfLastDay', 'compareDay', 'compareWeek', 'compareMonth');
-        dd($registrationsOfLast2Weeks->all(), $registrationsOfLast2Months->all(), $registrationsOfLast2Days->all(), $registrationsOfLastDay, $registrationStat);
+//        dd($registrationsOfLast2Weeks->all(), $registrationsOfLast2Months->all(), $registrationsOfLast2Days->all(), $registrationsOfLastDay, $registrationStat);
 
         //活跃用户统计
         $activeUsersOfLast2Weeks = $this->activeUsersPerSpan('%Y%u')->limit(2)->get();
