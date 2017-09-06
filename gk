@@ -1,0 +1,10 @@
+#!/bin/bash
+ 
+ 
+#提示“请输入进程名”并等待30秒，把用户的输入保存入变量name中
+read -t 30 -p "请输入进程名:" name
+echo -e "\n"
+echo "进程名为:$name"
+ps=`ps aux|grep $name|awk '{print $2}'|awk BEGIN{RS=EOF}'{gsub(/\n/," ");print }'`
+read -t 30 -n 1 -p "确定kill下列进程吗？:\n"+$ps
+#ps aux|grep $name|awk '{print $2}'|awk BEGIN{RS=EOF}'{gsub(/\n/," ");print }'|xargs kill -9
