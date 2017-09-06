@@ -29,10 +29,11 @@ class SearchService
     //课程评论数和学员数和所属分类信息
     public function basicStat()
     {
-        $items = Course::withCount('comments')
-            ->withCount(['users' => function ($query) {
-                $query->where('type', 'enroll');
-            }])
+        $items = Course::withCount(['comments' => function ($query) {
+            $query->whereNull('star');
+        }])->withCount(['users' => function ($query) {
+            $query->where('type', 'enroll');
+        }])
             ->with('category');//预加载课程所属分类的信息
         return $items;
     }

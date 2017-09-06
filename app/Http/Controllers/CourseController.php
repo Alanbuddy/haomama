@@ -27,7 +27,7 @@ class CourseController extends Controller
     function __construct()
     {
         $this->middleware('role:admin|operator|teacher')
-            ->except(['show', 'statistics', 'enrollHandle', 'favorite', 'search', 'signIn', 'favoriteCourses', 'commentsIndex']);
+            ->only(['draftIndex','finishedIndex','index','create','store','destroy','update']);
     }
 
     public function draftIndex(Request $request)
@@ -224,6 +224,7 @@ class CourseController extends Controller
                 ->where('course_id', $course->id)
                 ->whereNotNull('star')->count() > 0;
         $comments = $course->comments()
+            ->whereNull('comments.star')
             ->with('user')
             ->with('lesson')
             ->with('votes')
