@@ -26,14 +26,14 @@
             %span.f12.category-class= $item['category']['name']
             %span.course-item-value.f14.color5= $item['price'] ? "￥".$item['price'] : "无"
           .course-row-div.color7.unstart
-            %span.coures-name.f16= $item['name']
+            %span.coures-name.f16= str_limit($item['name'], $limit = 24, $end = '...')
             - if ($item['type'] == 'offline')
               %span.course-status.f8 线下
           .course-row-div.f12.color6
             - if ($item['type'] == 'offline')
               %span.participate= $item['users_count']."人已报名"
               %span .
-              %span= date_format(date_create($item['begin']),"m月/d日") ."开课"
+              %span= date_format(date_create($item['begin']),"m月d日") ."开课"
             - else
               %span.participate= $item['users_count']."人已学"
               %span .

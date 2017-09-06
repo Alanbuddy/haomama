@@ -10392,7 +10392,6 @@ return jQuery;
     var index;
     index = $(this).attr("data-index");
     $(this).siblings("a").removeClass("red-border");
-    $(this).siblings("a").find("span").css("color", "#999");
     return $(".nums-div a").eq(index).addClass("red-border").find("span").css("color", "#333");
   });
   return $(".time").each(function() {

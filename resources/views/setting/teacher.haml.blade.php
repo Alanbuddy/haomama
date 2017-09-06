@@ -25,7 +25,7 @@
     %span= $user->description->book
   .row-div.f12.color6
     %label 简介：
-    %span= $user->description->introduction
+    %span.teacher-info!= $user->description->introduction
   .avatar-div
     %img.teacher-avatar{src: $user['avatar'] ? strpos($user['avatar'], '/') == 0 ? substr($user['avatar'],1) :$user['avatar'] : "icon/teacher_avatar.png"}
   - if ($hasVoted == false)
@@ -46,9 +46,9 @@
       .word-div
         .course-row-div.clearfix
           %span.f12.category-class= $course['category']['name']
-          %span.course-item-value.f14.color5= "￥". $course['price']
+          %span.course-item-value.f14.color5= $course['price'] ? "￥". $course['price'] : "￥".$course['original_price']
         .course-row-div.color7.unstart
-          %span.name-span.f16= $course['name']
+          %span.name-span.f16= str_limit($course['name'], $limit = 24, $end = '...')
           - if ($course['type'] == 'offline')
             %span.course-status.f8 线下
             // %span.course-status.f8 线下    获取到用户的地理位置不在本地时不显示线下两字
@@ -56,7 +56,7 @@
           - if ($course['type'] == 'offline')
             %span.participate= $course['users_count']."人已报名"
             %span .
-            %span= date_format(date_create($course['begin']),"m月/d日") ."开课"
+            %span= date_format(date_create($course['begin']),"m月d日") ."开课"
           - else
             %span.participate= $course['users_count']."人已学"
             %span .

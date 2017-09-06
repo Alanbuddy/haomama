@@ -318,8 +318,18 @@ $(document).ready(function(){
       return false;
     }
     var desc = editor.txt.html();
-    var course_info = editor.txt.text();
-    if(course_info == ""){
+    var course_info = false;
+    $("#edit-area .w-e-text ").last().find('p').each(function(){
+      if($(this).text()!=''){
+        course_info =  true; 
+      }
+    });
+    $("#edit-area .w-e-text ").last().find('img').each(function(){
+      if($(this).attr("src")!=''){
+        course_info =  true; 
+      }
+    });
+    if(course_info == false){
       showMsg("课程介绍没有填写", "center");
       return false;
     }

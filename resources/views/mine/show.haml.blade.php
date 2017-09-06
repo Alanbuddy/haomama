@@ -27,7 +27,7 @@
             %span.course-item-value.f14.color5= "￥". ($item['price'] ? $item['price'] : $item['original_price'])
           .course-row-div.color7.unstart
             - if ($item['type'] == 'offline')
-              %span.name-span.f16= $item['name']
+              %span.name-span.f16= str_limit($item['name'], $limit = 24, $end = '...')
               %span.course-status.f8 线下
             - else 
               %span.course-name.f16= $item['name']
@@ -35,7 +35,7 @@
             - if ($item['type'] == "offline")
               %span.participate= $item['users_count']."人已报名"
               %span .
-              %span= date_format(date_create($item['begin']),"m月/d日")."开课"
+              %span= date_format(date_create($item['begin']),"m月d日")."开课"
             - else
               %span.participate= $item['users_count']."人已学"
               %span .

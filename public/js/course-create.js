@@ -10334,9 +10334,6 @@ return jQuery;
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var search;
-  $(".input-box").focus(function() {
-    return $(".search-auto").show();
-  });
   search = function() {
     var page, value;
     page = 0;
@@ -10345,7 +10342,6 @@ return jQuery;
   };
   $(".input-box").keydown(function(event) {
     var code;
-    $(".search-auto").hide();
     code = event.which;
     if (code === 13) {
       return search();
@@ -10356,7 +10352,6 @@ return jQuery;
   });
   $('.tag-word').click(function() {
     var word;
-    $(this).closest('.search-auto').hide();
     word = $(this).text();
     return $('.input-box').val(word);
   });

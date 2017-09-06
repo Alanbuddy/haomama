@@ -80,6 +80,12 @@
 <script src="js/plugin/dropload.min.js"></script>
 
 <script>
+    // document.addEventListener(
+    //     "touchmove",
+    //     function(e){
+    //         e.preventDefault();
+    //     }
+    // )
 
     wx.config({
         debug: false,

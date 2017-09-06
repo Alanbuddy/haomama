@@ -138,17 +138,19 @@ $(document).ready(function(){
     var lesson_name = $("#input-caption").val().trim();
     var lesson_video_id = $(".video-id").text();
     var lesson_desc = editor.txt.html();
-    var lesson_info = editor.txt.text();
-    if(lesson_name == ""){
-      showMsg("课时标题没有填写", "center");
-      return false;
-    }
-    if(lesson_video_id == ""){
-      showMsg("视频文件没有上传", "center");
-      return false;
-    }
-    if(lesson_info == ""){
-      showMsg("内容介绍没有填写", "center");
+    var has_info = false;
+    $(".w-e-text ").last().find('p').each(function(){
+      if($(this).text()!=''){
+        has_info =  true; 
+      }
+    });
+    $(".w-e-text ").last().find('img').each(function(){
+      if($(this).attr("src")!=''){
+        has_info =  true; 
+      }
+    });
+    if(lesson_name == "" || lesson_video_id == "" || has_info == false){
+      showMsg("课时标题、视频文件、内容介绍每一项都必须填写", "center");
       return false;
     }
     $.ajax({

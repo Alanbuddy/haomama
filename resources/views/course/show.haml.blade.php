@@ -32,7 +32,7 @@
     .course-row-div.clearfix
       %span.f12.category-class= $course->category?$course->category->name:$course['category_id']
     .course-row-div.color7.status-flex
-      %span.name-span.f16.fb.color7= $course['name']
+      %span.name-span.f16.fb.color7= str_limit($course['name'], $limit = 24, $end = '...')
       %span.course-id{style: "display:none;"}= $course['id']
       %span.user-info{style:"display:none"}= auth()->user()->phone
       - if ($course['type'] == "offline")
@@ -73,7 +73,10 @@
 // underline course
 - if ($course['type'] == "offline")
   .course-content.clearfix
-    %span.title.f14.color7.fb 课时情况
+    %span.title.f14.color7.fb 课程目录
+    - if (count($lessons) > 3)
+      %span.f12.color7= "(共".count($lessons)."节)"
+    %span.begin-time{style: "display:none;"}= $course->begin
     - if ($hasEnrolled == true)
       %span.refund.f12.color5 退款
       - if(!empty($order))
@@ -87,10 +90,11 @@
             .item-row.f12.color5
               %span.min= date_format(date_create($lessons[$i]['begin']),"Y/m/d")
               %span= date_format(date_create($lessons[$i]['begin']),"H:i")."~".date_format(date_create($lessons[$i]['end']),"H:i")
-          - if ($lessons[$i]['hasAttended'])
-            %img.sign-icon{src: "icon/arrive.png"}
-          - else
-            %img.sign-icon{src: "icon/absent.png"}
+          - if ($hasEnrolled == true)
+            - if ($lessons[$i]['hasAttended'])
+              %img.sign-icon{src: "icon/arrive.png"}
+            - else
+              %img.sign-icon{src: "icon/absent.png"}
       - if (count($lessons) > 3)
         .view-more
           %span.f12.color5 查看更多
@@ -156,14 +160,14 @@
           %span.f12.category-class= $recommendedCourse['category']['name']
           %span.course-item-value.f14.color5= $recommendedCourse['price'] ? "￥". $recommendedCourse['price'] : "￥". $recommendedCourse['original_price']
         .course-row-div.color7.unstart
-          %span.name-span.f16= $recommendedCourse['name']
+          %span.name-span.f16= str_limit($recommendedCourse['name'], $limit = 24, $end = '...')
           - if ($recommendedCourse['type'] == 'offline')
             %span.course-status.f8 线下
         .course-row-div.f12.color6
           - if ($recommendedCourse['type'] == 'offline')
             %span.participate= $recommendedCourse['users_count']."人已报名"
             %span .
-            %span= date_format(date_create($recommendedCourse['begin']),"m月/d日") ."开课"
+            %span= date_format(date_create($recommendedCourse['begin']),"m月d日") ."开课"
           - else
             %span.participate= $recommendedCourse['users_count']."人已学"
             %span .

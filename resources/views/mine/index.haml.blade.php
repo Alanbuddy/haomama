@@ -16,7 +16,7 @@
   .avatar-div
     - if ($user)
       %img.avatar-icon{src: $user->wx ? json_decode($user->wx)->headimgurl : "icon/avatar.png"}
-      %p.name.f16.color7= $user['name']
+      %p.name.f16.color7= str_limit($user['name'], $limit = 24, $end = '...')
     .right-div
       %span.f12.color5 个人资料
       %img.arrow{src: "icon/go.png"}
@@ -36,7 +36,7 @@
         .item{'data-id' => $onGoingCourse['id']}
           .item-left
             .category-class.f12.fb= $onGoingCourse['category']['name']
-            %p.course-name.f16.color7= $onGoingCourse['name']
+            %p.course-name.f16.color7= str_limit($onGoingCourse['name'], $limit = 24, $end = '...')
             .row-divf.f12.color6
               %span 时间：
               %span= $onGoingCourse['time']
@@ -60,7 +60,7 @@
               %span.category-class.f12= $enrolledCourse['category']['name']
               %span.item-value.f14.color5= "￥".($enrolledCourse['price'] ? $enrolledCourse['price'] : $enrolledCourse['original_price'])
             .favorite-row-div.color7.unstart
-              %span.favorite-name.f16= $enrolledCourse['name']
+              %span.favorite-name.f16= str_limit($enrolledCourse['name'], $limit = 24, $end = '...')
               - if ($enrolledCourse['type'] == 'offline')
                 %span.course-status.f8 线下
             .favorite-row-div.f12.color6
@@ -87,7 +87,7 @@
               %span.category-class.f12= $favoritedCourse['category']['name']
               %span.item-value.f14.color5= "￥".($favoritedCourse['price'] ? $favoritedCourse['price'] : $favoritedCourse['original_price'])
             .favorite-row-div.color7.unstart
-              %span.favorite-name.f16= $favoritedCourse['name']
+              %span.favorite-name.f16= str_limit($favoritedCourse['name'], $limit = 24, $end = '...')
               - if ($favoritedCourse['type'] == 'offline')
                 %span.course-status.f8 线下
             .favorite-row-div.f12.color6

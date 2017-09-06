@@ -31,7 +31,10 @@
       .row-div
         %label.f14.color7.fn 手机号码
         %p.f12.color6#mobile-span= $user['phone'] ? $user['phone'] : "未绑定"
-        %p.replace.f12.color10 更换
+        - if($user->phone)
+          %p.replace.f12.color10 更换
+        - else
+          %p.replace.f12.color10 添加
       .row-div
         %a.f12.color10#parent-edit 编辑
   - if($user->baby)
@@ -56,8 +59,29 @@
             %input.input-div#baby-birthday.birthday{type: "date"}
           .row-div
             %a.edit.f12.color10#baby-edit 编辑
+  - else
+    .baby-item.baby-div
+      .left-div
+        %img.avatar{src: "icon/baby_female.png"}
+      .right-div
+        .row-div
+          %label.f14.color7.fn 宝宝姓名
+          %span.f12.color6.span-desc.name-span 不知道
+          %input.input-div#baby-name.baby-name
+        .row-div
+          %label.f14.color7.fn 宝宝性别
+          %span.f12.color6.span-desc.gender-span 不知道
+          %select.input-div#baby-gender.gender
+            %option{value: "男子汉"} 男子汉
+            %option{value: "小姑娘"} 小姑娘
+        .row-div
+          %label.f14.color7.fn 宝宝生日
+          %span.f12.color6.span-desc.birthday-span 不知道
+          %input.input-div#baby-birthday.birthday{type: "date"}
+        .row-div
+          %a.edit.f12.color10#baby-edit 编辑
   %p.f12.color10.pt16#another-baby 还有一个宝宝?
-.btn#edit-end 编辑完成
+.btn#edit-end 确认
 
 .baby-item.add-baby-div
   %img.close-add-item{src: "icon/close.png"}
@@ -92,7 +116,7 @@
           .row-div.nmb
             %label.f14.color7.fn 验证码
             %input.verify-code.f12.color6
-        .btn#confirm-replace 确认更换
+        .btn#confirm-replace 确认
 @endsection
 
 @section('script')
