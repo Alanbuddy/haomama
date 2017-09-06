@@ -30,7 +30,12 @@ class SearchService
     public function basicStat()
     {
         $items = Course::withCount(['comments' => function ($query) {
-            $query->whereNull('star');
+            $query->whereNull('star')
+                ->where('validity', true)
+                ->orWhere(function ($query) {
+                    $query->where('validity', false)
+                        ->where('user_id', auth()->user()->id);
+                });
         }])->withCount(['users' => function ($query) {
             $query->where('type', 'enroll');
         }])

@@ -219,9 +219,13 @@ class BehaviorController extends Controller
             $page = '';
             Log::debug(__METHOD__ . $route->getName());
             Log::debug($route->getName()=='user.account'?'yes':'no');
+            Log::debug($route->getName()=='users.show'?'yes':'no');
             switch ($route->getName()) {
                 case 'index':
                     $page = '首页';
+                    break;
+                case 'users.show':
+                    $page = '老师主页(' . User::findOrFail($route->parameter('user'))->name.')';
                     break;
                 case 'courses.show':
                     $page = '课程' . Course::findOrFail($route->parameter('course'))->name;

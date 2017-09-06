@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
 
-    use CourseTitleTrait,StatisticTrait;
+    use CourseTitleTrait, StatisticTrait;
 
     function __construct()
     {
@@ -153,8 +153,12 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $userId = $user->id;
-        $enrolledCourses = Search::enrolledCourses($userId)->get();
-        $favoritedCourses = Search::favoritedCourses($userId)->get();
+        $enrolledCourses = Search::enrolledCourses($userId)
+            ->orderBy('course_user.created_at', 'desc')
+            ->get();
+        $favoritedCourses = Search::favoritedCourses($userId)
+            ->orderBy('course_user.created_at', 'desc')
+            ->get();
 //        dd($favoritedCourses);
         $onGoingCourses = Search::onGoingCourses($userId)->get(); //on going offline courses that I've enrolled
         foreach ($onGoingCourses as $c) {
@@ -186,6 +190,7 @@ class UserController extends Controller
     public function coachingCourses(User $user)
     {
         return $user->coachingCourse()
+            ->where('status', 'publish')
             ->withCount('comments')
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
@@ -504,10 +509,10 @@ class UserController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $registration= $this->registrationPerSpan('%Y%u')->limit(12)->get();
-        $activeUser= $this->activeUsersPerSpan('%Y%u')->limit(12)->get();
-        $subscribe= $this->subscribersPerSpan('%Y%u')->limit(12)->get();
-        $usersCount= $this->usersCountPerSpan('%Y%u')->limit(12)->get();
-        dd($items->toArray(),$usersCount);
+        $registration = $this->registrationPerSpan('%Y%u')->limit(12)->get();
+        $activeUser = $this->activeUsersPerSpan('%Y%u')->limit(12)->get();
+        $subscribe = $this->subscribersPerSpan('%Y%u')->limit(12)->get();
+        $usersCount = $this->usersCountPerSpan('%Y%u')->limit(12)->get();
+        dd($items->toArray(), $usersCount);
     }
 }

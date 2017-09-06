@@ -8,7 +8,6 @@ use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Vote;
 use Illuminate\Http\Request;
-use MtHaml\Filter\Less;
 
 class CommentController extends Controller
 {
@@ -69,7 +68,7 @@ class CommentController extends Controller
 //        $item->teacher_id = auth()->user()->id;
         auth()->user()->comments()->save($item);
         if ($request->ajax()) {
-            return ['success' => true,'data'=>['item'=>$item,'user'=>auth()->user()]];
+            return ['success' => true, 'data' => ['item' => $item, 'user' => auth()->user()]];
         }
         return redirect()->route('comments.index');
     }
@@ -114,8 +113,8 @@ class CommentController extends Controller
             'validity'
         ]));
         $comment->update();
-        if($request->ajax()){
-            return ['success'=>true];
+        if ($request->ajax()) {
+            return ['success' => true];
         }
         return redirect()->route('comments.edit', $comment->id);
     }
@@ -155,20 +154,33 @@ class CommentController extends Controller
                 'object_id' => $comment->id,
                 'object_type' => 'comment',
                 'has_read' => false,//this statement here is just for readability,it can be omitted since its default value is false
-            ],$comment->user_id);
+            ], $comment->user_id);
         }
         return ['success' => true, 'message' => !$hasVoted ? 'yes' : 'no'];
     }
 
-    public function search(Request $request,Course $course)
+    public function search(Request $request, Course $course)
     {
         if ($request->has('key')) {
             $items = Comment::where('content', 'like', '%' . $request->key . '%')
                 ->orderBy('id', 'desc')
                 ->paginate(10);
-            $items->withPath(route('admin.courses.comments.search',$course).'?key='.$request->key);
-            return view('admin.course.comment', compact('items', 'key','course'));
+            $items->withPath(route('admin.courses.comments.search', $course) . '?key=' . $request->key);
+            return view('admin.course.comment', compact('items', 'key', 'course'));
         }
-        return redirect()->route('admin.courses.comments',$course);
+        return redirect()->route('admin.courses.comments', $course);
+    }
+
+    /**
+     * 后台隐藏评论接口
+     * @param Comment $comment
+     * @return array
+     */
+    public function toggle(Comment $comment)
+    {
+        $comment->validity = !$comment->validity;
+        $comment->save();
+        return ['success' => true, 'valid' => $comment->validity];
     }
 }
+

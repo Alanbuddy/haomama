@@ -27,7 +27,7 @@ class CourseController extends Controller
     function __construct()
     {
         $this->middleware('role:admin|operator|teacher')
-            ->only(['draftIndex','finishedIndex','index','create','store','destroy','update']);
+            ->only(['draftIndex', 'finishedIndex', 'index', 'create', 'store', 'destroy', 'update']);
     }
 
     public function draftIndex(Request $request)
@@ -225,6 +225,11 @@ class CourseController extends Controller
                 ->whereNotNull('star')->count() > 0;
         $comments = $course->comments()
             ->whereNull('comments.star')
+            ->where('validity', true)
+            ->orWhere(function ($query) {
+                $query->where('validity', false)
+                    ->where('user_id', auth()->user()->id);
+            })
             ->with('user')
             ->with('lesson')
             ->with('votes')
@@ -272,11 +277,11 @@ class CourseController extends Controller
         $titles = json_decode($course->titles);
         $lessons = $this->processTitles($titles, $lessons);
         //获取线下课时开始、结束时间
-        if($course->type=='offline'){
-            $schedule=json_decode($course->schedule);
-            foreach ($lessons as $k=>$v){
-                $v->begin=explode(',',$schedule[$k])[0];
-                $v->end=explode(',',$schedule[$k])[1];
+        if ($course->type == 'offline') {
+            $schedule = json_decode($course->schedule);
+            foreach ($lessons as $k => $v) {
+                $v->begin = explode(',', $schedule[$k])[0];
+                $v->end = explode(',', $schedule[$k])[1];
             }
         }
 //        dd($lessons,$schedule);
@@ -524,6 +529,7 @@ class CourseController extends Controller
     public function commentsIndex(Request $request, Course $course)
     {
         return $course->comments()
+            ->whereNull('star')
             ->with('user')
             ->with('lesson')
             ->orderBy('id', 'desc')
@@ -626,7 +632,7 @@ class CourseController extends Controller
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
             }])
-            ->orderBy('courses.id','desc')
+            ->orderBy('course_user.created_at', 'desc')
             ->get();
         return view('mine.show', ['items' => $items]);
     }
@@ -639,7 +645,7 @@ class CourseController extends Controller
             ->withCount(['users' => function ($query) {
                 $query->where('type', 'enroll');
             }])
-            ->orderBy('courses.id','desc')
+            ->orderBy('course_user.created_at', 'desc')
             ->get();
         return view('mine.mycourse', ['items' => $items]);
     }
@@ -891,6 +897,7 @@ class CourseController extends Controller
     public function adminComments(Request $request, Course $course)
     {
         $items = $course->comments()
+            ->whereNull('comments.star')
             ->orderBy('comments.id', 'desc')
             ->with('user')
             ->paginate(10);
@@ -919,8 +926,8 @@ class CourseController extends Controller
         $lessons = json_decode($course->titles);
         $schedules = json_decode($course->schedule);
         $attendances = $this->getAttendances($request, $course);
-        dd($lessons, $schedules, $attendances);
-        return view('', compact('course', 'lessons'));
+//        dd($lessons, $schedules, $attendances);
+        return view('admin.course.offline_sign', compact('course', 'lessons'));
     }
 
     public function getAttendances(Request $request, Course $course)

@@ -50,13 +50,14 @@ class test extends Command
      */
     public function handle()
     {
-        for ($i = 0; $i < 20; $i++) {
-            Statistic::create([
-                'type' => 'subscribe',
-                'created_at' => date("Y-m-d", strtotime('today +' . $i . 'weeks')),
-                'data' => rand(10, 50),
-            ]);
-        }
+//        for ($i = 0; $i < 20; $i++) {
+//            Statistic::create([
+//                'type' => 'subscribe',
+//                'created_at' => date("Y-m-d", strtotime('today +' . $i . 'weeks')),
+//                'data' => rand(10, 50),
+//            ]);
+//        }
+
 //        foreach (User::get() as $user){
 //            if(!$user->hasRole('admin')&&!$user->hasRole('operator')){
 //                $user->attachRole(Role::find(2));
@@ -75,7 +76,7 @@ class test extends Command
 //        Storage::deleteDirectory('video');
 //        $this->info(md5(uniqid(rand(), true)));
 
-//        $this->refundOrder();
+        $this->refundOrder();
 //        $this->refundAllOrder();
 //        $this->testVodCloudCallback();
     }

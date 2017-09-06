@@ -87,6 +87,7 @@ Route::group([
 
     Route::resource('lessons', 'LessonController');
 
+    Route::get('/comments/{comment}/admin/toggle', 'CommentController@toggle')->name('admin.comment.toggle');//后台课程评论隐藏
     Route::get('/comments/{comment}/vote', 'CommentController@vote')->name('comments.vote');
     Route::resource('comments', 'CommentController');
 
