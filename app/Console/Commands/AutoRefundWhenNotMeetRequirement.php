@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Events\Refund;
 use App\Models\Course;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class AutoRefundWhenNotMeetRequirement extends Command
 {
@@ -39,21 +40,21 @@ class AutoRefundWhenNotMeetRequirement extends Command
      */
     public function handle()
     {
-        $this->info(__METHOD__ . 'Auto refund when students amount does not meet the least requirement');
+        Log::info(__METHOD__ . 'Auto refund when students amount does not meet the least requirement');
         $items = Course::where('type', 'offline')
-            ->whereNotNull('quota')
+            ->whereNotNull('minimum')
             ->get();
-        $this->info(count($items));
+        Log::info(count($items));
         foreach ($items as $course) {
             $studentsCount = $course->students()->count();
-            $this->info($studentsCount . ' ' . $course->minimum . ' id:' . $course->id . ' name:' . $course->name);
+            Log::info($studentsCount . ' ' . $course->minimum . ' id:' . $course->id . ' name:' . $course->name);
             if ($studentsCount < $course->minimum) {
-                $this->info($studentsCount . '<' . $course->minimum . ' Not Enough Students For Course' . $course->name . '(' . $course->id . ')');
+                Log::info($studentsCount . '<' . $course->minimum . ' Not Enough Students For Course' . $course->name . '(' . $course->id . ')');
                 $date = date('Y-m-d H', strtotime('+2 hour'));
                 if (date('Y-m-d H', strtotime($course->begin)) == $date) {
                     $orders = $course->orders();
                     foreach ($orders as $order) {
-                        $this->info('refund order:' . $order->id);
+                        Log::info('refund order:' . $order->id);
                         $this->refund($order);
                     }
                 }
