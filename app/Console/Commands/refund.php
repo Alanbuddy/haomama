@@ -32,7 +32,7 @@ class refund extends Command
     }
 
     /**
-     * Execute the console command.
+     * 根据UUID查出订单后退款
      *
      * @return mixed
      */

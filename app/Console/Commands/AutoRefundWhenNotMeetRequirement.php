@@ -39,24 +39,24 @@ class AutoRefundWhenNotMeetRequirement extends Command
      */
     public function handle()
     {
-        Log::info(__METHOD__ . 'Auto refund when students amount does not meet the least requirement');
+        Log::debug(__METHOD__ . 'Auto refund when students amount does not meet the least requirement');
         $items = Course::where('type', 'offline')
             ->whereNotNull('minimum')
             ->get();
-        Log::info(count($items));
+        Log::debug(count($items));
         foreach ($items as $course) {
             $studentsCount = $course->students()->count();
-            Log::info($studentsCount . ' ' . $course->minimum . ' id:' . $course->id . ' name:' . $course->name);
+            Log::debug($studentsCount . ' ' . $course->minimum . ' id:' . $course->id . ' name:' . $course->name);
             if ($studentsCount < $course->minimum) {
-                Log::info($studentsCount . '<' . $course->minimum . ' Not Enough Students For Course' . $course->name . '(' . $course->id . ')');
+                Log::debug($studentsCount . '<' . $course->minimum . ' Not Enough Students For Course' . $course->name . '(' . $course->id . ')');
                 $date = date('Y-m-d H', strtotime('+2 hour'));
                 if (date('Y-m-d H', strtotime($course->begin)) == $date) {
                     $orders = $course->orders()
                         ->where('status','paid')
                         ->get();
-                    Log::info('order of course'. $course->id.' count:' . count($orders));
+                    Log::debug('order of course'. $course->id.' count:' . count($orders));
                     foreach ($orders as $order) {
-                        Log::info('refund order:' . $order->id);
+                        Log::debug('refund order:' . $order->id);
                         $this->refund($order);
                     }
                 }
