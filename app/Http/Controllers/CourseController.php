@@ -940,7 +940,7 @@ class CourseController extends Controller
 
     public function qr(Request $request)
     {
-        $data = $request->url;
+        $data = $request->url();
         QR::qr($data);
     }
 
