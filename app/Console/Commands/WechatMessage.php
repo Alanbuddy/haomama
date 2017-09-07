@@ -62,9 +62,12 @@ class WechatMessage extends Command
                 $job = (new SMS($user, $course))->onQueue('wechat');
                 dispatch($job);
             }
+            $students = $course->students;
             foreach ($course->followers as $user) {
-                $job = (new SendWechatMessage($user, $course, false))->onQueue('wechat');
-                dispatch($job);
+                if (!$students->contains($user)) {//如果已经报名收藏的课程,就不发送提醒报名的消息
+                    $job = (new SendWechatMessage($user, $course, false))->onQueue('wechat');
+                    dispatch($job);
+                }
             }
         }
 
