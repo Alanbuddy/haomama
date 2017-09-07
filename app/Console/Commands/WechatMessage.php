@@ -76,6 +76,7 @@ class WechatMessage extends Command
 
     /**
      * @param $date
+     * @param $relation
      * @return mixed
      */
     public function dueCourses($date, $relation)

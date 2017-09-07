@@ -88,10 +88,10 @@ class test extends Command
         $this->info($uuid);
 
         $order = Order::where('uuid', $uuid)->first();
-        $controller = app(OrderController::class);
-        $request = app(Request::class);
-//        $result = $controller->refund($request, $order->uuid);
         event(new Refund($order));
+//        $controller = app(OrderController::class);
+//        $request = app(Request::class);
+//        $result = $controller->refund($request, $order->uuid);
 //        var_dump($result);
     }
 

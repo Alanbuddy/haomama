@@ -911,8 +911,8 @@ class CourseController extends Controller
      */
     public function saveSchedule($schedule, $item)
     {
-        $first = array_first($schedule);
-        $last = array_last($schedule);
+        $first = min($schedule);
+        $last = max($schedule);
         if ($first)
             $item->begin = explode(',', $first)[0];
         if ($last)

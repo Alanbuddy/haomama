@@ -166,8 +166,8 @@ class OrderController extends Controller
             && $course->quota
             && $course->students()->count() == $course->quota
         ) {
-            Log::info(__METHOD__ . '课程满额');
-            return ['success' => false, 'message' => '课程满额'];
+            Log::info(__METHOD__ . '课程学员已满');
+            return ['success' => false, 'message' => '课程学员已满'];
         }
 
         Log::info(__FILE__ . __LINE__);
