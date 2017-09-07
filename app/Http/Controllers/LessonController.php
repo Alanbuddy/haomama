@@ -142,6 +142,11 @@ class LessonController extends Controller
     public function show(Lesson $lesson)
     {
         $comments = $lesson->comments()
+            ->where('validity', true)
+            ->orWhere(function ($query) {
+                $query->where('validity', false)
+                    ->where('user_id', auth()->user()->id);
+            })
             ->with('user')
             ->with('votes')
             ->orderBy('vote', 'desc')

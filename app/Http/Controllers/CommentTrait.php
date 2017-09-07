@@ -15,6 +15,12 @@ trait CommentTrait
     public function latestComments($course, $lesson, $pageSize = 10)
     {
         return $course->comments()
+            ->where('validity', true)
+            ->orWhere(function ($query) {
+                if (auth()->check())
+                    $query->where('validity', false)
+                        ->where('user_id', auth()->user()->id);
+            })
             ->whereNull('star')
             ->where('lesson_id', $lesson->id)
             ->with('user')
@@ -26,6 +32,12 @@ trait CommentTrait
     public function hottestComments($course, $lesson, $pageSize = 10)
     {
         return $course->comments()
+            ->where('validity', true)
+            ->orWhere(function ($query) {
+                if (auth()->check())
+                    $query->where('validity', false)
+                        ->where('user_id', auth()->user()->id);
+            })
             ->whereNull('star')
             ->where('lesson_id', $lesson->id)
             ->with('user')

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\Refund;
 use App\Http\Controllers\OrderController;
 use App\Http\Util\Curl;
 use App\Models\Order;
@@ -76,23 +77,9 @@ class test extends Command
 //        Storage::deleteDirectory('video');
 //        $this->info(md5(uniqid(rand(), true)));
 
-        $this->refundOrder();
 //        $this->refundAllOrder();
 //        $this->testVodCloudCallback();
     }
-
-    public function refundOrder()
-    {
-        $uuid = $this->ask('uuid');
-        $this->info($uuid);
-
-        $controller = app(OrderController::class);
-        $request = app(Request::class);
-        $order = Order::where('uuid', $uuid)->first();
-        $result = $controller->refund($request, $order->uuid);
-        var_dump($result);
-    }
-
 
     public function refundAllOrder()
     {

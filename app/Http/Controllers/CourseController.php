@@ -911,8 +911,8 @@ class CourseController extends Controller
      */
     public function saveSchedule($schedule, $item)
     {
-        $first = array_first($schedule);
-        $last = array_last($schedule);
+        $first = min($schedule);
+        $last = max($schedule);
         if ($first)
             $item->begin = explode(',', $first)[0];
         if ($last)
@@ -938,9 +938,10 @@ class CourseController extends Controller
         return $attendances;
     }
 
-    public function qr(Request $request)
+    public function qr(Request $request, $course, $lessonIndex)
     {
-        $data = $request->url;
+        $data = $request->url();
+        $data = config('app.url') . route('courses.signIn', [$course, $lessonIndex]);
         QR::qr($data);
     }
 

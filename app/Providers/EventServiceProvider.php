@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Login' => [
             'App\Listeners\LoginEventListener',
         ],
+        'App\Events\Refund' => [
+            'App\Listeners\RefundEventListener',
+        ],
     ];
 
     /**
