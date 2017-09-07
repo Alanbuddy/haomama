@@ -938,9 +938,10 @@ class CourseController extends Controller
         return $attendances;
     }
 
-    public function qr(Request $request)
+    public function qr(Request $request, $course, $lessonIndex)
     {
         $data = $request->url();
+        $data = config('app.url') . route('courses.signIn', [$course, $lessonIndex]);
         QR::qr($data);
     }
 
