@@ -55,8 +55,10 @@ class WechatMessage extends Command
         foreach ($courses as $course) {
             Log::info('due course:' . $course->id . $course->name);
             foreach ($course->students as $user) {
+                //发送微信提醒
                 $job = (new SendWechatMessage($user, $course))->onQueue('wechat');
                 dispatch($job);
+                //发送短信提醒
                 $job = (new SMS($user, $course))->onQueue('wechat');
                 dispatch($job);
             }
