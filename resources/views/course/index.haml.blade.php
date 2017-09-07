@@ -92,7 +92,7 @@
                     - if ($itemOrderByUserCount['type'] == 'offline')
                       %span.participate= $itemOrderByUserCount['users_count']."人已报名"
                       %span .
-                      - if($item->begin)
+                      - if($itemOrderByUserCount->begin)
                         %span= date_format(date_create($itemOrderByUserCount['begin']),"m月d日") ."开课"
                     - else
                       %span.participate= $itemOrderByUserCount['users_count']."人已学"
@@ -124,7 +124,7 @@
                     - if ($itemOrderByCommentRating['type'] == 'offline')
                       %span.participate= $itemOrderByCommentRating['users_count']."人已报名"
                       %span .
-                      - if($item->begin)
+                      - if($itemOrderByCommentRating->begin)
                         %span= date_format(date_create($itemOrderByCommentRating['begin']),"m月d日") ."开课"
                     - else
                       %span.participate= $itemOrderByCommentRating['users_count']."人已学"
