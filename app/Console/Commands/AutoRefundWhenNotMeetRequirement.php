@@ -14,7 +14,7 @@ class AutoRefundWhenNotMeetRequirement extends Command
      *
      * @var string
      */
-    protected $signature = 'refund';
+    protected $signature = 'schedule:refund';
 
     /**
      * The console command description.
@@ -34,8 +34,7 @@ class AutoRefundWhenNotMeetRequirement extends Command
     }
 
     /**
-     * Execute the console command.
-     *
+     * 线下课程开课前24小时,人数不够则自动退款
      * @return mixed
      */
     public function handle()
