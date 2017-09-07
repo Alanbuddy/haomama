@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class SMS implements ShouldQueue
 {
@@ -44,6 +45,7 @@ class SMS implements ShouldQueue
     public function handle()
     {
         $phone = $this->user->phone;
+        Log::debug(__METHOD__ . '提醒SMS');
         if ($phone) {
             $content = '【好妈妈微课】提醒课程'
                 . $this->course->name

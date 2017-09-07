@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //课前提醒
+        //课前微信提醒
         $schedule->command('wx:send')->hourly();
         //线下课程开课前24小时,人数不够则自动退款
         $schedule->command('schedule:refund')->hourly();

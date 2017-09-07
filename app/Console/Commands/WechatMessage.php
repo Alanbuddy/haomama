@@ -62,6 +62,10 @@ class WechatMessage extends Command
                 $job = (new SMS($user, $course))->onQueue('wechat');
                 dispatch($job);
             }
+            foreach ($course->followers as $user) {
+                $job = (new SendWechatMessage($user, $course))->onQueue('wechat');
+                dispatch($job);
+            }
         }
 
     }
