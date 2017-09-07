@@ -17,8 +17,9 @@ trait CommentTrait
         return $course->comments()
             ->where('validity', true)
             ->orWhere(function ($query) {
-                $query->where('validity', false)
-                    ->where('user_id', auth()->user()->id);
+                if (auth()->check())
+                    $query->where('validity', false)
+                        ->where('user_id', auth()->user()->id);
             })
             ->whereNull('star')
             ->where('lesson_id', $lesson->id)
@@ -33,8 +34,9 @@ trait CommentTrait
         return $course->comments()
             ->where('validity', true)
             ->orWhere(function ($query) {
-                $query->where('validity', false)
-                    ->where('user_id', auth()->user()->id);
+                if (auth()->check())
+                    $query->where('validity', false)
+                        ->where('user_id', auth()->user()->id);
             })
             ->whereNull('star')
             ->where('lesson_id', $lesson->id)
