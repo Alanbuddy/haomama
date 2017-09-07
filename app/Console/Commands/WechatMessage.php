@@ -63,7 +63,7 @@ class WechatMessage extends Command
                 dispatch($job);
             }
             foreach ($course->followers as $user) {
-                $job = (new SendWechatMessage($user, $course))->onQueue('wechat');
+                $job = (new SendWechatMessage($user, $course, false))->onQueue('wechat');
                 dispatch($job);
             }
         }
