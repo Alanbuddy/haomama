@@ -29,7 +29,7 @@
           %a.f16.font-color1#sign 课程签到
       .tab-content.bg3
         #tab3.tab-pane.active
-          .desc-div
+          .desc-div.font-color3
             // - if(count($items) == 0)
             //   .undiscover.f14
             //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
@@ -37,15 +37,16 @@
             .sign-box.clearfix
               .sign-method
                 .class-choice
-                  %form.form-horizontal
-                    .form-group
-                      %label.col-sm-5.col-md-3.control-label{:for => "class"} 课次选择
-                      %input.col-sm-6.col-md-6
-                      
+                  %label.f14.fn 课次选择
+                  %select.select-style
+                    %option 请选择课次
+                    - foreach($lessons as $k=>$v)
+                      %option{value: $k}="第".($k +1)."次课"
                 .method
-                  %p.caption 签到方式一：扫描签到
+                  %p.caption 扫描签到
+                  %p.scan-notice 请用微信右上角"扫描二维码"扫描~
                   #qr-code
-                    %img.code-figure{src: asset_path("web/bigqrcode.png")}
+                    %img.code-figure{src: "icon/admin/bigqrcode.png"}
                   .mask
                     %p.notice 该次课程已结束点击此处补签到
               .sign-status-box
