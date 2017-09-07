@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\Refund;
 use App\Http\Controllers\OrderController;
 use App\Http\Util\Curl;
 use App\Models\Order;
@@ -86,11 +87,12 @@ class test extends Command
         $uuid = $this->ask('uuid');
         $this->info($uuid);
 
+        $order = Order::where('uuid', $uuid)->first();
         $controller = app(OrderController::class);
         $request = app(Request::class);
-        $order = Order::where('uuid', $uuid)->first();
-        $result = $controller->refund($request, $order->uuid);
-        var_dump($result);
+//        $result = $controller->refund($request, $order->uuid);
+        event(new Refund($order));
+//        var_dump($result);
     }
 
 
