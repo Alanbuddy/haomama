@@ -77,24 +77,9 @@ class test extends Command
 //        Storage::deleteDirectory('video');
 //        $this->info(md5(uniqid(rand(), true)));
 
-        $this->refundOrder();
 //        $this->refundAllOrder();
 //        $this->testVodCloudCallback();
     }
-
-    public function refundOrder()
-    {
-        $uuid = $this->ask('uuid');
-        $this->info($uuid);
-
-        $order = Order::where('uuid', $uuid)->first();
-        event(new Refund($order));
-//        $controller = app(OrderController::class);
-//        $request = app(Request::class);
-//        $result = $controller->refund($request, $order->uuid);
-//        var_dump($result);
-    }
-
 
     public function refundAllOrder()
     {

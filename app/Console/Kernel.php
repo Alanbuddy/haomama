@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\AutoRefundWhenNotMeetRequirement;
 use App\Console\Commands\changeCredential;
 use App\Console\Commands\enroll;
+use App\Console\Commands\refund;
 use App\Console\Commands\Stat;
 use App\Console\Commands\test;
 use App\Console\Commands\WechatMessage;
@@ -23,6 +24,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         test::class,
+        refund::class,
         WechatMessage::class,
         enroll::class,
         Ws::class,
