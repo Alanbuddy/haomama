@@ -19,6 +19,9 @@ trait CourseEnrollTrait
     public function enroll(Course $course, $user_id = 0)
     {
         $user = auth()->user() ?: User::find($user_id);
+        $success = true;
+        if ($course->type == 'offline' && $course->quota)
+            if($course->students()->count() == $course->quota)
         if (empty($user))
             throw new \Exception("User doesn't exist");
 //        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
@@ -32,7 +35,7 @@ trait CourseEnrollTrait
             ]);
         }
         $changed = $course->users()->syncWithoutDetaching($user, ['user_type' => 'student']);
-        return ['success' => 'true', 'changed' => $changed];
+        return ['success' => $success, 'changed' => $changed];
     }
 
     public function hasEnrolled($course, $userId)
