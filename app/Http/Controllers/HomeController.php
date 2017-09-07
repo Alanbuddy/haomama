@@ -8,7 +8,6 @@ use App\Models\Setting;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -119,7 +118,7 @@ class HomeController extends Controller
         $images = json_decode($setting->value);
 
         return view('course.index',
-            compact('categories', 'data','images')
+            compact('categories', 'data', 'images')
         );
     }
 
@@ -129,13 +128,25 @@ class HomeController extends Controller
         if ($categoryId == 0) {
             $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
             $recommendedCourse = $recommendedCourseSetting
-                ? Course::where('id', ($recommendedCourseSetting->value))->get()
+                ? Course::where('id', ($recommendedCourseSetting->value))
                 : null;
         } else {
             $recommendedCourse = Course::where('hot', true)
-                ->where('category_id', $categoryId)
-                ->get();
+                ->where('category_id', $categoryId);
         }
+        $recommendedCourse = $recommendedCourse
+            ->withCount(['comments' => function ($query) {
+                $query->whereNull('star')
+                    ->where('validity', true)
+                    ->orWhere(function ($query) {
+                        if (auth()->check())
+                            $query->where('validity', false)
+                                ->where('user_id', auth()->user()->id);
+                    });
+            }])->withCount(['users' => function ($query) {
+                $query->where('type', 'enroll');
+            }])->with('category')
+            ->get();
         return $recommendedCourse;
     }
 
@@ -183,8 +194,8 @@ class HomeController extends Controller
         $recommendedCourse = $recommendedCourse ?: $this->recommendedCourses($categoryId);
         $itemsOrderByCommentRating = Course::select(DB::raw('courses.*'))
             ->where('status', 'publish')
-            ->addSelect(DB::raw('(select count(*) from `users` inner join `course_user` on `users`.`id` = `course_user`.`user_id` where `courses`.`id` = `course_user`.`course_id` and `type` = ' . '\'student\'' . ') as `users_count`'))
-            ->addSelect(DB::raw('(select count(*) from `comments` where `comments`.`course_id` = `courses`.`id`) as `comments_count`'))
+            ->addSelect(DB::raw('(select count(*) from users inner join course_user on users.id = course_user.user_id where courses.id = course_user.course_id and course_user.type = ' . '\'enroll\'' . ') as users_count'))
+            ->addSelect(DB::raw('(select count(*) from `comments` where `comments`.`course_id` = `courses`.`id` and `comments`.star is null and `comments`.`validity` = 1) as `comments_count`'))
             ->addSelect(DB::raw('(select sum(comments.star) from `comments` where `comments`.`course_id` = `courses`.`id`) as `star`'))
             ->orderBy('star', 'desc');
         if ($categoryId > 0) {
