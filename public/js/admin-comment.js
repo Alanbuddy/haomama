@@ -7,7 +7,7 @@ $(document).ready(function(){
     var _this = $(this);
     $.ajax({
       url: window.review.replace(/-1/, rid),
-      type: 'post',
+      type: 'get',
       data: {
         _token: window.token,
         validity: validity,

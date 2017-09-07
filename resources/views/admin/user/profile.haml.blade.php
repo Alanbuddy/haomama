@@ -4,6 +4,7 @@
 :javascript
   window.account_set = "#{route('admin.profile')}"
   window.token = "#{csrf_token()}"
+  window.course = "#{route('courses.index')}"
 @endsection
 
 @section('search-input')
@@ -13,27 +14,62 @@
 @section('content')
 
 .main-content.bg2
-  %button.btn.finish-normal.font-color1.btn-position#finish{type: "button"} 完成
-  .table-div
-    .tabbable
-      %ul.nav.nav-tabs
-        %li.active
-          %a.f16#account-set{"data-toggle" => "tab", :href => "#tab1"} 账号设置
-      .tab-content.bg3
-        #tab1.tab-pane.active
-          .desc
-            %p.f24.font-color4.tc.bg2.work-cert 工作证
-            .person-div
-              %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
-              .photo-div#preview
-                %img.bg2.photo#imghead{src: $user->avatar ?  $user->avatar : "icon/admin/default.png", onclick: "$('#previewImg').click()"}
-                %img.figure{src: "icon/admin/photo.png"}
-              %p.mobile
-                %span.f20.font-color3.mobile-num 手机号:
-                %span.f20.font-color3= $user->phone
-              %p
-                %span.f20.font-color3.name 姓名:
-                %input.form-control.font-color3#user_name{placeholder: "请输入姓名", value: auth()->user()->name ? auth()->user()->name : ""}
+  - if(!auth()->user()->name)
+    %button.btn.finish-normal.font-color1.btn-position#finish{type: "button"} 完成
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16#account-set{"data-toggle" => "tab", :href => "#tab1"} 账号设置
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .desc
+              %p.f24.font-color4.tc.bg2.work-cert 工作证
+              .person-div
+                %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
+                .photo-div#preview
+                  %img.bg2.photo#imghead{src: $user->avatar ?  $user->avatar : "icon/admin/default.png", onclick: "$('#previewImg').click()"}
+                  %img.figure{src: "icon/admin/photo.png"}
+                %p.mobile
+                  %span.f20.font-color3.mobile-num 手机号:
+                  %span.f20.font-color3= $user->phone
+                %p
+                  %span.f20.font-color3.name 姓名:
+                  %input.form-control.font-color3#user_name{placeholder: "请输入姓名", value: auth()->user()->name ? auth()->user()->name : ""}
+  - else
+    %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{type: "button"} 编辑
+    %button.btn.finish-normal.font-color1.btn-position#finish-btn{type: "button"} 完成
+    .table-div
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a.f16#account-set{"data-toggle" => "tab", :href => "#tab1"} 账号设置
+        .tab-content.bg3
+          #tab1.tab-pane.active
+            .unedit-box.desc
+              %p.f24.font-color4.tc.bg2.work-cert 工作证
+              .person-div
+                .photo-div
+                  %img.account-avatar{src: $user->avatar ?  $user->avatar : "icon/admin/default.png"}
+                %p.mobile
+                  %span.f20.font-color3.mobile-num 手机号:
+                  %span.f20.font-color3= $user->phone
+                %p
+                  %span.f20.font-color3.name 姓名:
+                  %span.f20.font-color3= $user->name
+            .edit-box.desc
+              %p.f24.font-color4.tc.bg2.work-cert 工作证
+              .person-div
+                %input#previewImg{:onchange => "previewImage(this)", :type => "file", style: "display:none;"}
+                .photo-div#preview
+                  %img.bg2.photo#imghead{src: $user->avatar ?  $user->avatar : "icon/admin/default.png", onclick: "$('#previewImg').click()"}
+                  %img.figure{src: "icon/admin/photo.png"}
+                %p.mobile
+                  %span.f20.font-color3.mobile-num 手机号:
+                  %span.f20.font-color3= $user->phone
+                %p
+                  %span.f20.font-color3.name 姓名:
+                  %input.form-control.font-color3#user_name{placeholder: "请输入姓名", value: auth()->user()->name ? auth()->user()->name : ""}
 
 #setModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

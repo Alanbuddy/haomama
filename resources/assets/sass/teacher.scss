@@ -54,6 +54,7 @@
 }
 .teacher-avatar {
   width: 1.08rem;
+  height: 1.08rem;
   border-radius: 4px;
 }
 .admire-div {
@@ -108,5 +109,5 @@
 }
 .teacher-info {
   display: inline-block;
-  word-break: break-all;
+  word-wrap: break-word;
 }

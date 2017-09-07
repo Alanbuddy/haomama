@@ -8,11 +8,27 @@
 .desc-div {
   padding-bottom: 0;
 }
-
+.create-btn-position, .btn-position {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  z-index: 10;
+}
+#edit-btn {
+  width: 100px;
+  color: #fff;
+  outline: none;
+}
 #finish {
   color: #fff;
-  width: 7.143em;
+  width: 100px;
   outline: none;
+}
+#finish-btn {
+  color: #fff;
+  width: 100px;
+  outline: none;
+  display: none;
 }
 .desc {
   width: 395px;
@@ -45,6 +61,16 @@
   right: 0;
   left: 0;
   display: none;
+}
+.account-avatar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 180px;
+  height: 252px;
+  object-fit: contain;
 }
 .photo, .figure {
   width: 180px;
@@ -130,4 +156,7 @@
 #set-confirm {
   background: #f7873d;
   outline: none;
+}
+.edit-box {
+  display: none;
 }

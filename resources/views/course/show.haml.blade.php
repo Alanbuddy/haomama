@@ -244,6 +244,8 @@
             %span.notice.f12 亲没数据了～
 
 %img.upper{src: "icon/top.png"}
+@endsection
+@section('foot-div')
 - if ($hasEnrolled == true)
   - if ($course['type'] == "online")
     - if($hasCommented == false)

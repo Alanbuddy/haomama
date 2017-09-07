@@ -18,7 +18,6 @@
 @section('content')
 
 .main-content.bg2
-  %button.btn.edit-normal.font-color1.create-btn-position#edit-btn{:type => "button", "data-target" => "#noticeModal", "data-toggle" => "modal"} 编辑通知
   .table-div
     .tabbable
       %ul.nav.nav-tabs
@@ -54,7 +53,20 @@
               .sign-status-box
                 .sign-status
                   %h5 签到情况
-
+                  %table.table.table-bordered#sign-table
+                    %tbody
+                      %tr
+                        %td.sign-data.check-in dasfgag
+                        %td.sign-data dasfgag
+                        %td.sign-data dasfgag
+                      %tr
+                        %td.sign-data dasfgag
+                        %td.sign-data dasfgag
+                        %td.sign-data dasfgag
+                      %tr
+                        %td.sign-data dasfgag
+                        %td.sign-data dasfgag
+                        %td.sign-data dasfgag
 @endsection
 
 
