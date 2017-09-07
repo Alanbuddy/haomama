@@ -1,8 +1,1 @@
-.clicked {
-  background: rgba(173, 173, 190, 0.5);
-  line-height: 1.65em;
-  margin-right: 3%;
-  color: #2e2f4a;
-}
-
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiL2hvbWUvYWxhbi9XeE1wVm9kL3Jlc291cmNlcy9hc3NldHMvc2Fzcy9zaWdudXAuc2NzcyIsInNvdXJjZXMiOlsiL2hvbWUvYWxhbi9XeE1wVm9kL3Jlc291cmNlcy9hc3NldHMvc2Fzcy9zaWdudXAuc2NzcyJdLCJzb3VyY2VzQ29udGVudCI6WyIuY2xpY2tlZCB7XG4gIGJhY2tncm91bmQ6IHJnYmEoMTczLDE3MywxOTAsIC41KTtcbiAgbGluZS1oZWlnaHQ6IDEuNjVlbTtcbiAgbWFyZ2luLXJpZ2h0OiAzJTtcbiAgY29sb3I6ICMyZTJmNGE7XG59Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLEFBQUEsUUFBUSxDQUFDO0VBQ1AsVUFBVSxFQUFFLHdCQUFxQjtFQUNqQyxXQUFXLEVBQUUsTUFBTTtFQUNuQixZQUFZLEVBQUUsRUFBRTtFQUNoQixLQUFLLEVBQUUsT0FBTztDQUNmIn0= */
+.clicked{background:rgba(173,173,190,.5);line-height:1.65em;margin-right:3%;color:#2e2f4a}

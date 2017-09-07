@@ -8,6 +8,7 @@
   window.course_show = "#{route('admin.courses.show',$course->id)}"
   window.token = "#{csrf_token()}"
   window.offline_student = "#{route('admin.courses.students',$course->id)}"
+  window.qrcode = "#{route('courses.lesson.qr',[0,-1])}"
 
 @endsection
 @section('search-input')
@@ -45,6 +46,7 @@
                 .method
                   %p.caption 扫描签到
                   %p.scan-notice 请用微信右上角"扫描二维码"扫描~
+                  %p.course-id{style: "display:none;"}= $course->id
                   #qr-code
                     %img.code-figure{src: "icon/admin/bigqrcode.png"}
                   .mask
