@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\OrderController;
 use App\Models\Course;
 use Illuminate\Console\Command;
+use Illuminate\Http\Request;
 
 class AutoRefundWhenNotMeetRequirement extends Command
 {
@@ -45,8 +47,16 @@ class AutoRefundWhenNotMeetRequirement extends Command
         foreach ($items as $course) {
             $studentsCount = $course->students()->count();
             if ($studentsCount < $course->minimum) {
-                $this->info($studentsCount.'Not Enough Students For Course' . $course->name . '(' . $course->id . ')');
+                $this->info($studentsCount.'<'.$course->minimum.' Not Enough Students For Course' . $course->name . '(' . $course->id . ')');
             }
         }
+    }
+
+    public function refund()
+    {
+        $controller = app(OrderController::class);
+        $request = app(Request::class);
+        $order = Order::where('uuid', $uuid)->first();
+        $result = $controller->refund($request, $order->uuid);
     }
 }
