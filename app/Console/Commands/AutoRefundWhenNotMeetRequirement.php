@@ -52,7 +52,10 @@ class AutoRefundWhenNotMeetRequirement extends Command
                 Log::info($studentsCount . '<' . $course->minimum . ' Not Enough Students For Course' . $course->name . '(' . $course->id . ')');
                 $date = date('Y-m-d H', strtotime('+2 hour'));
                 if (date('Y-m-d H', strtotime($course->begin)) == $date) {
-                    $orders = $course->orders();
+                    $orders = $course->orders()
+                        ->where('status','paid')
+                        ->get();
+                    Log::info('order of course'. $course->id.' count:' . count($orders));
                     foreach ($orders as $order) {
                         Log::info('refund order:' . $order->id);
                         $this->refund($order);

@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('wx:send')->hourly();
-        $schedule->command('refund')->everyMinute();
+        $schedule->command('refund')->hourly();
         $schedule->command('stat:user')->daily();
 //        $schedule->call(function () {
 //            print("every 5 minute\n");
