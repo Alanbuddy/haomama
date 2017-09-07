@@ -82,8 +82,6 @@
         .row-div
           %a.edit.f12.color10#baby-edit 编辑
   %p.f12.color10.pt16#another-baby 还有一个宝宝?
-.btn#edit-end 确认
-
 .baby-item.add-baby-div
   %img.close-add-item{src: "icon/close.png"}
   .left-div
@@ -100,7 +98,9 @@
     .row-div
       %label.f14.color7.fn 宝宝生日
       %input.add-input-div#add-baby-birthday.birthday{type: "date"}
-
+@endsection
+@section('foot-div')
+.btn#edit-end 确认
 @endsection
 
 @section('modal-div')

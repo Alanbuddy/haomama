@@ -724,12 +724,12 @@ h2 {
   }
 }
 #sign-table {
-  width: auto;
+  // width: auto;
   border-radius: 6px;
   border: 1px solid #ddd;
   font-size: 20px;
   .sign-data {
-    width: 100px;
+    width: 33%;
     height:45px;
     // line-height: 45px;
     text-align: center;

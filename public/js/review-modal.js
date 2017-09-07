@@ -239,9 +239,20 @@ $(document).ready(function($) {
       },
       success: function (resp) {
           // console.log(resp);
-          signPackage = resp.data;
-          order=resp.data.order;
-          jsBrage();
+          if(resp.success){
+            signPackage = resp.data;
+            order=resp.data.order;
+            jsBrage();
+          }else{
+            if(resp.message == "已经加入课程"){
+              showMsg("您已经加入课程", "center");
+              return false;
+            }
+            if(resp.message == "课程学员已满"){
+              showMsg("课程学员已满", "center");
+              return false;
+            }
+          }
       }
     });
   });
@@ -380,6 +391,7 @@ $(document).ready(function($) {
     var scrollHeight = $(document).height();
     var windowheight = $(this).height();
     if(scrollTop + windowheight >= scrollHeight){
+      $(".notice").hide();
       $(".loading").show();
       $.ajax({
         type: 'get',

@@ -99,6 +99,8 @@
                 %span.participate= $favoritedCourse['users_count']."人已学"
                 %span .
                 %span= $favoritedCourse['comments_count'] ."条评论"
+@endsection
+@section('foot-div')
 .foot
   .foot-item-div#home
     %img.home{src: "icon/home_normal.png"}
@@ -106,7 +108,6 @@
   .foot-item-div#mine
     %img.mine{src: "icon/mine_selected.png"}
     %p.f10.color8.fb 我的
-
 @endsection
 
 @section('script')

@@ -11,8 +11,33 @@ $(document).ready(function(){
     $("#imghead").trigger("click");
   });
 
+  $("#edit-btn").click(function(){
+    $(this).toggle();
+    $("#finish-btn").toggle();
+    $(".edit-box").show();
+    $(".unedit-box").hide();
+  });
+
   $("#finish").click(function(){
   	var avatar = $("#imghead").attr("src");
+    var name = $("#user_name").val().trim();
+    $.postJSON(
+      window.account_set,
+      {
+        avatar: avatar,
+        name: name,
+        _token: window.token
+      },
+      function(data){
+        if(data.success){
+          location.href = window.account_set;
+        }
+      }
+      );
+  });
+
+  $("#finish-btn").click(function(){
+    var avatar = $("#imghead").attr("src");
     var name = $("#user_name").val().trim();
     $.postJSON(
       window.account_set,
