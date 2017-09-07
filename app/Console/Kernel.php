@@ -12,7 +12,6 @@ use App\Console\Commands\WechatMessage;
 use App\Console\Commands\Ws;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use MtHaml\Exception;
 
 class Kernel extends ConsoleKernel
 {
@@ -36,13 +35,16 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
+        //课前提醒
         $schedule->command('wx:send')->hourly();
+        //线下课程开课前24小时,人数不够则自动退款
         $schedule->command('schedule:refund')->hourly();
+        //每天午夜统计用户相关数据
         $schedule->command('stat:user')->daily();
 //        $schedule->call(function () {
 //            print("every 5 minute\n");

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\SendWechatMessage;
+use App\Jobs\SMS;
 use App\Models\Course;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +56,8 @@ class WechatMessage extends Command
             Log::info('due course:' . $course->id . $course->name);
             foreach ($course->students as $user) {
                 $job = (new SendWechatMessage($user, $course))->onQueue('wechat');
+                dispatch($job);
+                $job = (new SMS($user, $course))->onQueue('wechat');
                 dispatch($job);
             }
         }
