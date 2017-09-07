@@ -33,8 +33,9 @@ class SearchService
             $query->whereNull('star')
                 ->where('validity', true)
                 ->orWhere(function ($query) {
-                    $query->where('validity', false)
-                        ->where('user_id', auth()->user()->id);
+                    if (auth()->check())
+                        $query->where('validity', false)
+                            ->where('user_id', auth()->user()->id);
                 });
         }])->withCount(['users' => function ($query) {
             $query->where('type', 'enroll');
