@@ -31,7 +31,6 @@ class SMS implements ShouldQueue
      */
     public function __construct(User $user, Course $course, $hasEnrolled = true)
     {
-        //
         $this->user = $user;
         $this->course = $course;
         $this->hasEnrolled = $hasEnrolled;
@@ -45,9 +44,10 @@ class SMS implements ShouldQueue
     public function handle()
     {
         $phone = $this->user->phone;
-        Log::debug(__METHOD__ . '提醒SMS');
+        Log::info(__METHOD__ . $phone);
+        Log::info(__METHOD__ . '提醒SMS');
         if ($phone) {
-            $content = '【好妈妈微课】提醒课程'
+            $content = '【好妈妈微课】课程'
                 . $this->course->name
                 . "快开课了！"
                 . ($this->hasEnrolled ? "预祝学习愉快！" : "欢迎报名!");

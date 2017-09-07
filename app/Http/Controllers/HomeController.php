@@ -8,7 +8,6 @@ use App\Models\Setting;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -119,7 +118,7 @@ class HomeController extends Controller
         $images = json_decode($setting->value);
 
         return view('course.index',
-            compact('categories', 'data','images')
+            compact('categories', 'data', 'images')
         );
     }
 
@@ -129,13 +128,25 @@ class HomeController extends Controller
         if ($categoryId == 0) {
             $recommendedCourseSetting = Setting::where('key', 'recommendedCourse')->first();//dd($recommendedCourse);
             $recommendedCourse = $recommendedCourseSetting
-                ? Course::where('id', ($recommendedCourseSetting->value))->get()
+                ? Course::where('id', ($recommendedCourseSetting->value))
                 : null;
         } else {
             $recommendedCourse = Course::where('hot', true)
-                ->where('category_id', $categoryId)
-                ->get();
+                ->where('category_id', $categoryId);
         }
+        $recommendedCourse = $recommendedCourse
+            ->withCount(['comments' => function ($query) {
+                $query->whereNull('star')
+                    ->where('validity', true)
+                    ->orWhere(function ($query) {
+                        if (auth()->check())
+                            $query->where('validity', false)
+                                ->where('user_id', auth()->user()->id);
+                    });
+            }])->withCount(['users' => function ($query) {
+                $query->where('type', 'enroll');
+            }])->with('category')
+            ->get();
         return $recommendedCourse;
     }
 

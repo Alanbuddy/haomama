@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Events\Refund;
 use App\Http\Controllers\OrderController;
+use App\Http\Sms\SmsApi;
 use App\Http\Util\Curl;
 use App\Models\Order;
 use App\Statistic;
@@ -79,6 +80,8 @@ class test extends Command
 
 //        $this->refundAllOrder();
 //        $this->testVodCloudCallback();
+        $result=SmsApi::sendSms(['18911209450'], 'haha');
+        $this->info(json_encode($result));
     }
 
     public function refundAllOrder()
