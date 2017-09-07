@@ -158,7 +158,18 @@ class OrderController extends Controller
     public function pay(Request $request)
     {
         $course = Course::findOrFail($request->get('course_id'));
-        if ($this->hasEnrolled($course, auth()->user()->id)) return;
+        if ($this->hasEnrolled($course, auth()->user()->id)) {
+            Log::info(__METHOD__ . '已经加入课程');
+            return ['success' => false, 'message' => '已经加入课程'];
+        }
+        if ($course->type == 'offline'
+            && $course->quota
+            && $course->students()->count() == $course->quota
+        ) {
+            Log::info(__METHOD__ . '课程满额');
+            return ['success' => false, 'message' => '课程满额'];
+        }
+
         Log::info(__FILE__ . __LINE__);
         $order = $this->store($request);
         try {

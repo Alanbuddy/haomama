@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AutoRefundWhenNotMeetRequirement;
 use App\Console\Commands\changeCredential;
 use App\Console\Commands\enroll;
 use App\Console\Commands\Stat;
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
         Ws::class,
         changeCredential::class,
         Stat::class,
+        AutoRefundWhenNotMeetRequirement::class
     ];
 
     /**
@@ -38,6 +40,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('wx:send')->hourly();
+        $schedule->command('refund')->hourly();
         $schedule->command('stat:user')->daily();
 //        $schedule->call(function () {
 //            print("every 5 minute\n");
