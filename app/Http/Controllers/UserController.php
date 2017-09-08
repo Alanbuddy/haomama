@@ -457,6 +457,7 @@ class UserController extends Controller
         $items = $user->orders()
             ->with('course')
             ->paginate(10);
+        $items->withPath(route('admin.user.order', $user));
         return view('admin.client.purchase', compact('user', 'items'));
 
     }
