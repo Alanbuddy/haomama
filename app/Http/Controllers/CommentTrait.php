@@ -15,6 +15,7 @@ trait CommentTrait
     public function latestComments($course, $lesson, $pageSize = 10)
     {
         return $course->comments()
+            ->whereNull('star')
             ->where('validity', true)
             ->orWhere(function ($query) {
                 if (auth()->check())
@@ -32,6 +33,7 @@ trait CommentTrait
     public function hottestComments($course, $lesson, $pageSize = 10)
     {
         return $course->comments()
+            ->whereNull('star')
             ->where('validity', true)
             ->orWhere(function ($query) {
                 if (auth()->check())
