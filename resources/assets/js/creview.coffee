@@ -1,12 +1,12 @@
 
 $ ->
   # 页面底部fixed定位带输入框 iphone机型bug
-  viewHeight = window.innerHeight     
-  $(".review-input").focus( ->
-    $(".wrapper").css("height", viewHeight)
-  ).blur(->
-    $(".wrapper").css("height", "100%")
-  )
+  # viewHeight = window.innerHeight     
+  # $(".review-input").focus( ->
+  #   $(".wrapper").css("height", viewHeight)
+  # ).blur(->
+  #   $(".wrapper").css("height", "100%")
+  # )
 
   $(document).scroll ->
     if $(document).scrollTop() > 200

@@ -10333,13 +10333,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
-  var check_review_input, viewHeight;
-  viewHeight = window.innerHeight;
-  $(".review-input").focus(function() {
-    return $(".wrapper").css("height", viewHeight);
-  }).blur(function() {
-    return $(".wrapper").css("height", "100%");
-  });
+  var check_review_input;
   $(document).scroll(function() {
     if ($(document).scrollTop() > 200) {
       return $('.upper').fadeIn(1000);
