@@ -223,6 +223,7 @@ class CourseController extends Controller
         $hasCommented = auth()->user()->comments()
                 ->where('course_id', $course->id)
                 ->whereNotNull('star')->count() > 0;
+        $voteCount = $course->comments()->whereNotNull('star')->count();
         $comments = $course->comments()
             ->whereNull('comments.star')
             ->where(function ($query) {
@@ -335,6 +336,7 @@ class CourseController extends Controller
                 'avgRate',//平均评分
                 'teachers',//老师信息
                 'order',
+                'voteCount',
                 'hasCommented'//当前用户是否已经给课程评分
             )
         );
