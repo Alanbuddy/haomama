@@ -81,7 +81,7 @@
         %span.uuid{style: "display:none;"}= $order->uuid
     .items-div.offline-lesson
       - for ($i=0;$i<count($lessons);$i++)
-        %a.item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status'], href: route("courses.lessons.show", ['course'=>$course,'lesson'=>$lessons[$i]])}
+        .item{"data-id" => $lessons[$i]['id'], "data-status" => $lessons[$i]['status']}
           %p.num-div.f16.color7= ($i + 1)
           .item-desc
             %p.f14.color7= $lessons[$i]['name']
@@ -174,7 +174,7 @@
   %hr.div-line
 // 线下课程不显示评论
 - if ($course['type'] == "online")
-  - if (count($comments) > 3)
+  - if ($comments->total() > 3)
     .course-content
       .review-title
         %span.title.f14.color7.fb 课程评论
