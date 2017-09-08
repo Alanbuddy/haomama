@@ -42,7 +42,7 @@
               %span= $onGoingCourse['time']
             .row-div.f12.color6
               %span.address-span 地址：
-              %span.address= $onGoingCourse['name']
+              %span.address= $onGoingCourse['address']
           .item-right
             %img.signin{src: "icon/signin.png"}
     %hr.div-line

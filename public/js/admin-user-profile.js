@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  var is_edit = false;
   $("#imghead").mouseover(function() {
     $(".figure").show();
   });
@@ -16,6 +16,7 @@ $(document).ready(function(){
     $("#finish-btn").toggle();
     $(".edit-box").show();
     $(".unedit-box").hide();
+    is_edit = true;
   });
 
   $("#finish").click(function(){
@@ -48,6 +49,7 @@ $(document).ready(function(){
       },
       function(data){
         if(data.success){
+          is_edit = false;
           location.href = window.account_set;
         }
       }
@@ -56,8 +58,7 @@ $(document).ready(function(){
 
   var click_url = null;
 	function account_set_remind(event){
-    var name = $("#user_name").val().trim();
-    if(name != ""){
+    if(is_edit == true){
       click_url = event.currentTarget.href;
       event.preventDefault();
       $("#setModal").modal("show");
