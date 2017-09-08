@@ -189,7 +189,7 @@
               %p.f12.color5.time= $comment['created_at']
               %p.f14.color7.review-content= $comment['content']
               %span.f12.color5 评论来源：
-              %span.f12.color5= $comment->lesson->name
+              %span.f12.color5= $comment->lesson ? $comment->lesson->name : ''
               .admire-div
                 %span.f12.color5.admire-num= $comment['voteCount']
                 - if ($comment['hasVoted'] == false)
@@ -218,7 +218,7 @@
       .review-title
         %span.title.f14.color7.fb 课程评论
         %span.f12.color7= "(共".$comments->total()."条)"
-        %p.review-score.f12.color5= count($comments) > 0 ? $avgRate."分/".count($comments)."人已评" : "5分/1人已评"
+        %p.review-score.f12.color5= count($comments) > 0 ? $avgRate."分/".$voteCount."人已评" : "5分/1人已评"
       .review-items-div
         - if(count($comments) == 0)
           .undiscover

@@ -223,13 +223,16 @@ class CourseController extends Controller
         $hasCommented = auth()->user()->comments()
                 ->where('course_id', $course->id)
                 ->whereNotNull('star')->count() > 0;
+        $voteCount = $course->comments()->whereNotNull('star')->count();
         $comments = $course->comments()
             ->whereNull('comments.star')
-            ->where('validity', true)
-            ->orWhere(function ($query) {
-                if (auth()->check())
-                    $query->where('validity', false)
-                        ->where('user_id', auth()->user()->id);
+            ->where(function ($query) {
+                $query->where('validity', true)
+                    ->orWhere(function ($query) {
+                        if (auth()->check())
+                            $query->where('validity', false)
+                                ->where('user_id', auth()->user()->id);
+                    });
             })
             ->with('user')
             ->with('lesson')
@@ -261,7 +264,6 @@ class CourseController extends Controller
                 ->orderBy('id', 'desc')
                 ->paginate(10);
         }
-//        dd($comments);
 
         $lessons = $course->lessons()
             ->withPivot('created_at')
@@ -334,6 +336,7 @@ class CourseController extends Controller
                 'avgRate',//平均评分
                 'teachers',//老师信息
                 'order',
+                'voteCount',
                 'hasCommented'//当前用户是否已经给课程评分
             )
         );

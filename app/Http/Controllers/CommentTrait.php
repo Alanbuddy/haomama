@@ -16,11 +16,13 @@ trait CommentTrait
     {
         return $course->comments()
             ->whereNull('star')
-            ->where('validity', true)
-            ->orWhere(function ($query) {
-                if (auth()->check())
-                    $query->where('validity', false)
-                        ->where('user_id', auth()->user()->id);
+            ->where(function ($query) {
+                $query->where('validity', true)
+                    ->orWhere(function ($query) {
+                        if (auth()->check())
+                            $query->where('validity', false)
+                                ->where('user_id', auth()->user()->id);
+                    });
             })
             ->whereNull('star')
             ->where('lesson_id', $lesson->id)
@@ -34,11 +36,13 @@ trait CommentTrait
     {
         return $course->comments()
             ->whereNull('star')
-            ->where('validity', true)
-            ->orWhere(function ($query) {
-                if (auth()->check())
-                    $query->where('validity', false)
-                        ->where('user_id', auth()->user()->id);
+            ->where(function ($query) {
+                $query->where('validity', true)
+                    ->orWhere(function ($query) {
+                        if (auth()->check())
+                            $query->where('validity', false)
+                                ->where('user_id', auth()->user()->id);
+                    });
             })
             ->whereNull('star')
             ->where('lesson_id', $lesson->id)

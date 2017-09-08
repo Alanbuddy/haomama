@@ -455,6 +455,7 @@ class UserController extends Controller
     public function order(Request $request, User $user)
     {
         $items = $user->orders()
+            ->where('status','paid')
             ->with('course')
             ->paginate(10);
         $items->withPath(route('admin.user.order', $user));
