@@ -227,8 +227,9 @@ class CourseController extends Controller
             ->whereNull('comments.star')
             ->where('validity', true)
             ->orWhere(function ($query) {
-                $query->where('validity', false)
-                    ->where('user_id', auth()->user()->id);
+                if (auth()->check())
+                    $query->where('validity', false)
+                        ->where('user_id', auth()->user()->id);
             })
             ->with('user')
             ->with('lesson')
@@ -247,8 +248,14 @@ class CourseController extends Controller
             $comment->hasVoted = $hasVoted;
         }
 
-        if (count($comments) > 3) {
+        if ($comments->total() > 3) {
             $latestComments = $course->comments()
+                ->where('validity', true)
+                ->orWhere(function ($query) {
+                    if (auth()->check())
+                        $query->where('validity', false)
+                            ->where('user_id', auth()->user()->id);
+                })
                 ->with('user')
                 ->with('lesson')
                 ->orderBy('id', 'desc')
@@ -529,6 +536,12 @@ class CourseController extends Controller
     public function commentsIndex(Request $request, Course $course)
     {
         return $course->comments()
+            ->where('validity', true)
+            ->orWhere(function ($query) {
+                if (auth()->check())
+                    $query->where('validity', false)
+                        ->where('user_id', auth()->user()->id);
+            })
             ->whereNull('star')
             ->with('user')
             ->with('lesson')
