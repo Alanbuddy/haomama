@@ -174,7 +174,7 @@
   %hr.div-line
 // 线下课程不显示评论
 - if ($course['type'] == "online")
-  - if ($comments->total() > 3)
+  - if (count($comments) > 3)
     .course-content
       .review-title
         %span.title.f14.color7.fb 课程评论

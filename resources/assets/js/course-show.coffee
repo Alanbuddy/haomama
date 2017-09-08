@@ -126,24 +126,24 @@ $ ->
     location.href = window.course
 
   $(".time").each ->
-    data_time = $(this).text()
-    dtime = Date.parse(data_time)
-    dt = new Date(dtime)
-    dy = dt.getFullYear()
-    dm = dt.getMonth() + 1
-    dd = dt.getDate()
-    time_now = Date.parse(Date())
-    time = (time_now - dtime)/1000
-    if time < 60
-      $(this).text(time + "秒前")
-    else if 60 <= time < 3600
-      $(this).text(Math.round(time/60) + "分前")
-    else if 3600 <= time <  86400
-      $(this).text(Math.round(time/3600) + "小时前")
-    else if 86400 <= time < 604800
-      $(this).text(Math.round(time/86400) + "天前")
+    data_time_show = $(this).text()
+    dtime_show = Date.parse(data_time_show)
+    dt_show = new Date(dtime_show)
+    dy_show = dt_show.getFullYear()
+    dm_show = dt_show.getMonth() + 1
+    dd_show = dt_show.getDate()
+    time_now_show = Date.parse(Date())
+    time_show = (time_now_show - dtime_show)/1000
+    if time_show < 60
+      $(this).text(time_show + "秒前")
+    else if 60 <= time_show < 3600
+      $(this).text(Math.round(time_show/60) + "分前")
+    else if 3600 <= time_show <  86400
+      $(this).text(Math.round(time_show/3600) + "小时前")
+    else if 86400 <= time_show < 604800
+      $(this).text(Math.round(time_show/86400) + "天前")
     else
-      $(this).text(dy + "年" + dm + "月" + dd + "日")
+      $(this).text(dy_show + "年" + dm_show + "月" + dd_show + "日")
 
   $(".course-time").each ->
     if $(this).text() == "无时间"

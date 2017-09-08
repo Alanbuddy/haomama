@@ -10494,25 +10494,25 @@ $(".back").click(function() {
 });
 
 $(".time").each(function() {
-  var data_time, dd, dm, dt, dtime, dy, time, time_now;
-  data_time = $(this).text();
-  dtime = Date.parse(data_time);
-  dt = new Date(dtime);
-  dy = dt.getFullYear();
-  dm = dt.getMonth() + 1;
-  dd = dt.getDate();
-  time_now = Date.parse(Date());
-  time = (time_now - dtime) / 1000;
-  if (time < 60) {
-    return $(this).text(time + "秒前");
-  } else if ((60 <= time && time < 3600)) {
-    return $(this).text(Math.round(time / 60) + "分前");
-  } else if ((3600 <= time && time < 86400)) {
-    return $(this).text(Math.round(time / 3600) + "小时前");
-  } else if ((86400 <= time && time < 604800)) {
-    return $(this).text(Math.round(time / 86400) + "天前");
+  var data_time_show, dd_show, dm_show, dt_show, dtime_show, dy_show, time_now_show, time_show;
+  data_time_show = $(this).text();
+  dtime_show = Date.parse(data_time_show);
+  dt_show = new Date(dtime_show);
+  dy_show = dt_show.getFullYear();
+  dm_show = dt_show.getMonth() + 1;
+  dd_show = dt_show.getDate();
+  time_now_show = Date.parse(Date());
+  time_show = (time_now_show - dtime_show) / 1000;
+  if (time_show < 60) {
+    return $(this).text(time_show + "秒前");
+  } else if ((60 <= time_show && time_show < 3600)) {
+    return $(this).text(Math.round(time_show / 60) + "分前");
+  } else if ((3600 <= time_show && time_show < 86400)) {
+    return $(this).text(Math.round(time_show / 3600) + "小时前");
+  } else if ((86400 <= time_show && time_show < 604800)) {
+    return $(this).text(Math.round(time_show / 86400) + "天前");
   } else {
-    return $(this).text(dy + "年" + dm + "月" + dd + "日");
+    return $(this).text(dy_show + "年" + dm_show + "月" + dd_show + "日");
   }
 });
 
