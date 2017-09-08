@@ -261,7 +261,6 @@ class CourseController extends Controller
                 ->orderBy('id', 'desc')
                 ->paginate(10);
         }
-//        dd($comments);
 
         $lessons = $course->lessons()
             ->withPivot('created_at')
