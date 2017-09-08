@@ -28,7 +28,7 @@
         %select.input-div#parent
           %option{value: "请选择"} 请选择
           %option{value: "爸爸"} 爸爸
-          %option{value: "妈妈", selected: "selected"} 妈妈
+          %option{value: "妈妈"} 妈妈
       .row-div
         %label.f14.color7.fn 手机号码
         %p.f12.color6#mobile-span= $user['phone'] ? $user['phone'] : "未绑定"
@@ -47,17 +47,17 @@
           .row-div
             %label.f14.color7.fn 宝宝姓名
             %span.f12.color6.span-desc.name-span= $baby->name ? $baby->name : "不知道"
-            %input.input-div#baby-name.baby-name
+            %input.input-div#baby-name.baby-name{value: $baby->name ? $baby->name : "不知道"}
           .row-div
             %label.f14.color7.fn 宝宝性别
-            %span.f12.color6.span-desc.gender-span= $baby->gender ? $baby->gender : "不知道"
+            %span.f12.color6.span-desc.gender-span#gender-span= $baby->gender ? $baby->gender == "male" ? "男子汉" : "小姑娘" : "不知道"
             %select.input-div#baby-gender.gender
               %option{value: "男子汉"} 男子汉
               %option{value: "小姑娘"} 小姑娘
           .row-div
             %label.f14.color7.fn 宝宝生日
             %span.f12.color6.span-desc.birthday-span= $baby->birthday ? $baby->birthday : "不知道"
-            %input.input-div#baby-birthday.birthday{type: "date"}
+            %input.input-div#baby-birthday.birthday{type: "date", value:$baby->birthday ? $baby->birthday : "不知道"}
           .row-div
             %a.edit.f12.color10#baby-edit 编辑
   - else
