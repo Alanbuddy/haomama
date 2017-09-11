@@ -10370,6 +10370,7 @@ return jQuery;
     var ad, num, url;
     url = $(this).closest(".review-item").attr("data-url");
     num = $(this).siblings(".admire-num").text();
+    console.log(num);
     ad = $(this);
     return $.getJSON(url, {}, function(data) {
       console.log(data);
