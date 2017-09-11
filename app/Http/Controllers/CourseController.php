@@ -261,7 +261,6 @@ class CourseController extends Controller
                 ->paginate(10);
             $this->addVoteStatusToComment($latestComments);
         }
-        dd($comments,$latestComments);
 
         $lessons = $course->lessons()
             ->withPivot('created_at')
