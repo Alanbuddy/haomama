@@ -31,6 +31,7 @@ $ ->
   $(document).on 'click', '.admire-icon', ->
     url = $(this).closest(".review-item").attr("data-url")
     num = $(this).siblings(".admire-num").text()
+    console.log(num)
     ad = $(this)
     $.getJSON(
       url,
