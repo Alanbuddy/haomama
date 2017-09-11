@@ -114,6 +114,7 @@ $(document).ready(function($) {
     select.toggle();
     replace.toggle();
     $('#edit-end').show();
+    $("#parent").val($("#parent-span").text());
   });
 
   $('.edit').click(function(){
@@ -127,6 +128,7 @@ $(document).ready(function($) {
     input.toggle();
     select.toggle();
     $("#edit-end").show();
+    $("#baby-gender").val($("#gender-span").text());
   });
 
   $("#another-baby").click(function(){
