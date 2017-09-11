@@ -53,6 +53,8 @@
               .sign-status-box
                 .sign-status
                   %h5 签到情况
+                  -foreach($attendances as $attendance)
+                    %h4 =$attendance->user_id
                   %table.table.table-bordered#sign-table
                     %tbody
                       %tr

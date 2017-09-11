@@ -239,7 +239,7 @@ class CourseController extends Controller
             ->with('votes')
             ->whereNotNull('lesson_id')
             ->orderBy('vote', 'desc')
-            ->paginate(3);
+            ->paginate(10);
 //        dd($comments,$comments->lastPage());
         foreach ($comments as $comment) {
             $comment->voteCount = count($comment->votes);
@@ -949,8 +949,10 @@ class CourseController extends Controller
     public function getAttendances(Request $request, Course $course)
     {
         $attendances = $course->attendances()
-            ->where('lesson_index', $request->get('index', 1))//index表示第几次课
+            ->with('user')
+            ->where('lesson_index', $request->get('index', 0))//index表示第几次课
             ->get();
+        dd($attendances);
         return $attendances;
     }
 

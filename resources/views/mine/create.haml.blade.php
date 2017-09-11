@@ -20,7 +20,7 @@
     .name-div.f12.color6
       %span 课程
       %span= $course['name']
-    %p.f12.color6= "第".$index."次课已签到成功～"
+    %p.f12.color6= "第".($index+1)."次课已签到成功～"
   .btn#view.mt80{"data-id" => $course['id']} 查看详情
 
 @endsection
