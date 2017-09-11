@@ -537,10 +537,14 @@ class CourseController extends Controller
     {
         return $course->comments()
             ->where('validity', true)
-            ->orWhere(function ($query) {
-                if (auth()->check())
-                    $query->where('validity', false)
-                        ->where('user_id', auth()->user()->id);
+            ->whereNotNull('lesson_id')
+            ->where(function ($query) {
+                $query->where('validity', true)
+                    ->orWhere(function ($query) {
+                        if (auth()->check())
+                            $query->where('validity', false)
+                                ->where('user_id', auth()->user()->id);
+                    });
             })
             ->whereNull('star')
             ->with('user')
