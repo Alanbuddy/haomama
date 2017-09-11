@@ -10497,14 +10497,12 @@ $(".time").each(function() {
   var data_time_show, dd_show, dm_show, dt_show, dtime_show, dy_show, time_now_show, time_show;
   data_time_show = $(this).text();
   dtime_show = Date.parse(data_time_show);
-  if(isNaN(dtime_show))
-      dtime_show = Date.parse(data_time_show.replace(/-/g, "/"));
   dt_show = new Date(dtime_show);
   dy_show = dt_show.getFullYear();
   dm_show = dt_show.getMonth() + 1;
   dd_show = dt_show.getDate();
   time_now_show = Date.parse(Date());
-  time_show = parseInt(time_now_show - dtime_show) / 1000;
+  time_show = (time_now_show - dtime_show) / 1000;
   if (time_show < 60) {
     return $(this).text(time_show + "秒前");
   } else if ((60 <= time_show && time_show < 3600)) {
