@@ -17,8 +17,8 @@ $(document).ready(function(){
   };
   editor.create();
 
-  function check_input(name, mobile, avatar, introduce, desc){
-    if(name == "" || mobile == "" || avatar == "" || introduce == "" || desc == ""){
+  function check_input(name, mobile, avatar, introduce){
+    if(name == "" || mobile == "" || avatar == "" || introduce == ""){
       showMsg("有必填项内容没有填写", "center");
       return false;
     }
@@ -38,13 +38,27 @@ $(document).ready(function(){
     var introduce = $("#base").val().trim();
     var desc = editor.txt.html(); 
     var avatar = $(".cover-path").text();
-    
     var ret = check_input(name, mobile, avatar, introduce, desc);
     if(ret == false){
       return false;
     }
     if(!$.regex.isMobile(mobile)){
       showMsg("手机号不正确", "center");
+      return false;
+    }
+    var teacher_info = false;
+    $("#edit-area .w-e-text ").last().find('p').each(function(){
+      if($(this).text()!=''){
+        teacher_info =  true; 
+      }
+    });
+    $("#edit-area .w-e-text ").last().find('img').each(function(){
+      if($(this).attr("src")!=''){
+        teacher_info =  true; 
+      }
+    });
+    if(teacher_info == false){
+      showMsg("讲师介绍没有填写", "center");
       return false;
     }
     //需要时再放开

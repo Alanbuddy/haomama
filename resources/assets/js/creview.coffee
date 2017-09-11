@@ -31,22 +31,24 @@ $ ->
   $(document).on 'click', '.admire-icon', ->
     url = $(this).closest(".review-item").attr("data-url")
     num = $(this).siblings(".admire-num").text()
-    console.log(num)
-    ad = $(this)
+    cid = $(this).closest(".review-item").attr("data-id")
     $.getJSON(
       url,
       {},
       (data) ->
         console.log(data)
         if data.success
-          if data.message == 'yes'
-            ad.attr('src', 'icon/like1_selected.png')
-            ad.siblings(".admire-num").text(parseInt(num) + 1)
-            showMsg('点赞完成', 'center')
-          else
-            ad.attr('src', 'icon/like1_normal.png')
-            ad.siblings(".admire-num").text(parseInt(num) - 1)
-            showMsg('取消点赞', 'center')
+          $(".review-item").each ->
+            if $(this).attr("data-id") == cid
+              ad = $(this)
+              if data.message == 'yes'
+                ad.find(".admire-icon").attr('src', 'icon/like1_selected.png')
+                ad.find(".admire-num").text(parseInt(num) + 1)
+                showMsg('点赞完成', 'center')
+              else
+                ad.find(".admire-icon").attr('src', 'icon/like1_normal.png')
+                ad.find(".admire-num").text(parseInt(num) - 1)
+                showMsg('取消点赞', 'center')
         else
           showMsg('服务器出错，请稍后再试', 'center')
       )
