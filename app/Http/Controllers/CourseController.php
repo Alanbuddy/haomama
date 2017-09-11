@@ -226,6 +226,7 @@ class CourseController extends Controller
         $voteCount = $course->comments()->whereNotNull('star')->count();
         $comments = $course->comments()
             ->whereNull('comments.star')
+            ->whereNotNull('lesson_id')
             ->where(function ($query) {
                 $query->where('validity', true)
                     ->orWhere(function ($query) {
@@ -237,32 +238,28 @@ class CourseController extends Controller
             ->with('user')
             ->with('lesson')
             ->with('votes')
-            ->whereNotNull('lesson_id')
             ->orderBy('vote', 'desc')
-            ->paginate(10);
+            ->paginate(3);
 //        dd($comments,$comments->lastPage());
-        foreach ($comments as $comment) {
-            $comment->voteCount = count($comment->votes);
-            $hasVoted = false;
-            foreach ($comment->votes as $vote) {
-                if ($vote->user_id == auth()->user()->id)
-                    $hasVoted = true;
-            }
-            $comment->hasVoted = $hasVoted;
-        }
+        $this->addVoteStatusToComment($comments);
 
         if ($comments->total() > 3) {
             $latestComments = $course->comments()
-                ->where('validity', true)
-                ->orWhere(function ($query) {
-                    if (auth()->check())
-                        $query->where('validity', false)
-                            ->where('user_id', auth()->user()->id);
+                ->whereNull('comments.star')
+                ->whereNotNull('lesson_id')
+                ->where(function ($query) {
+                    $query->where('validity', true)
+                        ->orWhere(function ($query) {
+                            if (auth()->check())
+                                $query->where('validity', false)
+                                    ->where('user_id', auth()->user()->id);
+                        });
                 })
                 ->with('user')
                 ->with('lesson')
                 ->orderBy('id', 'desc')
                 ->paginate(10);
+            $this->addVoteStatusToComment($latestComments);
         }
 
         $lessons = $course->lessons()
@@ -987,6 +984,22 @@ class CourseController extends Controller
         $behavior->course_id = $course->id;
         $behavior->save();
         return ['success' => true];
+    }
+
+    /**
+     * @param $comments
+     */
+    public function addVoteStatusToComment($comments)
+    {
+        foreach ($comments as $comment) {
+            $comment->voteCount = count($comment->votes);
+            $hasVoted = false;
+            foreach ($comment->votes as $vote) {
+                if ($vote->user_id == auth()->user()->id)
+                    $hasVoted = true;
+            }
+            $comment->hasVoted = $hasVoted;
+        }
     }
 
 
