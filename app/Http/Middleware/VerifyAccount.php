@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class VerifyAccount
 {
     /**
-     * Handle an incoming request.
-     *
+     * 拒绝没有开通的后台人员操作
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
      * @param  string|null $guard
