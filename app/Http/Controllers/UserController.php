@@ -366,8 +366,8 @@ class UserController extends Controller
                 $query->where('name', 'like', '%' . $key . '%')
                     ->orWhere('phone', 'like', '%' . $key . '%')
                     ->orWhere('openid', 'like', '%' . $key . '%')
-                    ->orWhere(DB::raw('wx->"$.nickname"'), 'like', '%' . $key . '%');
-//                    ->orWhere(DB::raw('baby->"$.name"'), 'like', '%' . $key . '%');
+                    ->orWhere(DB::raw('wx->"$.nickname"'), 'like', '%' . $key . '%')
+                    ->orWhere('baby', 'like', '%' . $key . '%');
             })
             ->paginate(10);
     }
