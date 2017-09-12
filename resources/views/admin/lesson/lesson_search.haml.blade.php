@@ -42,7 +42,7 @@
                     -foreach ($items as $lesson) 
                       %tr{class: ""}
                         %td.show-name
-                          %a{href:route('admin.lesson.show',$lesson->id)}=$lesson->name
+                          %a{href:route('admin.lesson.show',$lesson->id).'?type='.$lesson->type}=$lesson->name
                         %td =$lesson->created_at
                         %td =$lesson->updated_at
                         %td =$lesson->type == "video" ? "视频" : "音频" 

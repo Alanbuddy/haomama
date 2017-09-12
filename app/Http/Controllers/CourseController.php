@@ -918,7 +918,7 @@ class CourseController extends Controller
             ->orderBy('comments.id', 'desc')
             ->with('user')
             ->paginate(10);
-        $items->withPath(route('admin.courses.students', $course));
+        $items->withPath(route('admin.courses.comments', $course));
         return view('admin.course.comment', compact('items', 'course'));
     }
 
