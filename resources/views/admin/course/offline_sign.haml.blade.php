@@ -53,22 +53,26 @@
               .sign-status-box
                 .sign-status
                   %h5 签到情况
-                  -foreach($attendances as $attendance)
-                    %h4 =$attendance->user_id
-                  %table.table.table-bordered#sign-table
-                    %tbody
-                      %tr
-                        %td.sign-data.check-in dasfgag
-                        %td.sign-data dasfgag
-                        %td.sign-data dasfgag
-                      %tr
-                        %td.sign-data dasfgag
-                        %td.sign-data dasfgag
-                        %td.sign-data dasfgag
-                      %tr
-                        %td.sign-data dasfgag
-                        %td.sign-data dasfgag
-                        %td.sign-data dasfgag
+                  #sign-table
+                    - foreach($course->students as $student)
+                      .sign-data.check-in= $student->name
+                      .sign-data= $student->name
+                  // %table.table.table-bordered#sign-table
+                  //   %tbody
+                  //     -foreach($attendances as $attendance)
+                        
+                  //       %tr
+                  //         %td.sign-data.check-in dasfgag
+                  //         %td.sign-data dasfgag
+                  //         %td.sign-data dasfgag
+                  //       %tr
+                  //         %td.sign-data dasfgag
+                  //         %td.sign-data dasfgag
+                  //         %td.sign-data dasfgag
+                  //       %tr
+                  //         %td.sign-data dasfgag
+                  //         %td.sign-data dasfgag
+                  //         %td.sign-data dasfgag
 @endsection
 
 

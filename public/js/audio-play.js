@@ -19,7 +19,7 @@ $(document).ready(function(){
       var current_time = Math.ceil(audio.currentTime);
       var len = pictures.length;
       for(let i=0; i<len;i++){
-        if(current_time == pictures[i].time){
+        if(pictures[i].time <= current_time && current_time < pictures[i+1].time){
           $(".audio-poster").attr("src", pictures[i].src);
         }
       }
