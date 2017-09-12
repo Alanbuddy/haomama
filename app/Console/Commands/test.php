@@ -8,6 +8,7 @@ use App\Http\Sms\SmsApi;
 use App\Http\Util\Curl;
 use App\Models\Order;
 use App\Statistic;
+use Faker\Provider\Uuid;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -80,8 +81,12 @@ class test extends Command
 
 //        $this->refundAllOrder();
 //        $this->testVodCloudCallback();
-        $result=SmsApi::sendSms(['18911209450'], 'haha');
-        $this->info(json_encode($result));
+
+        $this->info(Uuid::uuid());
+        $this->info(strlen(Uuid::uuid()));
+
+//        $result=SmsApi::sendSms(['18911209450'], 'haha');
+//        $this->info(json_encode($result));
     }
 
     public function refundAllOrder()
