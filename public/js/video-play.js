@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   var barrage = [];
   var bar_item = {};
-  $(".review-content").each(function(){
+  $(".feed-review-items-div .review-content").each(function(){
     var comment_content = $(this).text();
     if(comment_content.length < 15){
       bar_item = {
@@ -34,7 +34,7 @@ $(document).ready(function(){
         }
         $div.text(barrage.content);
         $video_div.append($div).css('overflow', 'hidden');
-        $div.animate({left: '-' + $div.width() + 'px'}, 2500, 'linear').queue(function (next) {
+        $div.animate({left: '-' + $div.width() + 'px'}, 2400, 'linear').queue(function (next) {
           $(this).hide() ;
           next();
         });

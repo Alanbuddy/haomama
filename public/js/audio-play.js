@@ -24,6 +24,21 @@ $(document).ready(function(){
         }
       }
     }, 1000);
+    var $audio_div = $(".audio-div");
+    var $div = $('<div>').addClass('barrage');
+    var barrage = [];
+    $(".feed-review-items-div .review-content").each(function(){
+      var comment_content = $(this).text();
+      if(comment_content.length < 15){
+        barrage.push(comment_content);
+      }
+    });
+    $div.text(barrage);
+    $audio_div.append($div).css('overflow', 'hidden');
+    $div.animate({left: '-' + $div.width() + 'px'}, 5400, 'linear').queue(function (next) {
+      $(this).hide() ;
+      next();
+    });
   });
 
   audio.addEventListener("pause", function(){
