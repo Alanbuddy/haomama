@@ -159,6 +159,7 @@ $(document).ready(function($) {
       });
     }
     if (!enroll) {
+      _this.addClass("opt55");
       _this.click(function(e){
         e.preventDefault();
         $("#confirmModal").modal("show");
@@ -166,24 +167,25 @@ $(document).ready(function($) {
     }
   });
 
-  $(".offline-lesson .item:gt(0)").each(function(){
-    var offline_status = $(this).attr("data-status");
-    var offline_enroll = $(this).find(".hasenrolled").text();
-    var _this = $(this);
-    if (offline_status != "publish") {
-      _this.addClass("opt55");
-      _this.click(function(e){
-        e.preventDefault();
-        showMsg("这节课还没有上线哦～", "center");
-      });
-    }
-    if (!offline_enroll) {
-      _this.click(function(e){
-        e.preventDefault();
-        $("#confirmModal").modal("show");
-      });
-    }
-  });
+  // $(".offline-lesson .item:gt(0)").each(function(){
+  //   var offline_status = $(this).attr("data-status");
+  //   var offline_enroll = $(this).find(".hasenrolled").text();
+  //   var _this = $(this);
+  //   if (offline_status != "publish") {
+  //     _this.addClass("opt55");
+  //     _this.click(function(e){
+  //       e.preventDefault();
+  //       showMsg("这节课还没有上线哦～", "center");
+  //     });
+  //   }
+  //   if (!offline_enroll) {
+  //     _this.click(function(e){
+  //       e.preventDefault();
+  //       $("#confirmModal").modal("show");
+  //     });
+  //   }
+  // });
+  
   //用user-info来判断是否已经填写过个人信息
   function getCookie(cname){
     var name = cname + "=";

@@ -57,7 +57,7 @@
         %span.f12.color7= "(共".$comments->total()."条)"
       .review-items-div
         - foreach ($comments as $comment)
-          .review-item{"data-url" => route("comments.vote", $comment['id'])}
+          .review-item{"data-id" => $comment['id'], "data-url" => route("comments.vote", $comment['id'])}
             %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
@@ -74,7 +74,7 @@
     %p.f12.color6.feed-review 最新评论
     .feed-review-items-div
       - foreach ($latestComments as $latestComment)
-        .review-item{"data-url" => route("comments.vote", $latestComment['id'])}
+        .review-item{"data-id" => $latestComment['id'], "data-url" => route("comments.vote", $latestComment['id'])}
           %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "icon/avatar.png"}
           .item-desc
             %p.f12.color7.review-name= $latestComment->user->name

@@ -65,24 +65,29 @@ $ ->
   $(document).on 'click', '.admire-icon', ->
     url = $(this).closest(".review-item").attr("data-url")
     num = $(this).siblings(".admire-num").text()
-    ad = $(this)
+    c_id = $(this).closest(".review-item").attr("data-id")
     $.getJSON(
       url,
       {},
       (data) ->
         console.log(data)
         if data.success
-          if data.message == 'yes'
-            ad.attr('src', 'icon/like1_selected.png')
-            ad.siblings(".admire-num").text(parseInt(num) + 1)
-            showMsg('点赞完成', 'center')
-          else
-            ad.attr('src', 'icon/like1_normal.png')
-            ad.siblings(".admire-num").text(parseInt(num) - 1)
-            showMsg('取消点赞', 'center')
+          $(".review-item").each ->
+            if $(this).attr("data-id") == c_id
+              ad = $(this)
+              if data.message == 'yes'
+                ad.find(".admire-icon").attr('src', 'icon/like1_selected.png')
+                ad.find(".admire-num").text(parseInt(num) + 1)
+                showMsg('点赞完成', 'center')
+              else
+                ad.find(".admire-icon").attr('src', 'icon/like1_normal.png')
+                ad.find(".admire-num").text(parseInt(num) - 1)
+                showMsg('取消点赞', 'center')
         else
           showMsg('服务器出错，请稍后再试', 'center')
       )
+    
+
 
   $('.category-class').each ->
     if $(this).text() == "健康养育"
@@ -99,12 +104,12 @@ $ ->
     if hasEnrolled == false
       $(this).addClass("opt55")
 
-  $(".offline-lesson .item:eq(0)").attr("data-status", "publish")
+  # $(".offline-lesson .item:eq(0)").attr("data-status", "publish")
 
-  $(".offline-lesson .item").each ->
-    offline_hasEnrolled = $(this).attr("data-enrolled")
-    if offline_hasEnrolled == false
-      $(this).addClass("opt55")
+  # $(".offline-lesson .item").each ->
+  #   offline_hasEnrolled = $(this).attr("data-enrolled")
+  #   if offline_hasEnrolled == false
+  #     $(this).addClass("opt55")
 
   $(".items-div > .item:gt(2)").hide()
 
@@ -128,12 +133,14 @@ $ ->
   $(".time").each ->
     data_time_show = $(this).text()
     dtime_show = Date.parse(data_time_show)
+    if(isNaN(dtime_show))
+      dtime_show = Date.parse(data_time_show.replace(/-/g, "/"))
     dt_show = new Date(dtime_show)
     dy_show = dt_show.getFullYear()
     dm_show = dt_show.getMonth() + 1
     dd_show = dt_show.getDate()
     time_now_show = Date.parse(Date())
-    time_show = (time_now_show - dtime_show)/1000
+    time_show = parseInt(time_now_show - dtime_show) / 1000
     if time_show < 60
       $(this).text(time_show + "秒前")
     else if 60 <= time_show < 3600

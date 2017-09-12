@@ -88,7 +88,7 @@
             .item-row.f12.color5
               %span.min= date_format(date_create($lessons[$i]['begin']),"Y/m/d")
               %span= date_format(date_create($lessons[$i]['begin']),"H:i")."~".date_format(date_create($lessons[$i]['end']),"H:i")
-          - if ($hasEnrolled == true)
+          - if ($hasEnrolled == true && time() >  strtotime($lessons[$i]['begin']))
             - if ($lessons[$i]['hasAttended'])
               %img.sign-icon{src: "icon/arrive.png"}
             - else
@@ -174,7 +174,7 @@
   %hr.div-line
 // 线下课程不显示评论
 - if ($course['type'] == "online")
-  - if (count($comments) > 3)
+  - if ($comments->total() > 3)
     .course-content
       .review-title
         %span.title.f14.color7.fb 课程评论
@@ -182,7 +182,7 @@
         %p.review-score.f12.color5= $avgRate."分/".count($comments)."人已评"
       .review-items-div
         - foreach ($comments as $comment)
-          .review-item{"data-url" => route("comments.vote", $comment['id'])}
+          .review-item{"data-id" => $comment['id'], "data-url" => route("comments.vote", $comment['id'])}
             %img.review-avatar{src: $comment->user->avatar ? $comment->user->avatar : "icon/avatar.png"}
             .item-desc
               %p.f12.color7.review-name= $comment->user->name
@@ -199,7 +199,7 @@
     %p.f12.color6.feed-review 最新评论
     .feed-review-items-div
       - foreach ($latestComments as $latestComment)
-        .review-item{"data-url" => route("comments.vote", $latestComment['id'])}
+        .review-item{"data-id" => $latestComment['id'], "data-url" => route("comments.vote", $latestComment['id'])}
           %img.review-avatar{src: $latestComment->user->avatar ? $latestComment->user->avatar : "icon/avatar.png"}
           .item-desc
             %p.f12.color7.review-name= $latestComment->user->name
