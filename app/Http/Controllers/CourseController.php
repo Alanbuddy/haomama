@@ -953,7 +953,7 @@ class CourseController extends Controller
             ->with('user')
             ->where('lesson_index', $request->get('index', 0))//index表示第几次课
             ->get();
-        dd($attendances);
+        // dd($attendances);
         return $attendances;
     }
 

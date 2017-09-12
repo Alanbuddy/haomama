@@ -724,17 +724,20 @@ h2 {
   }
 }
 #sign-table {
-  // width: auto;
+  width: 390px;
   border-radius: 6px;
-  border: 1px solid #ddd;
-  font-size: 20px;
+  // border: 1px solid #ddd;
+  // font-size: 0;
   .sign-data {
-    width: 33%;
+    display: inline-block;
+    width: 32%;
     height:45px;
-    // line-height: 45px;
+    line-height: 45px;
     text-align: center;
-    // padding: 0;
-    padding: 8px 0;
+    border: 1px solid #ddd;
+    font-size: 20px;
+    margin-bottom: 4px;
+    margin-right: 2px;
   }
   .check-in {
     background: rgb(16, 192, 120);
