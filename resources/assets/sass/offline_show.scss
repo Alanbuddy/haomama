@@ -726,17 +726,18 @@ h2 {
 #sign-table {
   width: 390px;
   border-radius: 6px;
-  border: 1px solid #ddd;
-  font-size: 0;
+  // border: 1px solid #ddd;
+  // font-size: 0;
   .sign-data {
     display: inline-block;
-    width: 33.3%;
+    width: 32%;
     height:45px;
     line-height: 45px;
     text-align: center;
     border: 1px solid #ddd;
-    border-collapse: collapse;
     font-size: 20px;
+    margin-bottom: 4px;
+    margin-right: 2px;
   }
   .check-in {
     background: rgb(16, 192, 120);
