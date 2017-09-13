@@ -46,7 +46,7 @@ class WechatMessage extends Command
         $this->sendBefore32h();
     }
 
-    //线下课程开课前24小时，发送微信消息给课程学员
+    //线下课程开课前24小时，给学员发送提醒消息
     public function sendBefore24h()
     {
         Log::info('----------------------------send wechat notification before 24h----------------------------');
@@ -54,7 +54,12 @@ class WechatMessage extends Command
         $courses = $this->dueCourses($date, 'students');
         foreach ($courses as $course) {
             Log::info('due course:' . $course->id . $course->name);
-            foreach ($course->students as $user) {
+            $students = $course->students;
+            if ($course->minimum && count($students) < $course->minimum) {
+                //如果开课前24小时报名人数不足,不发送开课提醒
+                continue;
+            }
+            foreach ($students as $user) {
                 //发送微信提醒
                 $job = (new SendWechatMessage($user, $course))->onQueue('wechat');
                 dispatch($job);
@@ -62,7 +67,6 @@ class WechatMessage extends Command
                 $smsJob = (new SMS($user, $course))->onQueue('wechat');
                 dispatch($smsJob);
             }
-            $students = $course->students;
             foreach ($course->followers as $user) {
                 if (!$students->contains($user)) {//如果已经报名收藏的课程,就不发送提醒报名的消息
                     $job = (new SendWechatMessage($user, $course, false))->onQueue('wechat');
