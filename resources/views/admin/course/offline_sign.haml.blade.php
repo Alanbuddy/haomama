@@ -39,7 +39,7 @@
                 .class-choice
                   %label.f14.fn 课次选择
                   %select.select-style
-                    %option 请选择课次
+                    %option{value: "-1"} 请选择课次
                     - foreach($lessons as $k=>$v)
                       %option{value: $k}="第".($k +1)."次课"
                 .method

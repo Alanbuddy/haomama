@@ -5,11 +5,17 @@
   window.person_show = "#{route('user.account')}"
 
 @endsection
-@section('content')
+@section('header')
 .head-div
   %p.fb.tc.fb.color7.f18 消息
   %img.back{src: "icon/back.png"}
   %hr.div-line
+@endsection
+@section('content')
+// .head-div
+//   %p.fb.tc.fb.color7.f18 消息
+//   %img.back{src: "icon/back.png"}
+//   %hr.div-line
 - if (count($messages) > 0)
   .message-item-div
     - foreach ($messages as $message)

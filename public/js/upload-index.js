@@ -63,6 +63,7 @@ $(document).ready(function(){
     var index = $(".list-div:visible").find(".course-item-div:visible").index();
     var scrollTop = $(this).scrollTop();
     var scrollHeight = document.querySelector(".wrapper").scrollHeight;
+    console.log(scrollHeight);
     var windowheight = $(this).height();
     if(scrollTop + windowheight >= scrollHeight){
       $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();

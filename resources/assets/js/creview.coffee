@@ -61,12 +61,14 @@ $ ->
   $(".time").each ->
     data_time = $(this).text()
     dtime = Date.parse(data_time)
+    if(isNaN(dtime_show))
+      dtime = Date.parse(data_time.replace(/-/g, "/"))
     dt = new Date(dtime)
     dy = dt.getFullYear()
     dm = dt.getMonth() + 1
     dd = dt.getDate()
     time_now = Date.parse(Date())
-    time = (time_now - dtime)/1000
+    time = parseInt(time_now - dtime) / 1000
     if time < 60
       $(this).text(time + "秒前")
     else if 60 <= time < 3600

@@ -10,10 +10,15 @@
   window.validmobile = "#{route('validate.phone')}"
 
 @endsection
-@section('content')
+@section('header')
 .head-div
   %p.fb.tc.fb.color7.f18 个人资料
   %img.back{src: "icon/back.png"}
+@endsection
+@section('content')
+// .head-div
+//   %p.fb.tc.fb.color7.f18 个人资料
+//   %img.back{src: "icon/back.png"}
 .item-div 
   .item.parent-div
     .left-div

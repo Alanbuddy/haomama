@@ -59,7 +59,7 @@
                         %td
                           -foreach($course->teachers as $teacher)
                             %span=$teacher->name 
-                        %td=$course->price
+                        %td=$course->price ? $course->price : $course->original_price
                         %td=$course->recommendation
 
               .select-page 

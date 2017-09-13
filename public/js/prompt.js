@@ -182,12 +182,15 @@ $(document).ready(function($){
     }
     var data_time = item['created_at'];
     var dtime = Date.parse(data_time);
+    if(isNaN(dtime)){
+      dtime = Date.parse(data_time.replace(/-/g, "/"));
+    }
     var dt = new Date(dtime);
     var dy = dt.getFullYear();
     var dm = dt.getMonth() + 1;
     var dd = dt.getDate();
     var time_now = Date.parse(Date());
-    var tem_time = (time_now - dtime)/1000;
+    var tem_time = parseInt(time_now - dtime)/1000;
     if(tem_time < 60){
       template.find(".time").text( tem_time + "秒前");
     }else if (60 < tem_time && tem_time  < 3600){

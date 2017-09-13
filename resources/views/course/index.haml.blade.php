@@ -68,7 +68,7 @@
                       %span= $item['comments_count'] ."条评论"
             .load
               %img.loading{src: "icon/loading.gif"}
-              %span.notice.f12 亲没数据了～
+              %span.notice.f12 没有课程了～
         .course-item-div
           - if(count($data[$i]['itemsOrderByUserCount']) == 0)
             .undiscover
@@ -100,7 +100,7 @@
                       %spann= $itemOrderByUserCount['comments_count'] ."条评论"
             .load
               %img.loading{src: "icon/loading.gif"}
-              %span.notice.f12 亲没数据了～
+              %span.notice.f12 没有课程了～
         .course-item-div
           - if(count($data[$i]['itemsOrderByCommentRating']) == 0)
             .undiscover
@@ -132,7 +132,7 @@
                       %span= $itemOrderByCommentRating['comments_count'] ."条评论"
             .load
               %img.loading{src: "icon/loading.gif"}
-              %span.notice.f12 亲没数据了～
+              %span.notice.f12 没有课程了～
 %img.upper{src: "icon/top.png"}
 
 @endsection

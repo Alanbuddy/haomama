@@ -6,11 +6,17 @@
   window.course = "#{route('courses.index')}"
 
 @endsection
-@section('content')
+@section('header')
 .head-div
   %p.fb.tc.fb.color7.f18 我的收藏
   %img.back{src: "icon/back.png"}
   %hr.div-line
+@endsection
+@section('content')
+// .head-div
+//   %p.fb.tc.fb.color7.f18 我的收藏
+//   %img.back{src: "icon/back.png"}
+//   %hr.div-line
 - if (count($items) == 0)
   .empty-div
     %img.empty-icon{src: "icon/empty.png"}

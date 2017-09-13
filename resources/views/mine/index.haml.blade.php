@@ -67,7 +67,7 @@
               - if ($enrolledCourse['type'] == 'offline')
                 %span.participate= $enrolledCourse['users_count']."人已报名"
                 %span .
-                %span= date_format(date_create($enrolledCourse['begin']),"m月/d日")."开课"
+                %span= date_format(date_create($enrolledCourse['begin']),"m月d日")."开课"
               - else 
                 %span.participate= $enrolledCourse['users_count']."人已学"
                 %span .
@@ -94,7 +94,7 @@
               - if ($favoritedCourse['type'] == 'offline')
                 %span.participate= $favoritedCourse['users_count']."人已报名"
                 %span .
-                %span= date_format(date_create($favoritedCourse['begin']),"m月/d日")."开课"
+                %span= date_format(date_create($favoritedCourse['begin']),"m月d日")."开课"
               - else
                 %span.participate= $favoritedCourse['users_count']."人已学"
                 %span .

@@ -19,7 +19,7 @@ $(document).ready(function(){
             for(var i=0;i<data.data.length;i++){
               var check_item = $('<div class="checkbox">' +
                                     '<label>' +
-                                      '<input type="checkbox" name="lesson-check" value=' + data.data[i].id + ' data-text=' + data.data[i].name + '>' + data.data[i].name +
+                                      '<input type="checkbox" name="lesson-check" value=' + data.data[i].id + ' data-text="' + data.data[i].name + '"/>' + data.data[i].name +
                                     '</label>' +
                                 '</div>');
               $(".checkbox-items").append(check_item);
@@ -195,7 +195,7 @@ $(document).ready(function(){
         title_text.push(text);
     });
     var len = title_arr.length;
-
+    
     for(var i=0;i<len;i++){
       var oLi = $("<li data-id="+title_arr[i]+">" + "<span class='sort-span'>" + title_text[i] + "<img class='sort-delete' src='icon/admin/delete.png'>" + "</span>" + "</li>");
       $(".example").append(oLi);
