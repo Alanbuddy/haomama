@@ -943,17 +943,30 @@ class CourseController extends Controller
         $lessons = json_decode($course->titles);
         $schedules = json_decode($course->schedule);
         $attendances = $this->getAttendances($request, $course);
-//        dd($lessons, $schedules, $attendances);
-        return view('admin.course.offline_sign', compact('course', 'lessons', 'attendances'));
+        $students = $course->students;
+        $attendedStudents = collect([]);
+        foreach ($attendances as $attendance) {
+            $attendedStudents->push($attendance->user->id);
+        }
+        foreach ($students as $student) {
+            if ($attendedStudents->contains($student->id))
+                $student->hasAttended = true;
+        }
+
+//        dd($lessons, $schedules, $students,$attendedStudents);
+        if ($request->wantsJson()) {
+            return $students;
+        }
+        return view('admin.course.offline_sign', compact('course', 'lessons', 'attendances', 'students'));
     }
 
     public function getAttendances(Request $request, Course $course)
     {
         $attendances = $course->attendances()
-            ->with('user')
-            ->where('lesson_index', $request->get('index', 0))//index表示第几次课
-            ->get();
-        // dd($attendances);
+            ->with('user');
+        if ($request->has('index'))
+            $attendances->where('lesson_index', $request->get('index', 0));//index表示第几次课
+        $attendances = $attendances->get();
         return $attendances;
     }
 
