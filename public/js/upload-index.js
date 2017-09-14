@@ -57,6 +57,7 @@ $(document).ready(function(){
   }
 
   var page = 2;
+  
   $(".nav li").click(function(){
     i = $(this).index();
     $(".nav li").removeClass('active');
@@ -68,8 +69,7 @@ $(document).ready(function(){
       $(this).addClass('course-active');
       $(".list-div").eq(i).find(".course-item-div").css('display', 'none');
       $(".list-div").eq(i).find(".course-item-div").eq($(this).index()).css('display', 'block');
-      page = $(this).attr("data-page");
-      console.log(page);
+      page = parseInt($(this).attr("data-page"));
     });
   });
     
@@ -79,8 +79,7 @@ $(document).ready(function(){
     $(this).addClass('course-active');
     $(".list-div").eq(0).find(".course-item-div").css('display', 'none');
     $(".list-div").eq(0).find(".course-item-div").eq($(this).index()).css('display', 'block');
-    page = $(this).attr("data-page");
-    console.log(page);
+    page = parseInt($(this).attr("data-page"));
   });
     
 
@@ -115,7 +114,7 @@ $(document).ready(function(){
               $(".list-div:visible").find(".course-active").attr("data-page", page);
             }
           }else{
-              $(".list-div:visible").find('.course-item-div:visible').find(".notice").show();
+            $(".list-div:visible").find('.course-item-div:visible').find(".notice").show();
           }
         }
       });
