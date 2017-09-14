@@ -10335,6 +10335,13 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var bannerSwiper, search;
   $(".list-div").eq(0).css("display", "block");
+  $('.wrapper').scroll(function() {
+    if ($('.wrapper').scrollTop() > 100) {
+      return $('.upper').fadeIn(1000);
+    } else {
+      return $('.upper').fadeOut(1000);
+    }
+  });
   $('.upper').click(function() {
     return $('.wrapper').animate({
       scrollTop: 0

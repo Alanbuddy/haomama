@@ -62,16 +62,8 @@ $(document).ready(function(){
     var tab_word = ["time", "hot", "rate"];
     var index = $(".list-div:visible").find(".course-item-div:visible").index();
     var scrollTop = $(this).scrollTop();
-    var scrollHeight = document.querySelector(".wrapper").scrollHeight;
-    // console.log(scrollHeight);
+    var scrollHeight = $(".object-wrap").height();
     var windowheight = $(this).height();
-
-    if(scrollTop > 100){
-      $('.upper').fadeIn(1000);
-    }else{
-      $('.upper').fadeOut(1000);
-    }
-
     if(scrollTop + windowheight >= scrollHeight){
       $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();
       $.ajax({
@@ -95,7 +87,7 @@ $(document).ready(function(){
               node.insertBefore($(".list-div:visible").find(".course-item-div:visible").find(".load"));
             }
           }else{
-             $(".list-div:visible").find('.course-item-div:visible').find(".notice").show();
+              $(".list-div:visible").find('.course-item-div:visible').find(".notice").show();
           }
         }
       });

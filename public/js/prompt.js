@@ -61,6 +61,20 @@ $(document).ready(function($){
   //     }
   //   });
   // });
+  
+  //input bug
+  var oHeight = $(document).height();
+     
+  $(window).resize(function(){
+
+      if($(document).height() < oHeight){
+       
+      $(".foot-div").css("position","static");
+  }else{
+       
+      $(".foot-div").css("position","absolute");
+  }    
+  });
 
   $("#delivery").click(function(){
     var content = $(".review-input").val();
@@ -92,12 +106,15 @@ $(document).ready(function($){
           template.find(".admire-icon").attr({"src": "icon/like1_normal.png", "data-ad": false});
           var data_time = data.data['item']['created_at'];
           var dtime = Date.parse(data_time);
+          if(isNaN(dtime)){
+            dtime = Date.parse(data_time.replace(/-/g, "/"));
+          }
           var dt = new Date(dtime);
           var dy = dt.getFullYear();
           var dm = dt.getMonth() + 1;
           var dd = dt.getDate();
           var time_now = Date.parse(Date());
-          var tem_time = (time_now - dtime)/1000;
+          var tem_time = parseInt(time_now - dtime)/1000;
           if(tem_time < 60){
             template.find(".time").text( tem_time + "秒前");
           }else if (60 < tem_time && tem_time  < 3600){
@@ -217,6 +234,7 @@ $(document).ready(function($){
     var scrollHeight = $(document).height();
     var windowheight = $(this).height();
     if(scrollTop + windowheight >= scrollHeight){
+      $(".notice").hide();
       $(".loading").show();
       $.ajax({
         type: 'get',
@@ -228,7 +246,6 @@ $(document).ready(function($){
             page++;
             callbackHandle(data);
           }else{
-            $(".loading").hide();
             $(".notice").show();
           }
         }

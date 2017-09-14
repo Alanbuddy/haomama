@@ -2,11 +2,11 @@ $ ->
 
   $(".list-div").eq(0).css("display", "block")
   
-  # $('.wrapper').scroll ->
-  #   if $('.wrapper').scrollTop() > 100
-  #     $('.upper').fadeIn(1000)
-  #   else
-  #     $('.upper').fadeOut(1000)
+  $('.wrapper').scroll ->
+    if $('.wrapper').scrollTop() > 100
+      $('.upper').fadeIn(1000)
+    else
+      $('.upper').fadeOut(1000)
 
   $('.upper').click ->
     $('.wrapper').animate({scrollTop: 0})
