@@ -57,6 +57,33 @@ $(document).ready(function(){
   }
 
   var page = 2;
+  $(".nav li").click(function(){
+    i = $(this).index();
+    $(".nav li").removeClass('active');
+    $(this).addClass('active');
+    $(".list-div").css("display", "none");
+    $(".list-div").eq(i).css("display", "block");
+    $(".list-div").eq(i).find(".course-nav span").click(function(){
+      $(".list-div").eq(i).find(".course-nav span").removeClass('course-active');
+      $(this).addClass('course-active');
+      $(".list-div").eq(i).find(".course-item-div").css('display', 'none');
+      $(".list-div").eq(i).find(".course-item-div").eq($(this).index()).css('display', 'block');
+      page = $(this).attr("data-page");
+      console.log(page);
+    });
+  });
+    
+  
+  $(".list-div").eq(0).find(".course-nav span").click(function(){
+    $(".list-div").eq(0).find(".course-nav span").removeClass('course-active');
+    $(this).addClass('course-active');
+    $(".list-div").eq(0).find(".course-item-div").css('display', 'none');
+    $(".list-div").eq(0).find(".course-item-div").eq($(this).index()).css('display', 'block');
+    page = $(this).attr("data-page");
+    console.log(page);
+  });
+    
+
   $(".wrapper").scroll(function(){
     var category_id = $(".list-div:visible").find(".category_id").text();
     var tab_word = ["time", "hot", "rate"];
@@ -85,6 +112,7 @@ $(document).ready(function(){
                 node.find('.category-class').addClass('grow-title');
               }
               node.insertBefore($(".list-div:visible").find(".course-item-div:visible").find(".load"));
+              $(".list-div:visible").find(".course-active").attr("data-page", page);
             }
           }else{
               $(".list-div:visible").find('.course-item-div:visible').find(".notice").show();

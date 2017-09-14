@@ -28,23 +28,23 @@ $ ->
   $(".search-input").click ->
     location.href = window.course_search
 
-  $(".nav li").click ->
-    i = $(this).index()
-    $(".nav li").removeClass('active')
-    $(this).addClass('active')
-    $(".list-div").css("display", "none")
-    $(".list-div").eq(i).css("display", "block")
-    $(".list-div").eq(i).find(".course-nav span").click ->
-      $(".list-div").eq(i).find(".course-nav span").removeClass('course-active')
-      $(this).addClass('course-active')
-      $(".list-div").eq(i).find(".course-item-div").css('display', 'none')
-      $(".list-div").eq(i).find(".course-item-div").eq($(this).index()).css('display', 'block')
+  # $(".nav li").click ->
+  #   i = $(this).index()
+  #   $(".nav li").removeClass('active')
+  #   $(this).addClass('active')
+  #   $(".list-div").css("display", "none")
+  #   $(".list-div").eq(i).css("display", "block")
+  #   $(".list-div").eq(i).find(".course-nav span").click ->
+  #     $(".list-div").eq(i).find(".course-nav span").removeClass('course-active')
+  #     $(this).addClass('course-active')
+  #     $(".list-div").eq(i).find(".course-item-div").css('display', 'none')
+  #     $(".list-div").eq(i).find(".course-item-div").eq($(this).index()).css('display', 'block')
   
-  $(".list-div").eq(0).find(".course-nav span").click ->
-    $(".list-div").eq(0).find(".course-nav span").removeClass('course-active')
-    $(this).addClass('course-active')
-    $(".list-div").eq(0).find(".course-item-div").css('display', 'none');
-    $(".list-div").eq(0).find(".course-item-div").eq($(this).index()).css('display', 'block')
+  # $(".list-div").eq(0).find(".course-nav span").click ->
+  #   $(".list-div").eq(0).find(".course-nav span").removeClass('course-active')
+  #   $(this).addClass('course-active')
+  #   $(".list-div").eq(0).find(".course-item-div").css('display', 'none');
+  #   $(".list-div").eq(0).find(".course-item-div").eq($(this).index()).css('display', 'block')
 
   # $(document).on 'click', '.course-nav span', ->
   #   $(this).closest(".list-div:visible").find(".course-nav span").removeClass('course-active')

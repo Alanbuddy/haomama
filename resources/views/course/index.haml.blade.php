@@ -35,9 +35,9 @@
             %p.color7.fb.f14= $categories[$i]['name']
             %p.category_id{style: "display:none;"}= $categories[$i]['id']
             .course-nav.f12.color5
-              %span.course-active 最新
-              %span 最热
-              %span 好评
+              %span.course-active{"data-page" => 2} 最新
+              %span{"data-page" => 2} 最热
+              %span{"data-page" => 2} 好评
           .course-item-div{style: "display:block"}
             - if(count($data[$i]['items']) == 0)
               .undiscover
