@@ -8,7 +8,8 @@
 @endsection
 @section('content')
 .head-div
-  %img.back{src: "icon/back2.png"}
+  %a{onClick: "javascript: window.history.back(); return false;"}
+    %img.back{src: "icon/back2.png"}
 .profile-div
   %p.name.f16.fb.color1= $user->name."老师"
   - if($user->description->title)

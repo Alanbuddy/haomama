@@ -22,7 +22,7 @@ $(document).ready(function(){
       <div class="course-row-div f12 color6">
           <span class="participate">人已报名</span>
           <span>.</span>
-          <span extra>07月/24日开课</span>
+          <span extra>07月24日开课</span>
       </div>
     </div>
   </div>`;
@@ -63,8 +63,15 @@ $(document).ready(function(){
     var index = $(".list-div:visible").find(".course-item-div:visible").index();
     var scrollTop = $(this).scrollTop();
     var scrollHeight = document.querySelector(".wrapper").scrollHeight;
-    console.log(scrollHeight);
+    // console.log(scrollHeight);
     var windowheight = $(this).height();
+
+    if(scrollTop > 100){
+      $('.upper').fadeIn(1000);
+    }else{
+      $('.upper').fadeOut(1000);
+    }
+
     if(scrollTop + windowheight >= scrollHeight){
       $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();
       $.ajax({

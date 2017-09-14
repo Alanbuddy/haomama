@@ -40,7 +40,7 @@
               %span= $item['comments_count'] ."条评论"
     .load
       %img.loading{src: "icon/loading.gif"}
-      %span.notice.f12 亲没数据了～
+      %span.notice.f12 已经是底部了～
 %img.upper{src: 'icon/top.png'}
 @endsection
 

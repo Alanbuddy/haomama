@@ -215,7 +215,7 @@
                 %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
       .load
         %img.loading{src: "icon/loading.gif"}
-        %span.notice.f12 亲没数据了～
+        %span.notice.f12 已经是底部了～
   - else
     .course-content
       .review-title
@@ -244,7 +244,7 @@
                     %img.admire-icon{src: "icon/like1_selected.png", 'data-ad'=> 'true'}
           .load
             %img.loading{src: "icon/loading.gif"}
-            %span.notice.f12 亲没数据了～
+            %span.notice.f12 已经是底部了～
 
 %img.upper{src: "icon/top.png"}
 @endsection

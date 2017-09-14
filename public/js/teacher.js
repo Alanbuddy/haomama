@@ -10334,9 +10334,6 @@ return jQuery;
 
 /* WEBPACK VAR INJECTION */(function($) {$(function() {
   var ref, ref1, votes;
-  $(".back").click(function() {
-    return location.href = window.history.back();
-  });
   $('.category-class').each(function() {
     if ($(this).text() === "健康养育") {
       return $(this).addClass('health-title');

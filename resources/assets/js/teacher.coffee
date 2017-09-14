@@ -1,7 +1,7 @@
 
 $ ->
-  $(".back").click ->
-    location.href = window.history.back()
+  # $(".back").click ->
+  #   location.href = window.history.back()
 
   $('.category-class').each ->
     if $(this).text() == "健康养育"
