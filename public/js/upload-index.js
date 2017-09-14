@@ -56,7 +56,6 @@ $(document).ready(function(){
     return template.clone(true);
   }
 
-  var page = 2;
   
   $(".nav li").click(function(){
     i = $(this).index();
@@ -69,7 +68,6 @@ $(document).ready(function(){
       $(this).addClass('course-active');
       $(".list-div").eq(i).find(".course-item-div").css('display', 'none');
       $(".list-div").eq(i).find(".course-item-div").eq($(this).index()).css('display', 'block');
-      page = parseInt($(this).attr("data-page"));
     });
   });
     
@@ -79,7 +77,6 @@ $(document).ready(function(){
     $(this).addClass('course-active');
     $(".list-div").eq(0).find(".course-item-div").css('display', 'none');
     $(".list-div").eq(0).find(".course-item-div").eq($(this).index()).css('display', 'block');
-    page = parseInt($(this).attr("data-page"));
   });
     
 
@@ -90,6 +87,7 @@ $(document).ready(function(){
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(".object-wrap").height();
     var windowheight = $(this).height();
+    var page = $(".list-div:visible").find(".course-active").attr("data-page");
     if(scrollTop + windowheight >= scrollHeight){
       $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();
       $.ajax({
