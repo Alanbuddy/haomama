@@ -946,11 +946,18 @@ class CourseController extends Controller
         $students = $course->students;
         $attendedStudents = collect([]);
         foreach ($attendances as $attendance) {
-            $attendedStudents->push($attendance->user);
+            $attendedStudents->push($attendance->user->id);
+        }
+        foreach ($students as $student) {
+            if ($attendedStudents->contains($student->id))
+                $student->hasAttended = true;
         }
 
-//        dd($lessons, $schedules, $attendances);
-        return view('admin.course.offline_sign', compact('course', 'lessons', 'attendances', 'students', 'attendedStudents'));
+//        dd($lessons, $schedules, $students,$attendedStudents);
+        if ($request->wantsJson()) {
+            return $students;
+        }
+        return view('admin.course.offline_sign', compact('course', 'lessons', 'attendances', 'students'));
     }
 
     public function getAttendances(Request $request, Course $course)

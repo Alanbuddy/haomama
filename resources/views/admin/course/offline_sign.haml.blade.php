@@ -54,11 +54,11 @@
                 .sign-status
                   %h5 签到情况
                   #sign-table
-                  - foreach($students as $student)
-                    - if($attendedStudents->contains($student))
-                      .sign-data.check-in= $student->name
-                    - else
-                      .sign-data{id:$student->name}= $student->name
+                    - foreach($students as $student)
+                      - if($student->hasAttended)
+                        .sign-data.check-in = $student->name
+                      - else
+                        .sign-data{id:$student->name}= $student->name
                   // %table.table.table-bordered#sign-table
                   //   %tbody
                   //     -foreach($attendances as $attendance)
