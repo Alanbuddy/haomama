@@ -52,8 +52,8 @@ $(document).ready(function(){
     template.find('.course-icon').attr('src', item['cover'] ? item['cover'] : "icon/example.png");
     template.find('.category-class').text(item['category']['name']);
     template.find('.course-item-value').text(item['price'] ? "￥" + item['price'] : "无");
-    if(item['name'].length > 12){
-      var name = item['name'].substr(0, 12) + "...";
+    if(item['name'].length > 13){
+      var name = item['name'].substr(0, 13) + "...";
       template.find('.we-course-name').text(name);
     }else{
       template.find('.we-course-name').text(item['name']);
