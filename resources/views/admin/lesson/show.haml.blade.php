@@ -47,7 +47,7 @@
                   %img{src: "icon/admin/video-small.png"}
                   %span#name-span= $video->file_name
               
-              #uploader.wu-example.edit-box-uploader
+              #uploader.wu-example.edit-box
                 .item#old-video
                   %span.info= $video->file_name
                   %p.video-id= $video->id

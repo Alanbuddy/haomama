@@ -150,6 +150,7 @@ $(document).ready(function(){
     $("#input-caption").val($("#caption-span").text());
     var desc = $("#desc-html").text();
     editor.txt.html(desc);
+    uploader.refresh();
   });
 
   $("#finish-btn").click(function(){
