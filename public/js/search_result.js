@@ -98,35 +98,104 @@ $(document).ready(function(){
     template.find('.course-icon').attr('src', item['cover'] ? item['cover'] : "icon/example.png");
     template.find('.category-class').text(item['category']['name']);
     template.find('.course-item-value').text(item['price'] ? "￥" + item['price'] : "￥" + item['original_price']);
-    template.find('.we-course-name').text(item['name']);
+    if(item['name'].length > 12){
+      var name = item['name'].substr(0, 12) + "...";
+    }
+    template.find('.we-course-name').text(name);
     return template.clone(true);
   }
+
 
   var page = 2;
   var isSearchByInput=location.href.indexOf('key')>0;
   var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
-  $(window).scroll(function(){
-    var scrollTop = $(this).scrollTop();
-    var scrollHeight = $(document).height();
-    var windowheight = $(this).height();
-    if(scrollTop + windowheight >= scrollHeight){
-      $(".loading").show();
-      $.ajax({
-        type: 'get',
-        url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
-        success: function(data){
-          $(".loading").hide();
-          var len = data.data.length;
-          if(len > 0){
-            page++;
-            callbackHandle(data);
-          }else{
-            $(".notice").show();
-          }
+  if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
+    $(window).on("touchmove", function(){
+      var scrollTop = $(this).scrollTop();
+      var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+      var windowheight = $(this).height();
+      var lastpage = null;
+      if(scrollTop + windowheight >= scrollHeight){
+        if(lastpage != page){
+          lastpage = page;
+          $(".notice").hide();
+          $(".loading").show();
+          $.ajax({
+            type: 'get',
+            url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
+            success: function(data){
+              $(".loading").hide();
+              var len = data.data.length;
+              if(len > 0){
+                page++;
+                callbackHandle(data);
+              }else{
+                $(".notice").show();
+              }
+            },
+            error: function(e){
+              lastpage = lastpage - 1;
+            }
+          });
         }
-      });
-    }
-  });
+      }
+    });
+  }
+  if(/(Android)/i.test(navigator.userAgent)){
+    $(window).scroll(function(){
+      var scrollTop = $(this).scrollTop();
+      var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+      // var scrollHeight = $(document).height();
+      var windowheight = $(this).height();
+      var lastpage = null;
+      if(scrollTop + windowheight >= scrollHeight){
+        if(lastpage != page){
+          lastpage = page;
+          $(".notice").hide();
+          $(".loading").show();
+          $.ajax({
+            type: 'get',
+            url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
+            success: function(data){
+              $(".loading").hide();
+              var len = data.data.length;
+              if(len > 0){
+                page++;
+                callbackHandle(data);
+              }else{
+                $(".notice").show();
+              }
+            },
+            error: function(e){
+              lastpage = lastpage - 1;
+            }
+          });
+        }
+      }
+    });
+  }
+  // $(window).scroll(function(){
+  //   var scrollTop = $(this).scrollTop();
+  //   var scrollHeight = $(document).height();
+  //   var windowheight = $(this).height();
+  //   if(scrollTop + windowheight >= scrollHeight){
+  //     $(".loading").show();
+  //     $.ajax({
+  //       type: 'get',
+  //       url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
+  //       success: function(data){
+  //         $(".loading").hide();
+  //         var len = data.data.length;
+  //         if(len > 0){
+  //           page++;
+  //           callbackHandle(data);
+  //         }else{
+  //           $(".notice").show();
+  //         }
+  //       }
+  //     });
+  //   }
+  // });
 });
 
 
