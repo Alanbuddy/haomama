@@ -186,7 +186,6 @@ $(document).ready(function(){
     var scrollHeight = $(".object-wrap").height();
     var windowheight = $(this).height();
     var page = $(".list-div:visible").find(".course-active").attr("data-page");
-    var lastpage = null;
     if(scrollTop + windowheight >= scrollHeight){
       $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();
       $.ajax({
@@ -194,7 +193,7 @@ $(document).ready(function(){
         url: window.load_bottom.replace(/-1/, category_id) + "?page=" + page + "&orderBy=" + tab_word[index - 1],
         success: function(data){
           console.log(data);
-          lastpage = data[0].last_page;
+          var lastpage = data[0].last_page;
           console.log(lastpage);
           $(".list-div:visible").find('.course-item-div:visible').find(".loading").hide();
           var len = data[0].data.length;
