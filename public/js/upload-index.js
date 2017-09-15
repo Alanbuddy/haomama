@@ -80,24 +80,28 @@ $(document).ready(function(){
   });
   
 
-  $(".wrapper").on("touchmove" , function(){
+  $(".wrapper").scroll(function(){
     var category_id = $(".list-div:visible").find(".category_id").text();
     var tab_word = ["time", "hot", "rate"];
     var index = $(".list-div:visible").find(".course-item-div:visible").index();
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(".object-wrap").height();
     var windowheight = $(this).height();
+    // console.log(scrollTop);
+    // console.log(scrollHeight);
+    // console.log(windowheight);
     var page = $(".list-div:visible").find(".course-active").attr("data-page");
     var lastpage = null;
     if(scrollTop + windowheight >= scrollHeight){
       if(lastpage != page){
         lastpage = page;
+        console.log(lastpage);
         $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();
         $.ajax({
           type: 'get',
           url: window.load_bottom.replace(/-1/, category_id) + "?page=" + page + "&orderBy=" + tab_word[index - 1],
           success: function(data){
-            console.log(data);
+            // console.log(data);
             $(".list-div:visible").find('.course-item-div:visible').find(".loading").hide();
             var len = data[0].data.length;
             if(len > 0){
