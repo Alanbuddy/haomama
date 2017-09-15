@@ -98,7 +98,6 @@ $(document).ready(function($){
           template.attr("data-url", window.comment_id.replace(/-1/, data.data['item']['id']));
           template.find(".review-avatar").attr("src", data.data['user']['avatar'] ? data.data['user']['avatar']: "icon/avatar.png");
           template.find(".review-content").text(data.data['item']['content']);
-          template.find(".review-source").text($(".name").text());
           template.find(".admire-num").text("0");
           template.find(".admire-icon").attr({"src": "icon/like1_normal.png", "data-ad": false});
           var data_time = data.data['item']['created_at'];
@@ -173,8 +172,6 @@ $(document).ready(function($){
               <p class="f12 color7 review-name">123</p>
               <p class="f12 color5 time">5天前</p>
               <p class="f14 color7 review-content">ggggg</p>
-              <span class="f12 color5">评论来源：</span>
-              <span class="f12 color5 review-source">audio-test</span>
               <div class="admire-div">
                 <span class="f12 color5 admire-num">1</span>
                 <img class="admire-icon" src="icon/like1_selected.png" data-ad="true">
@@ -187,7 +184,6 @@ $(document).ready(function($){
     template.attr("data-url", window.comment_id.replace(/-1/, item['id']));
     template.find(".review-avatar").attr("src", item['user']['avatar'] ? item['user']['avatar']: "icon/avatar.png");
     template.find(".review-content").text(item['content']);
-    template.find(".review-source").text(item['lesson']['name']);
     template.find(".admire-num").text(item['voteCount']);
     if(item['hasVoted'] == false){
       template.find(".admire-icon").attr({"src": "icon/like1_normal.png", "data-ad": false});
