@@ -113,10 +113,13 @@ $(document).ready(function(){
   var isSearchByInput=location.href.indexOf('key')>0;
   var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
   var loading = false;
-  $(window).scroll(function(){
+  $(window).scroll(function(e){
+    e.stopPropagation();
     var scrollTop = $(this).scrollTop();
-    var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+    // var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+    var scrollHeight = $(document).height();
     var windowheight = $(this).height();
+    console.log(scrollHeight);
     if(scrollTop + windowheight >= scrollHeight){
       $(".loading").show();
       if(!loading){
