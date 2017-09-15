@@ -390,72 +390,40 @@ $(document).ready(function($) {
       node.insertBefore($(".load"));
     }
   }
-  var page = 2;
-  if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
-    $(window).on("touchmove", function(){
-      var scrollTop = $(this).scrollTop();
-      var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
-      var windowheight = $(this).height();
-      var lastpage = null;
-      if(scrollTop + windowheight >= scrollHeight){
-        if(lastpage != page){
-          lastpage = page;
-          $(".notice").hide();
-          $(".loading").show();
-          $.ajax({
-            type: 'get',
-            url: window.review + "?page=" + page,
-            success: function(data){
-              $(".loading").hide();
-              var len = data.data.length;
-              if(len > 0){
-                page++;
-                callbackHandle(data);
-              }else{
-                $(".notice").show();
-              }
-            },
-            error: function(e){
-              lastpage = lastpage - 1;
-            }
-          });
-        }
-      }
-    });
-  }
-  if(/(Android)/i.test(navigator.userAgent)){
-    $(window).scroll(function(){
-      var scrollTop = $(this).scrollTop();
-      var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
-      var windowheight = $(this).height();
-      var lastpage = null;
-      if(scrollTop + windowheight >= scrollHeight){
-        if(lastpage != page){
-          lastpage = page;
-          $(".notice").hide();
-          $(".loading").show();
-          $.ajax({
-            type: 'get',
-            url: window.review + "?page=" + page,
-            success: function(data){
-              $(".loading").hide();
-              var len = data.data.length;
-              if(len > 0){
-                page++;
-                callbackHandle(data);
-              }else{
-                $(".notice").show();
-              }
-            },
-            error: function(e){
-              lastpage = lastpage - 1;
-            }
-          });
-        }
-      }
-    });
-  }
 
+  var page = 2;
+  var loading = false;
+  $(window).scroll(function(){
+    var scrollTop = $(this).scrollTop();
+    var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+    var windowheight = $(this).height();
+    if(scrollTop + windowheight >= scrollHeight){
+      if(!loading){
+        loading = true;
+        lastpage = page;
+        $(".notice").hide();
+        $(".loading").show();
+        $.ajax({
+          type: 'get',
+          url: window.review + "?page=" + page,
+          success: function(data){
+            // console.log(data);
+            // var lastpage = data[0].last_page;
+            // console.log(lastpage);
+            $(".loading").hide();
+            var len = data.data.length;
+            if(len > 0){
+              page++;
+              callbackHandle(data);
+            }else{
+              $(".notice").show();
+            }
+            loading = false;
+          }
+        });
+      }
+    }
+  });
   //签到
   function sign_in(){
     wx.scanQRCode({

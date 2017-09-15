@@ -109,93 +109,33 @@ $(document).ready(function(){
   var page = 2;
   var isSearchByInput=location.href.indexOf('key')>0;
   var currenturl = location.pathname+(isSearchByInput ? '?'+location.search.match(/key=([^&]*)/)[0]:'');
-  if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
-    $(window).on("touchmove", function(){
-      var scrollTop = $(this).scrollTop();
-      var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
-      var windowheight = $(this).height();
-      var lastpage = null;
-      if(scrollTop + windowheight >= scrollHeight){
-        if(lastpage != page){
-          lastpage = page;
-          $(".notice").hide();
-          $(".loading").show();
-          $.ajax({
-            type: 'get',
-            url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
-            success: function(data){
-              $(".loading").hide();
-              var len = data.data.length;
-              if(len > 0){
-                page++;
-                callbackHandle(data);
-              }else{
-                $(".notice").show();
-              }
-            },
-            error: function(e){
-              lastpage = lastpage - 1;
+  var loading = false;
+  $(window).scroll(function(){
+    var scrollTop = $(this).scrollTop();
+    var scrollHeight = $(document).height();
+    var windowheight = $(this).height();
+    if(scrollTop + windowheight >= scrollHeight){
+      if(!loading){
+        loading = true;
+        $(".loading").show();
+        $.ajax({
+          type: 'get',
+          url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
+          success: function(data){
+            $(".loading").hide();
+            var len = data.data.length;
+            if(len > 0){
+              page++;
+              callbackHandle(data);
+            }else{
+              $(".notice").show();
             }
-          });
-        }
+            loading = false;
+          }
+        });
       }
-    });
-  }
-  if(/(Android)/i.test(navigator.userAgent)){
-    $(window).scroll(function(){
-      var scrollTop = $(this).scrollTop();
-      var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
-      // var scrollHeight = $(document).height();
-      var windowheight = $(this).height();
-      var lastpage = null;
-      if(scrollTop + windowheight >= scrollHeight){
-        if(lastpage != page){
-          lastpage = page;
-          $(".notice").hide();
-          $(".loading").show();
-          $.ajax({
-            type: 'get',
-            url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
-            success: function(data){
-              $(".loading").hide();
-              var len = data.data.length;
-              if(len > 0){
-                page++;
-                callbackHandle(data);
-              }else{
-                $(".notice").show();
-              }
-            },
-            error: function(e){
-              lastpage = lastpage - 1;
-            }
-          });
-        }
-      }
-    });
-  }
-  // $(window).scroll(function(){
-  //   var scrollTop = $(this).scrollTop();
-  //   var scrollHeight = $(document).height();
-  //   var windowheight = $(this).height();
-  //   if(scrollTop + windowheight >= scrollHeight){
-  //     $(".loading").show();
-  //     $.ajax({
-  //       type: 'get',
-  //       url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
-  //       success: function(data){
-  //         $(".loading").hide();
-  //         var len = data.data.length;
-  //         if(len > 0){
-  //           page++;
-  //           callbackHandle(data);
-  //         }else{
-  //           $(".notice").show();
-  //         }
-  //       }
-  //     });
-  //   }
-  // });
+    }
+  });
 });
 
 
