@@ -104,7 +104,7 @@ class CourseController extends Controller
             if ($item->hot) {
                 $recommendation .= $item->category ? $item->category->name : '';
             }
-            $item->recommendation = $recommendation;
+            $item->recommendation = trim($recommendation, '、');
         }
         $items->withPath(route('courses.index'));
         return view('admin.course.index', [
@@ -756,6 +756,7 @@ class CourseController extends Controller
         $route = $request->route();
         if ($route->hasParameter('tag')) {
             $items = Search::coursesByTag($request->route('tag'))
+                ->where('courses.status', 'publish')
                 ->withCount('comments')
                 ->withCount(['users' => function ($query) {
                     $query->where('type', 'enroll');
