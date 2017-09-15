@@ -64,6 +64,15 @@
                             %td{colspan: "7"}
                               .course-status
                                 %span.item-status 上课状态:
+                      - else
+                        %tr{"course-id"=>$item->id}
+                          %td= $item->course?$item->course->name:''
+                          %td
+                          %td
+                          %td
+                          %td
+                          %td
+                          %td
               .tag2-foot.clearfix
                 %span.num-div.font-color3.f16
                   %span 关注时间:

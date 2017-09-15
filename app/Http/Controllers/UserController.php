@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\Search;
 use App\Models\Course;
+use App\Models\Order;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
@@ -455,7 +456,9 @@ class UserController extends Controller
     public function order(Request $request, User $user)
     {
         $items = $user->orders()
-            ->where('status','paid')
+            ->where('orders.status','paid')
+            ->join('courses','courses.id','orders.product_id')
+            ->whereNull('courses.deleted_at')
             ->with('course')
             ->paginate(10);
         $items->withPath(route('admin.user.order', $user));
