@@ -125,9 +125,10 @@ $(document).ready(function(){
           type: 'get',
           url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,
           success: function(data){
+            var lastpage = data.last_page;
             $(".loading").hide();
             var len = data.data.length;
-            if(len > 0){
+            if(len > 0 && page <= lastpage){
               page++;
               callbackHandle(data);
             }else{
