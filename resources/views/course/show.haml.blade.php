@@ -62,8 +62,8 @@
   - if ($course['type'] == "offline")
     .unonline-div
       .unonline-row.f14.color7
-        %span 时间：
-        %span= $course['time']
+        %span.address-span 时间：
+        %span.address= $course['time']
       .unonline-row.f14.color7
         %span.address-span 地址：
         %span.address= $course['address']
