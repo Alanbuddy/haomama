@@ -79,12 +79,12 @@ class CourseController extends Controller
         $globalRecommendedCourses = $recommendedCourseSetting
             ? Course::where('id', ($recommendedCourseSetting->value))->get()
             : null;
-        $recommendedCourses = Course::where('hot', true)->get();
-        $recommendedCourses = $recommendedCourses->union($globalRecommendedCourses);
-
+        $recommendedCourses = Course::where('hot', true)->get()->all();
+        $recommendedCourses = collect($globalRecommendedCourses)->merge($recommendedCourses)->unique();
         $arr = array_map(function ($v) {
             return $v->id;
         }, $recommendedCourses->all());
+
         $items = Course::with('category')
             ->where('status', 'publish')
             ->with('teachers')
@@ -100,6 +100,7 @@ class CourseController extends Controller
                 if ($item->id == $globalRecommendedCourses->first()->id)
                     $recommendation .= '新课速递、';
             }
+
             if ($item->hot) {
                 $recommendation .= $item->category ? $item->category->name : '';
             }
@@ -122,7 +123,7 @@ class CourseController extends Controller
             $items = $prevPageItems->merge($currPageItems)->splice(0, $pageSize);
         } else {
             $items = $items->paginate($pageSize)->splice(0, $pageSize - count($recommendedCourse));
-            $items = $recommendedCourse->merge($items);
+            $items = collect($recommendedCourse)->merge($items);
         }
         $items = new LengthAwarePaginator($items, $count + count($recommendedCourse), $pageSize, $page);
         return $items;
