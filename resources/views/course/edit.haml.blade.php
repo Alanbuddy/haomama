@@ -6,11 +6,12 @@
   window.course_item="#{route('courses.index')}"
 
 @endsection
-
-@section('content')
+@section('header')
 .search-box
   %img.back{src: "icon/back.png"}
   %p.fb.color7.f18 搜索结果
+@endsection
+@section('content')
 - if (count($items) == 0)
   .empty-div
     %img.empty-icon{src: "icon/empty.png"}
