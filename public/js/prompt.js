@@ -228,10 +228,9 @@ $(document).ready(function($){
     var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
     var windowheight = $(this).height();
     if(scrollTop + windowheight >= scrollHeight){
+      $(".loading").show();
       if(!loading){
         loading = true;
-        $(".notice").hide();
-        $(".loading").show();
         $.ajax({
           type: 'get',
           url: window.upload_review + "?page=" + page,

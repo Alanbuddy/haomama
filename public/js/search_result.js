@@ -112,12 +112,12 @@ $(document).ready(function(){
   var loading = false;
   $(window).scroll(function(){
     var scrollTop = $(this).scrollTop();
-    var scrollHeight = $(document).height();
+    var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
     var windowheight = $(this).height();
     if(scrollTop + windowheight >= scrollHeight){
+      $(".loading").show();
       if(!loading){
         loading = true;
-        $(".loading").show();
         $.ajax({
           type: 'get',
           url: currenturl + (isSearchByInput?"&":"?")+"page=" + page,

@@ -398,18 +398,13 @@ $(document).ready(function($) {
     var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
     var windowheight = $(this).height();
     if(scrollTop + windowheight >= scrollHeight){
+      $(".loading").show();
       if(!loading){
         loading = true;
-        lastpage = page;
-        $(".notice").hide();
-        $(".loading").show();
         $.ajax({
           type: 'get',
           url: window.review + "?page=" + page,
           success: function(data){
-            // console.log(data);
-            // var lastpage = data[0].last_page;
-            // console.log(lastpage);
             $(".loading").hide();
             var len = data.data.length;
             if(len > 0){
