@@ -79,56 +79,100 @@ $(document).ready(function(){
     $(".list-div").eq(0).find(".course-item-div").eq($(this).index()).css('display', 'block');
   });
   
-
-  $(".wrapper").scroll(function(){
-    var category_id = $(".list-div:visible").find(".category_id").text();
-    var tab_word = ["time", "hot", "rate"];
-    var index = $(".list-div:visible").find(".course-item-div:visible").index();
-    var scrollTop = $(this).scrollTop();
-    var scrollHeight = $(".object-wrap").height();
-    var windowheight = $(this).height();
-    // console.log(scrollTop);
-    // console.log(scrollHeight);
-    // console.log(windowheight);
-    var page = $(".list-div:visible").find(".course-active").attr("data-page");
-    var lastpage = null;
-    if(scrollTop + windowheight >= scrollHeight){
-      if(lastpage != page){
-        lastpage = page;
-        console.log(lastpage);
-        $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();
-        $.ajax({
-          type: 'get',
-          url: window.load_bottom.replace(/-1/, category_id) + "?page=" + page + "&orderBy=" + tab_word[index - 1],
-          success: function(data){
-            // console.log(data);
-            $(".list-div:visible").find('.course-item-div:visible').find(".loading").hide();
-            var len = data[0].data.length;
-            if(len > 0){
-              page++;
-              for(var i=0;i<data[0].data.length;i++){
-                var node=render(data[0].data[i]);
-                if(node.find('.category-class').text() ==  "健康养育"){
-                  node.find('.category-class').addClass('health-title');
-                }else if(node.find('.category-class').text() ==  "心理教育"){
-                  node.find('.category-class').addClass('psychology-title');
-                }else{
-                  node.find('.category-class').addClass('grow-title');
+  if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
+    $(".wrapper").on("touchmove" , function(){
+      var category_id = $(".list-div:visible").find(".category_id").text();
+      var tab_word = ["time", "hot", "rate"];
+      var index = $(".list-div:visible").find(".course-item-div:visible").index();
+      var scrollTop = $(this).scrollTop();
+      var scrollHeight = $(".object-wrap").height();
+      var windowheight = $(this).height();
+      var page = $(".list-div:visible").find(".course-active").attr("data-page");
+      var lastpage = null;
+      if(scrollTop + windowheight >= scrollHeight){
+        if(lastpage != page){
+          lastpage = page;
+          $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();
+          $.ajax({
+            type: 'get',
+            url: window.load_bottom.replace(/-1/, category_id) + "?page=" + page + "&orderBy=" + tab_word[index - 1],
+            success: function(data){
+              // console.log(data);
+              $(".list-div:visible").find('.course-item-div:visible').find(".loading").hide();
+              var len = data[0].data.length;
+              if(len > 0){
+                page++;
+                for(var i=0;i<data[0].data.length;i++){
+                  var node=render(data[0].data[i]);
+                  if(node.find('.category-class').text() ==  "健康养育"){
+                    node.find('.category-class').addClass('health-title');
+                  }else if(node.find('.category-class').text() ==  "心理教育"){
+                    node.find('.category-class').addClass('psychology-title');
+                  }else{
+                    node.find('.category-class').addClass('grow-title');
+                  }
+                  node.insertBefore($(".list-div:visible").find(".course-item-div:visible").find(".load"));
+                  $(".list-div:visible").find(".course-active").attr("data-page", page);
                 }
-                node.insertBefore($(".list-div:visible").find(".course-item-div:visible").find(".load"));
-                $(".list-div:visible").find(".course-active").attr("data-page", page);
+              }else{
+                $(".list-div:visible").find('.course-item-div:visible').find(".notice").show();
               }
-            }else{
-              $(".list-div:visible").find('.course-item-div:visible').find(".notice").show();
+            },
+            error: function(e){
+              lastpage = lastpage - 1;
             }
-          },
-          error: function(e){
-            lastpage = lastpage - 1;
-          }
-        });
+          });
+        }
+        
       }
-      
-    }
-  });
+    });
+  }
+  if(/(Android)/i.test(navigator.userAgent)){
+    $(".wrapper").scroll(function(){
+      var category_id = $(".list-div:visible").find(".category_id").text();
+      var tab_word = ["time", "hot", "rate"];
+      var index = $(".list-div:visible").find(".course-item-div:visible").index();
+      var scrollTop = $(this).scrollTop();
+      var scrollHeight = $(".object-wrap").height();
+      var windowheight = $(this).height();
+      var page = $(".list-div:visible").find(".course-active").attr("data-page");
+      var lastpage = null;
+      if(scrollTop + windowheight >= scrollHeight){
+        if(lastpage != page){
+          lastpage = page;
+          $(".list-div:visible").find('.course-item-div:visible').find(".loading").show();
+          $.ajax({
+            type: 'get',
+            url: window.load_bottom.replace(/-1/, category_id) + "?page=" + page + "&orderBy=" + tab_word[index - 1],
+            success: function(data){
+              // console.log(data);
+              $(".list-div:visible").find('.course-item-div:visible').find(".loading").hide();
+              var len = data[0].data.length;
+              if(len > 0){
+                page++;
+                for(var i=0;i<data[0].data.length;i++){
+                  var node=render(data[0].data[i]);
+                  if(node.find('.category-class').text() ==  "健康养育"){
+                    node.find('.category-class').addClass('health-title');
+                  }else if(node.find('.category-class').text() ==  "心理教育"){
+                    node.find('.category-class').addClass('psychology-title');
+                  }else{
+                    node.find('.category-class').addClass('grow-title');
+                  }
+                  node.insertBefore($(".list-div:visible").find(".course-item-div:visible").find(".load"));
+                  $(".list-div:visible").find(".course-active").attr("data-page", page);
+                }
+              }else{
+                $(".list-div:visible").find('.course-item-div:visible').find(".notice").show();
+              }
+            },
+            error: function(e){
+              lastpage = lastpage - 1;
+            }
+          });
+        }
+      }
+    });
+  }
   
 });
