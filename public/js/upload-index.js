@@ -54,8 +54,10 @@ $(document).ready(function(){
     template.find('.course-item-value').text(item['price'] ? "￥" + item['price'] : "无");
     if(item['name'].length > 12){
       var name = item['name'].substr(0, 12) + "...";
+      template.find('.we-course-name').text(name);
+    }else{
+      template.find('.we-course-name').text(item['name']);
     }
-    template.find('.we-course-name').text(name);
     return template.clone(true);
   }
 
