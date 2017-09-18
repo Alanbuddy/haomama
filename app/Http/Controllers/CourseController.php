@@ -951,8 +951,7 @@ class CourseController extends Controller
             $attendedStudents->push($attendance->user->id);
         }
         foreach ($students as $student) {
-            if ($attendedStudents->contains($student->id))
-                $student->hasAttended = true;
+            $student->hasAttended = $attendedStudents->contains($student->id) ?: false;
         }
 
 //        dd($lessons, $schedules, $students,$attendedStudents);
