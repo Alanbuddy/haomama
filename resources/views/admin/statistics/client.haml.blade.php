@@ -15,9 +15,9 @@
   .table-div
     .tabbable
       %ul.nav.nav-tabs
-        %li.active
-          %a.f16.font-color1#current-data 当前数据
         %li
+          %a.f16.font-color1#current-data 当前数据
+        %li.active
           %a.f16.font-color1#client 用户统计
         %li
           %a.f16.font-color1#amount 金额统计

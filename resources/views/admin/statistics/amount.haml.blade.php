@@ -15,11 +15,11 @@
   .table-div
     .tabbable
       %ul.nav.nav-tabs
-        %li.active
+        %li
           %a.f16.font-color1#current-data 当前数据
         %li
           %a.f16.font-color1#client 用户统计
-        %li
+        %li.active
           %a.f16.font-color1#amount 金额统计
         %li
           %a.f16.font-color1#course 课程统计

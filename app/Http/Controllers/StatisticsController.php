@@ -116,8 +116,7 @@ class StatisticsController extends Controller
         //儿童年龄分布
         $kidsAgeDistribution = $this->kidsAgeDistribution();
 //        dd($kidsAgeDistribution->toArray());
-
-        return view('statistics.index', compact('subscribers'));
+        return view('admin.statistics.index', compact('subscribers'));
     }
 
     public function subscribersPerDay()
@@ -153,7 +152,7 @@ class StatisticsController extends Controller
             ->addSelect(DB::raw('count(behaviors.user_id) as watch_times'))//学习次数
             ->groupBy('lessons.id')
             ->get();
-        dd($data->all());
+        // dd($data->all());
     }
 
 //    统计课时观看情况详情页
@@ -171,7 +170,7 @@ class StatisticsController extends Controller
 //        dd($dragBegin);
         $dragEnd = $items->where('type', 'video.drag.end')->all();
         return compact('dragBegin', 'dragEnd');
-        dd($data->all());
+        // dd($data->all());
     }
 
 

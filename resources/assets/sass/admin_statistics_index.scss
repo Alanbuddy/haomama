@@ -1,7 +1,42 @@
 .direction {
-  -webkit-flex-direction: flex-end;
-  -moz-flex-direction: flex-end;
-  -os-flex-direction: flex-end;
-  -o-flex-direction: flex-end;
-  flex-direction: flex-end;
+  -webkit-flex-direction: row-reverse;
+  -moz-flex-direction: row-reverse;
+  -os-flex-direction: row-reverse;
+  -o-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+.courses-income-box {
+  margin-bottom: 40px;
+}
+.amount {
+  background: #f5f6fa;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+}
+.amount-div {
+  padding-top: 20px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  padding-bottom: 20px;
+}
+.amount-items {
+	flex: 1;
+  text-align: center;
+}
+.amount-items:not(:last-of-type) {
+  border-right: 1px dashed #ddd;
+}
+.amount-caption {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.amount-nums {
+  font-size: 24px;
+  color: #7777cf;
+  margin: 10px 0;
+}
+.span-space {
+	margin-left: 5px;
 }
