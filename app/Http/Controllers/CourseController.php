@@ -85,6 +85,10 @@ class CourseController extends Controller
             return $v->id;
         }, $recommendedCourses->all());
 
+        $finishedCourses = Course::where('type', 'offline')
+            ->whereNotNull('schedule')
+            ->where('end', '<', Carbon::now())->select('id')->get();
+        $arr = array_merge($arr, $finishedCourses->all());
         $items = Course::with('category')
             ->where('status', 'publish')
             ->with('teachers')
