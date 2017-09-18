@@ -9,6 +9,7 @@
   window.token = "#{csrf_token()}"
   window.offline_student = "#{route('admin.courses.students',$course->id)}"
   window.qrcode = "#{route('courses.lesson.qr',[0,-1])}"
+  window.sign_people = "#{route('admin.courses.signIn',$course)}"
 
 @endsection
 @section('search-input')
@@ -56,25 +57,9 @@
                   #sign-table
                     - foreach($students as $student)
                       - if($student->hasAttended)
-                        .sign-data.check-in = $student->name
+                        .sign-data.check-in{"data-id" =>$student->id, "data-sign" =>$student->hasAttended} = $student->name
                       - else
                         .sign-data{id:$student->name}= $student->name
-                  // %table.table.table-bordered#sign-table
-                  //   %tbody
-                  //     -foreach($attendances as $attendance)
-                        
-                  //       %tr
-                  //         %td.sign-data.check-in dasfgag
-                  //         %td.sign-data dasfgag
-                  //         %td.sign-data dasfgag
-                  //       %tr
-                  //         %td.sign-data dasfgag
-                  //         %td.sign-data dasfgag
-                  //         %td.sign-data dasfgag
-                  //       %tr
-                  //         %td.sign-data dasfgag
-                  //         %td.sign-data dasfgag
-                  //         %td.sign-data dasfgag
 @endsection
 
 
