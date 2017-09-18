@@ -123,7 +123,6 @@ $(document).ready(function(){
     if(scrollTop + windowheight >= scrollHeight){
       $(".loading").show();
       if(!loading){
-        alert(2);
         loading = true;
         $.ajax({
           type: 'get',
