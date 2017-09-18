@@ -263,6 +263,7 @@ class OrderController extends Controller
             ->addSelect(DB::raw('(select sum(wx_total_fee) from orders where status="paid" and created_at <= left(orders.created_at,10) ) as thorough_total_fee '))
             ->groupBy(DB::raw('left(created_at,10)'));
 
-        dd($query->paginate(10)->all());
+        $items=$query->paginate(10)->all();
+        return view('admin.statistics.amount',compact('items'));
     }
 }

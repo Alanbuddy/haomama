@@ -744,7 +744,8 @@ class CourseController extends Controller
             ->where('orders.status', 'paid')
 //            ->toSql();
             ->paginate(10);
-        dd($items[0]);
+//        dd($items[0]);
+        return view('admin.statistics.amount',compact('items'));
     }
 
     public function recommend(Request $request, Course $course)
