@@ -956,7 +956,7 @@ class CourseController extends Controller
         }
 
 //        dd($lessons, $schedules, $students,$attendedStudents);
-        if ($request->wantsJson()) {
+        if ($request->ajax()) {
             return $students;
         }
         return view('admin.course.offline_sign', compact('course', 'lessons', 'attendances', 'students'));
