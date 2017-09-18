@@ -32,7 +32,7 @@ class StatisticsController extends Controller
         $compareDay = (count($subscribersOfLast2Days) == 2 && $subscribersOfLast2Days[1]->total != 0) ? $subscribersOfLast2Days[0]->total / $subscribersOfLast2Days[1]->total * 100 : 0;
         $subscriberStat = compact('subscribersOfLastDay', 'compareDay', 'compareWeek', 'compareMonth');
 
-        dd($subscribersOfLast2Weeks->all(), $subscribersOfLast2Months->all(), $subscribersOfLast2Days->all(),$subscriberStat);
+//        dd($subscribersOfLast2Weeks->all(), $subscribersOfLast2Months->all(), $subscribersOfLast2Days->all(),$subscriberStat);
 
         //注册人数相关
         $registrationsOfLast2Weeks = $this->registrationPerSpan('%Y%u')->limit(2)->get();
@@ -115,7 +115,7 @@ class StatisticsController extends Controller
 
         //儿童年龄分布
         $kidsAgeDistribution = $this->kidsAgeDistribution();
-        dd($kidsAgeDistribution->toArray());
+//        dd($kidsAgeDistribution->toArray());
 
         return view('statistics.index', compact('subscribers'));
     }
