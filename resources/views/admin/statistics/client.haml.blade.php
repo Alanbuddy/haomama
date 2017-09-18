@@ -1,12 +1,7 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_statistics_index.css') }}">
-// :javascript
-//     window.lesson_index = "#{route('lessons.index')}"
-//     window.lesson_store = "#{route('lessons.store')}"
-//     window.video = "#{route('videos.store')}"
-//     window.token = "#{csrf_token()}"
-//     window.client_index = "#{route('users.index')}"
+
 @endsection
 
 @section('content')
@@ -16,13 +11,13 @@
     .tabbable
       %ul.nav.nav-tabs
         %li
-          %a.f16.font-color1#current-data 当前数据
+          %a.f16.font-color1#current-data{href: route('statistics.index')} 当前数据
         %li.active
           %a.f16.font-color1#client 用户统计
         %li
-          %a.f16.font-color1#amount 金额统计
+          %a.f16.font-color1#amount{href: route('orders.statistics')} 金额统计
         %li
-          %a.f16.font-color1#course 课程统计
+          %a.f16.font-color1#course{href: route('courses.statistics')} 课程统计
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div
