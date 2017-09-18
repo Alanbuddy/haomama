@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Facades\Search;
 use App\Models\Course;
-use App\Models\Order;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Vote;
@@ -456,8 +455,8 @@ class UserController extends Controller
     public function order(Request $request, User $user)
     {
         $items = $user->orders()
-            ->where('orders.status','paid')
-            ->join('courses','courses.id','orders.product_id')
+            ->where('orders.status', 'paid')
+            ->join('courses', 'courses.id', 'orders.product_id')
             ->whereNull('courses.deleted_at')
             ->with('course')
             ->paginate(10);
@@ -518,6 +517,8 @@ class UserController extends Controller
         $activeUser = $this->activeUsersPerSpan('%Y%u')->limit(12)->get();
         $subscribe = $this->subscribersPerSpan('%Y%u')->limit(12)->get();
         $usersCount = $this->usersCountPerSpan('%Y%u')->limit(12)->get();
-        dd($items->toArray(), $usersCount);
+//        dd($items->toArray(), $usersCount);
+        return view('admin.statistics.client',
+            compact('items', 'registration', 'activeUser', 'subscribe', 'usersCount'));
     }
 }

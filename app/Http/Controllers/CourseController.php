@@ -85,6 +85,10 @@ class CourseController extends Controller
             return $v->id;
         }, $recommendedCourses->all());
 
+        $finishedCourses = Course::where('type', 'offline')
+            ->whereNotNull('schedule')
+            ->where('end', '<', Carbon::now())->select('id')->get();
+        $arr = array_merge($arr, $finishedCourses->all());
         $items = Course::with('category')
             ->where('status', 'publish')
             ->with('teachers')
@@ -740,7 +744,8 @@ class CourseController extends Controller
             ->where('orders.status', 'paid')
 //            ->toSql();
             ->paginate(10);
-        dd($items[0]);
+//        dd($items[0]);
+        return view('admin.statistics.amount',compact('items'));
     }
 
     public function recommend(Request $request, Course $course)
