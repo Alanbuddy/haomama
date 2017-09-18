@@ -118,9 +118,9 @@ $(document).ready(function(){
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(document).height();
     var windowheight = $(this).height();
-    console.log(scrollTop);
-    console.log(windowheight);
-    console.log(scrollHeight);
+    // console.log(scrollTop);
+    // console.log(windowheight);
+    // console.log(scrollHeight);
     if(scrollTop + windowheight >= scrollHeight){
       $(".loading").show();
       if(!loading){
