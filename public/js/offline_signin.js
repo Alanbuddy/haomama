@@ -7,9 +7,17 @@ $(document).ready(function(){
     location.href = window.offline_student;
   });
 
-  var temp = `<div class="sign-data" id="test333">test333</div>`;
+  var node = "";
+  var temp = `<div class="sign-data">test333</div>`;
   var template = $(temp);
-
+  function render(item){
+    template.attr("data-id", item['id']);
+    template.attr("data-sign", item['hasAttended']);
+    if(template.attr("data-sign") == true){
+      template.addClass('check-in');
+    }
+    return template.clone(true);
+  }
   $(".select-style").change(function(){
     var num = $(this).val();
     var cid = $(".course-id").text();
@@ -18,15 +26,16 @@ $(document).ready(function(){
       $(".code-figure").attr("src", "icon/admin/bigqrcode.png");
     }else{
       $(".code-figure").attr("src", qr_src);
+      $(".sign-data").remove(); 
       var link_url = window.sign_people + "?index=" + (parseInt(num) + 1);
       $.ajax({
         type: 'get',
         url: link_url,
         success: function(data){
-          console.log(data.length);
           if(data.length > 0){
             for(var i=0;i<data.length;i++){
-              
+              node = render(data[i]);
+              node.appendTo($("#sign-table"));
             }
           }
         }

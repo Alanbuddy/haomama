@@ -55,11 +55,7 @@
                 .sign-status
                   %h5 签到情况
                   #sign-table
-                    - foreach($students as $student)
-                      - if($student->hasAttended)
-                        .sign-data.check-in{"data-id" =>$student->id, "data-sign" =>$student->hasAttended} = $student->name
-                      - else
-                        .sign-data{id:$student->name}= $student->name
+                    
 @endsection
 
 
