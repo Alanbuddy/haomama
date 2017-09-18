@@ -23,7 +23,12 @@ $(document).ready(function(){
         type: 'get',
         url: link_url,
         success: function(data){
-          console.log(data);
+          console.log(data.length);
+          if(data.length > 0){
+            for(var i=0;i<data.length;i++){
+              
+            }
+          }
         }
       });
     }
