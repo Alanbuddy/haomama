@@ -116,9 +116,10 @@ $(document).ready(function(){
   $(window).scroll(function(e){
     e.stopPropagation();
     var scrollTop = $(this).scrollTop();
-    // var scrollHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
     var scrollHeight = $(document).height();
     var windowheight = $(this).height();
+    console.log(scrollTop);
+    console.log(windowheight);
     console.log(scrollHeight);
     if(scrollTop + windowheight >= scrollHeight){
       $(".loading").show();
@@ -133,7 +134,17 @@ $(document).ready(function(){
             var len = data.data.length;
             if(len > 0 && page <= lastpage){
               page++;
-              callbackHandle(data);
+              for(var i=0;i<data.data.length;i++){
+                node=render(data.data[i]);
+                if(node.find('.category-class').text() ==  "健康养育"){
+                  node.find('.category-class').addClass('health-title');
+                }else if(node.find('.category-class').text() ==  "心理教育"){
+                  node.find('.category-class').addClass('psychology-title');
+                }else{
+                  node.find('.category-class').addClass('grow-title');
+                }
+                node.insertBefore($(".load"));
+              }
             }else{
               $(".notice").show();
             }
