@@ -55,7 +55,7 @@
                   %img.mini-icon{src: "icon/admin/5user.png"}
                   %span.f18.sidebar-title 用户管理
               %li
-                %a{:href => route('statistics.lessons')}
+                %a{:href => route('statistics.index')}
                   %img.mini-icon{src: "icon/admin/6statistic.png"}
                   %span.f18.sidebar-title 统计数据
       .content-area
