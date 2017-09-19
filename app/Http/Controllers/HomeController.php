@@ -167,7 +167,7 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $items->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
-        $this->filterFishedCourses($items);
+        $this->filterCourses($items);
         //处理分页
         $items = $this->processPage($page, $items, $pageSize, $recommendedCourse);
         return [$items, $recommendedCourse];
@@ -187,7 +187,7 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $itemsOrderByUserCount->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
-        $this->filterFishedCourses($itemsOrderByUserCount);
+        $this->filterCourses($itemsOrderByUserCount);
         $itemsOrderByUserCount = $this->processPage($page, $itemsOrderByUserCount, $pageSize, $recommendedCourse);
         return [$itemsOrderByUserCount, $recommendedCourse];
     }
@@ -209,12 +209,12 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $itemsOrderByCommentRating->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
-        $this->filterFishedCourses($itemsOrderByCommentRating);
+        $this->filterCourses($itemsOrderByCommentRating);
         $itemsOrderByCommentRating = $this->processPage($page, $itemsOrderByCommentRating, $pageSize, $recommendedCourse);
         return [$itemsOrderByCommentRating, $recommendedCourse];
     }
 
-    public function filterFishedCourses($query)
+    public function filterCourses($query)
     {
         $arr1 = Search::finishedCoursesIds();
         $arr2 = Search::onGoingCoursesIds();
