@@ -40,3 +40,45 @@
 .span-space {
 	margin-left: 5px;
 }
+
+//tab2
+.title-div {
+  -webkit-display: flex;
+  -moz-display: flex;
+  -ms-display: flex;
+  -o-display: flex;
+  display: flex;
+  justify-content: space-between;
+  span {
+    flex: 1;
+    background: #adadbe;
+    text-align: center;
+    padding: 10px 0;
+  }
+  span:not(:last-of-type) {
+    border-right: 1px solid #fff;
+  }
+  .active {
+    background: #f5f6fa;
+    color: #3c3d45;
+  }
+}
+.figure-div {
+  display: none;
+  height: 240px;
+  border-bottom: 4px solid #eaebf2;
+  margin-bottom: 30px;
+}
+.download {
+  background: #40ca85;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.totalitems {
+  height: 32px;
+  line-height: 32px;
+}
+#new-statistics, #active-statistics, #focus-statistics, #all-statistics {
+  height: 238px;
+}

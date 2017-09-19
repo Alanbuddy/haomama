@@ -13,6 +13,7 @@ $(document).ready(function(){
   function render(item){
     template.attr("data-id", item['id']);
     template.attr("data-sign", item['hasAttended']);
+    template.find(".sign-data").text(item['name']);
     if(template.attr("data-sign") == true){
       template.addClass('check-in');
     }

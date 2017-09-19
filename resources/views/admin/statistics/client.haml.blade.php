@@ -17,138 +17,51 @@
         %li
           %a.f16.font-color1#amount{href: route('orders.statistics')} 金额统计
         %li
-          %a.f16.font-color1#course{href: route('courses.statistics')} 课程统计
+          %a.f16.font-color1#course-statistics{href: route('courses.statistics')} 课程统计
       .tab-content.bg3
-        #tab1.tab-pane.active
+        #tab2.tab-pane.active
           .desc-div
-            .courses-income-box.border-btm
-              %p.amount.font-color3.f16 昨日金额数据
-              .amount-div
-                .amount-items
-                  %p.amount-caption.font-color3.f16 新增收入(元)
-                  %p.amount-nums 10000
-                  .font-color3.f14
-                    %span 日
-                    %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 周
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 月
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                .amount-items
-                  %p.amount-caption.font-color3.f16 报名人数
-                  %p.amount-nums 6000
-                  .font-color3.f14
-                    %span 日
-                    %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 周
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 月
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                .amount-items#goverment
-                  %p.amount-caption.font-color3.f16 付费人数
-                  %p.amount-nums 4000
-                  .font-color3.f14
-                    %span 日
-                    %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 周
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 月
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                .amount-items
-                  %p.amount-caption.font-color3.f16 累计总收入(元)
-                  %p.amount-nums 10000
-                  .font-color3.f14
-                    %span 日
-                    %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 周
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 月
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-            .courses-income-box.border-btm
-              %p.amount.font-color3.f16 昨日用户数据
-              .amount-div
-                .amount-items
-                  %p.amount-caption.font-color3.f16 新用户
-                  %p.amount-nums 10000
-                  .font-color3.f14
-                    %span 日
-                    %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 周
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 月
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                .amount-items
-                  %p.amount-caption.font-color3.f16 活跃用户
-                  %p.amount-nums 6000
-                  .font-color3.f14
-                    %span 日
-                    %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 周
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 月
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                .amount-items#goverment
-                  %p.amount-caption.font-color3.f16 关注用户
-                  %p.amount-nums 4000
-                  .font-color3.f14
-                    %span 日
-                    %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 周
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 月
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                .amount-items
-                  %p.amount-caption.font-color3.f16 总用户
-                  %p.amount-nums 10000
-                  .font-color3.f14
-                    %span 日
-                    %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 周
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
-                  .font-color3.f14
-                    %span 月
-                    %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
+            .title-div
+              %span.active.f16.font-color1 新用户
+              %span.f16.font-color1 活跃用户
+              %span.f16.font-color1 关注用户
+              %span.f16.font-color1 总用户
+            .figure-div{style: "display: block"}
+              #new-statistics
+            .figure-div
+              #active-statistics
+            .figure-div
+              #focus-statistics
+            .figure-div
+              #all-statistics
+            .table-box
+              %table.table.table-hover.table-height.f14
+                %thead.th-bg.font-color2
+                  %tr
+                    %th 日期
+                    %th 新用户
+                    %th 活跃用户
+                    %th 关注用户
+                    %th 总用户
+                %tbody.font-color3
+                  %tr
+                    %td 2017/06/12
+                    %td 2110
+                    %td 3650
+                    %td 56770
+                    %td 98759
+
+            .select-page.clearfix 
+              // %span.download.f14.fl 下载表格
+              // %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+              // %span.choice-page
+              //   != $items->links()
+
 @endsection
 
 @section('script')
+<script src="js/plugin/jquery-ui.min.js"></script>
+<script src= "js/plugin/highcharts.js"></script>
+<script src= "js/client_statistics.js"></script>
 
 @endsection

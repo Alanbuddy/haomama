@@ -17,7 +17,7 @@
         %li
           %a.f16.font-color1#amount{href: route('orders.statistics')} 金额统计
         %li
-          %a.f16.font-color1#course{href: route('courses.statistics')} 课程统计
+          %a.f16.font-color1#course-statistics{href: route('courses.statistics')} 课程统计
       .tab-content.bg3
         #tab1.tab-pane.active
           .desc-div
