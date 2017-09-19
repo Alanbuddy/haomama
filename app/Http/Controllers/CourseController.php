@@ -87,7 +87,7 @@ class CourseController extends Controller
 
         $arr2 = Search::finishedCoursesIds();
         $arr3 = Search::onGoingCoursesIds();
-        $arr4 = array_unique(array_merge($arr, $arr2,$arr3));
+        $arr4 = array_unique(array_merge($arr, $arr2, $arr3));
 //        dd($arr, $arr2, $arr3,$arr4);
         $items = Course::with('category')
             ->where('status', 'publish')
@@ -851,7 +851,7 @@ class CourseController extends Controller
         $hasEnrolled = (bool)auth()->user()->enrolledCourses()->where('id', $course->id)->count();
 
         if ($hasEnrolled) {
-            $this->recordAttendance($course, $index);
+            $this->recordAttendance($course, $index + 1);
         }
 
         return view('mine.create', compact('hasEnrolled', 'course', 'index', 'lesson'));
