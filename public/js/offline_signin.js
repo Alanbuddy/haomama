@@ -8,12 +8,12 @@ $(document).ready(function(){
   });
 
   var node = "";
-  var temp = `<div class="sign-data">test333</div>`;
+  var temp = `<div class="sign-data"></div>`;
   var template = $(temp);
   function render(item){
     template.attr("data-id", item['id']);
     template.attr("data-sign", item['hasAttended']);
-    template.find(".sign-data").text(item['name']);
+    template.text(item['name']);
     if(template.attr("data-sign") == true){
       template.addClass('check-in');
     }
@@ -33,6 +33,7 @@ $(document).ready(function(){
         type: 'get',
         url: link_url,
         success: function(data){
+          console.log(data);
           if(data.length > 0){
             for(var i=0;i<data.length;i++){
               node = render(data[i]);
