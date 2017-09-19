@@ -14,7 +14,7 @@ $(document).ready(function(){
     template.attr("data-id", item['id']);
     template.attr("data-sign", item['hasAttended']);
     template.text(item['name']);
-    if(template.attr("data-sign") == true){
+    if(template.attr("data-sign") == "true"){
       template.addClass('check-in');
     }
     return template.clone(true);
