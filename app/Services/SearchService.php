@@ -160,6 +160,7 @@ class SearchService
         return $items;
     }
 
+    //已经结课的课程
     public function finishedCourses()
     {
         return Course::where('type', 'offline')
@@ -174,5 +175,17 @@ class SearchService
         return array_map(function ($v) {
             return $v->id;
         }, $finishedCourses->all());
+    }
+
+    //已经开课的课程
+    public function onGoingCoursesIds()
+    {
+        $arr = Course::where('type', 'offline')
+            ->where('begin', '<', date('Y-m-d H:i:s', time()))
+            ->select('id')
+            ->get();
+        return array_map(function ($v) {
+            return $v->id;
+        }, $arr->all());
     }
 }

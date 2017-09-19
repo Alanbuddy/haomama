@@ -216,7 +216,9 @@ class HomeController extends Controller
 
     public function filterFishedCourses($query)
     {
-        $arr = Search::finishedCoursesIds();
+        $arr1 = Search::finishedCoursesIds();
+        $arr2 = Search::onGoingCoursesIds();
+        $arr = array_unique(array_merge($arr1, $arr2));
         $query->whereNotIn('id', $arr);
     }
 

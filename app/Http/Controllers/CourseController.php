@@ -86,13 +86,14 @@ class CourseController extends Controller
         }, $recommendedCourses->all());
 
         $arr2 = Search::finishedCoursesIds();
-        $arr3 = array_unique(array_merge($arr, $arr2));
-//        dd($arr, $arr2, $arr3);
+        $arr3 = Search::onGoingCoursesIds();
+        $arr4 = array_unique(array_merge($arr, $arr2,$arr3));
+//        dd($arr, $arr2, $arr3,$arr4);
         $items = Course::with('category')
             ->where('status', 'publish')
             ->with('teachers')
             ->with('tags')
-            ->whereNotIn('id', $arr3)
+            ->whereNotIn('id', $arr4)
             ->orderBy('id', 'desc');
 //        dd($items);
         $page = $request->get('page', 1);
