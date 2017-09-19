@@ -214,6 +214,7 @@ class HomeController extends Controller
         return [$itemsOrderByCommentRating, $recommendedCourse];
     }
 
+    //排除结课和开课的线下课程
     public function filterCourses($query)
     {
         $arr1 = Search::finishedCoursesIds();
