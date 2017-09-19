@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Models\Course;
 use App\Models\Term;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -157,5 +158,34 @@ class SearchService
             ->where('courses.name', 'like', '%' . $key . '%')
             ->orderBy('courses.id', 'desc');
         return $items;
+    }
+
+    //已经结课的课程
+    public function finishedCourses()
+    {
+        return Course::where('type', 'offline')
+            ->whereNotNull('schedule')
+            ->where('end', '<', Carbon::now()->toDateTimeString());
+    }
+
+    public function finishedCoursesIds()
+    {
+        $finishedCourses = $this->finishedCourses()
+            ->select('id')->get();
+        return array_map(function ($v) {
+            return $v->id;
+        }, $finishedCourses->all());
+    }
+
+    //已经开课的课程
+    public function onGoingCoursesIds()
+    {
+        $arr = Course::where('type', 'offline')
+            ->where('begin', '<', date('Y-m-d H:i:s', time()))
+            ->select('id')
+            ->get();
+        return array_map(function ($v) {
+            return $v->id;
+        }, $arr->all());
     }
 }

@@ -85,15 +85,15 @@ class CourseController extends Controller
             return $v->id;
         }, $recommendedCourses->all());
 
-        $finishedCourses = Course::where('type', 'offline')
-            ->whereNotNull('schedule')
-            ->where('end', '<', Carbon::now())->select('id')->get();
-        $arr = array_merge($arr, $finishedCourses->all());
+        $arr2 = Search::finishedCoursesIds();
+        $arr3 = Search::onGoingCoursesIds();
+        $arr4 = array_unique(array_merge($arr, $arr2,$arr3));
+//        dd($arr, $arr2, $arr3,$arr4);
         $items = Course::with('category')
             ->where('status', 'publish')
             ->with('teachers')
             ->with('tags')
-            ->whereNotIn('id', $arr)
+            ->whereNotIn('id', $arr4)
             ->orderBy('id', 'desc');
 //        dd($items);
         $page = $request->get('page', 1);
@@ -745,7 +745,7 @@ class CourseController extends Controller
 //            ->toSql();
             ->paginate(10);
 //        dd($items[0]);
-        return view('admin.statistics.amount',compact('items'));
+        return view('admin.statistics.course', compact('items'));
     }
 
     public function recommend(Request $request, Course $course)

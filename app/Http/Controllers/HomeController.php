@@ -134,7 +134,10 @@ class HomeController extends Controller
             $recommendedCourse = Course::where('hot', true)
                 ->where('category_id', $categoryId);
         }
+        $arr = Search::finishedCoursesIds();
         $recommendedCourse = $recommendedCourse
+            ->where('status', 'publish')
+            ->whereNotIn('id', $arr)
             ->withCount(['comments' => function ($query) {
                 $query->whereNull('star')
                     ->where('validity', true)
@@ -164,6 +167,7 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $items->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
+        $this->filterCourses($items);
         //处理分页
         $items = $this->processPage($page, $items, $pageSize, $recommendedCourse);
         return [$items, $recommendedCourse];
@@ -183,6 +187,7 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $itemsOrderByUserCount->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
+        $this->filterCourses($itemsOrderByUserCount);
         $itemsOrderByUserCount = $this->processPage($page, $itemsOrderByUserCount, $pageSize, $recommendedCourse);
         return [$itemsOrderByUserCount, $recommendedCourse];
     }
@@ -196,7 +201,7 @@ class HomeController extends Controller
             ->where('status', 'publish')
             ->addSelect(DB::raw('(select count(*) from users inner join course_user on users.id = course_user.user_id where courses.id = course_user.course_id and course_user.type = ' . '\'enroll\'' . ') as users_count'))
             ->addSelect(DB::raw('(select count(*) from `comments` where `comments`.`course_id` = `courses`.`id` and `comments`.star is null and `comments`.`validity` = 1) as `comments_count`'))
-            ->addSelect(DB::raw('(select sum(comments.star) from `comments` where `comments`.`course_id` = `courses`.`id`) as `star`'))
+            ->addSelect(DB::raw('(select avg(comments.star) from `comments` where `comments`.`course_id` = `courses`.`id`) as `star`'))
             ->orderBy('star', 'desc');
         if ($categoryId > 0) {
             $itemsOrderByCommentRating->where('category_id', $categoryId);
@@ -204,10 +209,19 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $itemsOrderByCommentRating->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
+        $this->filterCourses($itemsOrderByCommentRating);
         $itemsOrderByCommentRating = $this->processPage($page, $itemsOrderByCommentRating, $pageSize, $recommendedCourse);
         return [$itemsOrderByCommentRating, $recommendedCourse];
     }
 
+    //排除结课和开课的线下课程
+    public function filterCourses($query)
+    {
+        $arr1 = Search::finishedCoursesIds();
+        $arr2 = Search::onGoingCoursesIds();
+        $arr = array_unique(array_merge($arr1, $arr2));
+        $query->whereNotIn('id', $arr);
+    }
 
     /**
      * @param $page
