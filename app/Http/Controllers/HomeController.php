@@ -134,7 +134,10 @@ class HomeController extends Controller
             $recommendedCourse = Course::where('hot', true)
                 ->where('category_id', $categoryId);
         }
+        $arr = Search::finishedCoursesIds();
         $recommendedCourse = $recommendedCourse
+            ->where('status', 'publish')
+            ->whereNotIn('id', $arr)
             ->withCount(['comments' => function ($query) {
                 $query->whereNull('star')
                     ->where('validity', true)
@@ -164,6 +167,7 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $items->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
+        $this->filterFishedCourses($items);
         //处理分页
         $items = $this->processPage($page, $items, $pageSize, $recommendedCourse);
         return [$items, $recommendedCourse];
@@ -183,6 +187,7 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $itemsOrderByUserCount->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
+        $this->filterFishedCourses($itemsOrderByUserCount);
         $itemsOrderByUserCount = $this->processPage($page, $itemsOrderByUserCount, $pageSize, $recommendedCourse);
         return [$itemsOrderByUserCount, $recommendedCourse];
     }
@@ -204,10 +209,16 @@ class HomeController extends Controller
         if (count($recommendedCourse)) {
             $itemsOrderByCommentRating->where('courses.id', '<>', $recommendedCourse->first()->id);
         }
+        $this->filterFishedCourses($itemsOrderByCommentRating);
         $itemsOrderByCommentRating = $this->processPage($page, $itemsOrderByCommentRating, $pageSize, $recommendedCourse);
         return [$itemsOrderByCommentRating, $recommendedCourse];
     }
 
+    public function filterFishedCourses($query)
+    {
+        $arr = Search::finishedCoursesIds();
+        $query->whereNotIn('id', $arr);
+    }
 
     /**
      * @param $page
