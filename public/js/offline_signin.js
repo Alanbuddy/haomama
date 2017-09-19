@@ -14,9 +14,6 @@ $(document).ready(function(){
     template.attr("data-id", item['id']);
     template.attr("data-sign", item['hasAttended']);
     template.text(item['name']);
-    if(template.attr("data-sign") == "true"){
-      template.addClass('check-in');
-    }
     return template.clone(true);
   }
   $(".select-style").change(function(){
@@ -33,10 +30,12 @@ $(document).ready(function(){
         type: 'get',
         url: link_url,
         success: function(data){
-          console.log(data);
           if(data.length > 0){
             for(var i=0;i<data.length;i++){
               node = render(data[i]);
+              if(node.attr("data-sign") == "true"){
+                node.addClass('check-in');
+              }
               node.appendTo($("#sign-table"));
             }
           }
