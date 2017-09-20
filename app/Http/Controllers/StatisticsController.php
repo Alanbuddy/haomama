@@ -38,7 +38,7 @@ class StatisticsController extends Controller
         $registrationsOfLast2Weeks = $this->registrationPerSpan('%Y%u')->limit(2)->get();
         $registrationsOfLast2Months = $this->registrationPerSpan('%Y%m')->limit(2)->get();
         $registrationsOfLast2Days = $this->registrationPerSpan('%Y%m%d')->limit(2)->get();
-        $registrationsOfLastDay = $registrationsOfLast2Days->first();
+        $registrationsOfLastDay = $registrationsOfLast2Days->first()->total;
         $compareWeek = (count($registrationsOfLast2Weeks) == 2 && $registrationsOfLast2Weeks[1]->total != 0) ? $registrationsOfLast2Weeks[0]->total / $registrationsOfLast2Weeks[1]->total * 100 : 0;
         $compareMonth = (count($registrationsOfLast2Months) == 2 && $registrationsOfLast2Months[1]->total != 0) ? $registrationsOfLast2Months[0]->total / $registrationsOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($registrationsOfLast2Days) == 2 && $registrationsOfLast2Days[1]->total != 0) ? $registrationsOfLast2Days[0]->total / $registrationsOfLast2Days[1]->total * 100 : 0;
@@ -68,10 +68,10 @@ class StatisticsController extends Controller
 //        dd($usersCount, $usersCountDayAgo, $usersCountWeekAgo, $usersCountMonthAgo, $usersCountStat, $activeUserStat, $subscriberStat, $registrationStat);
 
         //总收入
-        $income = $this->income('-1 day');
-        $incomeDayAgo = $this->income('-2 day');
-        $incomeWeekAgo = $this->income('-8 day');
-        $incomeMonthAgo = $this->income('-1 month');
+        $income = $this->income('-1 day')/100;
+        $incomeDayAgo = $this->income('-2 day')/100;
+        $incomeWeekAgo = $this->income('-8 day')/100;
+        $incomeMonthAgo = $this->income('-1 month')/100;
         $compareDay = $incomeDayAgo != 0 ? $income / $incomeDayAgo : 0;
         $compareWeek = $incomeWeekAgo != 0 ? $income / $incomeWeekAgo : 0;
         $compareMonth = $incomeMonthAgo != 0 ? $income / $incomeMonthAgo : 0;
@@ -86,7 +86,7 @@ class StatisticsController extends Controller
         $compareWeek = (count($incomeOfLast2Weeks) == 2 && $incomeOfLast2Weeks[1]->total != 0) ? $incomeOfLast2Weeks[0]->total / $incomeOfLast2Weeks[1]->total * 100 : 0;
         $compareMonth = (count($incomeOfLast2Months) == 2 && $incomeOfLast2Months[1]->total != 0) ? $incomeOfLast2Months[0]->total / $incomeOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($incomeOfLast2Days) == 2 && $incomeOfLast2Days[1]->total != 0) ? $incomeOfLast2Days[0]->total / $incomeOfLast2Days[1]->total * 100 : 0;
-        $incomeStat = compact('incomeOfLastDay', 'compareDay', 'compareWeek', 'compareMonth');
+        $deltaIncomeStat = compact('incomeOfLastDay', 'compareDay', 'compareWeek', 'compareMonth');
 //        dd($incomeOfLast2Weeks->all(), $incomeOfLast2Months->all(), $incomeOfLast2Days->all(), $incomeOfLastDay, $incomeStat);
 
         //付费人数/报名人数
@@ -116,7 +116,13 @@ class StatisticsController extends Controller
         //儿童年龄分布
         $kidsAgeDistribution = $this->kidsAgeDistribution();
 //        dd($kidsAgeDistribution->toArray());
-        return view('admin.statistics.index', compact('subscribers'));
+        return view('admin.statistics.index', compact(
+            'registrationStat',
+            'subscribers',
+            'deltaIncomeStat',
+            'orderStat',
+            'incomeStat'
+        ));
     }
 
     public function subscribersPerDay()
@@ -174,7 +180,7 @@ class StatisticsController extends Controller
     }
 
 
-    //总收入
+    //总收入,注意单位是分，不是元
     public function income($offset = null)
     {
         $query = Order::where('status', 'paid');
