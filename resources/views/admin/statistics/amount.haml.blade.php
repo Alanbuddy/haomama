@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/admin_statistics_index.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/search_time.css') }}">
 
 @endsection
 

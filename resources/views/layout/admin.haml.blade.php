@@ -60,16 +60,44 @@
                   %span.f18.sidebar-title 统计数据
       .content-area
         .main-top.direction
+          // - if(isset($showSpanForm))
+          //   .search-statistics.f14.font-color3
+          //     %form.form-inline
+          //       .form-group.form-time-statistics
+          //         %span.input-caption-statistics　查询时段:
+          //         %input.input-area-statistics.form-control#datepicker-1{:type => "text"}
+          //         %span.input-caption-statistics 至
+          //         %input.input-area-statistics.form-control#datepicker-2{:type => "text"}
+          //         .btn#course-search-btn.search-btn-statistics{:type => "button"} 查询
+          //         %select.quick-choice.form-control.font-color3
+          //           %option 最近七天
+          //           %option 最近十五天
+          //           %option 最近三十天
+          // - else
           @yield('search-input')
-          %ul.set
-            -if(auth()->user()->hasRole('admin'))
-              %li            
-                %a.f16.right-border{href: route('users.index')."?type=operator"} 人员管理
-                .dot
-            %li
-              %a.f16{href: route('admin.profile')} 账号设置
-            %li
-              %a.f16.set-left-border#exit{href: "javascript:void(0)"} 退出登录
+          - if(isset($showSpanForm))
+            .search-statistics.f14.font-color3
+              %form.form-inline
+                .form-group.form-time-statistics
+                  %span.input-caption-statistics　查询时段:
+                  %input.input-area-statistics.form-control#datepicker-1{:type => "text"}
+                  %span.input-caption-statistics 至
+                  %input.input-area-statistics.form-control#datepicker-2{:type => "text"}
+                  .btn#course-search-btn.search-btn-statistics{:type => "button"} 查询
+                  %select.quick-choice.form-control.font-color3
+                    %option 最近七天
+                    %option 最近十五天
+                    %option 最近三十天
+          - else
+            %ul.set          
+              -if(auth()->user()->hasRole('admin'))
+                %li            
+                  %a.f16.right-border{href: route('users.index')."?type=operator"} 人员管理
+                  .dot
+              %li
+                %a.f16{href: route('admin.profile')} 账号设置
+              %li
+                %a.f16.set-left-border#exit{href: "javascript:void(0)"} 退出登录
       @yield('content')
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

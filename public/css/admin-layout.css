@@ -543,3 +543,36 @@ a:hover {
   font-size: 16px;
 }
 
+
+.search-statistics {
+  width: 100%;
+  margin: 0;
+}
+.form-time-statistics {
+  width: 100%;
+  padding: 13px 0;
+  margin: 0;
+}
+#datepicker-1, #datepicker-2, #datepicker-3, #datepicker-4, #datepicker-5, #datepicker-6{
+  width: 14.85%;
+}
+.input-caption-statistics {
+  font-size: 16px;
+  vertical-align: middle;
+}
+.input-area-statistics {
+  margin: 0 8px;
+}
+.search-btn-statistics {
+  background: #10c078;
+  margin-left: 12px;
+  height: 32px;
+  color: #fff;
+}
+.search-btn-statistics:hover {
+  color: #fff;
+}
+.quick-choice {
+  float: right;
+  width: 14.85%;
+}

@@ -38,6 +38,7 @@
   "/css/admin_client_show.css": "/css/admin_client_show.css",
   "/css/admin_imgset_index.css": "/css/admin_imgset_index.css",
   "/css/admin_statistics_index.css": "/css/admin_statistics_index.css",
+  "/css/search_time.css": "/css/search_time.css",
   "/js/teacher.js": "/js/teacher.js",
   "/js/signup.js": "/js/signup.js",
   "/js/signin.js": "/js/signin.js",
