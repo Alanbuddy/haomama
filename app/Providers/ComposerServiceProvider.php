@@ -25,6 +25,16 @@ class ComposerServiceProvider extends ServiceProvider
             '*', 'App\Http\ViewComposers\WxComposer'
         );
 
+        View::composer([
+            'admin.statistics.client',
+            'admin.statistics.amount',
+            'admin.statistics.course',
+        ],
+            function ($view) {
+                $view->with('showSpanForm', true);
+            }
+        );
+
         // Using Closure based composers...
         View::composer('dashboard', function ($view) {
             //

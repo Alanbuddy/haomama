@@ -68,6 +68,8 @@
                 .dot
             %li
               %a.f16{href: route('admin.profile')} 账号设置
+              -if(isset($showSpanForm))
+                %h1 aaa
             %li
               %a.f16.set-left-border#exit{href: "javascript:void(0)"} 退出登录
       @yield('content')
