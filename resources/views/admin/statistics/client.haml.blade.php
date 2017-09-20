@@ -44,18 +44,19 @@
                     %th 关注用户
                     %th 总用户
                 %tbody.font-color3
+                -foreach($items as $item)
                   %tr
-                    %td 2017/06/12
-                    %td 2110
-                    %td 3650
-                    %td 56770
-                    %td 98759
+                    %td=$item->date
+                    %td=$item->registration
+                    %td=$item->activeUser
+                    %td=$item->subscribe
+                    %td=$item->total
 
             .select-page.clearfix 
               // %span.download.f14.fl 下载表格
-              // %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
-              // %span.choice-page
-              //   != $items->links()
+              %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+              %span.choice-page
+              != $items->links()
 
 @endsection
 

@@ -26,7 +26,7 @@ class StatisticsController extends Controller
         $subscribersOfLast2Weeks = $this->subscribersPerWeek()->limit(2)->get();
         $subscribersOfLast2Months = $this->subscribersPerMonth()->limit(2)->get();
         $subscribersOfLast2Days = $this->subscribersPerDay()->limit(2)->get();
-        $subscribersOfLastDay = $subscribersOfLast2Days->first();
+        $subscribersOfLastDay = count($subscribersOfLast2Days) > 0 ? $subscribersOfLast2Days->first()->total : 0;
         $compareWeek = (count($subscribersOfLast2Weeks) == 2 && $subscribersOfLast2Weeks[1]->total != 0) ? $subscribersOfLast2Weeks[0]->total / $subscribersOfLast2Weeks[1]->total * 100 : 0;
         $compareMonth = (count($subscribersOfLast2Months) == 2 && $subscribersOfLast2Months[1]->total != 0) ? $subscribersOfLast2Months[0]->total / $subscribersOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($subscribersOfLast2Days) == 2 && $subscribersOfLast2Days[1]->total != 0) ? $subscribersOfLast2Days[0]->total / $subscribersOfLast2Days[1]->total * 100 : 0;
@@ -38,7 +38,7 @@ class StatisticsController extends Controller
         $registrationsOfLast2Weeks = $this->registrationPerSpan('%Y%u')->limit(2)->get();
         $registrationsOfLast2Months = $this->registrationPerSpan('%Y%m')->limit(2)->get();
         $registrationsOfLast2Days = $this->registrationPerSpan('%Y%m%d')->limit(2)->get();
-        $registrationsOfLastDay = $registrationsOfLast2Days->first()->total;
+        $registrationsOfLastDay = count($registrationsOfLast2Days) > 0 ? $registrationsOfLast2Days->first()->total : 0;
         $compareWeek = (count($registrationsOfLast2Weeks) == 2 && $registrationsOfLast2Weeks[1]->total != 0) ? $registrationsOfLast2Weeks[0]->total / $registrationsOfLast2Weeks[1]->total * 100 : 0;
         $compareMonth = (count($registrationsOfLast2Months) == 2 && $registrationsOfLast2Months[1]->total != 0) ? $registrationsOfLast2Months[0]->total / $registrationsOfLast2Months[1]->total * 100 : 0;
         $compareDay = (count($registrationsOfLast2Days) == 2 && $registrationsOfLast2Days[1]->total != 0) ? $registrationsOfLast2Days[0]->total / $registrationsOfLast2Days[1]->total * 100 : 0;
@@ -68,10 +68,10 @@ class StatisticsController extends Controller
 //        dd($usersCount, $usersCountDayAgo, $usersCountWeekAgo, $usersCountMonthAgo, $usersCountStat, $activeUserStat, $subscriberStat, $registrationStat);
 
         //总收入
-        $income = $this->income('-1 day')/100;
-        $incomeDayAgo = $this->income('-2 day')/100;
-        $incomeWeekAgo = $this->income('-8 day')/100;
-        $incomeMonthAgo = $this->income('-1 month')/100;
+        $income = $this->income('-1 day') / 100;
+        $incomeDayAgo = $this->income('-2 day') / 100;
+        $incomeWeekAgo = $this->income('-8 day') / 100;
+        $incomeMonthAgo = $this->income('-1 month') / 100;
         $compareDay = $incomeDayAgo != 0 ? $income / $incomeDayAgo : 0;
         $compareWeek = $incomeWeekAgo != 0 ? $income / $incomeWeekAgo : 0;
         $compareMonth = $incomeMonthAgo != 0 ? $income / $incomeMonthAgo : 0;
@@ -102,26 +102,33 @@ class StatisticsController extends Controller
 
 
         //用户地区分布
-        $userLocationDistribution = $this->userLocationDistribution();
+        $userLocationDistribution = $this->userLocationDistribution()->toArray();
 //        dd($userLocationDistribution->toArray());
 
         //用户身份
-        $userParenthoodDistribution = $this->userParenthoodDistribution();
+        $userParenthoodDistribution = $this->userParenthoodDistribution()->toArray();
 //        dd($userParenthoodDistribution->toArray());
 
         //儿童数量分布
-        $kidsCountDistribution = $this->kidsCountDistribution();
-//        dd($kidsCountDistribution->toArray());
+        $kidsCountDistribution = $this->kidsCountDistribution()->toArray();
+//        dd($kidsCountDistribution);
 
         //儿童年龄分布
-        $kidsAgeDistribution = $this->kidsAgeDistribution();
-//        dd($kidsAgeDistribution->toArray());
+        $kidsAgeDistribution = $this->kidsAgeDistribution()->toArray();
+//        dd($kidsAgeDistribution);
         return view('admin.statistics.index', compact(
             'registrationStat',
             'subscribers',
+            'activeUserStat',
+            'subscriberStat',
             'deltaIncomeStat',
             'orderStat',
-            'incomeStat'
+            'incomeStat',
+            'usersCountStat',
+            'userLocationDistribution',
+            'userParenthoodDistribution',
+            'kidsCountDistribution',
+            'kidsAgeDistribution'
         ));
     }
 

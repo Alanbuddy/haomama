@@ -104,49 +104,49 @@
                     %span.span-space =round($registrationStat['compareMonth']*100).'%'
                 .amount-items
                   %p.amount-caption.font-color3.f16 活跃用户
-                  %p.amount-nums 6000
+                  %p.amount-nums =$activeUserStat['activeUsersOfLastDay']
                   .font-color3.f14
                     %span 日
                     %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
+                    %span.span-space =round($activeUserStat['compareDay']*100).'%'
                   .font-color3.f14
                     %span 周
                     %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
+                    %span.span-space =round($activeUserStat['compareWeek']*100).'%'
                   .font-color3.f14
                     %span 月
                     %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
+                    %span.span-space =round($activeUserStat['compareMonth']*100).'%'
                 .amount-items#goverment
                   %p.amount-caption.font-color3.f16 关注用户
-                  %p.amount-nums 4000
+                  %p.amount-nums=$subscriberStat['subscribersOfLastDay']
                   .font-color3.f14
                     %span 日
                     %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
+                    %span.span-space=round($subscriberStat['compareDay']*100).'%'
                   .font-color3.f14
                     %span 周
                     %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
+                    %span.span-space=round($subscriberStat['compareWeek']*100).'%'
                   .font-color3.f14
                     %span 月
                     %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
+                    %span.span-space=round($subscriberStat['compareMonth']*100).'%'
                 .amount-items
                   %p.amount-caption.font-color3.f16 总用户
-                  %p.amount-nums 10000
+                  %p.amount-nums=$usersCountStat['usersCount']
                   .font-color3.f14
                     %span 日
                     %img{src: "icon/admin/arrow_down.png"}
-                    %span.span-space 13.1%
+                    %span.span-space=round($usersCountStat['compareDay']*100).'%'
                   .font-color3.f14
                     %span 周
                     %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
+                    %span.span-space =round($usersCountStat['compareWeek']*100).'%'
                   .font-color3.f14
                     %span 月
                     %img{src: "icon/admin/arrow_up.png"}
-                    %span.span-space 13.1%
+                    %span.span-space =round($usersCountStat['compareMonth']*100).'%'
 @endsection
 
 @section('script')

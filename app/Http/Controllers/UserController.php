@@ -511,13 +511,14 @@ class UserController extends Controller
             ->addSelect(DB::raw('(select count("id") from users where created_at < date and wx is not null) as total'))
             ->groupBy('created_at')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(10);
 
         $registration = $this->registrationPerSpan('%Y%u')->limit(12)->get();
         $activeUser = $this->activeUsersPerSpan('%Y%u')->limit(12)->get();
         $subscribe = $this->subscribersPerSpan('%Y%u')->limit(12)->get();
         $usersCount = $this->usersCountPerSpan('%Y%u')->limit(12)->get();
 //        dd($items->toArray(), $usersCount);
+        $items->withPath(route('statistics.user'));
         return view('admin.statistics.client',
             compact('items', 'registration', 'activeUser', 'subscribe', 'usersCount'));
     }
