@@ -1,6 +1,7 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/search_time.css') }}">
+<link rel="stylesheet" href="css/plugin/jquery-ui.css">
 
 @endsection
 
@@ -66,6 +67,7 @@
 
 @section('script')
 <script src="js/plugin/jquery-ui.min.js"></script>
+<script src="js/plugin/datepicker-zh-TW.js"></script>
 <script src= "js/plugin/highcharts.js"></script>
 <script src= "js/client_statistics.js"></script>
 

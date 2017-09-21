@@ -60,20 +60,6 @@
                   %span.f18.sidebar-title 统计数据
       .content-area
         .main-top.direction
-          // - if(isset($showSpanForm))
-          //   .search-statistics.f14.font-color3
-          //     %form.form-inline
-          //       .form-group.form-time-statistics
-          //         %span.input-caption-statistics　查询时段:
-          //         %input.input-area-statistics.form-control#datepicker-1{:type => "text"}
-          //         %span.input-caption-statistics 至
-          //         %input.input-area-statistics.form-control#datepicker-2{:type => "text"}
-          //         .btn#course-search-btn.search-btn-statistics{:type => "button"} 查询
-          //         %select.quick-choice.form-control.font-color3
-          //           %option 最近七天
-          //           %option 最近十五天
-          //           %option 最近三十天
-          // - else
           @yield('search-input')
           - if(isset($showSpanForm))
             .search-statistics.f14.font-color3

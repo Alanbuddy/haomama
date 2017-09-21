@@ -575,4 +575,5 @@ a:hover {
 .quick-choice {
   float: right;
   width: 14.85%;
+  margin-right: 10px;
 }
