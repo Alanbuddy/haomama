@@ -34,21 +34,22 @@
                     %th 分享人数
                     %th 收藏人数
                 %tbody.font-color3
+                -foreach($items as $item)
                   %tr
-                    %td 课程名很长
-                    %td 2017/03/23
-                    %td 32145
-                    %td 3012
-                    %td 4321
-                    %td 3218
-                    %td 321
-                    %td 2346
+                    %td=$item['name']
+                    %td=$item['updated_at']
+                    %td=$item['total_fee']
+                    %td=$item['total_fee']
+                    %td=$item['users_count']
+                    %td=$item['orders_count']
+                    %td=$item['share_records_count']
+                    %td=$item['followers_count']
 
             .select-page.clearfix 
               // %span.download.f14.fl 下载表格
-              // %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
-              // %span.choice-page
-              //   != $items->links()
+              %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+              %span.choice-page
+              != $items->links()
 @endsection
 
 @section('script')

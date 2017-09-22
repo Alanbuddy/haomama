@@ -45,12 +45,13 @@
                       %th 付费人数
                       %th 累计收入(元)
                   %tbody.font-color3
+                  -foreach($items as $item)
                     %tr
-                      %td 2017/06/12
-                      %td 2110
-                      %td 3650
-                      %td 56770
-                      %td 98759
+                      %td=$item->date
+                      %td=$item->total_fee
+                      %td=$item->thorough_orders_count
+                      %td=$item->thorough_orders_count
+                      %td=$item->thorough_total_fee
 
               .select-page.clearfix
                 // %span.download.f14.fl 下载表格
