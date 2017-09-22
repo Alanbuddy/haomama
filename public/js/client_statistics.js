@@ -11,13 +11,15 @@ $(document).ready(function(){
 		title: {
 		  text: null
 		},
-		xAxis: { 
-		  title: {
-		    text: '周数'
-		  }
+		xAxis: {
+			type: 'datetime',
+			tickInterval: 24 * 3600 * 1000,
+      labels: {
+      	format: '{value: %Y-%m-%d}'
+      }
 		},
 		yAxis: {
-		  title: {text: '儿童数量'},
+		  title: {text: ''},
 		  // max: 10
 		},
 		credits: {
@@ -26,10 +28,19 @@ $(document).ready(function(){
 		legend: {
 		  enabled: false
 		},
+		tooltip: {
+      valueSuffix: '人',
+      pointFormat: '{series.name}: <b>{point.y}</b>',
+      dateTimeLabelFormats: {
+        day: '%Y-%m-%d'
+      }
+	  },
 		series: [
 		  {
+		  	name: '数量',
 		    data: [1, 5, 7, 9, 33, 54, 56,34],
-		    pointStart: 1
+		    pointStart: Date.UTC(2017, 3, 1),  //查询时间
+		    pointInterval: 24 * 3600 * 1000
 		  }
 		]
 	});
@@ -38,13 +49,15 @@ $(document).ready(function(){
 		title: {
 		  text: null
 		},
-		xAxis: { 
-		  title: {
-		    text: '周数'
-		  }
+		xAxis: {
+			type: 'datetime',
+			tickInterval: 24 * 3600 * 1000,
+      labels: {
+      	format: '{value: %Y-%m-%d}'
+      }
 		},
 		yAxis: {
-		  title: {text: '儿童数量'},
+		  title: {text: ''},
 		  // max: 10
 		},
 		credits: {
@@ -53,10 +66,19 @@ $(document).ready(function(){
 		legend: {
 		  enabled: false
 		},
+		tooltip: {
+      valueSuffix: '人',
+      pointFormat: '{series.name}: <b>{point.y}</b>',
+      dateTimeLabelFormats: {
+        day: '%Y-%m-%d'
+      }
+	  },
 		series: [
 		  {
+		  	name: '数量',
 		    data: [1, 5, 7, 9, 33, 54, 56,34],
-		    pointStart: 1
+		    pointStart: Date.UTC(2017, 3, 1),  //查询时间
+		    pointInterval: 24 * 3600 * 1000
 		  }
 		]
 	});
@@ -65,13 +87,15 @@ $(document).ready(function(){
 		title: {
 		  text: null
 		},
-		xAxis: { 
-		  title: {
-		    text: '周数'
-		  }
+		xAxis: {
+			type: 'datetime',
+			tickInterval: 24 * 3600 * 1000,
+      labels: {
+      	format: '{value: %Y-%m-%d}'
+      }
 		},
 		yAxis: {
-		  title: {text: '儿童数量'},
+		  title: {text: ''},
 		  // max: 10
 		},
 		credits: {
@@ -80,10 +104,19 @@ $(document).ready(function(){
 		legend: {
 		  enabled: false
 		},
+		tooltip: {
+      valueSuffix: '人',
+      pointFormat: '{series.name}: <b>{point.y}</b>',
+      dateTimeLabelFormats: {
+        day: '%Y-%m-%d'
+      }
+	  },
 		series: [
 		  {
+		  	name: '数量',
 		    data: [1, 5, 7, 9, 33, 54, 56,34],
-		    pointStart: 1
+		    pointStart: Date.UTC(2017, 3, 1),  //查询时间
+		    pointInterval: 24 * 3600 * 1000
 		  }
 		]
 	});
@@ -92,13 +125,15 @@ $(document).ready(function(){
 		title: {
 		  text: null
 		},
-		xAxis: { 
-		  title: {
-		    text: '周数'
-		  }
+		xAxis: {
+			type: 'datetime',
+			tickInterval: 24 * 3600 * 1000,
+      labels: {
+      	format: '{value: %Y-%m-%d}'
+      }
 		},
 		yAxis: {
-		  title: {text: '儿童数量'},
+		  title: {text: ''},
 		  // max: 10
 		},
 		credits: {
@@ -107,13 +142,38 @@ $(document).ready(function(){
 		legend: {
 		  enabled: false
 		},
+		tooltip: {
+      valueSuffix: '人',
+      pointFormat: '{series.name}: <b>{point.y}</b>',
+      dateTimeLabelFormats: {
+        day: '%Y-%m-%d'
+      }
+	  },
 		series: [
 		  {
-		    data: [1, 25, 7, 9, 33, 54, 56,34],
-		    pointStart: 1
+		  	name: '数量',
+		    data: [1, 5, 7, 9, 33, 54, 56,34],
+		    pointStart: Date.UTC(2017, 3, 1),  //查询时间
+		    pointInterval: 24 * 3600 * 1000
 		  }
 		]
 	});
 
+
+	$( "#datepicker-1" ).datepicker({
+    changeMonth: true,
+    changeYear: true,
+    yearRange : '-20:+10'
+  });
+	$( "#datepicker-1" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
+	$( "#datepicker-1" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
+	$( "#datepicker-2" ).datepicker({
+    changeMonth: true,
+    changeYear: true,
+    yearRange : '-20:+10'
+  });
+	$( "#datepicker-2" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
+	$( "#datepicker-2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
 });

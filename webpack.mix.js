@@ -60,6 +60,7 @@ mix.js('resources/assets/js/app.coffee', 'public/js')
 .sass('resources/assets/sass/admin_client_show.scss', 'public/css')
 .sass('resources/assets/sass/admin_imgset_index.scss', 'public/css')
 .sass('resources/assets/sass/admin_statistics_index.scss', 'public/css')
+.sass('resources/assets/sass/search_time.scss', 'public/css')
 
 .js('resources/assets/js/layout.coffee', 'public/js')
 .js('resources/assets/js/register.coffee', 'public/js')

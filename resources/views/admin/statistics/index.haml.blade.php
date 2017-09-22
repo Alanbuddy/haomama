@@ -35,7 +35,7 @@
                     %span 周
                     %img{src: "icon/admin/arrow_up.png"}
                     %span.span-space=round($deltaIncomeStat['compareWeek']*100).'%'
-                  .font-color3.f14
+                  .font-color3.f14.mc
                     %span 月
                     %img{src: "icon/admin/arrow_up.png"}
                     %span.span-space=round($deltaIncomeStat['compareMonth']*100).'%'

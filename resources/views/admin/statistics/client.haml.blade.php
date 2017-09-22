@@ -1,6 +1,7 @@
 @extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/admin_statistics_index.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/search_time.css') }}">
+<link rel="stylesheet" href="css/plugin/jquery-ui.css">
 
 @endsection
 
@@ -28,12 +29,16 @@
               %span.f16.font-color1 总用户
             .figure-div{style: "display: block"}
               #new-statistics
+              %span.new-statistics{style: "display: none;"}
             .figure-div
               #active-statistics
+              %span.active-statistics{style: "display: none;"}
             .figure-div
               #focus-statistics
+              %span.focus-statistics{style: "display: none;"}
             .figure-div
               #all-statistics
+              %span.all-statistics{style: "display: none;"}
             .table-box
               %table.table.table-hover.table-height.f14
                 %thead.th-bg.font-color2
@@ -44,24 +49,25 @@
                     %th 关注用户
                     %th 总用户
                 %tbody.font-color3
-                -foreach($items as $item)
-                  %tr
-                    %td=$item->date
-                    %td=$item->registration
-                    %td=$item->activeUser
-                    %td=$item->subscribe
-                    %td=$item->total
+                  -foreach($items as $item)
+                    %tr
+                      %td=$item->date
+                      %td=$item->registration
+                      %td=$item->activeUser
+                      %td=$item->subscribe
+                      %td=$item->total
 
-            .select-page.clearfix 
+            .select-page
               // %span.download.f14.fl 下载表格
               %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
               %span.choice-page
-              != $items->links()
+                != $items->links()
 
 @endsection
 
 @section('script')
 <script src="js/plugin/jquery-ui.min.js"></script>
+<script src="js/plugin/datepicker-zh-TW.js"></script>
 <script src= "js/plugin/highcharts.js"></script>
 <script src= "js/client_statistics.js"></script>
 
