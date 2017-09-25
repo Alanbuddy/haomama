@@ -455,12 +455,10 @@ class UserController extends Controller
     public function order(Request $request, User $user)
     {
         $items = $user->orders()
-            ->select('*')
-            ->addSelect(DB::raw('orders.status as order_status'))
             ->where('orders.status', 'paid')
-            ->join('courses', 'courses.id', 'orders.product_id')
-            ->whereNull('courses.deleted_at')
-            ->with('course')
+            ->with(['course' => function ($query) {
+                $query->whereNull('deleted_at');
+            }])
             ->paginate(10);
         $items->withPath(route('admin.user.order', $user));
         return view('admin.client.purchase', compact('user', 'items'));

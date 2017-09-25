@@ -48,7 +48,7 @@
                           %td= $item->course->category ? $item->course->category->name : "无"
                           %td= $item->created_at
                           %td= $item->wx_total_fee/100
-                          - if($item->order_status == 'paid')
+                          - if($item->status == 'paid')
                             %td.font-color-brown 已付款
                           - else
                             %td 未付款
