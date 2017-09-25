@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    
+
 .main-content.bg2
   .table-div
     .tabbable
@@ -70,5 +70,9 @@
 <script src="js/plugin/datepicker-zh-TW.js"></script>
 <script src= "js/plugin/highcharts.js"></script>
 <script src= "js/client_statistics.js"></script>
-
+%script
+  registration=JSON.parse('{!!  json_encode($registration)!!}');
+  activeUser=JSON.parse('{!!  json_encode($activeUser)!!}');
+  subscribe=JSON.parse('{!!  json_encode($subscribe)!!}');
+  usersCount=JSON.parse('{!!  json_encode($usersCount)!!}');
 @endsection

@@ -35,19 +35,21 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        $user = auth()->user();
-        Log::error('Exception Occured' . $exception->getMessage());
-        //Expected response code 250 but got code "553", with message "553 Mail from must equal authorized user"
-        if (!$exception instanceof NotFoundHttpException) {
-            try {
-                Mail::send('errors.email', ['user' => $user, 'e' => $exception], function ($m) use ($exception) {
-                    $m->to(env('REPORT_EMAIL'), 'wkk')->subject('ERROR!' . $exception->getMessage());
-                });
-            } catch (\Exception $e) {
-                Log::error($e->getMessage());
+        parent::report($exception);
+        if ($this->shouldReport($exception)) {
+            $user = auth()->user();
+            Log::error('Exception Occured' . $exception->getMessage());
+            //Expected response code 250 but got code "553", with message "553 Mail from must equal authorized user"
+            if (!$exception instanceof NotFoundHttpException) {
+                try {
+                    Mail::send('errors.email', ['user' => $user, 'e' => $exception], function ($m) use ($exception) {
+                        $m->to(env('REPORT_EMAIL'), 'wkk')->subject('ERROR!' . $exception->getMessage());
+                    });
+                } catch (\Exception $e) {
+                    Log::error($e->getMessage());
+                }
             }
         }
-        parent::report($exception);
     }
 
     /**
