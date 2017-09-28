@@ -10356,7 +10356,13 @@ return jQuery;
       $(this).closest("li.user_li").removeClass("active-li");
     }
     if (/lessons/.test(currenturl)) {
-      return $(this).closest("li.lesson-li").addClass("active-li");
+      $(this).closest("li.lesson-li").addClass("active-li");
+    }
+    if (/users/.test(currenturl) && /statistics/.test(currenturl)) {
+      $(this).closest("li.user_li").removeClass("active-li");
+    }
+    if (/courses/.test(currenturl) && /statistics/.test(currenturl)) {
+      return $(this).closest("li.course_li").removeClass("active-li");
     }
   });
   $("#exit").click(function() {

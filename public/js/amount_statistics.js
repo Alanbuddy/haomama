@@ -175,4 +175,10 @@ $(document).ready(function(){
 	$( "#datepicker-2" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
 	$( "#datepicker-2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
+	$(".search-btn-statistics").click(function(){
+		var left = $("#datepicker-1").val();
+		var right = $("#datepicker-2").val();
+		var current_url = location.href;
+		location.href = current_url + "?left=" + left + "&right=" + right;
+	});
 });

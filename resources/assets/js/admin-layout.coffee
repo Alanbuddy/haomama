@@ -19,6 +19,12 @@ $ ->
     if(/lessons/.test(currenturl))
       $(this).closest("li.lesson-li").addClass("active-li")
 
+    if(/users/.test(currenturl) && /statistics/.test(currenturl))
+      $(this).closest("li.user_li").removeClass("active-li")
+
+    if(/courses/.test(currenturl) && /statistics/.test(currenturl))
+      $(this).closest("li.course_li").removeClass("active-li")
+
 
   # 退出登录
   $("#exit").click ->

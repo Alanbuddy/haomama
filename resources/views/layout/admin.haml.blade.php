@@ -34,7 +34,7 @@
         .main
           .sidebar
             %ul
-              %li
+              %li.course_li
                 %a{href: route('courses.index')}
                   %img.mini-icon{src: "icon/admin/1class.png"}
                   %span.f18.sidebar-title 课程管理

@@ -229,6 +229,9 @@ $(document).ready(function(){
     if(time > 60){
       return false;
     }
+    if(!$.isNumeric(time)){
+      return false;
+    }
   }
 
   $(document).on('click', '#finish-btn', function(){
@@ -241,6 +244,7 @@ $(document).ready(function(){
       for(var i=0;i<time.length;i++){
         valid_time = check_time(time[i]);
         if(valid_time == false){
+          showMsg("输入时间格式不正确", "center");
           break;
         }
       }

@@ -22,65 +22,64 @@
       .tab-content.bg3
         #tab3.tab-pane.active
           .desc-div
-            .desc-div
-              .title-div
-                %span.active.f16.font-color1 新增收入
-                %span.f16.font-color1 报名人数
-                %span.f16.font-color1 付费人数
-                %span.f16.font-color1 累计总收入
-              .figure-div{style: "display: block"}
-                #new-statistics.new-comein
-              .figure-div
-                #active-statistics.register
-              .figure-div
-                #focus-statistics.pay-number
-              .figure-div
-                #all-statistics.amount
-              .table-box
-                %table.table.table-hover.table-height.f14
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 日期
-                      %th 新增收入(元)
-                      %th 报名人数
-                      %th 付费人数
-                      %th 累计收入(元)
-                  %tbody.font-color3
-                    %tr
-                      %td 2017/06/12
-                      %td 2110
-                      %td 3650
-                      %td 56770
-                      %td 98759
+            // .title-div
+            //   %span.active.f16.font-color1 新增收入
+            //   %span.f16.font-color1 报名人数
+            //   %span.f16.font-color1 付费人数
+            //   %span.f16.font-color1 累计总收入
+            // .figure-div{style: "display: block"}
+            //   #new-statistics.new-comein
+            // .figure-div
+            //   #active-statistics.register
+            // .figure-div
+            //   #focus-statistics.pay-number
+            // .figure-div
+            //   #all-statistics.amount
+            .table-box
+              %table.table.table-hover.table-height.f14
+                %thead.th-bg.font-color2
+                  %tr
+                    %th 日期
+                    %th 新增收入(元)
+                    %th 报名人数
+                    %th 付费人数
+                    %th 累计收入(元)
+                %tbody.font-color3
+                  %tr
+                    %td 2017/06/12
+                    %td 2110
+                    %td 3650
+                    %td 56770
+                    %td 98759
 
-              .select-page.clearfix
-                // %span.download.f14.fl 下载表格
-                // %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
-                // %span.choice-page
-                //   != $items->links()
-              
-              .table-box
-                %table.table.table-hover.table-height.f14
-                  %thead.th-bg.font-color2
-                    %tr
-                      %th 操作时间
-                      %th 微信ID
-                      %th 微信名
-                      %th 课程名称
-                      %th 金额(元)
-                  %tbody.font-color3
-                    %tr
-                      %td 2017/06/12
-                      %td afdsgfd
-                      %td 喵喵
-                      %td 课程的名字很长
-                      %td +80或者-20
+            .select-page.clearfix
+              // %span.download.f14.fl 下载表格
+              // %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+              // %span.choice-page
+              //   != $items->links()
+            
+            // .table-box
+            //   %table.table.table-hover.table-height.f14
+            //     %thead.th-bg.font-color2
+            //       %tr
+            //         %th 操作时间
+            //         %th 微信ID
+            //         %th 微信名
+            //         %th 课程名称
+            //         %th 金额(元)
+            //     %tbody.font-color3
+            //       %tr
+            //         %td 2017/06/12
+            //         %td afdsgfd
+            //         %td 喵喵
+            //         %td 课程的名字很长
+            //         %td +80或者-20
 
-              .select-page.clearfix 
-                // %span.download.f14.fl 下载表格
-                // %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
-                // %span.choice-page
-                //   != $items->links()
+            // .select-page.clearfix 
+            //   %span.download.f14.fl 下载表格
+            //   %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+            //   %span.choice-page
+            //     != $items->links()
 @endsection
 
 @section('script')

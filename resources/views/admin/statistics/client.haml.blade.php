@@ -22,23 +22,23 @@
       .tab-content.bg3
         #tab2.tab-pane.active
           .desc-div
-            .title-div
-              %span.active.f16.font-color1 新用户
-              %span.f16.font-color1 活跃用户
-              %span.f16.font-color1 关注用户
-              %span.f16.font-color1 总用户
-            .figure-div{style: "display: block"}
-              #new-statistics
-              %span.new-statistics{style: "display: none;"}
-            .figure-div
-              #active-statistics
-              %span.active-statistics{style: "display: none;"}
-            .figure-div
-              #focus-statistics
-              %span.focus-statistics{style: "display: none;"}
-            .figure-div
-              #all-statistics
-              %span.all-statistics{style: "display: none;"}
+            // .title-div
+            //   %span.active.f16.font-color1 新用户
+            //   %span.f16.font-color1 活跃用户
+            //   %span.f16.font-color1 关注用户
+            //   %span.f16.font-color1 总用户
+            // .figure-div{style: "display: block"}
+            //   #new-statistics
+            //   %span.new-statistics{style: "display: none;"}
+            // .figure-div
+            //   #active-statistics
+            //   %span.active-statistics{style: "display: none;"}
+            // .figure-div
+            //   #focus-statistics
+            //   %span.focus-statistics{style: "display: none;"}
+            // .figure-div
+            //   #all-statistics
+            //   %span.all-statistics{style: "display: none;"}
             .table-box
               %table.table.table-hover.table-height.f14
                 %thead.th-bg.font-color2
