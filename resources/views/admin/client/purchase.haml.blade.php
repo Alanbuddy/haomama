@@ -47,7 +47,7 @@
                           %td= $item->course->type == "online" ? "线上" : "线下"
                           %td= $item->course->category ? $item->course->category->name : "无"
                           %td= $item->created_at
-                          %td= $item->wx_total_fee
+                          %td= $item->wx_total_fee/100
                           - if($item->status == 'paid')
                             %td.font-color-brown 已付款
                           - else

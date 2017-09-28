@@ -456,9 +456,9 @@ class UserController extends Controller
     {
         $items = $user->orders()
             ->where('orders.status', 'paid')
-            ->join('courses', 'courses.id', 'orders.product_id')
-            ->whereNull('courses.deleted_at')
-            ->with('course')
+            ->with(['course' => function ($query) {
+                $query->whereNull('deleted_at');
+            }])
             ->paginate(10);
         $items->withPath(route('admin.user.order', $user));
         return view('admin.client.purchase', compact('user', 'items'));
@@ -503,7 +503,19 @@ class UserController extends Controller
 
     public function statistics(Request $request)
     {
-        $items = Statistic::select('created_at')
+        $left = $request->get('left');
+        $right = $request->get('right', 'now');
+        $query = Statistic::where('id', '>', 0);
+        if (isset($left)) {
+            $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
+            $query->where('created_at', '>', $left);
+        }
+        if ($right != 'now') {
+            $right = strtotime($right) ? $right : date('Y-m-d H:i:s', strtotime("today -" . $right . " days"));
+            $query->where('created_at', '<', $right);
+        }
+        $items = $query->select('created_at')
+//        $items = Statistic::select('created_at')
             ->addSelect(DB::raw('created_at as date'))
             ->addSelect(DB::raw('(select data from statistics where created_at = date and type=\'registration\') as registration'))
             ->addSelect(DB::raw('(select data from statistics where created_at = date and type=\'activeUser\') as activeUser'))

@@ -22,34 +22,39 @@
       .tab-content.bg3
         #tab4.tab-pane.active
           .desc-div
-            .table-box
-              %table.table.table-hover.table-height.f14
-                %thead.th-bg.font-color2
-                  %tr
-                    %th 课程名
-                    %th 上线时间
-                    %th 累计收入
-                    %th 付费收入
-                    %th 报名人数
-                    %th 付费人数
-                    %th 分享人数
-                    %th 收藏人数
-                %tbody.font-color3
-                  %tr
-                    %td 课程名很长
-                    %td 2017/03/23
-                    %td 32145
-                    %td 3012
-                    %td 4321
-                    %td 3218
-                    %td 321
-                    %td 2346
+            - if(count($items) == 0) 
+              .undiscover.f14
+                %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+            - else
+              .table-box
+                %table.table.table-hover.table-height.f14
+                  %thead.th-bg.font-color2
+                    %tr
+                      %th 课程名
+                      %th 上线时间
+                      %th 累计收入
+                      %th 付费收入
+                      %th 报名人数
+                      %th 付费人数
+                      %th 分享人数
+                      %th 收藏人数
+                  %tbody.font-color3
+                    -foreach($items as $item)
+                      %tr
+                        %td=$item['name']
+                        %td=$item['updated_at']
+                        %td=$item['total_fee']
+                        %td=$item['total_fee']
+                        %td=$item['users_count']
+                        %td=$item['orders_count']
+                        %td=$item['share_records_count']
+                        %td=$item['followers_count']
 
-            .select-page.clearfix 
-              // %span.download.f14.fl 下载表格
-              // %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
-              // %span.choice-page
-              //   != $items->links()
+              .select-page.clearfix 
+                // %span.download.f14.fl 下载表格
+                %span.totalitems= "共{$items->lastPage()}页，总计{$items->total()}条"
+                %span.choice-page
+                != $items->links()
 @endsection
 
 @section('script')

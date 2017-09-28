@@ -133,7 +133,7 @@ class Stat extends Command
     {
         $date = date('Y-m-d', strtotime('today -1 day'));
         $count = Behavior:: where('type', 'login')
-            ->where('created_at', '>', $date)
+            ->where('created_at', '>=', $date)
             ->where('created_at', '<', date('Y-m-d'))
             ->count();
         Statistic::updateOrCreate([
