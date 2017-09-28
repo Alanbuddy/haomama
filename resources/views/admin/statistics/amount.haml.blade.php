@@ -2,7 +2,9 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/search_time.css') }}">
 <link rel="stylesheet" href="css/plugin/jquery-ui.css">
-
+:javascript
+  window.amount_statistics = "#{route('orders.statistics')}"
+  
 @endsection
 
 @section('content')

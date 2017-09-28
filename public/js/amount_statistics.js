@@ -178,7 +178,6 @@ $(document).ready(function(){
 	$(".search-btn-statistics").click(function(){
 		var left = $("#datepicker-1").val();
 		var right = $("#datepicker-2").val();
-		var current_url = location.href;
-		location.href = current_url + "?left=" + left + "&right=" + right;
+		location.href = window.amount_statistics + "?left=" + left + "&right=" + right;
 	});
 });
