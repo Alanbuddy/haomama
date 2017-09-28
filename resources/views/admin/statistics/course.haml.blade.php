@@ -42,7 +42,7 @@
                     -foreach($items as $item)
                       %tr
                         %td=$item['name']
-                        %td=$item['updated_at']
+                        %td=$item['course_created_at']
                         %td=$item['total_fee']
                         %td=$item['total_fee']
                         %td=$item['users_count']

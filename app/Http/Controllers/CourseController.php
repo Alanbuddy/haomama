@@ -702,34 +702,39 @@ class CourseController extends Controller
     {
         $left = $request->get('left');
         $right = $request->get('right', 'now');
-        $items = Search::coursesStatistics()
+        if (isset($left)) {
+            $left = is_numeric($left)
+                ? $left = date('Y-m-d H:i:s', strtotime("today -" . $left . " days"))
+                : date('Y-m-d H:i:s', strtotime($left));
+        }
+        if ($right != 'now') {
+            $right = is_numeric($right)
+                ? date('Y-m-d H:i:s', strtotime("today +" . $right . " days"))
+                : date('Y-m-d H:i:s', strtotime($right));
+        }
+        $query = Search::coursesStatistics()
 //            ->where('courses.created_at', '>'
 //                , DB::raw('date_sub(`courses`.`created_at`, INTERVAL ' . $left . ' DAY)'))
 
             ->withCount(['shareRecords' => function ($query) use ($right, $left) {
                 if (isset($left)) {
-                    $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
                     $query->where('behaviors.created_at', '>', $left);
                 }
                 if ($right != 'now') {
-                    $right = strtotime($right) ? $right : date('Y-m-d H:i:s', strtotime("today -" . $right . " days"));
                     $query->where('behaviors.created_at', '<', $right);
                 }
             }])
             ->withCount(['followers' => function ($query) use ($right, $left) {
                 if (isset($left)) {
-                    $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
                     $query->where('course_user.created_at', '>', $left);
                 }
                 if ($right != 'now') {
-                    $right = strtotime($right) ? $right : date('Y-m-d H:i:s', strtotime("today +" . $right . " days"));
                     $query->where('course_user.created_at', '<', $right);
                 }
             }])
             ->withCount(['orders' => function ($query) use ($right, $left) {
                 $query->where('orders.status', 'paid');
                 if (isset($left)) {
-                    $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
                     $query->where('orders.created_at', '>', $left);
                 }
                 if ($right != 'now' && strtotime($right)) {
@@ -740,10 +745,16 @@ class CourseController extends Controller
             ->leftJoin('orders', 'courses.id', '=', 'orders.product_id')
             ->addSelect(DB::raw('sum(round(wx_total_fee/100,2)) as total_fee'))
             ->addSelect(DB::raw('count(*) as thorough_orders_count'))
+            ->addSelect(DB::raw('courses.created_at as course_created_at'))
             ->groupBy('courses.id')
-            ->where('orders.status', 'paid')
-//            ->toSql();
-            ->paginate(10);
+            ->where('orders.status', 'paid');
+        if (isset($left)) {
+            $query->where('courses.created_at', '>', $left);
+        }
+        if ($right != 'now' && strtotime($right)) {
+            $query->where('courses.created_at', '<', $right);
+        }
+        $items = $query->paginate(10);
 //        dd($items[0]);
         $items->withPath(route('courses.statistics'));
         return view('admin.statistics.course', compact('items'));
