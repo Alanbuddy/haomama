@@ -248,13 +248,23 @@ class OrderController extends Controller
     {
         $left = $request->get('left');
         $right = $request->get('right', 'now');
+        $left = $request->get('left');
+        $right = $request->get('right', 'now');
+        if (isset($left)) {
+            $left = is_numeric($left)
+                ? $left = date('Y-m-d H:i:s', strtotime("today -" . $left . " days"))
+                : date('Y-m-d H:i:s', strtotime($left));
+        }
+        if ($right != 'now') {
+            $right = is_numeric($right)
+                ? date('Y-m-d H:i:s', strtotime("today +" . $right . " days"))
+                : date('Y-m-d H:i:s', strtotime($right));
+        }
         $query = Order::where('status', 'paid');
         if (isset($left)) {
-            $left = strtotime($left) ? $left : date('Y-m-d H:i:s', strtotime("today -" . $left . " days"));
             $query->where('orders.created_at', '>', $left);
         }
         if ($right != 'now') {
-            $right = strtotime($right) ? $right : date('Y-m-d H:i:s', strtotime("today -" . $right . " days"));
             $query->where('orders.created_at', '<', $right);
         }
         $query->select(DB::raw('left(created_at,10) as date'))
