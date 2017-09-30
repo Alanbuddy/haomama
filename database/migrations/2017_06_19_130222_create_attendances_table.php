@@ -19,12 +19,12 @@ class CreateAttendancesTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->integer('lesson_id')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('course_id')->references('id')->on('courses')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('lesson_id')->references('id')->on('lessons')
-                ->onUpdate('cascade')->onDelete('cascade');
+//            $table->foreign('user_id')->references('id')->on('users')
+//                ->onUpdate('cascade')->onDelete('cascade');
+//            $table->foreign('course_id')->references('id')->on('courses')
+//                ->onUpdate('cascade')->onDelete('cascade');
+//            $table->foreign('lesson_id')->references('id')->on('lessons')
+//                ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
