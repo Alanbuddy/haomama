@@ -247,15 +247,13 @@ class OrderController extends Controller
     public function statistics(Request $request)
     {
         $left = $request->get('left');
-        $right = $request->get('right', 'now');
-        $left = $request->get('left');
-        $right = $request->get('right', 'now');
+        $right = $request->get('right');
         if (isset($left)) {
             $left = is_numeric($left)
                 ? $left = date('Y-m-d H:i:s', strtotime("today -" . $left . " days"))
                 : date('Y-m-d H:i:s', strtotime($left));
         }
-        if ($right != 'now') {
+        if ($right) {
             $right = is_numeric($right)
                 ? date('Y-m-d H:i:s', strtotime("today +" . $right . " days"))
                 : date('Y-m-d H:i:s', strtotime($right));
@@ -264,7 +262,7 @@ class OrderController extends Controller
         if (isset($left)) {
             $query->where('orders.created_at', '>', $left);
         }
-        if ($right != 'now') {
+        if ($right) {
             $query->where('orders.created_at', '<', $right);
         }
         $query->select(DB::raw('left(created_at,10) as date'))
@@ -275,7 +273,10 @@ class OrderController extends Controller
             ->orderBy(DB::raw('left(created_at,10)'), 'desc');
 
         $items = $query->paginate(10);
-        $items->withPath(route('orders.statistics'));
+        $items->withPath(route('orders.statistics') . '?' . (http_build_query([
+                'left' => $request->get('left'),
+                'right' => $request->get('right')
+            ])));
         return view('admin.statistics.amount', compact('items'));
     }
 }
