@@ -10,8 +10,7 @@ class JobController extends Controller
 {
     public function index()
     {
-        $items = DB::select('select * from failed_jobs')
-            ->get();
+        $items = DB::table('failed_jobs')->get();
         dd($items);
     }
 }
