@@ -41,6 +41,7 @@ Route::group([
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::any('/profile', 'AdminController@profile')->name('admin.profile');
     Route::get('/phpinfo', 'AdminController@info')->name('phpinfo');
+    Route::get('/jobs', 'JobController@index')->name('jobs.index');
 });
 
 
