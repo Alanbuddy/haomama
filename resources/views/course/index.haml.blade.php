@@ -80,7 +80,7 @@
                   .course-icon-div
                     - if($data[$i]['hasRecommendedCourse']&&$itemOrderByUserCount['id']==$data[$i]['recommendedCourse']->first()->id)
                       %img.course-recommend{src: "icon/recommend.png"}
-                    %img.course-icon{src: $itemOrderByUserCount['cover'] ? $itemOrderByUserCount['cover'] : "icon/example.png"}
+                    %img.course-icon{src: $itemOrderByUserCount['cover'] ? strpos($itemOrderByUserCount['cover'], '/') == 0 ? substr($itemOrderByUserCount['cover'],1) : $itemOrderByUserCount['cover'] : "icon/example.png"}
                   .word-div
                     .course-row-div.clearfix
                       %span.category-class.f12= $itemOrderByUserCount['category']['name']
@@ -112,7 +112,7 @@
                   .course-icon-div
                     - if($data[$i]['hasRecommendedCourse']&&$itemOrderByCommentRating['id']==$data[$i]['recommendedCourse']->first()->id)
                       %img.course-recommend{src: "icon/recommend.png"}
-                    %img.course-icon{src: $itemOrderByCommentRating['cover'] ? $itemOrderByCommentRating['cover'] : "icon/example.png"}
+                    %img.course-icon{src: $itemOrderByCommentRating['cover'] ? strpos($itemOrderByCommentRating['cover'], '/') == 0 ? substr($itemOrderByCommentRating['cover'],1) : $itemOrderByCommentRating['cover'] : "icon/example.png"}
                   .word-div
                     .course-row-div.clearfix
                       %span.category-class.f12= $itemOrderByCommentRating['category']['name']
