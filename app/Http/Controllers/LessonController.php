@@ -100,8 +100,8 @@ class LessonController extends Controller
     public function storeAttachments(Request $request, Lesson $lesson)
     {
         $this->validate($request, [
-            'pictures.*.time' => 'digits',
-            'pictures.*.file' => 'digits'
+            'pictures.*.time' => 'numeric',
+            'pictures.*.file' => 'numeric'
         ]);
         $video = Video::find($request->video_id);
         if ($request->has('pictures')) {
