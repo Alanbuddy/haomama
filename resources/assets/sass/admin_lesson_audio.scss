@@ -147,6 +147,12 @@
   top: -20px;
   left: 0;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.info_img:hover {
+  text-overflow: inherit;
+  overflow: visible;
 }
 .state_img {
   position: absolute;
