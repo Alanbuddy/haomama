@@ -137,7 +137,6 @@ Route::group([
     Route::get('/videos/{video?}/cloud/transcode', 'VideoController@cloudTranscode')->name('video.cloud.transcode');
     Route::get('/videos/{video?}/picture/order', 'VideoController@updateAttachmentOrder')->name('video.attachment.order');
     Route::get('/videos/{video?}/statistics', 'VideoController@statistics')->name('video.statistics');
-
 });
 
 Route::get('/wechat/message/get-industry', 'WechatController@getIndustry')->name('wechat.getIndustry');

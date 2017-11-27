@@ -168,7 +168,6 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        'Bkwld\LaravelHaml\ServiceProvider',
 
         /*
          * Application Service Providers...
@@ -182,7 +181,8 @@ return [
         Bkwld\LaravelHaml\ServiceProvider::class,
         App\Providers\SearchServiceProvider::class,
         App\Providers\MessageServiceProvider::class,
-        App\Providers\ComposerServiceProvider::class
+        App\Providers\ComposerServiceProvider::class,
+        Bkwld\LaravelHaml\ServiceProvider::class
 
     ],
 
