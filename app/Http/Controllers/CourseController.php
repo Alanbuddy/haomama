@@ -157,31 +157,22 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category_id' => 'required|numeric',
             'name' => 'required',
-            'type' => 'required',
-            'minimum' => 'sometimes|required|numeric',
-            'quota' => 'sometimes|numeric',
-            'address' => 'sometimes',
-            'titles' => 'sometimes|array',
-            'original_price' => 'numeric',
+            'price' => 'required|numeric',
+            'proportion' => 'numeric',
+            'lessons_count' => 'numeric',
         ]);
         $item = new Course();
         $item->fill($request->only([
             'name',
-            'description',
-            'category_id',
+            'lessons_count',
             'price',
-            'original_price',
-            'cover',
-            'minimum',
-            'quota',
-            'address',
-            'time',
-            'type',
+            'icon',
+            'proportion',
+            'url',
+            'description',
+            'detail',
         ]));
-        if ($request->has('titles'))
-            $item->titles = json_encode(array_values(array_filter($request->titles)));
         if ($request->has('schedule')) {
             $schedule = $request->schedule;//schedule[2] 0"2017-08-11 07:30:00,2017-08-11 08:30:00" 1	"2017-08-12 07:30:00,2017-08-12 08:30:00"
             $this->saveSchedule($schedule, $item);
