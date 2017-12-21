@@ -591,6 +591,7 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'SettingSeeder' => $baseDir . '/database/seeds/SettingSeeder.php',
     'TagSeeder' => $baseDir . '/database/seeds/TagSeeder.php',
+    'Test' => $baseDir . '/database/migrations/2017_12_18_165614_test.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UserTableSeeder' => $baseDir . '/database/seeds/UserTableSeeder.php',
     'VoteSeeder' => $baseDir . '/database/seeds/VoteSeeder.php',

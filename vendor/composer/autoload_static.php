@@ -886,6 +886,7 @@ class ComposerStaticInitbb1f915d8be31374c9ce6d0a46de65b4
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'SettingSeeder' => __DIR__ . '/../..' . '/database/seeds/SettingSeeder.php',
         'TagSeeder' => __DIR__ . '/../..' . '/database/seeds/TagSeeder.php',
+        'Test' => __DIR__ . '/../..' . '/database/migrations/2017_12_18_165614_test.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'UserTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UserTableSeeder.php',
         'VoteSeeder' => __DIR__ . '/../..' . '/database/seeds/VoteSeeder.php',
