@@ -530,7 +530,7 @@ class UserController extends Controller
         $subscribe = $this->subscribersPerSpan('%Y%u')->limit(12)->get();
         $usersCount = $this->usersCountPerSpan('%Y%u')->limit(12)->get();
 //        dd($items->toArray(), $usersCount->toArray());
-        $items->withPath(route('statistics.user').(($left||$right)?'?'.http_build_query(compact('left','right'))));
+        $items->withPath(route('statistics.user').(($left||$right)?'?'.http_build_query(compact('left','right')):''));
         return view('admin.statistics.client',
             compact('items', 'registration', 'activeUser', 'subscribe', 'usersCount'));
     }
